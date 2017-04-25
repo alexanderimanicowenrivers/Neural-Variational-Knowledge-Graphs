@@ -50,7 +50,6 @@ def main(argv):
     sampled_object_embeddings = sample_embedding(object_input, entity_parameters_layer)
 
     logger.info('Building Inference Network p(X|h) ..')
-
     model = models.BilinearDiagonalModel(subject_embeddings=sampled_subject_embeddings,
                                          predicate_embeddings=sampled_predicate_embeddings,
                                          object_embeddings=sampled_object_embeddings)
