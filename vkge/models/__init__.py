@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from inferbeddings.models.base import TranslatingModel
-from inferbeddings.models.base import BilinearDiagonalModel
-from inferbeddings.models.base import BilinearModel
-from inferbeddings.models.base import ComplexModel
+from vkge.models.base import TranslatingModel
+from vkge.models.base import BilinearDiagonalModel
+from vkge.models.base import BilinearModel
+from vkge.models.base import ComplexModel
 
 __all__ = ['TranslatingModel',
            'BilinearDiagonalModel',

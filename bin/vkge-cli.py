@@ -45,25 +45,29 @@ def main(argv):
     predicate_parameters_layer = tf.get_variable('predicates', shape=[nb_predicates, predicate_embedding_size * 2],
                                                 initializer=tf.contrib.layers.xavier_initializer())
 
-    sampled_subject_embedding = sample_embedding(subject_input, entity_parameters_layer)
-    sampled_predicate_embedding = sample_embedding(predicate_input, predicate_parameters_layer)
-    sampled_object_embedding = sample_embedding(object_input, entity_parameters_layer)
+    sampled_subject_embeddings = sample_embedding(subject_input, entity_parameters_layer)
+    sampled_predicate_embeddings = sample_embedding(predicate_input, predicate_parameters_layer)
+    sampled_object_embeddings = sample_embedding(object_input, entity_parameters_layer)
 
     logger.info('Building Inference Network p(X|h) ..')
 
-    #model = models.
-    #p = tf.sigmoid()
+    model = models.BilinearDiagonalModel(subject_embeddings=sampled_subject_embeddings,
+                                         predicate_embeddings=sampled_predicate_embeddings,
+                                         object_embeddings=sampled_object_embeddings)
+    p = tf.sigmoid(model())
 
     init_op = tf.global_variables_initializer()
 
-    with tf.Session(config=sess_config) as session:
+    with tf.Session() as session:
         session.run(init_op)
 
-        h_value = session.run([sampled_subject_embedding], feed_dict={subject_input: [0, 0, 0]})
-        print(h_value)
+        p_values = session.run([p], feed_dict={
+            subject_input: [0, 0, 0],
+            predicate_input: [0, 0, 0],
+            object_input: [0, 0, 0],
+        })
 
-        h_value = session.run([sampled_subject_embedding], feed_dict={subject_input: [0, 0, 0]})
-        print(h_value)
+        print(p_values)
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
