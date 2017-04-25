@@ -5,6 +5,7 @@ import os
 import sys
 
 import tensorflow as tf
+import vkge.models as models
 
 import logging
 
@@ -30,8 +31,7 @@ def sample_embedding(inputs, parameters_layer):
     embedding_size = mu.get_shape()[1].value
     eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
     sigma = tf.sqrt(tf.exp(log_sigma_square))
-    h = mu + sigma * eps
-    return h
+    return mu + sigma * eps
 
 
 def main(argv):
@@ -39,8 +39,7 @@ def main(argv):
     predicate_input = tf.placeholder(tf.int32, shape=[None])
     object_input = tf.placeholder(tf.int32, shape=[None])
 
-    logger.info('Building encoder - (inference Network) q(h|X)..')
-
+    logger.info('Building Inference Network q(h|X) ..')
     entity_parameters_layer = tf.get_variable('entities', shape=[nb_entities, entity_embedding_size * 2],
                                              initializer=tf.contrib.layers.xavier_initializer())
     predicate_parameters_layer = tf.get_variable('predicates', shape=[nb_predicates, predicate_embedding_size * 2],
@@ -50,8 +49,10 @@ def main(argv):
     sampled_predicate_embedding = sample_embedding(predicate_input, predicate_parameters_layer)
     sampled_object_embedding = sample_embedding(object_input, entity_parameters_layer)
 
-    sess_config = tf.ConfigProto()
-    sess_config.gpu_options.allow_growth = True
+    logger.info('Building Inference Network p(X|h) ..')
+
+    #model = models.
+    #p = tf.sigmoid()
 
     init_op = tf.global_variables_initializer()
 
