@@ -18,19 +18,28 @@ entity_embedding_size = 10
 predicate_embedding_size = 10
 
 
-def sample_embedding(inputs, parameters_layer):
+def input_parameters(inputs, parameters_layer):
     """
     :param inputs: [batch_size] tf.int32 tensor
     :param parameters_layer: [nb_entities, embedding_size * 2] tf.float32 tensor
-    :return: [batch_size, embedding_size] tf.float32 tensor
+    :return: two [batch_size, embedding_size] tf.float32 tensor
     """
     # [batch_size, embedding_size * 2] tf.float32 tensor
     parameters = tf.nn.embedding_lookup(parameters_layer, inputs)
     # [batch_size, embedding_size], [batch_size, embedding_size] tf.float32 tensors
     mu, log_sigma_square = tf.split(value=parameters, num_or_size_splits=2, axis=1)
+    return mu, log_sigma_square
+
+
+def sample_embedding(mu, log_sigma_square):
+    """
+    :param inputs: [batch_size] tf.int32 tensor
+    :param parameters_layer: [nb_entities, embedding_size * 2] tf.float32 tensor
+    :return: [batch_size, embedding_size] tf.float32 tensor
+    """
+    sigma = tf.sqrt(tf.exp(log_sigma_square))
     embedding_size = mu.get_shape()[1].value
     eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
-    sigma = tf.sqrt(tf.exp(log_sigma_square))
     return mu + sigma * eps
 
 
@@ -45,14 +54,16 @@ def main(argv):
     predicate_parameters_layer = tf.get_variable('predicates', shape=[nb_predicates, predicate_embedding_size * 2],
                                                 initializer=tf.contrib.layers.xavier_initializer())
 
-    sampled_subject_embeddings = sample_embedding(subject_input, entity_parameters_layer)
-    sampled_predicate_embeddings = sample_embedding(predicate_input, predicate_parameters_layer)
-    sampled_object_embeddings = sample_embedding(object_input, entity_parameters_layer)
+    mu_s, log_sigma_square_s = input_parameters(subject_input, entity_parameters_layer)
+    mu_p, log_sigma_square_p = input_parameters(predicate_input, predicate_parameters_layer)
+    mu_o, log_sigma_square_o = input_parameters(object_input, entity_parameters_layer)
+
+    e_s = sample_embedding(mu_s, log_sigma_square_s)
+    e_p = sample_embedding(mu_p, log_sigma_square_p)
+    e_o = sample_embedding(mu_o, log_sigma_square_o)
 
     logger.info('Building Inference Network p(X|h) ..')
-    model = models.BilinearDiagonalModel(subject_embeddings=sampled_subject_embeddings,
-                                         predicate_embeddings=sampled_predicate_embeddings,
-                                         object_embeddings=sampled_object_embeddings)
+    model = models.BilinearDiagonalModel(subject_embeddings=e_s, predicate_embeddings=e_p, object_embeddings=e_o)
     p = tf.sigmoid(model())
 
     init_op = tf.global_variables_initializer()
@@ -61,9 +72,7 @@ def main(argv):
         session.run(init_op)
 
         p_values = session.run([p], feed_dict={
-            subject_input: [0, 0, 0],
-            predicate_input: [0, 0, 0],
-            object_input: [0, 0, 0],
+            subject_input: [0, 0, 0], predicate_input: [0, 0, 0], object_input: [0, 0, 0],
         })
 
         print(p_values)
