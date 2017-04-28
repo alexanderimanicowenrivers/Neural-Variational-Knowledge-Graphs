@@ -47,7 +47,7 @@ class VKGE:
         self.e_objective += 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
 
         # Log likelihood
-        self.g_objective = tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i)))
+        self.g_objective = tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-4))
         self.elbo = tf.reduce_mean(self.g_objective - self.e_objective)
 
         self.training_step = optimizer.minimize(- self.elbo)
@@ -76,8 +76,12 @@ class VKGE:
             model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p, object_embeddings=self.h_o)
             self.p_x_i = tf.sigmoid(model())
 
-    def train(self, session, Xs, Xp, Xo, y, nb_epochs=10):
-        for epoch in range(1, nb_epochs + 1):
-            feed_dict = {self.s_inputs: Xs, self.p_inputs: Xp, self.o_inputs: Xo, self.y_inputs: y}
-            _, elbo_value = session.run([self.training_step, self.elbo], feed_dict=feed_dict)
-            logger.info('[{}] ELBO: {}'.format(epoch, elbo_value))
+    def train(self, session, Xs, Xp, Xo, y):
+        feed_dict = {
+            self.s_inputs: Xs,
+            self.p_inputs: Xp,
+            self.o_inputs: Xo,
+            self.y_inputs: y
+        }
+        _, elbo_value = session.run([self.training_step, self.elbo], feed_dict=feed_dict)
+        return elbo_value
