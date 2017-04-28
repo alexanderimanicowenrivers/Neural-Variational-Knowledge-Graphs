@@ -4,78 +4,47 @@
 import os
 import sys
 
+import numpy as np
 import tensorflow as tf
-import vkge.models as models
+
+from inferbeddings.knowledgebase import Fact, KnowledgeBaseParser
+from vkge import VKGE
 
 import logging
 
 logger = logging.getLogger(os.path.basename(sys.argv[0]))
 
-nb_entities = 100
-nb_predicates = 5
-
-entity_embedding_size = 10
-predicate_embedding_size = 10
-
-
-def input_parameters(inputs, parameters_layer):
-    """
-    :param inputs: [batch_size] tf.int32 tensor
-    :param parameters_layer: [nb_entities, embedding_size * 2] tf.float32 tensor
-    :return: two [batch_size, embedding_size] tf.float32 tensor
-    """
-    # [batch_size, embedding_size * 2] tf.float32 tensor
-    parameters = tf.nn.embedding_lookup(parameters_layer, inputs)
-    # [batch_size, embedding_size], [batch_size, embedding_size] tf.float32 tensors
-    mu, log_sigma_square = tf.split(value=parameters, num_or_size_splits=2, axis=1)
-    return mu, log_sigma_square
-
-
-def sample_embedding(mu, log_sigma_square):
-    """
-    :param inputs: [batch_size] tf.int32 tensor
-    :param parameters_layer: [nb_entities, embedding_size * 2] tf.float32 tensor
-    :return: [batch_size, embedding_size] tf.float32 tensor
-    """
-    sigma = tf.sqrt(tf.exp(log_sigma_square))
-    embedding_size = mu.get_shape()[1].value
-    eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
-    return mu + sigma * eps
-
-
 def main(argv):
-    subject_input = tf.placeholder(tf.int32, shape=[None])
-    predicate_input = tf.placeholder(tf.int32, shape=[None])
-    object_input = tf.placeholder(tf.int32, shape=[None])
+    triples = [
+        ('a', 'p', 'b'),
+        ('b', 'p', 'c'),
+        ('a', 'p', 'c')
+    ]
 
-    logger.info('Building Inference Network q(h_s | s), q(h_p | p), q(h_o | o) ..')
-    entity_parameters_layer = tf.get_variable('entities', shape=[nb_entities, entity_embedding_size * 2],
-                                             initializer=tf.contrib.layers.xavier_initializer())
-    predicate_parameters_layer = tf.get_variable('predicates', shape=[nb_predicates, predicate_embedding_size * 2],
-                                                initializer=tf.contrib.layers.xavier_initializer())
+    nb_triples = len(triples)
 
-    mu_s, log_sigma_square_s = input_parameters(subject_input, entity_parameters_layer)
-    mu_p, log_sigma_square_p = input_parameters(predicate_input, predicate_parameters_layer)
-    mu_o, log_sigma_square_o = input_parameters(object_input, entity_parameters_layer)
+    facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in triples]
+    parser = KnowledgeBaseParser(facts)
 
-    e_s = sample_embedding(mu_s, log_sigma_square_s)
-    e_p = sample_embedding(mu_p, log_sigma_square_p)
-    e_o = sample_embedding(mu_o, log_sigma_square_o)
+    nb_entities = len(parser.entity_vocabulary)
+    nb_predicates = len(parser.predicate_vocabulary)
 
-    logger.info('Building Inference Network p(y|h) ..')
-    model = models.BilinearDiagonalModel(subject_embeddings=e_s, predicate_embeddings=e_p, object_embeddings=e_o)
-    p = tf.sigmoid(model())
+    sequences = parser.facts_to_sequences(facts)
+
+    Xs = np.array([s[1][0] for s in sequences], dtype=np.int32)
+    Xp = np.array([s[0] for s in sequences], dtype=np.int32)
+    Xo = np.array([s[1][1] for s in sequences], dtype=np.int32)
+    y = np.array([1] * nb_triples, dtype=np.int32)
+
+    optimizer = tf.train.AdagradOptimizer(learning_rate=0.1)
+    vkge = VKGE(nb_entities, 10, nb_predicates, 10, optimizer)
 
     init_op = tf.global_variables_initializer()
-
     with tf.Session() as session:
         session.run(init_op)
+        vkge.train(session, Xs, Xp, Xo, y)
 
-        p_values = session.run([p], feed_dict={
-            subject_input: [0, 0, 0], predicate_input: [0, 0, 0], object_input: [0, 0, 0],
-        })
-
-        print(p_values)
+    print(Xs, Xp, Xo)
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
