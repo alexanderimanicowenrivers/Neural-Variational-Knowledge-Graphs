@@ -36,13 +36,13 @@ def main(argv):
     Xo = np.array([s[1][1] for s in sequences], dtype=np.int32)
     y = np.array([1] * nb_triples, dtype=np.int32)
 
-    optimizer = tf.train.AdagradOptimizer(learning_rate=0.1)
+    optimizer = tf.train.AdagradOptimizer(learning_rate=0.001)
     vkge = VKGE(nb_entities, 10, nb_predicates, 10, optimizer)
 
     init_op = tf.global_variables_initializer()
     with tf.Session() as session:
         session.run(init_op)
-        vkge.train(session, Xs, Xp, Xo, y)
+        vkge.train(session, Xs, Xp, Xo, y, nb_epochs=1000)
 
     print(Xs, Xp, Xo)
 
