@@ -48,7 +48,7 @@ def main(argv):
     predicate_input = tf.placeholder(tf.int32, shape=[None])
     object_input = tf.placeholder(tf.int32, shape=[None])
 
-    logger.info('Building Inference Network q(h|X) ..')
+    logger.info('Building Inference Network q(h_s | s), q(h_p | p), q(h_o | o) ..')
     entity_parameters_layer = tf.get_variable('entities', shape=[nb_entities, entity_embedding_size * 2],
                                              initializer=tf.contrib.layers.xavier_initializer())
     predicate_parameters_layer = tf.get_variable('predicates', shape=[nb_predicates, predicate_embedding_size * 2],
@@ -62,7 +62,7 @@ def main(argv):
     e_p = sample_embedding(mu_p, log_sigma_square_p)
     e_o = sample_embedding(mu_o, log_sigma_square_o)
 
-    logger.info('Building Inference Network p(X|h) ..')
+    logger.info('Building Inference Network p(y|h) ..')
     model = models.BilinearDiagonalModel(subject_embeddings=e_s, predicate_embeddings=e_p, object_embeddings=e_o)
     p = tf.sigmoid(model())
 

@@ -15,7 +15,7 @@ class BaseModel(metaclass=abc.ABCMeta):
 
         :param subject_embeddings: (batch_size, entity_embedding_size) Tensor.
         :param predicate_embeddings: (batch_size, predicate_embedding_size) Tensor.
-        :param subject_embeddings: (batch_size, entity_embedding_size) Tensor.
+        :param object_embeddings: (batch_size, entity_embedding_size) Tensor.
         """
         self.subject_embeddings = subject_embeddings
         self.predicate_embeddings = predicate_embeddings
