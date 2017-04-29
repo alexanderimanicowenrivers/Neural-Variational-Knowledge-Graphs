@@ -32,4 +32,11 @@ log p(s, p, o, y=1)
 
 However, such an integral is messy to solve.
 
-We can 
+We can define a variational lower bound to `log p(s, p, o, y=1)`:
+
+```
+log p(s, p, o, y=1)
+    = log ∫ p(s, p, o, h_s, h_p, h_o, y=1) d h_s, h_p, h_o
+    = log ∫ p(s, p, o, h_s, h_p, h_o, y=1) (q(h_s, h_p, h_o | s, p, o) / q(h_s, h_p, h_o | s, p, o)) d h_s, h_p, h_o
+    >= E_q(h_s, h_p, h_o | s, p, o) [ log p(s, p, o, h_s, h_p, h_o, y=1) - log q(h_s, h_p, h_o | s, p, o) ]
+```
