@@ -19,6 +19,7 @@ The rationale is that, by doing so, you can:
 By associating a "variance" to each entity embedding, it can be possible to perform some sort of "active learning" - for instance, by sampling triples that help reduce the variance of entity embeddings (similarly to [2]).
 
 [1] [Neural Variational Inference for Text Processing](https://arxiv.org/abs/1511.06038) - ICML 2016
+
 [2] [Active Learning with Gaussian Processes for Object Categorization](http://people.csail.mit.edu/rurtasun/publications/iccv_kapoor_et_al.pdf) - ICCV 2007
 
 ### Model
