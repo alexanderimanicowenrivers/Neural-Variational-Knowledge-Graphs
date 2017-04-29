@@ -6,9 +6,9 @@ Small and quick experiment on learning Gaussian embeddings for entitie and predi
 The generative model can be described as follows:
 
 ```
-h_s ~ N(0, 1)
-h_p ~ N(0, 1)
-h_o ~ N(0, 1)
+h_s ~ N(μ_s, Σ_s)
+h_p ~ N(μ_p, Σ_p)
+h_o ~ N(μ_o, Σ_o)
 y ~ Ber(y | σ(score(h_s, h_p, h_o)))
 ```
 
@@ -28,5 +28,8 @@ The log-likelihood of a `<s, p, o>` triple being true is the following:
 log p(s, p, o, y=1)
     = log ∫ p(s, p, o, h_s, h_p, h_o, y=1) d h_s, h_p, h_o
     = log ∫ p(s) p(p) p(o) p(h_s | s) p(h_p | p) p(h_o | o) p(y=1 | h_s, h_p, h_o) d h_s, h_p, h_o
-
 ```
+
+However, such an integral is messy to solve.
+
+We can 
