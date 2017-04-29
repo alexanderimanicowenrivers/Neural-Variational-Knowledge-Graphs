@@ -18,14 +18,14 @@ def main(argv):
     train_path = 'data/wn18/wordnet-mlj12-train.txt'
     triples = read_triples(train_path)
 
-    optimizer = tf.train.AdagradOptimizer(learning_rate=0.001)
+    optimizer = tf.train.AdagradOptimizer(learning_rate=0.1)
     vkge = VKGE(triples, 10, 10, optimizer)
 
     init_op = tf.global_variables_initializer()
     with tf.Session() as session:
         session.run(init_op)
 
-        vkge.train(session, nb_epochs=100)
+        vkge.train(session, nb_batches=1, nb_epochs=1000)
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
