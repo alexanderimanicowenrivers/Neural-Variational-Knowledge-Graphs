@@ -31,9 +31,9 @@ def main(argv):
     nb_entities, nb_predicates = len(parser.entity_vocabulary), len(parser.predicate_vocabulary)
     embedding_size = 10
 
-    h_s = Normal(loc=tf.zeros([nb_entities, embedding_size]), scale=tf.ones([nb_entities, embedding_size]))
-    h_p = Normal(loc=tf.zeros([nb_predicates, embedding_size]), scale=tf.ones([nb_predicates, embedding_size]))
-    h_o = Normal(loc=tf.zeros([nb_entities, embedding_size]), scale=tf.ones([nb_entities, embedding_size]))
+    E = Normal(loc=tf.zeros([nb_entities, embedding_size]), scale=tf.ones([nb_entities, embedding_size]))
+    R = Normal(loc=tf.zeros([nb_predicates, embedding_size]), scale=tf.ones([nb_predicates, embedding_size]))
+
 
 
 if __name__ == '__main__':
