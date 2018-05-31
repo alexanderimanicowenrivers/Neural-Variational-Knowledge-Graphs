@@ -176,4 +176,6 @@ class VKGE:
                 return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
             # logger.info('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
-            print('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
+
+            if epoch % 50 == 0:
+                print('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="added in progreess print statements">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1481">
-              <caret line="177" column="20" lean-forward="false" selection-start-line="177" selection-start-column="14" selection-end-line="177" selection-end-column="20" />
+            <state relative-caret-position="406">
+              <caret line="179" column="28" lean-forward="false" selection-start-line="179" selection-start-column="28" selection-end-line="179" selection-end-column="28" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -367,7 +368,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527787230679</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="pushing all recent commits">
+      <created>1527787447720</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1527787447720</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -441,7 +449,8 @@
     <MESSAGE value="updated optimiser call" />
     <MESSAGE value="completely commented out all projection steps" />
     <MESSAGE value="added in progreess print statements" />
-    <option name="LAST_COMMIT_MESSAGE" value="added in progreess print statements" />
+    <MESSAGE value="pushing all recent commits" />
+    <option name="LAST_COMMIT_MESSAGE" value="pushing all recent commits" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -670,8 +679,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1481">
-          <caret line="177" column="20" lean-forward="false" selection-start-line="177" selection-start-column="14" selection-end-line="177" selection-end-column="20" />
+        <state relative-caret-position="406">
+          <caret line="179" column="28" lean-forward="false" selection-start-line="179" selection-start-column="28" selection-end-line="179" selection-end-column="28" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
