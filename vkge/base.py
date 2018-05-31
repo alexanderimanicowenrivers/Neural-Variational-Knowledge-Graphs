@@ -93,7 +93,7 @@ class VKGE:
             model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p, object_embeddings=self.h_o)
             self.p_x_i = tf.sigmoid(model())
 
-    def train(self, session, nb_batches=10, nb_epochs=10, unit_cube=False):
+    def train(self, session, nb_batches=10, nb_epochs=10, GPUMode=False):
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
@@ -117,7 +117,8 @@ class VKGE:
 
         # projection_steps = [constraints.unit_cube(self.entity_parameters_layer) if unit_cube
         #                     else constraints.unit_sphere(self.entity_parameters_layer, norm=1.0)]
-
+        minloss=0
+        minepoch=0
         for epoch in range(1, nb_epochs + 1):
             order = self.random_state.permutation(nb_samples)
             Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
@@ -176,6 +177,15 @@ class VKGE:
                 return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
             # logger.info('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
+            if GPUMode:
+                if (round(np.mean(loss_values), 4) < minloss):
+                    minloss=round(np.mean(loss_values), 4)
+                    minepoch=epoch
+            else:
 
-            if epoch % 50 == 0:
-                print('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
+                if (round(np.mean(loss_values), 4) < minloss):
+                    minloss = round(np.mean(loss_values), 4)
+                    minepoch=epoch
+                if epoch % 50 == 0:
+                    print('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
+        print("The minimum loss achieved is {0} \t at epoch {1}".format(minloss,minepoch))
