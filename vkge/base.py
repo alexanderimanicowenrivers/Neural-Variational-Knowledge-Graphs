@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 class VKGE:
-    def __init__(self, triples, entity_embedding_size, predicate_embedding_size, optimizer):
+    def __init__(self, triples, entity_embedding_size, predicate_embedding_size, lr=0.001,b1=0.9,b2=0.999,eps=1e-08):
         super().__init__()
 
         logger.info('Parsing the facts in the Knowledge Base ..')
@@ -25,7 +25,9 @@ class VKGE:
 
         self.random_state = np.random.RandomState(0)
         nb_entities, nb_predicates = len(self.parser.entity_vocabulary), len(self.parser.predicate_vocabulary)
-        self.build_model(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer)
+
+        self.optimizer=tf.train.AdamOptimizer(learning_rate=lr,beta1=b1,beta2=b2,epsilon=eps)
+        self.build_model(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -60,7 +62,7 @@ class VKGE:
 
         self.elbo = tf.reduce_mean(self.g_objective + self.e_objective)
 
-        self.training_step = optimizer.minimize(self.elbo)
+        self.training_step = self.optimizer.minimize(self.elbo)
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size):
         logger.info('Building Inference Networks q(h_x | x) ..')
