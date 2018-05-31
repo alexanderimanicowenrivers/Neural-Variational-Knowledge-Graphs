@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="" />
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -9,16 +12,15 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="variational-knowledge-embeddings" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="vkge-cli.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../vkge/bin/vkge-cli.py">
+        <entry file="file://$PROJECT_DIR$/bin/vkge-cli.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
+            <state relative-caret-position="0">
               <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
                 <element signature="e#48#57#0" expanded="true" />
@@ -27,25 +29,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../vkge/vkge/base.py">
+      <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="26" column="110" lean-forward="false" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="110" />
+            <state relative-caret-position="670">
+              <caret line="110" column="8" lean-forward="false" selection-start-line="109" selection-start-column="10" selection-end-line="110" selection-end-column="8" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ed-cli.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../vkge/bin/ed-cli.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="582">
-              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-              <folding>
-                <element signature="e#48#57#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -60,31 +50,32 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/bin/vke-cli.py" />
-        <option value="$PROJECT_DIR$/../vkge/vkge/models/__init__.py" />
-        <option value="$PROJECT_DIR$/../vkge/vkge/models/base.py" />
-        <option value="$PROJECT_DIR$/../vkge/vkge/__init__.py" />
-        <option value="$PROJECT_DIR$/../vkge/vkge/io/__init__.py" />
-        <option value="$PROJECT_DIR$/../vkge/vkge/io/base.py" />
-        <option value="$PROJECT_DIR$/../vkge/vkge/training/losses.py" />
-        <option value="$PROJECT_DIR$/../vkge/vkge/training/corrupt.py" />
-        <option value="$PROJECT_DIR$/../vkge/vkge/base.py" />
-        <option value="$PROJECT_DIR$/../vkge/bin/vkge-cli.py" />
-        <option value="$PROJECT_DIR$/../vkge/README.md" />
-        <option value="$PROJECT_DIR$/../vkge/bin/ed-cli.py" />
+        <option value="$PROJECT_DIR$/vkge/models/__init__.py" />
+        <option value="$PROJECT_DIR$/vkge/models/base.py" />
+        <option value="$PROJECT_DIR$/vkge/__init__.py" />
+        <option value="$PROJECT_DIR$/vkge/io/__init__.py" />
+        <option value="$PROJECT_DIR$/vkge/io/base.py" />
+        <option value="$PROJECT_DIR$/vkge/training/losses.py" />
+        <option value="$PROJECT_DIR$/vkge/training/corrupt.py" />
+        <option value="$PROJECT_DIR$/bin/vkge-cli.py" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/bin/ed-cli.py" />
+        <option value="$PROJECT_DIR$/vkge/base.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="960" />
-    <option name="y" value="27" />
-    <option name="width" value="960" />
-    <option name="height" value="1053" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="720" />
+    <option name="height" value="823" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -101,67 +92,39 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="variational-knowledge-embeddings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vkge" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="variational-knowledge-embeddings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vkge" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vkge" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="variational-knowledge-embeddings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vkge" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vkge" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="variational-knowledge-embeddings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vkge" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
+          <expand>
+            <path>
+              <item name="vkge" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vkge" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vkge" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vkge" type="462c0819:PsiDirectoryNode" />
+              <item name="bin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vkge" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vkge" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vkge" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vkge" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="wn18" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vkge" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vkge" type="462c0819:PsiDirectoryNode" />
+              <item name="references" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -183,6 +146,55 @@
     </option>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="variational-knowledge-embeddings" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="variational-knowledge-embeddings" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <module name="variational-knowledge-embeddings" />
+    </configuration>
     <configuration default="true" type="BashConfigurationType" factoryName="Bash">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="INTERPRETER_PATH" value="/bin/bash" />
@@ -242,58 +254,6 @@
       <option name="ADDITIONAL_ARGS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="variational-knowledge-embeddings" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <module name="variational-knowledge-embeddings" />
-      <method />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="variational-knowledge-embeddings" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method />
-    </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -322,6 +282,14 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
+    <task id="LOCAL-00001" summary="Fixed loss function, similar to https://github.com/carpedm20/variational-text-tensorflow/blob/master/models/nvdm.py">
+      <created>1527775787668</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1527775787668</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -334,15 +302,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="960" y="27" width="960" height="1053" extended-state="5" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1513158" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10069445" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -354,17 +321,22 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fixed loss function, similar to https://github.com/carpedm20/variational-text-tensorflow/blob/master/models/nvdm.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed loss function, similar to https://github.com/carpedm20/variational-text-tensorflow/blob/master/models/nvdm.py" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../vkge/vkge/training/corrupt.py</url>
+          <url>file://$PROJECT_DIR$/vkge/training/corrupt.py</url>
           <line>2</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
@@ -374,15 +346,42 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../vkge/setup.py">
+    <entry file="file://$PROJECT_DIR$/bin/vkge-cli.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="8" column="31" lean-forward="false" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+        <state relative-caret-position="165">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="e#48#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="110" lean-forward="false" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="110" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/ed-cli.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/requirements.txt">
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="8" column="31" lean-forward="false" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="58">
           <caret line="2" column="15" lean-forward="false" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
@@ -390,7 +389,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/bin/vkge-cli.py">
+    <entry file="file://$PROJECT_DIR$/bin/vkge-cli.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1711">
           <caret line="64" column="22" lean-forward="false" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
@@ -400,15 +399,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/setup.py">
+    <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="8" column="31" lean-forward="false" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/requirements.txt">
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="58">
           <caret line="2" column="15" lean-forward="false" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
@@ -416,7 +414,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/bin/vkge-cli.py">
+    <entry file="file://$PROJECT_DIR$/bin/vkge-cli.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="87">
           <caret line="3" column="10" lean-forward="false" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
@@ -426,15 +424,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/setup.py">
+    <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="8" column="16" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/requirements.txt">
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="2" column="15" lean-forward="false" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
@@ -442,109 +439,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python3.5/dist-packages/tensorflow/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/knowledgebase/base.py">
+    <entry file="file:///usr/local/lib/python3.5/dist-packages/tensorflow/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/vkge/knowledgebase/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="17" column="37" lean-forward="true" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/models/__init__.py">
+    <entry file="file://$PROJECT_DIR$/vkge/models/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
           <caret line="5" column="9" lean-forward="false" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/__init__.py">
+    <entry file="file://$PROJECT_DIR$/vkge/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
           <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/io/base.py">
+    <entry file="file://$PROJECT_DIR$/vkge/io/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="667">
           <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/io/__init__.py">
+    <entry file="file://$PROJECT_DIR$/vkge/io/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
           <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/io/embeddings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/training/constraints.py">
+    <entry file="file://$PROJECT_DIR$/vkge/io/embeddings.py" />
+    <entry file="file://$PROJECT_DIR$/vkge/training/constraints.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
           <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#35#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/training/index.py">
+    <entry file="file://$PROJECT_DIR$/vkge/training/index.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#35#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/training/pairwise_losses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-348">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/training/util.py">
+    <entry file="file://$PROJECT_DIR$/vkge/training/pairwise_losses.py" />
+    <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="464">
           <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/training/losses.py">
+    <entry file="file://$PROJECT_DIR$/vkge/training/losses.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="10" column="62" lean-forward="false" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
-          <folding>
-            <element signature="e#25#48#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/training/corrupt.py">
+    <entry file="file://$PROJECT_DIR$/vkge/training/corrupt.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="609">
           <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
@@ -554,28 +515,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="554">
-            <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/models/base.py">
+    <entry file="file://$PROJECT_DIR$/README.md" />
+    <entry file="file://$PROJECT_DIR$/vkge/models/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="464">
           <caret line="67" column="0" lean-forward="true" selection-start-line="66" selection-start-column="15" selection-end-line="67" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/bin/vkge-cli.py">
+    <entry file="file://$PROJECT_DIR$/bin/vkge-cli.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
+        <state relative-caret-position="0">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="e#48#57#0" expanded="true" />
@@ -583,22 +533,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/vkge/base.py">
+    <entry file="file://$PROJECT_DIR$/bin/ed-cli.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="26" column="110" lean-forward="false" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="110" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="56">
+          <caret line="4" column="10" lean-forward="true" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vkge/bin/ed-cli.py">
+    <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="582">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state relative-caret-position="670">
+          <caret line="110" column="8" lean-forward="false" selection-start-line="109" selection-start-column="10" selection-end-line="110" selection-end-column="8" />
           <folding>
-            <element signature="e#48#57#0" expanded="true" />
+            <element signature="e#25#36#0" expanded="true" />
           </folding>
         </state>
       </provider>

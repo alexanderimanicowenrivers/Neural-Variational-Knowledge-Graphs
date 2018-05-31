@@ -107,8 +107,8 @@ class VKGE:
         batch_size = math.ceil(nb_samples / nb_batches)
         logger.info("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
 
-        projection_steps = [constraints.unit_cube(self.entity_parameters_layer) if unit_cube
-                            else constraints.unit_sphere(self.entity_parameters_layer, norm=1.0)]
+        # projection_steps = [constraints.unit_cube(self.entity_parameters_layer) if unit_cube
+        #                     else constraints.unit_sphere(self.entity_parameters_layer, norm=1.0)]
 
         for epoch in range(1, nb_epochs + 1):
             order = self.random_state.permutation(nb_samples)
