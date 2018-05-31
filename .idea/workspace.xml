@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,8 +31,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="670">
-              <caret line="110" column="8" lean-forward="false" selection-start-line="109" selection-start-column="10" selection-end-line="110" selection-end-column="8" />
+            <state relative-caret-position="513">
+              <caret line="106" column="42" lean-forward="false" selection-start-line="106" selection-start-column="42" selection-end-line="106" selection-end-column="42" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -289,7 +288,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527775787668</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="removed projection stage on embeddings - does not seem reasonable to normalise variational parameters">
+      <created>1527775904771</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1527775904771</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -330,7 +336,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed loss function, similar to https://github.com/carpedm20/variational-text-tensorflow/blob/master/models/nvdm.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed loss function, similar to https://github.com/carpedm20/variational-text-tensorflow/blob/master/models/nvdm.py" />
+    <MESSAGE value="removed projection stage on embeddings - does not seem reasonable to normalise variational parameters" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed projection stage on embeddings - does not seem reasonable to normalise variational parameters" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -543,8 +550,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="110" column="8" lean-forward="false" selection-start-line="109" selection-start-column="10" selection-end-line="110" selection-end-column="8" />
+        <state relative-caret-position="513">
+          <caret line="106" column="42" lean-forward="false" selection-start-line="106" selection-start-column="42" selection-end-line="106" selection-end-column="42" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
