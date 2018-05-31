@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -375,7 +374,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527787447720</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="print training progress every 50 iterations">
+      <created>1527787650811</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1527787650811</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -450,7 +456,8 @@
     <MESSAGE value="completely commented out all projection steps" />
     <MESSAGE value="added in progreess print statements" />
     <MESSAGE value="pushing all recent commits" />
-    <option name="LAST_COMMIT_MESSAGE" value="pushing all recent commits" />
+    <MESSAGE value="print training progress every 50 iterations" />
+    <option name="LAST_COMMIT_MESSAGE" value="print training progress every 50 iterations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
