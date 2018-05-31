@@ -26,8 +26,8 @@ class VKGE:
         self.random_state = np.random.RandomState(0)
         nb_entities, nb_predicates = len(self.parser.entity_vocabulary), len(self.parser.predicate_vocabulary)
 
-        self.optimizer=tf.train.AdamOptimizer(learning_rate=lr,beta1=b1,beta2=b2,epsilon=eps)
-        self.build_model(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size)
+        optimizer=tf.train.AdamOptimizer(learning_rate=lr,beta1=b1,beta2=b2,epsilon=eps)
+        self.build_model(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,optimizer)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -42,7 +42,7 @@ class VKGE:
         eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
         return mu + sigma * eps
 
-    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size):
+    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,optimizer):
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
@@ -62,7 +62,7 @@ class VKGE:
 
         self.elbo = tf.reduce_mean(self.g_objective + self.e_objective)
 
-        self.training_step = self.optimizer.minimize(self.elbo)
+        self.training_step = optimizer.minimize(self.elbo)
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size):
         logger.info('Building Inference Networks q(h_x | x) ..')
