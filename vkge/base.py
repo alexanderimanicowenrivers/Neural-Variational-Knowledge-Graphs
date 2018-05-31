@@ -16,10 +16,12 @@ from vkge.training.util import make_batches
 
 
 class VKGE:
-    def __init__(self, triples, entity_embedding_size, predicate_embedding_size,lr=0.001,b1=0.9,b2=0.999,eps=1e-08):
+    def __init__(self, triples, entity_embedding_size, predicate_embedding_size,lr=0.001,b1=0.9,b2=0.999,eps=1e-08,GPUMode=False):
         super().__init__()
+        self.GPUMode=GPUMode
 
-        print('Parsing the facts in the Knowledge Base ..')
+        if not(self.GPUMode):
+            print('Parsing the facts in the Knowledge Base ..')
 
         # logger.info('Parsing the facts in the Knowledge Base ..')
         self.facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in triples]
@@ -67,7 +69,8 @@ class VKGE:
         self.training_step = optimizer.minimize(self.elbo)
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size):
-        print('Building Inference Networks q(h_x | x) ..')
+        if not (self.GPUMode):
+            print('Building Inference Networks q(h_x | x) ..')
 
         # logger.info('Building Inference Networks q(h_x | x) ..')
         with tf.variable_scope('encoder'):
@@ -87,13 +90,14 @@ class VKGE:
             self.h_o = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
     def build_decoder(self):
-        print('Building Inference Network p(y|h) ..')
+        if not (self.GPUMode):
+            print('Building Inference Network p(y|h) ..')
         # logger.info('Building Inference Network p(y|h) ..')
         with tf.variable_scope('decoder'):
             model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p, object_embeddings=self.h_o)
             self.p_x_i = tf.sigmoid(model())
 
-    def train(self, session, nb_batches=10, nb_epochs=10, GPUMode=False):
+    def train(self, session, nb_batches=10, nb_epochs=10):
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
@@ -113,7 +117,8 @@ class VKGE:
         nb_samples = Xs.shape[0]
         batch_size = math.ceil(nb_samples / nb_batches)
         # logger.info("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
-        print("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
+        if not (self.GPUMode):
+            print("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
 
         # projection_steps = [constraints.unit_cube(self.entity_parameters_layer) if unit_cube
         #                     else constraints.unit_sphere(self.entity_parameters_layer, norm=1.0)]
@@ -177,7 +182,7 @@ class VKGE:
                 return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
             # logger.info('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
-            if GPUMode:
+            if self.GPUMode:
                 if (round(np.mean(loss_values), 4) < minloss):
                     minloss=round(np.mean(loss_values), 4)
                     minepoch=epoch
