@@ -10,16 +10,18 @@ import vkge.models as models
 from vkge.training import constraints, corrupt, index
 from vkge.training.util import make_batches
 
-import logging
+# import logging
 
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 
 class VKGE:
     def __init__(self, triples, entity_embedding_size, predicate_embedding_size,lr=0.001,b1=0.9,b2=0.999,eps=1e-08):
         super().__init__()
 
-        logger.info('Parsing the facts in the Knowledge Base ..')
+        print('Parsing the facts in the Knowledge Base ..')
+
+        # logger.info('Parsing the facts in the Knowledge Base ..')
         self.facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in triples]
         self.parser = KnowledgeBaseParser(self.facts)
 
@@ -65,7 +67,9 @@ class VKGE:
         self.training_step = optimizer.minimize(self.elbo)
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size):
-        logger.info('Building Inference Networks q(h_x | x) ..')
+        print('Building Inference Networks q(h_x | x) ..')
+
+        # logger.info('Building Inference Networks q(h_x | x) ..')
         with tf.variable_scope('encoder'):
             self.entity_parameters_layer = tf.get_variable('entities',
                                                            shape=[nb_entities + 1, entity_embedding_size * 2],
@@ -83,7 +87,8 @@ class VKGE:
             self.h_o = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
     def build_decoder(self):
-        logger.info('Building Inference Network p(y|h) ..')
+        print('Building Inference Network p(y|h) ..')
+        # logger.info('Building Inference Network p(y|h) ..')
         with tf.variable_scope('decoder'):
             model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p, object_embeddings=self.h_o)
             self.p_x_i = tf.sigmoid(model())
@@ -107,7 +112,8 @@ class VKGE:
 
         nb_samples = Xs.shape[0]
         batch_size = math.ceil(nb_samples / nb_batches)
-        logger.info("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
+        # logger.info("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
+        print("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
 
         # projection_steps = [constraints.unit_cube(self.entity_parameters_layer) if unit_cube
         #                     else constraints.unit_sphere(self.entity_parameters_layer, norm=1.0)]
@@ -169,4 +175,5 @@ class VKGE:
             def stats(values):
                 return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-            logger.info('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
+            # logger.info('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
+            print('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))

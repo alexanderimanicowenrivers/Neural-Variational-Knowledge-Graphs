@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="completely commented out all projection steps">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="166" column="16" lean-forward="false" selection-start-line="165" selection-start-column="18" selection-end-line="166" selection-end-column="16" />
+            <state relative-caret-position="376">
+              <caret line="177" column="20" lean-forward="false" selection-start-line="177" selection-start-column="14" selection-end-line="177" selection-end-column="20" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -54,6 +54,7 @@
     <findStrings>
       <find>optimizer</find>
       <find>projection</find>
+      <find>logger</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -353,7 +354,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527785971383</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="completely commented out all projection steps">
+      <created>1527786658113</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1527786658113</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -425,7 +433,8 @@
     <MESSAGE value="made the optimizer a class attribute rather than an option being passed through the modules." />
     <MESSAGE value="fixed the loading of the knowledgebase module" />
     <MESSAGE value="updated optimiser call" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated optimiser call" />
+    <MESSAGE value="completely commented out all projection steps" />
+    <option name="LAST_COMMIT_MESSAGE" value="completely commented out all projection steps" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -654,8 +663,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="166" column="16" lean-forward="false" selection-start-line="165" selection-start-column="18" selection-end-line="166" selection-end-column="16" />
+        <state relative-caret-position="376">
+          <caret line="177" column="20" lean-forward="false" selection-start-line="177" selection-start-column="14" selection-end-line="177" selection-end-column="20" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
