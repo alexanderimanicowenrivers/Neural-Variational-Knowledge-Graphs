@@ -42,7 +42,7 @@ class VKGE:
         eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
         return mu + sigma * eps
 
-    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer):
+    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size):
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
