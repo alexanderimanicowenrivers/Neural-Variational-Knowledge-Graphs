@@ -18,7 +18,6 @@ logger = logging.getLogger(os.path.basename(sys.argv[0]))
 
 
 def dot3(x, y, z):
-    return tf.reduce_sum(x * y * z, axis=1)
 
 
 def main(argv):
