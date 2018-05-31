@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="64" column="29" lean-forward="false" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
+            <state relative-caret-position="373">
+              <caret line="166" column="16" lean-forward="false" selection-start-line="165" selection-start-column="18" selection-end-line="166" selection-end-column="16" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -53,6 +53,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>optimizer</find>
+      <find>projection</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -345,7 +346,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527783885126</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="updated optimiser call">
+      <created>1527785971383</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1527785971383</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -416,7 +424,8 @@
     <MESSAGE value="added in optimisation parameters for Adam - learning_rate,beta1,beta2,epsilon with default TF options" />
     <MESSAGE value="made the optimizer a class attribute rather than an option being passed through the modules." />
     <MESSAGE value="fixed the loading of the knowledgebase module" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the loading of the knowledgebase module" />
+    <MESSAGE value="updated optimiser call" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated optimiser call" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -645,8 +654,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="64" column="29" lean-forward="false" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
+        <state relative-caret-position="373">
+          <caret line="166" column="16" lean-forward="false" selection-start-line="165" selection-start-column="18" selection-end-line="166" selection-end-column="16" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

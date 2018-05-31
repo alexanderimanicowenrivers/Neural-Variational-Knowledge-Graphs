@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 class VKGE:
-    def __init__(self, triples, entity_embedding_size, predicate_embedding_size, lr=0.001,b1=0.9,b2=0.999,eps=1e-08):
+    def __init__(self, triples, entity_embedding_size, predicate_embedding_size,lr=0.001,b1=0.9,b2=0.999,eps=1e-08):
         super().__init__()
 
         logger.info('Parsing the facts in the Knowledge Base ..')
@@ -163,8 +163,8 @@ class VKGE:
                 loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
                 total_loss_value += elbo_value
 
-                for projection_step in projection_steps:
-                    session.run([projection_step])
+                # for projection_step in projection_steps:
+                #     session.run([projection_step])
 
             def stats(values):
                 return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
