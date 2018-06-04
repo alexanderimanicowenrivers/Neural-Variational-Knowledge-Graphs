@@ -16,10 +16,11 @@ from vkge.training.util import make_batches
 
 
 class VKGE:
-    def __init__(self, triples, entity_embedding_size, predicate_embedding_size,lr=0.001,b1=0.9,b2=0.999,eps=1e-08,GPUMode=False,ent_sig=6.0,pred_sig=6.0):
+    def __init__(self, triples, entity_embedding_size, predicate_embedding_size,lr=0.001,b1=0.9,b2=0.999,eps=1e-08,GPUMode=False,ent_sig=6.0,pred_sig=6.0,alt_cost=True):
         super().__init__()
-        self.GPUMode=GPUMode
 
+        self.GPUMode=GPUMode
+        self.alt_cost=alt_cost
         self.nb_examples = len(triples)
 
         if not(self.GPUMode):
@@ -199,13 +200,25 @@ class VKGE:
                 y = np.zeros_like(Xp_batch)
                 y[0::nb_versions] = 1
 
-                loss_args = {
-                    self.KL_discount: pi[counter],
-                    self.s_inputs: Xs_batch,
-                    self.p_inputs: Xp_batch,
-                    self.o_inputs: Xo_batch,
-                    self.y_inputs: y
-                }
+                if self.alt_cost:
+
+                    loss_args = {
+                        self.KL_discount: pi[counter],
+                        self.s_inputs: Xs_batch,
+                        self.p_inputs: Xp_batch,
+                        self.o_inputs: Xo_batch,
+                        self.y_inputs: y
+                    }
+
+                else:
+
+                    loss_args = {
+                        self.KL_discount: 1.0,
+                        self.s_inputs: Xs_batch,
+                        self.p_inputs: Xp_batch,
+                        self.o_inputs: Xo_batch,
+                        self.y_inputs: y
+                    }
 
                 _, elbo_value = session.run([self.training_step, self.elbo], feed_dict=loss_args)
 
