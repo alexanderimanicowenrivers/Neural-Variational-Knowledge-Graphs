@@ -41,7 +41,7 @@ class VKGE:
         self.facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in triples]
 
         self.test_facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in test_triples]
-        self.test_parser= KnowledgeBaseParser(self.test_parser)
+        self.test_parser= KnowledgeBaseParser(self.test_facts)
 
         self.parser = KnowledgeBaseParser(self.facts)
 

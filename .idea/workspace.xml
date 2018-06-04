@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="317" column="92" lean-forward="false" selection-start-line="317" selection-start-column="92" selection-end-line="317" selection-end-column="92" />
+            <state relative-caret-position="638">
+              <caret line="43" column="61" lean-forward="false" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -456,7 +456,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528143274685</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="fixed flags">
+      <created>1528144269346</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1528144269347</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TodoView">
@@ -818,8 +825,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="317" column="92" lean-forward="false" selection-start-line="317" selection-start-column="92" selection-end-line="317" selection-end-column="92" />
+        <state relative-caret-position="638">
+          <caret line="43" column="61" lean-forward="false" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
