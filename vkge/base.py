@@ -10,6 +10,8 @@ import vkge.models as models
 from vkge.training import constraints, corrupt, index
 from vkge.training.util import make_batches
 import vkge.io as io
+
+
 # new
 
 # import logging
@@ -27,9 +29,9 @@ class VKGE:
         entity_embedding_size = embedding_size
 
         triples = io.read_triples("data/wn18/wordnet-mlj12-train.txt")  # choose dataset
+        test_triples = io.read_triples("data/wn18/wordnet-mlj12-test.txt")
 
-        test_triples=io.read_triples("data/wn18/wordnet-mlj12-test.txt")
-
+        self.random_state = np.random.RandomState(0)
         self.GPUMode = GPUMode
         self.alt_cost = alt_cost
         self.nb_examples = len(triples)
@@ -41,19 +43,25 @@ class VKGE:
         self.facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in triples]
 
         self.test_facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in test_triples]
-        self.test_parser= KnowledgeBaseParser(self.test_facts)
 
+        self.test_parser = KnowledgeBaseParser(self.test_facts)
         self.parser = KnowledgeBaseParser(self.facts)
 
-        self.random_state = np.random.RandomState(0)
-        nb_entities, nb_predicates = len(self.parser.entity_vocabulary), len(self.parser.predicate_vocabulary)
-        self.t_nb_entities, self.t_nb_predicates = len(self.test_parser.entity_vocabulary), len(self.test_parser.predicate_vocabulary)
+        ##### for test time ######
+        all_triples = triples + test_triples
+        entity_set = {s for (s, p, o) in all_triples} | {o for (s, p, o) in all_triples}
+        predicate_set = {p for (s, p, o) in all_triples}
+        self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
+        self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
+        self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
+        ############################
 
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
-        self.build_model(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
+        self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
+                         optimizer,
                          ent_sig, pred_sig)
 
-        self.train(nb_epochs=10000)
+        self.train(nb_epochs=10000, test_triples=test_triples, all_triples=all_triples)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -145,9 +153,10 @@ class VKGE:
         with tf.variable_scope('decoder'):
             model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                  object_embeddings=self.h_o)
-            self.p_x_i = tf.sigmoid(model())
+            self.scores = model()
+            self.p_x_i = tf.sigmoid(self.scores)
 
-    def train(self, session=0, nb_batches=10, nb_epochs=10):
+    def train(self, test_triples, all_triples, session=0, nb_batches=10, nb_epochs=10):
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
@@ -157,7 +166,6 @@ class VKGE:
                                                 corr_obj=True)
 
         test_sequences = self.parser.facts_to_sequences(self.test_facts)
-
         train_sequences = self.parser.facts_to_sequences(self.facts)
 
         Xs = np.array([s_idx for (_, [s_idx, _]) in train_sequences])
@@ -280,32 +288,31 @@ class VKGE:
                     if epoch % 50 == 0:
                         print('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
 
-
                 if epoch % 200:
 
-                    for eval_triples in ['valid']:
+                    for eval_type in ['valid']:
 
-                        eval_triples = test_sequences
+                        eval_triples = test_triples
                         ranks_subj, ranks_obj = [], []
                         filtered_ranks_subj, filtered_ranks_obj = [], []
 
-                        for _i, (s, p, o) in enumerate(test_sequences):
-                            s_idx, p_idx, o_idx = entity_to_idx[s], predicate_to_idx[p], entity_to_idx[o]
+                        for _i, (s, p, o) in enumerate(eval_triples):
+                            s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], self.entity_to_idx[o]
 
-                            Xs_v = np.full(shape=(self.t_nb_entities,), fill_value=s_idx, dtype=np.int32)
-                            Xp_v = np.full(shape=(self.t_nb_entities,), fill_value=p_idx, dtype=np.int32)
-                            Xo_v = np.full(shape=(self.t_nb_entities,), fill_value=o_idx, dtype=np.int32)
+                            Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
+                            Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
+                            Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
 
-                            feed_dict_corrupt_subj = {subject_inputs: np.arange(self.t_nb_entities), predicate_inputs: Xp_v,
-                                                      object_inputs: Xo_v}
-                            feed_dict_corrupt_obj = {subject_inputs: Xs_v, predicate_inputs: Xp_v,
-                                                     object_inputs: np.arange(self.t_nb_entities)}
+                            feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities), self.p_inputs: Xp_v,
+                                                      self.o_inputs: Xo_v}
+                            feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
+                                                     self.o_inputs: np.arange(self.nb_entities)}
 
                             # scores of (1, p, o), (2, p, o), .., (N, p, o)
-                            scores_subj = session.run(scores, feed_dict=feed_dict_corrupt_subj)
+                            scores_subj = session.run(self.scores, feed_dict=feed_dict_corrupt_subj)
 
                             # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                            scores_obj = session.run(scores, feed_dict=feed_dict_corrupt_obj)
+                            scores_obj = session.run(self.scores, feed_dict=feed_dict_corrupt_obj)
 
                             ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
                             ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
@@ -313,9 +320,9 @@ class VKGE:
                             filtered_scores_subj = scores_subj.copy()
                             filtered_scores_obj = scores_obj.copy()
 
-                            rm_idx_s = [entity_to_idx[fs] for (fs, fp, fo) in test_sequences if
+                            rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
                                         fs != s and fp == p and fo == o]
-                            rm_idx_o = [entity_to_idx[fo] for (fs, fp, fo) in test_sequences if
+                            rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
                                         fs == s and fp == p and fo != o]
 
                             filtered_scores_subj[rm_idx_s] = - np.inf
@@ -333,6 +340,5 @@ class VKGE:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                     t1, t2 = mean_rank, hits_at_k
                     print('Hits@10 value: {0} %'.format(t2))
-
 
             print("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
