@@ -154,7 +154,7 @@ class VKGE:
         pi_s = np.log(((2.0 ** (10 - 1)) / (2.0 ** (10) - 1)))
         pi_e = np.log(((2.0 ** (0)) / (2.0 ** (10) - 1)))
 
-        pi = np.linspace(pi_s, pi_e, M)
+        pi = np.exp(np.linspace(pi_s, pi_e, M))
 
         counter = 0
 
