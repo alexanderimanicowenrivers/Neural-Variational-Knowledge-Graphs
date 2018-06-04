@@ -289,7 +289,7 @@ class VKGE:
                         ranks_subj, ranks_obj = [], []
                         filtered_ranks_subj, filtered_ranks_obj = [], []
 
-                        for _i, (s, p, o) in enumerate(eval_triples):
+                        for _i, (s, p, o) in enumerate(test_sequences):
                             s_idx, p_idx, o_idx = entity_to_idx[s], predicate_to_idx[p], entity_to_idx[o]
 
                             Xs_v = np.full(shape=(self.t_nb_entities,), fill_value=s_idx, dtype=np.int32)
