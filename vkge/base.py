@@ -119,7 +119,7 @@ class VKGE:
             model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p, object_embeddings=self.h_o)
             self.p_x_i = tf.sigmoid(model())
 
-    def train(self, session, nb_batches=10, nb_epochs=10):
+    def train(self, session, batch_size=10, nb_epochs=10):
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
@@ -137,7 +137,8 @@ class VKGE:
         assert Xs.shape == Xp.shape == Xo.shape
 
         nb_samples = Xs.shape[0]
-        batch_size = math.ceil(nb_samples / nb_batches)
+        # batch_size = math.ceil(nb_samples / nb_batches)
+        nb_batches= math.ceil(nb_samples / batch_size)
         # logger.info("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
         if not (self.GPUMode):
             print("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))

@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="211" column="20" lean-forward="true" selection-start-line="211" selection-start-column="20" selection-end-line="211" selection-end-column="20" />
+            <state relative-caret-position="368">
+              <caret line="139" column="57" lean-forward="true" selection-start-line="139" selection-start-column="57" selection-end-line="139" selection-end-column="57" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -431,7 +431,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528131223317</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="boolean flag for compression cost">
+      <created>1528131384365</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1528131384365</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -514,7 +521,8 @@
     <MESSAGE value="set predicate and entity initial variance values as model parameter" />
     <MESSAGE value="added in compression cost" />
     <MESSAGE value="fixed compression cost" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed compression cost" />
+    <MESSAGE value="boolean flag for compression cost" />
+    <option name="LAST_COMMIT_MESSAGE" value="boolean flag for compression cost" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -751,8 +759,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="211" column="20" lean-forward="true" selection-start-line="211" selection-start-column="20" selection-end-line="211" selection-end-column="20" />
+        <state relative-caret-position="368">
+          <caret line="139" column="57" lean-forward="true" selection-start-line="139" selection-start-column="57" selection-end-line="139" selection-end-column="57" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
