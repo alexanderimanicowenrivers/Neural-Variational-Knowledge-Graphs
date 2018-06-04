@@ -15,8 +15,7 @@
 ## Instructions
 
 For:
-- **Reports** see [GROUP](https://github.com/uclwe/rtb/blob/master/Reports/group_01_report.pdf) / [ACR]
-- **Models** see [ACR](https://github.com/we/) 
+- **Report** see [ACR](https://github.com/acr42) 
 
 -------
 
