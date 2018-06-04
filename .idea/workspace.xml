@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2539">
-              <caret line="212" column="90" lean-forward="false" selection-start-line="212" selection-start-column="90" selection-end-line="212" selection-end-column="90" />
+            <state relative-caret-position="526">
+              <caret line="202" column="50" lean-forward="false" selection-start-line="202" selection-start-column="50" selection-end-line="202" selection-end-column="50" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -410,7 +410,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528126948204</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="set predicate and entity initial variance values as model parameter">
+      <created>1528128959908</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1528128959908</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView">
@@ -490,7 +497,8 @@
     <MESSAGE value="add in statement for GPU mode to only print lowest loss achieved and the epoch at which it was achieved" />
     <MESSAGE value="removed all print statements bar the the min requirement for GPUmode" />
     <MESSAGE value="split mean and variance so they can be independently initialised" />
-    <option name="LAST_COMMIT_MESSAGE" value="split mean and variance so they can be independently initialised" />
+    <MESSAGE value="set predicate and entity initial variance values as model parameter" />
+    <option name="LAST_COMMIT_MESSAGE" value="set predicate and entity initial variance values as model parameter" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -727,8 +735,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2539">
-          <caret line="212" column="90" lean-forward="false" selection-start-line="212" selection-start-column="90" selection-end-line="212" selection-end-column="90" />
+        <state relative-caret-position="526">
+          <caret line="202" column="50" lean-forward="false" selection-start-line="202" selection-start-column="50" selection-end-line="202" selection-end-column="50" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

@@ -20,6 +20,8 @@ class VKGE:
         super().__init__()
         self.GPUMode=GPUMode
 
+        self.nb_examples = len(triples)
+
         if not(self.GPUMode):
             print('Parsing the facts in the Knowledge Base ..')
 
@@ -55,12 +57,14 @@ class VKGE:
         self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,ent_sig,pred_sig)
         self.build_decoder()
 
+        self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
+
         # Kullback Leibler divergence
         self.e_objective = 0.0
         self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
         self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
         self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
-
+        self.e_objective = (self.e_objective*self.KL_discount)
         # Log likelihood
         self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-4))
 
@@ -139,8 +143,23 @@ class VKGE:
 
         # projection_steps = [constraints.unit_cube(self.entity_parameters_layer) if unit_cube
         #                     else constraints.unit_sphere(self.entity_parameters_layer, norm=1.0)]
-        minloss=100
+        minloss=10000
+
         minepoch=0
+
+        ####### COMPRESSION COST PARAMETERS
+
+        M = int(np.ceil((self.nb_examples * nb_epochs / batch_size)) + 1)
+
+        pi_s = np.log(((2.0 ** (10 - 1)) / (2.0 ** (10) - 1)))
+        pi_e = np.log(((2.0 ** (0)) / (2.0 ** (10) - 1)))
+
+        pi = np.linspace(pi_s, pi_e, M)
+
+        counter = 0
+
+        #####################
+
         for epoch in range(1, nb_epochs + 1):
             order = self.random_state.permutation(nb_samples)
             Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
@@ -181,6 +200,7 @@ class VKGE:
                 y[0::nb_versions] = 1
 
                 loss_args = {
+                    self.KL_discount: pi[counter],
                     self.s_inputs: Xs_batch,
                     self.p_inputs: Xp_batch,
                     self.o_inputs: Xo_batch,
@@ -191,6 +211,8 @@ class VKGE:
 
                 loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
                 total_loss_value += elbo_value
+
+                counter += 1
 
                 # for projection_step in projection_steps:
                 #     session.run([projection_step])
