@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="removed all print statements bar the the min requirement for GPUmode">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="82" column="46" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+            <state relative-caret-position="2539">
+              <caret line="212" column="90" lean-forward="false" selection-start-line="212" selection-start-column="90" selection-end-line="212" selection-end-column="90" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -403,7 +403,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527788770585</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="split mean and variance so they can be independently initialised">
+      <created>1528126948203</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1528126948204</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -482,7 +489,8 @@
     <MESSAGE value="push" />
     <MESSAGE value="add in statement for GPU mode to only print lowest loss achieved and the epoch at which it was achieved" />
     <MESSAGE value="removed all print statements bar the the min requirement for GPUmode" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed all print statements bar the the min requirement for GPUmode" />
+    <MESSAGE value="split mean and variance so they can be independently initialised" />
+    <option name="LAST_COMMIT_MESSAGE" value="split mean and variance so they can be independently initialised" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -719,8 +727,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="82" column="46" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+        <state relative-caret-position="2539">
+          <caret line="212" column="90" lean-forward="false" selection-start-line="212" selection-start-column="90" selection-end-line="212" selection-end-column="90" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

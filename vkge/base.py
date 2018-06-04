@@ -16,7 +16,7 @@ from vkge.training.util import make_batches
 
 
 class VKGE:
-    def __init__(self, triples, entity_embedding_size, predicate_embedding_size,lr=0.001,b1=0.9,b2=0.999,eps=1e-08,GPUMode=False):
+    def __init__(self, triples, entity_embedding_size, predicate_embedding_size,lr=0.001,b1=0.9,b2=0.999,eps=1e-08,GPUMode=False,ent_sig=6.0,pred_sig=6.0):
         super().__init__()
         self.GPUMode=GPUMode
 
@@ -31,7 +31,7 @@ class VKGE:
         nb_entities, nb_predicates = len(self.parser.entity_vocabulary), len(self.parser.predicate_vocabulary)
 
         optimizer=tf.train.AdamOptimizer(learning_rate=lr,beta1=b1,beta2=b2,epsilon=eps)
-        self.build_model(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,optimizer)
+        self.build_model(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,optimizer,ent_sig,pred_sig)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -46,13 +46,13 @@ class VKGE:
         eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
         return mu + sigma * eps
 
-    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,optimizer):
+    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,optimizer,ent_sig,pred_sig):
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
         self.y_inputs = tf.placeholder(tf.bool, shape=[None])
 
-        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size)
+        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,ent_sig,pred_sig)
         self.build_decoder()
 
         # Kullback Leibler divergence
@@ -68,7 +68,7 @@ class VKGE:
 
         self.training_step = optimizer.minimize(self.elbo)
 
-    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size):
+    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,pred_sig):
         if not (self.GPUMode):
             print('Building Inference Networks q(h_x | x) ..')
 
@@ -77,10 +77,10 @@ class VKGE:
         with tf.variable_scope("encoder"):
             self.entity_embedding_mean = tf.get_variable('entities_mean', shape=[nb_entities + 1, entity_embedding_size],
                                                     initializer=tf.zeros_initializer(), dtype=tf.float32)
-            self.entity_embedding_sigma = tf.get_variable('entities_sigma', shape=[nb_entities + 1, entity_embedding_size],
+            self.entity_embedding_sigm = tf.get_variable('entities_sigma', shape=[nb_entities + 1, entity_embedding_size],
                                                    initializer=tf.ones_initializer(), dtype=tf.float32)
 
-            # entity_embedding_sigma = tf.get_variable(entity_embedding_sig.initialized_value() * 6, dtype=tf.float32)
+            self.entity_embedding_sigma = tf.Variable(self.entity_embedding_sigm.initialized_value() * ent_sig, dtype=tf.float32)
 
             self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
             self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
@@ -93,12 +93,11 @@ class VKGE:
             self.predicate_embedding_mean = tf.get_variable('predicate_mean',
                                                        shape=[nb_predicates + 1, predicate_embedding_size],
                                                        initializer=tf.zeros_initializer(), dtype=tf.float32)
-            self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
+            self.predicate_embedding_sigm = tf.get_variable('predicate_sigma',
                                                         shape=[nb_predicates + 1, predicate_embedding_size],
                                                         initializer=tf.ones_initializer(), dtype=tf.float32)
 
-            # predicate_embedding_sigm = tf.get_variable(predicate_embedding_sigma.initialized_value() * 6,
-            #                                            dtype=tf.float32)
+            self.predicate_embedding_sigma = tf.Variable(self.predicate_embedding_sigm.initialized_value() * pred_sig, dtype=tf.float32)
 
             self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
             self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
