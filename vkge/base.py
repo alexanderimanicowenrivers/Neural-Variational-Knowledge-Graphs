@@ -9,6 +9,8 @@ from vkge.knowledgebase import Fact, KnowledgeBaseParser
 import vkge.models as models
 from vkge.training import constraints, corrupt, index
 from vkge.training.util import make_batches
+import vkge.io as io
+
 
 # import logging
 
@@ -16,14 +18,21 @@ from vkge.training.util import make_batches
 
 
 class VKGE:
-    def __init__(self, triples, entity_embedding_size, predicate_embedding_size,lr=0.001,b1=0.9,b2=0.999,eps=1e-08,GPUMode=False,ent_sig=6.0,pred_sig=6.0,alt_cost=True):
+    def __init__(self, embedding_size, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
+                 alt_cost=True):
         super().__init__()
 
-        self.GPUMode=GPUMode
-        self.alt_cost=alt_cost
+        pred_sig = ent_sig
+        predicate_embedding_size = embedding_size
+        entity_embedding_size = embedding_size
+
+        triples = io.read_triples("data/wn18/wordnet-mlj12-train.txt")  # choose dataset
+
+        self.GPUMode = GPUMode
+        self.alt_cost = alt_cost
         self.nb_examples = len(triples)
 
-        if not(self.GPUMode):
+        if not (self.GPUMode):
             print('Parsing the facts in the Knowledge Base ..')
 
         # logger.info('Parsing the facts in the Knowledge Base ..')
@@ -33,8 +42,11 @@ class VKGE:
         self.random_state = np.random.RandomState(0)
         nb_entities, nb_predicates = len(self.parser.entity_vocabulary), len(self.parser.predicate_vocabulary)
 
-        optimizer=tf.train.AdamOptimizer(learning_rate=lr,beta1=b1,beta2=b2,epsilon=eps)
-        self.build_model(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,optimizer,ent_sig,pred_sig)
+        optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
+        self.build_model(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
+                         ent_sig, pred_sig)
+
+        self.train(nb_epochs=10000)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -49,43 +61,53 @@ class VKGE:
         eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
         return mu + sigma * eps
 
-    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,optimizer,ent_sig,pred_sig):
+    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
+                    ent_sig, pred_sig):
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
         self.y_inputs = tf.placeholder(tf.bool, shape=[None])
 
-        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,ent_sig,pred_sig)
+        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
+                           pred_sig)
         self.build_decoder()
 
         self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
 
         # Kullback Leibler divergence
         self.e_objective = 0.0
-        self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
-        self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
-        self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
-        self.e_objective = (self.e_objective*self.KL_discount)
+        self.e_objective -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
+        self.e_objective -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
+        self.e_objective -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
+        self.e_objective = (self.e_objective * self.KL_discount)
         # Log likelihood
-        self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-4))
+        self.g_objective = -tf.reduce_sum(
+            tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-4))
 
         self.elbo = tf.reduce_mean(self.g_objective + self.e_objective)
 
         self.training_step = optimizer.minimize(self.elbo)
 
-    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,pred_sig):
+    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
+                      pred_sig):
         if not (self.GPUMode):
             print('Building Inference Networks q(h_x | x) ..')
 
         # logger.info('Building Inference Networks q(h_x | x) ..')
 
         with tf.variable_scope("encoder"):
-            self.entity_embedding_mean = tf.get_variable('entities_mean', shape=[nb_entities + 1, entity_embedding_size],
-                                                    initializer=tf.zeros_initializer(), dtype=tf.float32)
-            self.entity_embedding_sigm = tf.get_variable('entities_sigma', shape=[nb_entities + 1, entity_embedding_size],
-                                                   initializer=tf.ones_initializer(), dtype=tf.float32)
+            self.entity_embedding_mean = tf.get_variable('entities_mean',
+                                                         shape=[nb_entities + 1, entity_embedding_size],
+                                                         initializer=tf.zeros_initializer(), dtype=tf.float32)
+            self.entity_embedding_sigm = tf.get_variable('entities_sigma',
+                                                         shape=[nb_entities + 1, entity_embedding_size],
+                                                         initializer=tf.ones_initializer(), dtype=tf.float32)
 
-            self.entity_embedding_sigma = tf.Variable(self.entity_embedding_sigm.initialized_value() * ent_sig, dtype=tf.float32)
+            self.entity_embedding_sigma = tf.Variable(self.entity_embedding_sigm.initialized_value() * ent_sig,
+                                                      dtype=tf.float32)
 
             self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
             self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
@@ -96,30 +118,29 @@ class VKGE:
             self.h_o = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
             self.predicate_embedding_mean = tf.get_variable('predicate_mean',
-                                                       shape=[nb_predicates + 1, predicate_embedding_size],
-                                                       initializer=tf.zeros_initializer(), dtype=tf.float32)
+                                                            shape=[nb_predicates + 1, predicate_embedding_size],
+                                                            initializer=tf.zeros_initializer(), dtype=tf.float32)
             self.predicate_embedding_sigm = tf.get_variable('predicate_sigma',
-                                                        shape=[nb_predicates + 1, predicate_embedding_size],
-                                                        initializer=tf.ones_initializer(), dtype=tf.float32)
+                                                            shape=[nb_predicates + 1, predicate_embedding_size],
+                                                            initializer=tf.ones_initializer(), dtype=tf.float32)
 
-            self.predicate_embedding_sigma = tf.Variable(self.predicate_embedding_sigm.initialized_value() * pred_sig, dtype=tf.float32)
+            self.predicate_embedding_sigma = tf.Variable(self.predicate_embedding_sigm.initialized_value() * pred_sig,
+                                                         dtype=tf.float32)
 
             self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
             self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
             self.h_p = VKGE.sample_embedding(self.mu_p, self.log_sigma_sq_p)
-
-
-
 
     def build_decoder(self):
         if not (self.GPUMode):
             print('Building Inference Network p(y|h) ..')
         # logger.info('Building Inference Network p(y|h) ..')
         with tf.variable_scope('decoder'):
-            model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p, object_embeddings=self.h_o)
+            model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
+                                                 object_embeddings=self.h_o)
             self.p_x_i = tf.sigmoid(model())
 
-    def train(self, session, batch_size=10, nb_epochs=10):
+    def train(self, session=0, nb_batches=10, nb_epochs=10):
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
@@ -137,17 +158,17 @@ class VKGE:
         assert Xs.shape == Xp.shape == Xo.shape
 
         nb_samples = Xs.shape[0]
-        # batch_size = math.ceil(nb_samples / nb_batches)
-        nb_batches= math.ceil(nb_samples / batch_size)
+        batch_size = math.ceil(nb_samples / nb_batches)
+        # nb_batches= math.ceil(nb_samples / batch_size)
         # logger.info("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
         if not (self.GPUMode):
             print("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
 
         # projection_steps = [constraints.unit_cube(self.entity_parameters_layer) if unit_cube
         #                     else constraints.unit_sphere(self.entity_parameters_layer, norm=1.0)]
-        minloss=10000
+        minloss = 10000
 
-        minepoch=0
+        minepoch = 0
 
         ####### COMPRESSION COST PARAMETERS
 
@@ -162,88 +183,91 @@ class VKGE:
 
         #####################
 
-        for epoch in range(1, nb_epochs + 1):
-            order = self.random_state.permutation(nb_samples)
-            Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
+        init_op = tf.global_variables_initializer()
+        with tf.Session() as session:
+            session.run(init_op)
+            for epoch in range(1, nb_epochs + 1):
+                order = self.random_state.permutation(nb_samples)
+                Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
 
-            Xs_sc, Xp_sc, Xo_sc = subj_corruptor(Xs_shuf, Xp_shuf, Xo_shuf)
-            Xs_oc, Xp_oc, Xo_oc = obj_corruptor(Xs_shuf, Xp_shuf, Xo_shuf)
+                Xs_sc, Xp_sc, Xo_sc = subj_corruptor(Xs_shuf, Xp_shuf, Xo_shuf)
+                Xs_oc, Xp_oc, Xo_oc = obj_corruptor(Xs_shuf, Xp_shuf, Xo_shuf)
 
-            batches = make_batches(nb_samples, batch_size)
+                batches = make_batches(nb_samples, batch_size)
 
-            loss_values = []
-            total_loss_value = 0
+                loss_values = []
+                total_loss_value = 0
 
-            nb_versions = 3
+                nb_versions = 3
 
-            for batch_start, batch_end in batches:
-                curr_batch_size = batch_end - batch_start
+                for batch_start, batch_end in batches:
+                    curr_batch_size = batch_end - batch_start
 
-                Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
-                Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
-                Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
+                    Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
+                    Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
+                    Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
 
-                # Positive Example
-                Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
-                Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
-                Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
+                    # Positive Example
+                    Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
+                    Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                # Negative examples (corrupting subject)
-                Xs_batch[1::nb_versions] = Xs_sc[batch_start:batch_end]
-                Xp_batch[1::nb_versions] = Xp_sc[batch_start:batch_end]
-                Xo_batch[1::nb_versions] = Xo_sc[batch_start:batch_end]
+                    # Negative examples (corrupting subject)
+                    Xs_batch[1::nb_versions] = Xs_sc[batch_start:batch_end]
+                    Xp_batch[1::nb_versions] = Xp_sc[batch_start:batch_end]
+                    Xo_batch[1::nb_versions] = Xo_sc[batch_start:batch_end]
 
-                # Negative examples (corrupting object)
-                Xs_batch[2::nb_versions] = Xs_oc[batch_start:batch_end]
-                Xp_batch[2::nb_versions] = Xp_oc[batch_start:batch_end]
-                Xo_batch[2::nb_versions] = Xo_oc[batch_start:batch_end]
+                    # Negative examples (corrupting object)
+                    Xs_batch[2::nb_versions] = Xs_oc[batch_start:batch_end]
+                    Xp_batch[2::nb_versions] = Xp_oc[batch_start:batch_end]
+                    Xo_batch[2::nb_versions] = Xo_oc[batch_start:batch_end]
 
-                y = np.zeros_like(Xp_batch)
-                y[0::nb_versions] = 1
+                    y = np.zeros_like(Xp_batch)
+                    y[0::nb_versions] = 1
 
-                if self.alt_cost:
+                    if self.alt_cost:  # if compression cost
 
-                    loss_args = {
-                        self.KL_discount: pi[counter],
-                        self.s_inputs: Xs_batch,
-                        self.p_inputs: Xp_batch,
-                        self.o_inputs: Xo_batch,
-                        self.y_inputs: y
-                    }
+                        loss_args = {
+                            self.KL_discount: pi[counter],
+                            self.s_inputs: Xs_batch,
+                            self.p_inputs: Xp_batch,
+                            self.o_inputs: Xo_batch,
+                            self.y_inputs: y
+                        }
 
+                    else:
+
+                        loss_args = {
+                            self.KL_discount: 1.0,
+                            self.s_inputs: Xs_batch,
+                            self.p_inputs: Xp_batch,
+                            self.o_inputs: Xo_batch,
+                            self.y_inputs: y
+                        }
+
+                    _, elbo_value = session.run([self.training_step, self.elbo], feed_dict=loss_args)
+
+                    loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
+                    total_loss_value += elbo_value
+
+                    counter += 1
+
+                    # for projection_step in projection_steps:
+                    #     session.run([projection_step])
+
+                def stats(values):
+                    return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
+
+                # logger.info('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
+                if self.GPUMode:
+                    if (round(np.mean(loss_values), 4) < minloss):
+                        minloss = round(np.mean(loss_values), 4)
+                        minepoch = epoch
                 else:
 
-                    loss_args = {
-                        self.KL_discount: 1.0,
-                        self.s_inputs: Xs_batch,
-                        self.p_inputs: Xp_batch,
-                        self.o_inputs: Xo_batch,
-                        self.y_inputs: y
-                    }
-
-                _, elbo_value = session.run([self.training_step, self.elbo], feed_dict=loss_args)
-
-                loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
-                total_loss_value += elbo_value
-
-                counter += 1
-
-                # for projection_step in projection_steps:
-                #     session.run([projection_step])
-
-            def stats(values):
-                return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
-
-            # logger.info('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
-            if self.GPUMode:
-                if (round(np.mean(loss_values), 4) < minloss):
-                    minloss=round(np.mean(loss_values), 4)
-                    minepoch=epoch
-            else:
-
-                if (round(np.mean(loss_values), 4) < minloss):
-                    minloss = round(np.mean(loss_values), 4)
-                    minepoch=epoch
-                if epoch % 50 == 0:
-                    print('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
-        print("The minimum loss achieved is {0} \t at epoch {1}".format(minloss,minepoch))
+                    if (round(np.mean(loss_values), 4) < minloss):
+                        minloss = round(np.mean(loss_values), 4)
+                        minepoch = epoch
+                    if epoch % 50 == 0:
+                        print('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
+            print("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))

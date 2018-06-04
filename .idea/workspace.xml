@@ -32,10 +32,11 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="139" column="57" lean-forward="true" selection-start-line="139" selection-start-column="57" selection-end-line="139" selection-end-column="57" />
+            <state relative-caret-position="4080">
+              <caret line="272" column="95" lean-forward="false" selection-start-line="272" selection-start-column="95" selection-end-line="272" selection-end-column="95" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
+                <marker date="1528140058168" expanded="true" signature="12579:12670" ph="..." />
               </folding>
             </state>
           </provider>
@@ -438,7 +439,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528131384365</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="added in batch size as an optional parameter">
+      <created>1528134165004</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1528134165004</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">
@@ -522,7 +530,8 @@
     <MESSAGE value="added in compression cost" />
     <MESSAGE value="fixed compression cost" />
     <MESSAGE value="boolean flag for compression cost" />
-    <option name="LAST_COMMIT_MESSAGE" value="boolean flag for compression cost" />
+    <MESSAGE value="added in batch size as an optional parameter" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in batch size as an optional parameter" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -564,6 +573,7 @@
           <caret line="26" column="110" lean-forward="false" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="110" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
+            <marker date="1528140058168" expanded="true" signature="12579:12670" ph="..." />
           </folding>
         </state>
       </provider>
@@ -759,10 +769,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="139" column="57" lean-forward="true" selection-start-line="139" selection-start-column="57" selection-end-line="139" selection-end-column="57" />
+        <state relative-caret-position="4080">
+          <caret line="272" column="95" lean-forward="false" selection-start-line="272" selection-start-column="95" selection-end-line="272" selection-end-column="95" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
+            <marker date="1528140058168" expanded="true" signature="12579:12670" ph="..." />
           </folding>
         </state>
       </provider>
