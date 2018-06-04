@@ -14,7 +14,7 @@ FLAGS = flags.FLAGS
 
 
 def main(_):
-    vkge.VKGE(embedding_size=flags.embedding_size,lr=flags.learning_rate,b1=flags.beta1,b2=flags.beta2,eps=flags.epsilon,ent_sig=flags.int_sig,alt_cost=flags.alt_cost)
+    vkge.VKGE(embedding_size=FLAGS.embedding_size,lr=FLAGS.learning_rate,b1=FLAGS.beta1,b2=FLAGS.beta2,eps=FLAGS.epsilon,ent_sig=FLAGS.int_sig,alt_cost=FLAGS.alt_cost)
 
 
 if __name__ == '__main__':
