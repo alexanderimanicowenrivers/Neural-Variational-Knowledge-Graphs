@@ -73,21 +73,39 @@ class VKGE:
             print('Building Inference Networks q(h_x | x) ..')
 
         # logger.info('Building Inference Networks q(h_x | x) ..')
-        with tf.variable_scope('encoder'):
-            self.entity_parameters_layer = tf.get_variable('entities',
-                                                           shape=[nb_entities + 1, entity_embedding_size * 2],
-                                                           initializer=tf.contrib.layers.xavier_initializer())
-            self.predicate_parameters_layer = tf.get_variable('predicates',
-                                                              shape=[nb_predicates + 1, predicate_embedding_size * 2],
-                                                              initializer=tf.contrib.layers.xavier_initializer())
 
-            self.mu_s, self.log_sigma_sq_s = VKGE.input_parameters(self.s_inputs, self.entity_parameters_layer)
-            self.mu_p, self.log_sigma_sq_p = VKGE.input_parameters(self.p_inputs, self.predicate_parameters_layer)
-            self.mu_o, self.log_sigma_sq_o = VKGE.input_parameters(self.o_inputs, self.entity_parameters_layer)
+        with tf.variable_scope("encoder"):
+            self.entity_embedding_mean = tf.get_variable('entities_mean', shape=[nb_entities + 1, entity_embedding_size],
+                                                    initializer=tf.zeros_initializer(), dtype=tf.float32)
+            self.entity_embedding_sigma = tf.get_variable('entities_sigma', shape=[nb_entities + 1, entity_embedding_size],
+                                                   initializer=tf.ones_initializer(), dtype=tf.float32)
 
+            # entity_embedding_sigma = tf.get_variable(entity_embedding_sig.initialized_value() * 6, dtype=tf.float32)
+
+            self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
+            self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
             self.h_s = VKGE.sample_embedding(self.mu_s, self.log_sigma_sq_s)
-            self.h_p = VKGE.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+
+            self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
+            self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
             self.h_o = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o)
+
+            self.predicate_embedding_mean = tf.get_variable('predicate_mean',
+                                                       shape=[nb_predicates + 1, predicate_embedding_size],
+                                                       initializer=tf.zeros_initializer(), dtype=tf.float32)
+            self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
+                                                        shape=[nb_predicates + 1, predicate_embedding_size],
+                                                        initializer=tf.ones_initializer(), dtype=tf.float32)
+
+            # predicate_embedding_sigm = tf.get_variable(predicate_embedding_sigma.initialized_value() * 6,
+            #                                            dtype=tf.float32)
+
+            self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
+            self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
+            self.h_p = VKGE.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+
+
+
 
     def build_decoder(self):
         if not (self.GPUMode):
@@ -122,7 +140,7 @@ class VKGE:
 
         # projection_steps = [constraints.unit_cube(self.entity_parameters_layer) if unit_cube
         #                     else constraints.unit_sphere(self.entity_parameters_layer, norm=1.0)]
-        minloss=0
+        minloss=100
         minepoch=0
         for epoch in range(1, nb_epochs + 1):
             order = self.random_state.permutation(nb_samples)
