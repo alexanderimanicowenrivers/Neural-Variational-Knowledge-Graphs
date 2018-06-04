@@ -28,6 +28,8 @@ class VKGE:
 
         triples = io.read_triples("data/wn18/wordnet-mlj12-train.txt")  # choose dataset
 
+        test_triples=io.read_triples("data/wn18/wordnet-mlj12-test.txt")
+
         self.GPUMode = GPUMode
         self.alt_cost = alt_cost
         self.nb_examples = len(triples)
@@ -37,10 +39,15 @@ class VKGE:
 
         # logger.info('Parsing the facts in the Knowledge Base ..')
         self.facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in triples]
+
+        self.test_facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in test_triples]
+        self.test_parser= KnowledgeBaseParser(self.test_parser)
+
         self.parser = KnowledgeBaseParser(self.facts)
 
         self.random_state = np.random.RandomState(0)
         nb_entities, nb_predicates = len(self.parser.entity_vocabulary), len(self.parser.predicate_vocabulary)
+        self.t_nb_entities, self.t_nb_predicates = len(self.test_parser.entity_vocabulary), len(self.test_parser.predicate_vocabulary)
 
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
         self.build_model(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
@@ -148,6 +155,8 @@ class VKGE:
                                                  corr_obj=False)
         obj_corruptor = corrupt.SimpleCorruptor(index_generator=index_gen, candidate_indices=neg_idxs,
                                                 corr_obj=True)
+
+        test_sequences = self.parser.facts_to_sequences(self.test_facts)
 
         train_sequences = self.parser.facts_to_sequences(self.facts)
 
@@ -270,4 +279,60 @@ class VKGE:
                         minepoch = epoch
                     if epoch % 50 == 0:
                         print('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
+
+
+                if epoch % 200:
+
+                    for eval_triples in ['valid']:
+
+                        eval_triples = test_sequences
+                        ranks_subj, ranks_obj = [], []
+                        filtered_ranks_subj, filtered_ranks_obj = [], []
+
+                        for _i, (s, p, o) in enumerate(eval_triples):
+                            s_idx, p_idx, o_idx = entity_to_idx[s], predicate_to_idx[p], entity_to_idx[o]
+
+                            Xs_v = np.full(shape=(self.t_nb_entities,), fill_value=s_idx, dtype=np.int32)
+                            Xp_v = np.full(shape=(self.t_nb_entities,), fill_value=p_idx, dtype=np.int32)
+                            Xo_v = np.full(shape=(self.t_nb_entities,), fill_value=o_idx, dtype=np.int32)
+
+                            feed_dict_corrupt_subj = {subject_inputs: np.arange(self.t_nb_entities), predicate_inputs: Xp_v,
+                                                      object_inputs: Xo_v}
+                            feed_dict_corrupt_obj = {subject_inputs: Xs_v, predicate_inputs: Xp_v,
+                                                     object_inputs: np.arange(self.t_nb_entities)}
+
+                            # scores of (1, p, o), (2, p, o), .., (N, p, o)
+                            scores_subj = session.run(scores, feed_dict=feed_dict_corrupt_subj)
+
+                            # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                            scores_obj = session.run(scores, feed_dict=feed_dict_corrupt_obj)
+
+                            ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                            ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+
+                            filtered_scores_subj = scores_subj.copy()
+                            filtered_scores_obj = scores_obj.copy()
+
+                            rm_idx_s = [entity_to_idx[fs] for (fs, fp, fo) in test_sequences if
+                                        fs != s and fp == p and fo == o]
+                            rm_idx_o = [entity_to_idx[fo] for (fs, fp, fo) in test_sequences if
+                                        fs == s and fp == p and fo != o]
+
+                            filtered_scores_subj[rm_idx_s] = - np.inf
+                            filtered_scores_obj[rm_idx_o] = - np.inf
+
+                            filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                            filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
+
+                        ranks = ranks_subj + ranks_obj
+                        filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
+
+                        for setting_name, setting_ranks in [('Filtered', filtered_ranks)]:
+                            mean_rank = np.mean(setting_ranks)
+                            k = 10
+                            hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                    t1, t2 = mean_rank, hits_at_k
+                    print('Hits@10 value: {0} %'.format(t2))
+
+
             print("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
