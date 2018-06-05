@@ -20,7 +20,7 @@ import vkge.io as io
 
 
 class VKGE:
-    def __init__(self, embedding_size, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
+    def __init__(self, embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
                  alt_cost=True):
         super().__init__()
 
@@ -61,7 +61,7 @@ class VKGE:
                          optimizer,
                          ent_sig, pred_sig)
 
-        self.train(nb_epochs=10000, test_triples=test_triples, all_triples=all_triples)
+        self.train(nb_epochs=10000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -156,7 +156,7 @@ class VKGE:
             self.scores = model()
             self.p_x_i = tf.sigmoid(self.scores)
 
-    def train(self, test_triples, all_triples, session=0, nb_batches=10, nb_epochs=1000):
+    def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000):
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
@@ -174,8 +174,8 @@ class VKGE:
         assert Xs.shape == Xp.shape == Xo.shape
 
         nb_samples = Xs.shape[0]
-        batch_size = math.ceil(nb_samples / nb_batches)
-        # nb_batches= math.ceil(nb_samples / batch_size)
+        # batch_size = math.ceil(nb_samples / nb_batches)
+        nb_batches= math.ceil(nb_samples / batch_size)
         # logger.info("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
         if not (self.GPUMode):
             print("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
