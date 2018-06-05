@@ -44,8 +44,8 @@
       <file leaf-file-name="script.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="98" column="1" lean-forward="false" selection-start-line="98" selection-start-column="1" selection-end-line="98" selection-end-column="1" />
+            <state relative-caret-position="519">
+              <caret line="105" column="14" lean-forward="false" selection-start-line="105" selection-start-column="14" selection-end-line="105" selection-end-column="14" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -564,7 +564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528211335772</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="pushing script to cluster for optimisation fixed cpu request">
+      <created>1528211669451</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1528211669451</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TodoView">
@@ -630,7 +637,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in progreess print statements" />
     <MESSAGE value="pushing all recent commits" />
     <MESSAGE value="print training progress every 50 iterations" />
     <MESSAGE value="push" />
@@ -655,7 +661,8 @@
     <MESSAGE value="pushing script to cluster for optimisation" />
     <MESSAGE value="pushing script to cluster for optimisation (move folder)" />
     <MESSAGE value="pushing script to cluster for optimisation fixed indent" />
-    <option name="LAST_COMMIT_MESSAGE" value="pushing script to cluster for optimisation fixed indent" />
+    <MESSAGE value="pushing script to cluster for optimisation fixed cpu request" />
+    <option name="LAST_COMMIT_MESSAGE" value="pushing script to cluster for optimisation fixed cpu request" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -939,8 +946,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="98" column="1" lean-forward="false" selection-start-line="98" selection-start-column="1" selection-end-line="98" selection-end-column="1" />
+        <state relative-caret-position="519">
+          <caret line="105" column="14" lean-forward="false" selection-start-line="105" selection-start-column="14" selection-end-line="105" selection-end-column="14" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
