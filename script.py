@@ -95,21 +95,21 @@ def main(_):
 
     header = """#!/bin/bash
 
-    #$ -cwd
-    #$ -S /bin/bash
-    #$ -o /dev/null
-    #$ -e /dev/null
-    #$ -t 1-{}
-    #$ -l tmem=8G
-    #$ -l h_rt=12:00:00
-    #$ -P gpu
-    #$ -l gpu=0
+#$ -cwd
+#$ -S /bin/bash
+#$ -o /dev/null
+#$ -e /dev/null
+#$ -t 1-{}
+#$ -l tmem=8G
+#$ -l h_rt=12:00:00
+#$ -P gpu
+#$ -l gpu=0
 
-    export LANG="en_US.utf8"
-    export LANGUAGE="en_US:en"
+export LANG="en_US.utf8"
+export LANGUAGE="en_US:en"
 
-    cd /home/acowenri/workspace/Neural-Variational-Knowledge-Graphs
-    export PYTHONPATH=.
+cd /home/acowenri/workspace/Neural-Variational-Knowledge-Graphs
+export PYTHONPATH=.
 
     """.format(nb_jobs)
 
@@ -118,6 +118,6 @@ def main(_):
     for job_id, command_line in enumerate(sorted_command_lines, 1):
         print('test $SGE_TASK_ID -eq {} && {}'.format(job_id, command_line))
 
-    if __name__ == '__main__':
-        logging.basicConfig(level=logging.INFO)
-        main(sys.argv[1:])
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+    main(sys.argv[1:])
