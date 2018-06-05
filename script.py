@@ -103,8 +103,8 @@ def main(_):
 #$ -o /dev/null
 #$ -e /dev/null
 #$ -t 1-{}
-#$ -l tmem=8G
-#$ -l h_vmem=8G
+#$ -l tmem=18G
+#$ -l h_vmem=18G
 #$ -l h_rt=12:00:00
 
 
