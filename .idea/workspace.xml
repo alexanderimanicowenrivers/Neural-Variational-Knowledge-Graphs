@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="209">
+              <caret line="288" column="46" lean-forward="false" selection-start-line="288" selection-start-column="46" selection-end-line="288" selection-end-column="46" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -477,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528144466564</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="fully functioning training interval tests">
+      <created>1528147197402</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1528147197402</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TodoView">
@@ -566,7 +573,8 @@
     <MESSAGE value="main console for running on GPU" />
     <MESSAGE value="fixed flags" />
     <MESSAGE value="fixed test time hits @ 10" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed test time hits @ 10" />
+    <MESSAGE value="fully functioning training interval tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="fully functioning training interval tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -840,8 +848,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="209">
+          <caret line="288" column="46" lean-forward="false" selection-start-line="288" selection-start-column="46" selection-end-line="288" selection-end-column="46" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

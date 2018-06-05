@@ -286,9 +286,9 @@ class VKGE:
                         minloss = round(np.mean(loss_values), 4)
                         minepoch = epoch
                     if epoch % 50 == 0:
-                        print('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
+                        print('Epoch: {0}\tVLB: {1}'.format(epoch, stats(loss_values)))
 
-                if epoch % 200:
+                if (epoch % 200)==0:
 
                     for eval_type in ['valid']:
 
