@@ -93,6 +93,9 @@ def main(_):
     sorted_command_lines = sorted(command_lines)
     nb_jobs = len(sorted_command_lines)
 
+ # add this in for GPU's   # $ -P gpu
+ #    # $ -l gpu=0
+
     header = """#!/bin/bash
 
 #$ -cwd
@@ -102,8 +105,7 @@ def main(_):
 #$ -t 1-{}
 #$ -l tmem=8G
 #$ -l h_rt=12:00:00
-#$ -P gpu
-#$ -l gpu=0
+
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
