@@ -156,7 +156,7 @@ class VKGE:
             self.scores = model()
             self.p_x_i = tf.sigmoid(self.scores)
 
-    def train(self, test_triples, all_triples, session=0, nb_batches=10, nb_epochs=10):
+    def train(self, test_triples, all_triples, session=0, nb_batches=10, nb_epochs=1000):
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
