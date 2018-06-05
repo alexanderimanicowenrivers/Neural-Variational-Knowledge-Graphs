@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vkge/script.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/vkge/script.py" afterPath="$PROJECT_DIR$/script.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,7 +42,7 @@
         </entry>
       </file>
       <file leaf-file-name="script.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/vkge/script.py">
+        <entry file="file://$PROJECT_DIR$/script.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="773">
               <caret line="122" column="26" lean-forward="false" selection-start-line="122" selection-start-column="26" selection-end-line="122" selection-end-column="26" />
@@ -140,6 +140,11 @@
               <item name="Neural-Variational-Knowledge-Graphs" type="b2602c69:ProjectViewProjectNode" />
               <item name="Neural-Variational-Knowledge-Graphs" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Neural-Variational-Knowledge-Graphs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Neural-Variational-Knowledge-Graphs" type="462c0819:PsiDirectoryNode" />
+              <item name="vkge" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -151,6 +156,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -532,7 +542,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528207593072</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="pushing script to cluster for optimisation">
+      <created>1528210950973</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1528210950973</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TodoView">
@@ -546,9 +563,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.05" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.05" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -598,7 +614,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed the loading of the knowledgebase module" />
     <MESSAGE value="updated optimiser call" />
     <MESSAGE value="completely commented out all projection steps" />
     <MESSAGE value="added in progreess print statements" />
@@ -623,7 +638,8 @@
     <MESSAGE value="print loss each epoch" />
     <MESSAGE value="updated batch size info" />
     <MESSAGE value="commit batch size main flag" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit batch size main flag" />
+    <MESSAGE value="pushing script to cluster for optimisation" />
+    <option name="LAST_COMMIT_MESSAGE" value="pushing script to cluster for optimisation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -905,7 +921,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/script.py">
+    <entry file="file://$PROJECT_DIR$/script.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="773">
           <caret line="122" column="26" lean-forward="false" selection-start-line="122" selection-start-column="26" selection-end-line="122" selection-end-column="26" />
