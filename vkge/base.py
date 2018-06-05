@@ -165,7 +165,6 @@ class VKGE:
         obj_corruptor = corrupt.SimpleCorruptor(index_generator=index_gen, candidate_indices=neg_idxs,
                                                 corr_obj=True)
 
-        test_sequences = self.parser.facts_to_sequences(self.test_facts)
         train_sequences = self.parser.facts_to_sequences(self.facts)
 
         Xs = np.array([s_idx for (_, [s_idx, _]) in train_sequences])
@@ -285,8 +284,8 @@ class VKGE:
                     if (round(np.mean(loss_values), 4) < minloss):
                         minloss = round(np.mean(loss_values), 4)
                         minepoch = epoch
-                    if epoch % 50 == 0:
-                        print('Epoch: {0}\tVLB: {1}'.format(epoch, stats(loss_values)))
+
+                    print('Epoch: {0}\tVLB: {1}'.format(epoch, stats(loss_values)))
 
                 if (epoch % 200)==0:
 
