@@ -459,23 +459,41 @@ class MoGVKGE:
             self.h_s1 = VKGE.sample_embedding(self.mu_s, self.log_sigma_sq_s1)
             self.h_s2 = VKGE.sample_embedding(self.mu_s, self.log_sigma_sq_s2)
 
+            self.h_s = (self.h_s1*mix +(1-mix)*self.h_s2) #MoG
+
             self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
-            self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
-            self.h_o = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o)
+            self.log_sigma_sq_o1 = tf.nn.embedding_lookup(self.entity_embedding_sigma1, self.o_inputs)
+            self.log_sigma_sq_o2 = tf.nn.embedding_lookup(self.entity_embedding_sigma2, self.o_inputs)
+
+            self.h_o1 = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o1)
+            self.h_o2 = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o2)
+
+            self.h_o = (self.h_o1*mix +(1-mix)*self.h_o2) #MoG
 
             self.predicate_embedding_mean = tf.get_variable('predicate_mean',
                                                             shape=[nb_predicates + 1, predicate_embedding_size],
                                                             initializer=tf.zeros_initializer(), dtype=tf.float32,trainable=False)
-            self.predicate_embedding_sigm = tf.get_variable('predicate_sigma',
+            self.predicate_embedding_sigm1 = tf.get_variable('predicate_sigma',
                                                             shape=[nb_predicates + 1, predicate_embedding_size],
                                                             initializer=tf.ones_initializer(), dtype=tf.float32)
 
-            self.predicate_embedding_sigma = tf.Variable(self.predicate_embedding_sigm.initialized_value() * pred_sig,
+            self.predicate_embedding_sigma1 = tf.Variable(self.predicate_embedding_sigm1.initialized_value() * pred_sig,
                                                          dtype=tf.float32)
+            self.predicate_embedding_sigm2 = tf.get_variable('predicate_sigma',
+                                                             shape=[nb_predicates + 1, predicate_embedding_size],
+                                                             initializer=tf.ones_initializer(), dtype=tf.float32)
+
+            self.predicate_embedding_sigma2 = tf.Variable(self.predicate_embedding_sigm1.initialized_value() * pred_sig,dtype=tf.float32)
 
             self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
-            self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
-            self.h_p = VKGE.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+            self.log_sigma_sq_p1 = tf.nn.embedding_lookup(self.predicate_embedding_sigma1, self.p_inputs)
+            self.log_sigma_sq_p2 = tf.nn.embedding_lookup(self.predicate_embedding_sigma2, self.p_inputs)
+
+            self.h_p1 = VKGE.sample_embedding(self.mu_p, self.log_sigma_sq_p1)
+            self.h_p2 = VKGE.sample_embedding(self.mu_p, self.log_sigma_sq_p2)
+            self.h_p = (self.h_p1*mix +(1-mix)*self.h_p2) #MoG
+
+
 
     def build_decoder(self):
         if not (self.GPUMode):
