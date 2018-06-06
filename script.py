@@ -103,8 +103,8 @@ def main(_):
 #$ -o /home/acowenri/array.o.log
 #$ -e /home/acowenri/array.e.log
 #$ -t 1-{}
-#$ -l tmem=18G
-#$ -l h_vmem=18G
+#$ -l tmem=6G
+#$ -l h_vmem=6G
 #$ -l h_rt=12:00:00
 #$ -pe smp 8
 
