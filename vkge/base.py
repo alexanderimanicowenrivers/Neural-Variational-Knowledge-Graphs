@@ -427,8 +427,8 @@ class MoGVKGE:
 
         self.training_step = optimizer.minimize(self.elbo)
 
-    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
-                      pred_sig):
+    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,
+                      sigma1_e, sigma1_p, sigma2_e, sigma2_p, mix):
         if not (self.GPUMode):
             print('Building Inference Networks q(h_x | x) ..')
 
@@ -438,11 +438,18 @@ class MoGVKGE:
             self.entity_embedding_mean = tf.get_variable('entities_mean',
                                                          shape=[nb_entities + 1, entity_embedding_size],
                                                          initializer=tf.zeros_initializer(), dtype=tf.float32,trainable=False)
-            self.entity_embedding_sigm = tf.get_variable('entities_sigma',
+            self.entity_embedding_sigm1 = tf.get_variable('entities_sigma1',
                                                          shape=[nb_entities + 1, entity_embedding_size],
                                                          initializer=tf.ones_initializer(), dtype=tf.float32)
 
-            self.entity_embedding_sigma = tf.Variable(self.entity_embedding_sigm.initialized_value() * ent_sig,
+            self.entity_embedding_sigma1 = tf.Variable(self.entity_embedding_sigm1.initialized_value() * sigma1_e,
+                                                      dtype=tf.float32)
+
+            self.entity_embedding_sigm2 = tf.get_variable('entities_sigma2',
+                                                         shape=[nb_entities + 1, entity_embedding_size],
+                                                         initializer=tf.ones_initializer(), dtype=tf.float32)
+
+            self.entity_embedding_sigma2 = tf.Variable(self.entity_embedding_sigm2.initialized_value() * sigma2_e,
                                                       dtype=tf.float32)
 
             self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
