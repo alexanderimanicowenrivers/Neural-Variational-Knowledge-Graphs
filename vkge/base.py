@@ -116,7 +116,7 @@ class VKGE:
         with tf.variable_scope("encoder"):
             self.entity_embedding_mean = tf.get_variable('entities_mean',
                                                          shape=[nb_entities + 1, entity_embedding_size],
-                                                         initializer=tf.zeros_initializer(), dtype=tf.float32)
+                                                         initializer=tf.zeros_initializer(), dtype=tf.float32,trainable=False)
             self.entity_embedding_sigm = tf.get_variable('entities_sigma',
                                                          shape=[nb_entities + 1, entity_embedding_size],
                                                          initializer=tf.ones_initializer(), dtype=tf.float32)
@@ -134,7 +134,7 @@ class VKGE:
 
             self.predicate_embedding_mean = tf.get_variable('predicate_mean',
                                                             shape=[nb_predicates + 1, predicate_embedding_size],
-                                                            initializer=tf.zeros_initializer(), dtype=tf.float32)
+                                                            initializer=tf.zeros_initializer(), dtype=tf.float32,trainable=False)
             self.predicate_embedding_sigm = tf.get_variable('predicate_sigma',
                                                             shape=[nb_predicates + 1, predicate_embedding_size],
                                                             initializer=tf.ones_initializer(), dtype=tf.float32)
@@ -398,19 +398,19 @@ class MoGVKGE:
         return mu + sigma * eps
 
     def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
-                    ent_sig, pred_sig):
+                    sigma1_e, sigma1_p, sigma2_e, sigma2_p, mix):
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
         self.y_inputs = tf.placeholder(tf.bool, shape=[None])
 
-        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
-                           pred_sig)
+        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,
+                           sigma1_e, sigma1_p, sigma2_e, sigma2_p, mix)
         self.build_decoder()
 
         self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
 
-        # Kullback Leibler divergence Spike
+        # Kullback Leibler divergence Slab
         self.e_objective = 0.0
         self.e_objective -= 0.5 * tf.reduce_sum(
             1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
@@ -437,7 +437,7 @@ class MoGVKGE:
         with tf.variable_scope("encoder"):
             self.entity_embedding_mean = tf.get_variable('entities_mean',
                                                          shape=[nb_entities + 1, entity_embedding_size],
-                                                         initializer=tf.zeros_initializer(), dtype=tf.float32)
+                                                         initializer=tf.zeros_initializer(), dtype=tf.float32,trainable=False)
             self.entity_embedding_sigm = tf.get_variable('entities_sigma',
                                                          shape=[nb_entities + 1, entity_embedding_size],
                                                          initializer=tf.ones_initializer(), dtype=tf.float32)
@@ -455,7 +455,7 @@ class MoGVKGE:
 
             self.predicate_embedding_mean = tf.get_variable('predicate_mean',
                                                             shape=[nb_predicates + 1, predicate_embedding_size],
-                                                            initializer=tf.zeros_initializer(), dtype=tf.float32)
+                                                            initializer=tf.zeros_initializer(), dtype=tf.float32,trainable=False)
             self.predicate_embedding_sigm = tf.get_variable('predicate_sigma',
                                                             shape=[nb_predicates + 1, predicate_embedding_size],
                                                             initializer=tf.ones_initializer(), dtype=tf.float32)

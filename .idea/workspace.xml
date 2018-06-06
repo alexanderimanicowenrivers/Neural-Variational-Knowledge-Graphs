@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="412" column="43" lean-forward="false" selection-start-line="412" selection-start-column="43" selection-end-line="412" selection-end-column="43" />
+            <state relative-caret-position="331">
+              <caret line="457" column="128" lean-forward="false" selection-start-line="457" selection-start-column="128" selection-end-line="457" selection-end-column="128" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -114,7 +114,8 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds">
+    <option name="x" value="720" />
     <option name="width" value="720" />
     <option name="height" value="823" />
   </component>
@@ -592,7 +593,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528213999506</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="start of MoG">
+      <created>1528215024263</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1528215024263</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TodoView">
@@ -605,10 +613,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="720" y="0" width="720" height="823" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.05" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -658,7 +666,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="print training progress every 50 iterations" />
     <MESSAGE value="push" />
     <MESSAGE value="add in statement for GPU mode to only print lowest loss achieved and the epoch at which it was achieved" />
     <MESSAGE value="removed all print statements bar the the min requirement for GPUmode" />
@@ -683,7 +690,8 @@
     <MESSAGE value="pushing script to cluster for optimisation fixed indent" />
     <MESSAGE value="pushing script to cluster for optimisation fixed cpu request" />
     <MESSAGE value="pushing script to cluster for optimisation fixed cpu memory request" />
-    <option name="LAST_COMMIT_MESSAGE" value="pushing script to cluster for optimisation fixed cpu memory request" />
+    <MESSAGE value="start of MoG" />
+    <option name="LAST_COMMIT_MESSAGE" value="start of MoG" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -967,8 +975,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="412" column="43" lean-forward="false" selection-start-line="412" selection-start-column="43" selection-end-line="412" selection-end-column="43" />
+        <state relative-caret-position="331">
+          <caret line="457" column="128" lean-forward="false" selection-start-line="457" selection-start-column="128" selection-end-line="457" selection-end-column="128" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
