@@ -108,7 +108,7 @@ def main(_):
 #$ -l h_rt=12:00:00
 #$ -pe smp 4
 
-#  $ -ac allow=LMNOPQSTU
+#$ -ac allow=LMNOPQSTU
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
