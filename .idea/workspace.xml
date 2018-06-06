@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="384" column="32" lean-forward="true" selection-start-line="384" selection-start-column="32" selection-end-line="384" selection-end-column="32" />
+            <state relative-caret-position="303">
+              <caret line="61" column="27" lean-forward="false" selection-start-line="61" selection-start-column="27" selection-end-line="61" selection-end-column="27" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -635,7 +635,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528307977284</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="1000 epochs by default due to memory error with compression cost on 10000 epochs">
+      <created>1528308900646</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1528308900650</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TodoView">
@@ -701,7 +708,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="set predicate and entity initial variance values as model parameter" />
     <MESSAGE value="added in compression cost" />
     <MESSAGE value="fixed compression cost" />
     <MESSAGE value="boolean flag for compression cost" />
@@ -726,7 +732,8 @@
     <MESSAGE value="fixed print statement" />
     <MESSAGE value="fixed script" />
     <MESSAGE value="fixed script with anaconda" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed script with anaconda" />
+    <MESSAGE value="1000 epochs by default due to memory error with compression cost on 10000 epochs" />
+    <option name="LAST_COMMIT_MESSAGE" value="1000 epochs by default due to memory error with compression cost on 10000 epochs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1010,8 +1017,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="384" column="32" lean-forward="true" selection-start-line="384" selection-start-column="32" selection-end-line="384" selection-end-column="32" />
+        <state relative-caret-position="303">
+          <caret line="61" column="27" lean-forward="false" selection-start-line="61" selection-start-column="27" selection-end-line="61" selection-end-column="27" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

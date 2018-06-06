@@ -61,7 +61,7 @@ class VKGE:
                          optimizer,
                          ent_sig, pred_sig)
 
-        self.train(nb_epochs=10000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s)
+        self.train(nb_epochs=1000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
