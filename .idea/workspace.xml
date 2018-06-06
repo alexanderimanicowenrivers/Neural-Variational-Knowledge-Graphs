@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="457" column="128" lean-forward="false" selection-start-line="457" selection-start-column="128" selection-end-line="457" selection-end-column="128" />
+            <state relative-caret-position="602">
+              <caret line="664" column="0" lean-forward="true" selection-start-line="664" selection-start-column="0" selection-end-line="664" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -600,7 +600,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528215024263</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="fix Guassian mean to zero">
+      <created>1528300101366</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1528300101366</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TodoView">
@@ -666,7 +673,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="push" />
     <MESSAGE value="add in statement for GPU mode to only print lowest loss achieved and the epoch at which it was achieved" />
     <MESSAGE value="removed all print statements bar the the min requirement for GPUmode" />
     <MESSAGE value="split mean and variance so they can be independently initialised" />
@@ -691,7 +697,8 @@
     <MESSAGE value="pushing script to cluster for optimisation fixed cpu request" />
     <MESSAGE value="pushing script to cluster for optimisation fixed cpu memory request" />
     <MESSAGE value="start of MoG" />
-    <option name="LAST_COMMIT_MESSAGE" value="start of MoG" />
+    <MESSAGE value="fix Guassian mean to zero" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix Guassian mean to zero" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -975,8 +982,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="457" column="128" lean-forward="false" selection-start-line="457" selection-start-column="128" selection-end-line="457" selection-end-column="128" />
+        <state relative-caret-position="602">
+          <caret line="664" column="0" lean-forward="true" selection-start-line="664" selection-start-column="0" selection-end-line="664" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

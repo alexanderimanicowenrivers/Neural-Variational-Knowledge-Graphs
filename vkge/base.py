@@ -661,4 +661,4 @@ class MoGVKGE:
                     t1, t2 = mean_rank, hits_at_k
                     print('Hits@10 value: {0} %'.format(t2))
 
-            print("The minimum loss achieved is {
+            print("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
