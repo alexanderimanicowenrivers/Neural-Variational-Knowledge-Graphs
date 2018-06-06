@@ -102,7 +102,7 @@ class VKGE:
         self.g_objective = -tf.reduce_sum(
             tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-4))
 
-        self.elbo = tf.reduce_mean(self.g_objective + self.e_objective)
+        self.elbo = self.g_objective + self.e_objective
 
         self.training_step = optimizer.minimize(self.elbo)
 
@@ -344,7 +344,7 @@ class VKGE:
 
 class MoGVKGE:
     def __init__(self, embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, sigma1_e=6.0,sigma1_p=6.0,sigma2_e=1.0,sigma2_p=1.0,mix=6.0,
-                 alt_cost=True):
+                 alt_cost=True,train_mean=True):
         super().__init__()
 
         predicate_embedding_size = embedding_size
@@ -380,7 +380,7 @@ class MoGVKGE:
 
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
-                         optimizer,sigma1_e, sigma1_p, sigma2_e, sigma2_p, mix)
+                         optimizer,sigma1_e, sigma1_p, sigma2_e, sigma2_p, mix,train_mean)
 
         self.train(nb_epochs=1000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s)
 
@@ -398,37 +398,48 @@ class MoGVKGE:
         return mu + sigma * eps
 
     def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
-                    sigma1_e, sigma1_p, sigma2_e, sigma2_p, mix):
+                    sigma1_e, sigma1_p, sigma2_e, sigma2_p, mix,train_mean):
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
         self.y_inputs = tf.placeholder(tf.bool, shape=[None])
 
+
         self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,
-                           sigma1_e, sigma1_p, sigma2_e, sigma2_p, mix)
+                           sigma1_e, sigma1_p, sigma2_e, sigma2_p, mix,train_mean)
         self.build_decoder()
 
         self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
 
-        # Kullback Leibler divergence Slab
+        # Kullback Leibler divergence spike
         self.e_objective = 0.0
         self.e_objective -= 0.5 * tf.reduce_sum(
-            1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
+            1. + self.log_sigma_sq_s1 - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s1))
         self.e_objective -= 0.5 * tf.reduce_sum(
-            1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
+            1. + self.log_sigma_sq_p1 - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p1))
         self.e_objective -= 0.5 * tf.reduce_sum(
-            1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
+            1. + self.log_sigma_sq_o1 - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o1))
+        ## KL Slab
+
+        self.e_objective -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_s2 - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s2))
+        self.e_objective -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_p2 - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p2))
+        self.e_objective -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_o2 - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o2)
+
+        ##compression cost
         self.e_objective = (self.e_objective * self.KL_discount)
         # Log likelihood
         self.g_objective = -tf.reduce_sum(
             tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-4))
 
-        self.elbo = tf.reduce_mean(self.g_objective + self.e_objective)
+        self.elbo = self.g_objective + self.e_objective
 
         self.training_step = optimizer.minimize(self.elbo)
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,
-                      sigma1_e, sigma1_p, sigma2_e, sigma2_p, mix):
+                      sigma1_e, sigma1_p, sigma2_e, sigma2_p, mix,train_mean):
         if not (self.GPUMode):
             print('Building Inference Networks q(h_x | x) ..')
 
@@ -437,7 +448,7 @@ class MoGVKGE:
         with tf.variable_scope("encoder"):
             self.entity_embedding_mean = tf.get_variable('entities_mean',
                                                          shape=[nb_entities + 1, entity_embedding_size],
-                                                         initializer=tf.zeros_initializer(), dtype=tf.float32,trainable=False)
+                                                         initializer=tf.zeros_initializer(), dtype=tf.float32,trainable=train_mean)
             self.entity_embedding_sigm1 = tf.get_variable('entities_sigma1',
                                                          shape=[nb_entities + 1, entity_embedding_size],
                                                          initializer=tf.ones_initializer(), dtype=tf.float32)
@@ -472,7 +483,7 @@ class MoGVKGE:
 
             self.predicate_embedding_mean = tf.get_variable('predicate_mean',
                                                             shape=[nb_predicates + 1, predicate_embedding_size],
-                                                            initializer=tf.zeros_initializer(), dtype=tf.float32,trainable=False)
+                                                            initializer=tf.zeros_initializer(), dtype=tf.float32,trainable=train_mean)
             self.predicate_embedding_sigm1 = tf.get_variable('predicate_sigma',
                                                             shape=[nb_predicates + 1, predicate_embedding_size],
                                                             initializer=tf.ones_initializer(), dtype=tf.float32)

@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script.py" afterPath="$PROJECT_DIR$/script.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,11 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1272">
-              <caret line="493" column="56" lean-forward="false" selection-start-line="493" selection-start-column="56" selection-end-line="493" selection-end-column="56" />
+            <state relative-caret-position="-8398">
+              <caret line="104" column="55" lean-forward="true" selection-start-line="104" selection-start-column="55" selection-end-line="104" selection-end-column="55" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -41,7 +41,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="script.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="284">
@@ -121,9 +121,9 @@
         <option value="$PROJECT_DIR$/vkge/main.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/vkge/script.py" />
-        <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/script_gpu.py" />
         <option value="$PROJECT_DIR$/script.py" />
+        <option value="$PROJECT_DIR$/vkge/base.py" />
       </list>
     </option>
   </component>
@@ -325,13 +325,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00002" summary="removed projection stage on embeddings - does not seem reasonable to normalise variational parameters">
-      <created>1527775904771</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1527775904771</updated>
     </task>
     <task id="LOCAL-00003" summary="removed projection stage on embeddings - does not seem reasonable to normalise variational parameters">
       <created>1527775935697</created>
@@ -669,7 +662,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528310392726</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="added script">
+      <created>1528310558102</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1528310558103</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1032,16 +1032,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1272">
-          <caret line="493" column="56" lean-forward="false" selection-start-line="493" selection-start-column="56" selection-end-line="493" selection-end-column="56" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/script_gpu.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-886">
@@ -1058,6 +1048,16 @@
           <caret line="103" column="32" lean-forward="false" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8398">
+          <caret line="104" column="55" lean-forward="true" selection-start-line="104" selection-start-column="55" selection-end-line="104" selection-end-column="55" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
