@@ -382,7 +382,7 @@ class MoGVKGE:
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,sigma1_e, sigma1_p, sigma2_e, sigma2_p, mix)
 
-        self.train(nb_epochs=10000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s)
+        self.train(nb_epochs=1000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -453,8 +453,11 @@ class MoGVKGE:
                                                       dtype=tf.float32)
 
             self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
-            self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
-            self.h_s = VKGE.sample_embedding(self.mu_s, self.log_sigma_sq_s)
+            self.log_sigma_sq_s1 = tf.nn.embedding_lookup(self.entity_embedding_sigma1, self.s_inputs)
+            self.log_sigma_sq_s2 = tf.nn.embedding_lookup(self.entity_embedding_sigma2, self.s_inputs)
+
+            self.h_s1 = VKGE.sample_embedding(self.mu_s, self.log_sigma_sq_s1)
+            self.h_s2 = VKGE.sample_embedding(self.mu_s, self.log_sigma_sq_s2)
 
             self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
             self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
