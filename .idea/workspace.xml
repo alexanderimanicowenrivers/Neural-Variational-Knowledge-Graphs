@@ -44,8 +44,8 @@
       <file leaf-file-name="script.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="107" column="16" lean-forward="true" selection-start-line="107" selection-start-column="16" selection-end-line="107" selection-end-column="16" />
+            <state relative-caret-position="284">
+              <caret line="103" column="32" lean-forward="false" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -325,13 +325,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00001" summary="Fixed loss function, similar to https://github.com/carpedm20/variational-text-tensorflow/blob/master/models/nvdm.py">
-      <created>1527775787668</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1527775787668</updated>
     </task>
     <task id="LOCAL-00002" summary="removed projection stage on embeddings - does not seem reasonable to normalise variational parameters">
       <created>1527775904771</created>
@@ -669,7 +662,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528309902161</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="added script">
+      <created>1528310392716</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1528310392726</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TodoView">
@@ -735,7 +735,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed compression cost" />
     <MESSAGE value="boolean flag for compression cost" />
     <MESSAGE value="added in batch size as an optional parameter" />
     <MESSAGE value="test" />
@@ -760,7 +759,8 @@
     <MESSAGE value="fixed script with anaconda" />
     <MESSAGE value="1000 epochs by default due to memory error with compression cost on 10000 epochs" />
     <MESSAGE value="added gpu script" />
-    <option name="LAST_COMMIT_MESSAGE" value="added gpu script" />
+    <MESSAGE value="added script" />
+    <option name="LAST_COMMIT_MESSAGE" value="added script" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1054,8 +1054,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="107" column="16" lean-forward="true" selection-start-line="107" selection-start-column="16" selection-end-line="107" selection-end-column="16" />
+        <state relative-caret-position="284">
+          <caret line="103" column="32" lean-forward="false" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>

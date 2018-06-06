@@ -100,8 +100,8 @@ def main(_):
 
 #$ -cwd
 #$ -S /bin/bash
-#$ -o /dev/null
-#$ -e /dev/null
+#$ -o /home/acowenri/array.o.log
+#$ -e /home/acowenri/array.e.log
 #$ -t 1-{}
 #$ -l tmem=18G
 #$ -l h_vmem=18G
