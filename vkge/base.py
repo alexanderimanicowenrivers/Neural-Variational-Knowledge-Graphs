@@ -91,12 +91,14 @@ class VKGE:
 
         # Kullback Leibler divergence
         self.e_objective = 0.0
+
         self.e_objective -= 0.5 * tf.reduce_sum(
             1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
         self.e_objective -= 0.5 * tf.reduce_sum(
             1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
         self.e_objective -= 0.5 * tf.reduce_sum(
             1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
+
         self.e_objective = (self.e_objective * self.KL_discount)
         # Log likelihood
         self.g_objective = -tf.reduce_sum(
@@ -426,7 +428,7 @@ class MoGVKGE:
         self.e_objective -= 0.5 * tf.reduce_sum(
             1. + self.log_sigma_sq_p2 - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p2))
         self.e_objective -= 0.5 * tf.reduce_sum(
-            1. + self.log_sigma_sq_o2 - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o2)
+            1. + self.log_sigma_sq_o2 - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o2))
 
         ##compression cost
         self.e_objective = (self.e_objective * self.KL_discount)
