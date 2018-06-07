@@ -107,6 +107,9 @@ def main(_):
 #$ -l h_vmem=6G
 #$ -l h_rt=12:00:00
 #$ -pe smp 4
+#$ -R y
+#$ -ac allow=LMNOPQSTU
+
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
