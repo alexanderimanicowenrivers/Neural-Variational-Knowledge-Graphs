@@ -192,10 +192,10 @@ class VKGE:
 
         M = int(np.ceil((self.nb_examples * nb_epochs / batch_size)) + 1)
 
-        pi_s = np.log(((2.0 ** (10 - 1)) / (2.0 ** (10) - 1)))
-        pi_e = np.log(((2.0 ** (0)) / (2.0 ** (10) - 1)))
+        pi_s = np.exp(1)
+        pi_e = 1
 
-        pi = np.exp(np.linspace(pi_s, pi_e, M))
+        pi = np.log(np.linspace(pi_s, pi_e, M))
 
         counter = 0
 
@@ -552,10 +552,10 @@ class MoGVKGE:
 
         M = int(np.ceil((self.nb_examples * nb_epochs / batch_size)) + 1)
 
-        pi_s = np.log(((2.0 ** (10 - 1)) / (2.0 ** (10) - 1)))
-        pi_e = np.log(((2.0 ** (0)) / (2.0 ** (10) - 1)))
+        pi_s = np.exp(1)
+        pi_e = 1
 
-        pi = np.exp(np.linspace(pi_s, pi_e, M))
+        pi = np.log(np.linspace(pi_s, pi_e, M))
 
         counter = 0
 
