@@ -12,7 +12,7 @@ flags.DEFINE_float("epsilon", 1e-08, "Epsilon of learning rate [1e-08]")
 flags.DEFINE_integer("embedding_size", 50, "The dimension of graph embeddings [50]")
 flags.DEFINE_integer("batch_size", 14145, "Batch Size [14145]")
 flags.DEFINE_boolean("alt_cost", True, "Switch for compression cost to be used in training [True]")
-flags.DEFINE_boolean("train_mean", False, "Switch as to if mean is fixed at 0 or can train [False]")
+flags.DEFINE_boolean("train_mean", False, "Switch as to if mean is fixed at 0 or can train with random normal init [False]")
 FLAGS = flags.FLAGS
 
 
