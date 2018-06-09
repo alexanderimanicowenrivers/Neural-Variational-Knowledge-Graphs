@@ -21,7 +21,7 @@ import vkge.io as io
 
 class VKGE:
     def __init__(self, embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
-                 alt_cost=True,train_mean=False):
+                 alt_cost=True,train_mean=False,alt_updates=False):
         super().__init__()
 
         ent_sigma = np.log(ent_sig**2)
