@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="23" column="41" lean-forward="false" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="41" />
+            <state relative-caret-position="330">
+              <caret line="130" column="73" lean-forward="false" selection-start-line="130" selection-start-column="73" selection-end-line="130" selection-end-column="73" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -313,13 +313,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00016" summary="set predicate and entity initial variance values as model parameter">
-      <created>1528128959908</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1528128959908</updated>
     </task>
     <task id="LOCAL-00017" summary="added in compression cost">
       <created>1528130025776</created>
@@ -657,7 +650,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528560725493</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="added in variance adjustment for tao initialisation">
+      <created>1528561967337</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1528561967338</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TodoView">
@@ -723,7 +723,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed test time hits @ 10" />
     <MESSAGE value="fully functioning training interval tests" />
     <MESSAGE value="fixed hits test at every 200 epochs" />
     <MESSAGE value="added in default options for batch size and epochs" />
@@ -748,7 +747,8 @@
     <MESSAGE value="updated flags for MoG" />
     <MESSAGE value="updated script" />
     <MESSAGE value="fixed compression cost" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed compression cost" />
+    <MESSAGE value="added in variance adjustment for tao initialisation" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in variance adjustment for tao initialisation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1072,8 +1072,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="23" column="41" lean-forward="false" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="41" />
+        <state relative-caret-position="330">
+          <caret line="130" column="73" lean-forward="false" selection-start-line="130" selection-start-column="73" selection-end-line="130" selection-end-column="73" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

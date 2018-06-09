@@ -24,7 +24,8 @@ class VKGE:
                  alt_cost=True,train_mean=False):
         super().__init__()
 
-        pred_sig = np.log(ent_sig**2) #adjust for correct format for model input
+        ent_sigma = np.log(ent_sig**2)
+        pred_sigma = ent_sigma #adjust for correct format for model input
         predicate_embedding_size = embedding_size
         entity_embedding_size = embedding_size
 
@@ -35,6 +36,7 @@ class VKGE:
         self.GPUMode = GPUMode
         self.alt_cost = alt_cost
         self.nb_examples = len(triples)
+        self.static_mean=train_mean
 
         if not (self.GPUMode):
             print('Parsing the facts in the Knowledge Base ..')
@@ -59,7 +61,7 @@ class VKGE:
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,
-                         ent_sig, pred_sig)
+                         ent_sigma, pred_sigma)
 
         self.train(nb_epochs=1000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s)
 
@@ -116,9 +118,18 @@ class VKGE:
         # logger.info('Building Inference Networks q(h_x | x) ..')
 
         with tf.variable_scope("encoder"):
-            self.entity_embedding_mean = tf.get_variable('entities_mean',
+
+            if self.static_mean:
+
+                self.entity_embedding_mean = tf.get_variable('entities_mean',
                                                          shape=[nb_entities + 1, entity_embedding_size],
                                                          initializer=tf.zeros_initializer(), dtype=tf.float32,trainable=False)
+            else:
+
+                self.entity_embedding_mean = tf.get_variable('entities_mean',
+                                                             shape=[nb_entities + 1, entity_embedding_size],
+                                                             initializer=tf.initializers.random_normal(), dtype=tf.float32,trainable=True)
+
             self.entity_embedding_sigm = tf.get_variable('entities_sigma',
                                                          shape=[nb_entities + 1, entity_embedding_size],
                                                          initializer=tf.ones_initializer(), dtype=tf.float32)
