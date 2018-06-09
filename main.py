@@ -13,12 +13,14 @@ flags.DEFINE_integer("embedding_size", 50, "The dimension of graph embeddings [5
 flags.DEFINE_integer("batch_size", 14145, "Batch Size [14145]")
 flags.DEFINE_boolean("alt_cost", True, "Switch for compression cost to be used in training [True]")
 flags.DEFINE_boolean("train_mean", False, "Switch as to if mean is fixed at 0 or can train with random normal init [False]")
+flags.DEFINE_boolean("alternating_updates", False, "Alternate updates around each distribution[False]")
 FLAGS = flags.FLAGS
 
 
 
 def main(_):
-    vkge.VKGE(embedding_size=FLAGS.embedding_size,lr=FLAGS.learning_rate,b1=FLAGS.beta1,b2=FLAGS.beta2,eps=FLAGS.epsilon,ent_sig=FLAGS.init_sig,alt_cost=FLAGS.alt_cost,batch_s=FLAGS.batch_size)
+    vkge.VKGE(embedding_size=FLAGS.embedding_size,lr=FLAGS.learning_rate,b1=FLAGS.beta1,b2=FLAGS.beta2,eps=FLAGS.epsilon,ent_sig=FLAGS.init_sig,alt_cost=FLAGS.alt_cost,batch_s=FLAGS.batch_size,
+              train_mean=FLAGS.train_mean)
 
 
 if __name__ == '__main__':
