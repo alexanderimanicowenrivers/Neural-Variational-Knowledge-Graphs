@@ -37,6 +37,7 @@ class VKGE:
         self.alt_cost = alt_cost
         self.nb_examples = len(triples)
         self.static_mean=train_mean
+        self.alt_updates=alt_updates
 
         if not (self.GPUMode):
             print('Parsing the facts in the Knowledge Base ..')
