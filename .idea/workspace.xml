@@ -56,8 +56,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="361" column="48" lean-forward="true" selection-start-line="361" selection-start-column="48" selection-end-line="361" selection-end-column="48" />
+            <state relative-caret-position="499">
+              <caret line="731" column="0" lean-forward="true" selection-start-line="731" selection-start-column="0" selection-end-line="731" selection-end-column="0" />
               <folding>
                 <element signature="e#26#37#0" expanded="true" />
               </folding>
@@ -80,10 +80,12 @@
       <find>projection</find>
       <find>logger</find>
       <find>nb_enti</find>
+      <find>logger.info</find>
       <find>GPU</find>
     </findStrings>
     <replaceStrings>
       <replace />
+      <replace>print</replace>
       <replace>logger.info</replace>
     </replaceStrings>
   </component>
@@ -315,13 +317,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00054" summary="fixed script">
-      <created>1528312696640</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1528312696642</updated>
     </task>
     <task id="LOCAL-00055" summary="fixed script">
       <created>1528314481963</created>
@@ -659,7 +654,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528660659439</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="using print">
+      <created>1528660708993</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1528660708993</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TodoView">
@@ -725,7 +727,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="start of MoG" />
     <MESSAGE value="fix Guassian mean to zero" />
     <MESSAGE value="fixed print statement" />
     <MESSAGE value="fixed script with anaconda" />
@@ -750,7 +751,8 @@
     <MESSAGE value="changed script to base.py" />
     <MESSAGE value="updated main with extra logger info" />
     <MESSAGE value="testing with print statement in main" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing with print statement in main" />
+    <MESSAGE value="using print" />
+    <option name="LAST_COMMIT_MESSAGE" value="using print" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1074,8 +1076,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="361" column="48" lean-forward="true" selection-start-line="361" selection-start-column="48" selection-end-line="361" selection-end-column="48" />
+        <state relative-caret-position="499">
+          <caret line="731" column="0" lean-forward="true" selection-start-line="731" selection-start-column="0" selection-end-line="731" selection-end-column="0" />
           <folding>
             <element signature="e#26#37#0" expanded="true" />
           </folding>
