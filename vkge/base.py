@@ -3,12 +3,12 @@
 import math
 import numpy as np
 import tensorflow as tf
-from knowledgebase import Fact, KnowledgeBaseParser
+from vkge.knowledgebase import Fact, KnowledgeBaseParser
 
-import models as models
-from training import constraints, corrupt, index
-from training.util import make_batches
-import io as io
+import vkge.models as models
+from vkge.training import constraints, corrupt, index
+from vkge.training.util import make_batches
+import vkge.io as io
 
 
 # new
