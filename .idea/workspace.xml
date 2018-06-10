@@ -33,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/script.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
-              <caret line="25" column="51" lean-forward="false" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
+              <caret line="25" column="34" lean-forward="false" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -313,13 +313,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00028" summary="fully functioning training interval tests">
-      <created>1528147197402</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1528147197402</updated>
     </task>
     <task id="LOCAL-00029" summary="fixed hits test at every 200 epochs">
       <created>1528186937137</created>
@@ -657,7 +650,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528625314124</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="use GPU in script with anaconda">
+      <created>1528626116904</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1528626116904</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TodoView">
@@ -723,7 +723,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated batch size info" />
     <MESSAGE value="commit batch size main flag" />
     <MESSAGE value="pushing script to cluster for optimisation" />
     <MESSAGE value="pushing script to cluster for optimisation (move folder)" />
@@ -748,7 +747,8 @@
     <MESSAGE value="updated script" />
     <MESSAGE value="updated base, comment out MoG model" />
     <MESSAGE value="use GPU in script" />
-    <option name="LAST_COMMIT_MESSAGE" value="use GPU in script" />
+    <MESSAGE value="use GPU in script with anaconda" />
+    <option name="LAST_COMMIT_MESSAGE" value="use GPU in script with anaconda" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1073,7 +1073,7 @@
     <entry file="file://$PROJECT_DIR$/script.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
-          <caret line="25" column="51" lean-forward="false" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
+          <caret line="25" column="34" lean-forward="false" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
