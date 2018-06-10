@@ -1,5 +1,7 @@
 import tensorflow as tf
 import vkge
+from utils import pp
+
 
 flags = tf.app.flags
 flags.DEFINE_float("learning_rate", 0.001, "Learning rate of adam optimizer [0.001]")
@@ -19,6 +21,8 @@ FLAGS = flags.FLAGS
 
 
 def main(_):
+    pp.pprint(flags.FLAGS.__flags)
+
     vkge.VKGE(embedding_size=FLAGS.embedding_size,lr=FLAGS.learning_rate,b1=FLAGS.beta1,b2=FLAGS.beta2,eps=FLAGS.epsilon,ent_sig=FLAGS.init_sig,alt_cost=FLAGS.alt_cost,batch_s=FLAGS.batch_size,
               train_mean=FLAGS.train_mean,alt_updates=FLAGS.alternating_updates)
 
