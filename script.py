@@ -103,7 +103,6 @@ def main(_):
 #$ -l h_rt=12:00:00
 #$ -P gpu
 #$ -l gpu=1
-#$ -ac allow=LMNOPQSTU
 
 
 export LANG="en_US.utf8"

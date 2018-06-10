@@ -14,9 +14,8 @@ import vkge.io as io
 
 # new
 
-# import logging
-
-# logger = logging.getLogger(__name__)
+import logging
+logger = logging.getLogger(__name__)
 
 
 class VKGE:
@@ -39,8 +38,8 @@ class VKGE:
         self.static_mean=train_mean
         self.alt_updates=alt_updates
 
-        if not (self.GPUMode):
-            print('Parsing the facts in the Knowledge Base ..')
+
+        logger.info('Parsing the facts in the Knowledge Base ..')
 
         # logger.info('Parsing the facts in the Knowledge Base ..')
         self.facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in triples]
@@ -113,8 +112,7 @@ class VKGE:
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
                       pred_sig):
-        if not (self.GPUMode):
-            print('Building Inference Networks q(h_x | x) ..')
+        logger.info('Building Inference Networks q(h_x | x) ..')
 
         # logger.info('Building Inference Networks q(h_x | x) ..')
 
@@ -161,9 +159,9 @@ class VKGE:
             self.h_p = VKGE.sample_embedding(self.mu_p, self.log_sigma_sq_p)
 
     def build_decoder(self):
-        if not (self.GPUMode):
-            print('Building Inference Network p(y|h) ..')
-        # logger.info('Building Inference Network p(y|h) ..')
+
+        logger.info('Building Inference Network p(y|h) ..')
+
         with tf.variable_scope('decoder'):
             model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                  object_embeddings=self.h_o)
@@ -191,8 +189,7 @@ class VKGE:
         # batch_size = math.ceil(nb_samples / nb_batches)
         nb_batches= math.ceil(nb_samples / batch_size)
         # logger.info("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
-        if not (self.GPUMode):
-            print("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
+        logger.info("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
 
         # projection_steps = [constraints.unit_cube(self.entity_parameters_layer) if unit_cube
         #                     else constraints.unit_sphere(self.entity_parameters_layer, norm=1.0)]
@@ -289,17 +286,16 @@ class VKGE:
                     return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
                 # logger.info('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
-                if self.GPUMode:
-                    if (round(np.mean(loss_values), 4) < minloss):
-                        minloss = round(np.mean(loss_values), 4)
-                        minepoch = epoch
+                if (round(np.mean(loss_values), 4) < minloss):
+                    minloss = round(np.mean(loss_values), 4)
+                    minepoch = epoch
                 else:
 
                     if (round(np.mean(loss_values), 4) < minloss):
                         minloss = round(np.mean(loss_values), 4)
                         minepoch = epoch
 
-                    print('Epoch: {0}\tVLB: {1}'.format(epoch, stats(loss_values)))
+                    logger.info('Epoch: {0}\tVLB: {1}'.format(epoch, stats(loss_values)))
 
                 if (epoch % 200)==0:
 
@@ -352,9 +348,9 @@ class VKGE:
                             k = 10
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                     t1, t2 = mean_rank, hits_at_k
-                    print('Hits@10 value: {0} %'.format(t2))
+                    logger.info('Hits@10 value: {0} %'.format(t2))
 
-            print("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
+            logger.info("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
 
 # class MoGVKGE:
 #     def __init__(self, embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, sigma1_e=6.0,sigma1_p=6.0,sigma2_e=1.0,sigma2_p=1.0,mix=6.0,
@@ -373,7 +369,7 @@ class VKGE:
 #         self.nb_examples = len(triples)
 #
 #         if not (self.GPUMode):
-#             print('Parsing the facts in the Knowledge Base ..')
+#             logger.info('Parsing the facts in the Knowledge Base ..')
 #
 #         # logger.info('Parsing the facts in the Knowledge Base ..')
 #         self.facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in triples]
@@ -455,7 +451,7 @@ class VKGE:
 #     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size,
 #                       sigma1_e, sigma1_p, sigma2_e, sigma2_p, mix,train_mean):
 #         if not (self.GPUMode):
-#             print('Building Inference Networks q(h_x | x) ..')
+#             logger.info('Building Inference Networks q(h_x | x) ..')
 #
 #         # logger.info('Building Inference Networks q(h_x | x) ..')
 #
@@ -522,7 +518,7 @@ class VKGE:
 #
 #     def build_decoder(self):
 #         if not (self.GPUMode):
-#             print('Building Inference Network p(y|h) ..')
+#             logger.info('Building Inference Network p(y|h) ..')
 #         # logger.info('Building Inference Network p(y|h) ..')
 #         with tf.variable_scope('decoder'):
 #             model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
@@ -552,7 +548,7 @@ class VKGE:
 #         nb_batches= math.ceil(nb_samples / batch_size)
 #         # logger.info("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
 #         if not (self.GPUMode):
-#             print("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
+#             logger.info("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
 #
 #         # projection_steps = [constraints.unit_cube(self.entity_parameters_layer) if unit_cube
 #         #                     else constraints.unit_sphere(self.entity_parameters_layer, norm=1.0)]
@@ -659,7 +655,7 @@ class VKGE:
 #                         minloss = round(np.mean(loss_values), 4)
 #                         minepoch = epoch
 #
-#                     print('Epoch: {0}\tVLB: {1}'.format(epoch, stats(loss_values)))
+#                     logger.info('Epoch: {0}\tVLB: {1}'.format(epoch, stats(loss_values)))
 #
 #                 if (epoch % 200)==0:
 #
@@ -712,6 +708,6 @@ class VKGE:
 #                             k = 10
 #                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
 #                     t1, t2 = mean_rank, hits_at_k
-#                     print('Hits@10 value: {0} %'.format(t2))
+#                     logger.info('Hits@10 value: {0} %'.format(t2))
 #
-#             print("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
+#             logger.info("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
