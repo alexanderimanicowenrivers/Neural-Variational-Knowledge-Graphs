@@ -56,8 +56,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="55">
+              <caret line="30" column="46" lean-forward="true" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
               <folding>
                 <element signature="e#26#37#0" expanded="true" />
               </folding>
@@ -317,13 +317,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00056" summary="reduced cores requested to four">
-      <created>1528314675957</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1528314675957</updated>
     </task>
     <task id="LOCAL-00057" summary="updated flags for MoG">
       <created>1528315087800</created>
@@ -661,7 +654,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528661135407</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="change logger settings">
+      <created>1528661301333</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1528661301333</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TodoView">
@@ -727,7 +727,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix Guassian mean to zero" />
     <MESSAGE value="fixed print statement" />
     <MESSAGE value="fixed script with anaconda" />
     <MESSAGE value="1000 epochs by default due to memory error with compression cost on 10000 epochs" />
@@ -752,7 +751,8 @@
     <MESSAGE value="updated main with extra logger info" />
     <MESSAGE value="testing with print statement in main" />
     <MESSAGE value="using print" />
-    <option name="LAST_COMMIT_MESSAGE" value="using print" />
+    <MESSAGE value="change logger settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="change logger settings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1076,8 +1076,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="55">
+          <caret line="30" column="46" lean-forward="true" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
           <folding>
             <element signature="e#26#37#0" expanded="true" />
           </folding>
