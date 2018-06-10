@@ -3,6 +3,7 @@
 import math
 import numpy as np
 import tensorflow as tf
+import vkge
 from vkge.knowledgebase import Fact, KnowledgeBaseParser
 
 import vkge.models as models
