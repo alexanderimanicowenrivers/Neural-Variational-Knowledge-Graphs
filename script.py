@@ -25,13 +25,12 @@ def to_cmd(c):
     #     command = 'PYTHONPATH=. python3-gpu {}/main.py {} ' \
     command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
               '--learning_rate {} ' \
-              '--beta1 {} ' \
-              '--beta2 {} ' \
               '--init_sig {} ' \
-              '--epsilon {} ' \
               '--embedding_size {} ' \
               '--batch_size {} ' \
               '--alt_cost {} ' \
+              '--train_mean {} ' \
+ \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -41,8 +40,7 @@ def to_cmd(c):
                 c['w3'],
                 c['w4'],
                 c['w5'],
-                c['w6'],
-                c['w7'])
+                )
     return command
 
 
@@ -53,14 +51,12 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w0=[1e-3, 1e-4, 1e-5],
-        w1=[0.9],
-        w2=[0.999],
-        w3=[6, 7, 8],
-        w4=[1e-08],
-        w5=[10, 20, 50],
-        w6=[1, 2, 5, 10, 14145],
-        w7=[True, False]
+        w0=[1e-3, 1e-4, 1e-5, 1e-6],
+        w1=[1,2,3,4,5,6, 7, 8],
+        w2=[20],
+        w3=[1, 2, 5, 10, 14145],
+        w4=[True, False],
+        w5=[True, False]
     )
 
     configurations = cartesian_product(hyperparameters_space)
