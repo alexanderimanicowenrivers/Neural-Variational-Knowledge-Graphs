@@ -103,12 +103,10 @@ def main(_):
 #$ -o /home/acowenri/array.o.log
 #$ -e /home/acowenri/array.e.log
 #$ -t 1-{}
-#$ -l tmem=6G
-#$ -l h_vmem=6G
+#$ -l tmem=8G
 #$ -l h_rt=12:00:00
-#$ -pe smp 4
-#$ -R y
-#$ -ac allow=LMNOPQSTU
+#$ -P gpu
+#$ -l gpu=1
 
 
 export LANG="en_US.utf8"
