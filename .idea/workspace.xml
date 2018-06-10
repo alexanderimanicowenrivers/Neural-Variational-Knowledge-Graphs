@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -315,13 +314,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00050" summary="added script">
-      <created>1528310392716</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1528310392726</updated>
     </task>
     <task id="LOCAL-00051" summary="added script">
       <created>1528310558102</created>
@@ -659,7 +651,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528660133965</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="testing with print statement in main">
+      <created>1528660429540</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1528660429541</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TodoView">
@@ -725,7 +724,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="pushing script to cluster for optimisation fixed cpu memory request" />
     <MESSAGE value="start of MoG" />
     <MESSAGE value="fix Guassian mean to zero" />
     <MESSAGE value="fixed print statement" />
@@ -750,7 +748,8 @@
     <MESSAGE value="added in main function call to base.py" />
     <MESSAGE value="changed script to base.py" />
     <MESSAGE value="updated main with extra logger info" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated main with extra logger info" />
+    <MESSAGE value="testing with print statement in main" />
+    <option name="LAST_COMMIT_MESSAGE" value="testing with print statement in main" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
