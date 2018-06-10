@@ -315,13 +315,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00048" summary="1000 epochs by default due to memory error with compression cost on 10000 epochs">
-      <created>1528309012102</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1528309012102</updated>
-    </task>
     <task id="LOCAL-00049" summary="added gpu script">
       <created>1528309902161</created>
       <option name="number" value="00049" />
@@ -658,7 +651,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528660082464</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="updated main with extra logger info">
+      <created>1528660129939</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1528660129939</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TodoView">
@@ -724,7 +724,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="pushing script to cluster for optimisation fixed cpu request" />
     <MESSAGE value="pushing script to cluster for optimisation fixed cpu memory request" />
     <MESSAGE value="start of MoG" />
     <MESSAGE value="fix Guassian mean to zero" />
@@ -749,7 +748,8 @@
     <MESSAGE value="added in #$ -ac allow=LMNOPQSTU" />
     <MESSAGE value="added in main function call to base.py" />
     <MESSAGE value="changed script to base.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed script to base.py" />
+    <MESSAGE value="updated main with extra logger info" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated main with extra logger info" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
