@@ -19,11 +19,11 @@ def to_cmd(c):
     #         'train': 'data/wn18/snli_1.0_train.jsonl.gz'
     #     }
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge'
     #     params = '-m cbilstm -b 32 -d 0.8 -r 300 -o adam --lr 0.001 -c 100 -e 10 ' \
     #              '--restore saved/snli/cbilstm/2/cbilstm -C 5000'
     #     command = 'PYTHONPATH=. python3-gpu {}/main.py {} ' \
-    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
+    command = 'PYTHONPATH=. anaconda-python3-cpu {}/base.py  ' \
               '--learning_rate {} ' \
               '--init_sig {} ' \
               '--embedding_size {} ' \
@@ -45,7 +45,7 @@ def to_cmd(c):
 
 
 def to_logfile(c, path):
-    outfile = "%s/uclcs_cbilstm_v1.%s.log" % (path, summary(c))
+    outfile = "%s/uclcs_nvkg_v1.%s.log" % (path, summary(c))
     return outfile
 
 
