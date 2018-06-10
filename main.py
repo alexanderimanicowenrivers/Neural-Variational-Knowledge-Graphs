@@ -2,6 +2,8 @@ import tensorflow as tf
 import vkge
 import logging
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
 
 flags = tf.app.flags
 flags.DEFINE_float("learning_rate", 0.001, "Learning rate of adam optimizer [0.001]")
