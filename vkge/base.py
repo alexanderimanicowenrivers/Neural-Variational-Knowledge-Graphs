@@ -169,7 +169,7 @@ class VKGE:
                 self.predicate_embedding_sigma = tf.Variable(
                     self.predicate_embedding_sigm.initialized_value() * pred_sig, dtype=tf.float32)
 
-                                                                self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
+            self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
             self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
             self.h_s = VKGE.sample_embedding(self.mu_s, self.log_sigma_sq_s)
 
