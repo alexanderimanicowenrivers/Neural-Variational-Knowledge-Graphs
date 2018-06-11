@@ -44,8 +44,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="145" column="12" lean-forward="false" selection-start-line="145" selection-start-column="12" selection-end-line="145" selection-end-column="12" />
+            <state relative-caret-position="470">
+              <caret line="229" column="9" lean-forward="false" selection-start-line="229" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -316,13 +316,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00060" summary="updated flags for MoG">
-      <created>1528315779100</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1528315779101</updated>
     </task>
     <task id="LOCAL-00061" summary="updated script">
       <created>1528376482583</created>
@@ -660,7 +653,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528714882682</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="change logger settings from info to warning in base">
+      <created>1528715661622</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1528715661623</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1071,8 +1071,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="145" column="12" lean-forward="false" selection-start-line="145" selection-start-column="12" selection-end-line="145" selection-end-column="12" />
+        <state relative-caret-position="470">
+          <caret line="229" column="9" lean-forward="false" selection-start-line="229" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

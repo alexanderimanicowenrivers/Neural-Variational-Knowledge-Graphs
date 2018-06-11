@@ -23,7 +23,7 @@ class VKGE:
                  alt_cost=True,train_mean=False,alt_updates=False):
         super().__init__()
 
-        ent_sigma = np.log(ent_sig**2)
+        ent_sigma = (np.log(ent_sig)**2)
         pred_sigma = ent_sigma #adjust for correct format for model input
         predicate_embedding_size = embedding_size
         entity_embedding_size = embedding_size
@@ -113,6 +113,8 @@ class VKGE:
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
                       pred_sig):
         logger.warn('Building Inference Networks q(h_x | x) ..')
+
+        ## Later try sigma init to normal distribution also
 
         # logger.warn('Building Inference Networks q(h_x | x) ..')
 
