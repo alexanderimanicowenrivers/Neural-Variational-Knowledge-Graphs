@@ -123,36 +123,57 @@ class VKGE:
                 self.entity_embedding_mean = tf.get_variable('entities_mean',
                                                          shape=[nb_entities + 1, entity_embedding_size],
                                                          initializer=tf.zeros_initializer(), dtype=tf.float32,trainable=False)
+
+                self.entity_embedding_sigm = tf.get_variable('entities_sigma',
+                                                             shape=[nb_entities + 1, entity_embedding_size],
+                                                             initializer=tf.ones_initializer(), dtype=tf.float32)
+
+                self.entity_embedding_sigma = tf.Variable(self.entity_embedding_sigm.initialized_value() * ent_sig,
+                                                          dtype=tf.float32)
+
+                self.predicate_embedding_mean = tf.get_variable('predicate_mean',
+                                                                shape=[nb_predicates + 1, predicate_embedding_size],
+                                                                initializer=tf.zeros_initializer(), dtype=tf.float32,
+                                                                trainable=False)
+                self.predicate_embedding_sigm = tf.get_variable('predicate_sigma',
+                                                                shape=[nb_predicates + 1, predicate_embedding_size],
+                                                                initializer=tf.ones_initializer(), dtype=tf.float32)
+
+                self.predicate_embedding_sigma = tf.Variable(
+                    self.predicate_embedding_sigm.initialized_value() * pred_sig,dtype=tf.float32)
+
+
             else:
 
                 self.entity_embedding_mean = tf.get_variable('entities_mean',
                                                              shape=[nb_entities + 1, entity_embedding_size],
                                                              initializer=tf.initializers.random_normal(), dtype=tf.float32,trainable=True)
 
-            self.entity_embedding_sigm = tf.get_variable('entities_sigma',
-                                                         shape=[nb_entities + 1, entity_embedding_size],
-                                                         initializer=tf.ones_initializer(), dtype=tf.float32)
+                self.entity_embedding_sigm = tf.get_variable('entities_sigma',
+                                                             shape=[nb_entities + 1, entity_embedding_size],
+                                                             initializer=tf.ones_initializer(), dtype=tf.float32)
 
-            self.entity_embedding_sigma = tf.Variable(self.entity_embedding_sigm.initialized_value() * ent_sig,
-                                                      dtype=tf.float32)
+                self.entity_embedding_sigma = tf.Variable(self.entity_embedding_sigm.initialized_value() * ent_sig,
+                                                          dtype=tf.float32)
 
-            self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
+                self.predicate_embedding_mean = tf.get_variable('predicate_mean',
+                                                                shape=[nb_predicates + 1, predicate_embedding_size],
+                                                                initializer=tf.initializers.random_normal(), dtype=tf.float32,
+                                                                trainable=False)
+                self.predicate_embedding_sigm = tf.get_variable('predicate_sigma',
+                                                                shape=[nb_predicates + 1, predicate_embedding_size],
+                                                                initializer=tf.ones_initializer(), dtype=tf.float32)
+
+                self.predicate_embedding_sigma = tf.Variable(
+                    self.predicate_embedding_sigm.initialized_value() * pred_sig, dtype=tf.float32)
+
+                                                                self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
             self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
             self.h_s = VKGE.sample_embedding(self.mu_s, self.log_sigma_sq_s)
 
             self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
             self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
             self.h_o = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o)
-
-            self.predicate_embedding_mean = tf.get_variable('predicate_mean',
-                                                            shape=[nb_predicates + 1, predicate_embedding_size],
-                                                            initializer=tf.zeros_initializer(), dtype=tf.float32,trainable=False)
-            self.predicate_embedding_sigm = tf.get_variable('predicate_sigma',
-                                                            shape=[nb_predicates + 1, predicate_embedding_size],
-                                                            initializer=tf.ones_initializer(), dtype=tf.float32)
-
-            self.predicate_embedding_sigma = tf.Variable(self.predicate_embedding_sigm.initialized_value() * pred_sig,
-                                                         dtype=tf.float32)
 
             self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
             self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
