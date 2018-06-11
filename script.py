@@ -24,13 +24,13 @@ def to_cmd(c):
     #              '--restore saved/snli/cbilstm/2/cbilstm -C 5000'
     #     command = 'PYTHONPATH=. python3-gpu {}/main.py {} ' \
     command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
+              '--batch_size {} ' \
               '--learning_rate {} ' \
               '--init_sig {} ' \
               '--embedding_size {} ' \
               '--alt_cost {} ' \
               '--train_mean {} ' \
               '--Sigma_alt {} ' \
-              '--batch_size {} ' \
  \
         .format(path,
                 #                 params,
@@ -53,14 +53,13 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w0=[1e-3, 1e-4, 1e-5],
-        w1=[1,3,4,6,8],
-        w2=[20],
-        w3=[True, False],
+        w0=[14145, 1],
+        w1=[1e-3, 1e-4, 1e-5],
+        w2=[1,3,4,6,8],
+        w3=[20],
         w4=[True, False],
         w5=[True, False],
-        w6=[14145, 1]
-
+        w6=[True, False]
     )
 
     configurations = cartesian_product(hyperparameters_space)
