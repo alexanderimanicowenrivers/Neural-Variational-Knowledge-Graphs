@@ -161,7 +161,7 @@ class VKGE:
                 self.predicate_embedding_mean = tf.get_variable('predicate_mean',
                                                                 shape=[nb_predicates + 1, predicate_embedding_size],
                                                                 initializer=tf.initializers.random_normal(), dtype=tf.float32,
-                                                                trainable=False)
+                                                                trainable=True)
                 self.predicate_embedding_sigm = tf.get_variable('predicate_sigma',
                                                                 shape=[nb_predicates + 1, predicate_embedding_size],
                                                                 initializer=tf.ones_initializer(), dtype=tf.float32)

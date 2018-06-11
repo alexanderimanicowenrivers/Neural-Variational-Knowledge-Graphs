@@ -44,8 +44,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="229" column="9" lean-forward="false" selection-start-line="229" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
+            <state relative-caret-position="482">
+              <caret line="163" column="78" lean-forward="false" selection-start-line="163" selection-start-column="78" selection-end-line="163" selection-end-column="78" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -316,13 +316,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00061" summary="updated script">
-      <created>1528376482583</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1528376482589</updated>
     </task>
     <task id="LOCAL-00062" summary="fixed compression cost">
       <created>1528476921142</created>
@@ -660,7 +653,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528715661623</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="fixed sigma init">
+      <created>1528715995571</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1528715995571</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TodoView">
@@ -726,7 +726,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1000 epochs by default due to memory error with compression cost on 10000 epochs" />
     <MESSAGE value="added gpu script" />
     <MESSAGE value="added script" />
     <MESSAGE value="updated loss and also finished MoG model" />
@@ -751,7 +750,8 @@
     <MESSAGE value="change logger settings" />
     <MESSAGE value="change logger settings from info to warning" />
     <MESSAGE value="change logger settings from info to warning in base" />
-    <option name="LAST_COMMIT_MESSAGE" value="change logger settings from info to warning in base" />
+    <MESSAGE value="fixed sigma init" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed sigma init" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1071,8 +1071,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="229" column="9" lean-forward="false" selection-start-line="229" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
+        <state relative-caret-position="482">
+          <caret line="163" column="78" lean-forward="false" selection-start-line="163" selection-start-column="78" selection-end-line="163" selection-end-column="78" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
