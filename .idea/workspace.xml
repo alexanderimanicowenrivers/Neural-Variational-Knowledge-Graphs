@@ -32,8 +32,8 @@
       <file leaf-file-name="script.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="55" column="19" lean-forward="false" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+            <state relative-caret-position="668">
+              <caret line="91" column="60" lean-forward="false" selection-start-line="91" selection-start-column="60" selection-end-line="91" selection-end-column="60" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -319,13 +319,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00070" summary="updated script">
-      <created>1528622826384</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1528622826387</updated>
     </task>
     <task id="LOCAL-00071" summary="updated base, comment out MoG model">
       <created>1528623389763</created>
@@ -663,7 +656,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528740005533</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="fixed batch size so quicker experiments run first">
+      <created>1528740296448</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1528740296448</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TodoView">
@@ -729,7 +729,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated flags for MoG" />
     <MESSAGE value="fixed compression cost" />
     <MESSAGE value="added in variance adjustment for tao initialisation" />
     <MESSAGE value="added in non static mean initialisation to random normal distribution" />
@@ -754,7 +753,8 @@
     <MESSAGE value="updated standard deviation" />
     <MESSAGE value="fixed sample embeddings" />
     <MESSAGE value="fixed batch size" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed batch size" />
+    <MESSAGE value="fixed batch size so quicker experiments run first" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed batch size so quicker experiments run first" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1078,8 +1078,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="55" column="19" lean-forward="false" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+        <state relative-caret-position="668">
+          <caret line="91" column="60" lean-forward="false" selection-start-line="91" selection-start-column="60" selection-end-line="91" selection-end-column="60" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>

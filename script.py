@@ -89,7 +89,7 @@ def main(_):
             command_lines |= {command_line}
 
     # Sort command lines and remove duplicates
-    sorted_command_lines = sorted(command_lines)
+    sorted_command_lines = sorted(command_lines,reverse=True)
     nb_jobs = len(sorted_command_lines)
 
  # add this in for GPU's   # $ -P gpu
