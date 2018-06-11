@@ -23,7 +23,8 @@ class VKGE:
                  alt_cost=True,train_mean=False,alt_updates=False):
         super().__init__()
 
-        ent_sigma = (np.log(ent_sig)**2)
+        ent_sigma=tf.log(tf.exp(ent_sig)-1)
+        # ent_sigma = (np.log(ent_sig)**2) #old sigma
         pred_sigma = ent_sigma #adjust for correct format for model input
         predicate_embedding_size = embedding_size
         entity_embedding_size = embedding_size
@@ -73,7 +74,9 @@ class VKGE:
 
     @staticmethod
     def sample_embedding(mu, log_sigma_square):
-        sigma = tf.sqrt(tf.exp(log_sigma_square))
+        # sigma = tf.sqrt(tf.exp(log_sigma_square))
+        sigma = tf.log(1+tf.exp(log_sigma_square))
+
         embedding_size = mu.get_shape()[1].value
         eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
         return mu + sigma * eps
@@ -320,7 +323,7 @@ class VKGE:
 
                     logger.warn('Epoch: {0}\tVLB: {1}'.format(epoch, stats(loss_values)))
 
-                if (epoch % 200)==0:
+                if (epoch % 50)==0:
 
                     for eval_type in ['valid']:
 
