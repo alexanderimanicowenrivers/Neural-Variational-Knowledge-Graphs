@@ -29,6 +29,7 @@ def to_cmd(c):
               '--embedding_size {} ' \
               '--alt_cost {} ' \
               '--train_mean {} ' \
+              '--Sigma_alt {} ' \
               '--batch_size {} ' \
  \
         .format(path,
@@ -57,7 +58,8 @@ def main(_):
         w2=[20],
         w3=[True, False],
         w4=[True, False],
-        w5=[14145, 1]
+        w5=[True, False],
+        w6=[14145, 1]
 
     )
 
@@ -103,8 +105,7 @@ def main(_):
 #$ -t 1-{}
 #$ -l tmem=8G
 #$ -l h_rt=12:00:00
-#$ -P gpu
-#$ -l gpu=1
+
 
 
 export LANG="en_US.utf8"
