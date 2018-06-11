@@ -27,9 +27,9 @@ def to_cmd(c):
               '--learning_rate {} ' \
               '--init_sig {} ' \
               '--embedding_size {} ' \
-              '--batch_size {} ' \
               '--alt_cost {} ' \
               '--train_mean {} ' \
+              '--batch_size {} ' \
  \
         .format(path,
                 #                 params,
@@ -40,6 +40,7 @@ def to_cmd(c):
                 c['w3'],
                 c['w4'],
                 c['w5'],
+                c['w6'],
                 )
     return command
 
@@ -51,12 +52,13 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w0=[1e-3, 1e-4, 1e-5, 1e-6],
-        w1=[1,2,3,4,5,6, 7, 8],
+        w0=[1e-3, 1e-4, 1e-5],
+        w1=[1,3,4,6,8],
         w2=[20],
-        w3=[14145],
+        w3=[True, False],
         w4=[True, False],
-        w5=[True, False]
+        w5=[14145, 1]
+
     )
 
     configurations = cartesian_product(hyperparameters_space)

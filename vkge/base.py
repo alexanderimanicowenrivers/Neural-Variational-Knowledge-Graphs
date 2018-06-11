@@ -20,11 +20,16 @@ logger = logging.getLogger(__name__)
 
 class VKGE:
     def __init__(self, embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
-                 alt_cost=True,train_mean=False,alt_updates=False):
+                 alt_cost=True,train_mean=False,alt_updates=False,sigma_alt=True):
         super().__init__()
 
-        ent_sigma=tf.log(tf.exp(ent_sig)-1)
-        # ent_sigma = (np.log(ent_sig)**2) #old sigma
+        self.sigma_alt=sigma_alt
+
+        if sigma_alt:
+            ent_sigma=tf.log(tf.exp(ent_sig)-1)
+        else:
+            ent_sigma = (np.log(ent_sig)**2) #old sigma
+
         pred_sigma = ent_sigma #adjust for correct format for model input
         predicate_embedding_size = embedding_size
         entity_embedding_size = embedding_size
@@ -38,7 +43,6 @@ class VKGE:
         self.nb_examples = len(triples)
         self.static_mean=train_mean
         self.alt_updates=alt_updates
-
 
         logger.warn('Parsing the facts in the Knowledge Base ..')
 
@@ -72,10 +76,12 @@ class VKGE:
         mu, log_sigma_square = tf.split(value=parameters, num_or_size_splits=2, axis=1)
         return mu, log_sigma_square
 
-    @staticmethod
-    def sample_embedding(mu, log_sigma_square):
-        # sigma = tf.sqrt(tf.exp(log_sigma_square))
-        sigma = tf.log(1+tf.exp(log_sigma_square))
+    def sample_embedding(self,mu, log_sigma_square):
+
+        if self.sigma_alt :
+            sigma = tf.log(1+tf.exp(log_sigma_square))
+        else:
+            sigma = tf.sqrt(tf.exp(log_sigma_square))
 
         embedding_size = mu.get_shape()[1].value
         eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
@@ -225,14 +231,13 @@ class VKGE:
 
         ####### COMPRESSION COST PARAMETERS
 
-        M = int(np.ceil((self.nb_examples * nb_epochs / batch_size)) + 1)
+        M = int(np.ceil((self.nb_examples  / batch_size)) + 1)
 
         pi_s = np.log(2.0)*M
         pi_e = np.log(2.0)
 
         pi = np.exp(np.linspace(pi_s, pi_e, M)-M*np.log(2.0))
 
-        counter = 0
 
         #####################
 
@@ -240,6 +245,8 @@ class VKGE:
         with tf.Session() as session:
             session.run(init_op)
             for epoch in range(1, nb_epochs + 1):
+                counter = 0
+
                 order = self.random_state.permutation(nb_samples)
                 Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
 
