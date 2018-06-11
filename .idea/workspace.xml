@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,10 +41,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
+            <state relative-caret-position="2565">
               <caret line="171" column="12" lean-forward="false" selection-start-line="171" selection-start-column="12" selection-end-line="171" selection-end-column="12" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
@@ -53,12 +53,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-10440">
-              <caret line="3" column="11" lean-forward="false" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="11" />
-              <folding />
+            <state relative-caret-position="285">
+              <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding>
+                <element signature="e#26#37#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -80,6 +82,7 @@
       <find>nb_enti</find>
       <find>GPU</find>
       <find>logger.info</find>
+      <find>mu_s</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -113,8 +116,8 @@
         <option value="$PROJECT_DIR$/vkge/script.py" />
         <option value="$PROJECT_DIR$/script_gpu.py" />
         <option value="$PROJECT_DIR$/script.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -316,13 +319,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00063" summary="fixed compression cost">
-      <created>1528478581771</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1528478581774</updated>
     </task>
     <task id="LOCAL-00064" summary="fixed compression cost">
       <created>1528560725485</created>
@@ -660,7 +656,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528716036921</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="fixed indentation error on mu_s">
+      <created>1528716165438</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1528716165439</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TodoView">
@@ -726,7 +729,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added gpu script" />
     <MESSAGE value="added script" />
     <MESSAGE value="updated loss and also finished MoG model" />
     <MESSAGE value="fixed script" />
@@ -751,7 +753,8 @@
     <MESSAGE value="change logger settings from info to warning" />
     <MESSAGE value="change logger settings from info to warning in base" />
     <MESSAGE value="fixed sigma init" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed sigma init" />
+    <MESSAGE value="fixed indentation error on mu_s" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed indentation error on mu_s" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -791,7 +794,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="90" lean-forward="false" selection-start-line="14" selection-start-column="90" selection-end-line="14" selection-end-column="90" />
-          <folding />
+          <folding>
+            <element signature="e#26#37#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1061,20 +1066,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10440">
-          <caret line="3" column="11" lean-forward="false" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
+        <state relative-caret-position="2565">
           <caret line="171" column="12" lean-forward="false" selection-start-line="171" selection-start-column="12" selection-end-line="171" selection-end-column="12" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="e#26#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
