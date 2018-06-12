@@ -31,6 +31,8 @@ def to_cmd(c):
               '--alt_cost {} ' \
               '--train_mean {} ' \
               '--Sigma_alt {} ' \
+              '--epsilon {} ' \
+              '--file_name {} ' \
  \
         .format(path,
                 #                 params,
@@ -42,6 +44,8 @@ def to_cmd(c):
                 c['w4'],
                 c['w5'],
                 c['w6'],
+                c['w7'],
+                summary(c)
                 )
     return command
 
@@ -59,7 +63,8 @@ def main(_):
         w3=[20],
         w4=[True, False],
         w5=[True, False],
-        w6=[True, False]
+        w6=[True, False],
+        w7=[1e-5,1e-8] #from another paper
     )
 
     configurations = cartesian_product(hyperparameters_space)

@@ -19,8 +19,8 @@ logger = logging.getLogger(__name__)
 
 
 class VKGE:
-    def __init__(self, embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
-                 alt_cost=True,train_mean=False,alt_updates=False,sigma_alt=True):
+    def __init__(self, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
+                 alt_cost=True,train_mean=False,alt_updates=False,sigma_alt=True,opt_type='adam'):
         super().__init__()
 
         self.sigma_alt=sigma_alt
@@ -63,7 +63,11 @@ class VKGE:
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
 
-        optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
+        if opt_type == 'rms':
+            optimizer = tf.train.RMSPropOptimizer(learning_rate=lr, epsilon=eps)
+        elif opt_type == 'adam':
+            optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
+
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,
                          ent_sigma, pred_sigma)
@@ -248,6 +252,8 @@ class VKGE:
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
             session.run(init_op)
+            train_writer = tf.summary.FileWriter('/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_5', session.graph)
+
             for epoch in range(1, nb_epochs + 1):
                 counter = 0
 
@@ -309,7 +315,11 @@ class VKGE:
                             self.y_inputs: y
                         }
 
-                    _, elbo_value = session.run([self.training_step, self.elbo], feed_dict=loss_args)
+                    merge = tf.summary.merge_all()
+
+                    summary,_, elbo_value = session.run([merge,self.training_step, self.elbo], feed_dict=loss_args)
+
+                    train_writer.add_summary(summary, counter) #tensorboard
 
                     loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
                     total_loss_value += elbo_value
@@ -322,7 +332,6 @@ class VKGE:
                 def stats(values):
                     return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-                # logger.warn('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
                 if (round(np.mean(loss_values), 4) < minloss):
                     minloss = round(np.mean(loss_values), 4)
                     minepoch = epoch
