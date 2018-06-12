@@ -465,6 +465,8 @@ class VKGE:
                         maxepoch=epoch
                     logger.warn('Hits@10 value: {0} %'.format(t2))
 
+                logger.warn('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
+
             logger.warn("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
             logger.warn("The maximum Hits@10 value: {0} \t at epoch {1}".format(maxhits, maxepoch))
 
