@@ -105,23 +105,56 @@ class VKGE:
         self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
 
         # Kullback Leibler divergence
-        self.e_objective = 0.0
 
-        self.e_objective -= 0.5 * tf.reduce_sum(
+        self.e_objective = 0.0
+        self.e_objective1 = 0.0
+        self.e_objective2 = 0.0
+        self.e_objective3 = 0.0
+
+        self.e_objective1 -= 0.5 * tf.reduce_sum(
             1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
-        self.e_objective -= 0.5 * tf.reduce_sum(
+        self.e_objective2 -= 0.5 * tf.reduce_sum(
             1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
-        self.e_objective -= 0.5 * tf.reduce_sum(
+        self.e_objective3 -= 0.5 * tf.reduce_sum(
             1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
 
-        self.e_objective = (self.e_objective * self.KL_discount)
+        # Adjust through linear/non linear KL loss
+
+        self.e_objective1 = self.e_objective1 * self.KL_discount
+        self.e_objective2 = self.e_objective1 * self.KL_discount
+        self.e_objective3 = self.e_objective1 * self.KL_discount
+
+        # Total Loss
+
+        self.e_objective = self.e_objective1+self.e_objective2+self.e_objective3
         # Log likelihood
         self.g_objective = -tf.reduce_sum(
             tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-4))
 
         self.elbo = self.g_objective + self.e_objective
 
+        self.elbo1 = self.g_objective + self.e_objective1
+        self.elbo2 = self.g_objective + self.e_objective2
+        self.elbo3 = self.g_objective + self.e_objective3
+
         self.training_step = optimizer.minimize(self.elbo)
+
+        self.training_step1 = optimizer.minimize(self.elbo1)
+        self.training_step2 = optimizer.minimize(self.elbo2)
+        self.training_step3 = optimizer.minimize(self.elbo3)
+
+        _ = tf.scalar_summary("total e loss", self.e_objective)
+        _ = tf.scalar_summary("total e subject loss", self.e_objective1)
+        _ = tf.scalar_summary("total e predicate loss", self.e_objective2)
+        _ = tf.scalar_summary("total e object loss", self.e_objective3)
+        _ = tf.scalar_summary("g loss", self.g_objective)
+
+        _ = tf.scalar_summary("total loss", self.elbo)
+
+        _ = tf.scalar_summary("total loss subject", self.elbo1)
+        _ = tf.scalar_summary("total loss predicate", self.elbo2)
+        _ = tf.scalar_summary("total loss object", self.elbo3)
+
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
                       pred_sig):
@@ -197,6 +230,23 @@ class VKGE:
             self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
             self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
 
+            _ = tf.histogram_summary("mu subject", self.mu_s)
+            _ = tf.histogram_summary("sigma subject", self.log_sigma_sq_s)
+            _ = tf.histogram_summary("h subject", self.h_s)
+            _ = tf.histogram_summary("mu + sigma subject", self.mu_s + self.log_sigma_sq_s)
+
+            _ = tf.histogram_summary("mu object", self.mu_o)
+            _ = tf.histogram_summary("sigma object", self.log_sigma_sq_o)
+            _ = tf.histogram_summary("h object", self.h_o)
+            _ = tf.histogram_summary("mu + sigma object", self.mu_o + self.log_sigma_sq_o)
+
+            _ = tf.histogram_summary("mu predicate", self.mu_p)
+            _ = tf.histogram_summary("sigma predicate", self.log_sigma_sq_p)
+            _ = tf.histogram_summary("h predicate", self.h_p)
+            _ = tf.histogram_summary("mu + sigma predicate", self.mu_p + self.log_sigma_sq_p)
+
+
+
     def build_decoder(self):
 
         logger.warn('Building Inference Network p(y|h) ..')
@@ -207,7 +257,12 @@ class VKGE:
             self.scores = model()
             self.p_x_i = tf.sigmoid(self.scores)
 
+    @staticmethod
+    def stats(values):
+        return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
+
     def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000):
+
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
@@ -223,6 +278,7 @@ class VKGE:
         Xo = np.array([o_idx for (_, [_, o_idx]) in train_sequences])
 
         assert Xs.shape == Xp.shape == Xo.shape
+
 
         nb_samples = Xs.shape[0]
         # batch_size = math.ceil(nb_samples / nb_batches)
@@ -317,9 +373,21 @@ class VKGE:
 
                     merge = tf.summary.merge_all()
 
-                    summary,_, elbo_value = session.run([merge,self.training_step, self.elbo], feed_dict=loss_args)
+                    if self.alt_updates:
 
-                    train_writer.add_summary(summary, counter) #tensorboard
+                        _, elbo_value1 = session.run([self.training_step1, self.elbo1], feed_dict=loss_args)
+                        _, elbo_value2 = session.run([self.training_step2, self.elbo2], feed_dict=loss_args)
+                        summary,_, elbo_value3 = session.run([merge,self.training_step3, self.elbo3], feed_dict=loss_args)
+
+
+                    else:
+
+                        summary,_, elbo_value = session.run([merge,self.training_step, self.elbo], feed_dict=loss_args)
+
+
+
+                    if counter % 2 == 0:
+                        train_writer.add_summary(summary, counter) #tensorboard
 
                     loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
                     total_loss_value += elbo_value
@@ -329,8 +397,6 @@ class VKGE:
                     # for projection_step in projection_steps:
                     #     session.run([projection_step])
 
-                def stats(values):
-                    return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
                 if (round(np.mean(loss_values), 4) < minloss):
                     minloss = round(np.mean(loss_values), 4)
@@ -341,7 +407,6 @@ class VKGE:
                         minloss = round(np.mean(loss_values), 4)
                         minepoch = epoch
 
-                    logger.warn('Epoch: {0}\tVLB: {1}'.format(epoch, stats(loss_values)))
 
                 if (epoch % 50)==0:
 

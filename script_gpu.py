@@ -19,19 +19,21 @@ def to_cmd(c):
     #         'train': 'data/wn18/snli_1.0_train.jsonl.gz'
     #     }
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs'
     #     params = '-m cbilstm -b 32 -d 0.8 -r 300 -o adam --lr 0.001 -c 100 -e 10 ' \
     #              '--restore saved/snli/cbilstm/2/cbilstm -C 5000'
     #     command = 'PYTHONPATH=. python3-gpu {}/main.py {} ' \
-    command = 'PYTHONPATH=. python3 {}/main.py  ' \
-              '--learning_rate {} ' \
-              '--beta1 {} ' \
-              '--beta2 {} ' \
-              '--init_sig {} ' \
-              '--epsilon {} ' \
-              '--embedding_size {} ' \
+    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
               '--batch_size {} ' \
+              '--learning_rate {} ' \
+              '--init_sig {} ' \
+              '--embedding_size {} ' \
               '--alt_cost {} ' \
+              '--train_mean {} ' \
+              '--Sigma_alt {} ' \
+              '--epsilon {} ' \
+              '--file_name {} ' \
+ \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -42,25 +44,27 @@ def to_cmd(c):
                 c['w4'],
                 c['w5'],
                 c['w6'],
-                c['w7'])
+                c['w7'],
+                summary(c)
+                )
     return command
 
 
 def to_logfile(c, path):
-    outfile = "%s/uclcs_cbilstm_v1.%s.log" % (path, summary(c))
+    outfile = "%s/uclcs_nvkg_v1.%s.log" % (path, summary(c))
     return outfile
 
 
 def main(_):
     hyperparameters_space = dict(
-        w0=[1e-3, 1e-4, 1e-5],
-        w1=[0.9],
-        w2=[0.999],
-        w3=[6, 7, 8],
-        w4=[1e-08],
-        w5=[10, 20, 50],
-        w6=[1, 2, 5, 10, 14145],
-        w7=[True, False]
+        w0=[14145],
+        w1=[1e-3],
+        w2=[-1],
+        w3=[20],
+        w4=[True],
+        w5=[True],
+        w6=[True],
+        w7=[1e-8] #from another paper
     )
 
     configurations = cartesian_product(hyperparameters_space)
@@ -90,7 +94,7 @@ def main(_):
             command_lines |= {command_line}
 
     # Sort command lines and remove duplicates
-    sorted_command_lines = sorted(command_lines)
+    sorted_command_lines = sorted(command_lines,reverse=True)
     nb_jobs = len(sorted_command_lines)
 
  # add this in for GPU's   # $ -P gpu
@@ -100,12 +104,12 @@ def main(_):
 
 #$ -cwd
 #$ -S /bin/bash
-#$ -o /dev/null
-#$ -e /dev/null
+#$ -o /home/acowenri/array.o.log
+#$ -e /home/acowenri/array.e.log
 #$ -t 1-{}
-#$ -l tmem=18G
-#$ -l h_vmem=18G
+#$ -l tmem=8G
 #$ -l h_rt=12:00:00
+
 
 
 export LANG="en_US.utf8"
