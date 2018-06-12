@@ -267,8 +267,7 @@ class VKGE:
             self.scores = model()
             self.p_x_i = tf.sigmoid(self.scores)
 
-    @staticmethod
-    def stats(values):
+    def stats(self,values):
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
     def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
@@ -492,7 +491,7 @@ class VKGE:
                         maxepoch=epoch
                     logger.warn('Hits@10 value: {0} %'.format(t2))
 
-                logger.warn('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
+                logger.warn('Epoch: {0}\tELBO: {1}'.format(epoch, self.stats(loss_values)))
 
             logger.warn("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
             logger.warn("The maximum Hits@10 value: {0} \t at epoch {1}".format(maxhits, maxepoch))
