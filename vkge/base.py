@@ -143,17 +143,17 @@ class VKGE:
         self.training_step2 = optimizer.minimize(self.elbo2)
         self.training_step3 = optimizer.minimize(self.elbo3)
 
-        _ = tf.scalar_summary("total e loss", self.e_objective)
-        _ = tf.scalar_summary("total e subject loss", self.e_objective1)
-        _ = tf.scalar_summary("total e predicate loss", self.e_objective2)
-        _ = tf.scalar_summary("total e object loss", self.e_objective3)
-        _ = tf.scalar_summary("g loss", self.g_objective)
+        _ = tf.summary.scalar("total e loss", self.e_objective)
+        _ = tf.summary.scalar("total e subject loss", self.e_objective1)
+        _ = tf.summary.scalar("total e predicate loss", self.e_objective2)
+        _ = tf.summary.scalar("total e object loss", self.e_objective3)
+        _ = tf.summary.scalar("g loss", self.g_objective)
 
-        _ = tf.scalar_summary("total loss", self.elbo)
+        _ = tf.summary.scalar("total loss", self.elbo)
 
-        _ = tf.scalar_summary("total loss subject", self.elbo1)
-        _ = tf.scalar_summary("total loss predicate", self.elbo2)
-        _ = tf.scalar_summary("total loss object", self.elbo3)
+        _ = tf.summary.scalar("total loss subject", self.elbo1)
+        _ = tf.summary.scalar("total loss predicate", self.elbo2)
+        _ = tf.summary.scalar("total loss object", self.elbo3)
 
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
@@ -230,20 +230,20 @@ class VKGE:
             self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
             self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
 
-            _ = tf.histogram_summary("mu subject", self.mu_s)
-            _ = tf.histogram_summary("sigma subject", self.log_sigma_sq_s)
-            _ = tf.histogram_summary("h subject", self.h_s)
-            _ = tf.histogram_summary("mu + sigma subject", self.mu_s + self.log_sigma_sq_s)
+            _ = tf.summary.histogram("mu subject", self.mu_s)
+            _ = tf.summary.histogram("sigma subject", self.log_sigma_sq_s)
+            _ = tf.summary.histogram("h subject", self.h_s)
+            _ = tf.summary.histogram("mu + sigma subject", self.mu_s + self.log_sigma_sq_s)
 
-            _ = tf.histogram_summary("mu object", self.mu_o)
-            _ = tf.histogram_summary("sigma object", self.log_sigma_sq_o)
-            _ = tf.histogram_summary("h object", self.h_o)
-            _ = tf.histogram_summary("mu + sigma object", self.mu_o + self.log_sigma_sq_o)
+            _ = tf.summary.histogram("mu object", self.mu_o)
+            _ = tf.summary.histogram("sigma object", self.log_sigma_sq_o)
+            _ = tf.summary.histogram("h object", self.h_o)
+            _ = tf.summary.histogram("mu + sigma object", self.mu_o + self.log_sigma_sq_o)
 
-            _ = tf.histogram_summary("mu predicate", self.mu_p)
-            _ = tf.histogram_summary("sigma predicate", self.log_sigma_sq_p)
-            _ = tf.histogram_summary("h predicate", self.h_p)
-            _ = tf.histogram_summary("mu + sigma predicate", self.mu_p + self.log_sigma_sq_p)
+            _ = tf.summary.histogram("mu predicate", self.mu_p)
+            _ = tf.summary.histogram("sigma predicate", self.log_sigma_sq_p)
+            _ = tf.summary.histogram("h predicate", self.h_p)
+            _ = tf.summary.histogram("mu + sigma predicate", self.mu_p + self.log_sigma_sq_p)
 
 
 
