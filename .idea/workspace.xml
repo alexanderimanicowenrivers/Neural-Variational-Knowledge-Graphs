@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_gpu.py" afterPath="$PROJECT_DIR$/script_gpu.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,8 +56,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3627">
-              <caret line="383" column="24" lean-forward="false" selection-start-line="383" selection-start-column="24" selection-end-line="383" selection-end-column="24" />
+            <state relative-caret-position="-268">
+              <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -333,13 +332,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00086" summary="added in main function call to base.py">
-      <created>1528658790535</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1528658790541</updated>
     </task>
     <task id="LOCAL-00087" summary="changed script to base.py">
       <created>1528658973737</created>
@@ -677,7 +669,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528818908018</updated>
     </task>
-    <option name="localTasksCounter" value="135" />
+    <task id="LOCAL-00135" summary="turned tensorboard off">
+      <created>1528821691550</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1528821691550</updated>
+    </task>
+    <option name="localTasksCounter" value="136" />
     <servers />
   </component>
   <component name="TodoView">
@@ -743,7 +742,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in #$ -ac allow=LMNOPQSTU" />
     <MESSAGE value="added in main function call to base.py" />
     <MESSAGE value="changed script to base.py" />
     <MESSAGE value="updated main with extra logger info" />
@@ -768,7 +766,8 @@
     <MESSAGE value="fixed alternating updates output equation" />
     <MESSAGE value="fixed tensorboard" />
     <MESSAGE value="added back in loss" />
-    <option name="LAST_COMMIT_MESSAGE" value="added back in loss" />
+    <MESSAGE value="turned tensorboard off" />
+    <option name="LAST_COMMIT_MESSAGE" value="turned tensorboard off" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1095,8 +1094,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3627">
-          <caret line="383" column="24" lean-forward="false" selection-start-line="383" selection-start-column="24" selection-end-line="383" selection-end-column="24" />
+        <state relative-caret-position="-268">
+          <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

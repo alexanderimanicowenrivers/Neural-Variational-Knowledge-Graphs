@@ -25,10 +25,13 @@ class VKGE:
 
         self.sigma_alt=sigma_alt
 
-        if sigma_alt:
-            ent_sigma=tf.log(tf.exp(ent_sig)-1)
+        if ent_sig==-1:
+            ent_sigma=ent_sig
         else:
-            ent_sigma = (np.log(ent_sig)**2) #old sigma
+            if sigma_alt:
+                ent_sigma=tf.log(tf.exp(ent_sig)-1)
+            else:
+                ent_sigma = (np.log(ent_sig)**2) #old sigma
 
         pred_sigma = ent_sigma #adjust for correct format for model input
         predicate_embedding_size = embedding_size
