@@ -231,7 +231,7 @@ class VKGE:
 
         ####### COMPRESSION COST PARAMETERS
 
-        M = int(np.ceil((self.nb_examples  / batch_size)) + 1)
+        M = int(nb_batches + 1)
 
         pi_s = np.log(2.0)*M
         pi_e = np.log(2.0)
@@ -298,7 +298,7 @@ class VKGE:
                     else:
 
                         loss_args = {
-                            self.KL_discount: 1.0,
+                            self.KL_discount: (1.0/nb_batches),
                             self.s_inputs: Xs_batch,
                             self.p_inputs: Xp_batch,
                             self.o_inputs: Xo_batch,
