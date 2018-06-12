@@ -23,6 +23,8 @@ def to_cmd(c):
     #     params = '-m cbilstm -b 32 -d 0.8 -r 300 -o adam --lr 0.001 -c 100 -e 10 ' \
     #              '--restore saved/snli/cbilstm/2/cbilstm -C 5000'
     #     command = 'PYTHONPATH=. python3-gpu {}/main.py {} ' \
+    #     '--file_name {} ' \ this is for command if I want tensorboard
+
     command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
               '--batch_size {} ' \
               '--learning_rate {} ' \
@@ -32,7 +34,7 @@ def to_cmd(c):
               '--train_mean {} ' \
               '--Sigma_alt {} ' \
               '--epsilon {} ' \
-              '--file_name {} ' \
+              '--alternating_updates {} ' \
  \
         .format(path,
                 #                 params,
@@ -45,7 +47,9 @@ def to_cmd(c):
                 c['w5'],
                 c['w6'],
                 c['w7'],
-                summary(c)
+                c['w8'],
+                # "%s/logs/18_6_5/uclcs_nvkg_v1.%s" % (path, summary(c))
+
                 )
     return command
 
@@ -64,7 +68,8 @@ def main(_):
         w4=[True, False],
         w5=[True, False],
         w6=[True, False],
-        w7=[1e-5,1e-8] #from another paper
+        w7=[1e-5,1e-8], #from another paper
+        w8 = [True, False]
     )
 
     configurations = cartesian_product(hyperparameters_space)
