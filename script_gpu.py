@@ -29,7 +29,7 @@ def to_cmd(c):
               '--init_sig {} ' \
               '--embedding_size {} ' \
               '--alt_cost {} ' \
-              '--train_mean {} ' \
+              '--alternating_updates {} ' \
               '--Sigma_alt {} ' \
               '--epsilon {} ' \
               '--file_name {} ' \
