@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script.py" afterPath="$PROJECT_DIR$/script.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,8 +44,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
-              <caret line="171" column="107" lean-forward="false" selection-start-line="171" selection-start-column="107" selection-end-line="171" selection-end-column="107" />
+            <state relative-caret-position="503">
+              <caret line="394" column="87" lean-forward="false" selection-start-line="394" selection-start-column="87" selection-end-line="394" selection-end-column="87" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -319,13 +318,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00073" summary="updated base, comment out MoG model">
-      <created>1528624127370</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1528624127371</updated>
     </task>
     <task id="LOCAL-00074" summary="updated base, comment out MoG model">
       <created>1528624145146</created>
@@ -663,7 +655,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528800328529</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="added in random normal initalisation for variance when flag sigma init=-1">
+      <created>1528801419272</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1528801419272</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TodoView">
@@ -729,7 +728,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in non static mean initialisation to random normal distribution" />
     <MESSAGE value="added in alternating updates flag" />
     <MESSAGE value="updated script" />
     <MESSAGE value="updated base, comment out MoG model" />
@@ -754,7 +752,8 @@
     <MESSAGE value="fixed batch size so quicker experiments run first" />
     <MESSAGE value="sorted reverse = True" />
     <MESSAGE value="fixed KL loss" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed KL loss" />
+    <MESSAGE value="added in random normal initalisation for variance when flag sigma init=-1" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in random normal initalisation for variance when flag sigma init=-1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1078,8 +1077,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="171" column="107" lean-forward="false" selection-start-line="171" selection-start-column="107" selection-end-line="171" selection-end-column="107" />
+        <state relative-caret-position="503">
+          <caret line="394" column="87" lean-forward="false" selection-start-line="394" selection-start-column="87" selection-end-line="394" selection-end-column="87" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

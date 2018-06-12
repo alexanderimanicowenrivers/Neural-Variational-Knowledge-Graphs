@@ -229,7 +229,8 @@ class VKGE:
         # projection_steps = [constraints.unit_cube(self.entity_parameters_layer) if unit_cube
         #                     else constraints.unit_sphere(self.entity_parameters_layer, norm=1.0)]
         minloss = 10000
-
+        maxhits=0
+        maxepoch=0
         minepoch = 0
 
         ####### COMPRESSION COST PARAMETERS
@@ -384,9 +385,14 @@ class VKGE:
                             k = 10
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                     t1, t2 = mean_rank, hits_at_k
+
+                    if hits_at_k>maxhits:
+                        maxhits=hits_at_k
+                        maxepoch=epoch
                     logger.warn('Hits@10 value: {0} %'.format(t2))
 
             logger.warn("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
+            logger.warn("The maximum Hits@10 value: {0} \t at epoch {1}".format(maxhits, maxepoch))
 
 # class MoGVKGE:
 #     def __init__(self, embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, sigma1_e=6.0,sigma1_p=6.0,sigma2_e=1.0,sigma2_p=1.0,mix=6.0,
