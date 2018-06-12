@@ -377,7 +377,7 @@ class VKGE:
 
                         _, elbo_value1 = session.run([self.training_step1, self.elbo1], feed_dict=loss_args)
                         _, elbo_value2 = session.run([self.training_step2, self.elbo2], feed_dict=loss_args)
-                        summary,_, elbo_value3 = session.run([merge,self.training_step3, self.elbo3], feed_dict=loss_args)
+                        summary,_, elbo_value3,elbo_value = session.run([merge,self.training_step3, self.elbo3,self.elbo], feed_dict=loss_args)
 
 
                     else:
