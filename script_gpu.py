@@ -59,7 +59,7 @@ def main(_):
     hyperparameters_space = dict(
         w0=[14145],
         w1=[1e-3],
-        w2=[1],
+        w2=[-1],
         w3=[20],
         w4=[True],
         w5=[True],

@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 class VKGE:
     def __init__(self, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
-                 alt_cost=True,train_mean=False,alt_updates=False,sigma_alt=True,opt_type='adam'):
+                 alt_cost=True,train_mean=False,alt_updates=False,sigma_alt=True,opt_type='adam',tensorboard=False):
         super().__init__()
 
         self.sigma_alt=sigma_alt
@@ -43,7 +43,7 @@ class VKGE:
         self.nb_examples = len(triples)
         self.static_mean=train_mean
         self.alt_updates=alt_updates
-
+        self.tensorboard=tensorboard
         logger.warn('Parsing the facts in the Knowledge Base ..')
 
         # logger.warn('Parsing the facts in the Knowledge Base ..')
@@ -143,17 +143,20 @@ class VKGE:
         self.training_step2 = optimizer.minimize(self.elbo2)
         self.training_step3 = optimizer.minimize(self.elbo3)
 
-        _ = tf.summary.scalar("total e loss", self.e_objective)
-        _ = tf.summary.scalar("total e subject loss", self.e_objective1)
-        _ = tf.summary.scalar("total e predicate loss", self.e_objective2)
-        _ = tf.summary.scalar("total e object loss", self.e_objective3)
-        _ = tf.summary.scalar("g loss", self.g_objective)
 
-        _ = tf.summary.scalar("total loss", self.elbo)
+        if self.tensorboard:
 
-        _ = tf.summary.scalar("total loss subject", self.elbo1)
-        _ = tf.summary.scalar("total loss predicate", self.elbo2)
-        _ = tf.summary.scalar("total loss object", self.elbo3)
+            _ = tf.summary.scalar("total e loss", self.e_objective)
+            _ = tf.summary.scalar("total e subject loss", self.e_objective1)
+            _ = tf.summary.scalar("total e predicate loss", self.e_objective2)
+            _ = tf.summary.scalar("total e object loss", self.e_objective3)
+            _ = tf.summary.scalar("g loss", self.g_objective)
+
+            _ = tf.summary.scalar("total loss", self.elbo)
+
+            _ = tf.summary.scalar("total loss subject", self.elbo1)
+            _ = tf.summary.scalar("total loss predicate", self.elbo2)
+            _ = tf.summary.scalar("total loss object", self.elbo3)
 
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
@@ -193,6 +196,9 @@ class VKGE:
 
             if pred_sig==-1: #flag for initialising the sigmas to random normal distributions
 
+
+                logger.warn("pred_sig == -1")
+
                 self.entity_embedding_sigma = tf.get_variable('entities_sigma',
                                                              shape=[nb_entities + 1, entity_embedding_size],
                                                              initializer=tf.initializers.random_normal(), dtype=tf.float32,trainable=True)
@@ -230,20 +236,21 @@ class VKGE:
             self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
             self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
 
-            _ = tf.summary.histogram("mu subject", self.mu_s)
-            _ = tf.summary.histogram("sigma subject", self.log_sigma_sq_s)
-            _ = tf.summary.histogram("h subject", self.h_s)
-            _ = tf.summary.histogram("mu + sigma subject", self.mu_s + self.log_sigma_sq_s)
+            if self.tensorboard:
+                _ = tf.summary.histogram("mu subject", self.mu_s)
+                _ = tf.summary.histogram("sigma subject", self.log_sigma_sq_s)
+                _ = tf.summary.histogram("h subject", self.h_s)
+                _ = tf.summary.histogram("mu + sigma subject", self.mu_s + self.log_sigma_sq_s)
 
-            _ = tf.summary.histogram("mu object", self.mu_o)
-            _ = tf.summary.histogram("sigma object", self.log_sigma_sq_o)
-            _ = tf.summary.histogram("h object", self.h_o)
-            _ = tf.summary.histogram("mu + sigma object", self.mu_o + self.log_sigma_sq_o)
+                _ = tf.summary.histogram("mu object", self.mu_o)
+                _ = tf.summary.histogram("sigma object", self.log_sigma_sq_o)
+                _ = tf.summary.histogram("h object", self.h_o)
+                _ = tf.summary.histogram("mu + sigma object", self.mu_o + self.log_sigma_sq_o)
 
-            _ = tf.summary.histogram("mu predicate", self.mu_p)
-            _ = tf.summary.histogram("sigma predicate", self.log_sigma_sq_p)
-            _ = tf.summary.histogram("h predicate", self.h_p)
-            _ = tf.summary.histogram("mu + sigma predicate", self.mu_p + self.log_sigma_sq_p)
+                _ = tf.summary.histogram("mu predicate", self.mu_p)
+                _ = tf.summary.histogram("sigma predicate", self.log_sigma_sq_p)
+                _ = tf.summary.histogram("h predicate", self.h_p)
+                _ = tf.summary.histogram("mu + sigma predicate", self.mu_p + self.log_sigma_sq_p)
 
 
 
@@ -308,7 +315,9 @@ class VKGE:
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
             session.run(init_op)
-            train_writer = tf.summary.FileWriter(filename, session.graph)
+
+            if self.tensorboard:
+                train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
                 counter = 0
@@ -371,7 +380,8 @@ class VKGE:
                             self.y_inputs: y
                         }
 
-                    merge = tf.summary.merge_all()
+                    if self.tensorboard:
+                        merge = tf.summary.merge_all()
 
                     if self.alt_updates:
 
@@ -384,10 +394,10 @@ class VKGE:
 
                         summary,_, elbo_value = session.run([merge,self.training_step, self.elbo], feed_dict=loss_args)
 
+                    if self.tensorboard:
+                        if counter % 2 == 0:
 
-
-                    if counter % 2 == 0:
-                        train_writer.add_summary(summary, counter) #tensorboard
+                            train_writer.add_summary(summary, counter) #tensorboard
 
                     loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
                     total_loss_value += elbo_value
