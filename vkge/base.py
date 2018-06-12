@@ -390,17 +390,31 @@ class VKGE:
 
                         _, elbo_value1 = session.run([self.training_step1, self.elbo1], feed_dict=loss_args)
                         _, elbo_value2 = session.run([self.training_step2, self.elbo2], feed_dict=loss_args)
-                        summary,_, elbo_value3,elbo_value = session.run([merge,self.training_step3, self.elbo3,self.elbo], feed_dict=loss_args)
+
+                        if self.tensorboard:
+
+                            summary,_, elbo_value3,elbo_value = session.run([merge,self.training_step3, self.elbo3,self.elbo], feed_dict=loss_args)
+
+                        else:
+
+                            _, elbo_value3,elbo_value = session.run([self.training_step3, self.elbo3,self.elbo], feed_dict=loss_args)
 
 
                     else:
 
-                        summary,_, elbo_value = session.run([merge,self.training_step, self.elbo], feed_dict=loss_args)
 
-                    if self.tensorboard:
-                        if counter % 2 == 0:
+                        if self.tensorboard:
+                            summary,_, elbo_value = session.run([merge,self.training_step, self.elbo], feed_dict=loss_args)
 
-                            train_writer.add_summary(summary, counter) #tensorboard
+
+                        else:
+
+                             _, elbo_value = session.run([self.training_step, self.elbo],
+                                                                 feed_dict=loss_args)
+
+                    if counter % 2 == 0:
+                        if self.tensorboard:
+                            train_writer.add_summary(summary, counter)  # tensorboard
 
                     loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
                     total_loss_value += elbo_value
