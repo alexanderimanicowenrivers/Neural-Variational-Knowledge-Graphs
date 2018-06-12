@@ -56,8 +56,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="379" column="57" lean-forward="false" selection-start-line="379" selection-start-column="57" selection-end-line="379" selection-end-column="57" />
+            <state relative-caret-position="504">
+              <caret line="211" column="84" lean-forward="false" selection-start-line="211" selection-start-column="84" selection-end-line="211" selection-end-column="84" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -330,13 +330,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00080" summary="use GPU in script with anaconda">
-      <created>1528652483592</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1528652483592</updated>
     </task>
     <task id="LOCAL-00081" summary="fixed gpu script">
       <created>1528652894416</created>
@@ -674,7 +667,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528814442059</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="fixed alternating updates output equation">
+      <created>1528814611530</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1528814611530</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="TodoView">
@@ -740,7 +740,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="use GPU in script" />
     <MESSAGE value="use GPU in script with anaconda" />
     <MESSAGE value="fixed gpu script" />
     <MESSAGE value="added in #$ -ac allow=LMNOPQSTU" />
@@ -765,7 +764,8 @@
     <MESSAGE value="added in max hits summary" />
     <MESSAGE value="added in tensorboard summary" />
     <MESSAGE value="added test script - script_gpu" />
-    <option name="LAST_COMMIT_MESSAGE" value="added test script - script_gpu" />
+    <MESSAGE value="fixed alternating updates output equation" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed alternating updates output equation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1092,8 +1092,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="379" column="57" lean-forward="false" selection-start-line="379" selection-start-column="57" selection-end-line="379" selection-end-column="57" />
+        <state relative-caret-position="504">
+          <caret line="211" column="84" lean-forward="false" selection-start-line="211" selection-start-column="84" selection-end-line="211" selection-end-column="84" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
