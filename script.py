@@ -97,6 +97,7 @@ def main(_):
     sorted_command_lines = sorted(command_lines,reverse=True)
     nb_jobs = len(sorted_command_lines)
 
+
  # add this in for GPU's   # $ -P gpu
  #    # $ -l gpu=0
 

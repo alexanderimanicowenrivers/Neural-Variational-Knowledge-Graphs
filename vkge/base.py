@@ -195,11 +195,11 @@ class VKGE:
 
                 self.entity_embedding_sigma = tf.get_variable('entities_sigma',
                                                              shape=[nb_entities + 1, entity_embedding_size],
-                                                             initializer=tf.initializers.random_normal(), dtype=tf.float32)
+                                                             initializer=tf.initializers.random_normal(), dtype=tf.float32,trainable=True)
 
                 self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
                                                                 shape=[nb_predicates + 1, predicate_embedding_size],
-                                                                initializer=tf.initializers.random_normal(), dtype=tf.float32)
+                                                                initializer=tf.initializers.random_normal(), dtype=tf.float32,trainable=True)
 
             else:
 
