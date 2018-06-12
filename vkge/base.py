@@ -72,7 +72,7 @@ class VKGE:
                          optimizer,
                          ent_sigma, pred_sigma)
 
-        self.train(nb_epochs=1000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s)
+        self.train(nb_epochs=1000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s,filename=file_name)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -261,7 +261,7 @@ class VKGE:
     def stats(values):
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000):
+    def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
 
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
@@ -308,7 +308,7 @@ class VKGE:
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
             session.run(init_op)
-            train_writer = tf.summary.FileWriter('/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_5', session.graph)
+            train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
                 counter = 0
