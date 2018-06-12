@@ -45,7 +45,7 @@ def to_cmd(c):
                 c['w5'],
                 c['w6'],
                 c['w7'],
-                "%s/uclcs_nvkg_v1.%s" % (path, summary(c))
+                "%s/logs/18_6_5/uclcs_nvkg_v1.%s" % (path, summary(c))
                 )
     return command
 
