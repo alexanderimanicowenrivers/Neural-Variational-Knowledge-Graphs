@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_gpu.py" afterPath="$PROJECT_DIR$/script_gpu.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -331,13 +329,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00076" summary="use GPU in script">
-      <created>1528625314123</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1528625314124</updated>
     </task>
     <task id="LOCAL-00077" summary="use GPU in script with anaconda">
       <created>1528626116904</created>
@@ -675,7 +666,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528808455518</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="added test script - script_gpu">
+      <created>1528814078203</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1528814078203</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TodoView">
@@ -741,7 +739,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated base, comment out MoG model" />
     <MESSAGE value="use GPU in script" />
     <MESSAGE value="use GPU in script with anaconda" />
     <MESSAGE value="fixed gpu script" />
@@ -766,7 +763,8 @@
     <MESSAGE value="added in random normal initalisation for variance when flag sigma init=-1" />
     <MESSAGE value="added in max hits summary" />
     <MESSAGE value="added in tensorboard summary" />
-    <option name="LAST_COMMIT_MESSAGE" value="added in tensorboard summary" />
+    <MESSAGE value="added test script - script_gpu" />
+    <option name="LAST_COMMIT_MESSAGE" value="added test script - script_gpu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
