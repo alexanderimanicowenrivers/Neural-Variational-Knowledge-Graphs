@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 class VKGE:
     def __init__(self, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
-                 alt_cost=True,train_mean=False,alt_updates=False,sigma_alt=True,opt_type='adam',tensorboard=False):
+                 alt_cost=True,train_mean=False,alt_updates=False,sigma_alt=True,opt_type='adam',tensorboard=False,projection=True):
         super().__init__()
 
         self.sigma_alt=sigma_alt
@@ -47,6 +47,8 @@ class VKGE:
         self.static_mean=train_mean
         self.alt_updates=alt_updates
         self.tensorboard=tensorboard
+        self.projection=projection
+
         logger.warn('Parsing the facts in the Knowledge Base ..')
 
         # logger.warn('Parsing the facts in the Knowledge Base ..')
@@ -270,7 +272,7 @@ class VKGE:
     def stats(self,values):
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
+    def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000,unit_cube=False,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
 
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
@@ -295,8 +297,9 @@ class VKGE:
         # logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
         logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
 
-        # projection_steps = [constraints.unit_cube(self.entity_parameters_layer) if unit_cube
-        #                     else constraints.unit_sphere(self.entity_parameters_layer, norm=1.0)]
+        projection_steps = [constraints.unit_cube(self.entity_embedding_mean) if unit_cube
+                            else constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
+
         minloss = 10000
         maxhits=0
         maxepoch=0
@@ -420,8 +423,9 @@ class VKGE:
 
                     counter += 1
 
-                    # for projection_step in projection_steps:
-                    #     session.run([projection_step])
+                    if self.projection: #project means
+                        for projection_step in projection_steps:
+                            session.run([projection_step])
 
 
                 if (round(np.mean(loss_values), 4) < minloss):
