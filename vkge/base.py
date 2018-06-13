@@ -423,7 +423,7 @@ class VKGE:
 
                     counter += 1
 
-                    if self.projection: #project means
+                    if (self.projection==True) and (self.static_mean==False): #project means
                         for projection_step in projection_steps:
                             session.run([projection_step])
 

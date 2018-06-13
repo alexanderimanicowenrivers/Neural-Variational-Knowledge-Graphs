@@ -68,10 +68,10 @@ def main(_):
         w2=[-1],
         w3=[100],
         w4=[True],
-        w5=[True],
+        w5=[True,False],
         w6=[True],
         w7=[1e-5], #from another paper
-        w8 = [True],
+        w8 =[True],
         w9=[True]
     )
 
