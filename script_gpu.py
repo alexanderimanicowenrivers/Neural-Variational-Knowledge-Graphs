@@ -23,16 +23,19 @@ def to_cmd(c):
     #     params = '-m cbilstm -b 32 -d 0.8 -r 300 -o adam --lr 0.001 -c 100 -e 10 ' \
     #              '--restore saved/snli/cbilstm/2/cbilstm -C 5000'
     #     command = 'PYTHONPATH=. python3-gpu {}/main.py {} ' \
+    #     '--file_name {} ' \ this is for command if I want tensorboard
+
     command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
               '--batch_size {} ' \
               '--learning_rate {} ' \
               '--init_sig {} ' \
               '--embedding_size {} ' \
               '--alt_cost {} ' \
-              '--alternating_updates {} ' \
+              '--train_mean {} ' \
               '--Sigma_alt {} ' \
               '--epsilon {} ' \
-              '--file_name {} ' \
+              '--alternating_updates {} ' \
+              '--projection {} ' \
  \
         .format(path,
                 #                 params,
@@ -45,7 +48,10 @@ def to_cmd(c):
                 c['w5'],
                 c['w6'],
                 c['w7'],
-                "%s/logs/18_6_5/uclcs_nvkg_v1.%s" % (path, summary(c))
+                c['w8'],
+                c['w9']
+                # "%s/logs/18_6_5/uclcs_nvkg_v1.%s" % (path, summary(c))
+
                 )
     return command
 
@@ -60,11 +66,13 @@ def main(_):
         w0=[14145],
         w1=[1e-3],
         w2=[-1],
-        w3=[20],
+        w3=[100],
         w4=[True],
         w5=[True],
         w6=[True],
-        w7=[1e-8] #from another paper
+        w7=[1e-5], #from another paper
+        w8 = [True],
+        w9=[True]
     )
 
     configurations = cartesian_product(hyperparameters_space)
@@ -97,6 +105,7 @@ def main(_):
     sorted_command_lines = sorted(command_lines,reverse=True)
     nb_jobs = len(sorted_command_lines)
 
+
  # add this in for GPU's   # $ -P gpu
  #    # $ -l gpu=0
 
@@ -108,7 +117,7 @@ def main(_):
 #$ -e /home/acowenri/array.e.log
 #$ -t 1-{}
 #$ -l tmem=8G
-#$ -l h_rt=12:00:00
+#$ -l h_rt=24:00:00
 
 
 
