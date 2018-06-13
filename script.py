@@ -35,6 +35,7 @@ def to_cmd(c):
               '--Sigma_alt {} ' \
               '--epsilon {} ' \
               '--alternating_updates {} ' \
+              '--projection {} ' \
  \
         .format(path,
                 #                 params,
@@ -48,6 +49,7 @@ def to_cmd(c):
                 c['w6'],
                 c['w7'],
                 c['w8'],
+                c['w9']
                 # "%s/logs/18_6_5/uclcs_nvkg_v1.%s" % (path, summary(c))
 
                 )
