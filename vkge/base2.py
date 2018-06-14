@@ -16,6 +16,10 @@ logger = logging.getLogger(__name__)
 
 
 class VKGE_simple:
+    """
+            initial model created
+
+                """
     def __init__(self, triples, entity_embedding_size, predicate_embedding_size, optimizer):
         super().__init__()
 
