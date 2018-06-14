@@ -68,7 +68,7 @@ def main(_):
         w0=[14145],
         w1=[1e-3, 1e-4, 1e-5],
         w2=[1,4,8,-1],
-        w3=[100,150],
+        w3=[150],
         w4=[True, False],
         w5=[True, False],
         w6=[True, False],
