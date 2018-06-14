@@ -68,8 +68,8 @@
       <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="122" column="8" lean-forward="false" selection-start-line="121" selection-start-column="10" selection-end-line="122" selection-end-column="8" />
+            <state relative-caret-position="270">
+              <caret line="119" column="84" lean-forward="false" selection-start-line="119" selection-start-column="84" selection-end-line="119" selection-end-column="84" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -387,13 +387,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00121" summary="fixed KL loss">
-      <created>1528800328528</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1528800328529</updated>
     </task>
     <task id="LOCAL-00122" summary="added in random normal initalisation for variance when flag sigma init=-1">
       <created>1528801419272</created>
@@ -731,7 +724,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528983811241</updated>
     </task>
-    <option name="localTasksCounter" value="170" />
+    <task id="LOCAL-00170" summary="used old loss">
+      <created>1528984922802</created>
+      <option name="number" value="00170" />
+      <option name="presentableId" value="LOCAL-00170" />
+      <option name="project" value="LOCAL" />
+      <updated>1528984922803</updated>
+    </task>
+    <option name="localTasksCounter" value="171" />
     <servers />
   </component>
   <component name="TodoView">
@@ -797,7 +797,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated standard deviation" />
     <MESSAGE value="fixed sample embeddings" />
     <MESSAGE value="fixed batch size" />
     <MESSAGE value="fixed batch size so quicker experiments run first" />
@@ -822,7 +821,8 @@
     <MESSAGE value="added models into init" />
     <MESSAGE value="fixed base3" />
     <MESSAGE value="added hinge loss" />
-    <option name="LAST_COMMIT_MESSAGE" value="added hinge loss" />
+    <MESSAGE value="used old loss" />
+    <option name="LAST_COMMIT_MESSAGE" value="used old loss" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1229,8 +1229,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="122" column="8" lean-forward="false" selection-start-line="121" selection-start-column="10" selection-end-line="122" selection-end-column="8" />
+        <state relative-caret-position="270">
+          <caret line="119" column="84" lean-forward="false" selection-start-line="119" selection-start-column="84" selection-end-line="119" selection-end-column="84" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
