@@ -68,8 +68,8 @@
       <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="263" column="20" lean-forward="false" selection-start-line="262" selection-start-column="22" selection-end-line="263" selection-end-column="20" />
+            <state relative-caret-position="48">
+              <caret line="301" column="25" lean-forward="true" selection-start-line="301" selection-start-column="25" selection-end-line="301" selection-end-column="25" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -145,6 +145,7 @@
       <find>info</find>
       <find>log_sigma_sq_s</find>
       <find>scores</find>
+      <find>index_gen</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -387,13 +388,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00115" summary="updated standard deviation">
-      <created>1528739303413</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1528739303414</updated>
     </task>
     <task id="LOCAL-00116" summary="updated standard deviation">
       <created>1528739546207</created>
@@ -731,7 +725,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528976502466</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="added hinge loss">
+      <created>1528977425722</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1528977425722</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1224,8 +1225,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="263" column="20" lean-forward="false" selection-start-line="262" selection-start-column="22" selection-end-line="263" selection-end-column="20" />
+        <state relative-caret-position="48">
+          <caret line="301" column="25" lean-forward="true" selection-start-line="301" selection-start-column="25" selection-end-line="301" selection-end-column="25" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

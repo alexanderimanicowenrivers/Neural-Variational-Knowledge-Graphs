@@ -245,20 +245,19 @@ class VKGE2:
                     Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
                     Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
 
-                    # Positive Example
                     Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
                     Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
                     Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                    # Negative examples (corrupting subject)
-                    Xs_batch[1::nb_versions] = Xs_sc[batch_start:batch_end]
-                    Xp_batch[1::nb_versions] = Xp_sc[batch_start:batch_end]
-                    Xo_batch[1::nb_versions] = Xo_sc[batch_start:batch_end]
+                    # Xs_batch[1::nb_versions] needs to be corrupted
+                    Xs_batch[1::nb_versions] = index_gen(curr_batch_size, np.arange(nb_entities))
+                    Xp_batch[1::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[1::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                    # Negative examples (corrupting object)
-                    Xs_batch[2::nb_versions] = Xs_oc[batch_start:batch_end]
-                    Xp_batch[2::nb_versions] = Xp_oc[batch_start:batch_end]
-                    Xo_batch[2::nb_versions] = Xo_oc[batch_start:batch_end]
+                    # Xo_batch[2::nb_versions] needs to be corrupted
+                    Xs_batch[2::nb_versions] = Xs_shuf[batch_start:batch_end]
+                    Xp_batch[2::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[2::nb_versions] = index_gen(curr_batch_size, np.arange(nb_entities))
 
                     # y = np.zeros_like(Xp_batch)
                     # y[0::nb_versions] = 1
@@ -321,9 +320,8 @@ class VKGE2:
 
                     counter += 1
 
-                    if (self.projection==True) and (self.static_mean==False): #project means
-                        for projection_step in projection_steps:
-                            session.run([projection_step])
+                    for projection_step in projection_steps:
+                        session.run([projection_step])
 
 
                 if (round(np.mean(loss_values), 4) < minloss):
