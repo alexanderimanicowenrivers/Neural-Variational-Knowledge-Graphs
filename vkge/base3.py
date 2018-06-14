@@ -97,7 +97,8 @@ class VKGE2:
         eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
         return mu + sigma * eps
 
-    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer):
+    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
+                    ent_sig, pred_sig):
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
@@ -119,7 +120,8 @@ class VKGE2:
 
         self.training_step = optimizer.minimize(self.elbo)
 
-    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size):
+    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
+                      pred_sig):
         logger.warn('Building Inference Networks q(h_x | x) ..')
         with tf.variable_scope('encoder'):
             self.entity_embedding_mean = tf.get_variable('entities',
@@ -142,6 +144,9 @@ class VKGE2:
         with tf.variable_scope('decoder'):
             model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p, object_embeddings=self.h_o)
             self.p_x_i = tf.sigmoid(model())
+
+    def stats(self,values):
+        return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
     def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000,unit_cube=False,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
 
