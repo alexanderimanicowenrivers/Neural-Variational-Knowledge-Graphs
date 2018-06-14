@@ -76,7 +76,11 @@ class VKGE:
         # if opt_type == 'rms':
         #     optimizer = tf.train.RMSPropOptimizer(learning_rate=lr, epsilon=eps)
         # elif opt_type == 'adam':
-        optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
+
+        if lr==-1:
+            optimizer=tf.train.AdagradOptimizer(learning_rate=0.1) #original KG
+        else:
+            optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,
