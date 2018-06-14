@@ -25,7 +25,7 @@ def to_cmd(c):
     #     command = 'PYTHONPATH=. python3-gpu {}/main.py {} ' \
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
-    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main2.py  ' \
+    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
               '--batch_size {} ' \
               '--learning_rate {} ' \
               '--init_sig {} ' \
@@ -65,14 +65,14 @@ def main(_):
     hyperparameters_space = dict(
         w0=[14145],
         w1=[1e-3],
-        w2=[-1],
+        w2=[1],
         w3=[100],
         w4=[True],
-        w5=[True,False],
+        w5=[True],
         w6=[True],
-        w7=[1e-5], #from another paper
-        w8 =[True],
-        w9=[True]
+        w7=[1e-8], #from another paper
+        w8 = [False],
+        w9=[False]
     )
 
     configurations = cartesian_product(hyperparameters_space)
@@ -117,7 +117,7 @@ def main(_):
 #$ -e /home/acowenri/array.e.log
 #$ -t 1-{}
 #$ -l tmem=8G
-#$ -l h_rt=24:00:00
+#$ -l h_rt=12:00:00
 
 
 

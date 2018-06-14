@@ -53,7 +53,7 @@ class VKGE:
         self.alt_updates=alt_updates
         self.tensorboard=tensorboard
         self.projection=projection
-
+        self.opt_type=opt_type
         logger.warn('Parsing the facts in the Knowledge Base ..')
 
         # logger.warn('Parsing the facts in the Knowledge Base ..')
@@ -73,10 +73,10 @@ class VKGE:
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
 
-        if opt_type == 'rms':
-            optimizer = tf.train.RMSPropOptimizer(learning_rate=lr, epsilon=eps)
-        elif opt_type == 'adam':
-            optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
+        # if opt_type == 'rms':
+        #     optimizer = tf.train.RMSPropOptimizer(learning_rate=lr, epsilon=eps)
+        # elif opt_type == 'adam':
+        optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,
@@ -138,20 +138,23 @@ class VKGE:
 
         self.e_objective = self.e_objective1+self.e_objective2+self.e_objective3
         # Log likelihood
-        self.g_objective = -tf.reduce_sum(
-            tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-4))
+        if self.opt_type=='adam':
+            self.g_objective = -tf.reduce_sum(
+                tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-4))
+        else:
+            self.hinge_losses = tf.nn.relu(5 - self.scores * (2 * tf.int32(self.y_inputs) - 1))
+            self.g_objective = tf.reduce_sum(self.hinge_losses)
 
         self.elbo = self.g_objective + self.e_objective
 
-        self.elbo1 = self.g_objective + self.e_objective1
-        self.elbo2 = self.g_objective + self.e_objective2
-        self.elbo3 = self.g_objective + self.e_objective3
+
 
         self.training_step = optimizer.minimize(self.elbo)
 
-        self.training_step1 = optimizer.minimize(self.elbo1)
-        self.training_step2 = optimizer.minimize(self.elbo2)
-        self.training_step3 = optimizer.minimize(self.elbo3)
+        self.training_step1 = optimizer.minimize(self.e_objective1)
+        self.training_step2 = optimizer.minimize(self.e_objective2)
+        self.training_step3 = optimizer.minimize(self.e_objective3)
+        self.training_step4 = optimizer.minimize(self.g_objective)
 
 
         if self.tensorboard:
@@ -164,9 +167,6 @@ class VKGE:
 
             _ = tf.summary.scalar("total loss", self.elbo)
 
-            _ = tf.summary.scalar("total loss subject", self.elbo1)
-            _ = tf.summary.scalar("total loss predicate", self.elbo2)
-            _ = tf.summary.scalar("total loss object", self.elbo3)
 
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
@@ -352,23 +352,19 @@ class VKGE:
                     Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
                     Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
 
-                    # Positive Example
                     Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
                     Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
                     Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                    # Negative examples (corrupting subject)
-                    Xs_batch[1::nb_versions] = Xs_sc[batch_start:batch_end]
-                    Xp_batch[1::nb_versions] = Xp_sc[batch_start:batch_end]
-                    Xo_batch[1::nb_versions] = Xo_sc[batch_start:batch_end]
+                    # Xs_batch[1::nb_versions] needs to be corrupted
+                    Xs_batch[1::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                    Xp_batch[1::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[1::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                    # Negative examples (corrupting object)
-                    Xs_batch[2::nb_versions] = Xs_oc[batch_start:batch_end]
-                    Xp_batch[2::nb_versions] = Xp_oc[batch_start:batch_end]
-                    Xo_batch[2::nb_versions] = Xo_oc[batch_start:batch_end]
-
-                    y = np.zeros_like(Xp_batch)
-                    y[0::nb_versions] = 1
+                    # Xo_batch[2::nb_versions] needs to be corrupted
+                    Xs_batch[2::nb_versions] = Xs_shuf[batch_start:batch_end]
+                    Xp_batch[2::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[2::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
 
                     if self.alt_cost:  # if compression cost
 
@@ -377,7 +373,7 @@ class VKGE:
                             self.s_inputs: Xs_batch,
                             self.p_inputs: Xp_batch,
                             self.o_inputs: Xo_batch,
-                            self.y_inputs: y
+                            self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
                         }
 
                     else:
@@ -387,7 +383,7 @@ class VKGE:
                             self.s_inputs: Xs_batch,
                             self.p_inputs: Xp_batch,
                             self.o_inputs: Xo_batch,
-                            self.y_inputs: y
+                            self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
                         }
 
                     if self.tensorboard:
@@ -395,16 +391,17 @@ class VKGE:
 
                     if self.alt_updates:
 
-                        _, elbo_value1 = session.run([self.training_step1, self.elbo1], feed_dict=loss_args)
-                        _, elbo_value2 = session.run([self.training_step2, self.elbo2], feed_dict=loss_args)
+                        _, elbo_value1 = session.run([self.training_step1, self.e_objective1], feed_dict=loss_args)
+                        _, elbo_value2 = session.run([self.training_step2, self.e_objective2], feed_dict=loss_args)
+                        _, elbo_value3 = session.run([self.training_step3, self.e_objective3], feed_dict=loss_args)
 
                         if self.tensorboard:
 
-                            summary,_, elbo_value3,elbo_value = session.run([merge,self.training_step3, self.elbo3,self.elbo], feed_dict=loss_args)
+                            summary,_, g_value, elbo_value = session.run([merge,self.training_step3, self.g_objective,self.elbo], feed_dict=loss_args)
 
                         else:
 
-                            _, elbo_value3,elbo_value = session.run([self.training_step3, self.elbo3,self.elbo], feed_dict=loss_args)
+                            _, g_value, elbo_value = session.run([self.training_step3, self.g_objective,self.elbo], feed_dict=loss_args)
 
 
                     else:
@@ -486,7 +483,6 @@ class VKGE:
                             filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                             filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
-                        ranks = ranks_subj + ranks_obj
                         filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
 
                         for setting_name, setting_ranks in [('Filtered', filtered_ranks)]:
