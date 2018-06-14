@@ -250,14 +250,14 @@ class VKGE2:
                     Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
 
                     # Xs_batch[1::nb_versions] needs to be corrupted
-                    Xs_batch[1::nb_versions] = index_gen(curr_batch_size, np.arange(nb_entities))
+                    Xs_batch[1::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
                     Xp_batch[1::nb_versions] = Xp_shuf[batch_start:batch_end]
                     Xo_batch[1::nb_versions] = Xo_shuf[batch_start:batch_end]
 
                     # Xo_batch[2::nb_versions] needs to be corrupted
                     Xs_batch[2::nb_versions] = Xs_shuf[batch_start:batch_end]
                     Xp_batch[2::nb_versions] = Xp_shuf[batch_start:batch_end]
-                    Xo_batch[2::nb_versions] = index_gen(curr_batch_size, np.arange(nb_entities))
+                    Xo_batch[2::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
 
                     # y = np.zeros_like(Xp_batch)
                     # y[0::nb_versions] = 1
