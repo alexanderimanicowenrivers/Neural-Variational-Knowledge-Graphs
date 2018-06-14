@@ -170,7 +170,7 @@ class VKGE2:
     def stats(self,values):
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000,unit_cube=False,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
+    def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
 
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
@@ -260,8 +260,8 @@ class VKGE2:
                     Xp_batch[2::nb_versions] = Xp_oc[batch_start:batch_end]
                     Xo_batch[2::nb_versions] = Xo_oc[batch_start:batch_end]
 
-                    y = np.zeros_like(Xp_batch)
-                    y[0::nb_versions] = 1
+                    # y = np.zeros_like(Xp_batch)
+                    # y[0::nb_versions] = 1
 
                     if self.alt_cost:  # if compression cost
 
@@ -270,7 +270,7 @@ class VKGE2:
                             self.s_inputs: Xs_batch,
                             self.p_inputs: Xp_batch,
                             self.o_inputs: Xo_batch,
-                            self.y_inputs: y
+                            self.y_inputs:  np.array([1.0, 0.0, 0.0] * curr_batch_size)
                         }
 
                     else:
@@ -280,7 +280,7 @@ class VKGE2:
                             self.s_inputs: Xs_batch,
                             self.p_inputs: Xp_batch,
                             self.o_inputs: Xo_batch,
-                            self.y_inputs: y
+                            self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
                         }
 
                     if self.tensorboard:
