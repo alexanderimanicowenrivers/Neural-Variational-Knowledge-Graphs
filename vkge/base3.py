@@ -45,6 +45,10 @@ class VKGE2:
         test_triples = io.read_triples("data/wn18/wordnet-mlj12-test.txt")
 
         self.random_state = np.random.RandomState(0)
+
+        tf.set_random_seed(0)
+
+
         self.GPUMode = GPUMode
         self.alt_cost = alt_cost
         self.nb_examples = len(triples)
@@ -111,7 +115,6 @@ class VKGE2:
         self.build_decoder()
 
         # Kullback Leibler divergence
-        self.e_objective = 0.0
         # self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
         # self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
         # self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
@@ -124,7 +127,7 @@ class VKGE2:
 
         # self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
-        self.elbo = self.g_objective + self.e_objective
+        self.elbo = self.g_objective
 
         self.training_step = optimizer.minimize(self.elbo)
 
@@ -228,9 +231,6 @@ class VKGE2:
                 order = self.random_state.permutation(nb_samples)
                 Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
 
-                Xs_sc, Xp_sc, Xo_sc = subj_corruptor(Xs_shuf, Xp_shuf, Xo_shuf)
-                Xs_oc, Xp_oc, Xo_oc = obj_corruptor(Xs_shuf, Xp_shuf, Xo_shuf)
-
                 batches = make_batches(nb_samples, batch_size)
 
                 loss_values = []
@@ -262,19 +262,7 @@ class VKGE2:
                     # y = np.zeros_like(Xp_batch)
                     # y[0::nb_versions] = 1
 
-                    if self.alt_cost:  # if compression cost
-
-                        loss_args = {
-                            self.KL_discount: pi[counter],
-                            self.s_inputs: Xs_batch,
-                            self.p_inputs: Xp_batch,
-                            self.o_inputs: Xo_batch,
-                            self.y_inputs:  np.array([1.0, 0.0, 0.0] * curr_batch_size)
-                        }
-
-                    else:
-
-                        loss_args = {
+                    loss_args = {
                             self.KL_discount: (1.0/nb_batches),
                             self.s_inputs: Xs_batch,
                             self.p_inputs: Xp_batch,
@@ -282,33 +270,10 @@ class VKGE2:
                             self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
                         }
 
-                    if self.tensorboard:
-                        merge = tf.summary.merge_all()
-
-                    if self.alt_updates:
-
-                        _, elbo_value1 = session.run([self.training_step1, self.elbo1], feed_dict=loss_args)
-                        _, elbo_value2 = session.run([self.training_step2, self.elbo2], feed_dict=loss_args)
-
-                        if self.tensorboard:
-
-                            summary,_, elbo_value3,elbo_value = session.run([merge,self.training_step3, self.elbo3,self.elbo], feed_dict=loss_args)
-
-                        else:
-
-                            _, elbo_value3,elbo_value = session.run([self.training_step3, self.elbo3,self.elbo], feed_dict=loss_args)
 
 
-                    else:
 
-
-                        if self.tensorboard:
-                            summary,_, elbo_value = session.run([merge,self.training_step, self.elbo], feed_dict=loss_args)
-
-
-                        else:
-
-                             _, elbo_value = session.run([self.training_step, self.elbo],
+                    _, elbo_value = session.run([self.training_step, self.elbo],
                                                                  feed_dict=loss_args)
 
                     if counter % 2 == 0:
