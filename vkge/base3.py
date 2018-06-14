@@ -117,7 +117,9 @@ class VKGE2:
         # self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
 
         # Log likelihood
-        self.g_objective = tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-4))
+        self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
+
+        # self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-4))
 
         self.elbo = self.g_objective + self.e_objective
 

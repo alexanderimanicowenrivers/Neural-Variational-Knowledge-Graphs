@@ -68,8 +68,8 @@
       <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="119" column="27" lean-forward="true" selection-start-line="119" selection-start-column="27" selection-end-line="119" selection-end-column="27" />
+            <state relative-caret-position="407">
+              <caret line="121" column="76" lean-forward="true" selection-start-line="121" selection-start-column="76" selection-end-line="121" selection-end-column="76" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -385,13 +385,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00111" summary="fixed sigma init">
-      <created>1528716036921</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1528716036921</updated>
     </task>
     <task id="LOCAL-00112" summary="fixed indentation error on mu_s">
       <created>1528716165438</created>
@@ -729,7 +722,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528974934821</updated>
     </task>
-    <option name="localTasksCounter" value="160" />
+    <task id="LOCAL-00160" summary="fixed base3">
+      <created>1528975763425</created>
+      <option name="number" value="00160" />
+      <option name="presentableId" value="LOCAL-00160" />
+      <option name="project" value="LOCAL" />
+      <updated>1528975763425</updated>
+    </task>
+    <option name="localTasksCounter" value="161" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1222,8 +1222,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="119" column="27" lean-forward="true" selection-start-line="119" selection-start-column="27" selection-end-line="119" selection-end-column="27" />
+        <state relative-caret-position="407">
+          <caret line="121" column="76" lean-forward="true" selection-start-line="121" selection-start-column="76" selection-end-line="121" selection-end-column="76" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
