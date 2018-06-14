@@ -104,7 +104,8 @@ class VKGE2:
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
         self.y_inputs = tf.placeholder(tf.bool, shape=[None])
 
-        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size)
+        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
+                           pred_sig)
         self.build_decoder()
 
         # Kullback Leibler divergence

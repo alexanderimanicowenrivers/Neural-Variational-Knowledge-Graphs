@@ -56,8 +56,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="519">
-              <caret line="277" column="94" lean-forward="true" selection-start-line="276" selection-start-column="4" selection-end-line="277" selection-end-column="94" />
+            <state relative-caret-position="496">
+              <caret line="112" column="28" lean-forward="true" selection-start-line="110" selection-start-column="8" selection-end-line="112" selection-end-column="28" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -68,8 +68,8 @@
       <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="149" column="4" lean-forward="false" selection-start-line="149" selection-start-column="4" selection-end-line="149" selection-end-column="4" />
+            <state relative-caret-position="434">
+              <caret line="108" column="28" lean-forward="false" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -383,13 +383,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00104" summary="using print">
-      <created>1528661135406</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1528661135407</updated>
     </task>
     <task id="LOCAL-00105" summary="change logger settings">
       <created>1528661301333</created>
@@ -727,7 +720,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528974381443</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="fixed base3">
+      <created>1528974459024</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1528974459024</updated>
+    </task>
+    <option name="localTasksCounter" value="154" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1210,8 +1210,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="519">
-          <caret line="277" column="94" lean-forward="true" selection-start-line="276" selection-start-column="4" selection-end-line="277" selection-end-column="94" />
+        <state relative-caret-position="496">
+          <caret line="112" column="28" lean-forward="true" selection-start-line="110" selection-start-column="8" selection-end-line="112" selection-end-column="28" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
@@ -1220,8 +1220,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="149" column="4" lean-forward="false" selection-start-line="149" selection-start-column="4" selection-end-line="149" selection-end-column="4" />
+        <state relative-caret-position="434">
+          <caret line="108" column="28" lean-forward="false" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
