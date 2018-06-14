@@ -123,6 +123,15 @@ class VKGE2:
 
         self.training_step = optimizer.minimize(self.elbo)
 
+        if self.tensorboard:
+
+            _ = tf.summary.scalar("total e loss", self.e_objective)
+            _ = tf.summary.scalar("g loss", self.g_objective)
+
+            _ = tf.summary.scalar("total loss", self.elbo)
+
+
+
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
                       pred_sig):
         logger.warn('Building Inference Networks q(h_x | x) ..')
