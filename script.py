@@ -36,6 +36,7 @@ def to_cmd(c):
               '--epsilon {} ' \
               '--alternating_updates {} ' \
               '--projection {} ' \
+              '--opt_type {} ' \
  \
         .format(path,
                 #                 params,
@@ -49,7 +50,8 @@ def to_cmd(c):
                 c['w6'],
                 c['w7'],
                 c['w8'],
-                c['w9']
+                c['w9'],
+                c['w10']
                 # "%s/logs/18_6_5/uclcs_nvkg_v1.%s" % (path, summary(c))
 
                 )
@@ -65,14 +67,15 @@ def main(_):
     hyperparameters_space = dict(
         w0=[14145],
         w1=[1e-3, 1e-4, 1e-5],
-        w2=[1,3,4,6,8,-1],
-        w3=[100,200],
+        w2=[1,4,8,-1],
+        w3=[100,150],
         w4=[True, False],
         w5=[True, False],
         w6=[True, False],
         w7=[1e-5,1e-8], #from another paper
         w8 = [True, False],
-        w9=[True,False]
+        w9=[True,False],
+        w10=['adam', 'rms']
     )
 
     configurations = cartesian_product(hyperparameters_space)

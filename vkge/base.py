@@ -277,7 +277,7 @@ class VKGE:
     def stats(self,values):
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000,unit_cube=False,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
+    def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1500,unit_cube=False,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
 
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
