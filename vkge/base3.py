@@ -9,9 +9,12 @@ from vkge.knowledgebase import Fact, KnowledgeBaseParser
 import vkge.models as models
 from vkge.training import constraints, corrupt, index
 from vkge.training.util import make_batches
+import vkge.io as io
+
+
+# new
 
 import logging
-
 logger = logging.getLogger(__name__)
 
 
