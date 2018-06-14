@@ -152,10 +152,15 @@ class VKGE2:
             # self.h_o = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
     def build_decoder(self):
+
         logger.warn('Building Inference Network p(y|h) ..')
+
         with tf.variable_scope('decoder'):
-            model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p, object_embeddings=self.h_o)
-            self.p_x_i = tf.sigmoid(model())
+            model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
+                                                 object_embeddings=self.h_o)
+            self.scores = model()
+            self.p_x_i = tf.sigmoid(self.scores)
+
 
     def stats(self,values):
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))

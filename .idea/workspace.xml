@@ -56,8 +56,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="685">
-              <caret line="168" column="66" lean-forward="true" selection-start-line="156" selection-start-column="8" selection-end-line="168" selection-end-column="66" />
+            <state relative-caret-position="273">
+              <caret line="274" column="48" lean-forward="true" selection-start-line="266" selection-start-column="4" selection-end-line="274" selection-end-column="48" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -68,8 +68,8 @@
       <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="132" column="0" lean-forward="true" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+            <state relative-caret-position="449">
+              <caret line="162" column="12" lean-forward="false" selection-start-line="162" selection-start-column="12" selection-end-line="162" selection-end-column="12" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -142,8 +142,9 @@
       <find>scalar_summary</find>
       <find>stats</find>
       <find>info</find>
-      <find>log_sigma_sq_s</find>
       <find>vkge.base</find>
+      <find>log_sigma_sq_s</find>
+      <find>scores</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -384,13 +385,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00109" summary="change logger settings from info to warning in base">
-      <created>1528715661622</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1528715661623</updated>
     </task>
     <task id="LOCAL-00110" summary="fixed sigma init">
       <created>1528715995571</created>
@@ -728,7 +722,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528974822399</updated>
     </task>
-    <option name="localTasksCounter" value="158" />
+    <task id="LOCAL-00158" summary="fixed base3">
+      <created>1528974854509</created>
+      <option name="number" value="00158" />
+      <option name="presentableId" value="LOCAL-00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1528974854509</updated>
+    </task>
+    <option name="localTasksCounter" value="159" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1211,8 +1212,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="685">
-          <caret line="168" column="66" lean-forward="true" selection-start-line="156" selection-start-column="8" selection-end-line="168" selection-end-column="66" />
+        <state relative-caret-position="273">
+          <caret line="274" column="48" lean-forward="true" selection-start-line="266" selection-start-column="4" selection-end-line="274" selection-end-column="48" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
@@ -1221,8 +1222,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="132" column="0" lean-forward="true" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+        <state relative-caret-position="449">
+          <caret line="162" column="12" lean-forward="false" selection-start-line="162" selection-start-column="12" selection-end-line="162" selection-end-column="12" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
