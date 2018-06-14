@@ -25,7 +25,7 @@ def to_cmd(c):
     #     command = 'PYTHONPATH=. python3-gpu {}/main.py {} ' \
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
-    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
+    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main2.py  ' \
               '--batch_size {} ' \
               '--learning_rate {} ' \
               '--init_sig {} ' \
