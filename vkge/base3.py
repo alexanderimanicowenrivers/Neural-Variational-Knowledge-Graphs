@@ -122,12 +122,18 @@ class VKGE2:
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
+        """
+                    Separates distribution parameters from embeddings
+        """
         parameters = tf.nn.embedding_lookup(parameters_layer, inputs)
         mu, log_sigma_square = tf.split(value=parameters, num_or_size_splits=2, axis=1)
         return mu, log_sigma_square
 
     @staticmethod
     def sample_embedding(mu, log_sigma_square):
+        """
+                Samples from embeddings
+        """
         sigma = tf.sqrt(tf.exp(log_sigma_square))
         embedding_size = mu.get_shape()[1].value
         eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
@@ -135,6 +141,9 @@ class VKGE2:
 
     def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
                     ent_sig, pred_sig):
+        """
+                        Constructs Model
+        """
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
@@ -174,6 +183,9 @@ class VKGE2:
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
                       pred_sig):
+        """
+                                Constructs Encoder
+        """
         logger.warn('Building Inference Networks q(h_x | x) ..')
         with tf.variable_scope('encoder'):
             self.entity_embedding_mean = tf.get_variable('entities',
@@ -192,7 +204,9 @@ class VKGE2:
             # self.h_o = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
     def build_decoder(self):
-
+        """
+                                Constructs Decoder
+        """
         logger.warn('Building Inference Network p(y|h) ..')
 
         with tf.variable_scope('decoder'):
@@ -203,10 +217,15 @@ class VKGE2:
 
 
     def stats(self,values):
+        """
+                                Return mean and variance statistics
+        """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
     def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
-
+        """
+                                Train Model
+        """
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
@@ -249,6 +268,10 @@ class VKGE2:
 
 
         #####################
+
+        ##
+        # Train
+        ##
 
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
@@ -332,8 +355,9 @@ class VKGE2:
 
                 logger.warn('Epoch: {0}\tELBO: {1}'.format(epoch, self.stats(loss_values)))
 
-
-
+                ##
+                # Test
+                ##
 
 
                 eval_triples = test_triples

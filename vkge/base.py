@@ -128,11 +128,17 @@ class VKGE:
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
+        """
+                    Separates distribution parameters from embeddings
+        """
         parameters = tf.nn.embedding_lookup(parameters_layer, inputs)
         mu, log_sigma_square = tf.split(value=parameters, num_or_size_splits=2, axis=1)
         return mu, log_sigma_square
 
     def sample_embedding(self,mu, log_sigma_square):
+        """
+                Samples from embeddings
+        """
 
         if self.sigma_alt :
             sigma = tf.log(1+tf.exp(log_sigma_square))
@@ -145,6 +151,9 @@ class VKGE:
 
     def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
                     ent_sig, pred_sig):
+        """
+                        Constructs Model
+        """
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
@@ -213,6 +222,9 @@ class VKGE:
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
                       pred_sig):
+        """
+                                Constructs Encoder
+        """
         logger.warn('Building Inference Networks q(h_x | x) ..')
 
         ## Later try sigma init to normal distribution also
@@ -307,6 +319,9 @@ class VKGE:
 
 
     def build_decoder(self):
+        """
+                                Constructs Decoder
+        """
 
         logger.warn('Building Inference Network p(y|h) ..')
 
@@ -317,10 +332,15 @@ class VKGE:
             self.p_x_i = tf.sigmoid(self.scores)
 
     def stats(self,values):
+        """
+                                Return mean and variance statistics
+        """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
     def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1500,unit_cube=False,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
-
+        """
+                                Train Model
+        """
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
@@ -363,6 +383,10 @@ class VKGE:
 
 
         #####################
+
+        ##
+        # Train
+        ##
 
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
@@ -481,6 +505,9 @@ class VKGE:
                         minloss = round(np.mean(loss_values), 4)
                         minepoch = epoch
 
+                ##
+                # Test
+                ##
 
                 if (epoch % 50)==0:
 

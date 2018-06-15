@@ -44,18 +44,27 @@ class VKGE_simple:
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
+        """
+            Separates distribution parameters from embeddings
+        """
         parameters = tf.nn.embedding_lookup(parameters_layer, inputs)
         mu, log_sigma_square = tf.split(value=parameters, num_or_size_splits=2, axis=1)
         return mu, log_sigma_square
 
     @staticmethod
     def sample_embedding(mu, log_sigma_square):
+        """
+                Samples from embeddings
+        """
         sigma = tf.sqrt(tf.exp(log_sigma_square))
         embedding_size = mu.get_shape()[1].value
         eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
         return mu + sigma * eps
 
     def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer):
+        """
+                        Constructs Model
+        """
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
@@ -78,6 +87,9 @@ class VKGE_simple:
         self.training_step = optimizer.minimize(self.elbo)
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size):
+        """
+                                Constructs Encoder
+        """
         logger.warn('Building Inference Networks q(h_x | x) ..')
         with tf.variable_scope('encoder'):
             self.entity_parameters_layer = tf.get_variable('entities',
@@ -96,12 +108,18 @@ class VKGE_simple:
             self.h_o = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
     def build_decoder(self):
+        """
+                                Constructs Decoder
+        """
         logger.warn('Building Inference Network p(y|h) ..')
         with tf.variable_scope('decoder'):
             model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p, object_embeddings=self.h_o)
             self.p_x_i = tf.sigmoid(model())
 
     def train(self, session, nb_batches=10, nb_epochs=10, unit_cube=False):
+        """
+                                Train Model
+        """
         index_gen = index.GlorotIndexGenerator()
         neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
