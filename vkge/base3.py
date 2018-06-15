@@ -22,6 +22,41 @@ class VKGE2:
     """
            model for testing the non probabilistic aspects of the model
 
+        Initializes a Link Prediction Model.
+        @param file_name: The TensorBoard file_name.
+        @param opt_type: Determines the optimiser used
+        @param embedding_size: The embedding_size for entities and predicates
+        @param batch_s: The batch size
+        @param lr: The learning rate
+        @param b1: The beta 1 value for ADAM optimiser
+        @param b2: The beta 2 value for ADAM optimiser
+        @param eps: The epsilon value for ADAM optimiser
+        @param GPUMode: Used for reduced print statements during architecture search.
+        @param alt_cost: Determines the use of a compression cost KL or classical KL term
+        @param train_mean: Determines whether the mean embeddings are trainable or fixed
+        @param alt_updates: Determines if updates are done simultaneously or
+                            separately for each e and g objective.
+        @param sigma_alt: Determines between two standard deviation representation used
+        @param tensorboard: Determines if Tensorboard events are logged
+        @param projection: Determines if mean embeddings are projected
+                                     network.
+
+        @type file_name: str: '/home/workspace/acowenri/tboard'
+        @type opt_type: str
+        @type embedding_size: int
+        @type batch_s: int
+        @type lr: float
+        @type b1: float
+        @type b2: float
+        @type eps: float
+        @type GPUMode: bool
+        @type alt_cost: bool
+        @type train_mean: bool
+        @type alt_updates: bool
+        @type sigma_alt: bool
+        @type tensorboard: bool
+        @type projection: bool
+
             """
     def __init__(self, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
                  alt_cost=True,train_mean=False,alt_updates=False,sigma_alt=True,opt_type='adam',tensorboard=False,projection=True):

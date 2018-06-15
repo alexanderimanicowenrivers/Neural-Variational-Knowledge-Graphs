@@ -17,7 +17,18 @@ logger = logging.getLogger(__name__)
 
 class VKGE_simple:
     """
-            initial model created
+            First model created
+
+            Initializes a Link Prediction Model.
+        @param triples: The dataset to train and test on
+        @param optimizer: Determines the optimiser used
+        @param entity_embedding_size: The embedding_size for entities
+        @param predicate_embedding_size: The embedding_size for redicates
+
+        @type optimizer: tf.train.AdamOptimizer()
+        @type entity_embedding_size: int
+        @type predicate_embedding_size: int
+
 
                 """
     def __init__(self, triples, entity_embedding_size, predicate_embedding_size, optimizer):
