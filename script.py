@@ -1,3 +1,8 @@
+"""
+            used for cluster job submission and parameter search over main.py
+
+                """
+
 import itertools
 import os
 
