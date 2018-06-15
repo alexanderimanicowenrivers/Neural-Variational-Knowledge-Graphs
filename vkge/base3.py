@@ -119,10 +119,10 @@ class VKGE2:
         # Log likelihood
         # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
 
-        # self.hinge_losses = tf.nn.relu(5 - self.scores * (2 * self.y_inputs - 1))
-        # self.g_objective = tf.reduce_sum(self.hinge_losses)
+        self.hinge_losses = tf.nn.relu(5 - self.scores * (2 * self.y_inputs - 1))
+        self.g_objective = tf.reduce_sum(self.hinge_losses)
 
-        self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
+        # self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
         self.elbo = self.g_objective
 
