@@ -1,5 +1,5 @@
 
-# Neural-Variational-Knowledge-Graphs
+# Neural-Variational-Knowledge-Graphs !!(Work in progress)!!
 -------
 ## CONTRIBUTERS:
 
@@ -16,9 +16,19 @@
 
 For:
 - **Report** see [ACR](https://github.com/acr42) 
+- **Models** see [base](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/base.py) ,[base2](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/base2.py),[base3](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/base3.py)
+
 
 -------
 
 ## Dependencies
 
 - tbc
+
+
+-------
+
+## Usage
+
+1. Clone or download this repository.
+2. Prepare your data:
