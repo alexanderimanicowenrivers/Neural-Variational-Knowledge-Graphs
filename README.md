@@ -31,6 +31,6 @@ For:
 ## Usage
 
 1. Clone or download this repository.
-2. Prepare your data:
+2. Prepare your data, or use the included WN18 dataset. 
 
 ## FAQs
