@@ -32,3 +32,5 @@ For:
 
 1. Clone or download this repository.
 2. Prepare your data:
+
+## FAQs
