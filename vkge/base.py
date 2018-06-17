@@ -64,7 +64,7 @@ class VKGE:
 
 
     def __init__(self, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
-                 alt_cost=True,static_mean=False,alt_updates=False,sigma_alt=True,opt_type='adam',tensorboard=False,projection=True):
+                 alt_cost=False,static_mean=False,alt_updates=True,sigma_alt=True,opt_type='ml',tensorboard=True,projection=True):
         super().__init__()
 
         self.sigma_alt=sigma_alt
