@@ -1,9 +1,7 @@
-
 """
-            used to test a single job
+            used for cluster job submission and parameter search over main.py
 
                 """
-
 
 import itertools
 import os
@@ -40,9 +38,10 @@ def to_cmd(c):
               '--alt_cost {} ' \
               '--train_mean {} ' \
               '--Sigma_alt {} ' \
-              '--epsilon {} ' \
               '--alternating_updates {} ' \
               '--projection {} ' \
+              '--opt_type {} ' \
+              '--file_name {} ' \
  \
         .format(path,
                 #                 params,
@@ -56,8 +55,8 @@ def to_cmd(c):
                 c['w6'],
                 c['w7'],
                 c['w8'],
-                c['w9']
-                # "%s/logs/18_6_5/uclcs_nvkg_v1.%s" % (path, summary(c))
+                c['w9'],
+                "%s/logs/18_6_17/uclcs_nvkg_v1.%s" % (path, summary(c))
 
                 )
     return command
@@ -71,20 +70,20 @@ def to_logfile(c, path):
 def main(_):
     hyperparameters_space = dict(
         w0=[14145],
-        w1=[1e-3],
-        w2=[1],
-        w3=[100],
+        w1=[0.1],
+        w2=[4],
+        w3=[10],
         w4=[True],
-        w5=[True],
-        w6=[True],
-        w7=[1e-8], #from another paper
-        w8 = [False],
-        w9=[False]
+        w5=[False],
+        w6=[False],
+        w7 = [True],
+        w8=[True],
+        w9=['hinge']
     )
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_5'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_17'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
