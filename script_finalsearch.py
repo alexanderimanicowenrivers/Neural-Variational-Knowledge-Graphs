@@ -36,7 +36,7 @@ def to_cmd(c):
               '--init_sig {} ' \
               '--embedding_size {} ' \
               '--alt_cost {} ' \
-              '--train_mean {} ' \
+              '--static_mean {} ' \
               '--Sigma_alt {} ' \
               '--alternating_updates {} ' \
               '--projection {} ' \
