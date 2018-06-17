@@ -64,7 +64,7 @@ class VKGE:
 
 
     def __init__(self, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
-                 alt_cost=False,static_mean=False,alt_updates=True,sigma_alt=True,opt_type='ml',tensorboard=True,projection=True):
+                 alt_cost=False,static_mean=False,alt_updates=True,sigma_alt=True,opt_type='ml',tensorboard=True,projection=True,opt='adam'):
         super().__init__()
 
         self.sigma_alt=sigma_alt
@@ -131,10 +131,11 @@ class VKGE:
         #     optimizer = tf.train.RMSPropOptimizer(learning_rate=lr, epsilon=eps)
         # elif opt_type == 'adam':
 
-        # if lr==-1:
-        optimizer=tf.train.AdagradOptimizer(learning_rate=lr) #original KG
+        if opt=='adam':
+            optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
+        else:
+            optimizer=tf.train.AdagradOptimizer(learning_rate=lr) #original KG
         # else:
-        #     optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,
@@ -333,66 +334,66 @@ class VKGE:
                 var1_1= tf.nn.embedding_lookup(self.entity_embedding_mean, self.var1)
                 var1_2= tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var1)
 
-                with tf.name_scope('Entity1 Mean'):
+                with tf.name_scope('Entity1_Mean'):
 
                     self.variable_summaries(var1_1)
 
-                with tf.name_scope('Entity1 Std'):
+                with tf.name_scope('Entity1_Std'):
 
                     self.variable_summaries(var1_2)
 
                 var2_1= tf.nn.embedding_lookup(self.entity_embedding_mean, self.var2)
                 var2_2= tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var2)
 
-                with tf.name_scope('Entity2 Mean'):
+                with tf.name_scope('Entity2_Mean'):
 
                     self.variable_summaries(var2_1)
 
-                with tf.name_scope('Entity2 Std'):
+                with tf.name_scope('Entity2_Std'):
 
                     self.variable_summaries(var2_2)
 
                 var3_1= tf.nn.embedding_lookup(self.entity_embedding_mean, self.var3)
                 var3_2= tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var3)
 
-                with tf.name_scope('Entity3 Mean'):
+                with tf.name_scope('Entity3_Mean'):
 
                     self.variable_summaries(var3_1)
 
-                with tf.name_scope('Entity3 Std'):
+                with tf.name_scope('Entity3_Std'):
 
                     self.variable_summaries(var3_2)
 
                 var4_1= tf.nn.embedding_lookup(self.entity_embedding_mean, self.var4)
                 var4_2= tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var4)
 
-                with tf.name_scope('Entity4 Mean'):
+                with tf.name_scope('Entity4_Mean'):
 
                     self.variable_summaries(var4_1)
 
-                with tf.name_scope('Entity4 Std'):
+                with tf.name_scope('Entity4_Std'):
 
                     self.variable_summaries(var4_2)
 
                 var5_1= tf.nn.embedding_lookup(self.predicate_embedding_mean, self.var5)
                 var5_2= tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.var5)
 
-                with tf.name_scope('Predicate1 Mean'):
+                with tf.name_scope('Predicate1_Mean'):
 
                     self.variable_summaries(var5_1)
 
-                with tf.name_scope('Predicate1 Std'):
+                with tf.name_scope('Predicate1_Std'):
 
                     self.variable_summaries(var5_2)
 
                 var6_1= tf.nn.embedding_lookup(self.predicate_embedding_mean, self.var6)
                 var6_2= tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.var6)
 
-                with tf.name_scope('Predicate2 Mean'):
+                with tf.name_scope('Predicate2_Mean'):
 
                     self.variable_summaries(var6_1)
 
-                with tf.name_scope('Predicate2 Std'):
+                with tf.name_scope('Predicate2_Std'):
 
                     self.variable_summaries(var6_2)
 

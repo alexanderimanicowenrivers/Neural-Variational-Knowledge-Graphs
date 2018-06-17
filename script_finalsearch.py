@@ -41,6 +41,7 @@ def to_cmd(c):
               '--alternating_updates {} ' \
               '--projection {} ' \
               '--opt_type {} ' \
+              '--opt {} ' \
               '--file_name {} ' \
  \
         .format(path,
@@ -56,6 +57,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
+                c['w10'],
                 "%s/logs/18_6_17/uclcs_nvkg_v1.%s" % (path, summary(c))
 
                 )
@@ -70,15 +72,17 @@ def to_logfile(c, path):
 def main(_):
     hyperparameters_space = dict(
         w0=[14145],
-        w1=[0.1],
-        w2=[4],
-        w3=[100,150,200],
+        w1=[0.1,0.01,0.001],
+        w2=[4,-1],
+        w3=[150],
         w4=[True, False],
         w5=[False],
         w6=[False],
         w7 = [True],
-        w8=[True,False],
-        w9=['ml', 'hinge']
+        w8=[True],
+        w9=['hinge'],
+        w10 = ['adam', 'adagrad']
+
     )
 
     configurations = cartesian_product(hyperparameters_space)

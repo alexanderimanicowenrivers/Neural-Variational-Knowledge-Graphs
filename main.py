@@ -25,7 +25,8 @@ flags.DEFINE_boolean("alternating_updates", False, "Alternate updates around eac
 flags.DEFINE_boolean("Sigma_alt", True, "Alternate between two different standard dev calculations [True]")
 flags.DEFINE_boolean("projection", True, "Alternate between using a projection on the means [False]")
 flags.DEFINE_boolean("tensorboard", True, "Define for tensorboard statistics to be saved [False]")
-flags.DEFINE_string("opt_type", 'adam', "Choose optimiser, either adam or rms ['adam']")
+flags.DEFINE_string("opt_type", 'hinge', "Choose optimiser loss, either hinge or maximum likelihood ['ml']")
+flags.DEFINE_string("opt", 'adam', "Choose optimiser, either adam or rms ['adam']")
 flags.DEFINE_string("file_name", '~/', "file name for tensorboard file ['--']")
 FLAGS = flags.FLAGS
 
@@ -36,7 +37,7 @@ def main(_):
     
     vkge.VKGE(embedding_size=FLAGS.embedding_size,lr=FLAGS.learning_rate,b1=FLAGS.beta1,b2=FLAGS.beta2,eps=FLAGS.epsilon,ent_sig=FLAGS.init_sig,alt_cost=FLAGS.alt_cost,batch_s=FLAGS.batch_size,
               static_mean=FLAGS.static_mean,alt_updates=FLAGS.alternating_updates,sigma_alt=FLAGS.Sigma_alt,opt_type=FLAGS.opt_type,file_name=FLAGS.file_name,tensorboard=FLAGS.tensorboard
-              ,projection=FLAGS.projection)
+              ,projection=FLAGS.projection,opt=FLAGS.opt)
 
 
 if __name__ == '__main__':
