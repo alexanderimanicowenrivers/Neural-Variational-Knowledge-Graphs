@@ -40,6 +40,7 @@ def to_cmd(c):
               '--Sigma_alt {} ' \
               '--alternating_updates {} ' \
               '--projection {} ' \
+              '--tensorboard {} ' \
               '--opt_type {} ' \
               '--file_name {} ' \
  \
@@ -55,6 +56,7 @@ def to_cmd(c):
                 c['w6'],
                 c['w7'],
                 c['w8'],
+                False,
                 c['w9'],
                 "%s/logs/18_6_17/uclcs_nvkg_v1.%s" % (path, summary(c))
 
