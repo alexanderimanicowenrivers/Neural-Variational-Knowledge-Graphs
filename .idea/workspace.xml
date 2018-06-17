@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="new log folder for script">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/script_finalsearch.py" />
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -82,8 +80,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="709">
-              <caret line="510" column="33" lean-forward="false" selection-start-line="510" selection-start-column="33" selection-end-line="510" selection-end-column="33" />
+            <state relative-caret-position="174">
+              <caret line="545" column="99" lean-forward="false" selection-start-line="545" selection-start-column="99" selection-end-line="545" selection-end-column="99" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -383,13 +381,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00140" summary="fixed tensorboard">
-      <created>1528823606212</created>
-      <option name="number" value="00140" />
-      <option name="presentableId" value="LOCAL-00140" />
-      <option name="project" value="LOCAL" />
-      <updated>1528823606212</updated>
     </task>
     <task id="LOCAL-00141" summary="fixed stats">
       <created>1528824759116</created>
@@ -727,7 +718,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529232724898</updated>
     </task>
-    <option name="localTasksCounter" value="189" />
+    <task id="LOCAL-00189" summary="updated loss statement with more info">
+      <created>1529261865718</created>
+      <option name="number" value="00189" />
+      <option name="presentableId" value="LOCAL-00189" />
+      <option name="project" value="LOCAL" />
+      <updated>1529261865719</updated>
+    </task>
+    <option name="localTasksCounter" value="190" />
     <servers />
   </component>
   <component name="TodoView">
@@ -793,7 +791,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in random normal initalisation for variance when flag sigma init=-1" />
     <MESSAGE value="added in max hits summary" />
     <MESSAGE value="added in tensorboard summary" />
     <MESSAGE value="added test script - script_gpu" />
@@ -818,7 +815,8 @@
     <MESSAGE value="added info" />
     <MESSAGE value="changed epochs to 2000" />
     <MESSAGE value="new log folder for script" />
-    <option name="LAST_COMMIT_MESSAGE" value="new log folder for script" />
+    <MESSAGE value="updated loss statement with more info" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated loss statement with more info" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1222,8 +1220,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="709">
-          <caret line="510" column="33" lean-forward="false" selection-start-line="510" selection-start-column="33" selection-end-line="510" selection-end-column="33" />
+        <state relative-caret-position="174">
+          <caret line="545" column="99" lean-forward="false" selection-start-line="545" selection-start-column="99" selection-end-line="545" selection-end-column="99" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

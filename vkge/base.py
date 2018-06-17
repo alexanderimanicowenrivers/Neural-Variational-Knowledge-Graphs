@@ -3,6 +3,7 @@
 import math
 import numpy as np
 import tensorflow as tf
+from random import randint
 
 from vkge.knowledgebase import Fact, KnowledgeBaseParser
 
@@ -83,6 +84,7 @@ class VKGE:
         triples = io.read_triples("data/wn18/wordnet-mlj12-train.txt")  # choose dataset
         test_triples = io.read_triples("data/wn18/wordnet-mlj12-test.txt")
 
+
         self.random_state = np.random.RandomState(0)
         self.GPUMode = GPUMode
         self.alt_cost = alt_cost
@@ -109,6 +111,20 @@ class VKGE:
         self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
+
+        ###########
+        # generate 4 entity and 2 predicate variables to keep track of in Tensorboard
+
+        self.var1 = randint(0, self.nb_entities-1)
+        self.var2 = randint(0, self.nb_entities-1)
+        self.var3 = randint(0, self.nb_entities-1)
+        self.var4 = randint(0, self.nb_entities-1)
+        self.var5 = randint(0, self.nb_predicates-1)
+        self.var6 = randint(0, self.nb_predicates-1)
+
+        #########
+
+
         ############################
 
         # if opt_type == 'rms':
@@ -314,6 +330,73 @@ class VKGE:
             if self.tensorboard:
 
 
+                var1_1= tf.nn.embedding_lookup(self.entity_embedding_mean, self.var1)
+                var1_2= tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var1)
+
+                with tf.name_scope('Entity1 Mean'):
+
+                    self.variable_summaries(var1_1)
+
+                with tf.name_scope('Entity1 Std'):
+
+                    self.variable_summaries(var1_2)
+
+                var2_1= tf.nn.embedding_lookup(self.entity_embedding_mean, self.var2)
+                var2_2= tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var2)
+
+                with tf.name_scope('Entity2 Mean'):
+
+                    self.variable_summaries(var2_1)
+
+                with tf.name_scope('Entity2 Std'):
+
+                    self.variable_summaries(var2_2)
+
+                var3_1= tf.nn.embedding_lookup(self.entity_embedding_mean, self.var3)
+                var3_2= tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var3)
+
+                with tf.name_scope('Entity3 Mean'):
+
+                    self.variable_summaries(var3_1)
+
+                with tf.name_scope('Entity3 Std'):
+
+                    self.variable_summaries(var3_2)
+
+                var4_1= tf.nn.embedding_lookup(self.entity_embedding_mean, self.var4)
+                var4_2= tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var4)
+
+                with tf.name_scope('Entity4 Mean'):
+
+                    self.variable_summaries(var4_1)
+
+                with tf.name_scope('Entity4 Std'):
+
+                    self.variable_summaries(var4_2)
+
+                var5_1= tf.nn.embedding_lookup(self.predicate_embedding_mean, self.var5)
+                var5_2= tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.var5)
+
+                with tf.name_scope('Predicate1 Mean'):
+
+                    self.variable_summaries(var5_1)
+
+                with tf.name_scope('Predicate1 Std'):
+
+                    self.variable_summaries(var5_2)
+
+                var6_1= tf.nn.embedding_lookup(self.predicate_embedding_mean, self.var6)
+                var6_2= tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.var6)
+
+                with tf.name_scope('Predicate2 Mean'):
+
+                    self.variable_summaries(var6_1)
+
+                with tf.name_scope('Predicate2 Std'):
+
+                    self.variable_summaries(var6_2)
+
+
 
     def build_decoder(self):
         """
@@ -334,7 +417,7 @@ class VKGE:
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1500,unit_cube=False,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
+    def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=5000,unit_cube=False,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
                                 Train Model
         """
@@ -460,11 +543,11 @@ class VKGE:
 
                         if self.tensorboard:
 
-                            summary,_, g_value, elbo_value = session.run([merge,self.training_step3, self.g_objective,self.elbo], feed_dict=loss_args)
+                            summary,_, g_value, elbo_value = session.run([merge,self.training_step4, self.g_objective,self.elbo], feed_dict=loss_args)
 
                         else:
 
-                            _, g_value, elbo_value = session.run([self.training_step3, self.g_objective,self.elbo], feed_dict=loss_args)
+                            _, g_value, elbo_value = session.run([self.training_step4, self.g_objective,self.elbo], feed_dict=loss_args)
 
 
                     else:
