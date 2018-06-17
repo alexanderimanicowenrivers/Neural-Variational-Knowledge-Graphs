@@ -141,7 +141,7 @@ class VKGE:
                          optimizer,
                          ent_sigma, pred_sigma)
 
-        self.train(nb_epochs=5000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s,filename=file_name)
+        self.train(nb_epochs=1000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s,filename=file_name)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -590,7 +590,7 @@ class VKGE:
                 # Test
                 ##
 
-                if (epoch % 200)==0:
+                if (epoch % 100)==0:
 
                     for eval_name in ['valid']:
 
