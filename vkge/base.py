@@ -43,7 +43,7 @@ class VKGE:
                                      network.
 
         @type file_name: str: '/home/workspace/acowenri/tboard'
-        @type opt_type: str
+        @type opt_type: str: ['adam','rms']
         @type embedding_size: int
         @type batch_s: int
         @type lr: float
@@ -63,7 +63,7 @@ class VKGE:
 
 
     def __init__(self, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
-                 alt_cost=True,train_mean=False,alt_updates=False,sigma_alt=True,opt_type='adam',tensorboard=False,projection=True):
+                 alt_cost=True,static_mean=False,alt_updates=False,sigma_alt=True,opt_type='adam',tensorboard=False,projection=True):
         super().__init__()
 
         self.sigma_alt=sigma_alt
@@ -87,7 +87,7 @@ class VKGE:
         self.GPUMode = GPUMode
         self.alt_cost = alt_cost
         self.nb_examples = len(triples)
-        self.static_mean= train_mean
+        self.static_mean= static_mean
         self.alt_updates=alt_updates
         self.tensorboard=tensorboard
         self.projection=projection
@@ -115,16 +115,16 @@ class VKGE:
         #     optimizer = tf.train.RMSPropOptimizer(learning_rate=lr, epsilon=eps)
         # elif opt_type == 'adam':
 
-        if lr==-1:
-            optimizer=tf.train.AdagradOptimizer(learning_rate=0.1) #original KG
-        else:
-            optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
+        # if lr==-1:
+        optimizer=tf.train.AdagradOptimizer(learning_rate=lr) #original KG
+        # else:
+        #     optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=b1, beta2=b2, epsilon=eps)
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,
                          ent_sigma, pred_sigma)
 
-        self.train(nb_epochs=2000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s,filename=file_name)
+        self.train(nb_epochs=5000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s,filename=file_name)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -189,7 +189,7 @@ class VKGE:
 
         self.e_objective = self.e_objective1+self.e_objective2+self.e_objective3
         # Log likelihood
-        if self.opt_type=='adam':
+        if self.opt_type=='ml':
             self.g_objective = -tf.reduce_sum(
                 tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-4))
         else:
@@ -218,7 +218,17 @@ class VKGE:
 
             _ = tf.summary.scalar("total loss", self.elbo)
 
-
+    def variable_summaries(self,var):
+        """Summaries of a Tensor"""
+        with tf.name_scope('summaries'):
+            mean = tf.reduce_mean(var)
+            tf.summary.scalar('mean', mean)
+            with tf.name_scope('stddev'):
+                stddev = tf.sqrt(tf.reduce_mean(tf.square(var - mean)))
+            tf.summary.scalar('stddev', stddev)
+            tf.summary.scalar('max', tf.reduce_max(var))
+            tf.summary.scalar('min', tf.reduce_min(var))
+            tf.summary.histogram('histogram', var)
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
                       pred_sig):
@@ -262,6 +272,7 @@ class VKGE:
 
 
                 logger.warn("pred_sig == -1")
+                logger.warn("tf.initializers.random_normal() for entity and predicate mean")
 
                 self.entity_embedding_sigma = tf.get_variable('entities_sigma',
                                                              shape=[nb_entities + 1, entity_embedding_size],
@@ -301,20 +312,6 @@ class VKGE:
             self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
 
             if self.tensorboard:
-                _ = tf.summary.histogram("mu subject", self.mu_s)
-                _ = tf.summary.histogram("sigma subject", self.log_sigma_sq_s)
-                _ = tf.summary.histogram("h subject", self.h_s)
-                _ = tf.summary.histogram("mu + sigma subject", self.mu_s + self.log_sigma_sq_s)
-
-                _ = tf.summary.histogram("mu object", self.mu_o)
-                _ = tf.summary.histogram("sigma object", self.log_sigma_sq_o)
-                _ = tf.summary.histogram("h object", self.h_o)
-                _ = tf.summary.histogram("mu + sigma object", self.mu_o + self.log_sigma_sq_o)
-
-                _ = tf.summary.histogram("mu predicate", self.mu_p)
-                _ = tf.summary.histogram("sigma predicate", self.log_sigma_sq_p)
-                _ = tf.summary.histogram("h predicate", self.h_p)
-                _ = tf.summary.histogram("mu + sigma predicate", self.mu_p + self.log_sigma_sq_p)
 
 
 
@@ -509,9 +506,9 @@ class VKGE:
                 # Test
                 ##
 
-                if (epoch % 50)==0:
+                if (epoch % 200)==0:
 
-                    for eval_type in ['valid']:
+                    for eval_name in ['valid']:
 
                         eval_triples = test_triples
                         ranks_subj, ranks_obj = [], []
@@ -553,22 +550,24 @@ class VKGE:
                             filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
                         filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
+                        ranks = ranks_subj + ranks_obj
 
-                        for setting_name, setting_ranks in [('Filtered', filtered_ranks)]:
+                        for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                             mean_rank = np.mean(setting_ranks)
-                            k = 10
-                            hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
-                    t1, t2 = mean_rank, hits_at_k
+                            logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
+                            for k in [1, 3, 5, 10]:
+                                hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                                logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+
 
                     if hits_at_k>maxhits:
                         maxhits=hits_at_k
                         maxepoch=epoch
-                    logger.warn('Hits@10 value: {0} %'.format(t2))
 
                 logger.warn('Epoch: {0}\tELBO: {1}'.format(epoch, self.stats(loss_values)))
 
             logger.warn("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
-            logger.warn("The maximum Hits@10 value: {0} \t at epoch {1}".format(maxhits, maxepoch))
+            logger.warn("The maximum Filtered Hits@10 value: {0} \t at epoch {1}".format(maxhits, maxepoch))
 
 # class MoGVKGE:
 #     def __init__(self, embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, sigma1_e=6.0,sigma1_p=6.0,sigma2_e=1.0,sigma2_p=1.0,mix=6.0,
