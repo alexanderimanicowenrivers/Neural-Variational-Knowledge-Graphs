@@ -85,7 +85,7 @@ def main(_):
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_5'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_17'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
