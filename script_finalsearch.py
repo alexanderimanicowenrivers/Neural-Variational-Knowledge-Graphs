@@ -72,15 +72,15 @@ def to_logfile(c, path):
 def main(_):
     hyperparameters_space = dict(
         w0=[14145],
-        w1=[0.1,0.01,0.001],
+        w1=[0.1,0.01,0.001,1e-4],
         w2=[1,4,8,-1],
-        w3=[150],
+        w3=[100,200],
         w4=[True, False],
         w5=[False],
         w6=[False],
         w7 = [True],
         w8=[True],
-        w9=['hinge'],
+        w9=['hinge','ml'],
         w10 = ['adam', 'adagrad']
 
     )
