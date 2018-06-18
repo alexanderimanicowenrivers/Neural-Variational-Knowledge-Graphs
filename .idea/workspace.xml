@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_finalsearch.py" afterPath="$PROJECT_DIR$/script_finalsearch.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,8 +44,8 @@
       <file leaf-file-name="script_finalsearch.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_finalsearch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1006">
-              <caret line="44" column="34" lean-forward="false" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
+            <state relative-caret-position="399">
+              <caret line="80" column="22" lean-forward="false" selection-start-line="80" selection-start-column="22" selection-end-line="80" selection-end-column="22" />
               <folding>
                 <element signature="e#104#120#0" expanded="true" />
               </folding>
@@ -385,13 +383,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00156" summary="fixed base3">
-      <created>1528974764222</created>
-      <option name="number" value="00156" />
-      <option name="presentableId" value="LOCAL-00156" />
-      <option name="project" value="LOCAL" />
-      <updated>1528974764222</updated>
-    </task>
     <task id="LOCAL-00157" summary="fixed base3">
       <created>1528974822399</created>
       <option name="number" value="00157" />
@@ -728,7 +719,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529311337256</updated>
     </task>
-    <option name="localTasksCounter" value="205" />
+    <task id="LOCAL-00205" summary="final test with fixed predicate">
+      <created>1529312415586</created>
+      <option name="number" value="00205" />
+      <option name="presentableId" value="LOCAL-00205" />
+      <option name="project" value="LOCAL" />
+      <updated>1529312415586</updated>
+    </task>
+    <option name="localTasksCounter" value="206" />
     <servers />
   </component>
   <component name="TodoView">
@@ -794,7 +792,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed alternating updates output equation" />
     <MESSAGE value="added back in loss" />
     <MESSAGE value="turned tensorboard off" />
     <MESSAGE value="fixed special initalisation of sigmas to random normal when sigma flag =-1" />
@@ -819,7 +816,8 @@
     <MESSAGE value="updates summary on 4 entity variables and 2 predicate variables during training" />
     <MESSAGE value="updates test script" />
     <MESSAGE value="updated test script" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated test script" />
+    <MESSAGE value="final test with fixed predicate" />
+    <option name="LAST_COMMIT_MESSAGE" value="final test with fixed predicate" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1223,8 +1221,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script_finalsearch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1006">
-          <caret line="44" column="34" lean-forward="false" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
+        <state relative-caret-position="399">
+          <caret line="80" column="22" lean-forward="false" selection-start-line="80" selection-start-column="22" selection-end-line="80" selection-end-column="22" />
           <folding>
             <element signature="e#104#120#0" expanded="true" />
           </folding>
