@@ -146,7 +146,7 @@ class VKGE:
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,
                          ent_sigma, pred_sigma)
-        self.nb_epochs=1500
+        self.nb_epochs=1000
         self.decaykl= np.linspace(0, 1, self.nb_epochs)
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s,filename=file_name)
@@ -189,6 +189,7 @@ class VKGE:
         self.build_decoder()
 
         self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
+        self.epoch_d = tf.placeholder(tf.float32)  # starts at 0.5
 
         # Kullback Leibler divergence
 
@@ -207,9 +208,9 @@ class VKGE:
         # Adjust through linear/non linear KL loss
 
         if self.decay_kl:
-            self.e_objective1 = self.e_objective1 * self.KL_discount * self.decaykl
-            self.e_objective2 = self.e_objective1 * self.KL_discount * self.decaykl
-            self.e_objective3 = self.e_objective1 * self.KL_discount * self.decaykl
+            self.e_objective1 = self.e_objective1 * self.KL_discount * self.epoch_d
+            self.e_objective2 = self.e_objective1 * self.KL_discount * self.epoch_d
+            self.e_objective3 = self.e_objective1 * self.KL_discount * self.epoch_d
 
         else:
             self.e_objective1 = self.e_objective1 * self.KL_discount
@@ -538,7 +539,8 @@ class VKGE:
                             self.s_inputs: Xs_batch,
                             self.p_inputs: Xp_batch,
                             self.o_inputs: Xo_batch,
-                            self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
+                            self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
+                            self.epoch_d: self.decaykl[epoch - 1]
                         }
 
                     else:
@@ -548,7 +550,8 @@ class VKGE:
                             self.s_inputs: Xs_batch,
                             self.p_inputs: Xp_batch,
                             self.o_inputs: Xo_batch,
-                            self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
+                            self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
+                            self.epoch_d: self.decaykl[epoch-1]
                         }
 
                     if self.tensorboard:
