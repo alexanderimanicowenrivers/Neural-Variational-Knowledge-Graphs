@@ -121,7 +121,7 @@ def main(_):
     sorted_command_lines = sorted(command_lines,reverse=True)
     nb_jobs = len(sorted_command_lines)
 
-
+# use #$ -pe smp 1000 for 1000 cores
  # add this in for GPU's   # $ -P gpu
  #    # $ -l gpu=0
 
@@ -135,7 +135,6 @@ def main(_):
 #$ -l tmem=8G
 #$ -l h_rt=12:00:00
 #$ -ac allow=LMNOPQSTU
-#$ -pe smp 1000
 
 
 
