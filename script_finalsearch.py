@@ -42,6 +42,7 @@ def to_cmd(c):
               '--projection {} ' \
               '--opt_type {} ' \
               '--opt {} ' \
+              '--static_pred {}' \
               '--file_name {} ' \
  \
         .format(path,
@@ -58,6 +59,7 @@ def to_cmd(c):
                 c['w8'],
                 c['w9'],
                 c['w10'],
+                c['w11'],
                 "%s/logs/18_6_18/uclcs_nvkg_v1.%s" % (path, summary(c))
 
                 )
@@ -81,7 +83,8 @@ def main(_):
         w7 = [True],
         w8=[False,True],
         w9=['hinge','ml'],
-        w10 = ['adam', 'adagrad']
+        w10 = ['adam', 'adagrad'],
+        w11=[False,True]
 
     )
 

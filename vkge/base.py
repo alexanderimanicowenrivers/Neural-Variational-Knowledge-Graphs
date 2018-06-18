@@ -64,7 +64,7 @@ class VKGE:
 
 
     def __init__(self, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
-                 alt_cost=False,static_mean=False,alt_updates=True,sigma_alt=True,opt_type='ml',tensorboard=True,projection=True,opt='adam'):
+                 alt_cost=False,static_pred=False,static_mean=False,alt_updates=True,sigma_alt=True,opt_type='ml',tensorboard=True,projection=True,opt='adam'):
         super().__init__()
 
         self.sigma_alt=sigma_alt
@@ -84,7 +84,7 @@ class VKGE:
         triples = io.read_triples("data/wn18/wordnet-mlj12-train.txt")  # choose dataset
         test_triples = io.read_triples("data/wn18/wordnet-mlj12-test.txt")
 
-
+        self.static_pred=static_pred
         self.random_state = np.random.RandomState(0)
         self.GPUMode = GPUMode
         self.alt_cost = alt_cost
@@ -122,8 +122,14 @@ class VKGE:
         self.var5 = randint(0, self.nb_predicates-1)
         self.var6 = randint(0, self.nb_predicates-1)
 
-        #########
+        ######### Print sample ID's
+        logger.warn("Entity Sample1 is {} ..".format(self.var1))
+        logger.warn("Entity Sample2 is {} ..".format(self.var2))
+        logger.warn("Entity Sample3 is {} ..".format(self.var3))
+        logger.warn("Entity Sample4 is {} ..".format(self.var4))
 
+        logger.warn("Predicate Sample1 is {} ..".format(self.var5))
+        logger.warn("Predicate Sample1 is {} ..".format(self.var6))
 
         ############################
 
@@ -324,9 +330,13 @@ class VKGE:
             self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
             self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
-            self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
-            self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
-            self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+            if self.static_pred:
+                self.h_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
+
+            else:
+                self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
+                self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
+                self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
 
             if self.tensorboard:
 
