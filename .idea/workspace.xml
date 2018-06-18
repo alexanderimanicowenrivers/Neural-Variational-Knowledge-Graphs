@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_finalsearch.py" afterPath="$PROJECT_DIR$/script_finalsearch.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_gpu.py" afterPath="$PROJECT_DIR$/script_gpu.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,7 +41,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script_finalsearch.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="script_finalsearch.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script_finalsearch.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="399">
@@ -53,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script_gpu.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="script_gpu.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_gpu.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="38" column="28" lean-forward="false" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
+            <state relative-caret-position="1365">
+              <caret line="91" column="46" lean-forward="false" selection-start-line="91" selection-start-column="42" selection-end-line="91" selection-end-column="46" />
               <folding>
                 <element signature="e#104#120#0" expanded="true" />
               </folding>
@@ -80,7 +80,7 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
+            <state relative-caret-position="-1068">
               <caret line="332" column="31" lean-forward="false" selection-start-line="332" selection-start-column="20" selection-end-line="332" selection-end-column="31" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
@@ -141,6 +141,7 @@
       <find>scores</find>
       <find>sigma_alt</find>
       <find>training_step4</find>
+      <find>logs</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -178,10 +179,10 @@
         <option value="$PROJECT_DIR$/vkge/base2.py" />
         <option value="$PROJECT_DIR$/vkge/base3.py" />
         <option value="$PROJECT_DIR$/script.py" />
-        <option value="$PROJECT_DIR$/script_gpu.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/script_finalsearch.py" />
+        <option value="$PROJECT_DIR$/script_gpu.py" />
       </list>
     </option>
   </component>
@@ -382,13 +383,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00157" summary="fixed base3">
-      <created>1528974822399</created>
-      <option name="number" value="00157" />
-      <option name="presentableId" value="LOCAL-00157" />
-      <option name="project" value="LOCAL" />
-      <updated>1528974822399</updated>
     </task>
     <task id="LOCAL-00158" summary="fixed base3">
       <created>1528974854509</created>
@@ -726,7 +720,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529312415586</updated>
     </task>
-    <option name="localTasksCounter" value="206" />
+    <task id="LOCAL-00206" summary="final test with fixed predicate">
+      <created>1529312445516</created>
+      <option name="number" value="00206" />
+      <option name="presentableId" value="LOCAL-00206" />
+      <option name="project" value="LOCAL" />
+      <updated>1529312445517</updated>
+    </task>
+    <option name="localTasksCounter" value="207" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1189,26 +1190,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script_gpu.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="38" column="28" lean-forward="false" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
-          <folding>
-            <element signature="e#104#120#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="332" column="31" lean-forward="false" selection-start-line="332" selection-start-column="20" selection-end-line="332" selection-end-column="31" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="554">
@@ -1223,6 +1204,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="80" column="22" lean-forward="false" selection-start-line="80" selection-start-column="22" selection-end-line="80" selection-end-column="22" />
+          <folding>
+            <element signature="e#104#120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1068">
+          <caret line="332" column="31" lean-forward="false" selection-start-line="332" selection-start-column="20" selection-end-line="332" selection-end-column="31" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script_gpu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1365">
+          <caret line="91" column="46" lean-forward="false" selection-start-line="91" selection-start-column="42" selection-end-line="91" selection-end-column="46" />
           <folding>
             <element signature="e#104#120#0" expanded="true" />
           </folding>

@@ -30,7 +30,7 @@ def to_cmd(c):
     #     command = 'PYTHONPATH=. python3-gpu {}/main.py {} ' \
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
-    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
+    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main2.py  ' \
               '--batch_size {} ' \
               '--learning_rate {} ' \
               '--init_sig {} ' \
@@ -58,7 +58,7 @@ def to_cmd(c):
                 c['w8'],
                 False,
                 c['w9'],
-                "%s/logs/18_6_17/uclcs_nvkg_v1.%s" % (path, summary(c))
+                "%s/logs/simple/uclcs_nvkg_v1.%s" % (path, summary(c))
 
                 )
     return command
@@ -75,17 +75,17 @@ def main(_):
         w1=[0.1],
         w2=[4],
         w3=[10],
-        w4=[True],
-        w5=[False],
-        w6=[False],
-        w7 = [True],
-        w8=[True],
+        w4=[True,False],
+        w5=[True,False],
+        w6=[True,False],
+        w7 = [True,False],
+        w8=[True,False],
         w9=['hinge']
     )
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_17'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/simple'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
