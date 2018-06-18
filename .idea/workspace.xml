@@ -44,8 +44,8 @@
       <file leaf-file-name="script_finalsearch.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_finalsearch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="515">
-              <caret line="138" column="0" lean-forward="true" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
+            <state relative-caret-position="500">
+              <caret line="137" column="14" lean-forward="false" selection-start-line="137" selection-start-column="14" selection-end-line="137" selection-end-column="14" />
               <folding>
                 <element signature="e#104#120#0" expanded="true" />
               </folding>
@@ -396,13 +396,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00163" summary="added hinge loss">
-      <created>1528976502466</created>
-      <option name="number" value="00163" />
-      <option name="presentableId" value="LOCAL-00163" />
-      <option name="project" value="LOCAL" />
-      <updated>1528976502466</updated>
-    </task>
     <task id="LOCAL-00164" summary="added hinge loss">
       <created>1528977425722</created>
       <option name="number" value="00164" />
@@ -739,7 +732,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529343393066</updated>
     </task>
-    <option name="localTasksCounter" value="212" />
+    <task id="LOCAL-00212" summary="updated decaying KL">
+      <created>1529343971090</created>
+      <option name="number" value="00212" />
+      <option name="presentableId" value="LOCAL-00212" />
+      <option name="project" value="LOCAL" />
+      <updated>1529343971090</updated>
+    </task>
+    <option name="localTasksCounter" value="213" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1237,8 +1237,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script_finalsearch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="138" column="0" lean-forward="true" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
+        <state relative-caret-position="500">
+          <caret line="137" column="14" lean-forward="false" selection-start-line="137" selection-start-column="14" selection-end-line="137" selection-end-column="14" />
           <folding>
             <element signature="e#104#120#0" expanded="true" />
           </folding>
