@@ -58,7 +58,7 @@ def to_cmd(c):
                 c['w8'],
                 c['w9'],
                 c['w10'],
-                "%s/logs/18_6_17/uclcs_nvkg_v1.%s" % (path, summary(c))
+                "%s/logs/18_6_18/uclcs_nvkg_v1.%s" % (path, summary(c))
 
                 )
     return command
@@ -87,7 +87,7 @@ def main(_):
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_17'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_18'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
