@@ -135,6 +135,7 @@ def main(_):
 #$ -l tmem=8G
 #$ -l h_rt=12:00:00
 #$ -ac allow=LMNOPQSTU
+#$ -pe smp 8
 
 
 
