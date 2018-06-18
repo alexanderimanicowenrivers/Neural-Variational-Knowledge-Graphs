@@ -420,7 +420,7 @@ class VKGE:
             model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                  object_embeddings=self.h_o)
             self.scores = model()
-            self.p_x_i = tf.sigmoid(self.scores)
+            self.p_x_i = self.scores
 
     def stats(self,values):
         """

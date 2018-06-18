@@ -399,13 +399,16 @@ class VKGE2:
                     filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                     filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
-                ranks = ranks_subj + ranks_obj
                 filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
+                ranks = ranks_subj + ranks_obj
 
-                for setting_name, setting_ranks in [('Filtered', filtered_ranks)]:
+                for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                     mean_rank = np.mean(setting_ranks)
-                    k = 10
-                    hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                    logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
+                    for k in [1, 3, 5, 10]:
+                        hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                        logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+
             t1, t2 = mean_rank, hits_at_k
 
             if hits_at_k>maxhits:
