@@ -43,6 +43,7 @@ def to_cmd(c):
               '--opt_type {} ' \
               '--opt {} ' \
               '--static_pred {}' \
+              '--decay_kl {}' \
               '--file_name {} ' \
  \
         .format(path,
@@ -60,6 +61,7 @@ def to_cmd(c):
                 c['w9'],
                 c['w10'],
                 c['w11'],
+                c['w12'],
                 "%s/logs/18_6_18/uclcs_nvkg_v1.%s" % (path, summary(c))
 
                 )
@@ -75,7 +77,7 @@ def main(_):
     hyperparameters_space = dict(
         w0=[14145],
         w1=[0.01,0.001,1e-4],
-        w2=[0.5,1,4,-1],
+        w2=[1,4,-1],
         w3=[100],
         w4=[True, False],
         w5=[False,True],
@@ -84,7 +86,8 @@ def main(_):
         w8=[False,True],
         w9=['hinge','ml'],
         w10 = ['adam', 'adagrad'],
-        w11=[False,True]
+        w11=[False,True],
+        w12=[False, True],
 
     )
 

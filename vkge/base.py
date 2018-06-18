@@ -63,7 +63,7 @@ class VKGE:
 
 
 
-    def __init__(self, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
+    def __init__(self,decay_kl, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
                  alt_cost=False,static_pred=False,static_mean=False,alt_updates=True,sigma_alt=True,opt_type='ml',tensorboard=True,projection=True,opt='adam'):
         super().__init__()
 
@@ -83,7 +83,7 @@ class VKGE:
 
         triples = io.read_triples("data/wn18/wordnet-mlj12-train.txt")  # choose dataset
         test_triples = io.read_triples("data/wn18/wordnet-mlj12-test.txt")
-
+        self.decay_kl=decay_kl
         self.static_pred=static_pred
         self.random_state = np.random.RandomState(0)
         self.GPUMode = GPUMode
@@ -146,8 +146,10 @@ class VKGE:
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,
                          ent_sigma, pred_sigma)
+        self.nb_epochs=1500
+        self.decaykl= np.linspace(0, 1, self.nb_epochs)
 
-        self.train(nb_epochs=2000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s,filename=file_name)
+        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s,filename=file_name)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -204,9 +206,15 @@ class VKGE:
 
         # Adjust through linear/non linear KL loss
 
-        self.e_objective1 = self.e_objective1 * self.KL_discount
-        self.e_objective2 = self.e_objective1 * self.KL_discount
-        self.e_objective3 = self.e_objective1 * self.KL_discount
+        if self.decay_kl:
+            self.e_objective1 = self.e_objective1 * self.KL_discount * self.decaykl
+            self.e_objective2 = self.e_objective1 * self.KL_discount * self.decaykl
+            self.e_objective3 = self.e_objective1 * self.KL_discount * self.decaykl
+
+        else:
+            self.e_objective1 = self.e_objective1 * self.KL_discount
+            self.e_objective2 = self.e_objective1 * self.KL_discount
+            self.e_objective3 = self.e_objective1 * self.KL_discount
 
         # Total Loss
 
