@@ -87,7 +87,7 @@ class VKGE2:
         self.GPUMode = GPUMode
         self.alt_cost = alt_cost
         self.nb_examples = len(triples)
-        self.static_mean=train_mean
+        self.static_mean=static_mean
         self.alt_updates=alt_updates
         self.tensorboard=tensorboard
         self.projection=projection
