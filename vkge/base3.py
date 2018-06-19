@@ -359,7 +359,7 @@ class VKGE2:
                 # Test
                 ##
 
-
+                eval_name='valid'
                 eval_triples = test_triples
                 ranks_subj, ranks_obj = [], []
                 filtered_ranks_subj, filtered_ranks_obj = [], []

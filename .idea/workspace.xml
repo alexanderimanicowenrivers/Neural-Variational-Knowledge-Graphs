@@ -104,8 +104,8 @@
       <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="89" column="36" lean-forward="false" selection-start-line="89" selection-start-column="36" selection-end-line="89" selection-end-column="36" />
+            <state relative-caret-position="-255">
+              <caret line="361" column="32" lean-forward="false" selection-start-line="361" selection-start-column="32" selection-end-line="361" selection-end-column="32" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -383,13 +383,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00171" summary="used old loss">
-      <created>1528984959907</created>
-      <option name="number" value="00171" />
-      <option name="presentableId" value="LOCAL-00171" />
-      <option name="project" value="LOCAL" />
-      <updated>1528984959907</updated>
     </task>
     <task id="LOCAL-00172" summary="used old loss">
       <created>1528984996855</created>
@@ -727,7 +720,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529418850119</updated>
     </task>
-    <option name="localTasksCounter" value="220" />
+    <task id="LOCAL-00220" summary="updated decaying KL">
+      <created>1529418919547</created>
+      <option name="number" value="00220" />
+      <option name="presentableId" value="LOCAL-00220" />
+      <option name="project" value="LOCAL" />
+      <updated>1529418919547</updated>
+    </task>
+    <option name="localTasksCounter" value="221" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1225,8 +1225,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="89" column="36" lean-forward="false" selection-start-line="89" selection-start-column="36" selection-end-line="89" selection-end-column="36" />
+        <state relative-caret-position="-255">
+          <caret line="361" column="32" lean-forward="false" selection-start-line="361" selection-start-column="32" selection-end-line="361" selection-end-column="32" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
