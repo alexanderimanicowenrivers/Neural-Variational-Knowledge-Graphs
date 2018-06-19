@@ -78,7 +78,7 @@ def main(_):
         w4=[True,False],
         w5=[True,False],
         w6=[True,False],
-        w7 = [True,False],
+        w7 = [False],
         w8=[True,False],
         w9=['hinge']
     )
