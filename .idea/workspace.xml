@@ -92,8 +92,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="142" column="65" lean-forward="true" selection-start-line="142" selection-start-column="12" selection-end-line="142" selection-end-column="65" />
+            <state relative-caret-position="381">
+              <caret line="981" column="38" lean-forward="true" selection-start-line="981" selection-start-column="18" selection-end-line="981" selection-end-column="38" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -104,8 +104,8 @@
       <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="114" column="63" lean-forward="false" selection-start-line="114" selection-start-column="63" selection-end-line="114" selection-end-column="63" />
+            <state relative-caret-position="659">
+              <caret line="418" column="12" lean-forward="false" selection-start-line="418" selection-start-column="12" selection-end-line="418" selection-end-column="12" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -383,13 +383,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00173" summary="new test gpu">
-      <created>1528988226673</created>
-      <option name="number" value="00173" />
-      <option name="presentableId" value="LOCAL-00173" />
-      <option name="project" value="LOCAL" />
-      <updated>1528988226673</updated>
     </task>
     <task id="LOCAL-00174" summary="new test gpu">
       <created>1528988559062</created>
@@ -727,7 +720,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529419930303</updated>
     </task>
-    <option name="localTasksCounter" value="222" />
+    <task id="LOCAL-00222" summary="updated decaying KL">
+      <created>1529420218734</created>
+      <option name="number" value="00222" />
+      <option name="presentableId" value="LOCAL-00222" />
+      <option name="project" value="LOCAL" />
+      <updated>1529420218735</updated>
+    </task>
+    <option name="localTasksCounter" value="223" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1215,8 +1215,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="142" column="65" lean-forward="true" selection-start-line="142" selection-start-column="12" selection-end-line="142" selection-end-column="65" />
+        <state relative-caret-position="381">
+          <caret line="981" column="38" lean-forward="true" selection-start-line="981" selection-start-column="18" selection-end-line="981" selection-end-column="38" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
@@ -1225,8 +1225,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="114" column="63" lean-forward="false" selection-start-line="114" selection-start-column="63" selection-end-line="114" selection-end-column="63" />
+        <state relative-caret-position="659">
+          <caret line="418" column="12" lean-forward="false" selection-start-line="418" selection-start-column="12" selection-end-line="418" selection-end-column="12" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
