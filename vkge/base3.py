@@ -409,12 +409,11 @@ class VKGE2:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
-                t1, t2 = mean_rank, hits_at_k
+                    t1, t2 = mean_rank, hits_at_k
 
-                if hits_at_k>maxhits:
-                    maxhits=hits_at_k
-                    maxepoch=epoch
-                logger.warn('Hits@10 value: {0} %'.format(t2))
+                    if hits_at_k>maxhits:
+                        maxhits=hits_at_k
+                        maxepoch=epoch
 
             logger.warn("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
             logger.warn("The maximum Hits@10 value: {0} \t at epoch {1}".format(maxhits, maxepoch))
