@@ -74,7 +74,7 @@ def main(_):
         w0=[14145],
         w1=[0.1],
         w2=[4],
-        w3=[10],
+        w3=[100],
         w4=[True,False],
         w5=[True,False],
         w6=[True,False],
