@@ -134,7 +134,7 @@ class VKGE2:
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
 
-        optimizer = tf.train.AdagradOptimizer(learning_rate=0.1)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
+        optimizer = tf.train.AdagradOptimizer(learning_rate=0.0003)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,
                          ent_sigma, pred_sigma)
