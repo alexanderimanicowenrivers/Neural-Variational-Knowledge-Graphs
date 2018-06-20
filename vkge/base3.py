@@ -211,6 +211,8 @@ class VKGE2:
 
         init1=(6.0/np.sqrt(entity_embedding_size*1.0))
 
+        logger.warn('init is {} ..'.format(init1))
+
         with tf.variable_scope('encoder'):
             self.entity_embedding_mean = tf.get_variable('entities',
                                                            shape=[nb_entities + 1, entity_embedding_size ],
