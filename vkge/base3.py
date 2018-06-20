@@ -48,7 +48,7 @@ class IndexGenerator:
 
 class VKGE2:
     """
-           model for testing the basic probabilistic aspects of the model, just using SGD optimiser  - !!working!! 84% Hits@10
+           model for testing the basic probabilistic aspects of the model, just using SGD optimiser  - !!working!! 91.34%Hits@10
 
             Achievies 
         Initializes a Link Prediction Model.
@@ -143,7 +143,7 @@ class VKGE2:
                          optimizer,
                          ent_sigma, pred_sigma)
 
-        self.train(nb_epochs=1000, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
+        self.train(nb_epochs=2000, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
