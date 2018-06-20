@@ -48,9 +48,9 @@ class IndexGenerator:
 
 class VKGE2:
     """
-           model for testing the basic probabilistic aspects of the model, just using SGD optimiser  - !!working!! 80% Hits@10 
+           model for testing the basic probabilistic aspects of the model, just using SGD optimiser  - !!working!!
 
-            Achievies 
+            Achievies
         Initializes a Link Prediction Model.
         @param file_name: The TensorBoard file_name.
         @param opt_type: Determines the optimiser used
