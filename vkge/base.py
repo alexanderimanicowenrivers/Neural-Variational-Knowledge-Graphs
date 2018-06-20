@@ -82,7 +82,7 @@ class VKGE:
             if sigma_alt:
                 ent_sigma=tf.log(tf.exp(ent_sig)-1)
             else:
-                ent_sigma = (np.log(ent_sig)**2) #old sigma
+                ent_sigma = (np.log(ent_sig**2)) #old sigma
 
         pred_sigma = ent_sigma #adjust for correct format for model input
         predicate_embedding_size = embedding_size
