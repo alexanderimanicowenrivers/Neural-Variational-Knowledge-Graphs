@@ -28,7 +28,7 @@ def read_triples(path):
 
 class VKGE:
     """
-        composition of literature for architecture search
+        composition of literature for architecture search - not working
 
 
         Initializes a Link Prediction Model.

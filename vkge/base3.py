@@ -48,7 +48,7 @@ class IndexGenerator:
 
 class VKGE2:
     """
-           model for testing the basic probabilistic aspects of the model, just using SGD optimiser  - !!working!! 80% Hits@10 
+           model for testing the basic probabilistic aspects of the model, just using SGD optimiser  - !!working!! 84% Hits@10
 
             Achievies 
         Initializes a Link Prediction Model.
@@ -136,7 +136,9 @@ class VKGE2:
         ############################
 
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
-        optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
+        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
+        optimizer = tf.train.AdamOptimizer(learning_rate=0.01, epsilon=1e-5)
+
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,
                          ent_sigma, pred_sigma)
