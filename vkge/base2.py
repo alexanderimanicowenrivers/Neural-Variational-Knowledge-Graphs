@@ -46,7 +46,7 @@ class IndexGenerator:
         return rand_ints
 
 
-class VKGE2:
+class VKGE_simple:
     """
            model for testing the non probabilistic aspects of the model
 

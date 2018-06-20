@@ -225,22 +225,19 @@ class VKGE2:
                                                           initializer=tf.initializers.random_normal(), dtype=tf.float32,
                                                           trainable=True)
 
-        self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
-        self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
-        self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
+            self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
+            self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
+            self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
 
-        self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
-        self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
-        self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
+            self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
+            self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
+            self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
-        self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
-        self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
-        self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+            self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
+            self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
+            self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
 
 
-        # self.h_s = VKGE.sample_embedding(self.mu_s, self.log_sigma_sq_s)
-            # self.h_p = VKGE.sample_embedding(self.mu_p, self.log_sigma_sq_p)
-            # self.h_o = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
     def build_decoder(self):
         """
