@@ -98,7 +98,7 @@ class VKGE2:
             if sigma_alt:
                 ent_sigma=tf.log(tf.exp(ent_sig)-1)
             else:
-                ent_sigma = (np.log(ent_sig)**2) #old sigma
+                ent_sigma = (np.log(ent_sig**2)) #old sigma
 
         pred_sigma = ent_sigma #adjust for correct format for model input
         predicate_embedding_size = embedding_size
@@ -134,7 +134,7 @@ class VKGE2:
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
 
-        optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.001)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
+        optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,
                          ent_sigma, pred_sigma)
