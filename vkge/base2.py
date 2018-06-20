@@ -156,6 +156,7 @@ class VKGE_simple:
                 Samples from embeddings
         """
         sigma = tf.sqrt(tf.exp(log_sigma_square))
+
         embedding_size = mu.get_shape()[1].value
         eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
         return mu + sigma * eps
