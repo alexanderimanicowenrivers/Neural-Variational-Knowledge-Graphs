@@ -209,7 +209,7 @@ class VKGE2:
         """
         logger.warn('Building Inference Networks q(h_x | x) ..')
 
-        init1=np.round((6.0/np.sqrt(entity_embedding_size*1.0)), decimals=0)
+        init1=np.round((6.0/np.sqrt(entity_embedding_size*1.0)), decimals=2)
 
         logger.warn('init is {} ..'.format(init1))
 
