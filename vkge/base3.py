@@ -212,7 +212,7 @@ class VKGE2:
             self.entity_embedding_mean = tf.get_variable('entities',
                                                            shape=[nb_entities + 1, entity_embedding_size ],
                                                            initializer=tf.initializers.random_normal())
-            self.predicate_parameters_layer = tf.get_variable('predicates',
+            self.predicate_embedding_mean = tf.get_variable('predicates',
                                                               shape=[nb_predicates + 1, predicate_embedding_size],
                                                               initializer=tf.initializers.random_normal())
             self.entity_embedding_sigma = tf.get_variable('entities_sigma',
