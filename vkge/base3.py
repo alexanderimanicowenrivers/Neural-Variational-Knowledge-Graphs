@@ -223,12 +223,12 @@ class VKGE2:
                                                                                                       maxval=init1,dtype=tf.float32))
             self.entity_embedding_sigma = tf.get_variable('entities_sigma',
                                                           shape=[nb_entities + 1, entity_embedding_size],
-                                                          initializer=tf.random_uniform_initializer(minval=0.05,maxval=5,dtype=tf.float32)            , dtype=tf.float32,
+                                                          initializer=tf.random_uniform_initializer(minval=0.05,maxval=5.0,dtype=tf.float32)            , dtype=tf.float32,
                                                           trainable=True)
 
             self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
                                                              shape=[nb_predicates + 1, predicate_embedding_size],
-                                                          initializer=tf.random_uniform_initializer(minval=0.05,maxval=5,dtype=tf.float32), dtype=tf.float32,
+                                                          initializer=tf.random_uniform_initializer(minval=0.05,maxval=5.0,dtype=tf.float32), dtype=tf.float32,
                                                           trainable=True)
 
             self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
