@@ -18,6 +18,13 @@ import vkge.io as io
 import logging
 logger = logging.getLogger(__name__)
 
+def read_triples(path):
+    triples = []
+    with open(path, 'rt') as f:
+        for line in f.readlines():
+            s, p, o = line.split()
+            triples += [(s.strip(), p.strip(), o.strip())]
+    return triples
 
 class VKGE:
     """
@@ -81,14 +88,11 @@ class VKGE:
         predicate_embedding_size = embedding_size
         entity_embedding_size = embedding_size
 
-        triples = io.read_triples("data/wn18/wordnet-mlj12-train.txt")  # choose dataset
-        test_triples = io.read_triples("data/wn18/wordnet-mlj12-test.txt")
         self.decay_kl=decay_kl
         self.static_pred=static_pred
         self.random_state = np.random.RandomState(0)
         self.GPUMode = GPUMode
         self.alt_cost = alt_cost
-        self.nb_examples = len(triples)
         self.static_mean= static_mean
         self.alt_updates=alt_updates
         self.tensorboard=tensorboard
@@ -97,15 +101,14 @@ class VKGE:
         logger.warn('Parsing the facts in the Knowledge Base ..')
 
         # logger.warn('Parsing the facts in the Knowledge Base ..')
-        self.facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in triples]
+        dataset_name = 'wn18'
 
-        self.test_facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in test_triples]
-
-        self.test_parser = KnowledgeBaseParser(self.test_facts)
-        self.parser = KnowledgeBaseParser(self.facts)
+        train_triples = read_triples("data2/{}/train.tsv".format(dataset_name))  # choose dataset
+        test_triples = read_triples("data2/{}/dev.tsv".format(dataset_name))
+        self.nb_examples = len(train_triples)
 
         ##### for test time ######
-        all_triples = triples + test_triples
+        all_triples = train_triples + test_triples
         entity_set = {s for (s, p, o) in all_triples} | {o for (s, p, o) in all_triples}
         predicate_set = {p for (s, p, o) in all_triples}
         self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
@@ -149,7 +152,7 @@ class VKGE:
         self.nb_epochs=1000
         self.decaykl= np.linspace(0, 1, self.nb_epochs)
 
-        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s,filename=file_name)
+        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -437,23 +440,17 @@ class VKGE:
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000,unit_cube=False,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
+    def train(self, test_triples, train_triples, batch_size, session=0, nb_epochs=1000,unit_cube=False,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
                                 Train Model
         """
         index_gen = index.GlorotIndexGenerator()
-        neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
-        subj_corruptor = corrupt.SimpleCorruptor(index_generator=index_gen, candidate_indices=neg_idxs,
-                                                 corr_obj=False)
-        obj_corruptor = corrupt.SimpleCorruptor(index_generator=index_gen, candidate_indices=neg_idxs,
-                                                corr_obj=True)
+        all_triples=train_triples+test_triples
 
-        train_sequences = self.parser.facts_to_sequences(self.facts)
-
-        Xs = np.array([s_idx for (_, [s_idx, _]) in train_sequences])
-        Xp = np.array([p_idx for (p_idx, _) in train_sequences])
-        Xo = np.array([o_idx for (_, [_, o_idx]) in train_sequences])
+        Xs = np.array([s_idx for (_, [s_idx, _]) in train_triples])
+        Xp = np.array([p_idx for (p_idx, _) in train_triples])
+        Xo = np.array([o_idx for (_, [_, o_idx]) in train_triples])
 
         assert Xs.shape == Xp.shape == Xo.shape
 
@@ -463,6 +460,8 @@ class VKGE:
         nb_batches= math.ceil(nb_samples / batch_size)
         # logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
         logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
+        batches = make_batches(nb_samples, batch_size)
+
 
         projection_steps = [constraints.unit_cube(self.entity_embedding_mean) if unit_cube
                             else constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
@@ -501,17 +500,14 @@ class VKGE:
                 order = self.random_state.permutation(nb_samples)
                 Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
 
-                Xs_sc, Xp_sc, Xo_sc = subj_corruptor(Xs_shuf, Xp_shuf, Xo_shuf)
-                Xs_oc, Xp_oc, Xo_oc = obj_corruptor(Xs_shuf, Xp_shuf, Xo_shuf)
 
-                batches = make_batches(nb_samples, batch_size)
 
                 loss_values = []
                 total_loss_value = 0
 
                 nb_versions = 3
 
-                for batch_start, batch_end in batches:
+                for batch_no, (batch_start, batch_end) in enumerate(batches):
                     curr_batch_size = batch_end - batch_start
 
                     Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
