@@ -9,43 +9,142 @@ from vkge.knowledgebase import Fact, KnowledgeBaseParser
 import vkge.models as models
 from vkge.training import constraints, corrupt, index
 from vkge.training.util import make_batches
+import vkge.io as io
+
+
+# new
 
 import logging
-
 logger = logging.getLogger(__name__)
 
+def read_triples(path):
+    triples = []
+    with open(path, 'rt') as f:
+        for line in f.readlines():
+            s, p, o = line.split()
+            triples += [(s.strip(), p.strip(), o.strip())]
+    return triples
 
-class VKGE_simple:
+
+def unit_cube_projection(var_matrix):
+    unit_cube_projection = tf.minimum(1., tf.maximum(var_matrix, 0.))
+    return tf.assign(var_matrix, unit_cube_projection)
+
+
+def make_batches(size, batch_size):
+    nb_batch = int(np.ceil(size / float(batch_size)))
+    res = [(i * batch_size, min(size, (i + 1) * batch_size)) for i in range(0, nb_batch)]
+    return res
+
+class IndexGenerator:
+    def __init__(self):
+        self.random_state = np.random.RandomState(0)
+
+    def __call__(self, n_samples, candidate_indices):
+        shuffled_indices = candidate_indices[self.random_state.permutation(len(candidate_indices))]
+        rand_ints = shuffled_indices[np.arange(n_samples) % len(shuffled_indices)]
+        return rand_ints
+
+
+class VKGE2:
     """
-            First model created
+           model for testing the non probabilistic aspects of the model
 
-            Initializes a Link Prediction Model.
-        @param triples: The dataset to train and test on
-        @param optimizer: Determines the optimiser used
-        @param entity_embedding_size: The embedding_size for entities
-        @param predicate_embedding_size: The embedding_size for redicates
+        Initializes a Link Prediction Model.
+        @param file_name: The TensorBoard file_name.
+        @param opt_type: Determines the optimiser used
+        @param embedding_size: The embedding_size for entities and predicates
+        @param batch_s: The batch size
+        @param lr: The learning rate
+        @param b1: The beta 1 value for ADAM optimiser
+        @param b2: The beta 2 value for ADAM optimiser
+        @param eps: The epsilon value for ADAM optimiser
+        @param GPUMode: Used for reduced print statements during architecture search.
+        @param alt_cost: Determines the use of a compression cost KL or classical KL term
+        @param train_mean: Determines whether the mean embeddings are trainable or fixed
+        @param alt_updates: Determines if updates are done simultaneously or
+                            separately for each e and g objective.
+        @param sigma_alt: Determines between two standard deviation representation used
+        @param tensorboard: Determines if Tensorboard events are logged
+        @param projection: Determines if mean embeddings are projected
+                                     network.
 
-        @type optimizer: tf.train.AdamOptimizer()
-        @type entity_embedding_size: int
-        @type predicate_embedding_size: int
+        @type file_name: str: '/home/workspace/acowenri/tboard'
+        @type opt_type: str
+        @type embedding_size: int
+        @type batch_s: int
+        @type lr: float
+        @type b1: float
+        @type b2: float
+        @type eps: float
+        @type GPUMode: bool
+        @type alt_cost: bool
+        @type train_mean: bool
+        @type alt_updates: bool
+        @type sigma_alt: bool
+        @type tensorboard: bool
+        @type projection: bool
 
-
-                """
-    def __init__(self, triples, entity_embedding_size, predicate_embedding_size, optimizer):
+            """
+    def __init__(self,decay_kl, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
+                 alt_cost=False,static_pred=False,static_mean=False,alt_updates=True,sigma_alt=True,opt_type='ml',tensorboard=True,projection=True,opt='adam'):
         super().__init__()
 
-        logger.warn('Parsing the facts in the Knowledge Base ..')
-        self.facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in triples]
-        self.parser = KnowledgeBaseParser(self.facts)
+        self.sigma_alt=sigma_alt
 
+        if ent_sig==-1:
+            ent_sigma=ent_sig
+        else:
+            if sigma_alt:
+                ent_sigma=tf.log(tf.exp(ent_sig)-1)
+            else:
+                ent_sigma = (np.log(ent_sig)**2) #old sigma
+
+        pred_sigma = ent_sigma #adjust for correct format for model input
+        predicate_embedding_size = embedding_size
+        entity_embedding_size = embedding_size
         self.random_state = np.random.RandomState(0)
-        nb_entities, nb_predicates = len(self.parser.entity_vocabulary), len(self.parser.predicate_vocabulary)
-        self.build_model(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer)
+        tf.set_random_seed(0)
+
+
+        self.GPUMode = GPUMode
+        self.alt_cost = alt_cost
+        self.static_mean=static_mean
+        self.alt_updates=alt_updates
+        self.tensorboard=tensorboard
+        self.projection=projection
+        logger.warn('This model is non-probabilistic ..')
+
+        logger.warn('Parsing the facts in the Knowledge Base ..')
+
+        # Dataset
+        dataset_name = 'wn18'
+
+        train_triples = read_triples("data2/{}/train.tsv".format(dataset_name))  # choose dataset
+        test_triples = read_triples("data2/{}/dev.tsv".format(dataset_name))
+        self.nb_examples = len(train_triples)
+
+
+        ##### for test time ######
+        all_triples = train_triples + test_triples
+        entity_set = {s for (s, p, o) in all_triples} | {o for (s, p, o) in all_triples}
+        predicate_set = {p for (s, p, o) in all_triples}
+        self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
+        self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
+        self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
+        ############################
+
+        optimizer = tf.train.AdagradOptimizer(learning_rate=0.1)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
+        self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
+                         optimizer,
+                         ent_sigma, pred_sigma)
+
+        self.train(nb_epochs=1000, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
         """
-            Separates distribution parameters from embeddings
+                    Separates distribution parameters from embeddings
         """
         parameters = tf.nn.embedding_lookup(parameters_layer, inputs)
         mu, log_sigma_square = tf.split(value=parameters, num_or_size_splits=2, axis=1)
@@ -61,7 +160,8 @@ class VKGE_simple:
         eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
         return mu + sigma * eps
 
-    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer):
+    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
+                    ent_sig, pred_sig):
         """
                         Constructs Model
         """
@@ -70,134 +170,270 @@ class VKGE_simple:
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
         self.y_inputs = tf.placeholder(tf.bool, shape=[None])
 
-        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size)
+        self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
+
+        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
+                           pred_sig)
         self.build_decoder()
 
         # Kullback Leibler divergence
-        self.e_objective = 0.0
-        self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
-        self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
-        self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
+        # self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
+        # self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
+        # self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
 
         # Log likelihood
-        self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-4))
+        # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
 
-        self.elbo = self.g_objective + self.e_objective
+        self.hinge_losses = tf.nn.relu(5 - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
+        self.g_objective = tf.reduce_sum(self.hinge_losses)
+
+        # self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
+
+        self.elbo = self.g_objective
 
         self.training_step = optimizer.minimize(self.elbo)
 
-    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size):
+        if self.tensorboard:
+
+            _ = tf.summary.scalar("total e loss", self.e_objective)
+            _ = tf.summary.scalar("g loss", self.g_objective)
+
+            _ = tf.summary.scalar("total loss", self.elbo)
+
+
+
+    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
+                      pred_sig):
         """
                                 Constructs Encoder
         """
         logger.warn('Building Inference Networks q(h_x | x) ..')
         with tf.variable_scope('encoder'):
-            self.entity_parameters_layer = tf.get_variable('entities',
-                                                           shape=[nb_entities + 1, entity_embedding_size * 2],
+            self.entity_embedding_mean = tf.get_variable('entities',
+                                                           shape=[nb_entities + 1, entity_embedding_size ],
                                                            initializer=tf.contrib.layers.xavier_initializer())
             self.predicate_parameters_layer = tf.get_variable('predicates',
-                                                              shape=[nb_predicates + 1, predicate_embedding_size * 2],
+                                                              shape=[nb_predicates + 1, predicate_embedding_size],
                                                               initializer=tf.contrib.layers.xavier_initializer())
 
-            self.mu_s, self.log_sigma_sq_s = VKGE.input_parameters(self.s_inputs, self.entity_parameters_layer)
-            self.mu_p, self.log_sigma_sq_p = VKGE.input_parameters(self.p_inputs, self.predicate_parameters_layer)
-            self.mu_o, self.log_sigma_sq_o = VKGE.input_parameters(self.o_inputs, self.entity_parameters_layer)
+            self.h_s = tf.nn.embedding_lookup(self.entity_embedding_mean,self.s_inputs)
+            self.h_p = tf.nn.embedding_lookup(self.predicate_parameters_layer,self.p_inputs)
+            self.h_o = tf.nn.embedding_lookup(self.entity_embedding_mean,self.o_inputs)
 
-            self.h_s = VKGE.sample_embedding(self.mu_s, self.log_sigma_sq_s)
-            self.h_p = VKGE.sample_embedding(self.mu_p, self.log_sigma_sq_p)
-            self.h_o = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o)
+            # self.h_s = VKGE.sample_embedding(self.mu_s, self.log_sigma_sq_s)
+            # self.h_p = VKGE.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+            # self.h_o = VKGE.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
     def build_decoder(self):
         """
                                 Constructs Decoder
         """
         logger.warn('Building Inference Network p(y|h) ..')
-        with tf.variable_scope('decoder'):
-            model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p, object_embeddings=self.h_o)
-            self.p_x_i = tf.sigmoid(model())
 
-    def train(self, session, nb_batches=10, nb_epochs=10, unit_cube=False):
+        with tf.variable_scope('decoder'):
+            model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
+                                                 object_embeddings=self.h_o)
+            self.scores = model()
+            self.p_x_i = self.scores
+
+
+    def stats(self,values):
+        """
+                                Return mean and variance statistics
+        """
+        return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
+
+    def train(self, test_triples, train_triples, batch_size, session=0, nb_epochs=1000,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
                                 Train Model
         """
+
+        nb_versions = 3
+
+        all_triples=train_triples+test_triples
+
         index_gen = index.GlorotIndexGenerator()
-        neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
-        subj_corruptor = corrupt.SimpleCorruptor(index_generator=index_gen, candidate_indices=neg_idxs,
-                                                 corr_obj=False)
-        obj_corruptor = corrupt.SimpleCorruptor(index_generator=index_gen, candidate_indices=neg_idxs,
-                                                corr_obj=True)
-
-        train_sequences = self.parser.facts_to_sequences(self.facts)
-
-        Xs = np.array([s_idx for (_, [s_idx, _]) in train_sequences])
-        Xp = np.array([p_idx for (p_idx, _) in train_sequences])
-        Xo = np.array([o_idx for (_, [_, o_idx]) in train_sequences])
+        Xs = np.array([self.entity_to_idx[s] for (s, p, o) in train_triples], dtype=np.int32)
+        Xp = np.array([self.predicate_to_idx[p] for (s, p, o) in train_triples], dtype=np.int32)
+        Xo = np.array([self.entity_to_idx[o] for (s, p, o) in train_triples], dtype=np.int32)
 
         assert Xs.shape == Xp.shape == Xo.shape
 
+
         nb_samples = Xs.shape[0]
+        nb_batches= math.ceil(nb_samples / batch_size)
         batch_size = math.ceil(nb_samples / nb_batches)
+
+        batches = make_batches(self.nb_examples, batch_size)
+
+        # logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
         logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
 
-        projection_steps = [constraints.unit_cube(self.entity_parameters_layer) if unit_cube
-                            else constraints.unit_sphere(self.entity_parameters_layer, norm=1.0)]
+        projection_steps = [constraints.unit_cube(self.entity_embedding_mean) if unit_cube
+                            else constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
 
-        for epoch in range(1, nb_epochs + 1):
-            order = self.random_state.permutation(nb_samples)
-            Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
+        minloss = 10000
+        maxhits=0
+        maxepoch=0
+        minepoch = 0
 
-            Xs_sc, Xp_sc, Xo_sc = subj_corruptor(Xs_shuf, Xp_shuf, Xo_shuf)
-            Xs_oc, Xp_oc, Xo_oc = obj_corruptor(Xs_shuf, Xp_shuf, Xo_shuf)
+        ####### COMPRESSION COST PARAMETERS
 
-            batches = make_batches(nb_samples, batch_size)
+        M = int(nb_batches + 1)
 
-            loss_values = []
-            total_loss_value = 0
+        pi_s = np.log(2.0)*M
+        pi_e = np.log(2.0)
 
-            nb_versions = 3
+        pi = np.exp(np.linspace(pi_s, pi_e, M)-M*np.log(2.0))
 
-            for batch_start, batch_end in batches:
-                curr_batch_size = batch_end - batch_start
 
-                Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
-                Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
-                Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
+        #####################
 
-                # Positive Example
-                Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
-                Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
-                Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
+        ##
+        # Train
+        ##
 
-                # Negative examples (corrupting subject)
-                Xs_batch[1::nb_versions] = Xs_sc[batch_start:batch_end]
-                Xp_batch[1::nb_versions] = Xp_sc[batch_start:batch_end]
-                Xo_batch[1::nb_versions] = Xo_sc[batch_start:batch_end]
+        init_op = tf.global_variables_initializer()
+        with tf.Session() as session:
+            session.run(init_op)
 
-                # Negative examples (corrupting object)
-                Xs_batch[2::nb_versions] = Xs_oc[batch_start:batch_end]
-                Xp_batch[2::nb_versions] = Xp_oc[batch_start:batch_end]
-                Xo_batch[2::nb_versions] = Xo_oc[batch_start:batch_end]
+            if self.tensorboard:
+                train_writer = tf.summary.FileWriter(filename, session.graph)
 
-                y = np.zeros_like(Xp_batch)
-                y[0::nb_versions] = 1
+            for epoch in range(1, nb_epochs + 1):
+                counter = 0
 
-                loss_args = {
-                    self.s_inputs: Xs_batch,
-                    self.p_inputs: Xp_batch,
-                    self.o_inputs: Xo_batch,
-                    self.y_inputs: y
-                }
+                order = self.random_state.permutation(nb_samples)
+                Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
 
-                _, elbo_value = session.run([self.training_step, self.elbo], feed_dict=loss_args)
 
-                loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
-                total_loss_value += elbo_value
+                loss_values = []
+                total_loss_value = 0
 
-                for projection_step in projection_steps:
-                    session.run([projection_step])
 
-            def stats(values):
-                return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
+                for batch_no, (batch_start, batch_end) in enumerate(batches):
 
-            logger.warn('Epoch: {0}\tELBO: {1}'.format(epoch, stats(loss_values)))
+                    curr_batch_size = batch_end - batch_start
+
+                    Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
+                    Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
+                    Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
+
+                    Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
+                    Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
+
+                    # Xs_batch[1::nb_versions] needs to be corrupted
+                    Xs_batch[1::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                    Xp_batch[1::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[1::nb_versions] = Xo_shuf[batch_start:batch_end]
+
+                    # Xo_batch[2::nb_versions] needs to be corrupted
+                    Xs_batch[2::nb_versions] = Xs_shuf[batch_start:batch_end]
+                    Xp_batch[2::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[2::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+
+                    # y = np.zeros_like(Xp_batch)
+                    # y[0::nb_versions] = 1
+
+                    loss_args = {
+                            self.KL_discount: (1.0/nb_batches),
+                            self.s_inputs: Xs_batch,
+                            self.p_inputs: Xp_batch,
+                            self.o_inputs: Xo_batch,
+                            self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
+                        }
+
+
+
+
+                    _, elbo_value = session.run([self.training_step, self.elbo],
+                                                                 feed_dict=loss_args)
+
+                    if counter % 2 == 0:
+                        if self.tensorboard:
+                            train_writer.add_summary(summary, counter)  # tensorboard
+
+                    loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
+                    total_loss_value += elbo_value
+
+                    counter += 1
+
+                    for projection_step in projection_steps:
+                        session.run([projection_step])
+
+
+                if (round(np.mean(loss_values), 4) < minloss):
+                    minloss = round(np.mean(loss_values), 4)
+                    minepoch = epoch
+                else:
+
+                    if (round(np.mean(loss_values), 4) < minloss):
+                        minloss = round(np.mean(loss_values), 4)
+                        minepoch = epoch
+
+                logger.warn('Epoch: {0}\tELBO: {1}'.format(epoch, self.stats(loss_values)))
+
+                ##
+                # Test
+                ##
+
+                if (epoch % 200) == 0:
+                    eval_name='valid'
+                    eval_triples = test_triples
+                    ranks_subj, ranks_obj = [], []
+                    filtered_ranks_subj, filtered_ranks_obj = [], []
+
+                    for _i, (s, p, o) in enumerate(eval_triples):
+                        s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], self.entity_to_idx[o]
+
+                        Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
+                        Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
+                        Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
+
+                        feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities), self.p_inputs: Xp_v,
+                                                  self.o_inputs: Xo_v}
+                        feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
+                                                 self.o_inputs: np.arange(self.nb_entities)}
+
+                        # scores of (1, p, o), (2, p, o), .., (N, p, o)
+                        scores_subj = session.run(self.scores, feed_dict=feed_dict_corrupt_subj)
+
+                        # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                        scores_obj = session.run(self.scores, feed_dict=feed_dict_corrupt_obj)
+
+                        ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                        ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+
+                        filtered_scores_subj = scores_subj.copy()
+                        filtered_scores_obj = scores_obj.copy()
+
+                        rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
+                                    fs != s and fp == p and fo == o]
+                        rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
+                                    fs == s and fp == p and fo != o]
+
+                        filtered_scores_subj[rm_idx_s] = - np.inf
+                        filtered_scores_obj[rm_idx_o] = - np.inf
+
+                        filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                        filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
+
+                    filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
+                    ranks = ranks_subj + ranks_obj
+
+                    for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
+                        mean_rank = np.mean(setting_ranks)
+                        logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
+                        for k in [1, 3, 5, 10]:
+                            hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                            logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+
+
+                    if hits_at_k>maxhits:
+                        maxhits=hits_at_k
+                        maxepoch=epoch
+
+            logger.warn("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
+            logger.warn("The maximum Hits@10 value: {0} \t at epoch {1}".format(maxhits, maxepoch))

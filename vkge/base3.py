@@ -113,7 +113,7 @@ class VKGE2:
         self.alt_updates=alt_updates
         self.tensorboard=tensorboard
         self.projection=projection
-        logger.warn('This model is non-probabilistic ..')
+        logger.warn('This model is probabilistic ..')
 
         logger.warn('Parsing the facts in the Knowledge Base ..')
 
@@ -211,14 +211,27 @@ class VKGE2:
         with tf.variable_scope('encoder'):
             self.entity_embedding_mean = tf.get_variable('entities',
                                                            shape=[nb_entities + 1, entity_embedding_size ],
-                                                           initializer=tf.contrib.layers.xavier_initializer())
+                                                           initializer=tf.initializers.random_normal())
             self.predicate_parameters_layer = tf.get_variable('predicates',
                                                               shape=[nb_predicates + 1, predicate_embedding_size],
-                                                              initializer=tf.contrib.layers.xavier_initializer())
+                                                              initializer=tf.initializers.random_normal())
+            self.entity_embedding_sigma = tf.get_variable('entities_sigma',
+                                                          shape=[nb_entities + 1, entity_embedding_size],
+                                                          initializer=tf.initializers.random_normal(), dtype=tf.float32,
+                                                          trainable=True)
 
-            self.h_s = tf.nn.embedding_lookup(self.entity_embedding_mean,self.s_inputs)
-            self.h_p = tf.nn.embedding_lookup(self.predicate_parameters_layer,self.p_inputs)
-            self.h_o = tf.nn.embedding_lookup(self.entity_embedding_mean,self.o_inputs)
+            self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
+                                                             shape=[nb_predicates + 1, predicate_embedding_size],
+                                                          initializer=tf.initializers.random_normal(), dtype=tf.float32,
+                                                          trainable=True)
+
+        self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
+        self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
+        self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
+
+        self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
+        self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
+        self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
             # self.h_s = VKGE.sample_embedding(self.mu_s, self.log_sigma_sq_s)
             # self.h_p = VKGE.sample_embedding(self.mu_p, self.log_sigma_sq_p)
