@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="added multiple datasets">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base3.py" afterPath="$PROJECT_DIR$/vkge/base3.py" />
     </list>
@@ -92,7 +92,7 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
+            <state relative-caret-position="13682">
               <caret line="981" column="38" lean-forward="false" selection-start-line="981" selection-start-column="18" selection-end-line="981" selection-end-column="38" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
@@ -104,8 +104,8 @@
       <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="273" column="44" lean-forward="true" selection-start-line="273" selection-start-column="44" selection-end-line="273" selection-end-column="44" />
+            <state relative-caret-position="352">
+              <caret line="122" column="44" lean-forward="false" selection-start-line="122" selection-start-column="44" selection-end-line="122" selection-end-column="44" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -141,9 +141,9 @@
       <find>scores</find>
       <find>sigma_alt</find>
       <find>logs</find>
-      <find>training_step4</find>
       <find>triples</find>
       <find>batches</find>
+      <find>training_step4</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -385,13 +385,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00177" summary="new test gpu">
-      <created>1528988831845</created>
-      <option name="number" value="00177" />
-      <option name="presentableId" value="LOCAL-00177" />
-      <option name="project" value="LOCAL" />
-      <updated>1528988831845</updated>
     </task>
     <task id="LOCAL-00178" summary="new test gpu">
       <created>1528989142919</created>
@@ -729,7 +722,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529421196131</updated>
     </task>
-    <option name="localTasksCounter" value="226" />
+    <task id="LOCAL-00226" summary="added multiple datasets">
+      <created>1529480384295</created>
+      <option name="number" value="00226" />
+      <option name="presentableId" value="LOCAL-00226" />
+      <option name="project" value="LOCAL" />
+      <updated>1529480384295</updated>
+    </task>
+    <option name="localTasksCounter" value="227" />
     <servers />
   </component>
   <component name="TodoView">
@@ -795,7 +795,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="turned tensorboard off" />
     <MESSAGE value="fixed special initalisation of sigmas to random normal when sigma flag =-1" />
     <MESSAGE value="added in tensorboard option to flags" />
     <MESSAGE value="testing alternating updates" />
@@ -820,7 +819,8 @@
     <MESSAGE value="updated test script" />
     <MESSAGE value="final test with fixed predicate" />
     <MESSAGE value="updated decaying KL" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated decaying KL" />
+    <MESSAGE value="added multiple datasets" />
+    <option name="LAST_COMMIT_MESSAGE" value="added multiple datasets" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1217,7 +1217,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
+        <state relative-caret-position="13682">
           <caret line="981" column="38" lean-forward="false" selection-start-line="981" selection-start-column="18" selection-end-line="981" selection-end-column="38" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
@@ -1227,8 +1227,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="273" column="44" lean-forward="true" selection-start-line="273" selection-start-column="44" selection-end-line="273" selection-end-column="44" />
+        <state relative-caret-position="352">
+          <caret line="122" column="44" lean-forward="false" selection-start-line="122" selection-start-column="44" selection-end-line="122" selection-end-column="44" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

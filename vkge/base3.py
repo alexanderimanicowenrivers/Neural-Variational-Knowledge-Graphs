@@ -120,8 +120,8 @@ class VKGE2:
         # Dataset
         dataset_name = 'wn18'
 
-        train_triples = read_triples("data2/wn18/{}.train.tsv".format(dataset_name))  # choose dataset
-        test_triples = read_triples("data2/wn18/{}.valid.tsv".format(dataset_name))
+        train_triples = read_triples("data2/{}/train.tsv".format(dataset_name))  # choose dataset
+        test_triples = read_triples("data2/{}/valid.tsv".format(dataset_name))
         self.nb_examples = len(train_triples)
 
 
