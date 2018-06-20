@@ -17,6 +17,34 @@ import vkge.io as io
 import logging
 logger = logging.getLogger(__name__)
 
+def read_triples(path):
+    triples = []
+    with open(path, 'rt') as f:
+        for line in f.readlines():
+            s, p, o = line.split()
+            triples += [(s.strip(), p.strip(), o.strip())]
+    return triples
+
+
+def unit_cube_projection(var_matrix):
+    unit_cube_projection = tf.minimum(1., tf.maximum(var_matrix, 0.))
+    return tf.assign(var_matrix, unit_cube_projection)
+
+
+def make_batches(size, batch_size):
+    nb_batch = int(np.ceil(size / float(batch_size)))
+    res = [(i * batch_size, min(size, (i + 1) * batch_size)) for i in range(0, nb_batch)]
+    return res
+
+class IndexGenerator:
+    def __init__(self):
+        self.random_state = np.random.RandomState(0)
+
+    def __call__(self, n_samples, candidate_indices):
+        shuffled_indices = candidate_indices[self.random_state.permutation(len(candidate_indices))]
+        rand_ints = shuffled_indices[np.arange(n_samples) % len(shuffled_indices)]
+        return rand_ints
+
 
 class VKGE2:
     """
@@ -75,18 +103,12 @@ class VKGE2:
         pred_sigma = ent_sigma #adjust for correct format for model input
         predicate_embedding_size = embedding_size
         entity_embedding_size = embedding_size
-
-        triples = io.read_triples("data/wn18/wordnet-mlj12-train.txt")  # choose dataset
-        test_triples = io.read_triples("data/wn18/wordnet-mlj12-test.txt")
-
         self.random_state = np.random.RandomState(0)
-
         tf.set_random_seed(0)
 
 
         self.GPUMode = GPUMode
         self.alt_cost = alt_cost
-        self.nb_examples = len(triples)
         self.static_mean=static_mean
         self.alt_updates=alt_updates
         self.tensorboard=tensorboard
@@ -95,16 +117,16 @@ class VKGE2:
 
         logger.warn('Parsing the facts in the Knowledge Base ..')
 
-        # logger.warn('Parsing the facts in the Knowledge Base ..')
-        self.facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in triples]
+        # Dataset
+        dataset_name = 'wn18'
 
-        self.test_facts = [Fact(predicate_name=p, argument_names=[s, o]) for s, p, o in test_triples]
+        train_triples = read_triples("data2/wn18/{}.train.tsv".format(dataset_name))  # choose dataset
+        test_triples = read_triples("data2/wn18/{}.valid.tsv".format(dataset_name))
+        self.nb_examples = len(train_triples)
 
-        self.test_parser = KnowledgeBaseParser(self.test_facts)
-        self.parser = KnowledgeBaseParser(self.facts)
 
         ##### for test time ######
-        all_triples = triples + test_triples
+        all_triples = train_triples + test_triples
         entity_set = {s for (s, p, o) in all_triples} | {o for (s, p, o) in all_triples}
         predicate_set = {p for (s, p, o) in all_triples}
         self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
@@ -117,7 +139,7 @@ class VKGE2:
                          optimizer,
                          ent_sigma, pred_sigma)
 
-        self.train(nb_epochs=1000, test_triples=test_triples, all_triples=all_triples,batch_size=batch_s,filename=file_name)
+        self.train(nb_epochs=1000, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -221,30 +243,30 @@ class VKGE2:
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, all_triples, batch_size, session=0, nb_epochs=1000,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
+    def train(self, test_triples, train_triples, batch_size, session=0, nb_epochs=1000,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
                                 Train Model
         """
+
+        nb_versions = 3
+
+        all_triples=train_triples+test_triples
+
         index_gen = index.GlorotIndexGenerator()
-        neg_idxs = np.array(sorted(set(self.parser.entity_to_index.values())))
 
-        subj_corruptor = corrupt.SimpleCorruptor(index_generator=index_gen, candidate_indices=neg_idxs,
-                                                 corr_obj=False)
-        obj_corruptor = corrupt.SimpleCorruptor(index_generator=index_gen, candidate_indices=neg_idxs,
-                                                corr_obj=True)
-
-        train_sequences = self.parser.facts_to_sequences(self.facts)
-
-        Xs = np.array([s_idx for (_, [s_idx, _]) in train_sequences])
-        Xp = np.array([p_idx for (p_idx, _) in train_sequences])
-        Xo = np.array([o_idx for (_, [_, o_idx]) in train_sequences])
+        Xs = np.array([self.entity_to_idx[s] for (s, p, o) in train_triples], dtype=np.int32)
+        Xp = np.array([self.predicate_to_idx[p] for (s, p, o) in train_triples], dtype=np.int32)
+        Xo = np.array([self.entity_to_idx[o] for (s, p, o) in train_triples], dtype=np.int32)
 
         assert Xs.shape == Xp.shape == Xo.shape
 
 
         nb_samples = Xs.shape[0]
-        # batch_size = math.ceil(nb_samples / nb_batches)
         nb_batches= math.ceil(nb_samples / batch_size)
+        batch_size = math.ceil(nb_samples / nb_batches)
+
+        batches = make_batches(self.nb_examples, batch_size)
+
         # logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
         logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
 
@@ -285,14 +307,13 @@ class VKGE2:
                 order = self.random_state.permutation(nb_samples)
                 Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
 
-                batches = make_batches(nb_samples, batch_size)
 
                 loss_values = []
                 total_loss_value = 0
 
-                nb_versions = 3
 
-                for batch_start, batch_end in batches:
+                for batch_no, (batch_start, batch_end) in enumerate(batches):
+
                     curr_batch_size = batch_end - batch_start
 
                     Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
