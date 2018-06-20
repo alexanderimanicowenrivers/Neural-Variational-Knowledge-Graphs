@@ -209,7 +209,7 @@ class VKGE2:
         """
         logger.warn('Building Inference Networks q(h_x | x) ..')
 
-        init1=(6,0/np.sqrt(entity_embedding_size*1.0))
+        init1=(6.0/np.sqrt(entity_embedding_size*1.0))
 
         with tf.variable_scope('encoder'):
             self.entity_embedding_mean = tf.get_variable('entities',
