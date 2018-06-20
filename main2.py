@@ -36,7 +36,7 @@ FLAGS = flags.FLAGS
 def main(_):
     logger.warn("creating model")
 
-    vkge.VKGE_simple(embedding_size=FLAGS.embedding_size, lr=FLAGS.learning_rate, b1=FLAGS.beta1, b2=FLAGS.beta2,
+    vkge.VKGE2(embedding_size=FLAGS.embedding_size, lr=FLAGS.learning_rate, b1=FLAGS.beta1, b2=FLAGS.beta2,
               eps=FLAGS.epsilon, ent_sig=FLAGS.init_sig, alt_cost=FLAGS.alt_cost, batch_s=FLAGS.batch_size,
               static_mean=FLAGS.static_mean, alt_updates=FLAGS.alternating_updates, sigma_alt=FLAGS.Sigma_alt,
               opt_type=FLAGS.opt_type, file_name=FLAGS.file_name, tensorboard=FLAGS.tensorboard

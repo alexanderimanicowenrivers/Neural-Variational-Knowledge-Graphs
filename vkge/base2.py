@@ -211,12 +211,10 @@ class VKGE_simple:
 
         init1=np.round((6.0/np.sqrt(entity_embedding_size*1.0)), decimals=2)
 
-        logger.warn('init is {} ..'.format(init1))
-
         with tf.variable_scope('encoder'):
             self.entity_embedding_mean = tf.get_variable('entities',
                                                            shape=[nb_entities + 1, entity_embedding_size ],
-                                                           initializer=tf.random_uniform_initializer(minval=-init1,maxval=init1,dtype=tf.float32))
+                                                           initializer=tf.contrib.layers.xavier_initializer())
             self.predicate_parameters_layer = tf.get_variable('predicates',
                                                               shape=[nb_predicates + 1, predicate_embedding_size],
                                                               initializer=tf.contrib.layers.xavier_initializer())
