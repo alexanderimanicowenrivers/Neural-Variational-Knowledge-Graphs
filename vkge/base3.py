@@ -373,7 +373,7 @@ class VKGE2:
                     a1,a2,a3,_, elbo_value = session.run([self.mu_s,self.log_sigma_sq_s,self.h_s,self.training_step, self.elbo],
                                                                  feed_dict=loss_args)
 
-                    logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
+                    # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
 
                     if counter % 2 == 0:
                         if self.tensorboard:
