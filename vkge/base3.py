@@ -143,7 +143,7 @@ class VKGE2:
                          optimizer,
                          ent_sigma, pred_sigma)
 
-        self.nb_epochs=2000
+        self.nb_epochs=500
         self.decaykl= np.linspace(0, 1, self.nb_epochs)
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
@@ -298,7 +298,7 @@ class VKGE2:
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, train_triples, batch_size, session=0, nb_epochs=1000,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
+    def train(self, test_triples, train_triples, batch_size, session=0, nb_epochs=500,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
                                 Train Model
         """
