@@ -399,7 +399,7 @@ class VKGE2:
                             self.p_inputs: Xp_batch,
                             self.o_inputs: Xo_batch,
                             self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
-                            self.epoch_d: self.decaykl[epoch - 1]
+                            self.epoch_d: 1.0
                         }
 
 
