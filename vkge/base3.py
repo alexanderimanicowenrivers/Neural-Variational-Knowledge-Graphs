@@ -186,6 +186,7 @@ class VKGE2:
         self.e_objective2 = 0.0
         self.e_objective3 = 0.0
 
+
         self.e_objective1 -= 0.5 * tf.reduce_sum(
             1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
         self.e_objective2 -= 0.5 * tf.reduce_sum(
@@ -194,12 +195,20 @@ class VKGE2:
             1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))# Log likelihood
         # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
 
+
+        self.e_objective1 = self.e_objective1 * self.KL_discount
+        self.e_objective2 = self.e_objective1 * self.KL_discount
+        self.e_objective3 = self.e_objective1 * self.KL_discount
+
+
+        self.e_objective = self.e_objective1+self.e_objective2+self.e_objective3
+
         self.hinge_losses = tf.nn.relu(5 - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
         self.g_objective = tf.reduce_sum(self.hinge_losses)
 
         # self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
-        self.elbo = self.g_objective
+        self.elbo = self.g_objective+self.e_objective
 
         self.training_step = optimizer.minimize(self.elbo)
 
