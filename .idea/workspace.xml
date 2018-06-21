@@ -57,8 +57,8 @@
       <file leaf-file-name="script_gpu.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script_gpu.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="722">
-              <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
+            <state relative-caret-position="746">
+              <caret line="87" column="85" lean-forward="false" selection-start-line="87" selection-start-column="85" selection-end-line="87" selection-end-column="85" />
               <folding>
                 <element signature="e#104#120#0" expanded="true" />
               </folding>
@@ -105,7 +105,7 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
+            <state relative-caret-position="215">
               <caret line="538" column="48" lean-forward="false" selection-start-line="538" selection-start-column="0" selection-end-line="539" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
@@ -117,8 +117,8 @@
       <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="401" column="45" lean-forward="false" selection-start-line="401" selection-start-column="45" selection-end-line="401" selection-end-column="45" />
+            <state relative-caret-position="312">
+              <caret line="401" column="65" lean-forward="false" selection-start-line="401" selection-start-column="42" selection-end-line="401" selection-end-column="65" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -169,9 +169,9 @@
       <find>logs</find>
       <find>batches</find>
       <find>training_step4</find>
-      <find>decayk</find>
       <find>projection_steps</find>
       <find>simple</find>
+      <find>decayk</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -414,13 +414,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00218" summary="updated decaying KL">
-      <created>1529414730955</created>
-      <option name="number" value="00218" />
-      <option name="presentableId" value="LOCAL-00218" />
-      <option name="project" value="LOCAL" />
-      <updated>1529414730956</updated>
     </task>
     <task id="LOCAL-00219" summary="updated decaying KL">
       <created>1529418850118</created>
@@ -758,7 +751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529584502556</updated>
     </task>
-    <option name="localTasksCounter" value="267" />
+    <task id="LOCAL-00267" summary="no projection">
+      <created>1529584559830</created>
+      <option name="number" value="00267" />
+      <option name="presentableId" value="LOCAL-00267" />
+      <option name="project" value="LOCAL" />
+      <updated>1529584559830</updated>
+    </task>
+    <option name="localTasksCounter" value="268" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1257,9 +1257,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/script_gpu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="746">
+          <caret line="87" column="85" lean-forward="false" selection-start-line="87" selection-start-column="85" selection-end-line="87" selection-end-column="85" />
+          <folding>
+            <element signature="e#104#120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
+        <state relative-caret-position="215">
           <caret line="538" column="48" lean-forward="false" selection-start-line="538" selection-start-column="0" selection-end-line="539" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
@@ -1267,20 +1277,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script_gpu.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
-          <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
-          <folding>
-            <element signature="e#104#120#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="401" column="45" lean-forward="false" selection-start-line="401" selection-start-column="45" selection-end-line="401" selection-end-column="45" />
+        <state relative-caret-position="312">
+          <caret line="401" column="65" lean-forward="false" selection-start-line="401" selection-start-column="42" selection-end-line="401" selection-end-column="65" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
