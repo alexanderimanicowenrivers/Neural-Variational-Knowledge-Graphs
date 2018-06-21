@@ -143,7 +143,10 @@ class VKGE2:
                          optimizer,
                          ent_sigma, pred_sigma)
 
-        self.train(nb_epochs=2000, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
+        self.nb_epochs=2000
+        self.decaykl= np.linspace(0, 1, self.nb_epochs)
+
+        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -175,6 +178,7 @@ class VKGE2:
         self.y_inputs = tf.placeholder(tf.bool, shape=[None])
 
         self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
+        self.epoch_d = tf.placeholder(tf.float32)  # starts at 0.5
 
         self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
                            pred_sig)
@@ -193,7 +197,7 @@ class VKGE2:
         # self.e_objective-= 0.5 * tf.reduce_sum(
         #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
         #
-        # self.e_objective=self.e_objective*self.KL_discount
+        # self.e_objective=self.e_objective*self.KL_discount *self.epoch_d
         
         # ####################################  separately
         self.e_objective1 -= 0.5 * tf.reduce_sum(
@@ -205,9 +209,9 @@ class VKGE2:
         # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
 
 
-        self.e_objective1 = self.e_objective1 * self.KL_discount
-        self.e_objective2 = self.e_objective1 * self.KL_discount
-        self.e_objective3 = self.e_objective1 * self.KL_discount
+        self.e_objective1 = self.e_objective1 * self.KL_discount  *self.epoch_d
+        self.e_objective2 = self.e_objective1 * self.KL_discount  *self.epoch_d
+        self.e_objective3 = self.e_objective1 * self.KL_discount   *self.epoch_d
 
 
         self.e_objective = self.e_objective1+self.e_objective2+self.e_objective3
@@ -331,14 +335,14 @@ class VKGE2:
 
         ####### COMPRESSION COST PARAMETERS
 
-        M = int(nb_batches + 1)
+        M = int(nb_batches)
 
-        pi_s = np.log(2.0)*M  
+        pi_s = np.log(2.0)*(M-1)  
         pi_e = np.log(2.0)
 
-        pi = np.exp(np.linspace(pi_s, pi_e, M)-M*np.log(2.0))
+        pi_t = np.exp(np.linspace(pi_s, pi_e, M)-M*np.log(2.0))
 
-
+        pi=(1/np.sum(pi_t))*pi_t        #normalise pi
         #####################
 
         ##
@@ -353,7 +357,7 @@ class VKGE2:
                 train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
-                counter = 1
+                counter = 0
 
                 order = self.random_state.permutation(nb_samples)
                 Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
@@ -393,7 +397,8 @@ class VKGE2:
                             self.s_inputs: Xs_batch,
                             self.p_inputs: Xp_batch,
                             self.o_inputs: Xo_batch,
-                            self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
+                            self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
+                            self.epoch_d: self.decaykl[epoch - 1]
                         }
 
 
