@@ -214,7 +214,7 @@ class VKGE2:
         self.e_objective3 = self.e_objective1 * self.KL_discount   *self.epoch_d
 
 
-        self.e_objective = self.e_objective1+self.e_objective2+self.e_objective3
+        self.e_objective = (1.0/3.0)*(self.e_objective1+self.e_objective2+self.e_objective3)
 
         self.hinge_losses = tf.nn.relu(5 - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
         self.g_objective = tf.reduce_sum(self.hinge_losses)
@@ -399,7 +399,7 @@ class VKGE2:
                             self.p_inputs: Xp_batch,
                             self.o_inputs: Xo_batch,
                             self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
-                            self.epoch_d: self.decaykl[epoch - 1]
+                            self.epoch_d: 1
                         }
 
 
