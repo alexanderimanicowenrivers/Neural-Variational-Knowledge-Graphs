@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="added in KL">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base3.py" afterPath="$PROJECT_DIR$/vkge/base3.py" />
     </list>
@@ -116,8 +116,22 @@
       <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="139" column="47" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+            <state relative-caret-position="643">
+              <caret line="198" column="95" lean-forward="true" selection-start-line="198" selection-start-column="8" selection-end-line="198" selection-end-column="95" />
+              <caret line="199" column="95" lean-forward="true" selection-start-line="199" selection-start-column="8" selection-end-line="199" selection-end-column="95" />
+              <caret line="200" column="95" lean-forward="true" selection-start-line="200" selection-start-column="8" selection-end-line="200" selection-end-column="95" />
+              <caret line="201" column="95" lean-forward="true" selection-start-line="201" selection-start-column="8" selection-end-line="201" selection-end-column="95" />
+              <caret line="202" column="95" lean-forward="true" selection-start-line="202" selection-start-column="8" selection-end-line="202" selection-end-column="95" />
+              <caret line="203" column="95" lean-forward="false" selection-start-line="203" selection-start-column="8" selection-end-line="203" selection-end-column="95" />
+              <caret line="204" column="95" lean-forward="false" selection-start-line="204" selection-start-column="8" selection-end-line="204" selection-end-column="95" />
+              <caret line="205" column="88" lean-forward="true" selection-start-line="205" selection-start-column="88" selection-end-line="205" selection-end-column="88" />
+              <caret line="206" column="88" lean-forward="true" selection-start-line="206" selection-start-column="88" selection-end-line="206" selection-end-column="88" />
+              <caret line="207" column="95" lean-forward="true" selection-start-line="207" selection-start-column="8" selection-end-line="207" selection-end-column="95" />
+              <caret line="208" column="95" lean-forward="true" selection-start-line="208" selection-start-column="8" selection-end-line="208" selection-end-column="95" />
+              <caret line="209" column="95" lean-forward="true" selection-start-line="209" selection-start-column="8" selection-end-line="209" selection-end-column="95" />
+              <caret line="210" column="97" lean-forward="true" selection-start-line="210" selection-start-column="97" selection-end-line="210" selection-end-column="97" />
+              <caret line="211" column="97" lean-forward="true" selection-start-line="211" selection-start-column="97" selection-end-line="211" selection-end-column="97" />
+              <caret line="212" column="95" lean-forward="true" selection-start-line="212" selection-start-column="8" selection-end-line="212" selection-end-column="95" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -410,13 +424,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00210" summary="updated decaying KL">
-      <created>1529341472450</created>
-      <option name="number" value="00210" />
-      <option name="presentableId" value="LOCAL-00210" />
-      <option name="project" value="LOCAL" />
-      <updated>1529341472476</updated>
     </task>
     <task id="LOCAL-00211" summary="updated decaying KL">
       <created>1529343393066</created>
@@ -754,7 +761,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529580524283</updated>
     </task>
-    <option name="localTasksCounter" value="259" />
+    <task id="LOCAL-00259" summary="added in adda optimiser">
+      <created>1529580750503</created>
+      <option name="number" value="00259" />
+      <option name="presentableId" value="LOCAL-00259" />
+      <option name="project" value="LOCAL" />
+      <updated>1529580750503</updated>
+    </task>
+    <option name="localTasksCounter" value="260" />
     <servers />
   </component>
   <component name="TodoView">
@@ -820,7 +834,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="testing alternating updates" />
     <MESSAGE value="fixed tensorboard" />
     <MESSAGE value="fixed stats" />
     <MESSAGE value="changed embeddings size in script" />
@@ -845,7 +858,8 @@
     <MESSAGE value="added multiple datasets" />
     <MESSAGE value="updated main file" />
     <MESSAGE value="added in KL" />
-    <option name="LAST_COMMIT_MESSAGE" value="added in KL" />
+    <MESSAGE value="added in adda optimiser" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in adda optimiser" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1255,8 +1269,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="139" column="47" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+        <state relative-caret-position="643">
+          <caret line="198" column="95" lean-forward="true" selection-start-line="198" selection-start-column="8" selection-end-line="198" selection-end-column="95" />
+          <caret line="199" column="95" lean-forward="true" selection-start-line="199" selection-start-column="8" selection-end-line="199" selection-end-column="95" />
+          <caret line="200" column="95" lean-forward="true" selection-start-line="200" selection-start-column="8" selection-end-line="200" selection-end-column="95" />
+          <caret line="201" column="95" lean-forward="true" selection-start-line="201" selection-start-column="8" selection-end-line="201" selection-end-column="95" />
+          <caret line="202" column="95" lean-forward="true" selection-start-line="202" selection-start-column="8" selection-end-line="202" selection-end-column="95" />
+          <caret line="203" column="95" lean-forward="false" selection-start-line="203" selection-start-column="8" selection-end-line="203" selection-end-column="95" />
+          <caret line="204" column="95" lean-forward="false" selection-start-line="204" selection-start-column="8" selection-end-line="204" selection-end-column="95" />
+          <caret line="205" column="88" lean-forward="true" selection-start-line="205" selection-start-column="88" selection-end-line="205" selection-end-column="88" />
+          <caret line="206" column="88" lean-forward="true" selection-start-line="206" selection-start-column="88" selection-end-line="206" selection-end-column="88" />
+          <caret line="207" column="95" lean-forward="true" selection-start-line="207" selection-start-column="8" selection-end-line="207" selection-end-column="95" />
+          <caret line="208" column="95" lean-forward="true" selection-start-line="208" selection-start-column="8" selection-end-line="208" selection-end-column="95" />
+          <caret line="209" column="95" lean-forward="true" selection-start-line="209" selection-start-column="8" selection-end-line="209" selection-end-column="95" />
+          <caret line="210" column="97" lean-forward="true" selection-start-line="210" selection-start-column="97" selection-end-line="210" selection-end-column="97" />
+          <caret line="211" column="97" lean-forward="true" selection-start-line="211" selection-start-column="97" selection-end-line="211" selection-end-column="97" />
+          <caret line="212" column="95" lean-forward="true" selection-start-line="212" selection-start-column="8" selection-end-line="212" selection-end-column="95" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

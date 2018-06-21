@@ -187,30 +187,30 @@ class VKGE2:
         self.e_objective3 = 0.0
 
 
-        self.mu_all=tf.concat(axis=0,values=[self.mu_s,self.mu_p,self.mu_o])
-        self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s,self.log_sigma_sq_p,self.log_sigma_sq_o])
-
-        self.e_objective-= 0.5 * tf.reduce_sum(
-                         1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
-
-        self.e_objective=self.e_objective*self.KL_discount
+        # self.mu_all=tf.concat(axis=0,values=[self.mu_s,self.mu_p,self.mu_o])
+        # self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s,self.log_sigma_sq_p,self.log_sigma_sq_o])
+        #
+        # self.e_objective-= 0.5 * tf.reduce_sum(
+        #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
+        #
+        # self.e_objective=self.e_objective*self.KL_discount
         
         # ####################################  separately
-        # self.e_objective1 -= 0.5 * tf.reduce_sum(
-        #     1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
-        # self.e_objective2 -= 0.5 * tf.reduce_sum(
-        #     1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
-        # self.e_objective3 -= 0.5 * tf.reduce_sum(
-        #     1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))# Log likelihood
-        # # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
-        #
-        #
-        # self.e_objective1 = self.e_objective1 * self.KL_discount
-        # self.e_objective2 = self.e_objective1 * self.KL_discount
-        # self.e_objective3 = self.e_objective1 * self.KL_discount
+        self.e_objective1 -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
+        self.e_objective2 -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
+        self.e_objective3 -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))# Log likelihood
+        # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
 
 
-        # self.e_objective = self.e_objective1+self.e_objective2+self.e_objective3
+        self.e_objective1 = self.e_objective1 * self.KL_discount
+        self.e_objective2 = self.e_objective1 * self.KL_discount
+        self.e_objective3 = self.e_objective1 * self.KL_discount
+
+
+        self.e_objective = self.e_objective1+self.e_objective2+self.e_objective3
 
         self.hinge_losses = tf.nn.relu(5 - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
         self.g_objective = tf.reduce_sum(self.hinge_losses)
