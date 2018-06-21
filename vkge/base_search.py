@@ -46,7 +46,7 @@ class IndexGenerator:
         return rand_ints
 
 
-class VKGE2:
+class VKGE_working:
     """
            model for testing the basic probabilistic aspects of the model, just using SGD optimiser  - !!working!! 91.34% Hits@10 saved
 

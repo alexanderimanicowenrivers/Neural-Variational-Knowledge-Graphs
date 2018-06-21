@@ -181,11 +181,17 @@ class VKGE2:
         self.build_decoder()
 
         # Kullback Leibler divergence
-        # self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
-        # self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
-        # self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
+        self.e_objective = 0.0
+        self.e_objective1 = 0.0
+        self.e_objective2 = 0.0
+        self.e_objective3 = 0.0
 
-        # Log likelihood
+        self.e_objective1 -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
+        self.e_objective2 -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
+        self.e_objective3 -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))# Log likelihood
         # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
 
         self.hinge_losses = tf.nn.relu(5 - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
