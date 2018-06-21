@@ -116,8 +116,9 @@
       <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="327" column="36" lean-forward="true" selection-start-line="327" selection-start-column="0" selection-end-line="328" selection-end-column="0" />
+            <state relative-caret-position="529">
+              <caret line="422" column="0" lean-forward="false" selection-start-line="422" selection-start-column="0" selection-end-line="422" selection-end-column="59" />
+              <caret line="421" column="0" lean-forward="false" selection-start-line="421" selection-start-column="0" selection-end-line="421" selection-end-column="59" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -413,13 +414,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00215" summary="updated decaying KL">
-      <created>1529344207825</created>
-      <option name="number" value="00215" />
-      <option name="presentableId" value="LOCAL-00215" />
-      <option name="project" value="LOCAL" />
-      <updated>1529344207826</updated>
     </task>
     <task id="LOCAL-00216" summary="updated decaying KL">
       <created>1529413523323</created>
@@ -757,7 +751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529584413281</updated>
     </task>
-    <option name="localTasksCounter" value="264" />
+    <task id="LOCAL-00264" summary="no projection">
+      <created>1529584464455</created>
+      <option name="number" value="00264" />
+      <option name="presentableId" value="LOCAL-00264" />
+      <option name="project" value="LOCAL" />
+      <updated>1529584464455</updated>
+    </task>
+    <option name="localTasksCounter" value="265" />
     <servers />
   </component>
   <component name="TodoView">
@@ -843,7 +844,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed embeddings size in script" />
     <MESSAGE value="added in projection to architecture search" />
     <MESSAGE value="added in test script" />
     <MESSAGE value="added in fixed initial model" />
@@ -868,7 +868,8 @@
     <MESSAGE value="added in adda optimiser" />
     <MESSAGE value="norm" />
     <MESSAGE value=" norm 5" />
-    <option name="LAST_COMMIT_MESSAGE" value=" norm 5" />
+    <MESSAGE value="no projection" />
+    <option name="LAST_COMMIT_MESSAGE" value="no projection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1278,8 +1279,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="327" column="36" lean-forward="true" selection-start-line="327" selection-start-column="0" selection-end-line="328" selection-end-column="0" />
+        <state relative-caret-position="529">
+          <caret line="422" column="0" lean-forward="false" selection-start-line="422" selection-start-column="0" selection-end-line="422" selection-end-column="59" />
+          <caret line="421" column="0" lean-forward="false" selection-start-line="421" selection-start-column="0" selection-end-line="421" selection-end-column="59" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
