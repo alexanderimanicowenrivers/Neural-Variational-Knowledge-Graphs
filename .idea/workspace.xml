@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base3.py" afterPath="$PROJECT_DIR$/vkge/base3.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -115,8 +116,8 @@
       <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="190" column="44" lean-forward="false" selection-start-line="190" selection-start-column="44" selection-end-line="190" selection-end-column="44" />
+            <state relative-caret-position="2623">
+              <caret line="335" column="30" lean-forward="false" selection-start-line="335" selection-start-column="30" selection-end-line="335" selection-end-column="30" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -409,13 +410,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00207" summary="final test with fixed predicate">
-      <created>1529316426930</created>
-      <option name="number" value="00207" />
-      <option name="presentableId" value="LOCAL-00207" />
-      <option name="project" value="LOCAL" />
-      <updated>1529316426932</updated>
     </task>
     <task id="LOCAL-00208" summary="final test with fixed predicate">
       <created>1529340623892</created>
@@ -753,7 +747,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529579810673</updated>
     </task>
-    <option name="localTasksCounter" value="256" />
+    <task id="LOCAL-00256" summary="added in KL">
+      <created>1529579821435</created>
+      <option name="number" value="00256" />
+      <option name="presentableId" value="LOCAL-00256" />
+      <option name="project" value="LOCAL" />
+      <updated>1529579821436</updated>
+    </task>
+    <option name="localTasksCounter" value="257" />
     <servers />
   </component>
   <component name="TodoView">
@@ -819,7 +820,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in tensorboard option to flags" />
     <MESSAGE value="testing alternating updates" />
     <MESSAGE value="fixed tensorboard" />
     <MESSAGE value="fixed stats" />
@@ -844,7 +844,8 @@
     <MESSAGE value="updated decaying KL" />
     <MESSAGE value="added multiple datasets" />
     <MESSAGE value="updated main file" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated main file" />
+    <MESSAGE value="added in KL" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in KL" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1254,8 +1255,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="190" column="44" lean-forward="false" selection-start-line="190" selection-start-column="44" selection-end-line="190" selection-end-column="44" />
+        <state relative-caret-position="2623">
+          <caret line="335" column="30" lean-forward="false" selection-start-line="335" selection-start-column="30" selection-end-line="335" selection-end-column="30" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

@@ -333,7 +333,7 @@ class VKGE2:
 
         M = int(nb_batches + 1)
 
-        pi_s = np.log(2.0)*M
+        pi_s = np.log(2.0)*M  
         pi_e = np.log(2.0)
 
         pi = np.exp(np.linspace(pi_s, pi_e, M)-M*np.log(2.0))
@@ -353,7 +353,7 @@ class VKGE2:
                 train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
-                counter = 0
+                counter = 1
 
                 order = self.random_state.permutation(nb_samples)
                 Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
