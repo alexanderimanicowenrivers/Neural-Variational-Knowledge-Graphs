@@ -325,7 +325,7 @@ class VKGE2:
         # logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
         logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
 
-        projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=5.0)]
+        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=5.0)]
 
         # projection_steps = [constraints.unit_cube(self.entity_embedding_mean) if unit_cube
         #                     else constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
