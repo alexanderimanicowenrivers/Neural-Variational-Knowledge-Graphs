@@ -104,8 +104,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="224" column="80" lean-forward="true" selection-start-line="224" selection-start-column="8" selection-end-line="224" selection-end-column="80" />
+            <state relative-caret-position="70">
+              <caret line="533" column="58" lean-forward="true" selection-start-line="533" selection-start-column="46" selection-end-line="533" selection-end-column="58" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -116,8 +116,8 @@
       <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="587">
-              <caret line="210" column="53" lean-forward="false" selection-start-line="210" selection-start-column="53" selection-end-line="210" selection-end-column="53" />
+            <state relative-caret-position="1210">
+              <caret line="385" column="58" lean-forward="false" selection-start-line="385" selection-start-column="58" selection-end-line="385" selection-end-column="58" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -410,13 +410,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00203" summary="updated test script">
-      <created>1529311157052</created>
-      <option name="number" value="00203" />
-      <option name="presentableId" value="LOCAL-00203" />
-      <option name="project" value="LOCAL" />
-      <updated>1529311157052</updated>
     </task>
     <task id="LOCAL-00204" summary="updated test script">
       <created>1529311337256</created>
@@ -754,7 +747,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529578700604</updated>
     </task>
-    <option name="localTasksCounter" value="252" />
+    <task id="LOCAL-00252" summary="updated main file">
+      <created>1529578858925</created>
+      <option name="number" value="00252" />
+      <option name="presentableId" value="LOCAL-00252" />
+      <option name="project" value="LOCAL" />
+      <updated>1529578858925</updated>
+    </task>
+    <option name="localTasksCounter" value="253" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1245,8 +1245,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="224" column="80" lean-forward="true" selection-start-line="224" selection-start-column="8" selection-end-line="224" selection-end-column="80" />
+        <state relative-caret-position="70">
+          <caret line="533" column="58" lean-forward="true" selection-start-line="533" selection-start-column="46" selection-end-line="533" selection-end-column="58" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
@@ -1255,8 +1255,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="210" column="53" lean-forward="false" selection-start-line="210" selection-start-column="53" selection-end-line="210" selection-end-column="53" />
+        <state relative-caret-position="1210">
+          <caret line="385" column="58" lean-forward="false" selection-start-line="385" selection-start-column="58" selection-end-line="385" selection-end-column="58" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

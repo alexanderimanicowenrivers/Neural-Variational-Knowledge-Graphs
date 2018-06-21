@@ -187,6 +187,9 @@ class VKGE2:
         self.e_objective3 = 0.0
 
 
+        mu_all=tf.concat(values=[self.mu_s,self.mu_p,self.mu_o])
+        sigma_all=tf.concat(values=[self.mu_s,self.mu_p,self.mu_o])  
+
         self.e_objective1 -= 0.5 * tf.reduce_sum(
             1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
         self.e_objective2 -= 0.5 * tf.reduce_sum(
@@ -211,6 +214,7 @@ class VKGE2:
         self.elbo = self.g_objective+self.e_objective
 
         self.training_step = optimizer.minimize(self.elbo)
+
 
         if self.tensorboard:
 
@@ -379,7 +383,7 @@ class VKGE2:
                     # y[0::nb_versions] = 1
 
                     loss_args = {
-                            self.KL_discount: (1.0/nb_batches),
+                            self.KL_discount: pi[counter],
                             self.s_inputs: Xs_batch,
                             self.p_inputs: Xp_batch,
                             self.o_inputs: Xo_batch,
