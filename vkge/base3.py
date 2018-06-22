@@ -107,7 +107,7 @@ class VKGE2:
         entity_embedding_size = embedding_size
         self.random_state = np.random.RandomState(0)
         tf.set_random_seed(0)
-
+        self.static_mean=static_mean
         self.alt_cost = alt_cost
         self.alt_updates=alt_updates
         self.projection=projection
