@@ -82,8 +82,8 @@
           <file leaf-file-name="script_finalsearch.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/script_finalsearch.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="477">
-                  <caret line="71" column="26" lean-forward="false" selection-start-line="71" selection-start-column="23" selection-end-line="71" selection-end-column="26" />
+                <state relative-caret-position="447">
+                  <caret line="69" column="15" lean-forward="false" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="15" />
                   <folding>
                     <element signature="e#104#120#0" expanded="true" />
                   </folding>
@@ -437,13 +437,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00233" summary="updated main file">
-      <created>1529483525349</created>
-      <option name="number" value="00233" />
-      <option name="presentableId" value="LOCAL-00233" />
-      <option name="project" value="LOCAL" />
-      <updated>1529483525350</updated>
-    </task>
     <task id="LOCAL-00234" summary="updated main file">
       <created>1529485205203</created>
       <option name="number" value="00234" />
@@ -780,7 +773,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529684219244</updated>
     </task>
-    <option name="localTasksCounter" value="282" />
+    <task id="LOCAL-00282" summary="adding in previous features">
+      <created>1529685336999</created>
+      <option name="number" value="00282" />
+      <option name="presentableId" value="LOCAL-00282" />
+      <option name="project" value="LOCAL" />
+      <updated>1529685336999</updated>
+    </task>
+    <option name="localTasksCounter" value="283" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1292,8 +1292,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script_finalsearch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="71" column="26" lean-forward="false" selection-start-line="71" selection-start-column="23" selection-end-line="71" selection-end-column="26" />
+        <state relative-caret-position="447">
+          <caret line="69" column="15" lean-forward="false" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="15" />
           <folding>
             <element signature="e#104#120#0" expanded="true" />
           </folding>
