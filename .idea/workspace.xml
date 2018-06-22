@@ -82,8 +82,8 @@
           <file leaf-file-name="script_finalsearch.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/script_finalsearch.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="699">
-                  <caret line="78" column="0" lean-forward="true" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+                <state relative-caret-position="477">
+                  <caret line="71" column="26" lean-forward="false" selection-start-line="71" selection-start-column="23" selection-end-line="71" selection-end-column="26" />
                   <folding>
                     <element signature="e#104#120#0" expanded="true" />
                   </folding>
@@ -106,7 +106,7 @@
           <file leaf-file-name="base3.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/vkge/base3.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2930">
+                <state relative-caret-position="2418">
                   <caret line="266" column="47" lean-forward="false" selection-start-line="266" selection-start-column="47" selection-end-line="266" selection-end-column="47" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
@@ -436,13 +436,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00232" summary="updated main file">
-      <created>1529483318737</created>
-      <option name="number" value="00232" />
-      <option name="presentableId" value="LOCAL-00232" />
-      <option name="project" value="LOCAL" />
-      <updated>1529483318739</updated>
     </task>
     <task id="LOCAL-00233" summary="updated main file">
       <created>1529483525349</created>
@@ -780,7 +773,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529683932894</updated>
     </task>
-    <option name="localTasksCounter" value="281" />
+    <task id="LOCAL-00281" summary="adding in previous features">
+      <created>1529684219243</created>
+      <option name="number" value="00281" />
+      <option name="presentableId" value="LOCAL-00281" />
+      <option name="project" value="LOCAL" />
+      <updated>1529684219244</updated>
+    </task>
+    <option name="localTasksCounter" value="282" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1272,7 +1272,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2930">
+        <state relative-caret-position="2418">
           <caret line="266" column="47" lean-forward="false" selection-start-line="266" selection-start-column="47" selection-end-line="266" selection-end-column="47" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
@@ -1292,8 +1292,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script_finalsearch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="699">
-          <caret line="78" column="0" lean-forward="true" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+        <state relative-caret-position="477">
+          <caret line="71" column="26" lean-forward="false" selection-start-line="71" selection-start-column="23" selection-end-line="71" selection-end-column="26" />
           <folding>
             <element signature="e#104#120#0" expanded="true" />
           </folding>
