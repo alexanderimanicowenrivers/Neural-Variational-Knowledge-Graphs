@@ -158,7 +158,6 @@ class VKGE2:
         mu, log_sigma_square = tf.split(value=parameters, num_or_size_splits=2, axis=1)
         return mu, log_sigma_square
 
-    @staticmethod
     def sample_embedding(self,mu, log_sigma_square):
         """
                 Samples from embeddings
