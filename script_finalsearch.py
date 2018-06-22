@@ -30,7 +30,7 @@ def to_cmd(c):
     #     command = 'PYTHONPATH=. python3-gpu {}/main.py {} ' \
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
-    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
+    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main2.py  ' \
               '--batch_size {} ' \
               '--learning_rate {} ' \
               '--init_sig {} ' \
@@ -40,8 +40,7 @@ def to_cmd(c):
               '--Sigma_alt {} ' \
               '--alternating_updates {} ' \
               '--projection {} ' \
-              '--opt_type {} ' \
-              '--opt {} ' \
+              '--margin {} ' \
               '--static_pred {}' \
               '--decay_kl {}' \
               '--file_name {} ' \
@@ -62,7 +61,7 @@ def to_cmd(c):
                 c['w10'],
                 c['w11'],
                 c['w12'],
-                "%s/logs/18_6_18/uclcs_nvkg_v1.%s" % (path, summary(c))
+                "%s/logs/18_6_21/tfgraphs"
 
                 )
     return command
@@ -76,16 +75,15 @@ def to_logfile(c, path):
 def main(_):
     hyperparameters_space = dict(
         w0=[14145],
-        w1=[0.01,0.001,1e-4],
-        w2=[1,4,-1],
-        w3=[100],
+        w1=[0.1,0.01],
+        w2=[2,4,8,-1], #
+        w3=[50,100,150,200],
         w4=[True, False],
         w5=[False,True],
         w6=[True,False],
-        w7 = [True],
+        w7 = [True,False],
         w8=[False,True],
-        w9=['hinge','ml'],
-        w10 = ['adam', 'adagrad'],
+        w9=[1, 3, 5, 7],
         w11=[False,True],
         w12=[False, True],
 
@@ -93,7 +91,7 @@ def main(_):
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_18'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_21'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):

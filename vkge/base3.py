@@ -87,19 +87,19 @@ class VKGE2:
         @type projection: bool
 
             """
-    def __init__(self,decay_kl, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
-                 alt_cost=False,static_pred=False,static_mean=False,alt_updates=True,sigma_alt=True,opt_type='ml',tensorboard=True,projection=True,opt='adam'):
+    def __init__(self,decay_kl, file_name,embedding_size=5,batch_s=14145, lr=0.1, init_sig=6.0,
+                 alt_cost=False,static_pred=False,static_mean=False,alt_updates=True,sigma_alt=True,margin=5,tensorboard=True,projection=True):
         super().__init__()
 
         self.sigma_alt=sigma_alt
 
-        if ent_sig==-1:
-            ent_sigma=ent_sig
+        if init_sig==-1:
+            ent_sigma=init_sig
         else:
             if sigma_alt:
-                ent_sigma=tf.log(tf.exp(ent_sig)-1)
+                ent_sigma=tf.log(tf.exp(init_sig)-1)
             else:
-                ent_sigma = (np.log(ent_sig**2)) #old sigma
+                ent_sigma = (np.log(init_sig**2)) #old sigma
 
         pred_sigma = ent_sigma #adjust for correct format for model input
         predicate_embedding_size = embedding_size
@@ -107,8 +107,7 @@ class VKGE2:
         self.random_state = np.random.RandomState(0)
         tf.set_random_seed(0)
 
-
-        self.GPUMode = GPUMode
+        self.static_pred=static_pred
         self.alt_cost = alt_cost
         self.static_mean=static_mean
         self.alt_updates=alt_updates
@@ -134,10 +133,10 @@ class VKGE2:
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
-
+        self.margin=margin
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
-        optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
-        # optimizer = tf.train.AdamOptimizer(learning_rate=0.01, epsilon=1e-5)
+        optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
+        # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-5)
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,
@@ -216,7 +215,7 @@ class VKGE2:
 
         self.e_objective = (1.0/3.0)*(self.e_objective1+self.e_objective2+self.e_objective3)
 
-        self.hinge_losses = tf.nn.relu(5 - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
+        self.hinge_losses = tf.nn.relu(self.margin - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
         self.g_objective = tf.reduce_sum(self.hinge_losses)
 
         # self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
