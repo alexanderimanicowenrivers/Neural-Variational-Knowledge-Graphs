@@ -19,10 +19,9 @@ flags.DEFINE_boolean("alt_cost", True, "Switch for compression cost to be used i
 flags.DEFINE_boolean("static_mean", False,
                      "Switch as to if mean is fixed at 0 or can train with random normal init [False]")
 flags.DEFINE_boolean("alternating_updates", False, "Alternate updates around each distribution[False]")
-flags.DEFINE_boolean("Sigma_alt", True, "Alternate between two different standard dev calculations [True]")
-flags.DEFINE_boolean("projection", True, "Alternate between using a projection on the means [False]")
-flags.DEFINE_boolean("alt_opt", True, "Define for tensorboard statistics to be saved [False]")
-flags.DEFINE_boolean("static_pred", False, "Defines if predicate embeddings are variational or fixed point [False]")
+flags.DEFINE_boolean("Sigma_alt", False, "Alternate between two different standard dev calculations [False]")
+flags.DEFINE_boolean("projection", False, "Alternate between using a projection on the means [False]")
+flags.DEFINE_boolean("alt_opt", True, "Define to use  Adagrad or Adam  [False]")
 flags.DEFINE_boolean("decay_kl", False, "Defines if KL inverse decays [False]")
 flags.DEFINE_float("margin", 5, "Choose optimiser loss, select the margin for hinge loss [5]")
 flags.DEFINE_string("file_name", '~/', "file name for tensorboard file ['--']")

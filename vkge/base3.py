@@ -87,7 +87,7 @@ class VKGE2:
         @type projection: bool
 
             """
-    def __init__(self,decay_kl, file_name,embedding_size=50,batch_s=14145, lr=0.1, init_sig=6.0,
+    def __init__(self,file_name,decay_kl=False,static_mean=False,embedding_size=50,batch_s=14145, lr=0.1, init_sig=6.0,
                  alt_cost=False,alt_updates=True,sigma_alt=True,margin=5,alt_opt=True,projection=True):
         super().__init__()
 
@@ -110,7 +110,6 @@ class VKGE2:
 
         self.alt_cost = alt_cost
         self.alt_updates=alt_updates
-        self.tensorboard=tensorboard
         self.projection=projection
         logger.warn('This model is probabilistic ..')
 
@@ -134,10 +133,10 @@ class VKGE2:
         ############################
         self.margin=margin
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
-        if opt == 'adam':
-            optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-05)
-        else:
+        if alt_opt:
             optimizer = tf.train.AdagradOptimizer(learning_rate=lr)  # original KG
+        else:
+            optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-05)
 
         # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-5)
 
@@ -239,15 +238,15 @@ class VKGE2:
         self.training_step4 = optimizer.minimize(self.g_objective)
 
 
-        if self.tensorboard:
 
-            _ = tf.summary.scalar("total e loss", self.e_objective)
-            _ = tf.summary.scalar("total e subject loss", self.e_objective1)
-            _ = tf.summary.scalar("total e predicate loss", self.e_objective2)
-            _ = tf.summary.scalar("total e object loss", self.e_objective3)
-            _ = tf.summary.scalar("g loss", self.g_objective)
 
-            _ = tf.summary.scalar("total loss", self.elbo)
+        tf.summary.scalar("total e loss", self.e_objective)
+        tf.summary.scalar("total e subject loss", self.e_objective1)
+        tf.summary.scalar("total e predicate loss", self.e_objective2)
+        tf.summary.scalar("total e object loss", self.e_objective3)
+        tf.summary.scalar("g loss", self.g_objective)
+
+        tf.summary.scalar("total loss", self.elbo)
 
 
 
@@ -264,22 +263,60 @@ class VKGE2:
         logger.warn('init is {} ..'.format(init1))
 
         with tf.variable_scope('encoder'):
-            self.entity_embedding_mean = tf.get_variable('entities',
-                                                           shape=[nb_entities + 1, entity_embedding_size ],
-                                                           initializer=tf.random_uniform_initializer(minval=-init1,maxval=init1,dtype=tf.float32))
-            self.predicate_embedding_mean = tf.get_variable('predicates',
-                                                              shape=[nb_predicates + 1, predicate_embedding_size],
-                                                            initializer=tf.random_uniform_initializer(minval=-init1,
-                                                                                                      maxval=init1,dtype=tf.float32))
-            self.entity_embedding_sigma = tf.get_variable('entities_sigma',
-                                                          shape=[nb_entities + 1, entity_embedding_size],
-                                                          initializer=tf.random_uniform_initializer(minval=init2,maxval=init3,dtype=tf.float32)            , dtype=tf.float32,
-                                                          trainable=True)
 
-            self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
-                                                             shape=[nb_predicates + 1, predicate_embedding_size],
-                                                          initializer=tf.random_uniform_initializer(minval=init2,maxval=init3,dtype=tf.float32), dtype=tf.float32,
-                                                          trainable=True)
+            if self.static_mean:
+                with tf.variable_scope('entity mean'):
+                    self.entity_embedding_mean = tf.get_variable('entities_mean',
+                                                             shape=[nb_entities + 1, entity_embedding_size],
+                                                             initializer=tf.zeros_initializer(), dtype=tf.float32,
+                                                             trainable=False)
+                    self.variable_summaries(self.entity_embedding_mean)
+
+                self.predicate_embedding_mean = tf.get_variable('predicate_mean',
+                                                                shape=[nb_predicates + 1, predicate_embedding_size],
+                                                                initializer=tf.zeros_initializer(), dtype=tf.float32,
+                                                                trainable=False)
+            else:
+
+
+                self.entity_embedding_mean = tf.get_variable('entities',
+                                                                   shape=[nb_entities + 1, entity_embedding_size ],
+                                                                   initializer=tf.random_uniform_initializer(minval=-init1,maxval=init1,dtype=tf.float32))
+                self.predicate_embedding_mean = tf.get_variable('predicates',
+                                                                  shape=[nb_predicates + 1, predicate_embedding_size],
+                                                                initializer=tf.random_uniform_initializer(minval=-init1,maxval=init1,dtype=tf.float32))
+
+            if ent_sig == -1:
+
+                with tf.variable_scope('entity transformed sigma'):
+
+                    self.entity_embedding_sigma = tf.get_variable('entities_sigma',
+                                                              shape=[nb_entities + 1, entity_embedding_size],
+                                                              initializer=tf.random_uniform_initializer(
+                                                                  minval=init2, maxval=init3, dtype=tf.float32),
+                                                              dtype=tf.float32)
+                    self.variable_summaries(self.entity_embedding_sigma)
+
+                self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
+                                                                 shape=[nb_predicates + 1,
+                                                                        predicate_embedding_size],
+                                                                 initializer=tf.random_uniform_initializer(
+                                                                     minval=init2, maxval=init3, dtype=tf.float32),
+                                                                 dtype=tf.float32)
+            else:
+
+                self.entity_embedding_sigma = tf.get_variable('entities_sigma',
+                                                              shape=[nb_entities + 1, entity_embedding_size],
+                                                              initializer=tf.random_uniform_initializer(
+                                                                  minval=ent_sig, maxval=ent_sig, dtype=tf.float32),
+                                                              dtype=tf.float32)
+
+                self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
+                                                                 shape=[nb_predicates + 1,
+                                                                        predicate_embedding_size],
+                                                                 initializer=tf.random_uniform_initializer(
+                                                                     minval=pred_sig, maxval=pred_sig, dtype=tf.float32),
+                                                                 dtype=tf.float32)
 
             self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
             self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
