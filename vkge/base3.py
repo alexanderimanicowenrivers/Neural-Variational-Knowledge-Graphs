@@ -426,7 +426,7 @@ class VKGE2:
 
             for epoch in range(1, nb_epochs + 1):
                 counter = 0
-                if self.decaykl:
+                if self.decay_kl:
 
                     kl_inc_val = 1.0
                 else:
