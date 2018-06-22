@@ -31,7 +31,6 @@ def to_cmd(c):
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
     command = 'PYTHONPATH=. anaconda-python3-cpu {}/main2.py  ' \
-              '--batch_size {} ' \
               '--learning_rate {} ' \
               '--init_sig {} ' \
               '--embedding_size {} ' \
@@ -46,7 +45,6 @@ def to_cmd(c):
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
-                c['w0'],
                 c['w1'],
                 c['w2'],
                 c['w3'],
@@ -57,8 +55,6 @@ def to_cmd(c):
                 c['w8'],
                 c['w9'],
                 c['w10'],
-                c['w11'],
-                c['w12'],
                 "%s/logs/18_6_21/tfgraphs"
 
                 )
@@ -72,7 +68,6 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w0=[14145],
         w1=[0.1,0.01],
         w2=[2,4,8,-1], #
         w3=[50,100,150,200],
