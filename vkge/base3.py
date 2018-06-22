@@ -287,7 +287,7 @@ class VKGE2:
 
             if ent_sig == -1:
 
-                with tf.variable_scope('entity_f(sigma)'):
+                with tf.variable_scope('entity_f_of_sigma'):
 
                     self.entity_embedding_sigma = tf.get_variable('entities_sigma',
                                                               shape=[nb_entities + 1, entity_embedding_size],

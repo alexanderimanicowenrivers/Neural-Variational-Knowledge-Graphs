@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="adding in previous features">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_finalsearch.py" afterPath="$PROJECT_DIR$/script_finalsearch.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base3.py" afterPath="$PROJECT_DIR$/vkge/base3.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -108,7 +107,7 @@
             <entry file="file://$PROJECT_DIR$/vkge/base3.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="255">
-                  <caret line="289" column="55" lean-forward="false" selection-start-line="289" selection-start-column="55" selection-end-line="289" selection-end-column="55" />
+                  <caret line="289" column="52" lean-forward="false" selection-start-line="289" selection-start-column="52" selection-end-line="289" selection-end-column="52" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                   </folding>
@@ -437,13 +436,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00229" summary="updated main file">
-      <created>1529482262021</created>
-      <option name="number" value="00229" />
-      <option name="presentableId" value="LOCAL-00229" />
-      <option name="project" value="LOCAL" />
-      <updated>1529482262021</updated>
     </task>
     <task id="LOCAL-00230" summary="updated main file">
       <created>1529482660901</created>
@@ -781,7 +773,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529683584809</updated>
     </task>
-    <option name="localTasksCounter" value="278" />
+    <task id="LOCAL-00278" summary="adding in previous features">
+      <created>1529683743860</created>
+      <option name="number" value="00278" />
+      <option name="presentableId" value="LOCAL-00278" />
+      <option name="project" value="LOCAL" />
+      <updated>1529683743860</updated>
+    </task>
+    <option name="localTasksCounter" value="279" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1294,7 +1293,7 @@
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="289" column="55" lean-forward="false" selection-start-line="289" selection-start-column="55" selection-end-line="289" selection-end-column="55" />
+          <caret line="289" column="52" lean-forward="false" selection-start-line="289" selection-start-column="52" selection-end-line="289" selection-end-column="52" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
