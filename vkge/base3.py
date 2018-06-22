@@ -425,6 +425,11 @@ class VKGE2:
 
             for epoch in range(1, nb_epochs + 1):
                 counter = 0
+                if self.decaykl:
+
+                    kl_inc_val = 1.0
+                else:
+                    kl_inc_val = (1.0 / (nb_epochs+1-epoch))
 
                 order = self.random_state.permutation(nb_samples)
                 Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
@@ -459,6 +464,7 @@ class VKGE2:
                     # y = np.zeros_like(Xp_batch)
                     # y[0::nb_versions] = 1
 
+
                     if self.alt_cost:  # if compression cost
 
                         loss_args = {
@@ -467,7 +473,7 @@ class VKGE2:
                                 self.p_inputs: Xp_batch,
                                 self.o_inputs: Xo_batch,
                                 self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
-                                self.epoch_d: 1
+                                self.epoch_d: kl_inc_val
                             }
 
                     else:
@@ -477,7 +483,7 @@ class VKGE2:
                                 self.p_inputs: Xp_batch,
                                 self.o_inputs: Xo_batch,
                                 self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
-                                self.epoch_d: 1
+                                self.epoch_d: kl_inc_val
                             }
 
                     merge = tf.summary.merge_all() #for TB
