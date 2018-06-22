@@ -36,12 +36,10 @@ def to_cmd(c):
               '--init_sig {} ' \
               '--embedding_size {} ' \
               '--alt_cost {} ' \
-              '--static_mean {} ' \
               '--Sigma_alt {} ' \
               '--alternating_updates {} ' \
-              '--projection {} ' \
+              '--alt_opt {} ' \
               '--margin {} ' \
-              '--static_pred {}' \
               '--decay_kl {}' \
               '--file_name {} ' \
  \
@@ -79,13 +77,12 @@ def main(_):
         w2=[2,4,8,-1], #
         w3=[50,100,150,200],
         w4=[True, False],
-        w5=[False,True],
-        w6=[True,False],
-        w7 = [True,False],
-        w8=[False,True],
-        w9=[1, 3, 5, 7],
-        w11=[False,True],
-        w12=[False, True],
+        w5=[True,False],
+        w6 = [True,False],
+        w7=[False,True],
+        w8=[1, 3, 5, 7],
+        w9=[False,True],
+        w10=[False, True],
 
     )
 

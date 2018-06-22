@@ -87,8 +87,8 @@ class VKGE2:
         @type projection: bool
 
             """
-    def __init__(self,decay_kl, file_name,embedding_size=5,batch_s=14145, lr=0.1, init_sig=6.0,
-                 alt_cost=False,static_pred=False,static_mean=False,alt_updates=True,sigma_alt=True,margin=5,tensorboard=True,projection=True):
+    def __init__(self,decay_kl, file_name,embedding_size=50,batch_s=14145, lr=0.1, init_sig=6.0,
+                 alt_cost=False,alt_updates=True,sigma_alt=True,margin=5,alt_opt=True,projection=True):
         super().__init__()
 
         self.sigma_alt=sigma_alt
@@ -97,6 +97,7 @@ class VKGE2:
             ent_sigma=init_sig
         else:
             if sigma_alt:
+
                 ent_sigma=tf.log(tf.exp(init_sig)-1)
             else:
                 ent_sigma = (np.log(init_sig**2)) #old sigma
@@ -107,9 +108,7 @@ class VKGE2:
         self.random_state = np.random.RandomState(0)
         tf.set_random_seed(0)
 
-        self.static_pred=static_pred
         self.alt_cost = alt_cost
-        self.static_mean=static_mean
         self.alt_updates=alt_updates
         self.tensorboard=tensorboard
         self.projection=projection
@@ -135,7 +134,11 @@ class VKGE2:
         ############################
         self.margin=margin
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
-        optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
+        if opt == 'adam':
+            optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-05)
+        else:
+            optimizer = tf.train.AdagradOptimizer(learning_rate=lr)  # original KG
+
         # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-5)
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
@@ -157,11 +160,15 @@ class VKGE2:
         return mu, log_sigma_square
 
     @staticmethod
-    def sample_embedding(mu, log_sigma_square):
+    def sample_embedding(self,mu, log_sigma_square):
         """
                 Samples from embeddings
         """
-        sigma = tf.sqrt(tf.exp(log_sigma_square))
+        if self.sigma_alt:
+            sigma = tf.log(1+tf.exp(log_sigma_square))
+        else:
+            sigma = tf.sqrt(tf.exp(log_sigma_square))
+
         embedding_size = mu.get_shape()[1].value
         eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
         return mu + sigma * eps
@@ -224,10 +231,20 @@ class VKGE2:
 
         self.training_step = optimizer.minimize(self.elbo)
 
+        ## FOR ALTERNATING UPDATES
+
+        self.training_step1 = optimizer.minimize(self.e_objective1)
+        self.training_step2 = optimizer.minimize(self.e_objective2)
+        self.training_step3 = optimizer.minimize(self.e_objective3)
+        self.training_step4 = optimizer.minimize(self.g_objective)
+
 
         if self.tensorboard:
 
             _ = tf.summary.scalar("total e loss", self.e_objective)
+            _ = tf.summary.scalar("total e subject loss", self.e_objective1)
+            _ = tf.summary.scalar("total e predicate loss", self.e_objective2)
+            _ = tf.summary.scalar("total e object loss", self.e_objective3)
             _ = tf.summary.scalar("g loss", self.g_objective)
 
             _ = tf.summary.scalar("total loss", self.elbo)
@@ -293,6 +310,17 @@ class VKGE2:
             self.scores = model()
             self.scores_test = model_test()
 
+    def variable_summaries(self,var):
+        """Summaries of a Tensor"""
+        with tf.name_scope('summaries'):
+            mean = tf.reduce_mean(var)
+            tf.summary.scalar('mean', mean)
+            with tf.name_scope('stddev'):
+                stddev = tf.sqrt(tf.reduce_mean(tf.square(var - mean)))
+            tf.summary.scalar('stddev', stddev)
+            tf.summary.scalar('max', tf.reduce_max(var))
+            tf.summary.scalar('min', tf.reduce_min(var))
+            tf.summary.histogram('histogram', var)
 
     def stats(self,values):
         """
@@ -356,8 +384,8 @@ class VKGE2:
         with tf.Session() as session:
             session.run(init_op)
 
-            if self.tensorboard:
-                train_writer = tf.summary.FileWriter(filename, session.graph)
+
+            train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
                 counter = 0
@@ -395,34 +423,54 @@ class VKGE2:
                     # y = np.zeros_like(Xp_batch)
                     # y[0::nb_versions] = 1
 
-                    loss_args = {
-                            self.KL_discount: pi[counter],
-                            self.s_inputs: Xs_batch,
-                            self.p_inputs: Xp_batch,
-                            self.o_inputs: Xo_batch,
-                            self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
-                            self.epoch_d: 1
-                        }
+                    if self.alt_cost:  # if compression cost
+
+                        loss_args = {
+                                self.KL_discount: pi[counter],
+                                self.s_inputs: Xs_batch,
+                                self.p_inputs: Xp_batch,
+                                self.o_inputs: Xo_batch,
+                                self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
+                                self.epoch_d: 1
+                            }
+
+                    else:
+                        loss_args = {
+                                self.KL_discount: (1.0 / nb_batches),
+                                self.s_inputs: Xs_batch,
+                                self.p_inputs: Xp_batch,
+                                self.o_inputs: Xo_batch,
+                                self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
+                                self.epoch_d: 1
+                            }
+
+                    merge = tf.summary.merge_all() #for TB
 
 
+                    if self.alt_updates:
 
+                        _ = session.run([self.training_step1], feed_dict=loss_args)
+                        _ = session.run([self.training_step2], feed_dict=loss_args)
+                        _ = session.run([self.training_step3], feed_dict=loss_args)
+                        summary,_,elbo_value = session.run([merge,self.training_step4,self.elbo], feed_dict=loss_args)
 
-                    a1,a2,a3,_, elbo_value = session.run([self.mu_s,self.log_sigma_sq_s,self.h_s,self.training_step, self.elbo],
-                                                                 feed_dict=loss_args)
+                    else:
+                        summary,_,elbo_value = session.run([merge,self.training_step,self.elbo], feed_dict=loss_args)
+
+                    if counter % 2 == 0:
+                        train_writer.add_summary(summary, counter)  # tensorboard
 
                     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
 
-                    if counter % 2 == 0:
-                        if self.tensorboard:
-                            train_writer.add_summary(summary, counter)  # tensorboard
 
                     loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
                     total_loss_value += elbo_value
 
                     counter += 1
 
-                    # for projection_step in projection_steps:
-                    #     session.run([projection_step])
+                # if (self.projection == True):  # project means
+                #     for projection_step in projection_steps:
+                #         session.run([projection_step])
 
 
                 if (round(np.mean(loss_values), 4) < minloss):
