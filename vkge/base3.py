@@ -264,7 +264,7 @@ class VKGE2:
         with tf.variable_scope('encoder'):
 
             if self.static_mean:
-                with tf.variable_scope('entity mean'):
+                with tf.variable_scope('entity_mean'):
                     self.entity_embedding_mean = tf.get_variable('entities_mean',
                                                              shape=[nb_entities + 1, entity_embedding_size],
                                                              initializer=tf.zeros_initializer(), dtype=tf.float32,
