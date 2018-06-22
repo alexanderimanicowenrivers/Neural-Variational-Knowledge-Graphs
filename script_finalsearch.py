@@ -54,7 +54,6 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                c['w10'],
                 "%s/logs/18_6_21/tfgraphs"
 
                 )
@@ -77,7 +76,6 @@ def main(_):
         w7=[False,True],
         w8=[1, 3, 5, 7],
         w9=[False,True],
-        w10=[False, True],
 
     )
 
