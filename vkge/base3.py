@@ -145,7 +145,8 @@ class VKGE2:
                          ent_sigma, pred_sigma)
 
         self.nb_epochs=500
-        self.decaykl= np.linspace(0, 1, self.nb_epochs)
+
+        self.decay_kl=decay_kl
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
 
