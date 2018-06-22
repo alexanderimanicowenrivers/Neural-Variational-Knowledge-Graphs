@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="added in flag print statement">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main2.py" afterPath="$PROJECT_DIR$/main2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_finalsearch.py" afterPath="$PROJECT_DIR$/script_finalsearch.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_gpu.py" afterPath="$PROJECT_DIR$/script_gpu.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base3.py" afterPath="$PROJECT_DIR$/vkge/base3.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,7 +59,7 @@
           <file leaf-file-name="script_gpu.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/script_gpu.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="729">
+                <state relative-caret-position="597">
                   <caret line="87" column="85" lean-forward="false" selection-start-line="87" selection-start-column="85" selection-end-line="87" selection-end-column="85" />
                   <folding>
                     <element signature="e#104#120#0" expanded="true" />
@@ -93,7 +92,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="main2.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="main2.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/main2.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="450">
@@ -105,11 +104,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="base3.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="base3.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/base3.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1209">
-                  <caret line="136" column="75" lean-forward="false" selection-start-line="136" selection-start-column="75" selection-end-line="136" selection-end-column="75" />
+                <state relative-caret-position="157">
+                  <caret line="461" column="66" lean-forward="false" selection-start-line="461" selection-start-column="66" selection-end-line="461" selection-end-column="66" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                   </folding>
@@ -193,6 +192,7 @@
       <find>projection_steps</find>
       <find>simple</find>
       <find>decayk</find>
+      <find>p_x_i</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -231,10 +231,10 @@
         <option value="$PROJECT_DIR$/vkge/base_search.py" />
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
-        <option value="$PROJECT_DIR$/script_gpu.py" />
         <option value="$PROJECT_DIR$/script_finalsearch.py" />
-        <option value="$PROJECT_DIR$/vkge/base3.py" />
         <option value="$PROJECT_DIR$/main2.py" />
+        <option value="$PROJECT_DIR$/script_gpu.py" />
+        <option value="$PROJECT_DIR$/vkge/base3.py" />
       </list>
     </option>
   </component>
@@ -435,13 +435,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00222" summary="updated decaying KL">
-      <created>1529420218734</created>
-      <option name="number" value="00222" />
-      <option name="presentableId" value="LOCAL-00222" />
-      <option name="project" value="LOCAL" />
-      <updated>1529420218735</updated>
     </task>
     <task id="LOCAL-00223" summary="updated decaying KL">
       <created>1529420615463</created>
@@ -779,7 +772,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529595808348</updated>
     </task>
-    <option name="localTasksCounter" value="271" />
+    <task id="LOCAL-00271" summary="added in flag print statement">
+      <created>1529671237521</created>
+      <option name="number" value="00271" />
+      <option name="presentableId" value="LOCAL-00271" />
+      <option name="project" value="LOCAL" />
+      <updated>1529671237522</updated>
+    </task>
+    <option name="localTasksCounter" value="272" />
     <servers />
   </component>
   <component name="TodoView">
@@ -865,7 +865,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in test script" />
     <MESSAGE value="added in fixed initial model" />
     <MESSAGE value="added models into init" />
     <MESSAGE value="fixed base3" />
@@ -890,7 +889,8 @@
     <MESSAGE value=" norm 5" />
     <MESSAGE value="no projection" />
     <MESSAGE value="no increase, no projection and classically weighted KL term" />
-    <option name="LAST_COMMIT_MESSAGE" value="no increase, no projection and classically weighted KL term" />
+    <MESSAGE value="added in flag print statement" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in flag print statement" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1239,16 +1239,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script_gpu.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="729">
-          <caret line="87" column="85" lean-forward="false" selection-start-line="87" selection-start-column="85" selection-end-line="87" selection-end-column="85" />
-          <folding>
-            <element signature="e#104#120#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_search.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="795">
@@ -1279,22 +1269,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1209">
-          <caret line="136" column="75" lean-forward="false" selection-start-line="136" selection-start-column="75" selection-end-line="136" selection-end-column="75" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
             <element signature="e#25#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script_gpu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="87" column="85" lean-forward="false" selection-start-line="87" selection-start-column="85" selection-end-line="87" selection-end-column="85" />
+          <folding>
+            <element signature="e#104#120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="461" column="66" lean-forward="false" selection-start-line="461" selection-start-column="66" selection-end-line="461" selection-end-column="66" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -287,8 +287,11 @@ class VKGE2:
         with tf.variable_scope('decoder'):
             model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                  object_embeddings=self.h_o)
+            model_test = models.BilinearDiagonalModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
+                                                 object_embeddings=self.mu_o)
+
             self.scores = model()
-            self.p_x_i = self.scores
+            self.scores_test = model_test()
 
 
     def stats(self,values):
@@ -456,10 +459,10 @@ class VKGE2:
                                                  self.o_inputs: np.arange(self.nb_entities)}
 
                         # scores of (1, p, o), (2, p, o), .., (N, p, o)
-                        scores_subj = session.run(self.scores, feed_dict=feed_dict_corrupt_subj)
+                        scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
 
                         # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                        scores_obj = session.run(self.scores, feed_dict=feed_dict_corrupt_obj)
+                        scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
 
                         ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
                         ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
