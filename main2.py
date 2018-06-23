@@ -13,17 +13,17 @@ flags.DEFINE_float("learning_rate", 0.1, "Learning rate of adam optimizer [0.1]"
 flags.DEFINE_float("init_sig", 6.0, "Initalised variance of variables [6.0]")
 flags.DEFINE_float("init_sig2", 6.0, "Initalised variance of variables [6.0]")
 flags.DEFINE_float("mog_split", 0.5, "Split between spike and slab [6.0]")
-flags.DEFINE_integer("embedding_size", 50, "The dimension of graph embeddings [50]")
+flags.DEFINE_integer("embedding_size", 200, "The dimension of graph embeddings [50]")
 flags.DEFINE_integer("batch_size", 14145, "Batch Size [14145]")
 flags.DEFINE_boolean("alt_cost", True, "Switch for compression cost to be used in training [True]")
 flags.DEFINE_boolean("static_mean", False,
                      "Switch as to if mean is fixed at 0 or can train with random normal init [False]")
 flags.DEFINE_boolean("alternating_updates", False, "Alternate updates around each distribution[False]")
-flags.DEFINE_boolean("Sigma_alt", False, "Alternate between two different standard dev calculations [False]")
+flags.DEFINE_boolean("Sigma_alt", True, "Alternate between two different standard dev calculations [True]")
 flags.DEFINE_boolean("projection", False, "Alternate between using a projection on the means [False]")
 flags.DEFINE_boolean("alt_opt", True, "Define to use  Adagrad or Adam  [False]")
 flags.DEFINE_boolean("decay_kl", False, "Defines if KL inverse decays [False]")
-flags.DEFINE_float("margin", 5, "Choose optimiser loss, select the margin for hinge loss [5]")
+flags.DEFINE_float("margin", 1, "Choose optimiser loss, select the margin for hinge loss [1]")
 flags.DEFINE_string("file_name", '~/', "file name for tensorboard file ['--']")
 FLAGS = flags.FLAGS
 

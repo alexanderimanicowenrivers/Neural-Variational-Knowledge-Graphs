@@ -94,15 +94,15 @@ class VKGE2:
         self.sigma_alt=sigma_alt
 
         if init_sig==-1:
-            ent_sigma=init_sig
+            sig_max=init_sig
         else:
             if sigma_alt:
 
-                ent_sigma=tf.log(tf.exp(init_sig)-1)
+                sig_max=tf.log(tf.exp(init_sig)-1)
             else:
-                ent_sigma = (np.log(init_sig**2)) #old sigma
+                sig_max = (np.log(init_sig**2)) #old sigma
 
-        pred_sigma = ent_sigma #adjust for correct format for model input
+        sig_min = tf.log(tf.exp(init_sig/100)-1) #adjust for correct format for model input
         predicate_embedding_size = embedding_size
         entity_embedding_size = embedding_size
         self.random_state = np.random.RandomState(0)
@@ -141,10 +141,8 @@ class VKGE2:
         # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-5)
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
-                         optimizer,
-                         ent_sigma, pred_sigma)
-
-        self.nb_epochs=500
+                         optimizer,sig_max, sig_min)
+        self.nb_epochs=1000
 
         self.decay_kl=decay_kl
 
@@ -173,7 +171,7 @@ class VKGE2:
         return mu + sigma * eps
 
     def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
-                    ent_sig, pred_sig):
+                    sig_max, pred_sig):
         """
                         Constructs Model
         """
@@ -185,7 +183,7 @@ class VKGE2:
         self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
         self.epoch_d = tf.placeholder(tf.float32)  # starts at 0.5
 
-        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
+        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
                            pred_sig)
         self.build_decoder()
 
@@ -250,73 +248,49 @@ class VKGE2:
 
 
 
-    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
-                      pred_sig):
+    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
+                      sig_min):
         """
                                 Constructs Encoder
         """
         logger.warn('Building Inference Networks q(h_x | x) ..')
 
         init1=np.round((6.0/np.sqrt(entity_embedding_size*1.0)), decimals=2)
-        init2=(np.log(0.05**2))
-        init3=(np.log(0.05**2))
+        init2=sig_min
+        init3=sig_max
         logger.warn('init is {} ..'.format(init1))
 
         with tf.variable_scope('encoder'):
 
-            if self.static_mean:
-                with tf.variable_scope('entity_mean'):
-                    self.entity_embedding_mean = tf.get_variable('entities_mean',
-                                                             shape=[nb_entities + 1, entity_embedding_size],
-                                                             initializer=tf.zeros_initializer(), dtype=tf.float32,
-                                                             trainable=False)
-                    self.variable_summaries(self.entity_embedding_mean)
-
-                self.predicate_embedding_mean = tf.get_variable('predicate_mean',
-                                                                shape=[nb_predicates + 1, predicate_embedding_size],
-                                                                initializer=tf.zeros_initializer(), dtype=tf.float32,
-                                                                trainable=False)
-            else:
+                                                               trainable=False)
+            with tf.variable_scope('entity_mean'):
 
 
-                self.entity_embedding_mean = tf.get_variable('entities',
-                                                                   shape=[nb_entities + 1, entity_embedding_size ],
-                                                                   initializer=tf.random_uniform_initializer(minval=-init1,maxval=init1,dtype=tf.float32))
-                self.predicate_embedding_mean = tf.get_variable('predicates',
+                self.entity_embedding_mean = tf.get_variable('entities',shape=[nb_entities + 1, entity_embedding_size ],
+        initializer=tf.random_uniform_initializer(minval=-init1,maxval=init1,dtype=tf.float32))
+
+                self.variable_summaries(self.entity_embedding_mean)
+
+            self.predicate_embedding_mean = tf.get_variable('predicates',
                                                                   shape=[nb_predicates + 1, predicate_embedding_size],
                                                                 initializer=tf.random_uniform_initializer(minval=-init1,maxval=init1,dtype=tf.float32))
 
-            if ent_sig == -1:
 
-                with tf.variable_scope('entity_f_of_sigma'):
-
-                    self.entity_embedding_sigma = tf.get_variable('entities_sigma',
-                                                              shape=[nb_entities + 1, entity_embedding_size],
-                                                              initializer=tf.random_uniform_initializer(
-                                                                  minval=init2, maxval=init3, dtype=tf.float32),
-                                                              dtype=tf.float32)
-                    self.variable_summaries(self.entity_embedding_sigma)
-
-                self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
-                                                                 shape=[nb_predicates + 1,
-                                                                        predicate_embedding_size],
-                                                                 initializer=tf.random_uniform_initializer(
-                                                                     minval=init2, maxval=init3, dtype=tf.float32),
-                                                                 dtype=tf.float32)
-            else:
+            with tf.variable_scope('entity_f_of_sigma'):
 
                 self.entity_embedding_sigma = tf.get_variable('entities_sigma',
-                                                              shape=[nb_entities + 1, entity_embedding_size],
-                                                              initializer=tf.random_uniform_initializer(
-                                                                  minval=ent_sig, maxval=ent_sig, dtype=tf.float32),
-                                                              dtype=tf.float32)
+    shape=[nb_entities + 1, entity_embedding_size],initializer=tf.random_uniform_initializer(minval=init2, maxval=init3, dtype=tf.float32), dtype=tf.float32)
 
-                self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
-                                                                 shape=[nb_predicates + 1,
-                                                                        predicate_embedding_size],
-                                                                 initializer=tf.random_uniform_initializer(
-                                                                     minval=pred_sig, maxval=pred_sig, dtype=tf.float32),
-                                                                 dtype=tf.float32)
+                self.variable_summaries(self.entity_embedding_sigma)
+
+
+            self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
+                                                             shape=[nb_predicates + 1,
+                                                                    predicate_embedding_size],
+                                                             initializer=tf.random_uniform_initializer(
+                                                                 minval=init2, maxval=init3, dtype=tf.float32),
+                                                             dtype=tf.float32)
+
 
             self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
             self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
