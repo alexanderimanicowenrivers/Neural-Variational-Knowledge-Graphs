@@ -99,10 +99,12 @@ class VKGE2:
             if sigma_alt:
 
                 sig_max=tf.log(tf.exp(init_sig)-1)
+                sig_min = tf.log(tf.exp(init_sig / 100) - 1)
             else:
                 sig_max = (np.log(init_sig**2)) #old sigma
+                sig_min = (np.log((init_sig/100)**2))
 
-        sig_min = tf.log(tf.exp(init_sig/100)-1) #adjust for correct format for model input
+         #adjust for correct format for model input
         predicate_embedding_size = embedding_size
         entity_embedding_size = embedding_size
         self.random_state = np.random.RandomState(0)

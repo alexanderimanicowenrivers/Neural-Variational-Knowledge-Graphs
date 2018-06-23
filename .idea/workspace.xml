@@ -20,12 +20,12 @@
       <file leaf-file-name="base_model_search.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="287" column="40" lean-forward="false" selection-start-line="287" selection-start-column="40" selection-end-line="287" selection-end-column="40" />
+            <state relative-caret-position="262">
+              <caret line="104" column="53" lean-forward="false" selection-start-line="104" selection-start-column="53" selection-end-line="104" selection-end-column="53" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
-                <marker date="1529759330120" expanded="true" signature="16948:20483" ph="..." />
-                <marker date="1529759330120" expanded="true" signature="20318:20483" ph="..." />
+                <marker date="1529759576527" expanded="true" signature="17023:20558" ph="..." />
+                <marker date="1529759576527" expanded="true" signature="20393:20558" ph="..." />
               </folding>
             </state>
           </provider>
@@ -403,13 +403,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00245" summary="updated main file">
-      <created>1529489854851</created>
-      <option name="number" value="00245" />
-      <option name="presentableId" value="LOCAL-00245" />
-      <option name="project" value="LOCAL" />
-      <updated>1529489854851</updated>
-    </task>
     <task id="LOCAL-00246" summary="updated main file">
       <created>1529507686646</created>
       <option name="number" value="00246" />
@@ -746,7 +739,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529759250983</updated>
     </task>
-    <option name="localTasksCounter" value="294" />
+    <task id="LOCAL-00294" summary="updated margin parameter">
+      <created>1529759332953</created>
+      <option name="number" value="00294" />
+      <option name="presentableId" value="LOCAL-00294" />
+      <option name="project" value="LOCAL" />
+      <updated>1529759332953</updated>
+    </task>
+    <option name="localTasksCounter" value="295" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1265,12 +1265,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="287" column="40" lean-forward="false" selection-start-line="287" selection-start-column="40" selection-end-line="287" selection-end-column="40" />
+        <state relative-caret-position="262">
+          <caret line="104" column="53" lean-forward="false" selection-start-line="104" selection-start-column="53" selection-end-line="104" selection-end-column="53" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1529759330120" expanded="true" signature="16948:20483" ph="..." />
-            <marker date="1529759330120" expanded="true" signature="20318:20483" ph="..." />
+            <marker date="1529759576527" expanded="true" signature="17023:20558" ph="..." />
+            <marker date="1529759576527" expanded="true" signature="20393:20558" ph="..." />
           </folding>
         </state>
       </provider>
