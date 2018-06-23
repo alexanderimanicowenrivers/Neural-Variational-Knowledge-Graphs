@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/script_search.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main2.py" afterPath="$PROJECT_DIR$/main2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_model_search.py" afterPath="$PROJECT_DIR$/vkge/base_model_search.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,12 +20,12 @@
       <file leaf-file-name="base_model_search.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="291" column="20" lean-forward="false" selection-start-line="291" selection-start-column="20" selection-end-line="291" selection-end-column="20" />
+            <state relative-caret-position="414">
+              <caret line="287" column="40" lean-forward="false" selection-start-line="287" selection-start-column="40" selection-end-line="287" selection-end-column="40" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
-                <marker date="1529759245924" expanded="true" signature="17028:20563" ph="..." />
-                <marker date="1529759245924" expanded="true" signature="20398:20563" ph="..." />
+                <marker date="1529759330120" expanded="true" signature="16948:20483" ph="..." />
+                <marker date="1529759330120" expanded="true" signature="20318:20483" ph="..." />
               </folding>
             </state>
           </provider>
@@ -405,13 +403,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00244" summary="updated main file">
-      <created>1529489768524</created>
-      <option name="number" value="00244" />
-      <option name="presentableId" value="LOCAL-00244" />
-      <option name="project" value="LOCAL" />
-      <updated>1529489768524</updated>
-    </task>
     <task id="LOCAL-00245" summary="updated main file">
       <created>1529489854851</created>
       <option name="number" value="00245" />
@@ -748,7 +739,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529748631230</updated>
     </task>
-    <option name="localTasksCounter" value="293" />
+    <task id="LOCAL-00293" summary="updated margin parameter">
+      <created>1529759250983</created>
+      <option name="number" value="00293" />
+      <option name="presentableId" value="LOCAL-00293" />
+      <option name="project" value="LOCAL" />
+      <updated>1529759250983</updated>
+    </task>
+    <option name="localTasksCounter" value="294" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1267,12 +1265,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="291" column="20" lean-forward="false" selection-start-line="291" selection-start-column="20" selection-end-line="291" selection-end-column="20" />
+        <state relative-caret-position="414">
+          <caret line="287" column="40" lean-forward="false" selection-start-line="287" selection-start-column="40" selection-end-line="287" selection-end-column="40" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1529759245924" expanded="true" signature="17028:20563" ph="..." />
-            <marker date="1529759245924" expanded="true" signature="20398:20563" ph="..." />
+            <marker date="1529759330120" expanded="true" signature="16948:20483" ph="..." />
+            <marker date="1529759330120" expanded="true" signature="20318:20483" ph="..." />
           </folding>
         </state>
       </provider>

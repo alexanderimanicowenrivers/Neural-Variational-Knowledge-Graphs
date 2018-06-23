@@ -262,7 +262,6 @@ class VKGE2:
 
         with tf.variable_scope('encoder'):
 
-                                                               trainable=False)
             with tf.variable_scope('entity_mean'):
 
 
