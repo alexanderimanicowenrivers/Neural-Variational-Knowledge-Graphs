@@ -194,12 +194,6 @@ class VKGE_simple:
 
         self.training_step = optimizer.minimize(self.elbo)
 
-        if self.tensorboard:
-
-            _ = tf.summary.scalar("total e loss", self.e_objective)
-            _ = tf.summary.scalar("g loss", self.g_objective)
-
-            _ = tf.summary.scalar("total loss", self.elbo)
 
 
 
@@ -383,8 +377,8 @@ class VKGE_simple:
                 # Test
                 ##
 
-                if (epoch % 200) == 0:
-                    eval_name='valid'
+                if (epoch % 500) == 0:
+                    eval_name='test'
                     eval_triples = test_triples
                     ranks_subj, ranks_obj = [], []
                     filtered_ranks_subj, filtered_ranks_obj = [], []
