@@ -100,10 +100,10 @@ class VKGE2:
             if sigma_alt:
 
                 sig_max=tf.log(tf.exp(init_sig)-1)
-                sig_min = tf.log(tf.exp(init_sig / 100) - 1)
+                sig_min = sig_max
             else:
                 sig_max = (np.log(init_sig**2)) #old sigma
-                sig_min = (np.log((init_sig/100)**2))
+                sig_min = sig_max
 
          #adjust for correct format for model input
         predicate_embedding_size = embedding_size
@@ -298,7 +298,7 @@ class VKGE2:
                 with tf.variable_scope('entity_f_of_sigma'):
 
                     self.entity_embedding_sigma = tf.get_variable('entities_sigma',
-        shape=[nb_entities + 1, entity_embedding_size],initializer=tf.random_uniform_initializer(minval=init2, maxval=init3, dtype=tf.float32), dtype=tf.float32)
+        shape=[nb_entities + 1, entity_embedding_size],initializer=tf.random_uniform_initializer(minval=init2, maxval=init2, dtype=tf.float32), dtype=tf.float32)
 
                     self.variable_summaries(self.entity_embedding_sigma)
 
@@ -307,7 +307,7 @@ class VKGE2:
                                                                  shape=[nb_predicates + 1,
                                                                         predicate_embedding_size],
                                                                  initializer=tf.random_uniform_initializer(
-                                                                     minval=init2, maxval=init3, dtype=tf.float32),
+                                                                     minval=init2, maxval=init2, dtype=tf.float32),
                                                                  dtype=tf.float32)
 
 
@@ -358,7 +358,7 @@ class VKGE2:
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, train_triples, batch_size, session=0, nb_epochs=500,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
+    def train(self, test_triples, train_triples, batch_size, session=0, nb_epochs=1000,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
                                 Train Model
         """
