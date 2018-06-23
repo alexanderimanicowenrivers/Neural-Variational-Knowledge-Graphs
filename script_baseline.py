@@ -33,32 +33,15 @@ def to_cmd(c):
     command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
               '--batch_size {} ' \
               '--learning_rate {} ' \
-              '--init_sig {} ' \
               '--embedding_size {} ' \
-              '--alt_cost {} ' \
-              '--train_mean {} ' \
-              '--Sigma_alt {} ' \
-              '--epsilon {} ' \
-              '--alternating_updates {} ' \
-              '--projection {} ' \
-              '--opt_type {} ' \
  \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
                 c['w0'],
                 c['w1'],
-                c['w2'],
-                c['w3'],
-                c['w4'],
-                c['w5'],
-                c['w6'],
-                c['w7'],
-                c['w8'],
-                c['w9'],
-                c['w10']
+                c['w2']
                 # "%s/logs/18_6_5/uclcs_nvkg_v1.%s" % (path, summary(c))
-
                 )
     return command
 
@@ -71,21 +54,13 @@ def to_logfile(c, path):
 def main(_):
     hyperparameters_space = dict(
         w0=[14145],
-        w1=[1e-1, 1e-3, 1e-5,-1],
-        w2=[1,4,8,-1],
-        w3=[150],
-        w4=[True, False],
-        w5=[True, False],
-        w6=[True, False],
-        w7=[1e-5,1e-8], #from another paper
-        w8 = [True, False],
-        w9=[True,False],
-        w10=['adam', 'rms']
+        w1=[1e-1, 1e-2],
+        w2=[50,100,150,200]
     )
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_17'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/baseline'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):

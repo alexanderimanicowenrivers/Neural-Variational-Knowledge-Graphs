@@ -532,6 +532,8 @@ class VKGE2:
                 ##
 
                 if (epoch % 500) == 0:
+
+
                     eval_name='valid'
                     eval_triples = test_triples
                     ranks_subj, ranks_obj = [], []
