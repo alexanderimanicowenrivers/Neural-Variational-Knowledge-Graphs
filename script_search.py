@@ -68,7 +68,7 @@ def to_logfile(c, path):
 def main(_):
     hyperparameters_space = dict(
         w1=[0.1],
-        w2=[1,2,3,4,5,6,7,8], #
+        w2=[1,2,3,4,5,6,7,8,-1], #
         w3=[150,200,250,300,350],
         w4=[True],
         w5=[True],
