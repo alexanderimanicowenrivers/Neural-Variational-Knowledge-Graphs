@@ -87,7 +87,7 @@ class VKGE_simple:
 
             """
     def __init__(self,decay_kl, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
-                 alt_cost=False,static_pred=False,static_mean=False,alt_updates=True,sigma_alt=True,opt_type='ml',tensorboard=True,projection=True,opt='adam'):
+                 alt_cost=False,margin=5,static_pred=False,static_mean=False,alt_updates=True,sigma_alt=True,opt_type='ml',tensorboard=True,projection=True,opt='adam'):
         super().__init__()
 
         self.sigma_alt=sigma_alt
@@ -106,7 +106,7 @@ class VKGE_simple:
         self.random_state = np.random.RandomState(0)
         tf.set_random_seed(0)
 
-
+        self.margin=margin
         self.GPUMode = GPUMode
         self.alt_cost = alt_cost
         self.static_mean=static_mean
