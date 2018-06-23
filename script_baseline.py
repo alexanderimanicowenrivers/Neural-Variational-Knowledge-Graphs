@@ -33,6 +33,7 @@ def to_cmd(c):
     command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
               '--batch_size {} ' \
               '--learning_rate {} ' \
+              '--margin {} ' \
               '--embedding_size {} ' \
  \
         .format(path,
@@ -40,7 +41,8 @@ def to_cmd(c):
                 #                 set_to_path[c['instances']],
                 c['w0'],
                 c['w1'],
-                c['w2']
+                c['w2'],
+                c['w3']
                 # "%s/logs/18_6_5/uclcs_nvkg_v1.%s" % (path, summary(c))
                 )
     return command
@@ -55,7 +57,8 @@ def main(_):
     hyperparameters_space = dict(
         w0=[14145],
         w1=[1e-1, 1e-2],
-        w2=[50,100,150,200]
+        w2=[1,3,5,7],
+        w3=[50,100,150,200,250,300,350]
     )
 
     configurations = cartesian_product(hyperparameters_space)
