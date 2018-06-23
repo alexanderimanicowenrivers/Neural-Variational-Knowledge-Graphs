@@ -291,8 +291,7 @@ class VKGE2:
                                                                  shape=[nb_predicates + 1,
                                                                         predicate_embedding_size],
                                                                  initializer=tf.random_uniform_initializer(
-                                                                     minval=init1, maxval=init1, dtype=tf.float32),
-
+                                                                     minval=init1, maxval=init1, dtype=tf.float32), dtype=tf.float32)
 
             else:
 
