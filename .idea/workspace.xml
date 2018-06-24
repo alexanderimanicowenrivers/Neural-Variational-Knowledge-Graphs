@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="updated constant on mean initialisation">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_search.py" afterPath="$PROJECT_DIR$/script_search.py" />
     </list>
@@ -20,8 +20,8 @@
       <file leaf-file-name="base_model_search.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1770">
-              <caret line="261" column="83" lean-forward="false" selection-start-line="261" selection-start-column="83" selection-end-line="261" selection-end-column="83" />
+            <state relative-caret-position="-1741">
+              <caret line="244" column="7" lean-forward="true" selection-start-line="244" selection-start-column="7" selection-end-line="244" selection-end-column="7" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <marker date="1529846338743" expanded="true" signature="18381:21916" ph="..." />
@@ -34,8 +34,8 @@
       <file leaf-file-name="script_search.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="70" column="60" lean-forward="false" selection-start-line="70" selection-start-column="60" selection-end-line="70" selection-end-column="60" />
+            <state relative-caret-position="390">
+              <caret line="58" column="17" lean-forward="true" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="17" />
               <folding>
                 <element signature="e#104#120#0" expanded="true" />
               </folding>
@@ -344,13 +344,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00254" summary="updated main file">
-      <created>1529579626191</created>
-      <option name="number" value="00254" />
-      <option name="presentableId" value="LOCAL-00254" />
-      <option name="project" value="LOCAL" />
-      <updated>1529579626191</updated>
     </task>
     <task id="LOCAL-00255" summary="updated main file">
       <created>1529579810673</created>
@@ -688,7 +681,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529846362580</updated>
     </task>
-    <option name="localTasksCounter" value="303" />
+    <task id="LOCAL-00303" summary="updated constant on mean initialisation">
+      <created>1529846564295</created>
+      <option name="number" value="00303" />
+      <option name="presentableId" value="LOCAL-00303" />
+      <option name="project" value="LOCAL" />
+      <updated>1529846564295</updated>
+    </task>
+    <option name="localTasksCounter" value="304" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1197,8 +1197,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1770">
-          <caret line="261" column="83" lean-forward="false" selection-start-line="261" selection-start-column="83" selection-end-line="261" selection-end-column="83" />
+        <state relative-caret-position="-1741">
+          <caret line="244" column="7" lean-forward="true" selection-start-line="244" selection-start-column="7" selection-end-line="244" selection-end-column="7" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <marker date="1529846338743" expanded="true" signature="18381:21916" ph="..." />
@@ -1209,8 +1209,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script_search.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="70" column="60" lean-forward="false" selection-start-line="70" selection-start-column="60" selection-end-line="70" selection-end-column="60" />
+        <state relative-caret-position="390">
+          <caret line="58" column="17" lean-forward="true" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="17" />
           <folding>
             <element signature="e#104#120#0" expanded="true" />
           </folding>

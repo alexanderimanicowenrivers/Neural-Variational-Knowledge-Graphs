@@ -54,7 +54,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                "%s/logs/18_6_24/tfgraphs"
+                "%s/18_6_24" % (path)
 
                 )
     return command
