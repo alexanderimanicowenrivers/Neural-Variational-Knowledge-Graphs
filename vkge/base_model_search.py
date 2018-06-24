@@ -262,6 +262,10 @@ class VKGE2:
         init2=sig_min
         init3=sig_max
 
+        #experiment 1 parameters, initalises a sigma to 0.031
+        # init2 = (np.log(0.05 ** 2))
+        # init3 = (np.log(0.05 ** 2))
+
         with tf.variable_scope('encoder'):
 
             with tf.variable_scope('entity_mean'):
