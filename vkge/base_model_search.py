@@ -87,7 +87,7 @@ class VKGE2:
         @type projection: bool
 
             """
-    def __init__(self,file_name,decay_kl=False,static_mean=False,embedding_size=50,batch_s=14145, lr=0.1, init_sig=6.0,
+    def __init__(self,file_name,decay_kl=False,static_mean=False,embedding_size=50,batch_s=14145, mean_c=0.1, init_sig=6.0,
                  alt_cost=False,alt_updates=True,sigma_alt=True,margin=5,alt_opt=True,projection=True):
         super().__init__()
 
@@ -114,6 +114,7 @@ class VKGE2:
         self.alt_cost = alt_cost
         self.alt_updates=alt_updates
         self.projection=projection
+        self.mean_c=mean_c
         logger.warn('This model is probabilistic ..')
 
         logger.warn('Parsing the facts in the Knowledge Base ..')
@@ -137,15 +138,15 @@ class VKGE2:
         self.margin=margin
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
         if alt_opt:
-            optimizer = tf.train.AdagradOptimizer(learning_rate=lr)  # original KG
+            optimizer = tf.train.AdagradOptimizer(learning_rate=0.1)  # original KG
         else:
-            optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-05)
+            optimizer = tf.train.AdamOptimizer(learning_rate=0.1, epsilon=1e-05)
 
         # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-5)
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,sig_max, sig_min)
-        self.nb_epochs=1000
+        self.nb_epochs=500
 
         self.decay_kl=decay_kl
 
@@ -258,7 +259,7 @@ class VKGE2:
         """
         logger.warn('Building Inference Networks q(h_x | x) ..')
 
-        init1=np.round((6.0/np.sqrt(entity_embedding_size*1.0)), decimals=2)
+        init1=np.round((self.mean_c/np.sqrt(entity_embedding_size*1.0)), decimals=4)
         init2=sig_min
         init3=sig_max
 
@@ -362,7 +363,7 @@ class VKGE2:
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, train_triples, batch_size, session=0, nb_epochs=1000,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
+    def train(self, test_triples, train_triples, batch_size, session=0, nb_epochs=500,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
                                 Train Model
         """

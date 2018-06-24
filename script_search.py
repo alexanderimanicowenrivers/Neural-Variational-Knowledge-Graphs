@@ -31,7 +31,7 @@ def to_cmd(c):
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
     command = 'PYTHONPATH=. anaconda-python3-cpu {}/main2.py  ' \
-              '--learning_rate {} ' \
+              '--mean_c {} ' \
               '--init_sig {} ' \
               '--embedding_size {} ' \
               '--alt_cost {} ' \
@@ -54,7 +54,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                "%s/logs/18_6_23_smallvar/tfgraphs"
+                "%s/logs/18_6_24/tfgraphs"
 
                 )
     return command
@@ -67,21 +67,21 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[0.1],
-        w2=[0.05,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8], #
-        w3=[150,200,250,300,350],
+        w1=[1,2,3,4,5,6,7,8,9,10],
+        w2=[0.01,0.02,0.03,0.04,0.05,0.1,0.3,0.5,0.7,0.9], #
+        w3=[200,250,300,350,400],
         w4=[True],
         w5=[True],
         w6 = [False],
         w7=[True],
-        w8=[1,3,5],
+        w8=[1,3,5,7],
         w9=[False],
 
     )
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_23_smallvar'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_24'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
