@@ -102,7 +102,7 @@ class VKGE2:
                 sig_max=tf.log(tf.exp(init_sig)-1)
                 sig_min = sig_max
             else:
-                sig_max = (np.log(init_sig**2)) #old sigma
+                sig_max = (tf.log(init_sig**2)) #old sigma
                 sig_min = sig_max
 
          #adjust for correct format for model input
@@ -115,12 +115,12 @@ class VKGE2:
         self.alt_updates=alt_updates
         self.projection=projection
         self.mean_c=mean_c
-        logger.warn('This model is probabilistic ..')
-
-        logger.warn('Parsing the facts in the Knowledge Base ..')
 
         # Dataset
         dataset_name = 'wn18'
+
+        logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(dataset_name))
+
 
         train_triples = read_triples("data2/{}/train.tsv".format(dataset_name))  # choose dataset
         test_triples = read_triples("data2/{}/dev.tsv".format(dataset_name))
@@ -455,7 +455,6 @@ class VKGE2:
         with tf.Session() as session:
             session.run(init_op)
 
-            logger.warn("filename is   ",filename)
             train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
