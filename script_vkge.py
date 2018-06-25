@@ -41,7 +41,6 @@ def to_cmd(c):
               '--margin {} ' \
               '--decay_kl {}' \
               '--file_name {} ' \
- \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
