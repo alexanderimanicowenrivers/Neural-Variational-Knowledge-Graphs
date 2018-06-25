@@ -14,6 +14,7 @@ flags.DEFINE_float("init_sig", 6.0, "Initalised variance of variables [6.0]")
 flags.DEFINE_float("init_sig2", 6.0, "Initalised variance of variables [6.0]")
 flags.DEFINE_float("mog_split", 0.5, "Split between spike and slab [6.0]")
 flags.DEFINE_integer("embedding_size", 200, "The dimension of graph embeddings [50]")
+flags.DEFINE_string("file_name", '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_25', "file name for tensorboard file ['--']")
 flags.DEFINE_integer("batch_size", 14145, "Batch Size [14145]")
 flags.DEFINE_boolean("alt_cost", True, "Switch for compression cost to be used in training [True]")
 flags.DEFINE_boolean("static_mean", False,
@@ -24,7 +25,6 @@ flags.DEFINE_boolean("projection", False, "Alternate between using a projection 
 flags.DEFINE_boolean("alt_opt", True, "Define to use  Adagrad or Adam  [False]")
 flags.DEFINE_boolean("decay_kl", False, "Defines if KL inverse decays [False]")
 flags.DEFINE_float("margin", 1, "Choose optimiser loss, select the margin for hinge loss [1]")
-flags.DEFINE_string("file_name", '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_25', "file name for tensorboard file ['--']")
 FLAGS = flags.FLAGS
 
 
