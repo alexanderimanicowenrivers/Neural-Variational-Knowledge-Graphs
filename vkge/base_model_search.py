@@ -146,7 +146,7 @@ class VKGE2:
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,sig_max, sig_min)
-        self.nb_epochs=500
+        self.nb_epochs=5
 
         self.decay_kl=decay_kl
 
