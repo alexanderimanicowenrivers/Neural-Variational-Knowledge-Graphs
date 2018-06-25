@@ -350,8 +350,8 @@ class VKGE2:
                     self.variable_summaries(var1_2)
 
             with tf.name_scope('Predicate1'):
-                var2_1 = tf.nn.embedding_lookup(self.entity_embedding_mean, self.var2)
-                var2_2 = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var2)
+                var2_1 = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.var2)
+                var2_2 = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.var2)
 
                 with tf.name_scope('Predicate1_Mean'):
 
