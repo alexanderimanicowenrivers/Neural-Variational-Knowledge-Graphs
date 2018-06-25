@@ -419,7 +419,7 @@ class VKGE2:
         with tf.Session() as session:
             session.run(init_op)
 
-
+            logger.warn("filename is   ",filename)
             train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
@@ -498,7 +498,7 @@ class VKGE2:
                     else:
                         summary,_,elbo_value = session.run([merge,self.training_step,self.elbo], feed_dict=loss_args)
 
-                    if counter % 2 == 0:
+                    if ((counter % 2) == 0):
                         train_writer.add_summary(summary, counter)  # tensorboard
 
                     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))

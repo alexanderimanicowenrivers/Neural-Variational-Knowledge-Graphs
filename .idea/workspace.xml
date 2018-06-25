@@ -17,6 +17,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="not_working.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vkge/not_working.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7410">
+              <caret line="494" column="53" lean-forward="true" selection-start-line="494" selection-start-column="0" selection-end-line="495" selection-end-column="0" />
+              <folding>
+                <element signature="e#25#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="script_quicktest.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script_quicktest.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -51,27 +63,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vkge/base.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3511">
-              <caret line="51" column="19" lean-forward="false" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
-              <folding>
-                <element signature="e#25#36#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="base_model_search.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="148" column="24" lean-forward="false" selection-start-line="148" selection-start-column="24" selection-end-line="148" selection-end-column="24" />
+            <state relative-caret-position="263">
+              <caret line="421" column="24" lean-forward="false" selection-start-line="421" selection-start-column="24" selection-end-line="421" selection-end-column="24" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
-                <marker date="1529926038559" expanded="true" signature="18379:21914" ph="..." />
-                <marker date="1529926038559" expanded="true" signature="21749:21914" ph="..." />
+                <marker date="1529926366702" expanded="true" signature="18429:21968" ph="..." />
+                <marker date="1529926366702" expanded="true" signature="21803:21968" ph="..." />
               </folding>
             </state>
           </provider>
@@ -391,13 +391,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00260" summary="added in adda optimiser">
-      <created>1529580868469</created>
-      <option name="number" value="00260" />
-      <option name="presentableId" value="LOCAL-00260" />
-      <option name="project" value="LOCAL" />
-      <updated>1529580868470</updated>
     </task>
     <task id="LOCAL-00261" summary="added in adda optimiser">
       <created>1529583653859</created>
@@ -735,7 +728,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529925968634</updated>
     </task>
-    <option name="localTasksCounter" value="309" />
+    <task id="LOCAL-00309" summary="changed epochs to 5 for TB test">
+      <created>1529926048546</created>
+      <option name="number" value="00309" />
+      <option name="presentableId" value="LOCAL-00309" />
+      <option name="project" value="LOCAL" />
+      <updated>1529926048546</updated>
+    </task>
+    <option name="localTasksCounter" value="310" />
     <servers />
   </component>
   <component name="TodoView">
@@ -821,7 +821,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed epochs to 2000" />
     <MESSAGE value="new log folder for script" />
     <MESSAGE value="updated loss statement with more info" />
     <MESSAGE value="updates summary on 4 entity variables and 2 predicate variables during training" />
@@ -846,7 +845,8 @@
     <MESSAGE value="updated constant on mean initialisation" />
     <MESSAGE value="updated tf path" />
     <MESSAGE value="updated final search with tensorboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated final search with tensorboard" />
+    <MESSAGE value="changed epochs to 5 for TB test" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed epochs to 5 for TB test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1202,16 +1202,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/not_working.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-623">
-          <caret line="494" column="28" lean-forward="false" selection-start-line="494" selection-start-column="16" selection-end-line="494" selection-end-column="28" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3511">
@@ -1250,14 +1240,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
+    <entry file="file://$PROJECT_DIR$/vkge/not_working.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="148" column="24" lean-forward="false" selection-start-line="148" selection-start-column="24" selection-end-line="148" selection-end-column="24" />
+        <state relative-caret-position="7410">
+          <caret line="494" column="53" lean-forward="true" selection-start-line="494" selection-start-column="0" selection-end-line="495" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1529926038559" expanded="true" signature="18379:21914" ph="..." />
-            <marker date="1529926038559" expanded="true" signature="21749:21914" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="421" column="24" lean-forward="false" selection-start-line="421" selection-start-column="24" selection-end-line="421" selection-end-column="24" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+            <marker date="1529926366702" expanded="true" signature="18429:21968" ph="..." />
+            <marker date="1529926366702" expanded="true" signature="21803:21968" ph="..." />
           </folding>
         </state>
       </provider>
