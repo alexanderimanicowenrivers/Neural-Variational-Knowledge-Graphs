@@ -40,7 +40,7 @@ def to_cmd(c):
               '--alt_opt {} ' \
               '--margin {} ' \
               '--decay_kl {}' \
-              '--file_name "{}" ' \
+              '--file_name {} ' \
  \
         .format(path,
                 #                 params,
