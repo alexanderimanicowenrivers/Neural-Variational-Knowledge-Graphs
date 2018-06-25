@@ -24,7 +24,7 @@ flags.DEFINE_boolean("projection", False, "Alternate between using a projection 
 flags.DEFINE_boolean("alt_opt", True, "Define to use  Adagrad or Adam  [False]")
 flags.DEFINE_boolean("decay_kl", False, "Defines if KL inverse decays [False]")
 flags.DEFINE_float("margin", 1, "Choose optimiser loss, select the margin for hinge loss [1]")
-flags.DEFINE_string("file_name", '~/', 'file name for tensorboard file')
+flags.DEFINE_string("file_name", '~/', "file name for tensorboard file ['--']")
 FLAGS = flags.FLAGS
 
 
