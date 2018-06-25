@@ -24,12 +24,13 @@ flags.DEFINE_boolean("projection", False, "Alternate between using a projection 
 flags.DEFINE_boolean("alt_opt", True, "Define to use  Adagrad or Adam  [False]")
 flags.DEFINE_boolean("decay_kl", False, "Defines if KL inverse decays [False]")
 flags.DEFINE_float("margin", 1, "Choose optimiser loss, select the margin for hinge loss [1]")
-flags.DEFINE_string("file_name", '~/', "file name for tensorboard file ['--']")
+flags.DEFINE_string('file_name', '~/', "file name for tensorboard file ['--']")
 FLAGS = flags.FLAGS
 
 
 def main(_):
-    logger.warn("creating model with flags \t {}".format(flags.FLAGS.__flags))
+    # logger.warn("creating model with flags \t {}".format(flags.FLAGS.__flags))
+    logger.warn("filename is   ", FLAGS.file_name)
 
     vkge.VKGE2(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,init_sig=FLAGS.init_sig, alt_cost=FLAGS.alt_cost, batch_s=FLAGS.batch_size,
               static_mean=FLAGS.static_mean, alt_updates=FLAGS.alternating_updates, sigma_alt=FLAGS.Sigma_alt,
