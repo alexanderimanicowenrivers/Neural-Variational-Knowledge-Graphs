@@ -10,7 +10,7 @@ import vkge.models as models
 from vkge.training import constraints, corrupt, index
 from vkge.training.util import make_batches
 import vkge.io as io
-
+from random import randint
 
 # new
 
@@ -151,6 +151,13 @@ class VKGE2:
         self.decay_kl=decay_kl
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
+
+        self.var1 = randint(0, self.nb_entities - 1)
+        self.var2 = randint(0, self.nb_predicates - 1)
+
+        logger.warn("Entity Sample1 id is {} with name {}..".format(self.var1,list(entity_set)[self.var1]))
+
+        logger.warn("Predicate Sample1 id is {} with name {}..".format(self.var2,list(predicate_set)[self.var2]))
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):

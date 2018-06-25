@@ -20,8 +20,8 @@
       <file leaf-file-name="not_working.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/not_working.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="154" column="127" lean-forward="false" selection-start-line="154" selection-start-column="119" selection-end-line="154" selection-end-column="127" />
+            <state relative-caret-position="519">
+              <caret line="128" column="8" lean-forward="true" selection-start-line="128" selection-start-column="8" selection-end-line="133" selection-end-column="67" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -29,24 +29,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script_quicktest.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/script_quicktest.py">
+      <file leaf-file-name="base_model_search.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="60" column="39" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+            <state relative-caret-position="439">
+              <caret line="159" column="110" lean-forward="false" selection-start-line="159" selection-start-column="110" selection-end-line="159" selection-end-column="110" />
               <folding>
-                <element signature="e#104#120#0" expanded="true" />
+                <element signature="e#25#36#0" expanded="true" />
+                <marker date="1529935936576" expanded="true" signature="18790:22329" ph="..." />
+                <marker date="1529935936576" expanded="true" signature="22164:22329" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="script_baseline.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/script_baseline.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="45" column="42" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -58,20 +50,6 @@
               <caret line="54" column="35" lean-forward="false" selection-start-line="54" selection-start-column="35" selection-end-line="54" selection-end-column="35" />
               <folding>
                 <element signature="e#127#143#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base_model_search.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="148" column="26" lean-forward="false" selection-start-line="148" selection-start-column="26" selection-end-line="148" selection-end-column="26" />
-              <folding>
-                <element signature="e#25#36#0" expanded="true" />
-                <marker date="1529935552610" expanded="true" signature="18431:21970" ph="..." />
-                <marker date="1529935552610" expanded="true" signature="21805:21970" ph="..." />
               </folding>
             </state>
           </provider>
@@ -391,13 +369,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00276" summary="adding in previous features">
-      <created>1529683552311</created>
-      <option name="number" value="00276" />
-      <option name="presentableId" value="LOCAL-00276" />
-      <option name="project" value="LOCAL" />
-      <updated>1529683552311</updated>
     </task>
     <task id="LOCAL-00277" summary="adding in previous features">
       <created>1529683584809</created>
@@ -735,7 +706,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529935465410</updated>
     </task>
-    <option name="localTasksCounter" value="325" />
+    <task id="LOCAL-00325" summary="changed epochs to 5 for TB test">
+      <created>1529935555221</created>
+      <option name="number" value="00325" />
+      <option name="presentableId" value="LOCAL-00325" />
+      <option name="project" value="LOCAL" />
+      <updated>1529935555221</updated>
+    </task>
+    <option name="localTasksCounter" value="326" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1200,16 +1178,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/not_working.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="154" column="127" lean-forward="false" selection-start-line="154" selection-start-column="119" selection-end-line="154" selection-end-column="127" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/script_search.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -1250,14 +1218,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
+    <entry file="file://$PROJECT_DIR$/vkge/not_working.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="148" column="26" lean-forward="false" selection-start-line="148" selection-start-column="26" selection-end-line="148" selection-end-column="26" />
+        <state relative-caret-position="519">
+          <caret line="128" column="8" lean-forward="true" selection-start-line="128" selection-start-column="8" selection-end-line="133" selection-end-column="67" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1529935552610" expanded="true" signature="18431:21970" ph="..." />
-            <marker date="1529935552610" expanded="true" signature="21805:21970" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="159" column="110" lean-forward="false" selection-start-line="159" selection-start-column="110" selection-end-line="159" selection-end-column="110" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+            <marker date="1529935936576" expanded="true" signature="18790:22329" ph="..." />
+            <marker date="1529935936576" expanded="true" signature="22164:22329" ph="..." />
           </folding>
         </state>
       </provider>
