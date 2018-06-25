@@ -144,18 +144,22 @@ class VKGE2:
 
         # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-5)
 
+        self.var1_1 = randint(0, self.nb_entities - 1)
+        self.var1_2 = randint(0, self.nb_predicates - 1)
+
+        logger.warn("Entity Sample1 id is {} with name {}..".format(self.var1_1,list(entity_set)[self.var1_1]))
+
+        logger.warn("Predicate Sample1 id is {} with name {}..".format(self.var1_2,list(predicate_set)[self.var1_2]))
+
+        self.var1=tf.Variable(initial_value=self.var1_1,trainable=False,dtype=tf.int32)
+        self.var2=tf.Variable(initial_value=self.var1_2,trainable=False,dtype=tf.int32)
+
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,sig_max, sig_min)
         self.nb_epochs=500
 
         self.decay_kl=decay_kl
 
-        self.var1 = randint(0, self.nb_entities - 1)
-        self.var2 = randint(0, self.nb_predicates - 1)
-
-        logger.warn("Entity Sample1 id is {} with name {}..".format(self.var1,list(entity_set)[self.var1]))
-
-        logger.warn("Predicate Sample1 id is {} with name {}..".format(self.var2,list(predicate_set)[self.var2]))
 
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
