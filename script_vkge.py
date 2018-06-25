@@ -54,7 +54,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                "%s/18_6_25" % (path)
+                "%s/logs/18_6_25/" % (path)
 
                 )
     return command
