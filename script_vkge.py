@@ -39,8 +39,8 @@ def to_cmd(c):
               '--alternating_updates {} ' \
               '--alt_opt {} ' \
               '--margin {} ' \
-              '--decay_kl {}' \
               '--file_name {} ' \
+              '--decay_kl {}' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -52,8 +52,8 @@ def to_cmd(c):
                 c['w6'],
                 c['w7'],
                 c['w8'],
+                "%s/logs/18_6_25/uclcs_nvkg_v1.%s".format(path, summary(c)),
                 c['w9'],
-                "%s/logs/18_6_25/uclcs_nvkg_v1.%s".format(path, summary(c))
                 )
     return command
 
