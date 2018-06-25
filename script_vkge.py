@@ -1,5 +1,5 @@
 """
-            used for cluster job submission and parameter search over main.py
+            used for cluster job submission and parameter search over main2.py, final model analysis
 
                 """
 
@@ -31,7 +31,7 @@ def to_cmd(c):
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
     command = 'PYTHONPATH=. anaconda-python3-cpu {}/main2.py  ' \
-              '--learning_rate {} ' \
+              '--mean_c {} ' \
               '--init_sig {} ' \
               '--embedding_size {} ' \
               '--alt_cost {} ' \
@@ -54,7 +54,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                "%s/logs/18_6_22/tfgraphs"
+                "%s/18_6_25" % (path)
 
                 )
     return command
@@ -67,21 +67,21 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[0.1],
-        w2=[2,4,8,-1], #
-        w3=[50,100,150,200],
-        w4=[True, False],
-        w5=[True,False],
-        w6 = [True,False],
-        w7=[False,True],
-        w8=[1, 3, 5, 7],
-        w9=[False,True],
+        w1=[1,5],
+        w2=[0.5,0.01], #
+        w3=[200,250,300,350,400],
+        w4=[True],
+        w5=[True],
+        w6 = [False],
+        w7=[True],
+        w8=[5,7,9,11,13,15,17,19,21],
+        w9=[False],
 
     )
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_22'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_25'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):

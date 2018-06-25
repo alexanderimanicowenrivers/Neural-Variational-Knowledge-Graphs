@@ -259,7 +259,7 @@ class VKGE2:
         """
         logger.warn('Building Inference Networks q(h_x | x) ..')
 
-        init1=np.round((self.mean_c/np.sqrt(entity_embedding_size*1.0)), decimals=4)
+        init1=np.round((self.mean_c/np.sqrt(entity_embedding_size*1.0)), decimals=2)
         init2=sig_min
         init3=sig_max
 
