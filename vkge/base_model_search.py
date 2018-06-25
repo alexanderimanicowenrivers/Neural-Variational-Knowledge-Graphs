@@ -150,14 +150,16 @@ class VKGE2:
 
         self.decay_kl=decay_kl
 
-        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
-
         self.var1 = randint(0, self.nb_entities - 1)
         self.var2 = randint(0, self.nb_predicates - 1)
 
         logger.warn("Entity Sample1 id is {} with name {}..".format(self.var1,list(entity_set)[self.var1]))
 
         logger.warn("Predicate Sample1 id is {} with name {}..".format(self.var2,list(predicate_set)[self.var2]))
+
+
+        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
+
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -335,6 +337,29 @@ class VKGE2:
             self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
             self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
 
+            with tf.name_scope('Entity1'):
+                var1_1 = tf.nn.embedding_lookup(self.entity_embedding_mean, self.var1)
+                var1_2 = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var1)
+
+                with tf.name_scope('Entity1_Mean'):
+
+                    self.variable_summaries(var1_1)
+
+                with tf.name_scope('Entity1_logStd'):
+
+                    self.variable_summaries(var1_2)
+
+            with tf.name_scope('Predicate1'):
+                var2_1 = tf.nn.embedding_lookup(self.entity_embedding_mean, self.var2)
+                var2_2 = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var2)
+
+                with tf.name_scope('Predicate1_Mean'):
+
+                    self.variable_summaries(var2_1)
+
+                with tf.name_scope('Predicate1_logStd'):
+
+                    self.variable_summaries(var2_2)
 
 
     def build_decoder(self):

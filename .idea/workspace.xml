@@ -20,8 +20,8 @@
       <file leaf-file-name="not_working.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/not_working.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="519">
-              <caret line="128" column="8" lean-forward="true" selection-start-line="128" selection-start-column="8" selection-end-line="133" selection-end-column="67" />
+            <state relative-caret-position="495">
+              <caret line="402" column="51" lean-forward="false" selection-start-line="402" selection-start-column="36" selection-end-line="402" selection-end-column="51" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -32,12 +32,12 @@
       <file leaf-file-name="base_model_search.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="159" column="110" lean-forward="false" selection-start-line="159" selection-start-column="110" selection-end-line="159" selection-end-column="110" />
+            <state relative-caret-position="485">
+              <caret line="356" column="4" lean-forward="true" selection-start-line="356" selection-start-column="4" selection-end-line="356" selection-end-column="4" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
-                <marker date="1529935936576" expanded="true" signature="18790:22329" ph="..." />
-                <marker date="1529935936576" expanded="true" signature="22164:22329" ph="..." />
+                <marker date="1529936432028" expanded="true" signature="19670:23209" ph="..." />
+                <marker date="1529936432028" expanded="true" signature="23044:23209" ph="..." />
               </folding>
             </state>
           </provider>
@@ -369,13 +369,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00277" summary="adding in previous features">
-      <created>1529683584809</created>
-      <option name="number" value="00277" />
-      <option name="presentableId" value="LOCAL-00277" />
-      <option name="project" value="LOCAL" />
-      <updated>1529683584809</updated>
     </task>
     <task id="LOCAL-00278" summary="adding in previous features">
       <created>1529683743860</created>
@@ -713,7 +706,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529935555221</updated>
     </task>
-    <option name="localTasksCounter" value="326" />
+    <task id="LOCAL-00326" summary="changed epochs to 5 for TB test">
+      <created>1529935942989</created>
+      <option name="number" value="00326" />
+      <option name="presentableId" value="LOCAL-00326" />
+      <option name="project" value="LOCAL" />
+      <updated>1529935942989</updated>
+    </task>
+    <option name="localTasksCounter" value="327" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1220,8 +1220,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/not_working.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="519">
-          <caret line="128" column="8" lean-forward="true" selection-start-line="128" selection-start-column="8" selection-end-line="133" selection-end-column="67" />
+        <state relative-caret-position="495">
+          <caret line="402" column="51" lean-forward="false" selection-start-line="402" selection-start-column="36" selection-end-line="402" selection-end-column="51" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
@@ -1230,12 +1230,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="159" column="110" lean-forward="false" selection-start-line="159" selection-start-column="110" selection-end-line="159" selection-end-column="110" />
+        <state relative-caret-position="485">
+          <caret line="356" column="4" lean-forward="true" selection-start-line="356" selection-start-column="4" selection-end-line="356" selection-end-column="4" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1529935936576" expanded="true" signature="18790:22329" ph="..." />
-            <marker date="1529935936576" expanded="true" signature="22164:22329" ph="..." />
+            <marker date="1529936432028" expanded="true" signature="19670:23209" ph="..." />
+            <marker date="1529936432028" expanded="true" signature="23044:23209" ph="..." />
           </folding>
         </state>
       </provider>
