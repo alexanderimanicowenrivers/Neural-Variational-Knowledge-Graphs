@@ -407,7 +407,7 @@ class VKGE2:
         """
 
         nb_versions = 3
-        patience=5
+        patience=15
         patience_counter=0
         earl_stop=0
 
