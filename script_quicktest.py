@@ -52,7 +52,7 @@ def to_cmd(c):
                 c['w6'],
                 c['w7'],
                 c['w8'],
-                "{}/logs/18_6_25_hinge/tb_nvkg.{}".format(path, summary(c)),
+                "{}/logs/18_6_25_mle/tb_nvkg.{}".format(path, summary(c)),
                 c['w9'],
                 )
     return command
@@ -65,21 +65,21 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[2],
-        w2=[0.02], #
+        w1=[5],
+        w2=[0.01], #
         w3=[300],
         w4=[True],
         w5=[True],
         w6 = [False],
         w7=[True],
-        w8=[7],
+        w8=[1],
         w9=[False],
 
     )
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_25_hinge'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_25_mle'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
