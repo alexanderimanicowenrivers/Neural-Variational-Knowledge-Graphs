@@ -123,12 +123,13 @@ class VKGE2:
 
 
         train_triples = read_triples("data2/{}/train.tsv".format(dataset_name))  # choose dataset
-        test_triples = read_triples("data2/{}/dev.tsv".format(dataset_name))
+        valid_triples = read_triples("data2/{}/dev.tsv".format(dataset_name))
+        test_triples = read_triples("data2/{}/test.tsv".format(dataset_name))
         self.nb_examples = len(train_triples)
 
 
         ##### for test time ######
-        all_triples = train_triples + test_triples
+        all_triples = train_triples +valid_triples+ test_triples
         entity_set = {s for (s, p, o) in all_triples} | {o for (s, p, o) in all_triples}
         predicate_set = {p for (s, p, o) in all_triples}
         self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
@@ -162,7 +163,7 @@ class VKGE2:
 
 
 
-        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
+        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,train_triples=train_triples,batch_size=batch_s,filename=file_name)
 
 
     @staticmethod
@@ -401,18 +402,16 @@ class VKGE2:
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, train_triples, batch_size, session=0, nb_epochs=500,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
+    def train(self, test_triples, valid_triples, train_triples, batch_size, session=0, nb_epochs=500,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
                                 Train Model
         """
 
         nb_versions = 3
-        patience=10
-        patience_counter=0
         earl_stop=0
 
 
-        all_triples=train_triples+test_triples
+        all_triples=train_triples+valid_triples+test_triples
 
         index_gen = index.GlorotIndexGenerator()
 
@@ -434,13 +433,8 @@ class VKGE2:
 
         projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=5.0)]
 
-        # projection_steps = [constraints.unit_cube(self.entity_embedding_mean) if unit_cube
-        #                     else constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
-        minloss = 10000
-        maxhits=0
-        maxepoch=0
-        minepoch = 0
 
+        mr = 10000
         ####### COMPRESSION COST PARAMETERS
 
         M = int(nb_batches)
@@ -464,6 +458,10 @@ class VKGE2:
             train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
+
+                if earl_stop==1:
+                    break
+
                 counter = 0
                 if self.decay_kl:
 
@@ -555,26 +553,17 @@ class VKGE2:
                 #         session.run([projection_step])
 
 
-                if (round(np.mean(loss_values), 4) < minloss):
-                    minloss = round(np.mean(loss_values), 4)
-                    minepoch = epoch
-                    patience_counter = 0
-                else:
-                    patience_counter+=1
-                    if patience_counter==patience:
-                        earl_stop=1
-                        logger.warn('Early Stopping with patience {}'.format(patience))
+
 
                 logger.warn('Epoch: {0}\tELBO: {1}'.format(epoch, self.stats(loss_values)))
 
                 ##
-                # Test
+                # Early Stopping
                 ##
 
-                if ((epoch % 500) == 0 ) or (earl_stop==1):
+                if (epoch % 50) == 0:
 
-
-                    eval_name='valid'
+                    eval_name = 'valid'
                     eval_triples = test_triples
                     ranks_subj, ranks_obj = [], []
                     filtered_ranks_subj, filtered_ranks_obj = [], []
@@ -625,9 +614,67 @@ class VKGE2:
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
 
-                    if hits_at_k>maxhits:
-                        maxhits=hits_at_k
-                        maxepoch=epoch
+                if mean_rank < mr:
+                    mr = mean_rank
+                else:
+                    earl_stop = 1
+                    logger.warn('Early Stopping with valid mr {}'.format(mr))
 
-            logger.warn("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
-            logger.warn("The maximum Hits@10 value: {0} \t at epoch {1}".format(maxhits, maxepoch))
+            ##
+            # Test
+            ##
+
+
+
+
+            eval_name='test'
+            eval_triples = test_triples
+            ranks_subj, ranks_obj = [], []
+            filtered_ranks_subj, filtered_ranks_obj = [], []
+
+            for _i, (s, p, o) in enumerate(eval_triples):
+                s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], self.entity_to_idx[o]
+
+                Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
+                Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
+                Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
+
+                feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities), self.p_inputs: Xp_v,
+                                          self.o_inputs: Xo_v}
+                feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
+                                         self.o_inputs: np.arange(self.nb_entities)}
+
+                # scores of (1, p, o), (2, p, o), .., (N, p, o)
+                scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
+
+                # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
+
+                ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+
+                filtered_scores_subj = scores_subj.copy()
+                filtered_scores_obj = scores_obj.copy()
+
+                rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
+                            fs != s and fp == p and fo == o]
+                rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
+                            fs == s and fp == p and fo != o]
+
+                filtered_scores_subj[rm_idx_s] = - np.inf
+                filtered_scores_obj[rm_idx_o] = - np.inf
+
+                filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
+
+            filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
+            ranks = ranks_subj + ranks_obj
+
+            for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
+                mean_rank = np.mean(setting_ranks)
+                logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
+                for k in [1, 3, 5, 10]:
+                    hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                    logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+
+
