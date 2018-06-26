@@ -20,8 +20,8 @@
       <file leaf-file-name="non_probabilistic.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="190" column="0" lean-forward="true" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
+            <state relative-caret-position="370">
+              <caret line="380" column="30" lean-forward="false" selection-start-line="380" selection-start-column="30" selection-end-line="380" selection-end-column="30" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -423,13 +423,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00308" summary="updated final search with tensorboard">
-      <created>1529925968634</created>
-      <option name="number" value="00308" />
-      <option name="presentableId" value="LOCAL-00308" />
-      <option name="project" value="LOCAL" />
-      <updated>1529925968634</updated>
-    </task>
     <task id="LOCAL-00309" summary="changed epochs to 5 for TB test">
       <created>1529926048546</created>
       <option name="number" value="00309" />
@@ -766,7 +759,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530022710347</updated>
     </task>
-    <option name="localTasksCounter" value="357" />
+    <task id="LOCAL-00357" summary="updated non prob with MLE">
+      <created>1530023300812</created>
+      <option name="number" value="00357" />
+      <option name="presentableId" value="LOCAL-00357" />
+      <option name="project" value="LOCAL" />
+      <updated>1530023300813</updated>
+    </task>
+    <option name="localTasksCounter" value="358" />
     <servers />
   </component>
   <component name="TodoView">
@@ -852,7 +852,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updates summary on 4 entity variables and 2 predicate variables during training" />
     <MESSAGE value="updates test script" />
     <MESSAGE value="updated test script" />
     <MESSAGE value="final test with fixed predicate" />
@@ -877,7 +876,8 @@
     <MESSAGE value="changed epochs to 5 for TB test" />
     <MESSAGE value="added in MLE" />
     <MESSAGE value="back to Hinge" />
-    <option name="LAST_COMMIT_MESSAGE" value="back to Hinge" />
+    <MESSAGE value="updated non prob with MLE" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated non prob with MLE" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1284,8 +1284,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="190" column="0" lean-forward="true" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
+        <state relative-caret-position="370">
+          <caret line="380" column="30" lean-forward="false" selection-start-line="380" selection-start-column="30" selection-end-line="380" selection-end-column="30" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

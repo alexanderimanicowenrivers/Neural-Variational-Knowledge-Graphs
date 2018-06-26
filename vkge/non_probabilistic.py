@@ -378,7 +378,7 @@ class VKGE_simple:
                 # Test
                 ##
 
-                if (epoch % 500) == 0:
+                if (epoch % 50) == 0:
                     eval_name='test'
                     eval_triples = test_triples
                     ranks_subj, ranks_obj = [], []
