@@ -20,8 +20,8 @@
       <file leaf-file-name="script_quicktest.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_quicktest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
-              <caret line="139" column="68" lean-forward="false" selection-start-line="139" selection-start-column="68" selection-end-line="139" selection-end-column="68" />
+            <state relative-caret-position="626">
+              <caret line="143" column="76" lean-forward="false" selection-start-line="143" selection-start-column="76" selection-end-line="143" selection-end-column="76" />
               <folding>
                 <element signature="e#127#143#0" expanded="true" />
               </folding>
@@ -387,13 +387,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00317" summary="changed epochs to 5 for TB test">
-      <created>1529927287389</created>
-      <option name="number" value="00317" />
-      <option name="presentableId" value="LOCAL-00317" />
-      <option name="project" value="LOCAL" />
-      <updated>1529927287389</updated>
-    </task>
     <task id="LOCAL-00318" summary="changed epochs to 5 for TB test">
       <created>1529927302197</created>
       <option name="number" value="00318" />
@@ -730,7 +723,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530040889247</updated>
     </task>
-    <option name="localTasksCounter" value="366" />
+    <task id="LOCAL-00366" summary="added in test phase print statement">
+      <created>1530041216333</created>
+      <option name="number" value="00366" />
+      <option name="presentableId" value="LOCAL-00366" />
+      <option name="project" value="LOCAL" />
+      <updated>1530041216333</updated>
+    </task>
+    <option name="localTasksCounter" value="367" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1248,8 +1248,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script_quicktest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="139" column="68" lean-forward="false" selection-start-line="139" selection-start-column="68" selection-end-line="139" selection-end-column="68" />
+        <state relative-caret-position="626">
+          <caret line="143" column="76" lean-forward="false" selection-start-line="143" selection-start-column="76" selection-end-line="143" selection-end-column="76" />
           <folding>
             <element signature="e#127#143#0" expanded="true" />
           </folding>
