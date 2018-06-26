@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_model_search.py" afterPath="$PROJECT_DIR$/vkge/base_model_search.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,7 +31,7 @@
       <file leaf-file-name="base_model_search.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
+            <state relative-caret-position="395">
               <caret line="244" column="48" lean-forward="false" selection-start-line="244" selection-start-column="0" selection-end-line="245" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
@@ -377,13 +376,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00303" summary="updated constant on mean initialisation">
-      <created>1529846564295</created>
-      <option name="number" value="00303" />
-      <option name="presentableId" value="LOCAL-00303" />
-      <option name="project" value="LOCAL" />
-      <updated>1529846564295</updated>
-    </task>
     <task id="LOCAL-00304" summary="updated tf path">
       <created>1529847592499</created>
       <option name="number" value="00304" />
@@ -720,7 +712,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530018155514</updated>
     </task>
-    <option name="localTasksCounter" value="352" />
+    <task id="LOCAL-00352" summary="back to Hinge">
+      <created>1530018245496</created>
+      <option name="number" value="00352" />
+      <option name="presentableId" value="LOCAL-00352" />
+      <option name="project" value="LOCAL" />
+      <updated>1530018245496</updated>
+    </task>
+    <option name="localTasksCounter" value="353" />
     <servers />
   </component>
   <component name="TodoView">
@@ -806,7 +805,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated loss statement with more info" />
     <MESSAGE value="updates summary on 4 entity variables and 2 predicate variables during training" />
     <MESSAGE value="updates test script" />
     <MESSAGE value="updated test script" />
@@ -831,7 +829,8 @@
     <MESSAGE value="updated final search with tensorboard" />
     <MESSAGE value="changed epochs to 5 for TB test" />
     <MESSAGE value="added in MLE" />
-    <option name="LAST_COMMIT_MESSAGE" value="added in MLE" />
+    <MESSAGE value="back to Hinge" />
+    <option name="LAST_COMMIT_MESSAGE" value="back to Hinge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1236,7 +1235,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
+        <state relative-caret-position="395">
           <caret line="244" column="48" lean-forward="false" selection-start-line="244" selection-start-column="0" selection-end-line="245" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
