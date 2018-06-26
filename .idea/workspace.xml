@@ -36,8 +36,8 @@
               <caret line="409" column="19" lean-forward="false" selection-start-line="409" selection-start-column="19" selection-end-line="409" selection-end-column="19" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
-                <marker date="1530016424026" expanded="true" signature="19853:23396" ph="..." />
-                <marker date="1530016424026" expanded="true" signature="23231:23396" ph="..." />
+                <marker date="1530016435552" expanded="true" signature="19853:23396" ph="..." />
+                <marker date="1530016435552" expanded="true" signature="23231:23396" ph="..." />
               </folding>
             </state>
           </provider>
@@ -365,13 +365,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00297" summary="updated margin parameter">
-      <created>1529760049948</created>
-      <option name="number" value="00297" />
-      <option name="presentableId" value="LOCAL-00297" />
-      <option name="project" value="LOCAL" />
-      <updated>1529760049949</updated>
     </task>
     <task id="LOCAL-00298" summary="updated margin parameter">
       <created>1529760138461</created>
@@ -709,7 +702,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530016293571</updated>
     </task>
-    <option name="localTasksCounter" value="346" />
+    <task id="LOCAL-00346" summary="added in MLE">
+      <created>1530016426823</created>
+      <option name="number" value="00346" />
+      <option name="presentableId" value="LOCAL-00346" />
+      <option name="project" value="LOCAL" />
+      <updated>1530016426824</updated>
+    </task>
+    <option name="localTasksCounter" value="347" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1229,8 +1229,8 @@
           <caret line="409" column="19" lean-forward="false" selection-start-line="409" selection-start-column="19" selection-end-line="409" selection-end-column="19" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1530016424026" expanded="true" signature="19853:23396" ph="..." />
-            <marker date="1530016424026" expanded="true" signature="23231:23396" ph="..." />
+            <marker date="1530016435552" expanded="true" signature="19853:23396" ph="..." />
+            <marker date="1530016435552" expanded="true" signature="23231:23396" ph="..." />
           </folding>
         </state>
       </provider>
