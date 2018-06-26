@@ -239,10 +239,10 @@ class VKGE2:
 
         self.e_objective = (1.0/3.0)*(self.e_objective1+self.e_objective2+self.e_objective3)
 
-        # self.hinge_losses = tf.nn.relu(self.margin - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
-        # self.g_objective = tf.reduce_sum(self.hinge_losses)
+        self.hinge_losses = tf.nn.relu(self.margin - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
+        self.g_objective = tf.reduce_sum(self.hinge_losses)
 
-        self.g_objective = tf.reduce_sum(tf.log(1+tf.exp(-tf.cast(self.y_inputs,dtype=tf.float32)*self.scores)))
+        # self.g_objective = tf.reduce_sum(tf.log(1+tf.exp(-tf.cast(self.y_inputs,dtype=tf.float32)*self.scores)))
 
         self.elbo = self.g_objective+self.e_objective
 
@@ -431,7 +431,7 @@ class VKGE2:
         # logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
         logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
 
-        projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=5.0)]
+        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=5.0)]
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
