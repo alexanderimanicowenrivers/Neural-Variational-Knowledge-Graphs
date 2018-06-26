@@ -1,5 +1,5 @@
 """
-            used for cluster job submission and parameter search over main.py
+            used for cluster job submission and parameter search over main2.py, final model analysis
 
                 """
 
@@ -39,9 +39,8 @@ def to_cmd(c):
               '--alternating_updates {} ' \
               '--alt_opt {} ' \
               '--margin {} ' \
-              '--decay_kl {}' \
               '--file_name {} ' \
- \
+              '--decay_kl {}' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -53,9 +52,8 @@ def to_cmd(c):
                 c['w6'],
                 c['w7'],
                 c['w8'],
+                "{}/logs/18_6_25_ML/tb_nvkg.{}".format(path, summary(c)),
                 c['w9'],
-                "%s/18_6_25" % (path)
-
                 )
     return command
 
@@ -67,21 +65,21 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[1,2,3,4,5,6,7,8,9,10],
-        w2=[0.01,0.02,0.03,0.04,0.05,0.1,0.3,0.5,0.7,0.9,1.0], #
-        w3=[200,250,300,350],
+        w1=[1,5],
+        w2=[0.5,0.01], #
+        w3=[200,250,300,350,400],
         w4=[True],
         w5=[True],
         w6 = [False],
         w7=[True],
-        w8=[1,3,5,7],
+        w8=[5,7,9,11,13,15,17,19,21],
         w9=[False],
 
     )
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_25'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_25_ML'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
