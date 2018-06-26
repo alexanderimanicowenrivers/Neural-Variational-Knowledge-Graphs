@@ -31,23 +31,20 @@ def to_cmd(c):
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
     command = 'PYTHONPATH=. anaconda-python3-cpu {}/main2.py  ' \
-              '--batch_size {} ' \
-              '--learning_rate {} ' \
+              '--mean_c {} ' \
               '--init_sig {} ' \
               '--embedding_size {} ' \
               '--alt_cost {} ' \
-              '--static_mean {} ' \
               '--Sigma_alt {} ' \
               '--alternating_updates {} ' \
-              '--projection {} ' \
-              '--tensorboard {} ' \
-              '--opt_type {} ' \
+              '--alt_opt {} ' \
+              '--margin {} ' \
+              '--decay_kl {}' \
               '--file_name {} ' \
  \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
-                c['w0'],
                 c['w1'],
                 c['w2'],
                 c['w3'],
@@ -56,9 +53,8 @@ def to_cmd(c):
                 c['w6'],
                 c['w7'],
                 c['w8'],
-                False,
                 c['w9'],
-                "%s/logs/simple5/uclcs_nvkg_v1.%s" % (path, summary(c))
+                "%s/18_6_25" % (path)
 
                 )
     return command
@@ -71,21 +67,21 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w0=[14145],
-        w1=[0.1],
-        w2=[4],
-        w3=[50],
+        w1=[2],
+        w2=[0.02], #
+        w3=[300],
         w4=[True],
         w5=[True],
-        w6=[True,False],
-        w7 = [False],
-        w8=[True,False],
-        w9=['hinge']
+        w6 = [False],
+        w7=[True],
+        w8=[7],
+        w9=[False],
+
     )
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/simple5'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_25'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
@@ -113,7 +109,7 @@ def main(_):
     sorted_command_lines = sorted(command_lines,reverse=True)
     nb_jobs = len(sorted_command_lines)
 
-
+# use #$ -pe smp 1000 for 1000 cores
  # add this in for GPU's   # $ -P gpu
  #    # $ -l gpu=0
 
@@ -126,6 +122,7 @@ def main(_):
 #$ -t 1-{}
 #$ -l tmem=8G
 #$ -l h_rt=12:00:00
+#$ -ac allow=LMNOPQSTU
 
 
 
