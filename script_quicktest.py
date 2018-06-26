@@ -65,9 +65,9 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[2],
-        w2=[0.02], #
-        w3=[300],
+        w1=[5],
+        w2=[0.5], #
+        w3=[200],
         w4=[True],
         w5=[True],
         w6 = [False],
@@ -138,7 +138,10 @@ export PYTHONPATH=.
 
     for job_id, command_line in enumerate(sorted_command_lines, 1):
         print('test $SGE_TASK_ID -eq {} && {}'.format(job_id, command_line))
-
+    for job_id2, command_line in enumerate(sorted_command_lines, 1):
+        print('test $SGE_TASK_ID -eq {} && {}'.format(job_id+job_id2, command_line))
+    for job_id3, command_line in enumerate(sorted_command_lines, 1):
+        print('test $SGE_TASK_ID -eq {} && {}'.format(job_id+job_id2+job_id3, command_line))
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
