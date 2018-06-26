@@ -1,5 +1,5 @@
 """
-            used for cluster job submission and parameter search over main.py
+            used for cluster job submission and parameter search over main2.py, final model analysis
 
                 """
 
@@ -39,9 +39,8 @@ def to_cmd(c):
               '--alternating_updates {} ' \
               '--alt_opt {} ' \
               '--margin {} ' \
-              '--decay_kl {}' \
               '--file_name {} ' \
- \
+              '--decay_kl {}' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -53,15 +52,14 @@ def to_cmd(c):
                 c['w6'],
                 c['w7'],
                 c['w8'],
+                "{}/logs/18_6_25/tb_nvkg.{}".format(path, summary(c)),
                 c['w9'],
-                "%s/18_6_25" % (path)
-
                 )
     return command
 
 
 def to_logfile(c, path):
-    outfile = "%s/uclcs_nvkg_v2.%s.log" % (path, summary(c))
+    outfile = "%s/uclcs_nvkg_v1.%s.log" % (path, summary(c))
     return outfile
 
 
