@@ -192,6 +192,8 @@ class VKGE2:
         """
                         Constructs Model
         """
+
+
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
@@ -405,6 +407,10 @@ class VKGE2:
         """
 
         nb_versions = 3
+        patience=5
+        patience_counter=0
+        earl_stop=0
+
 
         all_triples=train_triples+test_triples
 
@@ -552,11 +558,12 @@ class VKGE2:
                 if (round(np.mean(loss_values), 4) < minloss):
                     minloss = round(np.mean(loss_values), 4)
                     minepoch = epoch
+                    patience_counter = 0
                 else:
-
-                    if (round(np.mean(loss_values), 4) < minloss):
-                        minloss = round(np.mean(loss_values), 4)
-                        minepoch = epoch
+                    patience_counter+=1
+                    if patience_counter==patience:
+                        earl_stop=1
+                        logger.warn('Early Stopping with patience {}'.format(patience))
 
                 logger.warn('Epoch: {0}\tELBO: {1}'.format(epoch, self.stats(loss_values)))
 
@@ -564,7 +571,7 @@ class VKGE2:
                 # Test
                 ##
 
-                if (epoch % 500) == 0:
+                if ((epoch % 500) == 0 ) or (earl_stop==1):
 
 
                     eval_name='valid'
