@@ -136,6 +136,8 @@ export PYTHONPATH=.
 
     for job_id, command_line in enumerate(sorted_command_lines, 1):
         print('test $SGE_TASK_ID -eq {} && {}'.format(job_id, command_line))
+    for job_id2, command_line in enumerate(sorted_command_lines, 1):
+        print('test $SGE_TASK_ID -eq {} && {}'.format(job_id+job_id2, command_line))
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
