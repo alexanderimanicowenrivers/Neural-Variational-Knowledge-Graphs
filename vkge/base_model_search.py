@@ -157,7 +157,7 @@ class VKGE2:
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer,sig_max, sig_min)
-        self.nb_epochs=150
+        self.nb_epochs=1000
 
         self.decay_kl=decay_kl
 
@@ -433,8 +433,7 @@ class VKGE2:
 
         projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=5.0)]
 
-
-        mr = 10000
+        max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
 
         M = int(nb_batches)
@@ -461,6 +460,7 @@ class VKGE2:
 
                 if earl_stop==1:
                     break
+                    # saver.save(session, '/model'+filename )
 
                 counter = 0
                 if self.decay_kl:
@@ -614,11 +614,11 @@ class VKGE2:
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
 
-                    if mean_rank < mr:
-                        mr = mean_rank
+                    if hits_at_k > max_hits_at_k:
+                        max_hits_at_k = hits_at_k
                     else:
                         earl_stop = 1
-                        logger.warn('Early Stopping with valid mr {}'.format(mr))
+                        logger.warn('Early Stopping with valid HITS@10 {}'.format(max_hits_at_k))
 
             ##
             # Test
