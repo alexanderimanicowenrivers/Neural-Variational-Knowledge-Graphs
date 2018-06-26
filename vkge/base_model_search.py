@@ -239,7 +239,7 @@ class VKGE2:
         # self.hinge_losses = tf.nn.relu(self.margin - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
         # self.g_objective = tf.reduce_sum(self.hinge_losses)
 
-        self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=tf.sigmoid(self.scores), y=1 - tf.sigmoid(self.scores)) + 1e-10))
+        self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=tf.relu(self.scores), y=1 - tf.relu(self.scores)) + 1e-10))
 
         self.elbo = self.g_objective+self.e_objective
 
