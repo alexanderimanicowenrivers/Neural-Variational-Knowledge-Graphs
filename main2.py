@@ -31,7 +31,7 @@ FLAGS = flags.FLAGS
 def main(_):
     logger.warn("creating model with flags \t {}".format(flags.FLAGS.__flags))
 
-    vkge.VKGE2(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,init_sig=FLAGS.init_sig, alt_cost=FLAGS.alt_cost, batch_s=FLAGS.batch_size,
+    vkge.VKGE(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,init_sig=FLAGS.init_sig, alt_cost=FLAGS.alt_cost, batch_s=FLAGS.batch_size,
               static_mean=FLAGS.static_mean, alt_updates=FLAGS.alternating_updates, sigma_alt=FLAGS.Sigma_alt,
                margin=FLAGS.margin, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt
               , projection=FLAGS.projection,  decay_kl=FLAGS.decay_kl)
