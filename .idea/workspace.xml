@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="added in MLE">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_quicktest.py" afterPath="$PROJECT_DIR$/script_quicktest.py" />
     </list>
@@ -20,8 +20,8 @@
       <file leaf-file-name="script_quicktest.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_quicktest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="538">
-              <caret line="76" column="13" lean-forward="false" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
+            <state relative-caret-position="593">
+              <caret line="76" column="13" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="13" />
               <folding>
                 <element signature="e#104#120#0" expanded="true" />
               </folding>
@@ -90,8 +90,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>nb_enti</find>
-      <find>GPU</find>
       <find>mu_s</find>
       <find>logger.info</find>
       <find>scalar_summary</find>
@@ -120,6 +118,8 @@
       <find>file_name</find>
       <find>filename</find>
       <find>var1</find>
+      <find>uclcs_nvkg_v2</find>
+      <find>uclcs_nvkg_v</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -370,13 +370,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00284" summary="adding in previous features">
-      <created>1529685373822</created>
-      <option name="number" value="00284" />
-      <option name="presentableId" value="LOCAL-00284" />
-      <option name="project" value="LOCAL" />
-      <updated>1529685373823</updated>
     </task>
     <task id="LOCAL-00285" summary="adding in previous features">
       <created>1529685527153</created>
@@ -714,7 +707,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530009686528</updated>
     </task>
-    <option name="localTasksCounter" value="333" />
+    <task id="LOCAL-00333" summary="added in MLE">
+      <created>1530009840732</created>
+      <option name="number" value="00333" />
+      <option name="presentableId" value="LOCAL-00333" />
+      <option name="project" value="LOCAL" />
+      <updated>1530009840732</updated>
+    </task>
+    <option name="localTasksCounter" value="334" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1233,8 +1233,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script_quicktest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="76" column="13" lean-forward="false" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
+        <state relative-caret-position="593">
+          <caret line="76" column="13" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="13" />
           <folding>
             <element signature="e#104#120#0" expanded="true" />
           </folding>
