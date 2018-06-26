@@ -20,12 +20,12 @@
       <file leaf-file-name="base_model_search.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="239" column="61" lean-forward="false" selection-start-line="238" selection-start-column="7" selection-end-line="239" selection-end-column="61" />
+            <state relative-caret-position="377">
+              <caret line="241" column="8" lean-forward="false" selection-start-line="241" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
-                <marker date="1530008489172" expanded="true" signature="19821:23360" ph="..." />
-                <marker date="1530008489172" expanded="true" signature="23195:23360" ph="..." />
+                <marker date="1530009683460" expanded="true" signature="19819:23358" ph="..." />
+                <marker date="1530009683460" expanded="true" signature="23193:23358" ph="..." />
               </folding>
             </state>
           </provider>
@@ -357,13 +357,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00282" summary="adding in previous features">
-      <created>1529685336999</created>
-      <option name="number" value="00282" />
-      <option name="presentableId" value="LOCAL-00282" />
-      <option name="project" value="LOCAL" />
-      <updated>1529685336999</updated>
     </task>
     <task id="LOCAL-00283" summary="adding in previous features">
       <created>1529685348682</created>
@@ -701,7 +694,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529937200730</updated>
     </task>
-    <option name="localTasksCounter" value="331" />
+    <task id="LOCAL-00331" summary="added in MLE">
+      <created>1530008500650</created>
+      <option name="number" value="00331" />
+      <option name="presentableId" value="LOCAL-00331" />
+      <option name="project" value="LOCAL" />
+      <updated>1530008500650</updated>
+    </task>
+    <option name="localTasksCounter" value="332" />
     <servers />
   </component>
   <component name="TodoView">
@@ -787,7 +787,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="new log folder for script" />
     <MESSAGE value="updated loss statement with more info" />
     <MESSAGE value="updates summary on 4 entity variables and 2 predicate variables during training" />
     <MESSAGE value="updates test script" />
@@ -812,7 +811,8 @@
     <MESSAGE value="updated tf path" />
     <MESSAGE value="updated final search with tensorboard" />
     <MESSAGE value="changed epochs to 5 for TB test" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed epochs to 5 for TB test" />
+    <MESSAGE value="added in MLE" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in MLE" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1218,12 +1218,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="239" column="61" lean-forward="false" selection-start-line="238" selection-start-column="7" selection-end-line="239" selection-end-column="61" />
+        <state relative-caret-position="377">
+          <caret line="241" column="8" lean-forward="false" selection-start-line="241" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1530008489172" expanded="true" signature="19821:23360" ph="..." />
-            <marker date="1530008489172" expanded="true" signature="23195:23360" ph="..." />
+            <marker date="1530009683460" expanded="true" signature="19819:23358" ph="..." />
+            <marker date="1530009683460" expanded="true" signature="23193:23358" ph="..." />
           </folding>
         </state>
       </provider>
