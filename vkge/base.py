@@ -237,10 +237,12 @@ class VKGE:
 
         self.e_objective = (1.0 / 3.0) * (self.e_objective1 + self.e_objective2 + self.e_objective3)
 
-        self.hinge_losses = tf.nn.relu(self.margin - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
-        self.g_objective = tf.reduce_sum(self.hinge_losses)
+        # self.hinge_losses = tf.nn.relu(self.margin - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
+        # self.g_objective = tf.reduce_sum(self.hinge_losses)
+        #
+        # # self.g_objective = tf.reduce_sum(tf.log(1+tf.exp(-tf.cast(self.y_inputs,dtype=tf.float32)*self.scores)))
 
-        # self.g_objective = tf.reduce_sum(tf.log(1+tf.exp(-tf.cast(self.y_inputs,dtype=tf.float32)*self.scores)))
+        self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
         self.elbo = self.g_objective + self.e_objective
 
@@ -357,6 +359,8 @@ class VKGE:
 
             self.scores = model()
             self.scores_test = model_test()
+            self.p_x_i = tf.sigmoid(self.scores)
+
 
     def variable_summaries(self, var):
         """Summaries of a Tensor"""
