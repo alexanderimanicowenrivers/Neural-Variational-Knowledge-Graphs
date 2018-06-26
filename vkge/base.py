@@ -599,7 +599,7 @@ class VKGE:
             # Test
             ##
 
-
+            logger.warn('Beginning test phase')
 
 
             eval_name = 'test'
