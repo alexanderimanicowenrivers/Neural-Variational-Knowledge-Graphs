@@ -614,11 +614,11 @@ class VKGE2:
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
 
-                if mean_rank < mr:
-                    mr = mean_rank
-                else:
-                    earl_stop = 1
-                    logger.warn('Early Stopping with valid mr {}'.format(mr))
+                    if mean_rank < mr:
+                        mr = mean_rank
+                    else:
+                        earl_stop = 1
+                        logger.warn('Early Stopping with valid mr {}'.format(mr))
 
             ##
             # Test
