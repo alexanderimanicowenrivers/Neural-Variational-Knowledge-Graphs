@@ -529,8 +529,8 @@ class VKGE:
 
                     config = projector.ProjectorConfig()
                     embed = config.embeddings.add()
-                    embed.tensor_name = 'embedding:0'
-                    embed.metadata_path = 'data2/wn18/emedding_names.tsv'
+                    embed.tensor_name = 'entities_sigma:0'
+                    embed.metadata_path = 'data2/wn18/embedding_names.tsv'
 
                     # Specify the width and height of a single thumbnail.
                     embed.sprite.single_image_dim.extend([28, 28])
