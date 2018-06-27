@@ -329,24 +329,24 @@ class VKGE:
         with tf.name_scope('Samples'):
 
             with tf.name_scope('Entity1'):
-                var1_1 = tf.nn.embedding_lookup(self.entity_embedding_mean, self.var1)
-                var1_2 = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var1)
+                self.var1_1 = tf.nn.embedding_lookup(self.entity_embedding_mean, self.var1)
+                self.var1_2 = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var1)
 
                 with tf.name_scope('Entity1_Mean'):
-                    self.variable_summaries(var1_1)
+                    self.variable_summaries(self.var1_1)
 
                 with tf.name_scope('Entity1_logStd'):
-                    self.variable_summaries(var1_2)
+                    self.variable_summaries(self.var1_2)
 
             with tf.name_scope('Predicate1'):
-                var2_1 = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.var2)
-                var2_2 = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.var2)
+                self.var2_1 = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.var2)
+                self.var2_2 = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.var2)
 
                 with tf.name_scope('Predicate1_Mean'):
-                    self.variable_summaries(var2_1)
+                    self.variable_summaries(self.var2_1)
 
                 with tf.name_scope('Predicate1_logStd'):
-                    self.variable_summaries(var2_2)
+                    self.variable_summaries(self.var2_2)
 
     def build_decoder(self):
         """
