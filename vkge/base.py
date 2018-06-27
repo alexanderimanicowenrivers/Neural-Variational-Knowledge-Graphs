@@ -3,7 +3,7 @@
 import math
 import numpy as np
 import tensorflow as tf
-
+import os
 from vkge.knowledgebase import Fact, KnowledgeBaseParser
 
 import vkge.models as models
@@ -11,6 +11,7 @@ from vkge.training import constraints, corrupt, index
 from vkge.training.util import make_batches
 import vkge.io as io
 from random import randint
+from tensorflow.contrib.tensorboard.plugins import projector
 
 # new
 
@@ -439,7 +440,7 @@ class VKGE:
             samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
 
             logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20], samp1_sig[:20]))
-
+            saver = tf.train.Saver()
             train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
@@ -522,8 +523,21 @@ class VKGE:
                     summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
                                                          feed_dict=loss_args)
 
-                    if ((counter % 2) == 0):
-                        train_writer.add_summary(summary, counter)  # tensorboard
+                    # tensorboard
+
+                    train_writer.add_summary(summary, counter)
+
+                    config = projector.ProjectorConfig()
+                    embed = config.embeddings.add()
+                    embed.tensor_name = 'embedding:0'
+                    embed.metadata_path = 'data2/wn18/emedding_names.tsv'
+
+                    # Specify the width and height of a single thumbnail.
+                    embed.sprite.single_image_dim.extend([28, 28])
+                    projector.visualize_embeddings(train_writer, config)
+
+                    saver.save(session, filename)
+
 
                     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
 

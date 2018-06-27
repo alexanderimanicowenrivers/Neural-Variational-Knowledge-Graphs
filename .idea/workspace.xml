@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data2/wn18/wordnet-mlj12-definitions.txt" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/wn18/wordnet-mlj12-clauses_0.9-train.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/wn18/wordnet-mlj12-definitions.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/wn18/wordnet-mlj12-test.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/wn18/wordnet-mlj12-train.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/wn18/wordnet-mlj12-valid.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="335" column="49" lean-forward="false" selection-start-line="335" selection-start-column="49" selection-end-line="335" selection-end-column="49" />
+            <state relative-caret-position="137">
+              <caret line="532" column="72" lean-forward="false" selection-start-line="532" selection-start-column="72" selection-end-line="532" selection-end-column="72" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -86,26 +91,6 @@
               <folding>
                 <element signature="e#26#49#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wordnet-mlj12-definitions.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/wn18/wordnet-mlj12-definitions.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wordnet-mlj12-definitions.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/data2/wn18/wordnet-mlj12-definitions.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -200,8 +185,8 @@
         <option value="$PROJECT_DIR$/vkge/non_probabilistic.py" />
         <option value="$PROJECT_DIR$/vkge/base_model_search.py" />
         <option value="$PROJECT_DIR$/script_search.py" />
-        <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/script_quicktest.py" />
+        <option value="$PROJECT_DIR$/vkge/base.py" />
       </list>
     </option>
   </component>
@@ -230,17 +215,6 @@
             <path>
               <item name="Neural-Variational-Knowledge-Graphs" type="b2602c69:ProjectViewProjectNode" />
               <item name="Neural-Variational-Knowledge-Graphs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Neural-Variational-Knowledge-Graphs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Neural-Variational-Knowledge-Graphs" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Neural-Variational-Knowledge-Graphs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Neural-Variational-Knowledge-Graphs" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="wn18" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Neural-Variational-Knowledge-Graphs" type="b2602c69:ProjectViewProjectNode" />
@@ -433,13 +407,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00333" summary="added in MLE">
-      <created>1530009840732</created>
-      <option name="number" value="00333" />
-      <option name="presentableId" value="LOCAL-00333" />
-      <option name="project" value="LOCAL" />
-      <updated>1530009840732</updated>
     </task>
     <task id="LOCAL-00334" summary="added in MLE">
       <created>1530010025057</created>
@@ -777,7 +744,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530092286084</updated>
     </task>
-    <option name="localTasksCounter" value="382" />
+    <task id="LOCAL-00382" summary="put hinge back">
+      <created>1530095560974</created>
+      <option name="number" value="00382" />
+      <option name="presentableId" value="LOCAL-00382" />
+      <option name="project" value="LOCAL" />
+      <updated>1530095560974</updated>
+    </task>
+    <option name="localTasksCounter" value="383" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1193,16 +1167,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="24" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding>
-            <element signature="e#26#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/script_baseline.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-162">
@@ -1237,16 +1201,6 @@
           <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
           <folding>
             <element signature="e#25#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="335" column="49" lean-forward="false" selection-start-line="335" selection-start-column="49" selection-end-line="335" selection-end-column="49" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1295,6 +1249,26 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="24" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <element signature="e#26#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="532" column="72" lean-forward="false" selection-start-line="532" selection-start-column="72" selection-end-line="532" selection-end-column="72" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
