@@ -296,7 +296,7 @@ class VKGE:
 
 
 
-            with tf.variable_scope('entity_f_of_sigma'):
+            with tf.variable_scope('entity_sigma'):
 
                 self.entity_embedding_sigma = tf.get_variable('entities_sigma',
                                                               shape=[nb_entities + 1, entity_embedding_size],
@@ -324,6 +324,9 @@ class VKGE:
             self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
             self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
             self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+
+
+        with tf.name_scope('Samples'):
 
             with tf.name_scope('Entity1'):
                 var1_1 = tf.nn.embedding_lookup(self.entity_embedding_mean, self.var1)
