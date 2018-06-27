@@ -602,6 +602,12 @@ class VKGE:
             # Test
             ##
 
+            logger.warn('PRINTING TOP 20 ROWS FROM SAMPLE ENTITY MEAN AND VAR ')
+
+            samp1_mu,samp1_sig=session.run(self.var1_1,self.var1_2)
+
+            logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20],samp1_sig[:20]))
+
             logger.warn('Beginning test phase')
 
 
