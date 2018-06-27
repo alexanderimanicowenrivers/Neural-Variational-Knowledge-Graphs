@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/wn18/wordnet-mlj12-clauses_0.9-train.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/wn18/wordnet-mlj12-definitions.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/wn18/wordnet-mlj12-test.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/wn18/wordnet-mlj12-train.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/wn18/wordnet-mlj12-valid.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_quicktest.py" afterPath="$PROJECT_DIR$/script_quicktest.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script_quicktest.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="script_quicktest.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_quicktest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="40" column="30" lean-forward="true" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
+            <state relative-caret-position="608">
+              <caret line="81" column="89" lean-forward="false" selection-start-line="81" selection-start-column="89" selection-end-line="81" selection-end-column="89" />
               <folding>
                 <element signature="e#127#143#0" expanded="true" />
               </folding>
@@ -47,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="532" column="72" lean-forward="false" selection-start-line="532" selection-start-column="72" selection-end-line="532" selection-end-column="72" />
+            <state relative-caret-position="398">
+              <caret line="532" column="57" lean-forward="false" selection-start-line="532" selection-start-column="57" selection-end-line="532" selection-end-column="57" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -134,8 +129,8 @@
       <find>mean_rank</find>
       <find>$SGE_TASK_ID</find>
       <find>decay_kl</find>
-      <find>f_of</find>
       <find>18_6_25</find>
+      <find>f_of</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -185,8 +180,8 @@
         <option value="$PROJECT_DIR$/vkge/non_probabilistic.py" />
         <option value="$PROJECT_DIR$/vkge/base_model_search.py" />
         <option value="$PROJECT_DIR$/script_search.py" />
-        <option value="$PROJECT_DIR$/script_quicktest.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
+        <option value="$PROJECT_DIR$/script_quicktest.py" />
       </list>
     </option>
   </component>
@@ -407,20 +402,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00334" summary="added in MLE">
-      <created>1530010025057</created>
-      <option name="number" value="00334" />
-      <option name="presentableId" value="LOCAL-00334" />
-      <option name="project" value="LOCAL" />
-      <updated>1530010025057</updated>
-    </task>
-    <task id="LOCAL-00335" summary="added in MLE">
-      <created>1530010259990</created>
-      <option name="number" value="00335" />
-      <option name="presentableId" value="LOCAL-00335" />
-      <option name="project" value="LOCAL" />
-      <updated>1530010259990</updated>
     </task>
     <task id="LOCAL-00336" summary="added in MLE">
       <created>1530010296779</created>
@@ -751,7 +732,21 @@
       <option name="project" value="LOCAL" />
       <updated>1530095560974</updated>
     </task>
-    <option name="localTasksCounter" value="383" />
+    <task id="LOCAL-00383" summary="put hinge back">
+      <created>1530116409035</created>
+      <option name="number" value="00383" />
+      <option name="presentableId" value="LOCAL-00383" />
+      <option name="project" value="LOCAL" />
+      <updated>1530116409036</updated>
+    </task>
+    <task id="LOCAL-00384" summary="added in embedding tensorboard">
+      <created>1530116537144</created>
+      <option name="number" value="00384" />
+      <option name="presentableId" value="LOCAL-00384" />
+      <option name="project" value="LOCAL" />
+      <updated>1530116537144</updated>
+    </task>
+    <option name="localTasksCounter" value="385" />
     <servers />
   </component>
   <component name="TodoView">
@@ -837,7 +832,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated decaying KL" />
     <MESSAGE value="added multiple datasets" />
     <MESSAGE value="updated main file" />
     <MESSAGE value="added in KL" />
@@ -862,7 +856,8 @@
     <MESSAGE value="updated MLE tests" />
     <MESSAGE value="added in test phase print statement" />
     <MESSAGE value="put hinge back" />
-    <option name="LAST_COMMIT_MESSAGE" value="put hinge back" />
+    <MESSAGE value="added in embedding tensorboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in embedding tensorboard" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1226,16 +1221,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script_quicktest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="40" column="30" lean-forward="true" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
-          <folding>
-            <element signature="e#127#143#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/wn18/wordnet-mlj12-definitions.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1264,10 +1249,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="532" column="72" lean-forward="false" selection-start-line="532" selection-start-column="72" selection-end-line="532" selection-end-column="72" />
+        <state relative-caret-position="398">
+          <caret line="532" column="57" lean-forward="false" selection-start-line="532" selection-start-column="57" selection-end-line="532" selection-end-column="57" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script_quicktest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="81" column="89" lean-forward="false" selection-start-line="81" selection-start-column="89" selection-end-line="81" selection-end-column="89" />
+          <folding>
+            <element signature="e#127#143#0" expanded="true" />
           </folding>
         </state>
       </provider>
