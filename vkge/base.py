@@ -533,7 +533,6 @@ class VKGE:
                     embed.metadata_path = 'data2/wn18/embedding_names.tsv'
 
                     # Specify the width and height of a single thumbnail.
-                    embed.sprite.single_image_dim.extend([28, 28])
                     projector.visualize_embeddings(train_writer, config)
 
                     saver.save(session, filename)
