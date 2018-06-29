@@ -91,7 +91,7 @@ class VKGE:
 
             """
 
-    def __init__(self, file_name, decay_kl=False, static_mean=False, embedding_size=50, batch_s=14145, mean_c=0.1,
+    def __init__(self, file_name, dismult_complex=False, static_mean=False, embedding_size=50, batch_s=14145, mean_c=0.1,
                  init_sig=6.0,
                  alt_cost=False, alt_updates=True, sigma_alt=True, margin=5, alt_opt=True, projection=True):
         super().__init__()
@@ -111,8 +111,17 @@ class VKGE:
                 sig_min = sig_max
 
                 # adjust for correct format for model input
-        predicate_embedding_size = embedding_size
-        entity_embedding_size = embedding_size
+
+        if not dismult_complex:
+            predicate_embedding_size = embedding_size*2
+            entity_embedding_size = embedding_size*2
+
+        else:
+            predicate_embedding_size = embedding_size
+            entity_embedding_size = embedding_size
+
+        self.dismult_complex=dismult_complex
+
         self.random_state = np.random.RandomState(0)
         tf.set_random_seed(0)
         self.static_mean = static_mean
@@ -355,10 +364,18 @@ class VKGE:
         logger.warn('Building Inference Network p(y|h) ..')
 
         with tf.variable_scope('decoder'):
-            model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
-                                                 object_embeddings=self.h_o)
-            model_test = models.BilinearDiagonalModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
-                                                      object_embeddings=self.mu_o)
+
+            if self.dismult_complex:
+
+                model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
+                                                     object_embeddings=self.h_o)
+                model_test = models.BilinearDiagonalModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
+                                                       object_embeddings=self.mu_o)
+            else:
+                model = models.ComplexModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
+                                                     object_embeddings=self.h_o)
+                model_test = models.ComplexModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
+                                                          object_embeddings=self.mu_o)
 
             self.scores = model()
             self.scores_test = model_test()
@@ -668,7 +685,8 @@ class VKGE:
                 for k in [1, 3, 5, 10]:
                     hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                     logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+#save embeddings
 
-            entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
-            np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
-            np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
+            # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
+            # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
+            # np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
