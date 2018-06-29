@@ -11,7 +11,6 @@ from vkge.training import constraints, corrupt, index
 from vkge.training.util import make_batches
 import vkge.io as io
 from random import randint
-from tensorflow.contrib.tensorboard.plugins import projector
 
 # new
 
@@ -527,16 +526,6 @@ class VKGE:
 
                     train_writer.add_summary(summary, counter)
 
-                    config = projector.ProjectorConfig()
-                    embed = config.embeddings.add()
-                    embed.tensor_name = 'entities_sigma:0'
-                    embed.metadata_path = 'data2/wn18/embedding_names.tsv'
-
-                    # Specify the width and height of a single thumbnail.
-                    projector.visualize_embeddings(train_writer, config)
-
-                    saver.save(session, filename)
-
 
                     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
 
@@ -680,5 +669,6 @@ class VKGE:
                     hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                     logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
-            entity_embeddings=session.run(self.entity_embedding_mean,feed_dict={})
-            np.savetxt("entity_embeddings.tsv", entity_embeddings, delimiter="\t")
+            entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
+            np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
+            np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
