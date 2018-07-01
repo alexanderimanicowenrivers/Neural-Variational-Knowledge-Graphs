@@ -690,3 +690,4 @@ class VKGE:
             entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
             np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
             np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
+    
