@@ -31,10 +31,14 @@ def to_cmd(c):
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
     command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
-              '--batch_size {} ' \
-              '--learning_rate {} ' \
-              '--margin {} ' \
+              '--mean_c {} ' \
+              '--init_sig {} ' \
               '--embedding_size {} ' \
+              '--dataset {} ' \
+              '--alt_opt {} ' \
+              '--lr {} ' \
+              '--file_name {} ' \
+              '--score_func {}' \
  \
         .format(path,
                 #                 params,

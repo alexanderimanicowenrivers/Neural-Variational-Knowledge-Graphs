@@ -1,17 +1,15 @@
-# -*- coding: utf-8 -*-
-
-import math
+# import math
 import numpy as np
 import tensorflow as tf
-
+import os
 from vkge.knowledgebase import Fact, KnowledgeBaseParser
+from functools import reduce
 
 import vkge.models as models
 from vkge.training import constraints, corrupt, index
 from vkge.training.util import make_batches
 import vkge.io as io
-
-
+from random import randint
 # new
 
 import logging
@@ -86,60 +84,83 @@ class VKGE_simple:
         @type projection: bool
 
             """
-    def __init__(self,decay_kl, file_name,embedding_size=5,batch_s=14145, lr=0.001, b1=0.9, b2=0.999, eps=1e-08, GPUMode=False, ent_sig=6.0,
-                 alt_cost=False,margin=5,static_pred=False,static_mean=False,alt_updates=True,sigma_alt=True,opt_type='ml',tensorboard=True,projection=True,opt='adam'):
+    def __init__(self, file_name, score_func='dismult', static_mean=False, embedding_size=50, batch_s=14145, mean_c=0.1,
+                 init_sig=6.0,
+                 alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True, projection=True):
         super().__init__()
 
-        self.sigma_alt=sigma_alt
+        self.sigma_alt = sigma_alt
+        self.score_func=score_func
 
-        if ent_sig==-1:
-            ent_sigma=ent_sig
+        if init_sig == -1:
+            sig_max = init_sig
+            sig_min = init_sig
         else:
             if sigma_alt:
-                ent_sigma=tf.log(tf.exp(ent_sig)-1)
-            else:
-                ent_sigma = (np.log(ent_sig)**2) #old sigma
 
-        pred_sigma = ent_sigma #adjust for correct format for model input
-        predicate_embedding_size = embedding_size
-        entity_embedding_size = embedding_size
+                sig_max = tf.log(tf.exp(init_sig) - 1)
+                sig_min = sig_max
+            else:
+                sig_max = (tf.log(init_sig ** 2))  # old sigma
+                sig_min = sig_max
+
+                # adjust for correct format for model input
+
+        if self.score_func=='ComplEx':
+            predicate_embedding_size = embedding_size*2
+            entity_embedding_size = embedding_size*2
+
+        else:
+            predicate_embedding_size = embedding_size
+            entity_embedding_size = embedding_size
+
+
         self.random_state = np.random.RandomState(0)
         tf.set_random_seed(0)
-
-        self.margin=margin
-        self.GPUMode = GPUMode
+        self.static_mean = static_mean
         self.alt_cost = alt_cost
-        self.static_mean=static_mean
-        self.alt_updates=alt_updates
-        self.tensorboard=tensorboard
-        self.projection=projection
-        logger.warn('This model is non-probabilistic ..')
-
-        logger.warn('Parsing the facts in the Knowledge Base ..')
+        self.projection = projection
+        self.mean_c = mean_c
 
         # Dataset
-        dataset_name = 'wn18'
+        self.dataset_name = dataset
 
-        train_triples = read_triples("data2/{}/train.tsv".format(dataset_name))  # choose dataset
-        test_triples = read_triples("data2/{}/dev.tsv".format(dataset_name))
+        logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(self.dataset_name))
+
+        train_triples = read_triples("data2/{}/train.tsv".format(self.dataset_name))  # choose dataset
+        valid_triples = read_triples("data2/{}/dev.tsv".format(self.dataset_name))
+        test_triples = read_triples("data2/{}/test.tsv".format(self.dataset_name))
         self.nb_examples = len(train_triples)
 
-
         ##### for test time ######
-        all_triples = train_triples + test_triples
+        all_triples = train_triples + valid_triples + test_triples
         entity_set = {s for (s, p, o) in all_triples} | {o for (s, p, o) in all_triples}
         predicate_set = {p for (s, p, o) in all_triples}
         self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
+        # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
+        if alt_opt:
+            optimizer = tf.train.AdagradOptimizer(learning_rate=lr)  # original KG
+        else:
+            optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-05)
 
-        optimizer = tf.train.AdagradOptimizer(learning_rate=0.1)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
+
+
+        logger.warn("Entity Sample1 id is {} with name {}..".format(self.var1_1, list(entity_set)[self.var1_1]))
+
+        logger.warn("Predicate Sample1 id is {} with name {}..".format(self.var1_2, list(predicate_set)[self.var1_2]))
+
+
+
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
-                         optimizer,
-                         ent_sigma, pred_sigma)
+                         optimizer, sig_max, sig_min)
+        self.nb_epochs = 1000
 
-        self.train(nb_epochs=1000, test_triples=test_triples, train_triples=train_triples,batch_size=batch_s,filename=file_name)
+
+        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,
+                   train_triples=train_triples, batch_size=batch_s, filename=file_name)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -177,18 +198,7 @@ class VKGE_simple:
                            pred_sig)
         self.build_decoder()
 
-        # Kullback Leibler divergence
-        # self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
-        # self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
-        # self.e_objective -= 0.5 * tf.reduce_sum(1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
 
-        # Log likelihood
-        # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
-
-        # self.hinge_losses = tf.nn.relu(self.margin- self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
-        # self.g_objective = tf.reduce_sum(self.hinge_losses)
-        # self.g_objective = tf.reduce_sum(tf.log(1+tf.exp(-tf.cast(self.y_inputs,dtype=tf.float32)*self.scores)))
-        # self.g_objective = tf.reduce_sum(tf.log(self.p_x_i))
         self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
         self.elbo = self.g_objective
@@ -227,12 +237,31 @@ class VKGE_simple:
         """
                                 Constructs Decoder
         """
-        logger.warn('Building Inference Network p(y|h) ..')
+        logger.warn('Building Inference Network p(y|h) for {} score function.'.format(self.score_func))
+        # w9=['TransE','DistMult','RESCAL','ComplEx']
 
-        with tf.variable_scope('decoder'):
-            model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
-                                                 object_embeddings=self.h_o)
+        with tf.variable_scope('Inference'):
+
+            if self.score_func=='DistMult':
+
+                model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
+                                                     object_embeddings=self.h_o)
+
+            elif self.score_func=='ComplEx':
+                model = models.ComplexModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
+                                                     object_embeddings=self.h_o)
+
+            elif self.score_func=='TransE':
+                model = models.TranslatingModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
+                                                     object_embeddings=self.h_o)
+
+            elif self.score_func=='RESCAL':
+                model = models.BilinearModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
+                                                     object_embeddings=self.h_o)
+
+
             self.scores = model()
+            self.scores_test = model()
             self.p_x_i = tf.sigmoid(self.scores)
 
 
@@ -242,14 +271,17 @@ class VKGE_simple:
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, train_triples, batch_size, session=0, nb_epochs=1000,unit_cube=True,filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
+    def train(self, test_triples, valid_triples, train_triples, batch_size, session=0, nb_epochs=1000,
+              unit_cube=True,
+              filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
                                 Train Model
         """
 
         nb_versions = 3
+        earl_stop = 0
 
-        all_triples=train_triples+test_triples
+        all_triples = train_triples + valid_triples + test_triples
 
         index_gen = index.GlorotIndexGenerator()
 
@@ -259,34 +291,25 @@ class VKGE_simple:
 
         assert Xs.shape == Xp.shape == Xo.shape
 
-
         nb_samples = Xs.shape[0]
-        nb_batches= math.ceil(nb_samples / batch_size)
+        nb_batches = math.ceil(nb_samples / batch_size)
         batch_size = math.ceil(nb_samples / nb_batches)
 
         batches = make_batches(self.nb_examples, batch_size)
 
-        # logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
-        logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
+        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=5.0)]
 
-        # projection_steps = [constraints.unit_cube(self.entity_embedding_mean) if unit_cube
-        #                     else constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
-
-        minloss = 10000
-        maxhits=0
-        maxepoch=0
-        minepoch = 0
-
+        max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
 
-        M = int(nb_batches + 1)
+        M = int(nb_batches)
 
-        pi_s = np.log(2.0)*M
+        pi_s = np.log(2.0) * (M - 1)
         pi_e = np.log(2.0)
 
-        pi = np.exp(np.linspace(pi_s, pi_e, M)-M*np.log(2.0))
+        pi_t = np.exp(np.linspace(pi_s, pi_e, M) - M * np.log(2.0))
 
-
+        pi = (1 / np.sum(pi_t)) * pi_t  # normalise pi
         #####################
 
         ##
@@ -297,22 +320,30 @@ class VKGE_simple:
         with tf.Session() as session:
             session.run(init_op)
 
-            if self.tensorboard:
-                train_writer = tf.summary.FileWriter(filename, session.graph)
+            logger.warn('Print Top 20 rows from a sample entity and var ')
+
+            samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2], feed_dict={})
+
+            logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20], samp1_sig[:20]))
+            train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
+
+                if earl_stop == 1:
+                    break
+                    # self._saver.save(session, '/model'+filename )
+
                 counter = 0
+
+                kl_inc_val = 1.0
 
                 order = self.random_state.permutation(nb_samples)
                 Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
 
-
                 loss_values = []
                 total_loss_value = 0
 
-
                 for batch_no, (batch_start, batch_end) in enumerate(batches):
-
                     curr_batch_size = batch_end - batch_start
 
                     Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
@@ -333,54 +364,49 @@ class VKGE_simple:
                     Xp_batch[2::nb_versions] = Xp_shuf[batch_start:batch_end]
                     Xo_batch[2::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
 
-                    # y = np.zeros_like(Xp_batch)
-                    # y[0::nb_versions] = 1
-
                     loss_args = {
-                            self.KL_discount: (1.0/nb_batches),
-                            self.s_inputs: Xs_batch,
-                            self.p_inputs: Xp_batch,
-                            self.o_inputs: Xo_batch,
-                            self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
-                        }
+                        self.KL_discount: pi[counter],
+                        self.s_inputs: Xs_batch,
+                        self.p_inputs: Xp_batch,
+                        self.o_inputs: Xo_batch,
+                        self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
+                        self.epoch_d: kl_inc_val
+                    }
 
+                    merge = tf.summary.merge_all()  # for TB
 
+                    summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
+                                                         feed_dict=loss_args)
 
+                    # tensorboard
 
-                    _, elbo_value = session.run([self.training_step, self.elbo],
-                                                                 feed_dict=loss_args)
+                    train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
 
-                    if counter % 2 == 0:
-                        if self.tensorboard:
-                            train_writer.add_summary(summary, counter)  # tensorboard
+                    # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
+
 
                     loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
                     total_loss_value += elbo_value
 
                     counter += 1
 
-                    # for projection_step in projection_steps:
-                    #     session.run([projection_step])
+                # if (self.projection == True):  # project means
+                #     for projection_step in projection_steps:
+                #         session.run([projection_step])
 
 
-                if (round(np.mean(loss_values), 4) < minloss):
-                    minloss = round(np.mean(loss_values), 4)
-                    minepoch = epoch
-                else:
 
-                    if (round(np.mean(loss_values), 4) < minloss):
-                        minloss = round(np.mean(loss_values), 4)
-                        minepoch = epoch
 
                 logger.warn('Epoch: {0}\tELBO: {1}'.format(epoch, self.stats(loss_values)))
 
                 ##
-                # Test
+                # Early Stopping
                 ##
 
                 if (epoch % 50) == 0:
-                    eval_name='test'
-                    eval_triples = test_triples
+
+                    eval_name = 'valid'
+                    eval_triples = valid_triples
                     ranks_subj, ranks_obj = [], []
                     filtered_ranks_subj, filtered_ranks_obj = [], []
 
@@ -397,10 +423,10 @@ class VKGE_simple:
                                                  self.o_inputs: np.arange(self.nb_entities)}
 
                         # scores of (1, p, o), (2, p, o), .., (N, p, o)
-                        scores_subj = session.run(self.scores, feed_dict=feed_dict_corrupt_subj)
+                        scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
 
                         # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                        scores_obj = session.run(self.scores, feed_dict=feed_dict_corrupt_obj)
+                        scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
 
                         ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
                         ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
@@ -429,10 +455,75 @@ class VKGE_simple:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
+                    if hits_at_k > max_hits_at_k:
+                        max_hits_at_k = hits_at_k
+                    else:
+                        earl_stop = 1
+                        logger.warn('Early Stopping with valid HITS@10 {}'.format(max_hits_at_k))
 
-                    if hits_at_k>maxhits:
-                        maxhits=hits_at_k
-                        maxepoch=epoch
+            ##
+            # Test
+            ##
 
-            logger.warn("The minimum loss achieved is {0} \t at epoch {1}".format(minloss, minepoch))
-            logger.warn("The maximum Hits@10 value: {0} \t at epoch {1}".format(maxhits, maxepoch))
+            # logger.warn('PRINTING TOP 20 ROWS FROM SAMPLE ENTITY MEAN AND VAR ')
+            #
+            # samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
+            #
+            # logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20],samp1_sig[:20]))
+
+            logger.warn('Beginning test phase')
+
+            eval_name = 'test'
+            eval_triples = test_triples
+            ranks_subj, ranks_obj = [], []
+            filtered_ranks_subj, filtered_ranks_obj = [], []
+
+            for _i, (s, p, o) in enumerate(eval_triples):
+                s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], self.entity_to_idx[o]
+
+                Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
+                Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
+                Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
+
+                feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities), self.p_inputs: Xp_v,
+                                          self.o_inputs: Xo_v}
+                feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
+                                         self.o_inputs: np.arange(self.nb_entities)}
+
+                # scores of (1, p, o), (2, p, o), .., (N, p, o)
+                scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
+
+                # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
+
+                ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+
+                filtered_scores_subj = scores_subj.copy()
+                filtered_scores_obj = scores_obj.copy()
+
+                rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
+                            fs != s and fp == p and fo == o]
+                rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
+                            fs == s and fp == p and fo != o]
+
+                filtered_scores_subj[rm_idx_s] = - np.inf
+                filtered_scores_obj[rm_idx_o] = - np.inf
+
+                filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
+
+            filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
+            ranks = ranks_subj + ranks_obj
+
+            for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
+                mean_rank = np.mean(setting_ranks)
+                logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
+                for k in [1, 3, 5, 10]:
+                    hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                    logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+                    # save embeddings
+
+                    # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
+                    # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
+                    # np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
