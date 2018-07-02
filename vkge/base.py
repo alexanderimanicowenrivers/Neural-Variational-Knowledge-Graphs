@@ -5,6 +5,7 @@ import numpy as np
 import tensorflow as tf
 import os
 from vkge.knowledgebase import Fact, KnowledgeBaseParser
+from functools import reduce
 
 import vkge.models as models
 from vkge.training import constraints, corrupt, index
