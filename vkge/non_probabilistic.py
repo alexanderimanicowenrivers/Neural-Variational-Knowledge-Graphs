@@ -360,7 +360,6 @@ class VKGE_simple:
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
-
                     }
 
                     merge = tf.summary.merge_all()  # for TB
