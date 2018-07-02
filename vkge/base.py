@@ -323,7 +323,7 @@ class VKGE:
         self._variables = tf.global_variables()
         self._saver = tf.train.Saver()
 
-def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
+    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
                       sig_min):
         """
                                 Constructs Encoder
@@ -437,7 +437,7 @@ def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predi
             self._saver = tf.train.Saver()
 
 
-def variable_summaries(self, var):
+    def variable_summaries(self, var):
         """Summaries of a Tensor"""
         with tf.name_scope('summaries'):
             mean = tf.reduce_mean(var)
