@@ -205,25 +205,26 @@ class VKGE_simple:
 
         self.training_step = optimizer.minimize(self.elbo)
 
-
-
-
-    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
-                      pred_sig):
+    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
+                      sig_min):
         """
                                 Constructs Encoder
         """
         logger.warn('Building Inference Networks q(h_x | x) ..')
 
-        init1=np.round((6.0/np.sqrt(entity_embedding_size*1.0)), decimals=2)
+        init1 = np.round((self.mean_c / np.sqrt(entity_embedding_size * 1.0)), decimals=2)
 
         with tf.variable_scope('encoder'):
             self.entity_embedding_mean = tf.get_variable('entities',
                                                            shape=[nb_entities + 1, entity_embedding_size ],
-                                                           initializer=tf.contrib.layers.xavier_initializer())
+                                                         initializer=tf.random_uniform_initializer(minval=-init1,
+                                                                                                   maxval=init1,
+                                                                                                   dtype=tf.float32))
             self.predicate_parameters_layer = tf.get_variable('predicates',
                                                               shape=[nb_predicates + 1, predicate_embedding_size],
-                                                              initializer=tf.contrib.layers.xavier_initializer())
+                                                              initializer=tf.random_uniform_initializer(minval=-init1,
+                                                                                                        maxval=init1,
+                                                                                                        dtype=tf.float32))
 
             self.h_s = tf.nn.embedding_lookup(self.entity_embedding_mean,self.s_inputs)
             self.h_p = tf.nn.embedding_lookup(self.predicate_parameters_layer,self.p_inputs)

@@ -32,22 +32,22 @@ def to_cmd(c):
 
     command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
               '--mean_c {} ' \
-              '--init_sig {} ' \
               '--embedding_size {} ' \
               '--dataset {} ' \
               '--alt_opt {} ' \
               '--lr {} ' \
-              '--file_name {} ' \
               '--score_func {}' \
  \
-        .format(path,
+        ..format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
-                c['w0'],
                 c['w1'],
                 c['w2'],
-                c['w3']
-                # "%s/logs/18_6_5/uclcs_nvkg_v1.%s" % (path, summary(c))
+                c['w3'],
+                c['w6'],
+                c['w7'],
+                c['w8'],
+                c['w9']
                 )
     return command
 
@@ -59,10 +59,12 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w0=[14145],
-        w1=[0.5,0.1],
-        w2=[1,3,5,7],
-        w3=[50,100,150,200]
+        w1=[1, 2, 3, 4, 5, 6, 7],
+        w3=[200, 250, 300],
+        w6=['fb-ntn', 'fb15k-237', 'kinship', 'nations', 'umls', 'wn-ntn', 'wn18', 'wn18rr'],
+        w7=[True, False],
+        w8=[0.1, 0.01],
+        w9=['TransE', 'DistMult', 'RESCAL', 'ComplEx']
     )
 
     configurations = cartesian_product(hyperparameters_space)
