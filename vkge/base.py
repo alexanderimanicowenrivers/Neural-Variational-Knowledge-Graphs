@@ -118,6 +118,9 @@ class VKGE:
             predicate_embedding_size = embedding_size*2
             entity_embedding_size = embedding_size*2
 
+        elif self.score_func=='RESCAL':
+            predicate_embedding_size = embedding_size * embedding_size
+            entity_embedding_size = embedding_size
         else:
             predicate_embedding_size = embedding_size
             entity_embedding_size = embedding_size
