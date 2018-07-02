@@ -42,7 +42,6 @@ def to_cmd(c):
                 #                 params,
                 #                 set_to_path[c['instances']],
                 c['w1'],
-                c['w2'],
                 c['w3'],
                 c['w6'],
                 c['w7'],
