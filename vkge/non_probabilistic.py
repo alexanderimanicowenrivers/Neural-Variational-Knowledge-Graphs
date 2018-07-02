@@ -187,7 +187,6 @@ class VKGE_simple:
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
         self.y_inputs = tf.placeholder(tf.bool, shape=[None])
 
-        self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
 
         self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, ent_sig,
                            pred_sig)
@@ -357,12 +356,11 @@ class VKGE_simple:
                     Xo_batch[2::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
 
                     loss_args = {
-                        self.KL_discount: pi[counter],
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
-                        self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
-                        self.epoch_d: kl_inc_val
+                        self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
+
                     }
 
                     merge = tf.summary.merge_all()  # for TB
