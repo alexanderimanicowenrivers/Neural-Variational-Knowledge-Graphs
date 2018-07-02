@@ -148,11 +148,6 @@ class VKGE_simple:
 
 
 
-        logger.warn("Entity Sample1 id is {} with name {}..".format(self.var1_1, list(entity_set)[self.var1_1]))
-
-        logger.warn("Predicate Sample1 id is {} with name {}..".format(self.var1_2, list(predicate_set)[self.var1_2]))
-
-
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, sig_max, sig_min)
@@ -321,11 +316,7 @@ class VKGE_simple:
         with tf.Session() as session:
             session.run(init_op)
 
-            logger.warn('Print Top 20 rows from a sample entity and var ')
 
-            samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2], feed_dict={})
-
-            logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20], samp1_sig[:20]))
             train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
