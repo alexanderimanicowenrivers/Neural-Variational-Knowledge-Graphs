@@ -126,7 +126,6 @@ class VKGE:
         tf.set_random_seed(0)
         self.static_mean = static_mean
         self.alt_cost = alt_cost
-        self.alt_updates = alt_updates
         self.projection = projection
         self.mean_c = mean_c
 
