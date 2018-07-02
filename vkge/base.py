@@ -147,7 +147,6 @@ class VKGE:
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
-        self.margin = margin
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
         if alt_opt:
             optimizer = tf.train.AdagradOptimizer(learning_rate=lr)  # original KG
