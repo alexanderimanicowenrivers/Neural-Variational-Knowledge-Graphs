@@ -112,7 +112,7 @@ class VKGE:
 
                 # adjust for correct format for model input
 
-        if not dismult_complex:
+        if self.score_func=='ComplEx':
             predicate_embedding_size = embedding_size*2
             entity_embedding_size = embedding_size*2
 
