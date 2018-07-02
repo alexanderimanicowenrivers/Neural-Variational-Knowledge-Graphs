@@ -381,7 +381,7 @@ class VKGE_simple:
 
                     # tensorboard
 
-                    train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
+                    # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
 
                     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
 
