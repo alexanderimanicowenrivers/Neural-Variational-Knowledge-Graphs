@@ -97,6 +97,7 @@ class VKGE:
         super().__init__()
 
         self.sigma_alt = sigma_alt
+        self.score_func=score_func
 
         if init_sig == -1:
             sig_max = init_sig
@@ -120,7 +121,6 @@ class VKGE:
             predicate_embedding_size = embedding_size
             entity_embedding_size = embedding_size
 
-        self.score_func=score_func
 
         self.random_state = np.random.RandomState(0)
         tf.set_random_seed(0)
