@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="added in ComplEX">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="added in GlobalStep">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main2.py" afterPath="$PROJECT_DIR$/main2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_quicktest.py" afterPath="$PROJECT_DIR$/script_quicktest.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_search.py" afterPath="$PROJECT_DIR$/script_search.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,7 +20,7 @@
       <file leaf-file-name="script_quicktest.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script_quicktest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
+            <state relative-caret-position="998">
               <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="113" selection-end-column="32" />
               <folding>
                 <element signature="e#127#143#0" expanded="true" />
@@ -47,8 +44,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="554" column="0" lean-forward="true" selection-start-line="554" selection-start-column="0" selection-end-line="554" selection-end-column="0" />
+            <state relative-caret-position="438">
+              <caret line="582" column="48" lean-forward="false" selection-start-line="582" selection-start-column="48" selection-end-line="582" selection-end-column="48" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -107,8 +104,8 @@
       <find>projector</find>
       <find>warn</find>
       <find>18_6_25</find>
-      <find>arra</find>
       <find>logger.warn</find>
+      <find>arra</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -118,6 +115,7 @@
       <replace>summary.scalar</replace>
       <replace>warn</replace>
       <replace>sig_min</replace>
+      <replace>_saver</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -404,13 +402,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00344" summary="added in MLE">
-      <created>1530015706124</created>
-      <option name="number" value="00344" />
-      <option name="presentableId" value="LOCAL-00344" />
-      <option name="project" value="LOCAL" />
-      <updated>1530015706124</updated>
     </task>
     <task id="LOCAL-00345" summary="added in MLE">
       <created>1530016293571</created>
@@ -748,7 +739,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530466903745</updated>
     </task>
-    <option name="localTasksCounter" value="393" />
+    <task id="LOCAL-00393" summary="added in GlobalStep">
+      <created>1530542494234</created>
+      <option name="number" value="00393" />
+      <option name="presentableId" value="LOCAL-00393" />
+      <option name="project" value="LOCAL" />
+      <updated>1530542494236</updated>
+    </task>
+    <option name="localTasksCounter" value="394" />
     <servers />
   </component>
   <component name="TodoView">
@@ -834,7 +832,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated main file" />
     <MESSAGE value="added in KL" />
     <MESSAGE value="added in adda optimiser" />
     <MESSAGE value="norm" />
@@ -859,7 +856,8 @@
     <MESSAGE value="put hinge back" />
     <MESSAGE value="added in embedding tensorboard" />
     <MESSAGE value="added in ComplEX" />
-    <option name="LAST_COMMIT_MESSAGE" value="added in ComplEX" />
+    <MESSAGE value="added in GlobalStep" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in GlobalStep" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1230,26 +1228,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="19" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script_quicktest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="113" selection-end-column="32" />
-          <folding>
-            <element signature="e#127#143#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/script_search.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
@@ -1260,10 +1238,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/script_quicktest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="998">
+          <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="113" selection-end-column="32" />
+          <folding>
+            <element signature="e#127#143#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="19" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <element signature="e#25#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="554" column="0" lean-forward="true" selection-start-line="554" selection-start-column="0" selection-end-line="554" selection-end-column="0" />
+        <state relative-caret-position="438">
+          <caret line="582" column="48" lean-forward="false" selection-start-line="582" selection-start-column="48" selection-end-line="582" selection-end-column="48" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

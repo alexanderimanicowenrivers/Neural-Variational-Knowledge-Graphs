@@ -509,20 +509,16 @@ def variable_summaries(self, var):
             samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
 
             logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20], samp1_sig[:20]))
-            saver = tf.train.Saver()
             train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
 
                 if earl_stop == 1:
                     break
-                    # saver.save(session, '/model'+filename )
+                    # self._saver.save(session, '/model'+filename )
 
                 counter = 0
-                # if self.decay_kl:
-                #     kl_inc_val = (1.0 / (nb_epochs + 1 - epoch))
-                #     kl_inc_val = 1.0
-                # else:
+
                 kl_inc_val = 1.0
 
                 order = self.random_state.permutation(nb_samples)
