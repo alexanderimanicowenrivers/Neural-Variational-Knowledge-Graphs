@@ -92,7 +92,7 @@ class VKGE:
 
             """
 
-    def __init__(self, file_name, score_func='dismult', static_mean=False, embedding_size=50, batch_s=14145, mean_c=0.1,
+    def __init__(self, file_name, score_func='dismult', static_mean=False, embedding_size=50, no_batches=10, mean_c=0.1,
                  init_sig=6.0,
                  alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True, projection=True):
         super().__init__()
@@ -172,7 +172,7 @@ class VKGE:
 
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,
-                   train_triples=train_triples, batch_size=batch_s, filename=file_name)
+                   train_triples=train_triples, no_batches=no_batches, filename=file_name)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -447,7 +447,7 @@ class VKGE:
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, valid_triples, train_triples, batch_size, session=0, nb_epochs=500, unit_cube=True,
+    def train(self, test_triples, valid_triples, train_triples, no_batches, session=0, nb_epochs=500, unit_cube=True,
               filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
                                 Train Model
@@ -467,7 +467,7 @@ class VKGE:
         assert Xs.shape == Xp.shape == Xo.shape
 
         nb_samples = Xs.shape[0]
-        nb_batches = math.ceil(nb_samples / batch_size)
+        nb_batches = no_batches
         batch_size = math.ceil(nb_samples / nb_batches)
 
         batches = make_batches(self.nb_examples, batch_size)

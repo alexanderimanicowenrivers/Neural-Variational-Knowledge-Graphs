@@ -15,7 +15,7 @@ flags.DEFINE_float("init_sig2", 6.0, "Initalised variance of variables [6.0]")
 flags.DEFINE_float("mog_split", 0.5, "Split between spike and slab [6.0]")
 flags.DEFINE_integer("embedding_size", 200, "The dimension of graph embeddings [50]")
 flags.DEFINE_string("file_name", '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_25', "file name for tensorboard file ['--']")
-flags.DEFINE_integer("batch_size", 14145, "Batch Size [14145]")
+flags.DEFINE_integer("no_batches", 10, "Batch Size [14145]")
 flags.DEFINE_boolean("alt_cost", True, "Switch for compression cost to be used in training [True]")
 flags.DEFINE_boolean("static_mean", False,
                      "Switch as to if mean is fixed at 0 or can train with random normal init [False]")
@@ -31,7 +31,7 @@ FLAGS = flags.FLAGS
 def main(_):
     logger.warn("creating model with flags \t {}".format(flags.FLAGS.__flags))
 
-    vkge.VKGE(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,init_sig=FLAGS.init_sig, alt_cost=FLAGS.alt_cost, batch_s=FLAGS.batch_size,
+    vkge.VKGE(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,init_sig=FLAGS.init_sig, alt_cost=FLAGS.alt_cost, no_batches=FLAGS.no_batches,
               static_mean=FLAGS.static_mean, dataset=FLAGS.dataset, sigma_alt=FLAGS.Sigma_alt,
               lr=FLAGS.lr, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt
               , projection=FLAGS.projection,  score_func=FLAGS.score_func)
