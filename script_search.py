@@ -34,13 +34,11 @@ def to_cmd(c):
               '--mean_c {} ' \
               '--init_sig {} ' \
               '--embedding_size {} ' \
-              '--alt_cost {} ' \
-              '--Sigma_alt {} ' \
-              '--alternating_updates {} ' \
+              '--dataset {} ' \
               '--alt_opt {} ' \
-              '--margin {} ' \
+              '--lr {} ' \
               '--file_name {} ' \
-              '--decay_kl {}' \
+              '--score_func {}' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -52,8 +50,8 @@ def to_cmd(c):
                 c['w6'],
                 c['w7'],
                 c['w8'],
-                "{}/logs/18_6_25_ML/tb_nvkg.{}".format(path, summary(c)),
-                c['w9'],
+                "{}/logs/18_7_02/tb_nvkg.{}".format(path, summary(c)),
+                c['w9']
                 )
     return command
 
@@ -66,20 +64,17 @@ def to_logfile(c, path):
 def main(_):
     hyperparameters_space = dict(
         w1=[1,2,3,4,5,6,7],
-        w2=[1.0,0.7,0.5,0.3,0.1,0.02,0.01], #
+        w2=[0.01,0.02,0.015,0.5], #
         w3=[200,250,300],
-        w4=[True],
-        w5=[True],
-        w6 = [False],
-        w7=[True],
-        w8=[1],
-        w9=[False],
-
+        w6 = ['fb-ntn','fb15k-237','kinship','nations','umls','wn-ntn','wn18','wn18rr'],
+        w7=[True,False],
+        w8=[0.1,0.01],
+        w9=['TransE','DistMult','RESCAL','ComplEx']
     )
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_25_ML'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_7_02'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
@@ -134,8 +129,11 @@ export PYTHONPATH=.
 
     print(header)
 
+    #repeat each job three times
+
     for job_id, command_line in enumerate(sorted_command_lines, 1):
         print('test $SGE_TASK_ID -eq {} && {}'.format(job_id, command_line))
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)

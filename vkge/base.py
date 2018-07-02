@@ -91,9 +91,9 @@ class VKGE:
 
             """
 
-    def __init__(self, file_name, dismult_complex=False, static_mean=False, embedding_size=50, batch_s=14145, mean_c=0.1,
+    def __init__(self, file_name, score_func='dismult', static_mean=False, embedding_size=50, batch_s=14145, mean_c=0.1,
                  init_sig=6.0,
-                 alt_cost=False, alt_updates=True, sigma_alt=True, margin=5, alt_opt=True, projection=True):
+                 alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True, projection=True):
         super().__init__()
 
         self.sigma_alt = sigma_alt
@@ -120,7 +120,7 @@ class VKGE:
             predicate_embedding_size = embedding_size
             entity_embedding_size = embedding_size
 
-        self.dismult_complex=dismult_complex
+        self.score_func=score_func
 
         self.random_state = np.random.RandomState(0)
         tf.set_random_seed(0)
@@ -131,13 +131,13 @@ class VKGE:
         self.mean_c = mean_c
 
         # Dataset
-        dataset_name = 'wn18'
+        self.dataset_name = dataset
 
-        logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(dataset_name))
+        logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(self.dataset_name))
 
-        train_triples = read_triples("data2/{}/train.tsv".format(dataset_name))  # choose dataset
-        valid_triples = read_triples("data2/{}/dev.tsv".format(dataset_name))
-        test_triples = read_triples("data2/{}/test.tsv".format(dataset_name))
+        train_triples = read_triples("data2/{}/train.tsv".format(self.dataset_name))  # choose dataset
+        valid_triples = read_triples("data2/{}/dev.tsv".format(self.dataset_name))
+        test_triples = read_triples("data2/{}/test.tsv".format(self.dataset_name))
         self.nb_examples = len(train_triples)
 
         ##### for test time ######
@@ -151,9 +151,9 @@ class VKGE:
         self.margin = margin
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
         if alt_opt:
-            optimizer = tf.train.AdagradOptimizer(learning_rate=0.1)  # original KG
+            optimizer = tf.train.AdagradOptimizer(learning_rate=lr)  # original KG
         else:
-            optimizer = tf.train.AdamOptimizer(learning_rate=0.1, epsilon=1e-05)
+            optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-05)
 
         # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-5)
 
@@ -184,6 +184,71 @@ class VKGE:
         parameters = tf.nn.embedding_lookup(parameters_layer, inputs)
         mu, log_sigma_square = tf.split(value=parameters, num_or_size_splits=2, axis=1)
         return mu, log_sigma_square
+
+    def _setup_summaries(self):
+
+        self.variable_summaries(self.entity_embedding_sigma)
+
+        self.variable_summaries(self.entity_embedding_mean)
+
+        tf.summary.scalar("total e loss", self.e_objective)
+
+        tf.summary.scalar("g loss", self.g_objective)
+
+        tf.summary.scalar("total loss", self.loss)
+
+
+        with tf.name_scope('Samples'):
+
+            with tf.name_scope('Entity1'):
+                self.var1_1 = tf.nn.embedding_lookup(self.entity_embedding_mean, self.var1)
+                self.var1_2 = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var1)
+
+                with tf.name_scope('Entity1_Mean'):
+                    self.variable_summaries(self.var1_1)
+
+                with tf.name_scope('Entity1_logStd'):
+                    self.variable_summaries(self.var1_2)
+
+            with tf.name_scope('Predicate1'):
+                self.var2_1 = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.var2)
+                self.var2_2 = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.var2)
+
+                with tf.name_scope('Predicate1_Mean'):
+                    self.variable_summaries(self.var2_1)
+
+                with tf.name_scope('Predicate1_logStd'):
+                    self.variable_summaries(self.var2_2)
+
+    def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=None):
+        global_step = tf.train.get_global_step()
+        if global_step is None:
+            global_step = tf.train.create_global_step()
+
+        gradients = optimizer.compute_gradients(loss=loss)
+        tf.summary.scalar('gradients_l2', tf.add_n([tf.nn.l2_loss(grad[0]) for grad in gradients]),
+                          collections=['summary_train'])
+
+        if l2:
+            loss += tf.add_n([tf.nn.l2_loss(v) for v in self.train_variables]) * l2
+        if clip:
+            if clip_op == tf.clip_by_value:
+                gradients = [(tf.clip_by_value(grad, clip[0], clip[1]), var)
+                             for grad, var in gradients if grad is not None]
+            elif clip_op == tf.clip_by_norm:
+                gradients = [(tf.clip_by_norm(grad, clip), var)
+                             for grad, var in gradients if grad is not None]
+
+        train_op = optimizer.apply_gradients(gradients, global_step)
+
+        variable_size = lambda v: reduce(lambda x, y: x * y, v.get_shape().as_list()) if v.get_shape() else 1
+        num_params = sum(variable_size(v) for v in self.train_variables)
+        print("Number of parameters: {}".format(num_params))
+
+        self.loss = loss
+        self.training_step = train_op
+        self.global_step = global_step
+        return loss, train_op
 
     def sample_embedding(self, mu, log_sigma_square):
         """
@@ -246,33 +311,19 @@ class VKGE:
 
         self.e_objective = (1.0 / 3.0) * (self.e_objective1 + self.e_objective2 + self.e_objective3)
 
-        # self.hinge_losses = tf.nn.relu(self.margin - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
-        # self.g_objective = tf.reduce_sum(self.hinge_losses)
 
-        # # self.g_objective = tf.reduce_sum(tf.log(1+tf.exp(-tf.cast(self.y_inputs,dtype=tf.float32)*self.scores)))
 
         self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
         self.elbo = self.g_objective + self.e_objective
 
-        self.training_step = optimizer.minimize(self.elbo)
+        self._setup_training(loss=self.elbo,optimizer=optimizer)
+        self._setup_summaries()
 
-        ## FOR ALTERNATING UPDATES
+        self._variables = tf.global_variables()
+        self._saver = tf.train.Saver()
 
-        self.training_step1 = optimizer.minimize(self.e_objective1)
-        self.training_step2 = optimizer.minimize(self.e_objective2)
-        self.training_step3 = optimizer.minimize(self.e_objective3)
-        self.training_step4 = optimizer.minimize(self.g_objective)
-
-        tf.summary.scalar("total e loss", self.e_objective)
-        tf.summary.scalar("total e subject loss", self.e_objective1)
-        tf.summary.scalar("total e predicate loss", self.e_objective2)
-        tf.summary.scalar("total e object loss", self.e_objective3)
-        tf.summary.scalar("g loss", self.g_objective)
-
-        tf.summary.scalar("total loss", self.elbo)
-
-    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
+def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
                       sig_min):
         """
                                 Constructs Encoder
@@ -286,103 +337,107 @@ class VKGE:
         # init2 = (np.log(0.05 ** 2))
         # init3 = (np.log(0.05 ** 2))
 
-        with tf.variable_scope('encoder'):
+        with tf.variable_scope('Encoder'):
 
-            with tf.variable_scope('entity_mean'):
+            with tf.variable_scope('entity'):
+                with tf.variable_scope('mu'):
 
-                self.entity_embedding_mean = tf.get_variable('entities', shape=[nb_entities + 1, entity_embedding_size],
+                    self.entity_embedding_mean = tf.get_variable('entities', shape=[nb_entities + 1, entity_embedding_size],
                                                              initializer=tf.random_uniform_initializer(minval=-init1,
                                                                                                        maxval=init1,
                                                                                                        dtype=tf.float32))
 
-                self.variable_summaries(self.entity_embedding_mean)
 
-            self.predicate_embedding_mean = tf.get_variable('predicates',
-                                                            shape=[nb_predicates + 1, predicate_embedding_size],
-                                                            initializer=tf.random_uniform_initializer(minval=-init1,
-                                                                                                      maxval=init1,
-                                                                                                      dtype=tf.float32))
+                with tf.variable_scope('sigma'):
 
-
-
-            with tf.variable_scope('entity_sigma'):
-
-                self.entity_embedding_sigma = tf.get_variable('entities_sigma',
+                    self.entity_embedding_sigma = tf.get_variable('entities_sigma',
                                                               shape=[nb_entities + 1, entity_embedding_size],
                                                               initializer=tf.random_uniform_initializer(
                                                                   minval=init2, maxval=init2, dtype=tf.float32),
                                                               dtype=tf.float32)
 
-                self.variable_summaries(self.entity_embedding_sigma)
 
-            self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
+                self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
+                self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
+
+                self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
+                self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
+
+
+
+            with tf.variable_scope('predicate'):
+                with tf.variable_scope('sigma'):
+
+                    self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
                                                              shape=[nb_predicates + 1,
                                                                     predicate_embedding_size],
                                                              initializer=tf.random_uniform_initializer(
                                                                  minval=init2, maxval=init2, dtype=tf.float32),
                                                              dtype=tf.float32)
+                with tf.variable_scope('mu'):
 
-            self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
-            self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
-            self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
+                    self.predicate_embedding_mean = tf.get_variable('predicates',
+                                                                shape=[nb_predicates + 1, predicate_embedding_size],
+                                                                initializer=tf.random_uniform_initializer(minval=-init1,
+                                                                                                          maxval=init1,
+                                                                                                          dtype=tf.float32))
 
-            self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
-            self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
-            self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
+                self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
+                self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
 
-            self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
-            self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
-            self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+            with tf.variable_scope('Decoder'):
+
+                self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
+                self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+                self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
 
-        with tf.name_scope('Samples'):
 
-            with tf.name_scope('Entity1'):
-                self.var1_1 = tf.nn.embedding_lookup(self.entity_embedding_mean, self.var1)
-                self.var1_2 = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var1)
-
-                with tf.name_scope('Entity1_Mean'):
-                    self.variable_summaries(self.var1_1)
-
-                with tf.name_scope('Entity1_logStd'):
-                    self.variable_summaries(self.var1_2)
-
-            with tf.name_scope('Predicate1'):
-                self.var2_1 = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.var2)
-                self.var2_2 = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.var2)
-
-                with tf.name_scope('Predicate1_Mean'):
-                    self.variable_summaries(self.var2_1)
-
-                with tf.name_scope('Predicate1_logStd'):
-                    self.variable_summaries(self.var2_2)
 
     def build_decoder(self):
         """
                                 Constructs Decoder
         """
-        logger.warn('Building Inference Network p(y|h) ..')
+        logger.warn('Building Inference Network p(y|h) for {} score function.'.format(self.score_func))
+        # w9=['TransE','DistMult','RESCAL','ComplEx']
 
-        with tf.variable_scope('decoder'):
+        with tf.variable_scope('Inference'):
 
-            if self.dismult_complex:
+            if self.score_func=='DistMult':
 
                 model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                      object_embeddings=self.h_o)
                 model_test = models.BilinearDiagonalModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
                                                        object_embeddings=self.mu_o)
-            else:
+            elif self.score_func=='ComplEx':
                 model = models.ComplexModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                      object_embeddings=self.h_o)
                 model_test = models.ComplexModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
+                                                          object_embeddings=self.mu_o)
+            elif self.score_func=='TransE':
+                model = models.TranslatingModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
+                                                     object_embeddings=self.h_o)
+                model_test = models.TranslatingModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
+                                                          object_embeddings=self.mu_o)
+            elif self.score_func=='RESCAL':
+                model = models.BilinearModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
+                                                     object_embeddings=self.h_o)
+                model_test = models.BilinearModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
                                                           object_embeddings=self.mu_o)
 
             self.scores = model()
             self.scores_test = model_test()
             self.p_x_i = tf.sigmoid(self.scores)
 
+            self._setup_model(model_params)
+            self._setup_training(self.tensors['loss'], **self.train_params)
+            self._setup_evaluation()
+            self._setup_summaries()
+            self._variables = tf.global_variables()
+            self._saver = tf.train.Saver()
 
-    def variable_summaries(self, var):
+
+def variable_summaries(self, var):
         """Summaries of a Tensor"""
         with tf.name_scope('summaries'):
             mean = tf.reduce_mean(var)
@@ -425,8 +480,6 @@ class VKGE:
 
         batches = make_batches(self.nb_examples, batch_size)
 
-        # logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
-        logger.warn("Samples: {}, no. batches: {} -> batch size: {}".format(nb_samples, nb_batches, batch_size))
 
         # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=5.0)]
 
@@ -451,7 +504,7 @@ class VKGE:
         with tf.Session() as session:
             session.run(init_op)
 
-            logger.warn('PRINTING TOP 20 ROWS FROM SAMPLE ENTITY MEAN AND VAR ')
+            logger.warn('Print Top 20 rows from a sample entity and var ')
 
             samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
 
@@ -500,12 +553,6 @@ class VKGE:
                     Xp_batch[2::nb_versions] = Xp_shuf[batch_start:batch_end]
                     Xo_batch[2::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
 
-                    # y = np.zeros_like(Xp_batch)
-                    # y[0::nb_versions] = 1
-
-
-                    # if self.alt_cost:  # if compression cost
-
                     loss_args = {
                         self.KL_discount: pi[counter],
                         self.s_inputs: Xs_batch,
@@ -515,33 +562,17 @@ class VKGE:
                         self.epoch_d: kl_inc_val
                     }
 
-                    # else:
-                    #     loss_args = {
-                    #         self.KL_discount: (1.0 / nb_batches),
-                    #         self.s_inputs: Xs_batch,
-                    #         self.p_inputs: Xp_batch,
-                    #         self.o_inputs: Xo_batch,
-                    #         self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
-                    #         self.epoch_d: kl_inc_val
-                    #     }
+
 
                     merge = tf.summary.merge_all()  # for TB
 
-                    # if self.alt_updates:
-                    #
-                    #     _ = session.run([self.training_step1], feed_dict=loss_args)
-                    #     _ = session.run([self.training_step2], feed_dict=loss_args)
-                    #     _ = session.run([self.training_step3], feed_dict=loss_args)
-                    #     summary, _, elbo_value = session.run([merge, self.training_step4, self.elbo],
-                    #                                          feed_dict=loss_args)
-                    #
-                    # else:
+
                     summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
                                                          feed_dict=loss_args)
 
                     # tensorboard
 
-                    train_writer.add_summary(summary, counter)
+                    train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
 
 
                     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
@@ -627,11 +658,11 @@ class VKGE:
             # Test
             ##
 
-            logger.warn('PRINTING TOP 20 ROWS FROM SAMPLE ENTITY MEAN AND VAR ')
-
-            samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
-
-            logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20],samp1_sig[:20]))
+            # logger.warn('PRINTING TOP 20 ROWS FROM SAMPLE ENTITY MEAN AND VAR ')
+            #
+            # samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
+            #
+            # logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20],samp1_sig[:20]))
 
             logger.warn('Beginning test phase')
 
@@ -690,4 +721,3 @@ class VKGE:
             entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
             np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
             np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
-    

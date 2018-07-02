@@ -34,13 +34,11 @@ def to_cmd(c):
               '--mean_c {} ' \
               '--init_sig {} ' \
               '--embedding_size {} ' \
-              '--alt_cost {} ' \
-              '--Sigma_alt {} ' \
-              '--alternating_updates {} ' \
+              '--dataset {} ' \
               '--alt_opt {} ' \
-              '--margin {} ' \
+              '--lr {} ' \
               '--file_name {} ' \
-              '--dismult_complex {}' \
+              '--score_func {}' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -52,8 +50,8 @@ def to_cmd(c):
                 c['w6'],
                 c['w7'],
                 c['w8'],
-                "{}/logs/18_7_01_mle/tb_nvkg.{}".format(path, summary(c)),
-                c['w9'],
+                "{}/logs/18_7_02/tb_nvkg.{}".format(path, summary(c)),
+                c['w9']
                 )
     return command
 
@@ -65,21 +63,18 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[1,2,5],
-        w2=[0.01,0.02,0.5], #
-        w3=[300],
-        w4=[True],
-        w5=[True],
-        w6 = [False],
+        w1=[6],
+        w2=[0.01], #
+        w3=[200],
+        w6 = ['nations'],
         w7=[True],
-        w8=[1],
-        w9=[True],
-
+        w8=[0.1],
+        w9=['DistMult']
     )
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_7_01_mle'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_7_02'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):

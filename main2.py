@@ -19,12 +19,12 @@ flags.DEFINE_integer("batch_size", 14145, "Batch Size [14145]")
 flags.DEFINE_boolean("alt_cost", True, "Switch for compression cost to be used in training [True]")
 flags.DEFINE_boolean("static_mean", False,
                      "Switch as to if mean is fixed at 0 or can train with random normal init [False]")
-flags.DEFINE_boolean("alternating_updates", False, "Alternate updates around each distribution[False]")
+flags.DEFINE_string("dataset", 'wn18', "Alternate updates around each distribution[wn18]")
 flags.DEFINE_boolean("Sigma_alt", True, "Alternate between two different standard dev calculations [True]")
 flags.DEFINE_boolean("projection", False, "Alternate between using a projection on the means [False]")
 flags.DEFINE_boolean("alt_opt", True, "Define to use  Adagrad or Adam  [False]")
-flags.DEFINE_boolean("dismult_complex", False, "Defines score function [False]")
-flags.DEFINE_float("margin", 1, "Choose optimiser loss, select the margin for hinge loss [1]")
+flags.DEFINE_string("score_func", 'dismult', "Defines score function [dismult]")
+flags.DEFINE_float("lr", 0.1, "Choose optimiser loss, select the margin for hinge loss [1]")
 FLAGS = flags.FLAGS
 
 
@@ -32,9 +32,9 @@ def main(_):
     logger.warn("creating model with flags \t {}".format(flags.FLAGS.__flags))
 
     vkge.VKGE(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,init_sig=FLAGS.init_sig, alt_cost=FLAGS.alt_cost, batch_s=FLAGS.batch_size,
-              static_mean=FLAGS.static_mean, alt_updates=FLAGS.alternating_updates, sigma_alt=FLAGS.Sigma_alt,
-               margin=FLAGS.margin, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt
-              , projection=FLAGS.projection,  dismult_complex=FLAGS.dismult_complex)
+              static_mean=FLAGS.static_mean, dataset=FLAGS.dataset, sigma_alt=FLAGS.Sigma_alt,
+              lr=FLAGS.lr, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt
+              , projection=FLAGS.projection,  score_func=FLAGS.score_func)
 
 
 if __name__ == '__main__':
