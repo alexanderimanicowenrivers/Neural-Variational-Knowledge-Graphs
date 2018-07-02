@@ -38,7 +38,7 @@ def to_cmd(c):
               '--lr {} ' \
               '--score_func {}' \
  \
-        ..format(path,
+        .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
                 c['w1'],

@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_baseline.py" afterPath="$PROJECT_DIR$/script_baseline.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/non_probabilistic.py" afterPath="$PROJECT_DIR$/vkge/non_probabilistic.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,22 +19,10 @@
       <file leaf-file-name="non_probabilistic.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="215" column="0" lean-forward="false" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
+            <state relative-caret-position="1766">
+              <caret line="383" column="48" lean-forward="false" selection-start-line="383" selection-start-column="0" selection-end-line="384" selection-end-column="0" />
               <folding>
                 <element signature="e#14#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vkge/base.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="329" column="14" lean-forward="true" selection-start-line="329" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
-              <folding>
-                <element signature="e#25#36#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -45,8 +31,8 @@
       <file leaf-file-name="script_baseline.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_baseline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="815">
-              <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+            <state relative-caret-position="250">
+              <caret line="40" column="9" lean-forward="false" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -179,8 +165,8 @@
         <option value="$PROJECT_DIR$/script_quicktest.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/script_baseline.py" />
         <option value="$PROJECT_DIR$/vkge/non_probabilistic.py" />
+        <option value="$PROJECT_DIR$/script_baseline.py" />
       </list>
     </option>
   </component>
@@ -431,20 +417,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00358" summary="updated non prob with MLE">
-      <created>1530023320188</created>
-      <option name="number" value="00358" />
-      <option name="presentableId" value="LOCAL-00358" />
-      <option name="project" value="LOCAL" />
-      <updated>1530023320188</updated>
-    </task>
-    <task id="LOCAL-00359" summary="updated non prob with MLE">
-      <created>1530023350279</created>
-      <option name="number" value="00359" />
-      <option name="presentableId" value="LOCAL-00359" />
-      <option name="project" value="LOCAL" />
-      <updated>1530023350279</updated>
     </task>
     <task id="LOCAL-00360" summary="updated non prob with MLE">
       <created>1530024546493</created>
@@ -775,7 +747,21 @@
       <option name="project" value="LOCAL" />
       <updated>1530545165385</updated>
     </task>
-    <option name="localTasksCounter" value="407" />
+    <task id="LOCAL-00407" summary="updated baseline with same initialisation as">
+      <created>1530545376307</created>
+      <option name="number" value="00407" />
+      <option name="presentableId" value="LOCAL-00407" />
+      <option name="project" value="LOCAL" />
+      <updated>1530545376307</updated>
+    </task>
+    <task id="LOCAL-00408" summary="take out summary from baseline experiment">
+      <created>1530545443945</created>
+      <option name="number" value="00408" />
+      <option name="presentableId" value="LOCAL-00408" />
+      <option name="project" value="LOCAL" />
+      <updated>1530545443945</updated>
+    </task>
+    <option name="localTasksCounter" value="409" />
     <servers />
   </component>
   <component name="TodoView">
@@ -861,8 +847,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in flag print statement" />
-    <MESSAGE value="adding in previous features" />
     <MESSAGE value="updated file names" />
     <MESSAGE value="added in baseline search up to embedding size 350" />
     <MESSAGE value="updated margin parameter" />
@@ -886,7 +870,9 @@
     <MESSAGE value="fixed train variables" />
     <MESSAGE value="import reduce" />
     <MESSAGE value="added in baseline" />
-    <option name="LAST_COMMIT_MESSAGE" value="added in baseline" />
+    <MESSAGE value="updated baseline with same initialisation as" />
+    <MESSAGE value="take out summary from baseline experiment" />
+    <option name="LAST_COMMIT_MESSAGE" value="take out summary from baseline experiment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1271,7 +1257,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
+        <state relative-caret-position="-2854">
           <caret line="329" column="14" lean-forward="true" selection-start-line="329" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
@@ -1281,8 +1267,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="215" column="0" lean-forward="false" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
+        <state relative-caret-position="1766">
+          <caret line="383" column="48" lean-forward="false" selection-start-line="383" selection-start-column="0" selection-end-line="384" selection-end-column="0" />
           <folding>
             <element signature="e#14#32#0" expanded="true" />
           </folding>
@@ -1291,8 +1277,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script_baseline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="815">
-          <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+        <state relative-caret-position="250">
+          <caret line="40" column="9" lean-forward="false" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
           <folding />
         </state>
       </provider>
