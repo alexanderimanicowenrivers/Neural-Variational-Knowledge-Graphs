@@ -169,7 +169,6 @@ class VKGE:
                          optimizer, sig_max, sig_min)
         self.nb_epochs = 1000
 
-        self.decay_kl = False
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,
                    train_triples=train_triples, batch_size=batch_s, filename=file_name)
@@ -317,7 +316,6 @@ class VKGE:
 
         self._setup_training(loss=self.elbo,optimizer=optimizer)
         self._setup_summaries()
-
         self._variables = tf.global_variables()
         self._saver = tf.train.Saver()
 
@@ -427,12 +425,7 @@ class VKGE:
             self.scores_test = model_test()
             self.p_x_i = tf.sigmoid(self.scores)
 
-            self._setup_model(model_params)
-            self._setup_training(self.tensors['loss'], **self.train_params)
-            self._setup_evaluation()
-            self._setup_summaries()
-            self._variables = tf.global_variables()
-            self._saver = tf.train.Saver()
+
 
 
     def variable_summaries(self, var):
