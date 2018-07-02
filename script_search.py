@@ -64,7 +64,7 @@ def main(_):
         w1=[1,2,3,4,5,6,7],
         w2=[0.01,0.02,0.015,0.5], #
         w3=[200,250,300],
-        w6 = ['fb15k-237','kinship','nations','umls','wn-ntn','wn18','wn18rr'],
+        w6 = ['fb15k-237','kinship','nations','umls','wn18','wn18rr'],
         w7=[True,False],
         w8=[0.1,0.01],
         w9=['TransE','DistMult','RESCAL','ComplEx']
