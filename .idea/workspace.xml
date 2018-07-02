@@ -20,8 +20,8 @@
       <file leaf-file-name="non_probabilistic.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="361" column="82" lean-forward="false" selection-start-line="361" selection-start-column="82" selection-end-line="361" selection-end-column="82" />
+            <state relative-caret-position="625">
+              <caret line="512" column="41" lean-forward="false" selection-start-line="512" selection-start-column="33" selection-end-line="512" selection-end-column="41" />
               <folding>
                 <element signature="e#14#32#0" expanded="true" />
               </folding>
@@ -104,8 +104,6 @@
       <find>nb_epochs</find>
       <find>logs</find>
       <find>dtype=tf.float32)</find>
-      <find>file_name</find>
-      <find>filename</find>
       <find>uclcs_nvkg_v2</find>
       <find>uclcs_nvkg_v</find>
       <find>minepoch</find>
@@ -128,6 +126,8 @@
       <find>FLAGS.projection</find>
       <find>epoch_d</find>
       <find>projection</find>
+      <find>file_name</find>
+      <find>filename</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -424,13 +424,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00366" summary="added in test phase print statement">
-      <created>1530041216333</created>
-      <option name="number" value="00366" />
-      <option name="presentableId" value="LOCAL-00366" />
-      <option name="project" value="LOCAL" />
-      <updated>1530041216333</updated>
     </task>
     <task id="LOCAL-00367" summary="added in test phase print statement">
       <created>1530041272420</created>
@@ -768,7 +761,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530546208339</updated>
     </task>
-    <option name="localTasksCounter" value="415" />
+    <task id="LOCAL-00415" summary="removed sampling from baseline">
+      <created>1530546355119</created>
+      <option name="number" value="00415" />
+      <option name="presentableId" value="LOCAL-00415" />
+      <option name="project" value="LOCAL" />
+      <updated>1530546355119</updated>
+    </task>
+    <option name="localTasksCounter" value="416" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1282,8 +1282,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="361" column="82" lean-forward="false" selection-start-line="361" selection-start-column="82" selection-end-line="361" selection-end-column="82" />
+        <state relative-caret-position="625">
+          <caret line="512" column="41" lean-forward="false" selection-start-line="512" selection-start-column="33" selection-end-line="512" selection-end-column="41" />
           <folding>
             <element signature="e#14#32#0" expanded="true" />
           </folding>

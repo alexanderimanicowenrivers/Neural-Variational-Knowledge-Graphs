@@ -84,9 +84,9 @@ class VKGE_simple:
         @type projection: bool
 
             """
-    def __init__(self, file_name, score_func='dismult', static_mean=False, embedding_size=50, batch_s=14145, mean_c=0.1,
+    def __init__(self, score_func='dismult', static_mean=False, embedding_size=50, batch_s=14145, mean_c=0.1,
                  init_sig=6.0,
-                 alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True, projection=True):
+                 alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True):
         super().__init__()
 
         self.sigma_alt = sigma_alt
@@ -119,7 +119,6 @@ class VKGE_simple:
         tf.set_random_seed(0)
         self.static_mean = static_mean
         self.alt_cost = alt_cost
-        self.projection = projection
         self.mean_c = mean_c
 
         # Dataset
@@ -155,7 +154,7 @@ class VKGE_simple:
 
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,
-                   train_triples=train_triples, batch_size=batch_s, filename=file_name)
+                   train_triples=train_triples, batch_size=batch_s)
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -267,8 +266,7 @@ class VKGE_simple:
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
     def train(self, test_triples, valid_triples, train_triples, batch_size, session=0, nb_epochs=1000,
-              unit_cube=True,
-              filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
+              unit_cube=True):
         """
                                 Train Model
         """
@@ -316,13 +314,11 @@ class VKGE_simple:
             session.run(init_op)
 
 
-            train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
 
                 if earl_stop == 1:
                     break
-                    # self._saver.save(session, '/model'+filename )
 
                 counter = 0
 
@@ -362,9 +358,8 @@ class VKGE_simple:
                         self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
                     }
 
-                    merge = tf.summary.merge_all()  # for TB
 
-                    summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
+                    _, elbo_value = session.run([self.training_step, self.elbo],
                                                          feed_dict=loss_args)
 
                     # tensorboard
