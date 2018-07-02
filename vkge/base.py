@@ -315,6 +315,7 @@ class VKGE:
         self.elbo = self.g_objective + self.e_objective
 
         self._setup_training(loss=self.elbo,optimizer=optimizer)
+        self.train_variables=tf.trainable_variables()
         self._setup_summaries()
         self._variables = tf.global_variables()
         self._saver = tf.train.Saver()
