@@ -450,10 +450,12 @@ class VKGE:
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, valid_triples, train_triples, no_batches, session=0, nb_epochs=500, unit_cube=True,
+    def train(self, test_triples, valid_triples, train_triples, no_batches, session=0, nb_epochs=1000, unit_cube=True,
               filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
+
                                 Train Model
+
         """
 
         nb_versions = 3
@@ -476,7 +478,7 @@ class VKGE:
         batches = make_batches(self.nb_examples, batch_size)
 
 
-        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=5.0)]
+        projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
@@ -574,9 +576,9 @@ class VKGE:
 
                     counter += 1
 
-                # if (self.projection == True):  # project means
-                #     for projection_step in projection_steps:
-                #         session.run([projection_step])
+                if (self.projection == True):  # project means
+                    for projection_step in projection_steps:
+                        session.run([projection_step])
 
 
 
