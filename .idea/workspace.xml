@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="513" column="27" lean-forward="false" selection-start-line="512" selection-start-column="18" selection-end-line="513" selection-end-column="27" />
+            <state relative-caret-position="132">
+              <caret line="173" column="28" lean-forward="false" selection-start-line="173" selection-start-column="28" selection-end-line="173" selection-end-column="28" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -390,13 +390,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00382" summary="put hinge back">
-      <created>1530095560974</created>
-      <option name="number" value="00382" />
-      <option name="presentableId" value="LOCAL-00382" />
-      <option name="project" value="LOCAL" />
-      <updated>1530095560974</updated>
-    </task>
     <task id="LOCAL-00383" summary="put hinge back">
       <created>1530116409035</created>
       <option name="number" value="00383" />
@@ -733,7 +726,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530616187765</updated>
     </task>
-    <option name="localTasksCounter" value="431" />
+    <task id="LOCAL-00431" summary="taken out early stopping and set to 500 epochs">
+      <created>1530725681265</created>
+      <option name="number" value="00431" />
+      <option name="presentableId" value="LOCAL-00431" />
+      <option name="project" value="LOCAL" />
+      <updated>1530725681265</updated>
+    </task>
+    <option name="localTasksCounter" value="432" />
     <servers />
   </component>
   <component name="TodoView">
@@ -819,7 +819,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated tf path" />
     <MESSAGE value="updated final search with tensorboard" />
     <MESSAGE value="changed epochs to 5 for TB test" />
     <MESSAGE value="added in MLE" />
@@ -844,7 +843,8 @@
     <MESSAGE value="removed sampling from baseline" />
     <MESSAGE value="updated working datasets only (no ntn)" />
     <MESSAGE value="added in projection" />
-    <option name="LAST_COMMIT_MESSAGE" value="added in projection" />
+    <MESSAGE value="taken out early stopping and set to 500 epochs" />
+    <option name="LAST_COMMIT_MESSAGE" value="taken out early stopping and set to 500 epochs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1247,8 +1247,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="513" column="27" lean-forward="false" selection-start-line="512" selection-start-column="18" selection-end-line="513" selection-end-column="27" />
+        <state relative-caret-position="132">
+          <caret line="173" column="28" lean-forward="false" selection-start-line="173" selection-start-column="28" selection-end-line="173" selection-end-column="28" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
