@@ -450,7 +450,7 @@ class VKGE:
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, valid_triples, train_triples, no_batches, session=0, nb_epochs=1000, unit_cube=True,
+    def train(self, test_triples, valid_triples, train_triples, no_batches, session=0, nb_epochs=500, unit_cube=True,
               filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
 
@@ -510,8 +510,8 @@ class VKGE:
 
             for epoch in range(1, nb_epochs + 1):
 
-                if earl_stop == 1:
-                    break
+                # if earl_stop == 1:
+                #     break
                     # self._saver.save(session, '/model'+filename )
 
                 counter = 0

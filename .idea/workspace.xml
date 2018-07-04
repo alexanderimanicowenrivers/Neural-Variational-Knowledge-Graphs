@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="618">
-              <caret line="716" column="0" lean-forward="true" selection-start-line="716" selection-start-column="0" selection-end-line="716" selection-end-column="0" />
+            <state relative-caret-position="333">
+              <caret line="513" column="27" lean-forward="false" selection-start-line="512" selection-start-column="18" selection-end-line="513" selection-end-column="27" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -390,13 +390,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00381" summary="put hinge back">
-      <created>1530092286084</created>
-      <option name="number" value="00381" />
-      <option name="presentableId" value="LOCAL-00381" />
-      <option name="project" value="LOCAL" />
-      <updated>1530092286084</updated>
-    </task>
     <task id="LOCAL-00382" summary="put hinge back">
       <created>1530095560974</created>
       <option name="number" value="00382" />
@@ -733,7 +726,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530616153175</updated>
     </task>
-    <option name="localTasksCounter" value="430" />
+    <task id="LOCAL-00430" summary="added in projection">
+      <created>1530616187765</created>
+      <option name="number" value="00430" />
+      <option name="presentableId" value="LOCAL-00430" />
+      <option name="project" value="LOCAL" />
+      <updated>1530616187765</updated>
+    </task>
+    <option name="localTasksCounter" value="431" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1247,8 +1247,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
-          <caret line="716" column="0" lean-forward="true" selection-start-line="716" selection-start-column="0" selection-end-line="716" selection-end-column="0" />
+        <state relative-caret-position="333">
+          <caret line="513" column="27" lean-forward="false" selection-start-line="512" selection-start-column="18" selection-end-line="513" selection-end-column="27" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
