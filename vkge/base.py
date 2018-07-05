@@ -296,9 +296,9 @@ class VKGE:
         self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
         self.samples_all= tf.concat(axis=0, values=[self.h_s, self.h_p, self.h_o])
         #
-
-        dist = tf.contrib.distributions.Normal(mu=self.mu_all, sigma=self.log_sigma_all)
-        self.e_objective = dist.pdf(self.samples_all)
+        self.sigma_all= tf.log(1 + tf.exp(self.log_sigma_all ))
+        self.dist = tf.contrib.distributions.Normal(mu=self.mu_all, sigma=self.sigma_all)
+        self.e_objective = self.dist.pdf(self.samples_all)
 
 
         self.e_objective = tf.reduce_sum(self.e_objective) * self.KL_discount
