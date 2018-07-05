@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="try a single kl">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
@@ -32,8 +32,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="299" column="45" lean-forward="false" selection-start-line="299" selection-start-column="0" selection-end-line="300" selection-end-column="0" />
+            <state relative-caret-position="298">
+              <caret line="172" column="28" lean-forward="false" selection-start-line="172" selection-start-column="28" selection-end-line="172" selection-end-column="28" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -390,13 +390,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00393" summary="added in GlobalStep">
-      <created>1530542494234</created>
-      <option name="number" value="00393" />
-      <option name="presentableId" value="LOCAL-00393" />
-      <option name="project" value="LOCAL" />
-      <updated>1530542494236</updated>
-    </task>
     <task id="LOCAL-00394" summary="added in multiple datasets, scoring functions, additional modulairty including gradient tracking">
       <created>1530542755479</created>
       <option name="number" value="00394" />
@@ -733,7 +726,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530794607162</updated>
     </task>
-    <option name="localTasksCounter" value="442" />
+    <task id="LOCAL-00442" summary="try a single kl">
+      <created>1530800423725</created>
+      <option name="number" value="00442" />
+      <option name="presentableId" value="LOCAL-00442" />
+      <option name="project" value="LOCAL" />
+      <updated>1530800423726</updated>
+    </task>
+    <option name="localTasksCounter" value="443" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1247,8 +1247,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="299" column="45" lean-forward="false" selection-start-line="299" selection-start-column="0" selection-end-line="300" selection-end-column="0" />
+        <state relative-caret-position="298">
+          <caret line="172" column="28" lean-forward="false" selection-start-line="172" selection-start-column="28" selection-end-line="172" selection-end-column="28" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
