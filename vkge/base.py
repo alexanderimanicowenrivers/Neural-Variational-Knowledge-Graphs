@@ -510,9 +510,9 @@ class VKGE:
 
             for epoch in range(1, nb_epochs + 1):
 
-                # if earl_stop == 1:
-                #     break
-                    # self._saver.save(session, '/model'+filename )
+                if earl_stop == 1:
+                    break
+                    self._saver.save(session, '/model'+filename )
 
                 counter = 0
 
