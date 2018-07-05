@@ -12,7 +12,6 @@ from vkge.training import constraints, corrupt, index
 from vkge.training.util import make_batches
 import vkge.io as io
 from random import randint
-from tensorflow.contrib.distributions import Normal as tf.Normal
 # new
 
 import logging
