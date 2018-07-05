@@ -12,7 +12,7 @@ from vkge.training import constraints, corrupt, index
 from vkge.training.util import make_batches
 import vkge.io as io
 from random import randint
-
+from tensorflow.contrib.distributions import Normal as tf.Normal
 # new
 
 import logging
@@ -288,12 +288,24 @@ class VKGE:
         self.e_objective2 = 0.0
         self.e_objective3 = 0.0
 
+        self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
+
         # ####################################  Weight uncertainity in NN's
 
 
+        self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
+        self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
+        self.samples_all= tf.concat(axis=0, values=[self.h_s, self.h_p, self.h_o])
+        #
+
+        dist = tf.contrib.distributions.Normal(mu=self.mu_all, sigma=self.log_sigma_all)
+        self.e_objective = dist.pdf(self.samples_all)
+
+
+        self.e_objective = tf.reduce_sum(self.e_objective) * self.KL_discount
+
         # ####################################  one KL
 
-        #alt loss
 
         self.mu_all=tf.concat(axis=0,values=[self.mu_s,self.mu_p,self.mu_o])
         self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s,self.log_sigma_sq_p,self.log_sigma_sq_o])
@@ -301,7 +313,7 @@ class VKGE:
         self.e_objective-= 0.5 * tf.reduce_sum(
                          1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
 
-        self.e_objective=self.e_objective*self.KL_discount *self.epoch_d
+        self.e_objective=self.e_objective*self.KL_discount
 
         # ####################################  separately KL
         # self.e_objective1 -= 0.5 * tf.reduce_sum(
@@ -312,9 +324,9 @@ class VKGE:
         #     1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))  # Log likelihood
 
 
-        # self.e_objective1 = self.e_objective1 * self.KL_discount * self.epoch_d
-        # self.e_objective2 = self.e_objective1 * self.KL_discount * self.epoch_d
-        # self.e_objective3 = self.e_objective1 * self.KL_discount * self.epoch_d
+        # self.e_objective1 = self.e_objective1 * self.KL_discount
+        # self.e_objective2 = self.e_objective1 * self.KL_discount
+        # self.e_objective3 = self.e_objective1 * self.KL_discount
 
         # self.e_objective = (1.0 / 3.0) * (self.e_objective1 + self.e_objective2 + self.e_objective3)
 
@@ -322,7 +334,6 @@ class VKGE:
 
 
 
-        self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
         self.elbo = self.g_objective + self.e_objective
         self.train_variables=tf.trainable_variables()
