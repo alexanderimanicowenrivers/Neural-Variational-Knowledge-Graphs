@@ -63,7 +63,7 @@ def main(_):
     hyperparameters_space = dict(
         w1=[6],
         w2=[0.01], #
-        w3=[300],
+        w3=[200,250],
         w6 = ['wn18'],
         w7=[False],
         w8=[0.01],
