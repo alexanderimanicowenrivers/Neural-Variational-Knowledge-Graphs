@@ -288,29 +288,37 @@ class VKGE:
         self.e_objective2 = 0.0
         self.e_objective3 = 0.0
 
-        # self.mu_all=tf.concat(axis=0,values=[self.mu_s,self.mu_p,self.mu_o])
-        # self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s,self.log_sigma_sq_p,self.log_sigma_sq_o])
+        # ####################################  Weight uncertainity in NN's
+
+
+        # ####################################  one KL
+
+        #alt loss
+
+        self.mu_all=tf.concat(axis=0,values=[self.mu_s,self.mu_p,self.mu_o])
+        self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s,self.log_sigma_sq_p,self.log_sigma_sq_o])
         #
-        # self.e_objective-= 0.5 * tf.reduce_sum(
-        #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
-        #
-        # self.e_objective=self.e_objective*self.KL_discount *self.epoch_d
+        self.e_objective-= 0.5 * tf.reduce_sum(
+                         1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
 
-        # ####################################  separately
-        self.e_objective1 -= 0.5 * tf.reduce_sum(
-            1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
-        self.e_objective2 -= 0.5 * tf.reduce_sum(
-            1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
-        self.e_objective3 -= 0.5 * tf.reduce_sum(
-            1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))  # Log likelihood
-        # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
+        self.e_objective=self.e_objective*self.KL_discount *self.epoch_d
+
+        # ####################################  separately KL
+        # self.e_objective1 -= 0.5 * tf.reduce_sum(
+        #     1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
+        # self.e_objective2 -= 0.5 * tf.reduce_sum(
+        #     1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
+        # self.e_objective3 -= 0.5 * tf.reduce_sum(
+        #     1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))  # Log likelihood
 
 
-        self.e_objective1 = self.e_objective1 * self.KL_discount * self.epoch_d
-        self.e_objective2 = self.e_objective1 * self.KL_discount * self.epoch_d
-        self.e_objective3 = self.e_objective1 * self.KL_discount * self.epoch_d
+        # self.e_objective1 = self.e_objective1 * self.KL_discount * self.epoch_d
+        # self.e_objective2 = self.e_objective1 * self.KL_discount * self.epoch_d
+        # self.e_objective3 = self.e_objective1 * self.KL_discount * self.epoch_d
 
-        self.e_objective = (1.0 / 3.0) * (self.e_objective1 + self.e_objective2 + self.e_objective3)
+        # self.e_objective = (1.0 / 3.0) * (self.e_objective1 + self.e_objective2 + self.e_objective3)
+
+        # ####################################  separately KL
 
 
 
@@ -565,7 +573,7 @@ class VKGE:
 
                     # tensorboard
 
-                    train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
+                    # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
 
 
                     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
@@ -711,6 +719,6 @@ class VKGE:
                     logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 #save embeddings
 
-            entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
-            np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
-            np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
+            # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
+            # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
+            # np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
