@@ -292,27 +292,27 @@ class VKGE:
         # ####################################  Weight uncertainity in NN's
 
 
-        self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
-        self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
-        self.samples_all= tf.concat(axis=0, values=[self.h_s, self.h_p, self.h_o])
+        # self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
+        # self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
+        # self.samples_all= tf.concat(axis=0, values=[self.h_s, self.h_p, self.h_o])
+        # #
+        # self.sigma_all= tf.log(1 + tf.exp(self.log_sigma_all ))
+        # # self.dist = tf.contrib.distributions.Normal(self.mu_all, self.sigma_all)
+        # # self.e_objective = self.dist.pdf(self.samples_all)
+        # self.e_objective=tf.sqrt(1 / (2 * 3.14 * (self.sigma_all ** 2)))*tf.exp(-(self.samples_all - self.mu_all)**2 / (2 * (self.samples_all ** 2)))
         #
-        self.sigma_all= tf.log(1 + tf.exp(self.log_sigma_all ))
-        # self.dist = tf.contrib.distributions.Normal(self.mu_all, self.sigma_all)
-        # self.e_objective = self.dist.pdf(self.samples_all)
-        self.e_objective=tf.sqrt(1 / (2 * 3.14 * (self.sigma_all ** 2)))*tf.exp(-(self.samples_all - self.mu_all)**2 / (2 * (self.samples_all ** 2)))
-
-        self.e_objective = tf.reduce_sum(self.e_objective) * self.KL_discount
+        # self.e_objective = tf.reduce_sum(self.e_objective) * self.KL_discount
 
         # ####################################  one KL
 
 
-        # self.mu_all=tf.concat(axis=0,values=[self.mu_s,self.mu_p,self.mu_o])
-        # self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s,self.log_sigma_sq_p,self.log_sigma_sq_o])
-        # #
-        # self.e_objective-= 0.5 * tf.reduce_sum(
-        #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
+        self.mu_all=tf.concat(axis=0,values=[self.mu_s,self.mu_p,self.mu_o])
+        self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s,self.log_sigma_sq_p,self.log_sigma_sq_o])
         #
-        # self.e_objective=self.e_objective*self.KL_discount
+        self.e_objective-= 0.5 * tf.reduce_sum(
+                         1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
+
+        self.e_objective=self.e_objective*self.KL_discount
 
         # ####################################  separately KL
         # self.e_objective1 -= 0.5 * tf.reduce_sum(
