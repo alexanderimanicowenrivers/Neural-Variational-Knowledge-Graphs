@@ -239,6 +239,10 @@ class GinieAI:
                     sess.run(cluster_assigns[vector_n], feed_dict={
                         assignment_value: assignment})
 
+                mean_dist = np.mean(distances)
+
+                print('Epoch', iteration_n, '/', 'loss:', mean_dist)
+
                 ##MAXIMIZATION STEP
                 # Based on the expected state computed from the Expectation Step,
                 # compute the locations of the centroids so as to maximize the
@@ -254,10 +258,9 @@ class GinieAI:
                     sess.run(cent_assigns[cluster_n], feed_dict={
                         centroid_value: new_location})
 
-                mean_dist = np.mean(distances)
 
 
-                print('Epoch', iteration_n, '/', 'loss:', mean_dist)
+
 
 
             # Return centroids and assignments
