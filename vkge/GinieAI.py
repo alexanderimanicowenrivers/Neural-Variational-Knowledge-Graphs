@@ -261,7 +261,7 @@ class GinieAI:
             sess.run(init)
             # defining batch size, number of epochs and learning rate
             batch_size = 1129  # how many images to use together for training
-            hm_epochs = 60  # how many times to go through the entire dataset
+            hm_epochs = 100  # how many times to go through the entire dataset
             tot_images = all_clauses.shape[0]  # total number of images
             # running the model for a 1000 epochs taking 100 images in batches
             # total improvement is printed out after each epoch
