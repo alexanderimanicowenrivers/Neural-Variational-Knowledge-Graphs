@@ -36,7 +36,7 @@ def main(_):
     #           lr=FLAGS.lr, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt
     #           , projection=FLAGS.projection,  score_func=FLAGS.score_func)
 
-    vkge.GinieAI()
+    vkge.GinieAI(no_clusters=FLAGS.no_batches)
 
 if __name__ == '__main__':
     tf.app.run()

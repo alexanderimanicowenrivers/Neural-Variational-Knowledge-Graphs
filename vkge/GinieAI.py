@@ -54,10 +54,11 @@ class GinieAI:
 
             """
 
-    def __init__(self):
+    def __init__(self,no_clusters=10):
         super().__init__()
 
         ## AUTOENCODER
+
 
         n_nodes_inpl = 18800  # encoder
         n_nodes_hl1 = 32  # encoder
@@ -98,7 +99,6 @@ class GinieAI:
 
         self.optimizer = tf.train.AdamOptimizer(learn_rate).minimize(self.meansq)
 
-
         # KMEANS
 
         logger.warn('Begin training')
@@ -114,7 +114,7 @@ class GinieAI:
         logger.warn("Data loaded has size {}".format(matrix.shape))
 
 
-        for no_clusts in [2]:
+        for no_clusts in [no_clusters]:
 
             centroids, assignments, mean_dist=self.TFKMeansCluster(matrix,no_clusts)
             logger.warn('number of clusters {}, mean distance {}'.format(no_clusts,mean_dist))
