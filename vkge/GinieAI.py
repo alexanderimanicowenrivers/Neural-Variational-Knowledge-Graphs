@@ -248,7 +248,7 @@ class GinieAI:
         """
 
         all_clauses = np.load('/home/acowenri/clauses2vec.npy')
-        print("Data loaded has size {}".format(all_clauses))
+        print("Data loaded has size {}".format(all_clauses.shape))
         # initialising stuff and starting the session
         init = tf.global_variables_initializer()
         with tf.Session() as sess:
