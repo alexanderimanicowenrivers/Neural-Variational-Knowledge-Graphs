@@ -301,7 +301,7 @@ class VKGE:
         # # self.e_objective = self.dist.pdf(self.samples_all)
         # self.e_objective=tf.sqrt(1 / (2 * 3.14 * (self.sigma_all ** 2)))*tf.exp(-(self.samples_all - self.mu_all)**2 / (2 * (self.samples_all ** 2)))
         #
-        # self.e_objective = tf.reduce_sum(self.e_objective) * self.KL_discount
+        # self.e_objective = tf.reduce_sum(tf.log(self.e_objective)) * self.KL_discount
 
         # ####################################  one KL
 
@@ -530,7 +530,7 @@ class VKGE:
 
                 if earl_stop == 1:
                     break
-                    self._saver.save(session, '/model'+filename )
+                    # self._saver.save(session, '/model'+filename )
 
                 counter = 0
 
