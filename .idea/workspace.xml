@@ -56,8 +56,8 @@
       <file leaf-file-name="GinieAI.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/GinieAI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-348">
-              <caret line="192" column="88" lean-forward="false" selection-start-line="192" selection-start-column="88" selection-end-line="192" selection-end-column="88" />
+            <state relative-caret-position="968">
+              <caret line="192" column="48" lean-forward="false" selection-start-line="192" selection-start-column="48" selection-end-line="192" selection-end-column="48" />
               <folding>
                 <element signature="e#25#48#0" expanded="true" />
               </folding>
@@ -414,13 +414,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00420" summary="updated working datasets only (no ntn)">
-      <created>1530547181494</created>
-      <option name="number" value="00420" />
-      <option name="presentableId" value="LOCAL-00420" />
-      <option name="project" value="LOCAL" />
-      <updated>1530547181494</updated>
-    </task>
     <task id="LOCAL-00421" summary="updated working datasets only (no ntn)">
       <created>1530547371088</created>
       <option name="number" value="00421" />
@@ -757,7 +750,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531471607491</updated>
     </task>
-    <option name="localTasksCounter" value="469" />
+    <task id="LOCAL-00469" summary="upload GenieAI">
+      <created>1531471715235</created>
+      <option name="number" value="00469" />
+      <option name="presentableId" value="LOCAL-00469" />
+      <option name="project" value="LOCAL" />
+      <updated>1531471715235</updated>
+    </task>
+    <option name="localTasksCounter" value="470" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1271,8 +1271,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/GinieAI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-348">
-          <caret line="192" column="88" lean-forward="false" selection-start-line="192" selection-start-column="88" selection-end-line="192" selection-end-column="88" />
+        <state relative-caret-position="968">
+          <caret line="192" column="48" lean-forward="false" selection-start-line="192" selection-start-column="48" selection-end-line="192" selection-end-column="48" />
           <folding>
             <element signature="e#25#48#0" expanded="true" />
           </folding>
