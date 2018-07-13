@@ -9,7 +9,7 @@ from vkge.knowledgebase import Fact, KnowledgeBaseParser
 
 
 
-class GenieAI:
+class GinieAI:
     """
            model for testing the basic probabilistic aspects of the model, just using SGD optimiser  - !!working!! 91.34%Hits@10
 
