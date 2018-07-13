@@ -263,7 +263,6 @@ class GinieAI:
                 epoch_loss = 0  # initializing error as 0
                 for i in range(int(tot_images / batch_size)):
                     epoch_x = all_clauses[i * batch_size: (i + 1) * batch_size,:]
-                    print(epoch_x.shape)
                     _, c = sess.run([self.optimizer , self.meansq],
                                     feed_dict={self.input_layer: epoch_x,
                                                self.output_true: epoch_x})
