@@ -7,7 +7,9 @@ from numpy import array
 import os
 from vkge.knowledgebase import Fact, KnowledgeBaseParser
 
+import logging
 
+logger = logging.getLogger(__name__)
 
 
 class GinieAI:
@@ -24,7 +26,7 @@ class GinieAI:
         @param b1: The beta 1 value for ADAM optimiser
         @param b2: The beta 2 value for ADAM optimiser
         @param eps: The epsilon value for ADAM optimiser
-        @param GPUMode: Used for reduced print statements during architecture search.
+        @param GPUMode: Used for reduced logger.warn statements during architecture search.
         @param alt_cost: Determines the use of a compression cost KL or classical KL term
         @param train_mean: Determines whether the mean embeddings are trainable or fixed
         @param alt_updates: Determines if updates are done simultaneously or
@@ -99,23 +101,23 @@ class GinieAI:
 
         # KMEANS
 
-        print('Begin training')
+        logger.warn('Begin training')
 
         # self.train()
 
 
-        print('Begin clustering of hidden representation')
+        logger.warn('Begin clustering of hidden representation')
 
 
         matrix=np.load('/home/acowenri/clause_compact.npy')
 
-        print("Data loaded has size {}".format(matrix.shape))
+        logger.warn("Data loaded has size {}".format(matrix.shape))
 
 
         for no_clusts in [2]:
 
             centroids, assignments, mean_dist=self.TFKMeansCluster(matrix,no_clusts)
-            print('number of clusters {}, mean distance {}'.format(no_clusts,mean_dist))
+            logger.warn('number of clusters {}, mean distance {}'.format(no_clusts,mean_dist))
 
             np.save('/home/acowenri/centroids'+str(no_clusts),centroids)
             np.save('/home/acowenri/assignments'+str(no_clusts),assignments)
@@ -215,7 +217,7 @@ class GinieAI:
             sess.run(init_op)
 
             ##CLUSTERING ITERATIONS
-            print(len(vectors), "number of vectors to cluster")
+            logger.warn(len(vectors), "number of vectors to cluster")
 
             # Now perform the Expectation-Maximization steps of K-Means clustering
             # iterations. To keep things simple, we will only do a set number of
@@ -248,7 +250,7 @@ class GinieAI:
 
                 mean_dist = np.mean(distances)
 
-                print('Epoch', iteration_n, '/', 'loss:', mean_dist)
+                logger.warn('Epoch', iteration_n, '/', 'loss:', mean_dist)
 
                 ##MAXIMIZATION STEP
                 # Based on the expected state computed from the Expectation Step,
@@ -283,7 +285,7 @@ class GinieAI:
         """
 
         all_clauses = np.load('/home/acowenri/clauses2vec.npy')
-        print("Data loaded has size {}".format(all_clauses.shape))
+        logger.warn("Data loaded has size {}".format(all_clauses.shape))
         # initialising stuff and starting the session
         init = tf.global_variables_initializer()
         with tf.Session() as sess:
@@ -293,18 +295,18 @@ class GinieAI:
             hm_epochs = 100  # how many times to go through the entire dataset
             tot_images = all_clauses.shape[0]  # total number of images
             # running the model for a 1000 epochs taking 100 images in batches
-            # total improvement is printed out after each epoch
+            # total improvement is logger.warned out after each epoch
             for epoch in range(hm_epochs):
                 epoch_loss = 0  # initializing error as 0
                 for i in range(int(tot_images / batch_size)):
                     epoch_x = all_clauses[i * batch_size: (i + 1) * batch_size,:]
-                    # print(epoch_x.shape)
+                    # logger.warn(epoch_x.shape)
                     _, c = sess.run([self.optimizer , self.meansq],
                                     feed_dict={self.input_layer: epoch_x,
                                                self.output_true: epoch_x})
 
                     epoch_loss += c
-                print('Epoch', epoch, '/', hm_epochs, 'loss:', epoch_loss)
+                logger.warn('Epoch', epoch, '/', hm_epochs, 'loss:', epoch_loss)
 
             clause_compact = sess.run(self.layer_1,
                             feed_dict={self.input_layer: all_clauses,

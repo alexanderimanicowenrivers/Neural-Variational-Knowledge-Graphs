@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="upload GenieAI">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/GinieAI.py" afterPath="$PROJECT_DIR$/vkge/GinieAI.py" />
     </list>
@@ -44,8 +44,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2190">
-              <caret line="553" column="63" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="734" selection-end-column="0" />
+            <state relative-caret-position="243">
+              <caret line="603" column="16" lean-forward="true" selection-start-line="603" selection-start-column="16" selection-end-line="603" selection-end-column="27" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -56,11 +56,9 @@
       <file leaf-file-name="GinieAI.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/GinieAI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="114" column="27" lean-forward="false" selection-start-line="114" selection-start-column="27" selection-end-line="114" selection-end-column="27" />
-              <folding>
-                <element signature="e#25#48#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="105">
+              <caret line="7" column="56" lean-forward="true" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -120,7 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>nb_epochs</find>
       <find>logs</find>
       <find>dtype=tf.float32)</find>
       <find>uclcs_nvkg_v2</find>
@@ -148,8 +145,9 @@
       <find>filename</find>
       <find>projection</find>
       <find>batch</find>
-      <find>train_writer</find>
       <find>output_true</find>
+      <find>train_writer</find>
+      <find>logger</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -159,9 +157,9 @@
       <replace>summary.scalar</replace>
       <replace>warn</replace>
       <replace>sig_min</replace>
-      <replace>_saver</replace>
       <replace>self.output_true</replace>
       <replace>self.layer_1</replace>
+      <replace>_saver</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -414,13 +412,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00432" summary="taken out early stopping and set to 500 epochs">
-      <created>1530725694573</created>
-      <option name="number" value="00432" />
-      <option name="presentableId" value="LOCAL-00432" />
-      <option name="project" value="LOCAL" />
-      <updated>1530725694573</updated>
     </task>
     <task id="LOCAL-00433" summary="added in tf graph">
       <created>1530790131513</created>
@@ -758,7 +749,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531472581842</updated>
     </task>
-    <option name="localTasksCounter" value="481" />
+    <task id="LOCAL-00481" summary="upload GenieAI">
+      <created>1531472796109</created>
+      <option name="number" value="00481" />
+      <option name="presentableId" value="LOCAL-00481" />
+      <option name="project" value="LOCAL" />
+      <updated>1531472796109</updated>
+    </task>
+    <option name="localTasksCounter" value="482" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1232,16 +1230,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2190">
-          <caret line="553" column="63" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="734" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/script_quicktest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1376">
@@ -1270,13 +1258,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="603" column="16" lean-forward="true" selection-start-line="603" selection-start-column="16" selection-end-line="603" selection-end-column="27" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/GinieAI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="114" column="27" lean-forward="false" selection-start-line="114" selection-start-column="27" selection-end-line="114" selection-end-column="27" />
-          <folding>
-            <element signature="e#25#48#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="105">
+          <caret line="7" column="56" lean-forward="true" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>
