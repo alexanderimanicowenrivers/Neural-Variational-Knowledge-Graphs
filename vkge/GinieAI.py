@@ -257,7 +257,7 @@ class GinieAI:
                 mean_dist = np.mean(distances)
 
 
-                print('Epoch', iteration_n, '/', hm_epochs, 'loss:', mean_dist)
+                print('Epoch', iteration_n, '/', 'loss:', mean_dist)
 
 
             # Return centroids and assignments
