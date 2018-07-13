@@ -241,7 +241,6 @@ class GinieAI:
                     sess.run(cluster_assigns[vector_n], feed_dict={
                         assignment_value: assignment})
 
-                    print('Vector', vector_n)
 
                 mean_dist = np.mean(distances)
 
