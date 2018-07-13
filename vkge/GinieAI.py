@@ -138,11 +138,8 @@ class GinieAI:
         # multiple times, the default graph doesn't keep getting crowded with
         # unused ops and Variables from previous function calls.
 
-        self.input_layer_clust = tf.placeholder('float', [None, 32])
 
-        self.layer_1 = tf.nn.sigmoid(
-            tf.add(tf.matmul(self.input_layer, self.hidden_1_layer_vals['weights']),
-                   self.hidden_1_layer_vals['biases']))
+
 
         graph = tf.Graph()
 
@@ -156,7 +153,7 @@ class GinieAI:
 
             ##First lets ensure we have a Variable vector for each centroid,
             ##initialized to one of the vectors from the available data points
-            centroids = [tf.Variable((vectors[vector_indices[i]]))
+            centroids = [tf.Variable((vectors[vector_indices[i]]),dtype=tf.float32)
                          for i in range(noofclusters)]
             ##These nodes will assign the centroid Variables the appropriate
             ##values
