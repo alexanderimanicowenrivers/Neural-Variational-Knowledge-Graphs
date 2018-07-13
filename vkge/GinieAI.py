@@ -2,7 +2,7 @@
 
 import tensorflow as tf
 from random import choice, shuffle
-from numpy as np
+import numpy as np
 from numpy import array
 import os
 from vkge.knowledgebase import Fact, KnowledgeBaseParser
