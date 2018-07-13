@@ -101,7 +101,18 @@ class GinieAI:
 
         print('Begin training')
 
-        self.train()
+        # self.train()
+
+        matrix=np.load('/home/acowenri/clause_compact.npy')
+
+        print('Begin clustering of hidden representation')
+
+
+        for no_clusts in [2,5,10,20,50]:
+
+            centroids, assignments, mean_dist=self.TFKMeansCluster(matrix,no_clusts)
+            print('number of clusters {}, mean distance {}'.format(no_clusts,mean_dist))
+
 
     def TFKMeansCluster(self,vectors, noofclusters):
         """
