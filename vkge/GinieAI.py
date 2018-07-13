@@ -149,6 +149,8 @@ class GinieAI:
 
             sess = tf.Session()
 
+
+
             ##CONSTRUCTING THE ELEMENTS OF COMPUTATION
 
             ##First lets ensure we have a Variable vector for each centroid,
@@ -199,7 +201,7 @@ class GinieAI:
             ##to the graph. The Variable-initializer should be defined after
             ##all the Variables have been constructed, so that each of them
             ##will be included in the initialization.
-            init_op = tf.initialize_all_variables()
+            init_op = tf.global_variables_initializer()
 
             # Initialize all variables
             sess.run(init_op)
