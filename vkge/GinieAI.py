@@ -112,10 +112,14 @@ class GinieAI:
         print("Data loaded has size {}".format(matrix.shape))
 
 
-        for no_clusts in [2,5,10,20,50]:
+        for no_clusts in [2]:
 
             centroids, assignments, mean_dist=self.TFKMeansCluster(matrix,no_clusts)
             print('number of clusters {}, mean distance {}'.format(no_clusts,mean_dist))
+
+            np.save('/home/acowenri/centroids'+str(no_clusts),centroids)
+            np.save('/home/acowenri/assignments'+str(no_clusts),assignments)
+
 
 
     def TFKMeansCluster(self,vectors, noofclusters):
