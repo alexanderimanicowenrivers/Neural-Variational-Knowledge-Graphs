@@ -184,7 +184,7 @@ class GinieAI:
             # Placeholders for input
             v1 = tf.placeholder("float32", [dim])
             v2 = tf.placeholder("float32", [dim])
-            euclid_dist = tf.sqrt(tf.reduce_sum(tf.pow(tf.sub(
+            euclid_dist = tf.sqrt(tf.reduce_sum(tf.pow(tf.subtract(
                 v1, v2), 2)))
 
             ##This node will figure out which cluster to assign a vector to,

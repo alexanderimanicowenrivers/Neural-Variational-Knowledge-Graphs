@@ -56,8 +56,8 @@
       <file leaf-file-name="GinieAI.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/GinieAI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-229">
-              <caret line="192" column="56" lean-forward="false" selection-start-line="192" selection-start-column="56" selection-end-line="192" selection-end-column="56" />
+            <state relative-caret-position="270">
+              <caret line="186" column="54" lean-forward="false" selection-start-line="186" selection-start-column="54" selection-end-line="186" selection-end-column="54" />
               <folding>
                 <element signature="e#25#48#0" expanded="true" />
               </folding>
@@ -161,6 +161,7 @@
       <replace>sig_min</replace>
       <replace>_saver</replace>
       <replace>self.output_true</replace>
+      <replace>self.layer_1</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -413,13 +414,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00422" summary="updated working datasets only (no ntn)">
-      <created>1530547417577</created>
-      <option name="number" value="00422" />
-      <option name="presentableId" value="LOCAL-00422" />
-      <option name="project" value="LOCAL" />
-      <updated>1530547417577</updated>
     </task>
     <task id="LOCAL-00423" summary="updated working datasets only (no ntn)">
       <created>1530555849226</created>
@@ -757,7 +751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531471772232</updated>
     </task>
-    <option name="localTasksCounter" value="471" />
+    <task id="LOCAL-00471" summary="upload GenieAI">
+      <created>1531471933893</created>
+      <option name="number" value="00471" />
+      <option name="presentableId" value="LOCAL-00471" />
+      <option name="project" value="LOCAL" />
+      <updated>1531471933893</updated>
+    </task>
+    <option name="localTasksCounter" value="472" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1271,8 +1272,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/GinieAI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-229">
-          <caret line="192" column="56" lean-forward="false" selection-start-line="192" selection-start-column="56" selection-end-line="192" selection-end-column="56" />
+        <state relative-caret-position="270">
+          <caret line="186" column="54" lean-forward="false" selection-start-line="186" selection-start-column="54" selection-end-line="186" selection-end-column="54" />
           <folding>
             <element signature="e#25#48#0" expanded="true" />
           </folding>
