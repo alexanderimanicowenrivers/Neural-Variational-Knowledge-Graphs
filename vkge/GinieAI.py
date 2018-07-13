@@ -254,7 +254,7 @@ class GinieAI:
         with tf.Session() as sess:
             sess.run(init)
             # defining batch size, number of epochs and learning rate
-            batch_size = 2  # how many images to use together for training
+            batch_size = 1129  # how many images to use together for training
             hm_epochs = 1000  # how many times to go through the entire dataset
             tot_images = all_clauses.shape[0]  # total number of images
             # running the model for a 1000 epochs taking 100 images in batches
@@ -263,6 +263,7 @@ class GinieAI:
                 epoch_loss = 0  # initializing error as 0
                 for i in range(int(tot_images / batch_size)):
                     epoch_x = all_clauses[i * batch_size: (i + 1) * batch_size,:]
+                    # print(epoch_x.shape)
                     _, c = sess.run([self.optimizer , self.meansq],
                                     feed_dict={self.input_layer: epoch_x,
                                                self.output_true: epoch_x})
