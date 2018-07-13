@@ -103,9 +103,13 @@ class GinieAI:
 
         # self.train()
 
-        matrix=np.load('/home/acowenri/clause_compact.npy')
 
         print('Begin clustering of hidden representation')
+
+
+        matrix=np.load('/home/acowenri/clause_compact.npy')
+
+        print("Data loaded has size {}".format(matrix.shape))
 
 
         for no_clusts in [2,5,10,20,50]:
