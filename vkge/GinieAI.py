@@ -211,6 +211,7 @@ class GinieAI:
             sess.run(init_op)
 
             ##CLUSTERING ITERATIONS
+            print(len(vectors), "number of vectors to cluster")
 
             # Now perform the Expectation-Maximization steps of K-Means clustering
             # iterations. To keep things simple, we will only do a set number of
@@ -223,6 +224,7 @@ class GinieAI:
                 ##the _expected_ centroid assignments.
                 # Iterate over each vector
                 for vector_n in range(len(vectors)):
+
                     vect = vectors[vector_n]
                     # Compute Euclidean distance between this vector and each
                     # centroid. Remember that this list cannot be named
@@ -238,6 +240,8 @@ class GinieAI:
                     # Now assign the value to the appropriate state variable
                     sess.run(cluster_assigns[vector_n], feed_dict={
                         assignment_value: assignment})
+
+                    print('Vector', vector_n)
 
                 mean_dist = np.mean(distances)
 
