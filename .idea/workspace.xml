@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="upload GenieAI">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main2.py" afterPath="$PROJECT_DIR$/main2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/GinieAI.py" afterPath="$PROJECT_DIR$/vkge/GinieAI.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,7 +44,7 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
+            <state relative-caret-position="-2457">
               <caret line="93" column="107" lean-forward="true" selection-start-line="93" selection-start-column="94" selection-end-line="93" selection-end-column="107" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
@@ -57,8 +56,8 @@
       <file leaf-file-name="GinieAI.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/GinieAI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="116" column="37" lean-forward="false" selection-start-line="116" selection-start-column="37" selection-end-line="116" selection-end-column="37" />
+            <state relative-caret-position="170">
+              <caret line="225" column="30" lean-forward="true" selection-start-line="225" selection-start-column="30" selection-end-line="225" selection-end-column="30" />
               <folding>
                 <element signature="e#25#48#0" expanded="true" />
               </folding>
@@ -151,8 +150,8 @@
       <find>batch</find>
       <find>output_true</find>
       <find>train_writer</find>
-      <find>logger</find>
       <find>print</find>
+      <find>logger</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -163,8 +162,8 @@
       <replace>sig_min</replace>
       <replace>self.output_true</replace>
       <replace>self.layer_1</replace>
-      <replace>_saver</replace>
       <replace>logger.warn</replace>
+      <replace>_saver</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -417,13 +416,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00436" summary="try a single kl">
-      <created>1530793446246</created>
-      <option name="number" value="00436" />
-      <option name="presentableId" value="LOCAL-00436" />
-      <option name="project" value="LOCAL" />
-      <updated>1530793446246</updated>
     </task>
     <task id="LOCAL-00437" summary="try a single kl">
       <created>1530793467470</created>
@@ -761,7 +753,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531472993374</updated>
     </task>
-    <option name="localTasksCounter" value="485" />
+    <task id="LOCAL-00485" summary="upload GenieAI">
+      <created>1531473101482</created>
+      <option name="number" value="00485" />
+      <option name="presentableId" value="LOCAL-00485" />
+      <option name="project" value="LOCAL" />
+      <updated>1531473101482</updated>
+    </task>
+    <option name="localTasksCounter" value="486" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1237,16 +1236,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="93" column="107" lean-forward="true" selection-start-line="93" selection-start-column="94" selection-end-line="93" selection-end-column="107" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/models/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="37">
@@ -1275,10 +1264,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2457">
+          <caret line="93" column="107" lean-forward="true" selection-start-line="93" selection-start-column="94" selection-end-line="93" selection-end-column="107" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/GinieAI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="116" column="37" lean-forward="false" selection-start-line="116" selection-start-column="37" selection-end-line="116" selection-end-column="37" />
+        <state relative-caret-position="170">
+          <caret line="225" column="30" lean-forward="true" selection-start-line="225" selection-start-column="30" selection-end-line="225" selection-end-column="30" />
           <folding>
             <element signature="e#25#48#0" expanded="true" />
           </folding>
