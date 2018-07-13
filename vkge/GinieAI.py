@@ -92,7 +92,7 @@ class GinieAI:
         # define our cost function
         self.meansq = tf.reduce_mean(tf.square(self.output_layer- self.output_true))
         # define our optimizer
-        learn_rate = 0.1  # how fast the model should learn
+        learn_rate = 0.01  # how fast the model should learn
 
         self.optimizer = tf.train.AdamOptimizer(learn_rate).minimize(self.meansq)
 
