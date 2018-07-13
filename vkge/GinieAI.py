@@ -215,7 +215,7 @@ class GinieAI:
             # Now perform the Expectation-Maximization steps of K-Means clustering
             # iterations. To keep things simple, we will only do a set number of
             # iterations, instead of using a Stopping Criterion.
-            noofiterations = 200
+            noofiterations = 100
             for iteration_n in range(noofiterations):
 
                 ##EXPECTATION STEP
