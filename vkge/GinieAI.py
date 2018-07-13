@@ -62,7 +62,7 @@ class GinieAI:
         n_nodes_hl2 = 32  # decoder
         n_nodes_outl = 18800  # decoder
 
-        hidden_1_layer_vals = {
+        self.hidden_1_layer_vals = {
             'weights': tf.Variable(tf.random_normal([n_nodes_inpl, n_nodes_hl1])),
             'biases': tf.Variable(tf.random_normal([n_nodes_hl1]))}
         # second hidden layer has 32*32 weights and 32 biases
@@ -75,14 +75,14 @@ class GinieAI:
             'biases': tf.Variable(tf.random_normal([n_nodes_outl]))}
 
         # image with shape 784 goes in
-        self.input_layer = tf.placeholder('float', [None, n_nodes_inpl])
+        self.input_layer = tf.placeholder('float', [None, 18800])
         # multiply output of self.input_layer wth a weight matrix and add biases
-        layer_1 = tf.nn.sigmoid(
-            tf.add(tf.matmul(self.input_layer, hidden_1_layer_vals['weights']),
-                   hidden_1_layer_vals['biases']))
-        # multiply output of layer_1 wth a weight matrix and add biases
+        self.layer_1 = tf.nn.sigmoid(
+            tf.add(tf.matmul(self.input_layer, self.hidden_1_layer_vals['weights']),
+                   self.hidden_1_layer_vals['biases']))
+        # multiply output of self.layer_1 wth a weight matrix and add biases
         layer_2 = tf.nn.sigmoid(
-            tf.add(tf.matmul(layer_1, hidden_2_layer_vals['weights']),
+            tf.add(tf.matmul(self.layer_1, hidden_2_layer_vals['weights']),
                    hidden_2_layer_vals['biases']))
         # multiply output of layer_2 wth a weight matrix and add biases
         self.output_layer= tf.matmul(layer_2, output_layer_vals['weights']) +output_layer_vals['biases']
@@ -126,6 +126,12 @@ class GinieAI:
         # of this algorithm. This ensures that as this function is called
         # multiple times, the default graph doesn't keep getting crowded with
         # unused ops and Variables from previous function calls.
+
+        self.input_layer_clust = tf.placeholder('float', [None, 32])
+
+        self.layer_1 = tf.nn.sigmoid(
+            tf.add(tf.matmul(self.input_layer, self.hidden_1_layer_vals['weights']),
+                   self.hidden_1_layer_vals['biases']))
 
         graph = tf.Graph()
 
@@ -255,7 +261,7 @@ class GinieAI:
             sess.run(init)
             # defining batch size, number of epochs and learning rate
             batch_size = 1129  # how many images to use together for training
-            hm_epochs = 1000  # how many times to go through the entire dataset
+            hm_epochs = 60  # how many times to go through the entire dataset
             tot_images = all_clauses.shape[0]  # total number of images
             # running the model for a 1000 epochs taking 100 images in batches
             # total improvement is printed out after each epoch
@@ -267,5 +273,12 @@ class GinieAI:
                     _, c = sess.run([self.optimizer , self.meansq],
                                     feed_dict={self.input_layer: epoch_x,
                                                self.output_true: epoch_x})
+
                     epoch_loss += c
                 print('Epoch', epoch, '/', hm_epochs, 'loss:', epoch_loss)
+
+            clause_compact = sess.run(self.layer_1,
+                            feed_dict={self.input_layer: all_clauses,
+                                       self.output_true: all_clauses})
+
+            np.save('/home/acowenri/clause_compact',clause_compact)
