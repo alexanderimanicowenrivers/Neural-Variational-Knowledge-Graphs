@@ -250,10 +250,15 @@ class GinieAI:
                     sess.run(cent_assigns[cluster_n], feed_dict={
                         centroid_value: new_location})
 
+                mean_dist = np.mean(distances)
+
+
+                print('Epoch', iteration_n, '/', hm_epochs, 'loss:', mean_dist)
+
+
             # Return centroids and assignments
             centroids = sess.run(centroids)
             assignments = sess.run(assignments)
-            mean_dist=np.mean(distances)
             return centroids, assignments,mean_dist
 
     def train(self):
