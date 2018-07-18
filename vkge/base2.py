@@ -100,7 +100,7 @@ class VKGE_justified:
         self.score_func=score_func
         self.alt_updates=alt_updates
         self.negsamples=negsamples
-        sig_max = tf.log(tf.exp(init_sig) - 1)
+        sig_max = tf.log(tf.exp(1/embedding_size) - 1)
         sig_min = sig_max
 
                 # adjust for correct format for model input
@@ -338,7 +338,7 @@ class VKGE_justified:
         logger.warn('Building Inference Networks q(h_x | x) ..')
 
         init1 = np.round((self.mean_c / np.sqrt(entity_embedding_size * 1.0)), decimals=2)
-        init2 = np.round((1/entity_embedding_size),decimals=2)
+        init2 = np.round((sig_max),decimals=2)
 
         # experiment 1 parameters, initalises a sigma to 0.031
         # init2 = (np.log(0.05 ** 2))
