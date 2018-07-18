@@ -335,7 +335,7 @@ class VKGE_justified:
         """
                                 Constructs Encoder
         """
-        logger.warn('Building Inference Networks q(h_x | x) ..{}'.format(sig_max))
+        logger.warn('Building Inference Networks q(h_x | x) ..{}'.format(self.score_func))
 
         init1 = np.round((self.mean_c / np.sqrt(entity_embedding_size * 1.0)), decimals=2)
         init2 = np.round(sig_max,decimals=2)
