@@ -163,7 +163,7 @@ class VKGE_justified:
 
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,
-                   train_triples=train_triples, no_batches=int(no_batches), filename=str(file_name))
+                   train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
@@ -465,7 +465,7 @@ class VKGE_justified:
 
         """
 
-        nb_versions = self.negsamples+1 # neg samples + original
+        nb_versions = int(self.negsamples+1) # neg samples + original
         earl_stop = 0
 
         all_triples = train_triples + valid_triples + test_triples

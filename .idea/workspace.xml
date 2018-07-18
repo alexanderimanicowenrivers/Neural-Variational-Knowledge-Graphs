@@ -51,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base2.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="base2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="165" column="74" lean-forward="false" selection-start-line="165" selection-start-column="74" selection-end-line="165" selection-end-column="74" />
+            <state relative-caret-position="208">
+              <caret line="469" column="0" lean-forward="true" selection-start-line="469" selection-start-column="0" selection-end-line="469" selection-end-column="0" />
               <folding>
                 <element signature="e#442#634#0" expanded="false" />
                 <element signature="e#679#799#0" expanded="false" />
@@ -76,10 +76,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main2.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
+            <state relative-caret-position="367">
               <caret line="26" column="43" lean-forward="false" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
               <folding>
                 <element signature="e#25#48#0" expanded="true" />
@@ -414,13 +414,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00450" summary="upload GenieAI">
-      <created>1531469320153</created>
-      <option name="number" value="00450" />
-      <option name="presentableId" value="LOCAL-00450" />
-      <option name="project" value="LOCAL" />
-      <updated>1531469320153</updated>
     </task>
     <task id="LOCAL-00451" summary="upload GenieAI">
       <created>1531469702663</created>
@@ -758,7 +751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531931012587</updated>
     </task>
-    <option name="localTasksCounter" value="499" />
+    <task id="LOCAL-00499" summary="fixed initsig from tf to np operations">
+      <created>1531931083827</created>
+      <option name="number" value="00499" />
+      <option name="presentableId" value="LOCAL-00499" />
+      <option name="project" value="LOCAL" />
+      <updated>1531931083827</updated>
+    </task>
+    <option name="localTasksCounter" value="500" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1230,14 +1230,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/models/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/script_quicktest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="415">
@@ -1258,25 +1250,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="26" column="43" lean-forward="false" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
+          <folding>
+            <element signature="e#25#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/models/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="165" column="74" lean-forward="false" selection-start-line="165" selection-start-column="74" selection-end-line="165" selection-end-column="74" />
+        <state relative-caret-position="208">
+          <caret line="469" column="0" lean-forward="true" selection-start-line="469" selection-start-column="0" selection-end-line="469" selection-end-column="0" />
           <folding>
             <element signature="e#442#634#0" expanded="false" />
             <element signature="e#679#799#0" expanded="false" />
             <element signature="e#842#996#0" expanded="false" />
             <element signature="e#1025#1360#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="43" lean-forward="false" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
-          <folding>
-            <element signature="e#25#48#0" expanded="true" />
           </folding>
         </state>
       </provider>
