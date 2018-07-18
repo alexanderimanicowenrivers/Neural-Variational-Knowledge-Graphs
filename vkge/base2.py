@@ -550,17 +550,24 @@ class VKGE_justified:
 
 
                     vec_neglabels=[1.0]+[0]*(nb_versions-1)
+                    #
+                    # loss_args = {
+                    #     self.KL_discount: pi[counter],
+                    #     self.s_inputs: Xs_batch,
+                    #     self.p_inputs: Xp_batch,
+                    #     self.o_inputs: Xo_batch,
+                    #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
+                    #     self.epoch_d: kl_inc_val
+                    # }
 
                     loss_args = {
-                        self.KL_discount: pi[counter],
+                        self.KL_discount: 1.0,
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size),
-                        self.epoch_d: kl_inc_val
+                        self.epoch_d: 1.0
                     }
-
-
 
                     merge = tf.summary.merge_all()  # for TB
 
@@ -725,6 +732,6 @@ class VKGE_justified:
                     logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 #save embeddings
 
-            entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
-            np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
-            np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
+            # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
+            # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
+            # np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
