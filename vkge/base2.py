@@ -467,6 +467,7 @@ class VKGE_justified:
 
         nb_versions = int(self.negsamples+1) # neg samples + original
         earl_stop = 0
+        logger.warn('Begin training ')
 
         all_triples = train_triples + valid_triples + test_triples
 

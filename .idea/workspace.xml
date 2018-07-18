@@ -55,7 +55,7 @@
         <entry file="file://$PROJECT_DIR$/vkge/base2.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="208">
-              <caret line="469" column="0" lean-forward="true" selection-start-line="469" selection-start-column="0" selection-end-line="469" selection-end-column="0" />
+              <caret line="469" column="35" lean-forward="false" selection-start-line="469" selection-start-column="35" selection-end-line="469" selection-end-column="35" />
               <folding>
                 <element signature="e#442#634#0" expanded="false" />
                 <element signature="e#679#799#0" expanded="false" />
@@ -415,13 +415,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00451" summary="upload GenieAI">
-      <created>1531469702663</created>
-      <option name="number" value="00451" />
-      <option name="presentableId" value="LOCAL-00451" />
-      <option name="project" value="LOCAL" />
-      <updated>1531469702663</updated>
-    </task>
     <task id="LOCAL-00452" summary="upload GenieAI">
       <created>1531469753722</created>
       <option name="number" value="00452" />
@@ -758,7 +751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531931083827</updated>
     </task>
-    <option name="localTasksCounter" value="500" />
+    <task id="LOCAL-00500" summary="fixed initsig from tf to np operations">
+      <created>1531931172119</created>
+      <option name="number" value="00500" />
+      <option name="presentableId" value="LOCAL-00500" />
+      <option name="project" value="LOCAL" />
+      <updated>1531931172119</updated>
+    </task>
+    <option name="localTasksCounter" value="501" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1271,7 +1271,7 @@
     <entry file="file://$PROJECT_DIR$/vkge/base2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
-          <caret line="469" column="0" lean-forward="true" selection-start-line="469" selection-start-column="0" selection-end-line="469" selection-end-column="0" />
+          <caret line="469" column="35" lean-forward="false" selection-start-line="469" selection-start-column="35" selection-end-line="469" selection-end-column="35" />
           <folding>
             <element signature="e#442#634#0" expanded="false" />
             <element signature="e#679#799#0" expanded="false" />
