@@ -40,6 +40,7 @@ def to_cmd(c):
               '--lr {} ' \
               '--file_name {} ' \
               '--score_func {}' \
+              '--alt_opt {}' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -51,7 +52,8 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 "{}/logs/180718/tb_nvkg.{}".format(path, summary(c)),
-                c['w9']
+                c['w9'],
+                c['w10']
                 )
     return command
 
@@ -70,7 +72,8 @@ def main(_):
         w6 = ['nations'],
         w7=[True,False],
         w8=[0.1,0.01,0.001,0.0001],
-        w9=['DistMult']
+        w9=['DistMult'],
+        w10=[True]
     )
 
     configurations = cartesian_product(hyperparameters_space)
