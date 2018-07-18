@@ -163,7 +163,7 @@ class VKGE_justified:
 
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,
-                   train_triples=train_triples, no_batches=no_batches, filename=file_name)
+                   train_triples=train_triples, no_batches=no_batches, filename=str(file_name))
 
     @staticmethod
     def input_parameters(inputs, parameters_layer):
