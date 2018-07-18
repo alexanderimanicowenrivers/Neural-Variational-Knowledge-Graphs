@@ -510,11 +510,8 @@ class VKGE_justified:
         with tf.Session() as session:
             session.run(init_op)
 
-            logger.warn('Print Top 20 rows from a sample entity and var ')
 
-            samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
 
-            logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20], samp1_sig[:20]))
             train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
@@ -551,7 +548,7 @@ class VKGE_justified:
                         Xo_batch[q::nb_versions] = Xo_shuf[batch_start:batch_end]
 
 
-                    vec_neglabels=[int(1)]+[int(0)]*(int(nb_versions-1))
+                    vec_neglabels=[int(1)]+([int(0)]*(int(nb_versions-1)))
                     #
                     # loss_args = {
                     #     self.KL_discount: pi[counter],
