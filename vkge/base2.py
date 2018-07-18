@@ -324,11 +324,11 @@ class VKGE_justified:
 
 
         self.elbo = self.g_objective + self.e_objective
-        self.train_variables=tf.trainable_variables()
+        # self.train_variables=tf.trainable_variables()
         # self._setup_training(loss=self.elbo,optimizer=optimizer)
         # self._setup_summaries()
-        self._variables = tf.global_variables()
-        self._saver = tf.train.Saver()
+        # self._variables = tf.global_variables()
+        # self._saver = tf.train.Saver()
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
                       sig_min):
@@ -506,7 +506,7 @@ class VKGE_justified:
         ##
         logger.warn('Begin training ')
 
-        init_op = self._variables
+        init_op = tf.global_variables_initializer()
         with tf.Session() as session:
             session.run(init_op)
 
