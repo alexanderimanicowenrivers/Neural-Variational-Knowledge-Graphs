@@ -42,7 +42,7 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1102">
+            <state relative-caret-position="-165">
               <caret line="281" column="28" lean-forward="true" selection-start-line="281" selection-start-column="28" selection-end-line="281" selection-end-column="28" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
@@ -54,8 +54,8 @@
       <file leaf-file-name="base2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="514" column="0" lean-forward="false" selection-start-line="514" selection-start-column="0" selection-end-line="514" selection-end-column="0" />
+            <state relative-caret-position="398">
+              <caret line="586" column="89" lean-forward="false" selection-start-line="586" selection-start-column="89" selection-end-line="586" selection-end-column="89" />
               <folding>
                 <element signature="e#442#634#0" expanded="false" />
                 <element signature="e#679#799#0" expanded="false" />
@@ -91,8 +91,8 @@
       <file leaf-file-name="non_probabilistic.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="112" column="8" lean-forward="false" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
+            <state relative-caret-position="159">
+              <caret line="202" column="37" lean-forward="false" selection-start-line="202" selection-start-column="0" selection-end-line="203" selection-end-column="0" />
               <folding>
                 <element signature="e#14#32#0" expanded="true" />
               </folding>
@@ -143,16 +143,16 @@
       <find>file_name</find>
       <find>filename</find>
       <find>projection</find>
-      <find>batch</find>
       <find>output_true</find>
       <find>train_writer</find>
       <find>print</find>
       <find>nb_versions</find>
       <find>rint</find>
-      <find>_setup_training</find>
-      <find>logger</find>
       <find>kl_in</find>
       <find>_saver</find>
+      <find>_setup_training</find>
+      <find>logger</find>
+      <find>batch</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -163,8 +163,8 @@
       <replace>sig_min</replace>
       <replace>self.output_true</replace>
       <replace>self.layer_1</replace>
-      <replace>_saver</replace>
       <replace>logger.warn</replace>
+      <replace>_saver</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -414,13 +414,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00457" summary="upload GenieAI">
-      <created>1531469956937</created>
-      <option name="number" value="00457" />
-      <option name="presentableId" value="LOCAL-00457" />
-      <option name="project" value="LOCAL" />
-      <updated>1531469956937</updated>
     </task>
     <task id="LOCAL-00458" summary="upload GenieAI">
       <created>1531470013572</created>
@@ -758,7 +751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531931665451</updated>
     </task>
-    <option name="localTasksCounter" value="506" />
+    <task id="LOCAL-00506" summary="fixed initsig from tf to np operations">
+      <created>1531931781100</created>
+      <option name="number" value="00506" />
+      <option name="presentableId" value="LOCAL-00506" />
+      <option name="project" value="LOCAL" />
+      <updated>1531931781100</updated>
+    </task>
+    <option name="localTasksCounter" value="507" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1176,16 +1176,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="112" column="8" lean-forward="false" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
-          <folding>
-            <element signature="e#14#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/GinieAI.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
@@ -1240,16 +1230,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1102">
-          <caret line="281" column="28" lean-forward="true" selection-start-line="281" selection-start-column="28" selection-end-line="281" selection-end-column="28" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="367">
@@ -1268,10 +1248,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-165">
+          <caret line="281" column="28" lean-forward="true" selection-start-line="281" selection-start-column="28" selection-end-line="281" selection-end-column="28" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="202" column="37" lean-forward="false" selection-start-line="202" selection-start-column="0" selection-end-line="203" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="514" column="0" lean-forward="false" selection-start-line="514" selection-start-column="0" selection-end-line="514" selection-end-column="0" />
+        <state relative-caret-position="398">
+          <caret line="586" column="89" lean-forward="false" selection-start-line="586" selection-start-column="89" selection-end-line="586" selection-end-column="89" />
           <folding>
             <element signature="e#442#634#0" expanded="false" />
             <element signature="e#679#799#0" expanded="false" />

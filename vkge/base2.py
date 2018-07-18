@@ -100,7 +100,7 @@ class VKGE_justified:
         self.score_func=score_func
         self.alt_updates=alt_updates
         self.negsamples=negsamples
-        sig_max = np.log(np.exp(1.0/embedding_size*1.0) - 1)
+        sig_max = (np.log((1.0/embedding_size*1.0))**2)
         sig_min = sig_max
 
                 # adjust for correct format for model input
@@ -243,10 +243,11 @@ class VKGE_justified:
         """
                 Samples from embeddings
         """
-        if self.sigma_alt:
-            sigma = tf.log(1 + tf.exp(log_sigma_square))
-        else:
-            sigma = tf.sqrt(tf.exp(log_sigma_square))
+        # if self.sigma_alt:
+        #     sigma = tf.log(1 + tf.exp(log_sigma_square))
+        # else:
+        #
+        sigma = tf.sqrt(tf.exp(log_sigma_square))
 
         embedding_size = mu.get_shape()[1].value
         eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
@@ -320,10 +321,16 @@ class VKGE_justified:
 
         # ####################################  separately KL
 
+        self.training_step1 = optimizer.minimize(self.e_objective1)
+        self.training_step2 = optimizer.minimize(self.e_objective2)
+        self.training_step3 = optimizer.minimize(self.e_objective3)
+        self.training_step4 = optimizer.minimize(self.g_objective)
 
 
 
         self.elbo = self.g_objective + self.e_objective
+        self.training_step = optimizer.minimize(self.elbo)
+
         # self.train_variables=tf.trainable_variables()
         # self._setup_training(loss=self.elbo,optimizer=optimizer)
         # self._setup_summaries()
@@ -571,13 +578,13 @@ class VKGE_justified:
                     merge = tf.summary.merge_all()  # for TB
 
                     if self.alt_updates:
-                        summary, _, elbo_value0 = session.run([merge, self.g_objective],
+                        summary, _, elbo_value0 = session.run([merge, self.training_step1],
                                                              feed_dict=loss_args)
-                        summary, _, elbo_value1 = session.run([merge, self.e_objective1],
+                        summary, _, elbo_value1 = session.run([merge, self.training_step2],
                                                              feed_dict=loss_args)
-                        summary, _, elbo_value2 = session.run([merge, self.e_objective2],
+                        summary, _, elbo_value2 = session.run([merge, self.training_step3],
                                                              feed_dict=loss_args)
-                        summary, _, elbo_value3 = session.run([merge, self.e_objective3],
+                        summary, _, elbo_value3 = session.run([merge, self.training_step4],
                                                              feed_dict=loss_args)
 
                         elbo_value=elbo_value0+elbo_value1+elbo_value2+elbo_value3
