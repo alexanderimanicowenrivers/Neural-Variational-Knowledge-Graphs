@@ -54,8 +54,8 @@
       <file leaf-file-name="base2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="340" column="33" lean-forward="false" selection-start-line="340" selection-start-column="33" selection-end-line="340" selection-end-column="33" />
+            <state relative-caret-position="568">
+              <caret line="102" column="54" lean-forward="false" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
               <folding>
                 <element signature="e#442#634#0" expanded="false" />
                 <element signature="e#679#799#0" expanded="false" />
@@ -123,8 +123,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>uclcs_nvkg_v2</find>
-      <find>uclcs_nvkg_v</find>
       <find>minepoch</find>
       <find>minloss</find>
       <find>maxepoch</find>
@@ -153,6 +151,8 @@
       <find>print</find>
       <find>logger</find>
       <find>nb_versions</find>
+      <find>rint</find>
+      <find>_setup_training</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -414,13 +414,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00440" summary="try a single kl">
-      <created>1530794571425</created>
-      <option name="number" value="00440" />
-      <option name="presentableId" value="LOCAL-00440" />
-      <option name="project" value="LOCAL" />
-      <updated>1530794571426</updated>
     </task>
     <task id="LOCAL-00441" summary="try a single kl">
       <created>1530794607162</created>
@@ -758,7 +751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531927699656</updated>
     </task>
-    <option name="localTasksCounter" value="489" />
+    <task id="LOCAL-00489" summary="fixed initsig">
+      <created>1531929682607</created>
+      <option name="number" value="00489" />
+      <option name="presentableId" value="LOCAL-00489" />
+      <option name="project" value="LOCAL" />
+      <updated>1531929682610</updated>
+    </task>
+    <option name="localTasksCounter" value="490" />
     <servers />
   </component>
   <component name="TodoView">
@@ -844,7 +844,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated non prob with MLE" />
     <MESSAGE value="updated MLE tests" />
     <MESSAGE value="added in test phase print statement" />
     <MESSAGE value="put hinge back" />
@@ -869,7 +868,8 @@
     <MESSAGE value="try a single kl" />
     <MESSAGE value="upload GenieAI" />
     <MESSAGE value="Upload Justified Model" />
-    <option name="LAST_COMMIT_MESSAGE" value="Upload Justified Model" />
+    <MESSAGE value="fixed initsig" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed initsig" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1270,8 +1270,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="340" column="33" lean-forward="false" selection-start-line="340" selection-start-column="33" selection-end-line="340" selection-end-column="33" />
+        <state relative-caret-position="568">
+          <caret line="102" column="54" lean-forward="false" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
           <folding>
             <element signature="e#442#634#0" expanded="false" />
             <element signature="e#679#799#0" expanded="false" />

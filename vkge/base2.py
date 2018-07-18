@@ -100,7 +100,7 @@ class VKGE_justified:
         self.score_func=score_func
         self.alt_updates=alt_updates
         self.negsamples=negsamples
-        sig_max = tf.log(tf.exp(1/embedding_size) - 1)
+        sig_max = tf.log(tf.exp(1.0/embedding_size*1.0) - 1)
         sig_min = sig_max
 
                 # adjust for correct format for model input
@@ -325,8 +325,8 @@ class VKGE_justified:
 
         self.elbo = self.g_objective + self.e_objective
         self.train_variables=tf.trainable_variables()
-        self._setup_training(loss=self.elbo,optimizer=optimizer)
-        self._setup_summaries()
+        # self._setup_training(loss=self.elbo,optimizer=optimizer)
+        # self._setup_summaries()
         self._variables = tf.global_variables()
         self._saver = tf.train.Saver()
 
