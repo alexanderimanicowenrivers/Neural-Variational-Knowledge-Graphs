@@ -100,7 +100,7 @@ class VKGE_justified:
         self.score_func=score_func
         self.alt_updates=alt_updates
         self.negsamples=negsamples
-        sig_max = tf.log(tf.exp(1.0/embedding_size*1.0) - 1)
+        sig_max = np.log(np.exp(1.0/embedding_size*1.0) - 1)
         sig_min = sig_max
 
                 # adjust for correct format for model input
