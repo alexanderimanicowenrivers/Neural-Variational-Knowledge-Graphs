@@ -551,7 +551,7 @@ class VKGE_justified:
                         Xo_batch[q::nb_versions] = Xo_shuf[batch_start:batch_end]
 
 
-                    vec_neglabels=[1.0]+[0]*(nb_versions-1)
+                    vec_neglabels=[int(1)]+[int(0)]*(int(nb_versions-1))
                     #
                     # loss_args = {
                     #     self.KL_discount: pi[counter],
@@ -574,14 +574,17 @@ class VKGE_justified:
                     merge = tf.summary.merge_all()  # for TB
 
                     if self.alt_updates:
-                        summary, _, elbo_value = session.run([merge, self.g_objective, self.elbo],
+                        summary, _, elbo_value0 = session.run([merge, self.g_objective],
                                                              feed_dict=loss_args)
-                        summary, _, elbo_value = session.run([merge, self.e_objective1, self.elbo],
+                        summary, _, elbo_value1 = session.run([merge, self.e_objective1],
                                                              feed_dict=loss_args)
-                        summary, _, elbo_value = session.run([merge, self.e_objective2, self.elbo],
+                        summary, _, elbo_value2 = session.run([merge, self.e_objective2],
                                                              feed_dict=loss_args)
-                        summary, _, elbo_value = session.run([merge, self.e_objective3, self.elbo],
+                        summary, _, elbo_value3 = session.run([merge, self.e_objective3],
                                                              feed_dict=loss_args)
+
+                        elbo_value=elbo_value0+elbo_value1+elbo_value2+elbo_value3
+
                     else:
                         summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
                                                          feed_dict=loss_args)
