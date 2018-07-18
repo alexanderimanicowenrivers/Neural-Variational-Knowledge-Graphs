@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="fixed initsig from tf to np operations">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base2.py" afterPath="$PROJECT_DIR$/vkge/base2.py" />
     </list>
@@ -54,8 +54,8 @@
       <file leaf-file-name="base2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="469" column="35" lean-forward="false" selection-start-line="469" selection-start-column="35" selection-end-line="469" selection-end-column="35" />
+            <state relative-caret-position="374">
+              <caret line="516" column="15" lean-forward="false" selection-start-line="516" selection-start-column="8" selection-end-line="516" selection-end-column="15" />
               <folding>
                 <element signature="e#442#634#0" expanded="false" />
                 <element signature="e#679#799#0" expanded="false" />
@@ -415,13 +415,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00452" summary="upload GenieAI">
-      <created>1531469753722</created>
-      <option name="number" value="00452" />
-      <option name="presentableId" value="LOCAL-00452" />
-      <option name="project" value="LOCAL" />
-      <updated>1531469753723</updated>
-    </task>
     <task id="LOCAL-00453" summary="upload GenieAI">
       <created>1531469790362</created>
       <option name="number" value="00453" />
@@ -758,7 +751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531931172119</updated>
     </task>
-    <option name="localTasksCounter" value="501" />
+    <task id="LOCAL-00501" summary="fixed initsig from tf to np operations">
+      <created>1531931187986</created>
+      <option name="number" value="00501" />
+      <option name="presentableId" value="LOCAL-00501" />
+      <option name="project" value="LOCAL" />
+      <updated>1531931187986</updated>
+    </task>
+    <option name="localTasksCounter" value="502" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1270,8 +1270,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="469" column="35" lean-forward="false" selection-start-line="469" selection-start-column="35" selection-end-line="469" selection-end-column="35" />
+        <state relative-caret-position="374">
+          <caret line="516" column="15" lean-forward="false" selection-start-line="516" selection-start-column="8" selection-end-line="516" selection-end-column="15" />
           <folding>
             <element signature="e#442#634#0" expanded="false" />
             <element signature="e#679#799#0" expanded="false" />

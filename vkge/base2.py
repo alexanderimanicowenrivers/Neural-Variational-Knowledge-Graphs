@@ -467,29 +467,37 @@ class VKGE_justified:
 
         nb_versions = int(self.negsamples+1) # neg samples + original
         earl_stop = 0
-        logger.warn('Begin training ')
 
         all_triples = train_triples + valid_triples + test_triples
 
+        logger.warn('Begin training ')
+
         index_gen = index.GlorotIndexGenerator()
+        logger.warn('Begin training ')
 
         Xs = np.array([self.entity_to_idx[s] for (s, p, o) in train_triples], dtype=np.int32)
         Xp = np.array([self.predicate_to_idx[p] for (s, p, o) in train_triples], dtype=np.int32)
         Xo = np.array([self.entity_to_idx[o] for (s, p, o) in train_triples], dtype=np.int32)
+        logger.warn('Begin training ')
 
         assert Xs.shape == Xp.shape == Xo.shape
+        logger.warn('Begin training ')
 
         nb_samples = Xs.shape[0]
         nb_batches = no_batches
         batch_size = math.ceil(nb_samples / nb_batches)
+        logger.warn('Begin training ')
 
         batches = make_batches(self.nb_examples, batch_size)
 
+        logger.warn('Begin training ')
 
         projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
+        logger.warn('Begin training ')
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
+        logger.warn('Begin training ')
 
         M = int(nb_batches)
 
@@ -504,6 +512,7 @@ class VKGE_justified:
         ##
         # Train
         ##
+        logger.warn('Begin training ')
 
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
@@ -598,9 +607,9 @@ class VKGE_justified:
 
                     counter += 1
 
-                if (self.projection == True):  # project means
-                    for projection_step in projection_steps:
-                        session.run([projection_step])
+                # if (self.projection == True):  # project means
+                #     for projection_step in projection_steps:
+                #         session.run([projection_step])
 
 
 
