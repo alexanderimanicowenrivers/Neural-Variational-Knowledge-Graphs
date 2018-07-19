@@ -64,8 +64,8 @@
       <file leaf-file-name="base2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="566" column="31" lean-forward="false" selection-start-line="566" selection-start-column="31" selection-end-line="566" selection-end-column="31" />
+            <state relative-caret-position="497">
+              <caret line="566" column="107" lean-forward="false" selection-start-line="566" selection-start-column="107" selection-end-line="566" selection-end-column="107" />
               <folding>
                 <element signature="e#442#634#0" expanded="false" />
                 <element signature="e#679#799#0" expanded="false" />
@@ -415,13 +415,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00473" summary="upload GenieAI">
-      <created>1531472053994</created>
-      <option name="number" value="00473" />
-      <option name="presentableId" value="LOCAL-00473" />
-      <option name="project" value="LOCAL" />
-      <updated>1531472053994</updated>
-    </task>
     <task id="LOCAL-00474" summary="upload GenieAI">
       <created>1531472132414</created>
       <option name="number" value="00474" />
@@ -758,7 +751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531999382537</updated>
     </task>
-    <option name="localTasksCounter" value="522" />
+    <task id="LOCAL-00522" summary="fixed sigma init">
+      <created>1531999487080</created>
+      <option name="number" value="00522" />
+      <option name="presentableId" value="LOCAL-00522" />
+      <option name="project" value="LOCAL" />
+      <updated>1531999487081</updated>
+    </task>
+    <option name="localTasksCounter" value="523" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1275,8 +1275,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="566" column="31" lean-forward="false" selection-start-line="566" selection-start-column="31" selection-end-line="566" selection-end-column="31" />
+        <state relative-caret-position="497">
+          <caret line="566" column="107" lean-forward="false" selection-start-line="566" selection-start-column="107" selection-end-line="566" selection-end-column="107" />
           <folding>
             <element signature="e#442#634#0" expanded="false" />
             <element signature="e#679#799#0" expanded="false" />

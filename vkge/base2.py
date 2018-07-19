@@ -564,7 +564,7 @@ class VKGE_justified:
 
                     vec_neglabels=[int(1)]+([int(0)]*(int(nb_versions-1)))
 
-                    logger.warn("vec_neglabels is {}".format(vec_neglabels))
+                    logger.warn("vec_neglabels is {}, batch size is {}".format(vec_neglabels,Xs_batch.shape))
                     #
                     # loss_args = {
                     #     self.KL_discount: pi[counter],
