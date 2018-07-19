@@ -100,7 +100,14 @@ class VKGE_justified:
         self.score_func=score_func
         self.alt_updates=alt_updates
         self.negsamples=negsamples
-        sig_max = (np.log((1.0/embedding_size*1.0))**2)
+
+
+
+        # sigma = tf.log(1 + tf.exp(log_sigma_square))
+
+        sig_max = np.exp(np.sqrt(1.0/embedding_size*1.0))
+
+        # sig_max = np.log(np.exp(1.0/embedding_size*1.0)-1)
         sig_min = sig_max
 
                 # adjust for correct format for model input
@@ -244,7 +251,7 @@ class VKGE_justified:
                 Samples from embeddings
         """
         # if self.sigma_alt:
-        #     sigma = tf.log(1 + tf.exp(log_sigma_square))
+        # sigma = tf.log(1 + tf.exp(log_sigma_square))
         # else:
         #
         sigma = tf.sqrt(tf.exp(log_sigma_square))
@@ -303,6 +310,7 @@ class VKGE_justified:
         #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
         #
         # self.e_objective=self.e_objective*self.KL_discount
+
 
         # ####################################  separately KL
         self.e_objective1 -= 0.5 * tf.reduce_sum(
