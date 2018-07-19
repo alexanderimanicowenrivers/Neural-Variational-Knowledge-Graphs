@@ -67,12 +67,12 @@ def main(_):
     hyperparameters_space = dict(
         w0=[0],
         w1=[1],
-        w2=[1e-3,1e-5,1e-7], #
-        w3=[10,20,30,40,50,100,200,300],
-        w6 = ['fb15k-237','kinship','nations','umls','wn18','wn18rr'],
-        w7=[True,False],
-        w8=[0.1,0.001,0.00001],
-        w9=['TransE', 'DistMult', 'ComplEx'],
+        w2=[1e-3], #
+        w3=[10],
+        w6 = ['nations'],
+        w7=[False],
+        w8=[0.1],
+        w9=['DistMult'],
         w11=[1,3,5,7],
         w10=[True,False]
     )

@@ -31,26 +31,30 @@ def to_cmd(c):
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
     command = 'PYTHONPATH=. anaconda-python3-cpu {}/main2.py  ' \
-              '--mean_c {} ' \
-              '--init_sig {} ' \
+              '--negsamples {} ' \
+              '--no_batches {} ' \
+              '--epsilon {} ' \
               '--embedding_size {} ' \
               '--dataset {} ' \
-              '--alt_opt {} ' \
+              '--alt_updates {} ' \
               '--lr {} ' \
-              '--file_name {} ' \
+              '--mean_c {} ' \
               '--score_func {}' \
+              '--alt_opt {}' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
+                c['w0'],
                 c['w1'],
                 c['w2'],
                 c['w3'],
                 c['w6'],
                 c['w7'],
                 c['w8'],
-                "{}/logs/18_7_02/tb_nvkg.{}".format(path, summary(c)),
-                c['w9']
-                )
+                c['w11'],
+                # ("{}/logs/180718/tb_nvkg.{}".format(path, summary(c))),
+                c['w9'],
+                c['w10'])
     return command
 
 
@@ -61,18 +65,21 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[1,2,3,4,5,6,7],
-        w2=[0.01,0.02,0.015,0.5], #
-        w3=[200,250,300],
+        w0=[0],
+        w1=[1],
+        w2=[1e-3,1e-5,1e-7], #
+        w3=[10,20,30,40,50,100,200,300],
         w6 = ['fb15k-237','kinship','nations','umls','wn18','wn18rr'],
         w7=[True,False],
-        w8=[0.1,0.01],
-        w9=['TransE','DistMult','ComplEx']
+        w8=[0.1,0.001,0.00001],
+        w9=['TransE', 'DistMult', 'ComplEx'],
+        w11=[1,3,5,7],
+        w10=[True,False]
     )
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_7_02'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180718'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):

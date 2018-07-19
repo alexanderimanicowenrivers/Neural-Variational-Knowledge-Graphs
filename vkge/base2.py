@@ -180,6 +180,15 @@ class VKGE_justified:
         mu, log_sigma_square = tf.split(value=parameters, num_or_size_splits=2, axis=1)
         return mu, log_sigma_square
 
+
+    def generate_matrix(inputs, parameters_layer):
+        """
+                    Under closed world assumption
+        """
+        parameters = tf.nn.embedding_lookup(parameters_layer, inputs)
+        mu, log_sigma_square = tf.split(value=parameters, num_or_size_splits=2, axis=1)
+        return mu, log_sigma_square
+
     def _setup_summaries(self):
 
         self.variable_summaries(self.entity_embedding_sigma)
@@ -428,24 +437,37 @@ class VKGE_justified:
 
                 model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                      object_embeddings=self.h_o)
-                model_test = models.BilinearDiagonalModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
-                                                       object_embeddings=self.mu_o)
+
+                if self.alt_opt:
+                    model_test = models.BilinearDiagonalModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
+                                                           object_embeddings=self.mu_o)
+                else:
+                    model_test=model
             elif self.score_func=='ComplEx':
                 model = models.ComplexModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                      object_embeddings=self.h_o)
-                model_test = models.ComplexModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
+
+                if self.alt_opt:
+                    model_test = models.ComplexModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
                                                           object_embeddings=self.mu_o)
+                else:
+                    model_test = model
             elif self.score_func=='TransE':
                 model = models.TranslatingModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                      object_embeddings=self.h_o)
-                model_test = models.TranslatingModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
+                if self.alt_opt:
+                    model_test = models.TranslatingModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
                                                           object_embeddings=self.mu_o)
+                else:
+                    model_test = model
             elif self.score_func=='RESCAL':
                 model = models.BilinearModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                      object_embeddings=self.h_o)
-                model_test = models.BilinearModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
+                if self.alt_opt:
+                    model_test = models.BilinearModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
                                                           object_embeddings=self.mu_o)
-
+                else:
+                    model_test = model
             self.scores = model()
             self.scores_test = model_test()
             self.p_x_i = tf.sigmoid(self.scores)
