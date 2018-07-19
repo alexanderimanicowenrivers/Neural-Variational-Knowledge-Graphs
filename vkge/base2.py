@@ -191,7 +191,7 @@ class VKGE_justified:
 
         tf.summary.scalar("g loss", self.g_objective)
 
-        tf.summary.scalar("total loss", self.loss)
+        tf.summary.scalar("total loss", self.elbo)
 
 
         with tf.name_scope('Samples'):
