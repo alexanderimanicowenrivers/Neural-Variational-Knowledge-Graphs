@@ -472,7 +472,7 @@ class VKGE_justified:
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, valid_triples, train_triples, no_batches, session=0, nb_epochs=500, unit_cube=True,
+    def train(self, test_triples, valid_triples, train_triples, no_batches, session, nb_epochs=500, unit_cube=True,
               filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
 
@@ -586,18 +586,18 @@ class VKGE_justified:
                     logger.warn('Begin training ')
 
                     if self.alt_updates:
-                        summary, _ = session.run([merge, self.training_step1],
+                        _, _ = session.run([merge, self.training_step1],
                                                              feed_dict=loss_args)
-                        summary, _ = session.run([merge, self.training_step2],
+                        _, _ = session.run([merge, self.training_step2],
                                                              feed_dict=loss_args)
-                        summary, _ = session.run([merge, self.training_step3],
+                        _, _ = session.run([merge, self.training_step3],
                                                              feed_dict=loss_args)
-                        summary, _, elbo_value = session.run([merge, self.training_step4, self.elbo],
+                        _, _, elbo_value = session.run([merge, self.training_step4, self.elbo],
                                                              feed_dict=loss_args)
 
 
                     else:
-                        summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
+                        _, _, elbo_value = session.run([merge, self.training_step, self.elbo],
                                                          feed_dict=loss_args)
 
                     # tensorboard
