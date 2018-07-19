@@ -546,6 +546,36 @@ class VKGE_justified:
             session.run(init_op)
 
 
+            #create full batch
+
+            order = self.random_state.permutation(nb_samples)
+            Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
+            nb_versions = self.nb_entities
+
+            for batch_no, (batch_start, batch_end) in enumerate(batches):
+
+                curr_batch_size = batch_end - batch_start
+
+                Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
+                Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
+                Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
+
+                Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
+                Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
+                Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
+
+                # for q in range((nb_versions-1)): # Xs_batch[1::nb_versions] needs to be corrupted (NEG SAMPLING)
+                #
+                #     Xs_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                #     Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
+                #     Xo_batch[q::nb_versions] = Xo_shuf[batch_start:batch_end]
+                for q in range((nb_versions - 1)):  # Xs_batch[1::nb_versions] needs to be corrupted
+
+                    Xs_batch[q::nb_versions] = Xs_shuf[batch_start:batch_end]
+                    Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[q::nb_versions] = np.mod((Xo_shuf[batch_start:batch_end] + q), nb_versions)
+
+            vec_neglabels = [int(1)] + ([int(0)] * (int(nb_versions - 1)))
 
             # train_writer = tf.summary.FileWriter(filename, session.graph)
 
@@ -559,33 +589,43 @@ class VKGE_justified:
 
                 kl_inc_val = 1.0
 
-                order = self.random_state.permutation(nb_samples)
-                Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
+
 
                 loss_values = []
                 total_loss_value = 0
 
-                for batch_no, (batch_start, batch_end) in enumerate(batches):
+                # order = self.random_state.permutation(nb_samples)
+                # Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
+                #
+                # for batch_no, (batch_start, batch_end) in enumerate(batches):
+                #     nb_versions=self.nb_entities
+                #
+                #     curr_batch_size = batch_end - batch_start
+                #
+                #     Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
+                #     Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
+                #     Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
+                #
+                #     Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
+                #     Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
+                #     Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
+                #
+                #
+                #     # for q in range((nb_versions-1)): # Xs_batch[1::nb_versions] needs to be corrupted (NEG SAMPLING)
+                #     #
+                #     #     Xs_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                #     #     Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
+                #     #     Xo_batch[q::nb_versions] = Xo_shuf[batch_start:batch_end]
+                #     for q in range((nb_versions-2)): # Xs_batch[1::nb_versions] needs to be corrupted
+                #
+                #         Xs_batch[q::nb_versions] = Xs_shuf[batch_start:batch_end]
+                #         Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
+                #         Xo_batch[q::nb_versions] = np.mod((Xo_shuf[batch_start:batch_end]+q),nb_versions)
 
-                    curr_batch_size = batch_end - batch_start
-
-                    Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
-                    Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
-                    Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
-
-                    Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
-                    Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
-                    Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
-
-                    for q in range((nb_versions-1)): # Xs_batch[1::nb_versions] needs to be corrupted
-                        Xs_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
-                        Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
-                        Xo_batch[q::nb_versions] = Xo_shuf[batch_start:batch_end]
+                    # vec_neglabels=[int(1)]+([int(0)]*(int(nb_versions-1)))
 
 
-                    vec_neglabels=[int(1)]+([int(0)]*(int(nb_versions-1)))
-
-                    logger.warn("vec_neglabels is {}, batch size is {}".format(vec_neglabels,Xs_batch.shape))
+                    logger.warn("batch size is {}".format(Xs_batch.shape))
                     #
                     # loss_args = {
                     #     self.KL_discount: pi[counter],

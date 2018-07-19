@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="Add in sampling evaluation method or mean evaluation method">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main2.py" afterPath="$PROJECT_DIR$/main2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_quicktest.py" afterPath="$PROJECT_DIR$/script_quicktest.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_search.py" afterPath="$PROJECT_DIR$/script_search.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base2.py" afterPath="$PROJECT_DIR$/vkge/base2.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,22 +51,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base2.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="base2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="587">
-              <caret line="469" column="38" lean-forward="false" selection-start-line="469" selection-start-column="38" selection-end-line="469" selection-end-column="38" />
+            <state relative-caret-position="451">
+              <caret line="571" column="47" lean-forward="false" selection-start-line="571" selection-start-column="47" selection-end-line="571" selection-end-column="47" />
               <folding>
                 <element signature="e#442#634#0" expanded="false" />
                 <element signature="e#679#799#0" expanded="false" />
                 <element signature="e#842#996#0" expanded="false" />
                 <element signature="e#1025#1360#0" expanded="false" />
+                <element signature="e#18563#21092#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main2.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main2.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="352">
@@ -158,6 +156,7 @@
       <replace>self.layer_1</replace>
       <replace>_saver</replace>
       <replace>logger.warn</replace>
+      <replace>nb_versions</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -201,8 +200,8 @@
         <option value="$PROJECT_DIR$/vkge/models/base.py" />
         <option value="$PROJECT_DIR$/script_search.py" />
         <option value="$PROJECT_DIR$/script_quicktest.py" />
-        <option value="$PROJECT_DIR$/vkge/base2.py" />
         <option value="$PROJECT_DIR$/main2.py" />
+        <option value="$PROJECT_DIR$/vkge/base2.py" />
       </list>
     </option>
   </component>
@@ -407,13 +406,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00477" summary="upload GenieAI">
-      <created>1531472428413</created>
-      <option name="number" value="00477" />
-      <option name="presentableId" value="LOCAL-00477" />
-      <option name="project" value="LOCAL" />
-      <updated>1531472428413</updated>
     </task>
     <task id="LOCAL-00478" summary="upload GenieAI">
       <created>1531472471749</created>
@@ -751,7 +743,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532002653466</updated>
     </task>
-    <option name="localTasksCounter" value="526" />
+    <task id="LOCAL-00526" summary="Add in sampling evaluation method or mean evaluation method">
+      <created>1532022387510</created>
+      <option name="number" value="00526" />
+      <option name="presentableId" value="LOCAL-00526" />
+      <option name="project" value="LOCAL" />
+      <updated>1532022387570</updated>
+    </task>
+    <option name="localTasksCounter" value="527" />
     <servers />
   </component>
   <component name="TodoView">
@@ -837,7 +836,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="put hinge back" />
     <MESSAGE value="added in embedding tensorboard" />
     <MESSAGE value="added in ComplEX" />
     <MESSAGE value="added in GlobalStep" />
@@ -862,7 +860,8 @@
     <MESSAGE value="fixed initsig" />
     <MESSAGE value="fixed initsig from tf to np operations" />
     <MESSAGE value="fixed sigma init" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed sigma init" />
+    <MESSAGE value="Add in sampling evaluation method or mean evaluation method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add in sampling evaluation method or mean evaluation method" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1156,7 +1155,7 @@
         <state relative-caret-position="135">
           <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1246,19 +1245,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="469" column="38" lean-forward="false" selection-start-line="469" selection-start-column="38" selection-end-line="469" selection-end-column="38" />
-          <folding>
-            <element signature="e#442#634#0" expanded="false" />
-            <element signature="e#679#799#0" expanded="false" />
-            <element signature="e#842#996#0" expanded="false" />
-            <element signature="e#1025#1360#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/script_quicktest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="597">
@@ -1275,6 +1261,20 @@
           <caret line="25" column="139" lean-forward="false" selection-start-line="25" selection-start-column="139" selection-end-line="25" selection-end-column="139" />
           <folding>
             <element signature="e#25#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="571" column="47" lean-forward="false" selection-start-line="571" selection-start-column="47" selection-end-line="571" selection-end-column="47" />
+          <folding>
+            <element signature="e#442#634#0" expanded="false" />
+            <element signature="e#679#799#0" expanded="false" />
+            <element signature="e#842#996#0" expanded="false" />
+            <element signature="e#1025#1360#0" expanded="false" />
+            <element signature="e#18563#21092#0" expanded="false" />
           </folding>
         </state>
       </provider>
