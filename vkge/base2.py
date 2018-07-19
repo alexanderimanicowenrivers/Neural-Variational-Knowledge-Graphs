@@ -341,7 +341,7 @@ class VKGE_justified:
 
         # self.train_variables=tf.trainable_variables()
         # self._setup_training(loss=self.elbo,optimizer=optimizer)
-        # self._setup_summaries()
+        self._setup_summaries()
         # self._variables = tf.global_variables()
         # self._saver = tf.train.Saver()
 
@@ -586,18 +586,18 @@ class VKGE_justified:
                     logger.warn('Begin training ')
 
                     if self.alt_updates:
-                        _, _ = session.run([merge, self.training_step1],
+                        summary, _ = session.run([merge, self.training_step1],
                                                              feed_dict=loss_args)
-                        _, _ = session.run([merge, self.training_step2],
+                        summary, _ = session.run([merge, self.training_step2],
                                                              feed_dict=loss_args)
-                        _, _ = session.run([merge, self.training_step3],
+                        summary, _ = session.run([merge, self.training_step3],
                                                              feed_dict=loss_args)
-                        _, _, elbo_value = session.run([merge, self.training_step4, self.elbo],
+                        summary, _, elbo_value = session.run([merge, self.training_step4, self.elbo],
                                                              feed_dict=loss_args)
 
 
                     else:
-                        _, _, elbo_value = session.run([merge, self.training_step, self.elbo],
+                        summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
                                                          feed_dict=loss_args)
 
                     # tensorboard
