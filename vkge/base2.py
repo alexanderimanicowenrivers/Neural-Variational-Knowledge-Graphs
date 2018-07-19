@@ -519,7 +519,6 @@ class VKGE_justified:
         ##
         # Train
         ##
-        logger.warn('Begin training ')
 
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
@@ -584,6 +583,7 @@ class VKGE_justified:
                     }
 
                     merge = tf.summary.merge_all()  # for TB
+                    logger.warn('Begin training ')
 
                     if self.alt_updates:
                         summary, _ = session.run([merge, self.training_step1],
