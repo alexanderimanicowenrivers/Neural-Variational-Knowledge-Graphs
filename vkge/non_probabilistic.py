@@ -275,9 +275,7 @@ class VKGE_simple:
                                 Train Model
         """
 
-        # nb_versions = 3
-        nb_versions = 1
-
+        nb_versions = 3
         earl_stop = 0
 
         all_triples = train_triples + valid_triples + test_triples
@@ -347,22 +345,21 @@ class VKGE_simple:
                     Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
                     Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                    # # Xs_batch[1::nb_versions] needs to be corrupted
-                    # Xs_batch[1::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
-                    # Xp_batch[1::nb_versions] = Xp_shuf[batch_start:batch_end]
-                    # Xo_batch[1::nb_versions] = Xo_shuf[batch_start:batch_end]
-                    #
-                    # # Xo_batch[2::nb_versions] needs to be corrupted
-                    # Xs_batch[2::nb_versions] = Xs_shuf[batch_start:batch_end]
-                    # Xp_batch[2::nb_versions] = Xp_shuf[batch_start:batch_end]
-                    # Xo_batch[2::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                    # Xs_batch[1::nb_versions] needs to be corrupted
+                    Xs_batch[1::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                    Xp_batch[1::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[1::nb_versions] = Xo_shuf[batch_start:batch_end]
+
+                    # Xo_batch[2::nb_versions] needs to be corrupted
+                    Xs_batch[2::nb_versions] = Xs_shuf[batch_start:batch_end]
+                    Xp_batch[2::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[2::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
 
                     loss_args = {
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
-                        self.y_inputs: np.array([1.0] * curr_batch_size)
-                        # self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
+                        self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
                     }
 
 

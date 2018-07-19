@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base2.py" afterPath="$PROJECT_DIR$/vkge/base2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/non_probabilistic.py" afterPath="$PROJECT_DIR$/vkge/non_probabilistic.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -83,8 +82,8 @@
       <file leaf-file-name="non_probabilistic.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-35">
-              <caret line="278" column="23" lean-forward="false" selection-start-line="278" selection-start-column="23" selection-end-line="278" selection-end-column="23" />
+            <state relative-caret-position="700">
+              <caret line="355" column="102" lean-forward="true" selection-start-line="347" selection-start-column="20" selection-end-line="355" selection-end-column="102" />
               <folding>
                 <element signature="e#14#32#0" expanded="true" />
               </folding>
@@ -95,8 +94,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="32" />
+            <state relative-caret-position="345">
+              <caret line="23" column="31" lean-forward="false" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="31" />
               <folding>
                 <element signature="e#25#48#0" expanded="true" />
               </folding>
@@ -141,10 +140,10 @@
       <find>summary</find>
       <find>_setup_summaries</find>
       <find>logger</find>
-      <find>projection</find>
       <find>training_step</find>
-      <find>batch</find>
       <find>alt_opt</find>
+      <find>batch</find>
+      <find>projection</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -155,9 +154,9 @@
       <replace>sig_min</replace>
       <replace>self.output_true</replace>
       <replace>self.layer_1</replace>
-      <replace>_saver</replace>
       <replace>logger.warn</replace>
       <replace>nb_versions</replace>
+      <replace>_saver</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -407,13 +406,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00481" summary="upload GenieAI">
-      <created>1531472796109</created>
-      <option name="number" value="00481" />
-      <option name="presentableId" value="LOCAL-00481" />
-      <option name="project" value="LOCAL" />
-      <updated>1531472796109</updated>
     </task>
     <task id="LOCAL-00482" summary="upload GenieAI">
       <created>1531472850223</created>
@@ -751,7 +743,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532024011505</updated>
     </task>
-    <option name="localTasksCounter" value="530" />
+    <task id="LOCAL-00530" summary="testing non probabilistic model">
+      <created>1532024933558</created>
+      <option name="number" value="00530" />
+      <option name="presentableId" value="LOCAL-00530" />
+      <option name="project" value="LOCAL" />
+      <updated>1532024933560</updated>
+    </task>
+    <option name="localTasksCounter" value="531" />
     <servers />
   </component>
   <component name="TodoView">
@@ -837,7 +836,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in ComplEX" />
     <MESSAGE value="added in GlobalStep" />
     <MESSAGE value="added in multiple datasets, scoring functions, additional modulairty including gradient tracking" />
     <MESSAGE value="fixed job script" />
@@ -862,7 +860,8 @@
     <MESSAGE value="fixed sigma init" />
     <MESSAGE value="Add in sampling evaluation method or mean evaluation method" />
     <MESSAGE value="Added in all possible negative samples" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added in all possible negative samples" />
+    <MESSAGE value="testing non probabilistic model" />
+    <option name="LAST_COMMIT_MESSAGE" value="testing non probabilistic model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1208,16 +1207,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="32" />
-          <folding>
-            <element signature="e#25#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/script_baseline.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="636">
@@ -1270,10 +1259,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="31" lean-forward="false" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="31" />
+          <folding>
+            <element signature="e#25#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-35">
-          <caret line="278" column="23" lean-forward="false" selection-start-line="278" selection-start-column="23" selection-end-line="278" selection-end-column="23" />
+        <state relative-caret-position="700">
+          <caret line="355" column="102" lean-forward="true" selection-start-line="347" selection-start-column="20" selection-end-line="355" selection-end-column="102" />
           <folding>
             <element signature="e#14#32#0" expanded="true" />
           </folding>
