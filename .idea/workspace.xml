@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="Add in sampling evaluation method or mean evaluation method">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="Added in all possible negative samples">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base2.py" afterPath="$PROJECT_DIR$/vkge/base2.py" />
     </list>
@@ -54,8 +54,8 @@
       <file leaf-file-name="base2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="571" column="47" lean-forward="false" selection-start-line="571" selection-start-column="47" selection-end-line="571" selection-end-column="47" />
+            <state relative-caret-position="300">
+              <caret line="626" column="62" lean-forward="false" selection-start-line="626" selection-start-column="62" selection-end-line="626" selection-end-column="62" />
               <folding>
                 <element signature="e#442#634#0" expanded="false" />
                 <element signature="e#679#799#0" expanded="false" />
@@ -407,13 +407,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00478" summary="upload GenieAI">
-      <created>1531472471749</created>
-      <option name="number" value="00478" />
-      <option name="presentableId" value="LOCAL-00478" />
-      <option name="project" value="LOCAL" />
-      <updated>1531472471749</updated>
-    </task>
     <task id="LOCAL-00479" summary="upload GenieAI">
       <created>1531472548972</created>
       <option name="number" value="00479" />
@@ -750,7 +743,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532022387570</updated>
     </task>
-    <option name="localTasksCounter" value="527" />
+    <task id="LOCAL-00527" summary="Added in all possible negative samples">
+      <created>1532023322536</created>
+      <option name="number" value="00527" />
+      <option name="presentableId" value="LOCAL-00527" />
+      <option name="project" value="LOCAL" />
+      <updated>1532023322541</updated>
+    </task>
+    <option name="localTasksCounter" value="528" />
     <servers />
   </component>
   <component name="TodoView">
@@ -836,7 +836,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in embedding tensorboard" />
     <MESSAGE value="added in ComplEX" />
     <MESSAGE value="added in GlobalStep" />
     <MESSAGE value="added in multiple datasets, scoring functions, additional modulairty including gradient tracking" />
@@ -861,7 +860,8 @@
     <MESSAGE value="fixed initsig from tf to np operations" />
     <MESSAGE value="fixed sigma init" />
     <MESSAGE value="Add in sampling evaluation method or mean evaluation method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add in sampling evaluation method or mean evaluation method" />
+    <MESSAGE value="Added in all possible negative samples" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added in all possible negative samples" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1267,8 +1267,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="571" column="47" lean-forward="false" selection-start-line="571" selection-start-column="47" selection-end-line="571" selection-end-column="47" />
+        <state relative-caret-position="300">
+          <caret line="626" column="62" lean-forward="false" selection-start-line="626" selection-start-column="62" selection-end-line="626" selection-end-column="62" />
           <folding>
             <element signature="e#442#634#0" expanded="false" />
             <element signature="e#679#799#0" expanded="false" />
