@@ -624,7 +624,7 @@ class VKGE_justified:
 
                     # vec_neglabels=[int(1)]+([int(0)]*(int(nb_versions-1)))
 
-                for d in [1]: #just put here so that it works
+                for d in range((1)): #just put here so that it works
                     logger.warn("batch size is {}".format(Xs_batch.shape))
                     #
                     # loss_args = {
