@@ -38,7 +38,7 @@ def to_cmd(c):
               '--dataset {} ' \
               '--alt_updates {} ' \
               '--lr {} ' \
-              '--file_name {} ' \
+              '--mean_c {} ' \
               '--score_func {}' \
               '--alt_opt {}' \
         .format(path,
@@ -51,7 +51,8 @@ def to_cmd(c):
                 c['w6'],
                 c['w7'],
                 c['w8'],
-                ("{}/logs/180718/tb_nvkg.{}".format(path, summary(c))),
+                c['w11'],
+                # ("{}/logs/180718/tb_nvkg.{}".format(path, summary(c))),
                 c['w9'],
                 c['w10'])
     return command
@@ -67,11 +68,12 @@ def main(_):
         w0=[0],
         w1=[1],
         w2=[1e-3,1e-5,1e-7], #
-        w3=[50,100,150,200,250,300],
-        w6 = ['nations'],
+        w3=[10,20,30,40,50,100,150,200,250,300],
+        w6 = ['fb15k-237','kinship','nations','umls','wn18','wn18rr'],
         w7=[True,False],
         w8=[0.1,0.01,0.001,0.0001],
         w9=['DistMult'],
+        w11=[1,2,3,4,5,6,7],
         w10=[True]
     )
 
