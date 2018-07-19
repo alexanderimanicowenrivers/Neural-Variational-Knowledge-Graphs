@@ -105,7 +105,7 @@ class VKGE_justified:
 
         # sigma = tf.log(1 + tf.exp(log_sigma_square))
 
-        sig_max = np.exp(np.sqrt(1.0/embedding_size*1.0))
+        sig_max = np.exp((1.0/embedding_size*1.0)**2)
 
         # sig_max = np.log(np.exp(1.0/embedding_size*1.0)-1)
         sig_min = sig_max
