@@ -82,8 +82,8 @@
       <file leaf-file-name="non_probabilistic.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="700">
-              <caret line="355" column="102" lean-forward="true" selection-start-line="347" selection-start-column="20" selection-end-line="355" selection-end-column="102" />
+            <state relative-caret-position="30">
+              <caret line="278" column="23" lean-forward="false" selection-start-line="278" selection-start-column="23" selection-end-line="278" selection-end-column="23" />
               <folding>
                 <element signature="e#14#32#0" expanded="true" />
               </folding>
@@ -406,13 +406,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00482" summary="upload GenieAI">
-      <created>1531472850223</created>
-      <option name="number" value="00482" />
-      <option name="presentableId" value="LOCAL-00482" />
-      <option name="project" value="LOCAL" />
-      <updated>1531472850223</updated>
     </task>
     <task id="LOCAL-00483" summary="upload GenieAI">
       <created>1531472901343</created>
@@ -750,7 +743,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532024933560</updated>
     </task>
-    <option name="localTasksCounter" value="531" />
+    <task id="LOCAL-00531" summary="testing non probabilistic model with no neg sampling">
+      <created>1532025267987</created>
+      <option name="number" value="00531" />
+      <option name="presentableId" value="LOCAL-00531" />
+      <option name="project" value="LOCAL" />
+      <updated>1532025267987</updated>
+    </task>
+    <option name="localTasksCounter" value="532" />
     <servers />
   </component>
   <component name="TodoView">
@@ -836,7 +836,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in GlobalStep" />
     <MESSAGE value="added in multiple datasets, scoring functions, additional modulairty including gradient tracking" />
     <MESSAGE value="fixed job script" />
     <MESSAGE value="fixed complex set up" />
@@ -861,7 +860,8 @@
     <MESSAGE value="Add in sampling evaluation method or mean evaluation method" />
     <MESSAGE value="Added in all possible negative samples" />
     <MESSAGE value="testing non probabilistic model" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing non probabilistic model" />
+    <MESSAGE value="testing non probabilistic model with no neg sampling" />
+    <option name="LAST_COMMIT_MESSAGE" value="testing non probabilistic model with no neg sampling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1271,8 +1271,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="355" column="102" lean-forward="true" selection-start-line="347" selection-start-column="20" selection-end-line="355" selection-end-column="102" />
+        <state relative-caret-position="30">
+          <caret line="278" column="23" lean-forward="false" selection-start-line="278" selection-start-column="23" selection-end-line="278" selection-end-column="23" />
           <folding>
             <element signature="e#14#32#0" expanded="true" />
           </folding>
