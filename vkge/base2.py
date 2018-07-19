@@ -586,16 +586,15 @@ class VKGE_justified:
                     merge = tf.summary.merge_all()  # for TB
 
                     if self.alt_updates:
-                        summary, _, elbo_value0 = session.run([merge, self.training_step1],
+                        summary, _ = session.run([merge, self.training_step1],
                                                              feed_dict=loss_args)
-                        summary, _, elbo_value1 = session.run([merge, self.training_step2],
+                        summary, _ = session.run([merge, self.training_step2],
                                                              feed_dict=loss_args)
-                        summary, _, elbo_value2 = session.run([merge, self.training_step3],
+                        summary, _ = session.run([merge, self.training_step3],
                                                              feed_dict=loss_args)
-                        summary, _, elbo_value3 = session.run([merge, self.training_step4],
+                        summary, _, elbo_value = session.run([merge, self.training_step4, self.elbo],
                                                              feed_dict=loss_args)
 
-                        elbo_value=elbo_value0+elbo_value1+elbo_value2+elbo_value3
 
                     else:
                         summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
