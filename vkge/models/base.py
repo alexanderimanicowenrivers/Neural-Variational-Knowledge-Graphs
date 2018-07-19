@@ -82,7 +82,6 @@ class BilinearModel(BaseModel):
         :return: (batch_size) Tensor containing the scores associated by the models to the walks.
         """
         es, emb_size = tf.expand_dims(self.subject_embeddings, 1), tf.shape(self.subject_embeddings)[1]
-
         W = tf.reshape(self.predicate_embeddings, (-1, emb_size, emb_size))
         sW = tf.matmul(es, W)[:, 0, :]
         return tf.reduce_sum(sW * self.object_embeddings, axis=1)

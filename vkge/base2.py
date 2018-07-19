@@ -586,11 +586,11 @@ class VKGE_justified:
                     logger.warn('Begin training ')
 
                     if self.alt_updates:
-                         _ = session.run([ self.training_step1],
+                        _ = session.run([ self.training_step1],
                                                              feed_dict=loss_args)
-                         _ = session.run([ self.training_step2],
+                        _ = session.run([ self.training_step2],
                                                              feed_dict=loss_args)
-                         _ = session.run([ self.training_step3],
+                        _ = session.run([ self.training_step3],
                                                              feed_dict=loss_args)
                         summary, _, elbo_value = session.run([merge, self.training_step4, self.elbo],
                                                              feed_dict=loss_args)
