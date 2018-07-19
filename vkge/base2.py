@@ -527,7 +527,7 @@ class VKGE_justified:
 
 
 
-            train_writer = tf.summary.FileWriter(filename, session.graph)
+            # train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
 

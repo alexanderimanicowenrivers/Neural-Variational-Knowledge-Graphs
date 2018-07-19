@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base2.py" afterPath="$PROJECT_DIR$/vkge/base2.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,8 +42,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="257" column="12" lean-forward="false" selection-start-line="256" selection-start-column="8" selection-end-line="257" selection-end-column="12" />
+            <state relative-caret-position="-1269">
+              <caret line="416" column="45" lean-forward="false" selection-start-line="416" selection-start-column="45" selection-end-line="416" selection-end-column="45" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -53,8 +54,8 @@
       <file leaf-file-name="base2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="475" column="48" lean-forward="true" selection-start-line="475" selection-start-column="48" selection-end-line="475" selection-end-column="48" />
+            <state relative-caret-position="108">
+              <caret line="520" column="10" lean-forward="true" selection-start-line="520" selection-start-column="0" selection-end-line="521" selection-end-column="0" />
               <folding>
                 <element signature="e#442#634#0" expanded="false" />
                 <element signature="e#679#799#0" expanded="false" />
@@ -142,16 +143,16 @@
       <find>filename</find>
       <find>projection</find>
       <find>output_true</find>
-      <find>train_writer</find>
       <find>print</find>
       <find>nb_versions</find>
       <find>rint</find>
       <find>kl_in</find>
       <find>_saver</find>
       <find>batch</find>
-      <find>logger</find>
       <find>_setup_training</find>
       <find>session.run</find>
+      <find>logger</find>
+      <find>train_writer</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -162,8 +163,8 @@
       <replace>sig_min</replace>
       <replace>self.output_true</replace>
       <replace>self.layer_1</replace>
-      <replace>_saver</replace>
       <replace>logger.warn</replace>
+      <replace>_saver</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -413,13 +414,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00464" summary="upload GenieAI">
-      <created>1531470382893</created>
-      <option name="number" value="00464" />
-      <option name="presentableId" value="LOCAL-00464" />
-      <option name="project" value="LOCAL" />
-      <updated>1531470382894</updated>
     </task>
     <task id="LOCAL-00465" summary="upload GenieAI">
       <created>1531470885397</created>
@@ -757,7 +751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531997536088</updated>
     </task>
-    <option name="localTasksCounter" value="513" />
+    <task id="LOCAL-00513" summary="fixed sigma init">
+      <created>1531998656692</created>
+      <option name="number" value="00513" />
+      <option name="presentableId" value="LOCAL-00513" />
+      <option name="project" value="LOCAL" />
+      <updated>1531998656694</updated>
+    </task>
+    <option name="localTasksCounter" value="514" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1244,16 +1245,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="257" column="12" lean-forward="false" selection-start-line="256" selection-start-column="8" selection-end-line="257" selection-end-column="12" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="667">
@@ -1272,10 +1263,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1269">
+          <caret line="416" column="45" lean-forward="false" selection-start-line="416" selection-start-column="45" selection-end-line="416" selection-end-column="45" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="475" column="48" lean-forward="true" selection-start-line="475" selection-start-column="48" selection-end-line="475" selection-end-column="48" />
+        <state relative-caret-position="108">
+          <caret line="520" column="10" lean-forward="true" selection-start-line="520" selection-start-column="0" selection-end-line="521" selection-end-column="0" />
           <folding>
             <element signature="e#442#634#0" expanded="false" />
             <element signature="e#679#799#0" expanded="false" />
