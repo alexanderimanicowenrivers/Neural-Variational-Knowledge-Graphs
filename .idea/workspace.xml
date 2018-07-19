@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base2.py" afterPath="$PROJECT_DIR$/vkge/base2.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,8 +53,8 @@
       <file leaf-file-name="base2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="594" column="89" lean-forward="false" selection-start-line="594" selection-start-column="89" selection-end-line="594" selection-end-column="89" />
+            <state relative-caret-position="348">
+              <caret line="475" column="48" lean-forward="true" selection-start-line="475" selection-start-column="48" selection-end-line="475" selection-end-column="48" />
               <folding>
                 <element signature="e#442#634#0" expanded="false" />
                 <element signature="e#679#799#0" expanded="false" />
@@ -123,7 +122,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>maxepoch</find>
       <find>mr</find>
       <find>mean_rank</find>
       <find>$SGE_TASK_ID</find>
@@ -153,6 +151,7 @@
       <find>batch</find>
       <find>logger</find>
       <find>_setup_training</find>
+      <find>session.run</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -414,13 +413,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00463" summary="upload GenieAI">
-      <created>1531470368382</created>
-      <option name="number" value="00463" />
-      <option name="presentableId" value="LOCAL-00463" />
-      <option name="project" value="LOCAL" />
-      <updated>1531470368382</updated>
     </task>
     <task id="LOCAL-00464" summary="upload GenieAI">
       <created>1531470382893</created>
@@ -758,7 +750,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531997306144</updated>
     </task>
-    <option name="localTasksCounter" value="512" />
+    <task id="LOCAL-00512" summary="fixed sigma init">
+      <created>1531997536087</created>
+      <option name="number" value="00512" />
+      <option name="presentableId" value="LOCAL-00512" />
+      <option name="project" value="LOCAL" />
+      <updated>1531997536088</updated>
+    </task>
+    <option name="localTasksCounter" value="513" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1275,8 +1274,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="594" column="89" lean-forward="false" selection-start-line="594" selection-start-column="89" selection-end-line="594" selection-end-column="89" />
+        <state relative-caret-position="348">
+          <caret line="475" column="48" lean-forward="true" selection-start-line="475" selection-start-column="48" selection-end-line="475" selection-end-column="48" />
           <folding>
             <element signature="e#442#634#0" expanded="false" />
             <element signature="e#679#799#0" expanded="false" />
