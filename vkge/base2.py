@@ -100,8 +100,7 @@ class VKGE_justified:
         self.score_func=score_func
         self.alt_updates=alt_updates
         self.negsamples=negsamples
-
-
+        self.alt_opt=alt_opt
 
         # sigma = tf.log(1 + tf.exp(log_sigma_square))
 
