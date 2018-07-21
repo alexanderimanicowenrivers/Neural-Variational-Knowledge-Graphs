@@ -27,6 +27,7 @@ flags.DEFINE_boolean("alt_opt", True, "Define the use of means or samples at tes
 flags.DEFINE_string("score_func", 'DistMult', "Defines score function [dismult]")
 flags.DEFINE_float("lr", 0.1, "Choose optimiser loss, select the margin for hinge loss [1]")
 flags.DEFINE_integer("negsamples", 0, "Number of negative samples [0]")
+flags.DEFINE_integer("samples_perdp", 1, "Number of noise samples used per datapoint [1]")
 FLAGS = flags.FLAGS
 
 
@@ -40,7 +41,7 @@ def main(_):
 
     vkge.VKGE_justified(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,epsilon=FLAGS.epsilon, alt_cost=FLAGS.alt_cost, no_batches=FLAGS.no_batches,
               static_mean=FLAGS.static_mean, dataset=FLAGS.dataset, sigma_alt=FLAGS.Sigma_alt,negsamples=FLAGS.negsamples,
-              lr=FLAGS.lr, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt, projection=FLAGS.projection,  score_func=FLAGS.score_func,alt_updates=FLAGS.alt_updates)
+              lr=FLAGS.lr, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt, projection=FLAGS.projection,  score_func=FLAGS.score_func,alt_updates=FLAGS.alt_updates,nosamps=FLAGS.samples_perdp)
 
 
 if __name__ == '__main__':

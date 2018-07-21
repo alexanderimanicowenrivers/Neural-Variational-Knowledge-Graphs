@@ -93,7 +93,7 @@ class VKGE_justified:
 
     def __init__(self, file_name, score_func='dismult', static_mean=False, embedding_size=50, no_batches=10, mean_c=0.1,
                  epsilon=1e-3,negsamples=0,
-                 alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True, projection=True,alt_updates=False):
+                 alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True, projection=True,alt_updates=False,nosamps=1):
         super().__init__()
 
         self.sigma_alt = sigma_alt
@@ -101,7 +101,7 @@ class VKGE_justified:
         self.alt_updates=alt_updates
         self.negsamples=negsamples
         self.alt_opt=alt_opt
-
+        self.nosamps=nosamps
         # sigma = tf.log(1 + tf.exp(log_sigma_square))
 
         sig_max = np.exp((1.0/embedding_size*1.0)**2)
@@ -265,15 +265,17 @@ class VKGE_justified:
         sigma = tf.sqrt(tf.exp(log_sigma_square))
 
         embedding_size = mu.get_shape()[1].value
-        eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
-        return mu + sigma * eps
+        # eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
+        eps = tf.random_normal((self.no_samples, embedding_size), 0, 1, dtype=tf.float32)
+
+        return tf.reshape(tf.add(mu,tf.matmul(sigma, eps)),shape=[-1,embedding_size])
 
     def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
                     sig_max, pred_sig):
         """
                         Constructs Model
         """
-
+        self.no_samples = tf.placeholder(tf.int32)
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
@@ -292,7 +294,7 @@ class VKGE_justified:
         self.e_objective2 = 0.0
         self.e_objective3 = 0.0
 
-        self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
+        self.g_objective = (1.0/self.no_samples)* -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
         # ####################################  Weight uncertainity in NN's
 
@@ -597,6 +599,7 @@ class VKGE_justified:
                     # }
 
                     loss_args = {
+                        self.no_samples:2,
                         self.KL_discount: 1.0,
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
@@ -717,60 +720,60 @@ class VKGE_justified:
             #
             # logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20],samp1_sig[:20]))
 
-            logger.warn('Beginning test phase')
+                    logger.warn('Beginning test phase')
 
 
-            eval_name = 'test'
-            eval_triples = test_triples
-            ranks_subj, ranks_obj = [], []
-            filtered_ranks_subj, filtered_ranks_obj = [], []
+                    eval_name = 'test'
+                    eval_triples = test_triples
+                    ranks_subj, ranks_obj = [], []
+                    filtered_ranks_subj, filtered_ranks_obj = [], []
 
-            for _i, (s, p, o) in enumerate(eval_triples):
-                s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], self.entity_to_idx[o]
+                    for _i, (s, p, o) in enumerate(eval_triples):
+                        s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], self.entity_to_idx[o]
 
-                Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
-                Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
-                Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
+                        Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
+                        Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
+                        Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
 
-                feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities), self.p_inputs: Xp_v,
-                                          self.o_inputs: Xo_v}
-                feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
-                                         self.o_inputs: np.arange(self.nb_entities)}
+                        feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities), self.p_inputs: Xp_v,
+                                                  self.o_inputs: Xo_v}
+                        feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
+                                                 self.o_inputs: np.arange(self.nb_entities)}
 
-                # scores of (1, p, o), (2, p, o), .., (N, p, o)
-                scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
+                        # scores of (1, p, o), (2, p, o), .., (N, p, o)
+                        scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
 
-                # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
+                        # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                        scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
 
-                ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+                        ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                        ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
-                filtered_scores_subj = scores_subj.copy()
-                filtered_scores_obj = scores_obj.copy()
+                        filtered_scores_subj = scores_subj.copy()
+                        filtered_scores_obj = scores_obj.copy()
 
-                rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
-                            fs != s and fp == p and fo == o]
-                rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
-                            fs == s and fp == p and fo != o]
+                        rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
+                                    fs != s and fp == p and fo == o]
+                        rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
+                                    fs == s and fp == p and fo != o]
 
-                filtered_scores_subj[rm_idx_s] = - np.inf
-                filtered_scores_obj[rm_idx_o] = - np.inf
+                        filtered_scores_subj[rm_idx_s] = - np.inf
+                        filtered_scores_obj[rm_idx_o] = - np.inf
 
-                filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
+                        filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                        filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
-            filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
-            ranks = ranks_subj + ranks_obj
+                    filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
+                    ranks = ranks_subj + ranks_obj
 
-            for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
-                mean_rank = np.mean(setting_ranks)
-                logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
-                for k in [1, 3, 5, 10]:
-                    hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
-                    logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
-#save embeddings
+                    for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
+                        mean_rank = np.mean(setting_ranks)
+                        logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
+                        for k in [1, 3, 5, 10]:
+                            hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                            logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+        #save embeddings
 
-            # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
-            # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
-            # np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
+                    # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
+                    # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
+                    # np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")

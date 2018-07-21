@@ -73,8 +73,8 @@ def main(_):
         w7=[False],
         w8=[0.1],
         w9=['DistMult'],
-        w11=[1,3,5,7],
-        w10=[True,False]
+        w11=[6],
+        w10=[True]
     )
 
     configurations = cartesian_product(hyperparameters_space)
