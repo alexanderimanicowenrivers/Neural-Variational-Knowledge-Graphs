@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="no neg samples">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main2.py" afterPath="$PROJECT_DIR$/main2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_quicktest.py" afterPath="$PROJECT_DIR$/script_quicktest.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base2.py" afterPath="$PROJECT_DIR$/vkge/base2.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -56,8 +53,8 @@
       <file leaf-file-name="base2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="605">
-              <caret line="599" column="0" lean-forward="true" selection-start-line="599" selection-start-column="0" selection-end-line="599" selection-end-column="0" />
+            <state relative-caret-position="575">
+              <caret line="597" column="50" lean-forward="true" selection-start-line="597" selection-start-column="0" selection-end-line="598" selection-end-column="0" />
               <folding>
                 <element signature="e#679#799#0" expanded="false" />
                 <element signature="e#842#996#0" expanded="false" />
@@ -397,13 +394,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00485" summary="upload GenieAI">
-      <created>1531473101482</created>
-      <option name="number" value="00485" />
-      <option name="presentableId" value="LOCAL-00485" />
-      <option name="project" value="LOCAL" />
-      <updated>1531473101482</updated>
-    </task>
     <task id="LOCAL-00486" summary="upload GenieAI">
       <created>1531473806516</created>
       <option name="number" value="00486" />
@@ -740,7 +730,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532026726795</updated>
     </task>
-    <option name="localTasksCounter" value="534" />
+    <task id="LOCAL-00534" summary="added in dynamic sampling">
+      <created>1532194434493</created>
+      <option name="number" value="00534" />
+      <option name="presentableId" value="LOCAL-00534" />
+      <option name="project" value="LOCAL" />
+      <updated>1532194434498</updated>
+    </task>
+    <option name="localTasksCounter" value="535" />
     <servers />
   </component>
   <component name="TodoView">
@@ -826,7 +823,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed job script" />
     <MESSAGE value="fixed complex set up" />
     <MESSAGE value="fixed score_func assignment" />
     <MESSAGE value="fixed train variables" />
@@ -851,7 +847,8 @@
     <MESSAGE value="testing non probabilistic model" />
     <MESSAGE value="testing non probabilistic model with no neg sampling" />
     <MESSAGE value="no neg samples" />
-    <option name="LAST_COMMIT_MESSAGE" value="no neg samples" />
+    <MESSAGE value="added in dynamic sampling" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in dynamic sampling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1255,8 +1252,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
-          <caret line="599" column="0" lean-forward="true" selection-start-line="599" selection-start-column="0" selection-end-line="599" selection-end-column="0" />
+        <state relative-caret-position="575">
+          <caret line="597" column="50" lean-forward="true" selection-start-line="597" selection-start-column="0" selection-end-line="598" selection-end-column="0" />
           <folding>
             <element signature="e#679#799#0" expanded="false" />
             <element signature="e#842#996#0" expanded="false" />
