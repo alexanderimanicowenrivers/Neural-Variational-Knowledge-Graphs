@@ -294,7 +294,7 @@ class VKGE_justified:
         self.e_objective2 = 0.0
         self.e_objective3 = 0.0
 
-        self.g_objective = (1.0/self.no_samples)* -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
+        self.g_objective = (1.0/tf.cast(self.no_samples,tf.float32))* -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
         # ####################################  Weight uncertainity in NN's
 
