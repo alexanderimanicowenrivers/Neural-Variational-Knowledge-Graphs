@@ -27,7 +27,7 @@ flags.DEFINE_boolean("alt_opt", True, "Define the use of means or samples at tes
 flags.DEFINE_string("score_func", 'DistMult', "Defines score function [dismult]")
 flags.DEFINE_float("lr", 0.1, "Choose optimiser loss, select the margin for hinge loss [1]")
 flags.DEFINE_integer("negsamples", 0, "Number of negative samples [0]")
-flags.DEFINE_integer("samples_perdp", 1, "Number of noise samples used per datapoint [1]")
+flags.DEFINE_float("samples_perdp", 1, "Number of noise samples used per datapoint [1]")
 FLAGS = flags.FLAGS
 
 

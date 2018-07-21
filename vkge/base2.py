@@ -101,7 +101,7 @@ class VKGE_justified:
         self.alt_updates=alt_updates
         self.negsamples=negsamples
         self.alt_opt=alt_opt
-        self.nosamps=nosamps
+        self.nosamps=int(nosamps)
         # sigma = tf.log(1 + tf.exp(log_sigma_square))
 
         sig_max = np.exp((1.0/embedding_size*1.0)**2)
