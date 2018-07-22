@@ -168,7 +168,7 @@ class VKGE_justified:
         self.nb_epochs = 500
 
 
-        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,
+        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
 
     @staticmethod
@@ -212,7 +212,7 @@ class VKGE_justified:
                     self.variable_summaries(self.var1_1)
 
                 with tf.name_scope('Entity1_logStd'):
-                    self.variable_summaries(self.var1_2)
+                    self.variable_summaries(tf.sqrt(tf.exp(self.var1_2)))
 
             with tf.name_scope('Predicate1'):
                 self.var2_1 = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.var2)
@@ -222,7 +222,7 @@ class VKGE_justified:
                     self.variable_summaries(self.var2_1)
 
                 with tf.name_scope('Predicate1_logStd'):
-                    self.variable_summaries(self.var2_2)
+                    self.variable_summaries(tf.sqrt(tf.exp(self.var2_2)))
 
     def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=None):
         global_step = tf.train.get_global_step()
@@ -256,28 +256,39 @@ class VKGE_justified:
 
     def sample_embedding(self, mu, log_sigma_square):
         """
-                Samples from embeddings
-        """
-        # if self.sigma_alt:
-        # sigma = tf.log(1 + tf.exp(log_sigma_square))
-        # else:
-        #
-
-        sigma = tf.sqrt(tf.exp(log_sigma_square))
+                        Samples from embeddings
+                """
+        if self.sigma_alt:
+            sigma = tf.log(1 + tf.exp(log_sigma_square))
+        else:
+            sigma = tf.sqrt(tf.exp(log_sigma_square))
 
         embedding_size = mu.get_shape()[1].value
-        # eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
-        eps = tf.random_normal((self.no_samples, embedding_size), 0, 1, dtype=tf.float32)
-        mu= tf.tile(mu,self.no_samples)
-        sigma=tf.tile(sigma,self.no_samples)
 
-        return tf.add(mu,tf.matmul(sigma, eps))
+        self.eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
+
+        return mu+sigma*self.eps
+
+    def sample_embedding_ptriple(self, mu, log_sigma_square):
+        """
+                        Samples from embeddings
+                """
+        if self.sigma_alt:
+            sigma = tf.log(1 + tf.exp(log_sigma_square))
+        else:
+            sigma = tf.sqrt(tf.exp(log_sigma_square))
+
+
+
+        return mu+sigma*self.noise
 
     def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
                     sig_max, pred_sig):
         """
                         Constructs Model
         """
+        self.noise = tf.placeholder(tf.float32, shape=[None,entity_embedding_size])
+
         self.no_samples = tf.placeholder(tf.int32)
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
@@ -422,11 +433,12 @@ class VKGE_justified:
 
             with tf.variable_scope('Decoder'):
 
-                self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
-                self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
-                self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
+                self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
+                self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
+                self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
 
 
+                # self.h_s2 = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
 
 
     def build_decoder(self):
@@ -492,13 +504,15 @@ class VKGE_justified:
             tf.summary.scalar('min', tf.reduce_min(var))
             tf.summary.histogram('histogram', var)
 
+
+
     def stats(self, values):
         """
                                 Return mean and variance statistics
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, valid_triples, train_triples, no_batches, session=0, nb_epochs=500, unit_cube=True,
+    def train(self, test_triples, valid_triples, train_triples, entity_embedding_size,no_batches, session=0, nb_epochs=500, unit_cube=True,
               filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
 
@@ -523,6 +537,8 @@ class VKGE_justified:
         nb_samples = Xs.shape[0]
         nb_batches = no_batches
         batch_size = math.ceil(nb_samples / nb_batches)
+
+        self.batch_size=batch_size
 
         batches = make_batches(self.nb_examples, batch_size)
 
@@ -600,6 +616,7 @@ class VKGE_justified:
                     #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
                     #     self.epoch_d: kl_inc_val
                     # }
+                    noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
 
                     loss_args = {
                         self.no_samples:2,
@@ -608,7 +625,8 @@ class VKGE_justified:
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size),
-                        self.epoch_d: 1.0
+                        self.epoch_d: 1.0,
+                        self.noise:noise
                     }
 
                     merge = tf.summary.merge_all()  # for TB
@@ -628,6 +646,9 @@ class VKGE_justified:
                     else:
                         summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
                                                          feed_dict=loss_args)
+                        # h_s = session.run(self.h_s2,
+                        #                                  feed_dict=loss_args)
+                        # logger.warn('Shape : {0}'.format(h_s.shape))
 
                     # tensorboard
 
