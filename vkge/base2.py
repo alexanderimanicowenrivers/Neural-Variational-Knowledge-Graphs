@@ -262,13 +262,16 @@ class VKGE_justified:
         # sigma = tf.log(1 + tf.exp(log_sigma_square))
         # else:
         #
+
         sigma = tf.sqrt(tf.exp(log_sigma_square))
 
         embedding_size = mu.get_shape()[1].value
         # eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
         eps = tf.random_normal((self.no_samples, embedding_size), 0, 1, dtype=tf.float32)
+        mu= tf.tile(mu,self.no_samples)
+        sigma=tf.tile(sigma,self.no_samples)
 
-        return tf.reshape(tf.add(mu,tf.matmul(sigma, eps)),shape=[-1,embedding_size])
+        return tf.add(mu,tf.matmul(sigma, eps))
 
     def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
                     sig_max, pred_sig):
