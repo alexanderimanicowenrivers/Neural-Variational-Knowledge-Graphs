@@ -65,12 +65,12 @@ def main(_):
     hyperparameters_space = dict(
         w1=[1,10,100],
         w2=[1e-3,1e-5,1e-7], #
-        w3=[10,20,30,40,50,100,200],
+        w3=[10,20,50,100,200],
         w6 = ['kinship','nations','umls'],
         w7=[True,False],
         w8=[0.1,0.001,0.00001],
         w9=['TransE', 'DistMult', 'ComplEx'],
-        w11=[1,3,5,7],
+        w11=[1,3,5],
         w10=[True]
     )
 
