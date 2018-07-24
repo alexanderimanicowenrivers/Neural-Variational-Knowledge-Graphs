@@ -13,6 +13,7 @@ flags.DEFINE_float("mean_c", 6, "Constant for mean embeddings initalisation [0.1
 flags.DEFINE_float("init_sig", 6.0, "Initalised variance of variables [6.0]")
 flags.DEFINE_float("init_sig2", 6.0, "Initalised variance of variables [6.0]")
 flags.DEFINE_float("mog_split", 0.5, "Split between spike and slab [6.0]")
+flags.DEFINE_float("epsilon", 1e-5, "Initalised epsilon of variables [1e-5]")
 flags.DEFINE_integer("embedding_size", 200, "The dimension of graph embeddings [50]")
 flags.DEFINE_integer("no_batches", 10, "Batch Size [14145]")
 flags.DEFINE_boolean("alt_cost", True, "Switch for compression cost to be used in training [True]")
@@ -32,7 +33,7 @@ def main(_):
     vkge.VKGE_simple(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,init_sig=FLAGS.init_sig, alt_cost=FLAGS.alt_cost, no_batches=FLAGS.no_batches,
               static_mean=FLAGS.static_mean, dataset=FLAGS.dataset, sigma_alt=FLAGS.Sigma_alt,
               lr=FLAGS.lr, alt_opt=FLAGS.alt_opt
-              , score_func=FLAGS.score_func)
+              , score_func=FLAGS.score_func,epsilon=FLAGS.epsilon)
 
 
 if __name__ == '__main__':

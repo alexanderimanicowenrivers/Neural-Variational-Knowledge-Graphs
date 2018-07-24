@@ -86,7 +86,7 @@ class VKGE_simple:
             """
     def __init__(self, score_func='dismult', static_mean=False, embedding_size=50, no_batches=10, mean_c=0.1,
                  init_sig=6.0,
-                 alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True):
+                 alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True,epsilon=1e-5):
         super().__init__()
 
         self.sigma_alt = sigma_alt
@@ -144,10 +144,7 @@ class VKGE_simple:
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
-        if alt_opt:
-            optimizer = tf.train.AdagradOptimizer(learning_rate=lr)  # original KG
-        else:
-            optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-05)
+        optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
 
 
 

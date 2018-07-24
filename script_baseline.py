@@ -34,7 +34,7 @@ def to_cmd(c):
               '--mean_c {} ' \
               '--embedding_size {} ' \
               '--dataset {} ' \
-              '--alt_opt {} ' \
+              '--epsilon {} ' \
               '--lr {} ' \
               '--score_func {}' \
         .format(path,
@@ -57,11 +57,11 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[1, 2, 3, 4, 5, 6, 7],
-        w3=[200, 250, 300],
+        w1=[1, 3, 5],
+        w3=[100,200, 300],
         w6=['fb15k-237', 'kinship', 'nations', 'umls', 'wn18', 'wn18rr'],
-        w7=[True, False],
-        w8=[0.1, 0.01],
+        w7=[1e-3,1e-5,1e-7],
+        w8=[0.1,0.001,0.00001],
         w9=['TransE', 'DistMult', 'ComplEx']
     )
 
