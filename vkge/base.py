@@ -93,7 +93,7 @@ class VKGE:
 
     def __init__(self, file_name, score_func='dismult', static_mean=False, embedding_size=50, no_batches=10, mean_c=0.1,
                  epsilon=1e-3,negsamples=0,
-                 alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True, projection=True,alt_updates=False,nosamps=1):
+                 alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True, projection=True,alt_updates=False,nosamps=1,alt_test=True):
         super().__init__()
 
         self.model='ptriple' #decides if we sample per triple or per entity/ predicate/ object
@@ -104,7 +104,8 @@ class VKGE:
         self.alt_opt=alt_opt
         self.nosamps=int(nosamps)
         # sigma = tf.log(1 + tf.exp(log_sigma_square))
-
+        self.no_confidence_samples=1000
+        self.p_threshold=0.8
         sig_max = np.log((1.0/embedding_size*1.0))**2
 
         # sig_max = np.log(np.exp(1.0/embedding_size*1.0)-1)
@@ -286,7 +287,7 @@ class VKGE:
         self.p_inputs = tf.placeholder(tf.int32, shape=[None])
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
         self.y_inputs = tf.placeholder(tf.bool, shape=[None])
-
+        self.alt_test=alt_test
         self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
         self.epoch_d = tf.placeholder(tf.float32)  # starts at 0.5
 
@@ -452,39 +453,26 @@ class VKGE:
                 model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                      object_embeddings=self.h_o)
 
-                if self.alt_opt:
-                    model_test = models.BilinearDiagonalModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
+                model_test = models.BilinearDiagonalModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
                                                            object_embeddings=self.mu_o)
-                else:
-                    model_test=model
             elif self.score_func=='ComplEx':
                 model = models.ComplexModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                      object_embeddings=self.h_o)
 
-                if self.alt_opt:
-                    model_test = models.ComplexModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
+                model_test = models.ComplexModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
                                                           object_embeddings=self.mu_o)
-                else:
-                    model_test = model
+
             elif self.score_func=='TransE':
                 model = models.TranslatingModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                      object_embeddings=self.h_o)
-                if self.alt_opt:
-                    model_test = models.TranslatingModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
+                model_test = models.TranslatingModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
                                                           object_embeddings=self.mu_o)
-                else:
-                    model_test = model
-            elif self.score_func=='RESCAL':
-                model = models.BilinearModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
-                                                     object_embeddings=self.h_o)
-                if self.alt_opt:
-                    model_test = models.BilinearModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
-                                                          object_embeddings=self.mu_o)
-                else:
-                    model_test = model
+
+
             self.scores = model()
             self.scores_test = model_test()
             self.p_x_i = tf.sigmoid(self.scores)
+            self.p_x_i_test = tf.sigmoid(self.scores_test)
 
 
 
@@ -522,6 +510,8 @@ class VKGE:
 
         all_triples = train_triples + valid_triples + test_triples
 
+        len_valid=len(valid_triples)
+        len_test=len(test_triples)
 
         index_gen = index.GlorotIndexGenerator()
 
@@ -697,10 +687,48 @@ class VKGE:
                                                  self.o_inputs: np.arange(self.nb_entities)}
 
                         # scores of (1, p, o), (2, p, o), .., (N, p, o)
+
                         scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
 
-                        # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                            # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
                         scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
+
+                        if self.alt_test in ['test1','test2','test3']: #CORRECTION of scores for confidence TEST1
+
+                            confidence_subj=np.zeros(len_valid)
+
+                            confidence_obj=np.zeros(len_valid)
+
+                            for samp_no in range((self.no_confidence_samples)):
+
+                                scores_subj_c = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
+
+                                confidence_subj+=((scores_subj_c>0.5)/self.no_confidence_samples*1.0)
+
+                                # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                                scores_obj_c = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
+
+                                confidence_obj+=((scores_obj_c>0.5)/self.no_confidence_samples*1.0)
+
+
+
+                        if self.alt_test=='test1': #multiply by probability
+                            scores_subj = scores_subj * confidence_subj
+
+                            scores_obj = scores_obj * confidence_obj
+
+                        elif self.alt_test=='test2': #multiply by binary threshold on variance
+
+                            scores_subj = scores_subj * (confidence_subj>self.p_threshold)
+
+                            scores_obj = scores_obj * (confidence_obj>self.p_threshold)
+
+                        elif self.alt_test=='test3': #multiply by combination of binary threshold and confidence
+
+                            scores_subj = scores_subj * (confidence_subj > self.p_threshold)*confidence_subj
+
+                            scores_obj = scores_obj * (confidence_obj > self.p_threshold)*confidence_subj
+
 
                         ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
                         ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]

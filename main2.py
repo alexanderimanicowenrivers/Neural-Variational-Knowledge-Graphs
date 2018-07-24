@@ -18,6 +18,7 @@ flags.DEFINE_string("file_name", '/home/acowenri/workspace/Neural-Variational-Kn
 flags.DEFINE_integer("no_batches", 10, "Number of batches [10]")
 flags.DEFINE_boolean("alt_updates", True, "Switch between alternating updates in training [True]")
 flags.DEFINE_boolean("alt_cost", True, "Switch for compression cost to be used in training [True]")
+flags.DEFINE_boolean("alt_test", True, "Switch between test for sample confidence and rank filter[True]")
 flags.DEFINE_boolean("static_mean", False,
                      "Switch as to if mean is fixed at 0 or can train with random normal init [False]")
 flags.DEFINE_string("dataset", 'wn18', "Alternate updates around each distribution[wn18]")
@@ -41,7 +42,7 @@ def main(_):
 
     vkge.VKGE(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,epsilon=FLAGS.epsilon, alt_cost=FLAGS.alt_cost, no_batches=FLAGS.no_batches,
               static_mean=FLAGS.static_mean, dataset=FLAGS.dataset, sigma_alt=FLAGS.Sigma_alt,negsamples=FLAGS.negsamples,
-              lr=FLAGS.lr, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt, projection=FLAGS.projection,  score_func=FLAGS.score_func,alt_updates=FLAGS.alt_updates,nosamps=FLAGS.samples_perdp)
+              lr=FLAGS.lr, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt, projection=FLAGS.projection,alt_test=FLAGS.alt_test,  score_func=FLAGS.score_func,alt_updates=FLAGS.alt_updates,nosamps=FLAGS.samples_perdp)
 
 
 if __name__ == '__main__':
