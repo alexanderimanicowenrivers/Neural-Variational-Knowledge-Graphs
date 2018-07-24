@@ -37,6 +37,7 @@ def to_cmd(c):
               '--epsilon {} ' \
               '--lr {} ' \
               '--score_func {}' \
+              '--no_batches {}' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -45,7 +46,8 @@ def to_cmd(c):
                 c['w6'],
                 c['w7'],
                 c['w8'],
-                c['w9']
+                c['w9'],
+                c['w10']
                 )
     return command
 
@@ -62,7 +64,8 @@ def main(_):
         w6=['fb15k-237', 'kinship', 'nations', 'umls', 'wn18', 'wn18rr'],
         w7=[1e-3,1e-5,1e-7],
         w8=[0.1,0.001,0.00001],
-        w9=['TransE', 'DistMult', 'ComplEx']
+        w9=['TransE', 'DistMult', 'ComplEx'],
+        w10=[1,10]
     )
 
     configurations = cartesian_product(hyperparameters_space)
