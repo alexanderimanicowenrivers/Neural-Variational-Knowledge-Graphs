@@ -39,7 +39,7 @@ def main(_):
     #           lr=FLAGS.lr, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt
     #           , projection=FLAGS.projection,  score_func=FLAGS.score_func)
 
-    vkge.VKGE_justified(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,epsilon=FLAGS.epsilon, alt_cost=FLAGS.alt_cost, no_batches=FLAGS.no_batches,
+    vkge.VKGE(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,epsilon=FLAGS.epsilon, alt_cost=FLAGS.alt_cost, no_batches=FLAGS.no_batches,
               static_mean=FLAGS.static_mean, dataset=FLAGS.dataset, sigma_alt=FLAGS.Sigma_alt,negsamples=FLAGS.negsamples,
               lr=FLAGS.lr, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt, projection=FLAGS.projection,  score_func=FLAGS.score_func,alt_updates=FLAGS.alt_updates,nosamps=FLAGS.samples_perdp)
 
