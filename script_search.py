@@ -39,8 +39,8 @@ def to_cmd(c):
               '--alt_updates {} ' \
               '--lr {} ' \
               '--mean_c {} ' \
-              '--score_func {}' \
-              '--alt_opt {}' \
+              '--score_func {} ' \
+              '--alt_opt {} ' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
