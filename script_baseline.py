@@ -36,8 +36,8 @@ def to_cmd(c):
               '--dataset {} ' \
               '--epsilon {} ' \
               '--lr {} ' \
-              '--score_func {}' \
-              '--no_batches {}' \
+              '--score_func {} ' \
+              '--no_batches {} ' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
