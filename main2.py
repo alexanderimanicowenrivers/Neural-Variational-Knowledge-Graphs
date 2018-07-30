@@ -18,7 +18,6 @@ flags.DEFINE_string("file_name", '/home/acowenri/workspace/Neural-Variational-Kn
 flags.DEFINE_integer("no_batches", 10, "Number of batches [10]")
 flags.DEFINE_boolean("alt_updates", True, "Switch between alternating updates in training [True]")
 flags.DEFINE_boolean("alt_cost", True, "Switch for compression cost to be used in training [True]")
-flags.DEFINE_boolean("alt_test", True, "Switch between test for sample confidence and rank filter[True]")
 flags.DEFINE_boolean("static_mean", False,
                      "Switch as to if mean is fixed at 0 or can train with random normal init [False]")
 flags.DEFINE_string("dataset", 'wn18', "Alternate updates around each distribution[wn18]")
@@ -26,6 +25,7 @@ flags.DEFINE_boolean("Sigma_alt", True, "Alternate between two different standar
 flags.DEFINE_boolean("projection", False, "Alternate between using a projection on the means [False]")
 flags.DEFINE_boolean("alt_opt", True, "Define the use of means or samples at test/ validation time, if True use means, if false use samples  [True]")
 flags.DEFINE_string("score_func", 'DistMult', "Defines score function [dismult]")
+flags.DEFINE_string("alt_test", 'none', "Defines the alternative test type, t1,t2,t3 [None]")
 flags.DEFINE_float("lr", 0.1, "Choose optimiser loss, select the margin for hinge loss [1]")
 flags.DEFINE_integer("negsamples", 0, "Number of negative samples [0]")
 flags.DEFINE_float("samples_perdp", 1, "Number of noise samples used per datapoint [1]")
