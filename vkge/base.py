@@ -105,7 +105,7 @@ class VKGE:
         self.alt_opt=alt_opt
         self.nosamps=int(nosamps)
         # sigma = tf.log(1 + tf.exp(log_sigma_square))
-        self.no_confidence_samples=10 #change to 1000
+        self.no_confidence_samples=1000 #change to 1000
         self.p_threshold=p_threshold
         sig_max = np.log((1.0/embedding_size*1.0))**2
 
@@ -169,7 +169,7 @@ class VKGE:
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, sig_max, sig_min)
-        self.nb_epochs = 500
+        self.nb_epochs = 100
 
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
