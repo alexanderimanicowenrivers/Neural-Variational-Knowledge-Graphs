@@ -732,8 +732,7 @@ class VKGE:
                     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                         mean_rank = np.mean(setting_ranks)
                         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
-                        for k in [1]:
-                        # for k in [1, 3, 5, 10]:
+                        for k in [1, 3, 5, 10]:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
