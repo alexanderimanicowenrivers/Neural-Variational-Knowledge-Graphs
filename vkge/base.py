@@ -792,7 +792,7 @@ class VKGE:
 
                     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
                     ranks = ranks_subj + ranks_obj
-                    logger.warn("Number of samples in valid phase {}".format(filtered_ranks_obj.shape))
+                    logger.warn("\t \t Number of samples in valid phase {} \t \t".format(filtered_ranks_obj.shape))
                     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                         mean_rank = np.mean(setting_ranks)
                         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
@@ -919,7 +919,7 @@ class VKGE:
                     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
                     ranks = ranks_subj + ranks_obj
 
-                    logger.warn("Number of samples in test phase {}".format(len(filtered_ranks_obj)))
+                    logger.warn("\t \t Number of samples in test phase {} \t \t".format(len(filtered_ranks_obj)))
 
                     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                         mean_rank = np.mean(setting_ranks)
