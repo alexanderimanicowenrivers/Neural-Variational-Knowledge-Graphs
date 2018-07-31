@@ -93,7 +93,7 @@ class VKGE:
 
     def __init__(self, file_name, score_func='dismult', static_mean=False, embedding_size=50, no_batches=10, mean_c=0.1,
                  epsilon=1e-3,negsamples=0,
-                 alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True, projection=True,alt_updates=False,nosamps=1,alt_test='none'):
+                 alt_cost=False, dataset='wn18', p_threshold=0.1, sigma_alt=True, lr=0.1, alt_opt=True, projection=True,alt_updates=False,nosamps=1,alt_test='none'):
         # super().__init__()
 
         self.alt_test=alt_test
@@ -105,8 +105,8 @@ class VKGE:
         self.alt_opt=alt_opt
         self.nosamps=int(nosamps)
         # sigma = tf.log(1 + tf.exp(log_sigma_square))
-        self.no_confidence_samples=1000
-        self.p_threshold=0.8
+        self.no_confidence_samples=10 #change to 1000
+        self.p_threshold=p_threshold
         sig_max = np.log((1.0/embedding_size*1.0))**2
 
         # sig_max = np.log(np.exp(1.0/embedding_size*1.0)-1)
@@ -151,8 +151,9 @@ class VKGE:
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
-        # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
-        optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
+        # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
+        optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
+        # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
 
         # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-5)
 
@@ -649,7 +650,7 @@ class VKGE:
                     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
 
 
-                    loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
+                    loss_values += [elbo_value / (Xp_batch.shape[0] / self.nb_entities)]
                     total_loss_value += elbo_value
 
                     counter += 1
@@ -667,7 +668,7 @@ class VKGE:
                 # Early Stopping
                 ##
 
-                if (epoch % 50) == 0:
+                if (epoch % 1) == 0:
 
                     eval_name = 'valid'
                     eval_triples = valid_triples
@@ -706,20 +707,20 @@ class VKGE:
 
                         if self.alt_test in ['test1','test2','test3']: #CORRECTION of scores for confidence TEST1
 
-                            confidence_subj=np.zeros(len_valid)
+                            confidence_subj=np.zeros(self.nb_entities)
 
-                            confidence_obj=np.zeros(len_valid)
+                            confidence_obj=np.zeros(self.nb_entities)
 
                             for samp_no in range((self.no_confidence_samples)):
 
-                                scores_subj_c = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
+                                scores_subj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
 
-                                confidence_subj+=((scores_subj_c>0.5)/self.no_confidence_samples*1.0)
+                                confidence_subj+= np.divide((scores_subj>0.5),self.no_confidence_samples)
 
                                 # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                                scores_obj_c = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
+                                scores_obj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
 
-                                confidence_obj+=((scores_obj_c>0.5)/self.no_confidence_samples*1.0)
+                                confidence_obj+=((scores_obj>0.5)/self.no_confidence_samples*1.0)
 
 
                         #########################
@@ -731,14 +732,19 @@ class VKGE:
 
                             scores_obj = scores_obj * confidence_obj
 
+                            ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                            ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+
+
                         elif self.alt_test=='test2': #multiply by binary threshold on variance
 
                             scores_subj = scores_subj
 
                             scores_obj = scores_obj
 
-                            if (confidence_subj > self.p_threshold):
+                            if (confidence_subj[s_idx] > self.p_threshold): #need to index subj and obj here
                                 ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                            if (confidence_obj[o_idx] > self.p_threshold):
                                 ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
                         elif self.alt_test=='test3': #multiply by combination of binary threshold and confidence
@@ -747,8 +753,9 @@ class VKGE:
 
                             scores_obj = scores_obj*confidence_obj
 
-                            if (confidence_subj > self.p_threshold):
+                            if (confidence_subj[s_idx] > self.p_threshold): 
                                 ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                            if (confidence_obj[o_idx] > self.p_threshold):
                                 ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
                         filtered_scores_subj = scores_subj.copy()
@@ -770,13 +777,14 @@ class VKGE:
 
                         elif self.alt_test in ['test2','test3']:  # multiply by binary threshold on variance
 
-                            if (confidence_subj > self.p_threshold):
+                            if (confidence_subj[s_idx] > self.p_threshold): 
                                 filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                            if (confidence_obj[o_idx] > self.p_threshold):
                                 filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
                     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
                     ranks = ranks_subj + ranks_obj
-
+                    logger.warn("Number of samples in valid phase {}".format(filtered_ranks_obj.shape))
                     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                         mean_rank = np.mean(setting_ranks)
                         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
@@ -832,19 +840,19 @@ class VKGE:
 
                         if self.alt_test in ['test1', 'test2', 'test3']:  # CORRECTION of scores for confidence TEST1
 
-                            confidence_subj = np.zeros(len_valid)
+                            confidence_subj = np.zeros(self.nb_entities)
 
-                            confidence_obj = np.zeros(len_valid)
+                            confidence_obj = np.zeros(self.nb_entities)
 
                             for samp_no in range((self.no_confidence_samples)):
-                                scores_subj_c = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
+                                scores_subj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
 
-                                confidence_subj += ((scores_subj_c > 0.5) / self.no_confidence_samples * 1.0)
+                                confidence_subj += ((scores_subj > 0.5) / self.no_confidence_samples * 1.0)
 
                                 # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                                scores_obj_c = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
+                                scores_obj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
 
-                                confidence_obj += ((scores_obj_c > 0.5) / self.no_confidence_samples * 1.0)
+                                confidence_obj += ((scores_obj > 0.5) / self.no_confidence_samples * 1.0)
 
                         #########################
                         # Calculate new scores wrs to confidence
@@ -861,8 +869,9 @@ class VKGE:
 
                             scores_obj = scores_obj
 
-                            if (confidence_subj > self.p_threshold):
+                            if (confidence_subj[s_idx] > self.p_threshold): 
                                 ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                            if (confidence_obj[o_idx] > self.p_threshold):
                                 ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
                         elif self.alt_test == 'test3':  # multiply by combination of binary threshold and confidence
@@ -871,8 +880,9 @@ class VKGE:
 
                             scores_obj = scores_obj * confidence_obj
 
-                            if (confidence_subj > self.p_threshold):
+                            if (confidence_subj[s_idx] > self.p_threshold): 
                                 ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                            if (confidence_obj[o_idx] > self.p_threshold):
                                 ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
                         filtered_scores_subj = scores_subj.copy()
@@ -893,17 +903,20 @@ class VKGE:
 
                         elif self.alt_test in ['test2', 'test3']:  # multiply by binary threshold on variance
 
-                            if (confidence_subj > self.p_threshold):
+                            if (confidence_subj[s_idx] > self.p_threshold): 
                                 filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                            if (confidence_obj[o_idx] > self.p_threshold):
                                 filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
                     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
                     ranks = ranks_subj + ranks_obj
 
+                    logger.warn("Number of samples in test phase {}".format(len(filtered_ranks_obj)))
+
                     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                         mean_rank = np.mean(setting_ranks)
                         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
-                        for k in [1, 3, 5, 10]:
+                        for k in [1]:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
         #save embeddings

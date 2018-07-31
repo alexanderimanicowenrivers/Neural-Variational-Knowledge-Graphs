@@ -197,7 +197,24 @@ class VKGE_simple:
 
         self.elbo = self.g_objective
 
-        self.training_step = optimizer.minimize(self.elbo)
+        self.train_variables = tf.trainable_variables()
+        #
+
+        gradients = optimizer.compute_gradients(loss=self.g_objective)
+
+        if True:
+            self.g_objective += tf.add_n([tf.nn.l2_loss(v) for v in self.train_variables]) * 0.01
+        if True:
+            # if clip_op == tf.clip_by_value:
+            gradients = [(tf.clip_by_value(grad, -1, 1), var)
+                        for grad, var in gradients if grad is not None]
+            # elif clip_op == tf.clip_by_norm:
+            # gradients = [(tf.clip_by_norm(grad, 1), var)
+            #             for grad, var in gradients if grad is not None]
+
+        self.training_step = optimizer.apply_gradients(gradients)
+
+        # self.training_step = optimizer.minimize(self.elbo)
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
                       sig_min):
@@ -211,14 +228,10 @@ class VKGE_simple:
         with tf.variable_scope('encoder'):
             self.entity_embedding_mean = tf.get_variable('entities',
                                                            shape=[nb_entities + 1, entity_embedding_size ],
-                                                         initializer=tf.random_uniform_initializer(minval=-init1,
-                                                                                                   maxval=init1,
-                                                                                                   dtype=tf.float32))
+                                                         initializer=tf.contrib.layers.xavier_initializer()   )
             self.predicate_parameters_layer = tf.get_variable('predicates',
                                                               shape=[nb_predicates + 1, predicate_embedding_size],
-                                                              initializer=tf.random_uniform_initializer(minval=-init1,
-                                                                                                        maxval=init1,
-                                                                                                        dtype=tf.float32))
+                                                              initializer=tf.contrib.layers.xavier_initializer() )
 
             self.h_s = tf.nn.embedding_lookup(self.entity_embedding_mean,self.s_inputs)
             self.h_p = tf.nn.embedding_lookup(self.predicate_parameters_layer,self.p_inputs)
@@ -272,8 +285,8 @@ class VKGE_simple:
                                 Train Model
         """
 
-        # nb_versions = 3
-        nb_versions = 1
+        nb_versions = 3
+        # nb_versions = 1
 
         earl_stop = 0
 
@@ -293,7 +306,7 @@ class VKGE_simple:
 
         batches = make_batches(self.nb_examples, batch_size)
 
-        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=5.0)]
+        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
@@ -344,22 +357,22 @@ class VKGE_simple:
                     Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
                     Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                    # # Xs_batch[1::nb_versions] needs to be corrupted
-                    # Xs_batch[1::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
-                    # Xp_batch[1::nb_versions] = Xp_shuf[batch_start:batch_end]
-                    # Xo_batch[1::nb_versions] = Xo_shuf[batch_start:batch_end]
-                    #
-                    # # Xo_batch[2::nb_versions] needs to be corrupted
-                    # Xs_batch[2::nb_versions] = Xs_shuf[batch_start:batch_end]
-                    # Xp_batch[2::nb_versions] = Xp_shuf[batch_start:batch_end]
-                    # Xo_batch[2::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                    # Xs_batch[1::nb_versions] needs to be corrupted
+                    Xs_batch[1::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                    Xp_batch[1::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[1::nb_versions] = Xo_shuf[batch_start:batch_end]
+
+                    # Xo_batch[2::nb_versions] needs to be corrupted
+                    Xs_batch[2::nb_versions] = Xs_shuf[batch_start:batch_end]
+                    Xp_batch[2::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[2::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
 
                     loss_args = {
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
-                        self.y_inputs: np.array([1.0] * curr_batch_size)
-                        # self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
+                        # self.y_inputs: np.array([1.0] * curr_batch_size)
+                        self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
                     }
 
 

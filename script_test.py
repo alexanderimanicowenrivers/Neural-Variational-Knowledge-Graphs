@@ -37,7 +37,6 @@ def to_cmd(c):
               '--dataset {} ' \
               '--alt_updates {} ' \
               '--lr {} ' \
-              '--mean_c {} ' \
               '--score_func {} ' \
               '--alt_opt {} ' \
         .format(path,
@@ -70,13 +69,12 @@ def main(_):
         w7=[True,False],
         w8=[0.1,0.001,0.00001],
         w9=[ 'DistMult'],
-        w11=[1,3,5],
         w10=[True]
     )
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180724'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180731'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
