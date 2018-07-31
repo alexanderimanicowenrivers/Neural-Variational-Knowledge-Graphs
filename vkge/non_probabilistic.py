@@ -204,7 +204,7 @@ class VKGE_simple:
 
         gradients = optimizer.compute_gradients(loss=self.g_objective)
 
-        if True:
+        if False:
             self.g_objective += tf.add_n([tf.nn.l2_loss(v) for v in self.train_variables]) * 0.01
         if True:
             # if clip_op == tf.clip_by_value:
@@ -308,7 +308,7 @@ class VKGE_simple:
 
         batches = make_batches(self.nb_examples, batch_size)
 
-        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
+        projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
@@ -396,7 +396,8 @@ class VKGE_simple:
                 # if (self.projection == True):  # project means
                 #     for projection_step in projection_steps:
                 #         session.run([projection_step])
-
+                    for projection_step in projection_steps:
+                        session.run([projection_step])
 
 
 
