@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_test.py" afterPath="$PROJECT_DIR$/script_test.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/non_probabilistic.py" afterPath="$PROJECT_DIR$/vkge/non_probabilistic.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,13 +17,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="non_probabilistic.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="non_probabilistic.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="916">
-              <caret line="394" column="60" lean-forward="false" selection-start-line="394" selection-start-column="60" selection-end-line="394" selection-end-column="60" />
+            <state relative-caret-position="211">
+              <caret line="197" column="80" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
               <folding>
                 <element signature="e#14#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="not_working.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vkge/not_working.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="334">
+              <caret line="231" column="63" lean-forward="true" selection-start-line="230" selection-start-column="12" selection-end-line="231" selection-end-column="63" />
+              <folding>
+                <element signature="e#25#36#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -53,10 +65,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script_test.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="script_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-128">
+            <state relative-caret-position="182">
               <caret line="40" column="31" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding>
                 <element signature="e#127#143#0" expanded="true" />
@@ -69,7 +81,7 @@
         <entry file="file://$PROJECT_DIR$/main2.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="376">
-              <caret line="45" column="129" lean-forward="true" selection-start-line="45" selection-start-column="129" selection-end-line="45" selection-end-column="129" />
+              <caret line="45" column="38" lean-forward="false" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="38" />
               <folding>
                 <element signature="e#25#48#0" expanded="true" />
               </folding>
@@ -77,11 +89,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="script_baseline.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/script_baseline.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="151">
+              <caret line="66" column="18" lean-forward="false" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="33" column="52" lean-forward="false" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="52" />
+            <state relative-caret-position="257">
+              <caret line="35" column="26" lean-forward="false" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="26" />
               <folding>
                 <element signature="e#25#48#0" expanded="true" />
               </folding>
@@ -190,14 +212,14 @@
         <option value="$PROJECT_DIR$/vkge/not_working.py" />
         <option value="$PROJECT_DIR$/script_baseline.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/vkge/non_probabilistic.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/script_search.py" />
         <option value="$PROJECT_DIR$/script_test.py" />
+        <option value="$PROJECT_DIR$/vkge/non_probabilistic.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
@@ -405,13 +427,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00507" summary="fixed initsig from tf to np operations">
-      <created>1531932364427</created>
-      <option name="number" value="00507" />
-      <option name="presentableId" value="LOCAL-00507" />
-      <option name="project" value="LOCAL" />
-      <updated>1531932364427</updated>
     </task>
     <task id="LOCAL-00508" summary="fixed initsig from tf to np operations">
       <created>1531994654900</created>
@@ -749,7 +764,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533042183170</updated>
     </task>
-    <option name="localTasksCounter" value="556" />
+    <task id="LOCAL-00556" summary="updated tests with ada optimiser">
+      <created>1533042509931</created>
+      <option name="number" value="00556" />
+      <option name="presentableId" value="LOCAL-00556" />
+      <option name="project" value="LOCAL" />
+      <updated>1533042509932</updated>
+    </task>
+    <option name="localTasksCounter" value="557" />
     <servers />
   </component>
   <component name="TodoView">
@@ -762,7 +784,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23175965" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1125,55 +1147,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/not_working.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="297" column="89" lean-forward="false" selection-start-line="297" selection-start-column="89" selection-end-line="297" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Downloads/LMFIX_RL_assignment_4_17036378.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
           <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="45" column="129" lean-forward="true" selection-start-line="45" selection-start-column="129" selection-end-line="45" selection-end-column="129" />
-          <folding>
-            <element signature="e#25#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="33" column="52" lean-forward="false" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="52" />
-          <folding>
-            <element signature="e#25#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="916">
-          <caret line="394" column="60" lean-forward="false" selection-start-line="394" selection-start-column="60" selection-end-line="394" selection-end-column="60" />
-          <folding>
-            <element signature="e#14#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script_baseline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="60" column="33" lean-forward="false" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1211,12 +1188,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="35" column="26" lean-forward="false" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="26" />
+          <folding>
+            <element signature="e#25#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="45" column="38" lean-forward="false" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="38" />
+          <folding>
+            <element signature="e#25#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/script_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-128">
+        <state relative-caret-position="182">
           <caret line="40" column="31" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding>
             <element signature="e#127#143#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script_baseline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="66" column="18" lean-forward="false" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/not_working.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="231" column="63" lean-forward="true" selection-start-line="230" selection-start-column="12" selection-end-line="231" selection-end-column="63" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="197" column="80" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
