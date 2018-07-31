@@ -540,7 +540,7 @@ class VKGE:
 
         self.negsamples = int(2.0*len(all_triples)*self.nb_entities/(nb_batches*1.0))
 
-        logger.warn("Number of negative samples per batch is {}, \t batch size is {} \t number of positive triples".format(self.negsamples,self.negsamples+batch_size,len(all_triples)))
+        logger.warn("Number of negative samples per batch is {}, \t batch size is {} \t number of positive triples {}".format(self.negsamples,self.negsamples+batch_size,len(all_triples)))
 
         nb_versions = int(self.negsamples + 1)  # neg samples + original
 
@@ -658,7 +658,7 @@ class VKGE:
                     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
 
 
-                    loss_values += [elbo_value / (Xp_batch.shape[0] / self.nb_entities)]
+                    loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
                     total_loss_value += elbo_value
 
                     counter += 1
@@ -670,11 +670,9 @@ class VKGE:
 
 
 
-                logger.warn('Epoch: {0}\tELBO: {1}'.format(epoch, self.stats(loss_values)))
+                logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
-                ##
-                # Early Stopping
-                ##
+
 
                 if (epoch % 50) == 0:
 
@@ -883,3 +881,121 @@ class VKGE:
                     # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
                     # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
                     # np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
+
+                # if (epoch % 50) == 0:
+                #
+                #     eval_name = 'valid'
+                #     eval_triples = valid_triples
+                #     ranks_subj, ranks_obj = [], []
+                #     filtered_ranks_subj, filtered_ranks_obj = [], []
+                #
+                #     for _i, (s, p, o) in enumerate(eval_triples):
+                #         s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], \
+                #                               self.entity_to_idx[o]
+                #
+                #         Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
+                #         Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
+                #         Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
+                #
+                #         feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities),
+                #                                   self.p_inputs: Xp_v,
+                #                                   self.o_inputs: Xo_v}
+                #         feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
+                #                                  self.o_inputs: np.arange(self.nb_entities)}
+                #
+                #         # scores of (1, p, o), (2, p, o), .., (N, p, o)
+                #         scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
+                #
+                #         # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                #         scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
+                #
+                #         ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                #         ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+                #
+                #         filtered_scores_subj = scores_subj.copy()
+                #         filtered_scores_obj = scores_obj.copy()
+                #
+                #         rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
+                #                     fs != s and fp == p and fo == o]
+                #         rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
+                #                     fs == s and fp == p and fo != o]
+                #
+                #         filtered_scores_subj[rm_idx_s] = - np.inf
+                #         filtered_scores_obj[rm_idx_o] = - np.inf
+                #
+                #         filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                #         filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
+                #
+                #     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
+                #     ranks = ranks_subj + ranks_obj
+                #
+                #     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
+                #         mean_rank = np.mean(setting_ranks)
+                #         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
+                #         for k in [1, 3, 5, 10]:
+                #             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                #             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+                #
+                #     ##
+                #     # Test
+                #     ##
+                #
+                #     # logger.warn('PRINTING TOP 20 ROWS FROM SAMPLE ENTITY MEAN AND VAR ')
+                #     #
+                #     # samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
+                #     #
+                #     # logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20],samp1_sig[:20]))
+                #
+                #     logger.warn('Beginning test phase')
+                #
+                #     eval_name = 'test'
+                #     eval_triples = test_triples
+                #     ranks_subj, ranks_obj = [], []
+                #     filtered_ranks_subj, filtered_ranks_obj = [], []
+                #
+                #     for _i, (s, p, o) in enumerate(eval_triples):
+                #         s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], \
+                #                               self.entity_to_idx[o]
+                #
+                #         Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
+                #         Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
+                #         Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
+                #
+                #         feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities),
+                #                                   self.p_inputs: Xp_v,
+                #                                   self.o_inputs: Xo_v}
+                #         feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
+                #                                  self.o_inputs: np.arange(self.nb_entities)}
+                #
+                #         # scores of (1, p, o), (2, p, o), .., (N, p, o)
+                #         scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
+                #
+                #         # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                #         scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
+                #
+                #         ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                #         ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+                #
+                #         filtered_scores_subj = scores_subj.copy()
+                #         filtered_scores_obj = scores_obj.copy()
+                #
+                #         rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
+                #                     fs != s and fp == p and fo == o]
+                #         rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
+                #                     fs == s and fp == p and fo != o]
+                #
+                #         filtered_scores_subj[rm_idx_s] = - np.inf
+                #         filtered_scores_obj[rm_idx_o] = - np.inf
+                #
+                #         filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                #         filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
+                #
+                #     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
+                #     ranks = ranks_subj + ranks_obj
+                #
+                #     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
+                #         mean_rank = np.mean(setting_ranks)
+                #         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
+                #         for k in [1, 3, 5, 10]:
+                #             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                #             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))

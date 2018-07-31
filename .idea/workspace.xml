@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="fixed validation every 50 epochs">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
@@ -17,11 +17,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="non_probabilistic.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="527" column="108" lean-forward="true" selection-start-line="409" selection-start-column="16" selection-end-line="527" selection-end-column="108" />
+              <folding>
+                <element signature="e#14#32#0" expanded="true" />
+                <marker date="1533048211984" expanded="false" signature="15789:15958" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="678" column="30" lean-forward="false" selection-start-line="678" selection-start-column="30" selection-end-line="678" selection-end-column="30" />
+            <state relative-caret-position="315">
+              <caret line="881" column="9" lean-forward="false" selection-start-line="881" selection-start-column="9" selection-end-line="881" selection-end-column="9" />
               <folding>
                 <element signature="e#679#799#0" expanded="false" />
                 <element signature="e#842#996#0" expanded="false" />
@@ -172,7 +185,6 @@
         <option value="$PROJECT_DIR$/script_quicktest.py" />
         <option value="$PROJECT_DIR$/vkge/models/base.py" />
         <option value="$PROJECT_DIR$/script_test_variance.py" />
-        <option value="$PROJECT_DIR$/vkge/not_working.py" />
         <option value="$PROJECT_DIR$/script_baseline.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/script_search.py" />
@@ -180,6 +192,7 @@
         <option value="$PROJECT_DIR$/main2.py" />
         <option value="$PROJECT_DIR$/script_test.py" />
         <option value="$PROJECT_DIR$/script_test_thresh.py" />
+        <option value="$PROJECT_DIR$/vkge/not_working.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
       </list>
     </option>
@@ -392,13 +405,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00518" summary="fixed sigma init">
-      <created>1531999196540</created>
-      <option name="number" value="00518" />
-      <option name="presentableId" value="LOCAL-00518" />
-      <option name="project" value="LOCAL" />
-      <updated>1531999196541</updated>
     </task>
     <task id="LOCAL-00519" summary="fixed sigma init">
       <created>1531999246752</created>
@@ -736,7 +742,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533053744454</updated>
     </task>
-    <option name="localTasksCounter" value="567" />
+    <task id="LOCAL-00567" summary="updates baselines for variance experiments">
+      <created>1533054439593</created>
+      <option name="number" value="00567" />
+      <option name="presentableId" value="LOCAL-00567" />
+      <option name="project" value="LOCAL" />
+      <updated>1533054439594</updated>
+    </task>
+    <option name="localTasksCounter" value="568" />
     <servers />
   </component>
   <component name="TodoView">
@@ -754,7 +767,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23175965" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40409207" sideWeight="0.50858366" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40409207" sideWeight="0.50858366" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.49713877" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -822,7 +835,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Upload Justified Model" />
     <MESSAGE value="fixed initsig" />
     <MESSAGE value="fixed initsig from tf to np operations" />
     <MESSAGE value="fixed sigma init" />
@@ -847,7 +859,8 @@
     <MESSAGE value="added in test script" />
     <MESSAGE value="added in re run capabilities to testscript for more reliable results" />
     <MESSAGE value="fixed validation every 50 epochs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed validation every 50 epochs" />
+    <MESSAGE value="updates baselines for variance experiments" />
+    <option name="LAST_COMMIT_MESSAGE" value="updates baselines for variance experiments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1147,32 +1160,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="392" column="0" lean-forward="true" selection-start-line="392" selection-start-column="0" selection-end-line="392" selection-end-column="0" />
-          <folding>
-            <element signature="e#14#32#0" expanded="true" />
-            <marker date="1533048211984" expanded="false" signature="15789:15958" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/script_test_variance.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
           <caret line="74" column="12" lean-forward="false" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="12" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/not_working.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="231" column="63" lean-forward="true" selection-start-line="226" selection-start-column="8" selection-end-line="231" selection-end-column="63" />
-          <folding>
-            <element signature="e#25#36#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1194,6 +1186,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/not_working.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="672" column="16" lean-forward="true" selection-start-line="672" selection-start-column="16" selection-end-line="672" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/script_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-751">
@@ -1204,10 +1204,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="527" column="108" lean-forward="true" selection-start-line="409" selection-start-column="16" selection-end-line="527" selection-end-column="108" />
+          <folding>
+            <element signature="e#14#32#0" expanded="true" />
+            <marker date="1533048211984" expanded="false" signature="15789:15958" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="678" column="30" lean-forward="false" selection-start-line="678" selection-start-column="30" selection-end-line="678" selection-end-column="30" />
+        <state relative-caret-position="315">
+          <caret line="881" column="9" lean-forward="false" selection-start-line="881" selection-start-column="9" selection-end-line="881" selection-end-column="9" />
           <folding>
             <element signature="e#679#799#0" expanded="false" />
             <element signature="e#842#996#0" expanded="false" />
