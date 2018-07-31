@@ -192,7 +192,7 @@ class VKGE_simple:
                            pred_sig)
         self.build_decoder()
 
-        self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
+        self.hinge_losses = tf.nn.relu(5 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
         self.g_objective = tf.reduce_sum(self.hinge_losses)
 
         # self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
