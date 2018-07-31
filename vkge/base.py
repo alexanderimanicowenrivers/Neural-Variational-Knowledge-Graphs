@@ -676,7 +676,7 @@ class VKGE:
                 # Early Stopping
                 ##
 
-                if (epoch % 1) == 0:
+                if (epoch % 50) == 0:
 
                     eval_name = 'valid'
                     eval_triples = valid_triples
@@ -730,12 +730,15 @@ class VKGE:
 
                                 confidence_obj+=((scores_obj>0.5)/self.no_confidence_samples*1.0)
 
-
+                        if self.alt_test=='test1_bline': #creates random confidence levels between 0 and 1
+                            confidence_subj=np.random.random_sample(self.nb_entities,)
+                            confidence_obj=np.random.random_sample(self.nb_entities,)
                         #########################
                         # Calculate new scores wrs to confidence
                         #########################
 
-                        if self.alt_test=='test1': #multiply by probability
+                        if self.alt_test in ['test1','test1_bline']: #multiply by probability
+
                             scores_subj = scores_subj * confidence_subj
 
                             scores_obj = scores_obj * confidence_obj
@@ -778,7 +781,7 @@ class VKGE:
                         filtered_scores_obj[rm_idx_o] = - np.inf
 
 
-                        if self.alt_test in ['test1','none']:  # multiply by probability
+                        if self.alt_test in ['test1','none','test1_bline']:  # multiply by probability
 
                             filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                             filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
