@@ -13,6 +13,7 @@ flags.DEFINE_float("mean_c", 6, "Constant for mean embeddings initalisation [0.1
 flags.DEFINE_float("init_sig", 6.0, "Initalised variance of variables [6.0]")
 flags.DEFINE_float("epsilon", 1e-5, "Initalised epsilon of variables [1e-5]")
 flags.DEFINE_float("mog_split", 0.5, "Split between spike and slab [6.0]")
+flags.DEFINE_integer("re_reun", 1, "used for multiple runs of the same parameter settings")
 flags.DEFINE_integer("embedding_size", 200, "The dimension of graph embeddings [50]")
 flags.DEFINE_string("file_name", '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_25', "file name for tensorboard file ['--']")
 flags.DEFINE_integer("no_batches", 10, "Number of batches [10]")
