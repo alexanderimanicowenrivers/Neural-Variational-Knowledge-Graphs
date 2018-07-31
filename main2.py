@@ -23,7 +23,7 @@ flags.DEFINE_boolean("static_mean", False,
 flags.DEFINE_string("dataset", 'wn18', "Alternate updates around each distribution[wn18]")
 flags.DEFINE_boolean("Sigma_alt", True, "Alternate between two different standard dev calculations [True]")
 flags.DEFINE_boolean("projection", False, "Alternate between using a projection on the means [False]")
-flags.DEFINE_boolean("alt_opt", True, "Define the use of means or samples at test/ validation time, if True use means, if false use samples  [True]")
+flags.DEFINE_boolean("alt_opt", True, "Define the use of hinge loss or MLE True is MLE  [True]")
 flags.DEFINE_string("score_func", 'DistMult', "Defines score function [dismult]")
 flags.DEFINE_string("alt_test", 'none', "Defines the alternative test type, t1,t2,t3 [None]")
 flags.DEFINE_float("lr", 0.1, "Choose optimiser loss, select the margin for hinge loss [1]")

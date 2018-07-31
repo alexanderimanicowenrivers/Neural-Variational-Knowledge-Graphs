@@ -66,9 +66,9 @@ def main(_):
         w3=[10,20,50,100,200],
         w4 = ['kinship','nations','umls'],
         w5=[True,False],
-        w6=[0.1,0.001,0.00001],
+        w6=[0.1,0.01,0.001],
         w7=[ 'DistMult'],
-        w8=[True]
+        w8=[True,False]
     )
 
     configurations = cartesian_product(hyperparameters_space)

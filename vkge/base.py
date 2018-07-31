@@ -302,7 +302,15 @@ class VKGE:
         self.e_objective2 = 0.0
         self.e_objective3 = 0.0
 
-        self.g_objective = (1.0/tf.cast(self.no_samples,tf.float32))* -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
+        if self.alt_opt: #ml
+            self.g_objective = (1.0 / tf.cast(self.no_samples, tf.float32)) * -tf.reduce_sum(
+                tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
+
+        else: #else hinge margin of 1
+            self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
+            self.g_objective = tf.reduce_sum(self.hinge_losses)
+
+
 
         # ####################################  Weight uncertainity in NN's
 
@@ -616,7 +624,7 @@ class VKGE:
                     # noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
 
                     loss_args = {
-                        self.no_samples:2, #number of samples for precision test
+                        self.no_samples:1, #number of samples for precision test
                         self.KL_discount: 1.0,
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
