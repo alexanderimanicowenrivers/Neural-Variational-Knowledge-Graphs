@@ -45,13 +45,12 @@ def to_cmd(c):
                 c['w1'],
                 c['w2'],
                 c['w3'],
+                c['w4'],
+                c['w5'],
                 c['w6'],
                 c['w7'],
-                c['w8'],
-                c['w11'],
                 # ("{}/logs/180718/tb_nvkg.{}".format(path, summary(c))),
-                c['w9'],
-                c['w10'])
+                c['w8'])
     return command
 
 
@@ -65,11 +64,11 @@ def main(_):
         w1=[1,100,1000],
         w2=[1e-3,1e-5,1e-7], #
         w3=[10,20,50,100,200],
-        w6 = ['kinship','nations','umls'],
-        w7=[True,False],
-        w8=[0.1,0.001,0.00001],
-        w9=[ 'DistMult'],
-        w10=[True]
+        w4 = ['kinship','nations','umls'],
+        w5=[True,False],
+        w6=[0.1,0.001,0.00001],
+        w7=[ 'DistMult'],
+        w8=[True]
     )
 
     configurations = cartesian_product(hyperparameters_space)
