@@ -705,69 +705,11 @@ class VKGE:
                             # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
                         scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
 
-                        if self.alt_test == 'none':
-                            ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                            ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
-                        #########################
-                        # Calculate score confidence
-                        #########################
-
-                        if self.alt_test in ['test1','test2','test3']: #CORRECTION of scores for confidence TEST1
-
-                            confidence_subj=np.zeros(self.nb_entities)
-
-                            confidence_obj=np.zeros(self.nb_entities)
-
-                            for samp_no in range((self.no_confidence_samples)):
-
-                                scores_subj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
-
-                                confidence_subj+= np.divide((scores_subj>0.5),self.no_confidence_samples)
-
-                                # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                                scores_obj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
-
-                                confidence_obj+=((scores_obj>0.5)/self.no_confidence_samples*1.0)
-
-                        if self.alt_test=='test1_bline': #creates random confidence levels between 0 and 1
-                            confidence_subj=np.random.random_sample(self.nb_entities,)
-                            confidence_obj=np.random.random_sample(self.nb_entities,)
-                        #########################
-                        # Calculate new scores wrs to confidence
-                        #########################
-
-                        if self.alt_test in ['test1','test1_bline']: #multiply by probability
-
-                            scores_subj = scores_subj * confidence_subj
-
-                            scores_obj = scores_obj * confidence_obj
-
-                            ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                            ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+                        ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                        ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
 
-                        elif self.alt_test=='test2': #multiply by binary threshold on variance
-
-                            scores_subj = scores_subj
-
-                            scores_obj = scores_obj
-
-                            if (confidence_subj[s_idx] > self.p_threshold): #need to index subj and obj here
-                                ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                            if (confidence_obj[o_idx] > self.p_threshold):
-                                ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
-
-                        elif self.alt_test=='test3': #multiply by combination of binary threshold and confidence
-
-                            scores_subj = scores_subj*confidence_subj
-
-                            scores_obj = scores_obj*confidence_obj
-
-                            if (confidence_subj[s_idx] > self.p_threshold): 
-                                ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                            if (confidence_obj[o_idx] > self.p_threshold):
-                                ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
                         filtered_scores_subj = scores_subj.copy()
                         filtered_scores_obj = scores_obj.copy()
@@ -781,17 +723,10 @@ class VKGE:
                         filtered_scores_obj[rm_idx_o] = - np.inf
 
 
-                        if self.alt_test in ['test1','none','test1_bline']:  # multiply by probability
+                        filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                        filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
-                            filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                            filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
-                        elif self.alt_test in ['test2','test3']:  # multiply by binary threshold on variance
-
-                            if (confidence_subj[s_idx] > self.p_threshold): 
-                                filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                            if (confidence_obj[o_idx] > self.p_threshold):
-                                filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
                     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
                     ranks = ranks_subj + ranks_obj
@@ -824,6 +759,9 @@ class VKGE:
                     filtered_ranks_subj, filtered_ranks_obj = [], []
 
                     for _i, (s, p, o) in enumerate(eval_triples):
+
+                        #corrupts both a subject and object
+
                         s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], self.entity_to_idx[o]
 
                         Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
@@ -836,9 +774,10 @@ class VKGE:
                                                  self.o_inputs: np.arange(self.nb_entities)}
 
                         # scores of (1, p, o), (2, p, o), .., (N, p, o)
+
                         scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
 
-                        # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                            # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
                         scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
 
                         if self.alt_test == 'none':
@@ -849,49 +788,58 @@ class VKGE:
                         # Calculate score confidence
                         #########################
 
-                        if self.alt_test in ['test1', 'test2', 'test3']:  # CORRECTION of scores for confidence TEST1
+                        if self.alt_test in ['test1','test2','test3']: #CORRECTION of scores for confidence TEST1
 
-                            confidence_subj = np.zeros(self.nb_entities)
+                            confidence_subj=np.zeros(self.nb_entities)
 
-                            confidence_obj = np.zeros(self.nb_entities)
+                            confidence_obj=np.zeros(self.nb_entities)
 
                             for samp_no in range((self.no_confidence_samples)):
+
                                 scores_subj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
 
-                                confidence_subj += ((scores_subj > 0.5) / self.no_confidence_samples * 1.0)
+                                confidence_subj+= np.divide((scores_subj>0.5),self.no_confidence_samples)
 
                                 # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
                                 scores_obj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
 
-                                confidence_obj += ((scores_obj > 0.5) / self.no_confidence_samples * 1.0)
+                                confidence_obj+=((scores_obj>0.5)/self.no_confidence_samples*1.0)
 
+                        if self.alt_test in ['test1_bline','test2_bline','test3_bline']: #creates random confidence levels between 0 and 1 for baseline test1
+                            confidence_subj=np.random.random_sample(self.nb_entities,)
+                            confidence_obj=np.random.random_sample(self.nb_entities,)
                         #########################
                         # Calculate new scores wrs to confidence
                         #########################
 
-                        if self.alt_test == 'test1':  # multiply by probability
+                        if self.alt_test in ['test1','test1_bline']: #multiply by probability
+
                             scores_subj = scores_subj * confidence_subj
 
                             scores_obj = scores_obj * confidence_obj
 
-                        elif self.alt_test == 'test2':  # multiply by binary threshold on variance
+                            ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                            ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+
+
+                        elif self.alt_test in ['test2','test2_bline']: #multiply by binary threshold on variance
 
                             scores_subj = scores_subj
 
                             scores_obj = scores_obj
 
-                            if (confidence_subj[s_idx] > self.p_threshold): 
+                            if (confidence_subj[s_idx] > self.p_threshold): #need to index subj and obj here
                                 ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
                             if (confidence_obj[o_idx] > self.p_threshold):
                                 ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
-                        elif self.alt_test == 'test3':  # multiply by combination of binary threshold and confidence
+                        elif self.alt_test in ['test3','test3_bline']: #multiply by combination of binary threshold and confidence
 
-                            scores_subj = scores_subj * confidence_subj
+                            scores_subj = scores_subj*confidence_subj
 
-                            scores_obj = scores_obj * confidence_obj
+                            scores_obj = scores_obj*confidence_obj
 
-                            if (confidence_subj[s_idx] > self.p_threshold): 
+                            if (confidence_subj[s_idx] > self.p_threshold):
                                 ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
                             if (confidence_obj[o_idx] > self.p_threshold):
                                 ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
@@ -907,27 +855,27 @@ class VKGE:
                         filtered_scores_subj[rm_idx_s] = - np.inf
                         filtered_scores_obj[rm_idx_o] = - np.inf
 
-                        if self.alt_test in ['test1', 'none']:  # multiply by probability
+
+                        if self.alt_test in ['test1','none','test1_bline']:  # multiply by probability
 
                             filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                             filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
-                        elif self.alt_test in ['test2', 'test3']:  # multiply by binary threshold on variance
+                        elif self.alt_test in ['test2','test3','test2_bline','test3_bline']:  # multiply by binary threshold on variance
 
-                            if (confidence_subj[s_idx] > self.p_threshold): 
+                            if (confidence_subj[s_idx] > self.p_threshold):
                                 filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                             if (confidence_obj[o_idx] > self.p_threshold):
                                 filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
                     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
                     ranks = ranks_subj + ranks_obj
-
-                    logger.warn("\t \t Number of samples in test phase {} \t \t".format(len(filtered_ranks_obj)))
-
+                    logger.warn("\t \t Number of samples in valid phase {} \t \t".format(len(filtered_ranks_obj)))
                     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                         mean_rank = np.mean(setting_ranks)
                         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
                         for k in [1]:
+                        # for k in [1, 3, 5, 10]:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
         #save embeddings

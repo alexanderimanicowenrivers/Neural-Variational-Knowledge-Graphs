@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="fixed validation every 50 epochs">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
@@ -20,8 +20,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="734" column="85" lean-forward="true" selection-start-line="734" selection-start-column="85" selection-end-line="734" selection-end-column="85" />
+            <state relative-caret-position="100">
+              <caret line="678" column="30" lean-forward="false" selection-start-line="678" selection-start-column="30" selection-end-line="678" selection-end-column="30" />
               <folding>
                 <element signature="e#679#799#0" expanded="false" />
                 <element signature="e#842#996#0" expanded="false" />
@@ -393,13 +393,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00517" summary="fixed sigma init">
-      <created>1531999131613</created>
-      <option name="number" value="00517" />
-      <option name="presentableId" value="LOCAL-00517" />
-      <option name="project" value="LOCAL" />
-      <updated>1531999131613</updated>
-    </task>
     <task id="LOCAL-00518" summary="fixed sigma init">
       <created>1531999196540</created>
       <option name="number" value="00518" />
@@ -736,7 +729,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533052770126</updated>
     </task>
-    <option name="localTasksCounter" value="566" />
+    <task id="LOCAL-00566" summary="fixed validation every 50 epochs">
+      <created>1533053744454</created>
+      <option name="number" value="00566" />
+      <option name="presentableId" value="LOCAL-00566" />
+      <option name="project" value="LOCAL" />
+      <updated>1533053744454</updated>
+    </task>
+    <option name="localTasksCounter" value="567" />
     <servers />
   </component>
   <component name="TodoView">
@@ -822,7 +822,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="upload GenieAI" />
     <MESSAGE value="Upload Justified Model" />
     <MESSAGE value="fixed initsig" />
     <MESSAGE value="fixed initsig from tf to np operations" />
@@ -847,7 +846,8 @@
     <MESSAGE value="fixed test script shape to len error" />
     <MESSAGE value="added in test script" />
     <MESSAGE value="added in re run capabilities to testscript for more reliable results" />
-    <option name="LAST_COMMIT_MESSAGE" value="added in re run capabilities to testscript for more reliable results" />
+    <MESSAGE value="fixed validation every 50 epochs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed validation every 50 epochs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1206,8 +1206,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="734" column="85" lean-forward="true" selection-start-line="734" selection-start-column="85" selection-end-line="734" selection-end-column="85" />
+        <state relative-caret-position="100">
+          <caret line="678" column="30" lean-forward="false" selection-start-line="678" selection-start-column="30" selection-end-line="678" selection-end-column="30" />
           <folding>
             <element signature="e#679#799#0" expanded="false" />
             <element signature="e#842#996#0" expanded="false" />
