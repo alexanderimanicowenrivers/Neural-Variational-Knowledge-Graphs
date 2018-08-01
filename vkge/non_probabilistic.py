@@ -143,15 +143,16 @@ class VKGE_simple:
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
-        # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
-        optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
+        # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
+        optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
+        # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
 
 
 
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, sig_max, sig_min)
-        self.nb_epochs = 1000
+        self.nb_epochs = 100
 
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,
@@ -308,7 +309,7 @@ class VKGE_simple:
 
         batches = make_batches(self.nb_examples, batch_size)
 
-        projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
+        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
@@ -396,8 +397,8 @@ class VKGE_simple:
                 # if (self.projection == True):  # project means
                 #     for projection_step in projection_steps:
                 #         session.run([projection_step])
-                    for projection_step in projection_steps:
-                        session.run([projection_step])
+                #     for projection_step in projection_steps:
+                #         session.run([projection_step])
 
 
 
