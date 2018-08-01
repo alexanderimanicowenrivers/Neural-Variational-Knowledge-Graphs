@@ -790,7 +790,7 @@ class VKGE:
                         # Calculate score confidence
                         #########################
 
-                        if self.alt_test in ['test1','test2','test3']: #CORRECTION of scores for confidence TEST1
+                        if self.alt_test in ['test1']: #CORRECTION of scores for confidence TEST1
 
                             confidence_subj=np.zeros(self.nb_entities)
 
@@ -807,24 +807,15 @@ class VKGE:
 
                                 confidence_obj+=((scores_obj>0.5)/self.no_confidence_samples*1.0)
 
-                        if self.alt_test in ['test1_bline','test2_bline','test3_bline']: #creates random confidence levels between 0 and 1 for baseline test1
+                        elif self.alt_test in ['test1_bline']: #creates random confidence levels between 0 and 1 for baseline test1
                             confidence_subj=np.random.random_sample(self.nb_entities,)
                             confidence_obj=np.random.random_sample(self.nb_entities,)
                         #########################
                         # Calculate new scores wrs to confidence
                         #########################
 
-                        if self.alt_test in ['test1','test1_bline']: #multiply by probability
 
-                            scores_subj = scores_subj * confidence_subj
-
-                            scores_obj = scores_obj * confidence_obj
-
-                            ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                            ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
-
-
-                        elif self.alt_test in ['test2','test2_bline']: #multiply by binary threshold on variance
+                        if self.alt_test in ['test1','test1_bline']: #multiply by binary threshold on variance
 
                             scores_subj = scores_subj
 
@@ -835,16 +826,7 @@ class VKGE:
                             if (confidence_obj[o_idx] > self.p_threshold):
                                 ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
-                        elif self.alt_test in ['test3','test3_bline']: #multiply by combination of binary threshold and confidence
 
-                            scores_subj = scores_subj*confidence_subj
-
-                            scores_obj = scores_obj*confidence_obj
-
-                            if (confidence_subj[s_idx] > self.p_threshold):
-                                ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                            if (confidence_obj[o_idx] > self.p_threshold):
-                                ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
                         filtered_scores_subj = scores_subj.copy()
                         filtered_scores_obj = scores_obj.copy()
@@ -858,12 +840,12 @@ class VKGE:
                         filtered_scores_obj[rm_idx_o] = - np.inf
 
 
-                        if self.alt_test in ['test1','none','test1_bline']:  # multiply by probability
+                        if self.alt_test in ['none']:  # multiply by probability
 
                             filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                             filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
-                        elif self.alt_test in ['test2','test3','test2_bline','test3_bline']:  # multiply by binary threshold on variance
+                        elif self.alt_test in ['test1','test1_bline']:  # multiply by binary threshold on variance
 
                             if (confidence_subj[s_idx] > self.p_threshold):
                                 filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
