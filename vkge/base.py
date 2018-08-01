@@ -538,7 +538,7 @@ class VKGE:
 
         batches = make_batches(self.nb_examples, batch_size)
 
-        self.negsamples = int(2.0*len(all_triples)*self.nb_entities/(nb_batches*1.0))
+        self.negsamples = int(2.0*len(all_triples)*(self.nb_entities-1)/(nb_batches*1.0))
 
         logger.warn("Number of negative samples per batch is {}, \t batch size is {} \t number of positive triples {}".format(self.negsamples,self.negsamples+batch_size,len(all_triples)))
 
@@ -634,18 +634,24 @@ class VKGE:
                         # self.noise:noise
                     }
 
-                    merge = tf.summary.merge_all()  # for TB
+                    # merge = tf.summary.merge_all()  # for TB
 
                     if self.alt_updates:
                         _ = session.run([ self.training_stepg],
                                                              feed_dict=loss_args)
                         summary, _, elbo_value = session.run([merge, self.training_stepe, self.elbo],
                                                              feed_dict=loss_args)
+                        _, elbo_value = session.run([self.training_stepe, self.elbo],
+                                                             feed_dict=loss_args)
 
 
                     else:
-                        summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
+                        _, elbo_value = session.run([ self.training_step, self.elbo],
                                                          feed_dict=loss_args)
+
+                        # summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
+                        #                                      feed_dict=loss_args)
+
                         # h_s = session.run(self.h_s2,
                         #                                  feed_dict=loss_args)
                         # logger.warn('Shape : {0}'.format(h_s.shape))

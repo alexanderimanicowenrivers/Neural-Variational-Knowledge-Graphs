@@ -142,6 +142,9 @@ class VKGE_simple:
         self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
+
+        logger.warn('# entitys Dataset {} \t # relations {} \t  # triples {} '.format(self.nb_entities,self.nb_predicates, len(all_triples)))
+
         ############################
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
         optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
