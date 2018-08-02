@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="update evaluation">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_test.py" afterPath="$PROJECT_DIR$/script_test.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,7 +20,7 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
+            <state relative-caret-position="149">
               <caret line="538" column="0" lean-forward="true" selection-start-line="538" selection-start-column="0" selection-end-line="538" selection-end-column="0" />
               <folding>
                 <element signature="e#679#799#0" expanded="false" />
@@ -52,21 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script_baseline.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/script_baseline.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="61" column="25" lean-forward="true" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="script_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="68" column="17" lean-forward="false" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
+            <state relative-caret-position="67">
+              <caret line="75" column="42" lean-forward="false" selection-start-line="75" selection-start-column="42" selection-end-line="75" selection-end-column="42" />
               <folding>
                 <element signature="e#127#143#0" expanded="true" />
               </folding>
@@ -175,10 +166,10 @@
         <option value="$PROJECT_DIR$/script_search.py" />
         <option value="$PROJECT_DIR$/script_test_thresh.py" />
         <option value="$PROJECT_DIR$/vkge/not_working.py" />
-        <option value="$PROJECT_DIR$/script_baseline.py" />
         <option value="$PROJECT_DIR$/vkge/non_probabilistic.py" />
         <option value="$PROJECT_DIR$/main2.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
+        <option value="$PROJECT_DIR$/script_baseline.py" />
         <option value="$PROJECT_DIR$/script_test.py" />
       </list>
     </option>
@@ -391,13 +382,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00537" summary="added in dynamic sampling">
-      <created>1532195444679</created>
-      <option name="number" value="00537" />
-      <option name="presentableId" value="LOCAL-00537" />
-      <option name="project" value="LOCAL" />
-      <updated>1532195444679</updated>
     </task>
     <task id="LOCAL-00538" summary="added in dynamic sampling">
       <created>1532262870969</created>
@@ -735,7 +719,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533240915383</updated>
     </task>
-    <option name="localTasksCounter" value="586" />
+    <task id="LOCAL-00586" summary="update evaluation">
+      <created>1533240926874</created>
+      <option name="number" value="00586" />
+      <option name="presentableId" value="LOCAL-00586" />
+      <option name="project" value="LOCAL" />
+      <updated>1533240926874</updated>
+    </task>
+    <option name="localTasksCounter" value="587" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1162,14 +1153,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script_baseline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="61" column="25" lean-forward="true" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/non_probabilistic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-983">
@@ -1182,13 +1165,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
+        <state relative-caret-position="149">
           <caret line="538" column="0" lean-forward="true" selection-start-line="538" selection-start-column="0" selection-end-line="538" selection-end-column="0" />
           <folding>
             <element signature="e#679#799#0" expanded="false" />
             <element signature="e#842#996#0" expanded="false" />
             <element signature="e#1025#1360#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script_baseline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="65" column="20" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1204,8 +1195,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="68" column="17" lean-forward="false" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
+        <state relative-caret-position="67">
+          <caret line="75" column="42" lean-forward="false" selection-start-line="75" selection-start-column="42" selection-end-line="75" selection-end-column="42" />
           <folding>
             <element signature="e#127#143#0" expanded="true" />
           </folding>
