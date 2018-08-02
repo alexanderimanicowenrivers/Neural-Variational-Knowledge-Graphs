@@ -93,7 +93,7 @@ class VKGE:
 
     def __init__(self, file_name, score_func='dismult', static_mean=False, embedding_size=50, no_batches=10, mean_c=0.1,
                  epsilon=1e-3,negsamples=0,
-                 alt_cost=False, dataset='wn18', p_threshold=0.1, sigma_alt=True, lr=0.1, alt_opt=True, projection=True,alt_updates=False,nosamps=1,alt_test='none'):
+                 alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True, projection=True,alt_updates=False,nosamps=1,alt_test='none'):
         # super().__init__()
 
         self.alt_test=alt_test
@@ -106,7 +106,6 @@ class VKGE:
         self.nosamps=int(nosamps)
         # sigma = tf.log(1 + tf.exp(log_sigma_square))
         self.no_confidence_samples=1000 #change to 1000
-        self.p_threshold=p_threshold
         sig_max = np.log((1.0/embedding_size*1.0))**2
 
         # sig_max = np.log(np.exp(1.0/embedding_size*1.0)-1)
@@ -282,7 +281,7 @@ class VKGE:
         """
                         Constructs Model
         """
-        # self.noise = tf.placeholder(tf.float32, shape=[None,entity_embedding_size])
+        self.noise = tf.placeholder(tf.float32, shape=[None,entity_embedding_size])
 
         self.no_samples = tf.placeholder(tf.int32)
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
@@ -433,17 +432,15 @@ class VKGE:
 
             with tf.variable_scope('Decoder'):
 
-                # if self.model=='ptriple':
-                #
-                #     self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
-                #     self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
-                #     self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
+                self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
+                self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
+                self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
                 #
                 # else:
 
-                self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
-                self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
-                self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
+                # self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
+                # self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+                # self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
 
 
@@ -623,7 +620,7 @@ class VKGE:
                     #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
                     #     self.epoch_d: kl_inc_val
                     # }
-                    # noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
+                    noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
 
                     loss_args = {
                         self.no_samples:1, #number of samples for precision test
@@ -633,7 +630,7 @@ class VKGE:
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size),
                         self.epoch_d: 1.0
-                        # self.noise:noise
+                        ,self.noise:noise
                     }
 
                     # merge = tf.summary.merge_all()  # for TB

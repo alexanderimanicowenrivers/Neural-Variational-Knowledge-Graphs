@@ -30,7 +30,6 @@ flags.DEFINE_string("alt_test", 'none', "Defines the alternative test type, t1,t
 flags.DEFINE_float("lr", 0.1, "Choose optimiser loss, select the margin for hinge loss [1]")
 flags.DEFINE_integer("negsamples", 0, "Number of negative samples [0]")
 flags.DEFINE_float("samples_perdp", 1, "Number of noise samples used per datapoint [1]")
-flags.DEFINE_float("p_threshold", 0.1, "Confidence threshold for experiments 2&3 [1]")
 FLAGS = flags.FLAGS
 
 
@@ -44,7 +43,7 @@ def main(_):
 
     vkge.VKGE(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,epsilon=FLAGS.epsilon, alt_cost=FLAGS.alt_cost, no_batches=FLAGS.no_batches,
               static_mean=FLAGS.static_mean, dataset=FLAGS.dataset, sigma_alt=FLAGS.Sigma_alt,negsamples=FLAGS.negsamples,
-              lr=FLAGS.lr, p_threshold=FLAGS.p_threshold,file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt, projection=FLAGS.projection,alt_test=FLAGS.alt_test,  score_func=FLAGS.score_func,alt_updates=FLAGS.alt_updates,nosamps=FLAGS.samples_perdp)
+              lr=FLAGS.lr, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt, projection=FLAGS.projection,alt_test=FLAGS.alt_test,  score_func=FLAGS.score_func,alt_updates=FLAGS.alt_updates,nosamps=FLAGS.samples_perdp)
 
 
 if __name__ == '__main__':
