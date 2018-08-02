@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_test.py" afterPath="$PROJECT_DIR$/script_test.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,8 +20,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1550">
-              <caret line="980" column="66" lean-forward="false" selection-start-line="980" selection-start-column="66" selection-end-line="980" selection-end-column="66" />
+            <state relative-caret-position="225">
+              <caret line="442" column="80" lean-forward="true" selection-start-line="440" selection-start-column="16" selection-end-line="442" selection-end-column="80" />
               <folding>
                 <element signature="e#679#799#0" expanded="false" />
                 <element signature="e#842#996#0" expanded="false" />
@@ -394,13 +393,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00533" summary="no neg samples">
-      <created>1532026726795</created>
-      <option name="number" value="00533" />
-      <option name="presentableId" value="LOCAL-00533" />
-      <option name="project" value="LOCAL" />
-      <updated>1532026726795</updated>
-    </task>
     <task id="LOCAL-00534" summary="added in dynamic sampling">
       <created>1532194434493</created>
       <option name="number" value="00534" />
@@ -737,7 +729,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533223376148</updated>
     </task>
-    <option name="localTasksCounter" value="582" />
+    <task id="LOCAL-00582" summary="update evaluation">
+      <created>1533240391294</created>
+      <option name="number" value="00582" />
+      <option name="presentableId" value="LOCAL-00582" />
+      <option name="project" value="LOCAL" />
+      <updated>1533240391294</updated>
+    </task>
+    <option name="localTasksCounter" value="583" />
     <servers />
   </component>
   <component name="TodoView">
@@ -823,7 +822,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="no neg samples" />
     <MESSAGE value="added in dynamic sampling" />
     <MESSAGE value="added in noise sampled per triple" />
     <MESSAGE value="added in full matrix of LCWA" />
@@ -848,7 +846,8 @@
     <MESSAGE value="remove summary" />
     <MESSAGE value="fix merge error" />
     <MESSAGE value="upload experiment 2 of 5 negative samples" />
-    <option name="LAST_COMMIT_MESSAGE" value="upload experiment 2 of 5 negative samples" />
+    <MESSAGE value="update evaluation" />
+    <option name="LAST_COMMIT_MESSAGE" value="update evaluation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1204,8 +1203,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1550">
-          <caret line="980" column="66" lean-forward="false" selection-start-line="980" selection-start-column="66" selection-end-line="980" selection-end-column="66" />
+        <state relative-caret-position="225">
+          <caret line="442" column="80" lean-forward="true" selection-start-line="440" selection-start-column="16" selection-end-line="442" selection-end-column="80" />
           <folding>
             <element signature="e#679#799#0" expanded="false" />
             <element signature="e#842#996#0" expanded="false" />

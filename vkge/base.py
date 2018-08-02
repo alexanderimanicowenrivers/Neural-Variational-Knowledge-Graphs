@@ -432,15 +432,15 @@ class VKGE:
 
             with tf.variable_scope('Decoder'):
 
-                self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
-                self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
-                self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
+                # self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
+                # self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
+                # self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
                 #
                 # else:
 
-                # self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
-                # self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
-                # self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
+                self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
+                self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+                self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
 
 
