@@ -538,7 +538,9 @@ class VKGE:
 
         batches = make_batches(self.nb_examples, batch_size)
 
-        self.negsamples = int(2.0*len(all_triples)*(self.nb_entities-1)/(nb_batches*1.0))
+        self.negsamples = int(5)
+
+        # self.negsamples = int(2.0*len(all_triples)*(self.nb_entities-1)/(nb_batches*1.0))
 
         logger.warn("Number of negative samples per batch is {}, \t batch size is {} \t number of positive triples {}".format(self.negsamples,self.negsamples+batch_size,len(all_triples)))
 
