@@ -291,8 +291,6 @@ class VKGE_simple:
                                 Train Model
         """
 
-        nb_versions = 3
-        # nb_versions = 1
 
         earl_stop = 0
 
@@ -313,6 +311,15 @@ class VKGE_simple:
         batches = make_batches(self.nb_examples, batch_size)
 
         # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
+
+        # self.negsamples = int(3)
+
+        self.negsamples = int(2.0*len(all_triples)*(self.nb_entities-1)/(nb_batches*1.0))
+
+        logger.warn("Number of negative samples per batch is {}, \t batch size is {} \t number of positive triples {}".format(self.negsamples,self.negsamples+batch_size,len(all_triples)))
+
+        nb_versions = int(self.negsamples + 1)  # neg samples + original
+
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
@@ -337,14 +344,14 @@ class VKGE_simple:
 
 
 
+            # train_writer = tf.summary.FileWriter(filename, session.graph)
+
             for epoch in range(1, nb_epochs + 1):
 
-                if earl_stop == 1:
-                    break
+
 
                 counter = 0
 
-                kl_inc_val = 1.0
 
                 order = self.random_state.permutation(nb_samples)
                 Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
@@ -353,6 +360,7 @@ class VKGE_simple:
                 total_loss_value = 0
 
                 for batch_no, (batch_start, batch_end) in enumerate(batches):
+
                     curr_batch_size = batch_end - batch_start
 
                     Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
@@ -363,23 +371,34 @@ class VKGE_simple:
                     Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
                     Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                    # Xs_batch[1::nb_versions] needs to be corrupted
-                    Xs_batch[1::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
-                    Xp_batch[1::nb_versions] = Xp_shuf[batch_start:batch_end]
-                    Xo_batch[1::nb_versions] = Xo_shuf[batch_start:batch_end]
+                    for q in range((int(self.negsamples/2))): # Xs_batch[1::nb_versions] needs to be corrupted
+                        Xs_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                        Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
+                        Xo_batch[q::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                    # Xo_batch[2::nb_versions] needs to be corrupted
-                    Xs_batch[2::nb_versions] = Xs_shuf[batch_start:batch_end]
-                    Xp_batch[2::nb_versions] = Xp_shuf[batch_start:batch_end]
-                    Xo_batch[2::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                    for q in range((int(self.negsamples/2))): # Xs_batch[1::nb_versions] needs to be corrupted
+                        Xs_batch[q::nb_versions] = Xs_shuf[batch_start:batch_end]
+                        Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
+                        Xo_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+
+
+                    vec_neglabels=[int(1)]+([int(0)]*(int(nb_versions-1)))
+
 
                     loss_args = {
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
-                        # self.y_inputs: np.array([1.0] * curr_batch_size)
-                        self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
+                        self.y_inputs: np.array(vec_neglabels * curr_batch_size),
                     }
+
+                    # loss_args = {
+                    #     self.s_inputs: Xs_batch,
+                    #     self.p_inputs: Xp_batch,
+                    #     self.o_inputs: Xo_batch,
+                    #     # self.y_inputs: np.array([1.0] * curr_batch_size)
+                    #     self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size)
+                    # }
 
 
                     _, elbo_value = session.run([self.training_step, self.elbo],
