@@ -66,14 +66,14 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        # w1=[10000,1000],
-        w1=[10],
+        w1=[1000,100],
+        # w1=[10],
         w2=[1e-3,1e-5,1e-7], #
         w3=[50,100,200,300],
         w4 = ['kinship','nations','umls'],
         w5=[True,False],
         w6=[0.1,0.01,0.001],
-        w7=[ 'DistMult'],
+        w7=[ 'DistMult',''],
         w8=[True,False],
         w9=['none'],
         w10=[1,6]
