@@ -687,32 +687,27 @@ class VKGE:
                     filtered_ranks_subj, filtered_ranks_obj = [], []
 
                     for _i, (s, p, o) in enumerate(eval_triples):
-
-                        #corrupts both a subject and object
-
-                        s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], self.entity_to_idx[o]
+                        s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], \
+                                              self.entity_to_idx[o]
 
                         Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
                         Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
                         Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
 
-                        feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities), self.p_inputs: Xp_v,
+                        feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities),
+                                                  self.p_inputs: Xp_v,
                                                   self.o_inputs: Xo_v}
                         feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
                                                  self.o_inputs: np.arange(self.nb_entities)}
 
                         # scores of (1, p, o), (2, p, o), .., (N, p, o)
-
                         scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
 
-                            # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                        # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
                         scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
-
 
                         ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
                         ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
-
-
 
                         filtered_scores_subj = scores_subj.copy()
                         filtered_scores_obj = scores_obj.copy()
@@ -725,23 +720,18 @@ class VKGE:
                         filtered_scores_subj[rm_idx_s] = - np.inf
                         filtered_scores_obj[rm_idx_o] = - np.inf
 
-
                         filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                         filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
-
-
                     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
                     ranks = ranks_subj + ranks_obj
-                    logger.warn("\t \t Number of samples in valid phase {} \t \t".format(len(filtered_ranks_obj)))
+
                     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                         mean_rank = np.mean(setting_ranks)
                         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
                         for k in [1, 3, 5, 10]:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
-
-
             ##
             # Test
             ##
@@ -805,12 +795,12 @@ class VKGE:
 
                                 scores_subj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
 
-                                confidence_subj+= np.divide((scores_subj>0.5),self.no_confidence_samples)
+                                confidence_subj+= np.divide(scores_subj,self.no_confidence_samples)
 
                                 # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
                                 scores_obj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
 
-                                confidence_obj+=((scores_obj>0.5)/self.no_confidence_samples*1.0)
+                                confidence_obj+=((scores_obj)/self.no_confidence_samples*1.0)
 
                         elif self.alt_test in ['test1_bline']: #creates random confidence levels between 0 and 1 for baseline test1
                             confidence_subj=np.random.random_sample(self.nb_entities,)
@@ -871,7 +861,7 @@ class VKGE:
                     # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
                     # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
                     # np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
-
+                #
                 # if (epoch % 50) == 0:
                 #
                 #     eval_name = 'valid'
