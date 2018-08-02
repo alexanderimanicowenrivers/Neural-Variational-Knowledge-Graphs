@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="update evaluation">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_test.py" afterPath="$PROJECT_DIR$/script_test.py" />
     </list>
@@ -56,8 +56,8 @@
       <file leaf-file-name="script_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="75" column="42" lean-forward="false" selection-start-line="75" selection-start-column="42" selection-end-line="75" selection-end-column="42" />
+            <state relative-caret-position="77">
+              <caret line="70" column="16" lean-forward="false" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
               <folding>
                 <element signature="e#127#143#0" expanded="true" />
               </folding>
@@ -382,13 +382,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00538" summary="added in dynamic sampling">
-      <created>1532262870969</created>
-      <option name="number" value="00538" />
-      <option name="presentableId" value="LOCAL-00538" />
-      <option name="project" value="LOCAL" />
-      <updated>1532262870970</updated>
     </task>
     <task id="LOCAL-00539" summary="added in noise sampled per triple">
       <created>1532270510984</created>
@@ -726,7 +719,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533240926874</updated>
     </task>
-    <option name="localTasksCounter" value="587" />
+    <task id="LOCAL-00587" summary="updated test script">
+      <created>1533241038388</created>
+      <option name="number" value="00587" />
+      <option name="presentableId" value="LOCAL-00587" />
+      <option name="project" value="LOCAL" />
+      <updated>1533241038388</updated>
+    </task>
+    <option name="localTasksCounter" value="588" />
     <servers />
   </component>
   <component name="TodoView">
@@ -812,7 +812,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in dynamic sampling" />
     <MESSAGE value="added in noise sampled per triple" />
     <MESSAGE value="added in full matrix of LCWA" />
     <MESSAGE value="added in full matrix of LCWA test" />
@@ -837,7 +836,8 @@
     <MESSAGE value="fix merge error" />
     <MESSAGE value="upload experiment 2 of 5 negative samples" />
     <MESSAGE value="update evaluation" />
-    <option name="LAST_COMMIT_MESSAGE" value="update evaluation" />
+    <MESSAGE value="updated test script" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated test script" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1195,8 +1195,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="75" column="42" lean-forward="false" selection-start-line="75" selection-start-column="42" selection-end-line="75" selection-end-column="42" />
+        <state relative-caret-position="77">
+          <caret line="70" column="16" lean-forward="false" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
           <folding>
             <element signature="e#127#143#0" expanded="true" />
           </folding>
