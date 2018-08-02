@@ -40,7 +40,7 @@ def to_cmd(c):
               '--score_func {} ' \
               '--alt_opt {} ' \
               '--alt_test {} ' \
-              '--re_reun {}' \
+              '--mean_c {}' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -75,7 +75,7 @@ def main(_):
         w7=[ 'DistMult'],
         w8=[True,False],
         w9=['none'],
-        w10=[1]
+        w10=[1,6]
     )
 
     configurations = cartesian_product(hyperparameters_space)
