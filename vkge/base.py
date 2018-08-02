@@ -303,7 +303,7 @@ class VKGE:
         self.e_objective3 = 0.0
 
         if self.alt_opt: #ml
-            self.g_objective = (1.0 / tf.cast(self.no_samples, tf.float32)) * -tf.reduce_sum(
+            self.g_objective = -tf.reduce_sum(
                 tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
         else: #else hinge margin of 1
@@ -639,8 +639,8 @@ class VKGE:
                     if self.alt_updates:
                         _ = session.run([ self.training_stepg],
                                                              feed_dict=loss_args)
-                        summary, _, elbo_value = session.run([merge, self.training_stepe, self.elbo],
-                                                             feed_dict=loss_args)
+                        # summary, _, elbo_value = session.run([merge, self.training_stepe, self.elbo],
+                        #                                      feed_dict=loss_args)
                         _, elbo_value = session.run([self.training_stepe, self.elbo],
                                                              feed_dict=loss_args)
 
