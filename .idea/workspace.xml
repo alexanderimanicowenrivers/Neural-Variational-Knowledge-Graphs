@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="upload experiment 2 of 5 negative samples">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_test.py" afterPath="$PROJECT_DIR$/script_test.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,7 +20,7 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-30">
+            <state relative-caret-position="125">
               <caret line="540" column="31" lean-forward="false" selection-start-line="540" selection-start-column="31" selection-end-line="540" selection-end-column="31" />
               <folding>
                 <element signature="e#679#799#0" expanded="false" />
@@ -45,8 +44,8 @@
       <file leaf-file-name="script_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="82" column="96" lean-forward="false" selection-start-line="82" selection-start-column="78" selection-end-line="82" selection-end-column="96" />
+            <state relative-caret-position="191">
+              <caret line="69" column="14" lean-forward="true" selection-start-line="69" selection-start-column="14" selection-end-line="69" selection-end-column="14" />
               <folding>
                 <element signature="e#127#143#0" expanded="true" />
               </folding>
@@ -394,13 +393,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00530" summary="testing non probabilistic model">
-      <created>1532024933558</created>
-      <option name="number" value="00530" />
-      <option name="presentableId" value="LOCAL-00530" />
-      <option name="project" value="LOCAL" />
-      <updated>1532024933560</updated>
-    </task>
     <task id="LOCAL-00531" summary="testing non probabilistic model with no neg sampling">
       <created>1532025267987</created>
       <option name="number" value="00531" />
@@ -737,7 +729,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533218966188</updated>
     </task>
-    <option name="localTasksCounter" value="579" />
+    <task id="LOCAL-00579" summary="upload experiment 2 of 5 negative samples">
+      <created>1533222937714</created>
+      <option name="number" value="00579" />
+      <option name="presentableId" value="LOCAL-00579" />
+      <option name="project" value="LOCAL" />
+      <updated>1533222937715</updated>
+    </task>
+    <option name="localTasksCounter" value="580" />
     <servers />
   </component>
   <component name="TodoView">
@@ -823,7 +822,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="testing non probabilistic model with no neg sampling" />
     <MESSAGE value="no neg samples" />
     <MESSAGE value="added in dynamic sampling" />
     <MESSAGE value="added in noise sampled per triple" />
@@ -848,7 +846,8 @@
     <MESSAGE value="simplified test script" />
     <MESSAGE value="remove summary" />
     <MESSAGE value="fix merge error" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix merge error" />
+    <MESSAGE value="upload experiment 2 of 5 negative samples" />
+    <option name="LAST_COMMIT_MESSAGE" value="upload experiment 2 of 5 negative samples" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1194,7 +1193,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-30">
+        <state relative-caret-position="125">
           <caret line="540" column="31" lean-forward="false" selection-start-line="540" selection-start-column="31" selection-end-line="540" selection-end-column="31" />
           <folding>
             <element signature="e#679#799#0" expanded="false" />
@@ -1206,8 +1205,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="82" column="96" lean-forward="false" selection-start-line="82" selection-start-column="78" selection-end-line="82" selection-end-column="96" />
+        <state relative-caret-position="191">
+          <caret line="69" column="14" lean-forward="true" selection-start-line="69" selection-start-column="14" selection-end-line="69" selection-end-column="14" />
           <folding>
             <element signature="e#127#143#0" expanded="true" />
           </folding>
