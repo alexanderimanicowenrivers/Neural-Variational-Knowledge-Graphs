@@ -71,7 +71,7 @@ def main(_):
         w2=[1e-3,1e-7], #
         w3=[50,100,200,300],
         w4 = ['kinship','nations','umls'],
-        w5=[True,False],
+        w5=[False],
         w6=[0.1,0.01,0.001],
         w7=['DistMult'],
         w8=[True,False],
