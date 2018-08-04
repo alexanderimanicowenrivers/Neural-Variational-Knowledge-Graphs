@@ -282,6 +282,7 @@ class VKGE:
                         Constructs Model
         """
         self.noise = tf.placeholder(tf.float32, shape=[None,entity_embedding_size])
+        self.bernoulli_elbo_sampling = tf.placeholder(tf.int32, shape=[None])
 
         self.no_samples = tf.placeholder(tf.int32)
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
@@ -327,14 +328,28 @@ class VKGE:
 
         # ####################################  one KL
 
-
-        self.mu_all=tf.concat(axis=0,values=[self.mu_s,self.mu_p,self.mu_o])
-        self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s,self.log_sigma_sq_p,self.log_sigma_sq_o])
         #
+        idx=self.bernoulli_elbo_sampling
+
+        # self.mu_s_bs=tf.gather(self.mu_s,idx)
+        # self.mu_o_bs=tf.gather(self.mu_o,idx)
+        # self.mu_p_bs=tf.gather(self.mu_p,idx)
+        #
+        # self.log_sigma_sq_s_bs =tf.gather(self.log_sigma_sq_s,idx)
+        # self.log_sigma_sq_o_bs =tf.gather(self.log_sigma_sq_o,idx)
+        # self.log_sigma_sq_p_bs =tf.gather(self.log_sigma_sq_p,idx)
+        #
+        # self.mu_all=tf.concat(axis=0,values=[self.mu_s_bs,self.mu_o_bs,self.mu_p_bs])
+        # self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s_bs,self.log_sigma_sq_o_bs,self.log_sigma_sq_p_bs])
+        # #
+        self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
+        self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
+        #
+
         self.e_objective-= 0.5 * tf.reduce_sum(
                          1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
 
-        self.e_objective=self.e_objective*self.KL_discount
+        self.e_objective=self.e_objective
 
 
         # ####################################  separately KL
@@ -630,7 +645,8 @@ class VKGE:
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size),
                         self.epoch_d: 1.0
-                        ,self.noise:noise
+                        ,self.bernoulli_elbo_sampling: np.arange(int(self.batch_size+10))
+                        # ,self.noise:noise
                     }
 
                     # merge = tf.summary.merge_all()  # for TB
