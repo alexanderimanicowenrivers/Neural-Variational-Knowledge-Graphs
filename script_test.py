@@ -74,7 +74,7 @@ def main(_):
         w5=[False],
         w6=[0.1,0.01,0.001],
         w7=['DistMult', 'ComplEx','TransE'],
-        w8=[True,False],
+        w8=[True],
         w9=['none'],
         w10=[1,6]
     )
