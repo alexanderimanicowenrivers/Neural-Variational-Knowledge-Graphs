@@ -430,7 +430,7 @@ class VKGE_simple:
                 # Early Stopping
                 ##
 
-                if (epoch % 50) == 0:
+                if (epoch % 10) == 0:
 
                     eval_name = 'valid'
                     eval_triples = valid_triples

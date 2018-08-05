@@ -376,6 +376,8 @@ class VKGE:
 
         self.elbo = self.g_objective + self.e_objective
 
+        ##clip for robust learning as observed nans during training
+
         gradients = optimizer.compute_gradients(loss=self.elbo)
 
         if True:

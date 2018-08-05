@@ -66,14 +66,14 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[100],
+        w1=[1000],
         # w1=[10],
         w2=[1e-3,1e-7], #
         w3=[100,200,300],
         w4 = ['kinship','nations','umls'],
         w5=[False],
         w6=[0.1,0.01,0.001],
-        w7=['TransE', 'DistMult', 'ComplEx'],
+        w7=['DistMult', 'ComplEx','TransE'],
         w8=[True,False],
         w9=['none'],
         w10=[1,6]
@@ -81,7 +81,7 @@ def main(_):
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180805_GPU2'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180805_redo_testGPU2'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
@@ -145,8 +145,9 @@ def main(_):
 # $ -e /home/acowenri/array.e.log
 # $ -t 1-{}
 # $ -l tmem=8G
-# $ -l h_rt=24:00:00
-# $ -ac allow=LMNOPQSTU
+# $ -l h_rt=8:00:00
+# $ -P gpu
+# $ -l gpu=1-GPU_PASCAL=1
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
