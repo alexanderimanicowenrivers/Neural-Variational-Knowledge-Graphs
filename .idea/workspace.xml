@@ -58,8 +58,8 @@
       <file leaf-file-name="script_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="73" column="12" lean-forward="false" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="12" />
+            <state relative-caret-position="271">
+              <caret line="136" column="0" lean-forward="true" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
               <folding>
                 <element signature="e#127#143#0" expanded="true" />
               </folding>
@@ -386,13 +386,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00547" summary="redo baseline tests">
-      <created>1532450500215</created>
-      <option name="number" value="00547" />
-      <option name="presentableId" value="LOCAL-00547" />
-      <option name="project" value="LOCAL" />
-      <updated>1532450500215</updated>
     </task>
     <task id="LOCAL-00548" summary="redo baseline tests">
       <created>1532450540107</created>
@@ -730,7 +723,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533412805848</updated>
     </task>
-    <option name="localTasksCounter" value="596" />
+    <task id="LOCAL-00596" summary="updated test script">
+      <created>1533413026615</created>
+      <option name="number" value="00596" />
+      <option name="presentableId" value="LOCAL-00596" />
+      <option name="project" value="LOCAL" />
+      <updated>1533413026616</updated>
+    </task>
+    <option name="localTasksCounter" value="597" />
     <servers />
   </component>
   <component name="TodoView">
@@ -836,12 +836,12 @@
     <MESSAGE value="fix merge error" />
     <MESSAGE value="upload experiment 2 of 5 negative samples" />
     <MESSAGE value="update evaluation" />
-    <MESSAGE value="updated test script" />
     <MESSAGE value="updated baseline with max number of negative samples" />
     <MESSAGE value="dismult in tst" />
     <MESSAGE value="updated with tested bernoulli sampling on elbo" />
     <MESSAGE value="evaluation after 10 epochs" />
-    <option name="LAST_COMMIT_MESSAGE" value="evaluation after 10 epochs" />
+    <MESSAGE value="updated test script" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated test script" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1211,8 +1211,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="73" column="12" lean-forward="false" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="12" />
+        <state relative-caret-position="271">
+          <caret line="136" column="0" lean-forward="true" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
           <folding>
             <element signature="e#127#143#0" expanded="true" />
           </folding>

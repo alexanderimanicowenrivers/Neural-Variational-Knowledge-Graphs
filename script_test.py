@@ -112,19 +112,43 @@ def main(_):
 # use #$ -pe smp 1000 for 1000 cores
  # add this in for GPU's   # $ -P gpu
  #    # $ -l gpu=0
+    #no gpu
+
+    # $ -cwd
+    # $ -S /bin/bash
+    # $ -o /home/acowenri/array.o.log
+    # $ -e /home/acowenri/array.e.log
+    # $ -t 1-{}
+    # $ -l tmem=8G
+    # $ -l h_rt=12:00:00
+    # $ -ac allow=LMNOPQSTU
+
+    #GPU
+
+    # $ -cwd
+    # $ -S /bin/bash
+    # $ -o /dev/null
+    # $ -e /dev/null
+    # $ -t 1-{}
+    # $ -l tmem=8G
+    # $ -l h_rt=24:00:00
+    # $ -P gpu
+    # $ -l gpu=1
+
 
     header = """#!/bin/bash
 
+
 #$ -cwd
 #$ -S /bin/bash
-#$ -o /home/acowenri/array.o.log
-#$ -e /home/acowenri/array.e.log
+#$ -o /dev/null
+#$ -e /dev/null
 #$ -t 1-{}
 #$ -l tmem=8G
-#$ -l h_rt=12:00:00
+#$ -l h_rt=24:00:00
+#$ -P gpu
+#$ -l gpu=1
 #$ -ac allow=LMNOPQSTU
-
-
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
