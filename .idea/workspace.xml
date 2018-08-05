@@ -80,8 +80,8 @@
       <file leaf-file-name="script_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="71" column="20" lean-forward="false" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="20" />
+            <state relative-caret-position="311">
+              <caret line="56" column="18" lean-forward="true" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
               <folding>
                 <element signature="e#127#143#0" expanded="true" />
               </folding>
@@ -104,7 +104,7 @@
       <file leaf-file-name="script_search.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1050">
+            <state relative-caret-position="490">
               <caret line="74" column="43" lean-forward="false" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="43" />
               <folding />
             </state>
@@ -435,20 +435,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00560" summary="baseline with hinge loss + projection">
-      <created>1533048226829</created>
-      <option name="number" value="00560" />
-      <option name="presentableId" value="LOCAL-00560" />
-      <option name="project" value="LOCAL" />
-      <updated>1533048226830</updated>
-    </task>
-    <task id="LOCAL-00561" summary="added in hinge loss">
-      <created>1533048600241</created>
-      <option name="number" value="00561" />
-      <option name="presentableId" value="LOCAL-00561" />
-      <option name="project" value="LOCAL" />
-      <updated>1533048600241</updated>
-    </task>
     <task id="LOCAL-00562" summary="test scripts">
       <created>1533049170473</created>
       <option name="number" value="00562" />
@@ -778,7 +764,21 @@
       <option name="project" value="LOCAL" />
       <updated>1533482178902</updated>
     </task>
-    <option name="localTasksCounter" value="609" />
+    <task id="LOCAL-00609" summary="less learning rate search">
+      <created>1533482201286</created>
+      <option name="number" value="00609" />
+      <option name="presentableId" value="LOCAL-00609" />
+      <option name="project" value="LOCAL" />
+      <updated>1533482201286</updated>
+    </task>
+    <task id="LOCAL-00610" summary="less learning rate search">
+      <created>1533482216828</created>
+      <option name="number" value="00610" />
+      <option name="presentableId" value="LOCAL-00610" />
+      <option name="project" value="LOCAL" />
+      <updated>1533482216828</updated>
+    </task>
+    <option name="localTasksCounter" value="611" />
     <servers />
   </component>
   <component name="TodoView">
@@ -864,7 +864,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in hinge loss" />
     <MESSAGE value="test scripts" />
     <MESSAGE value="fixed test script shape to len error" />
     <MESSAGE value="added in test script" />
@@ -889,7 +888,8 @@
     <MESSAGE value="gradient clipping to combat nans" />
     <MESSAGE value="only using MLE for now without Hinge" />
     <MESSAGE value="remove mean embedding initalisation" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove mean embedding initalisation" />
+    <MESSAGE value="less learning rate search" />
+    <option name="LAST_COMMIT_MESSAGE" value="less learning rate search" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1172,14 +1172,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script_search.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="74" column="43" lean-forward="false" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="585">
@@ -1240,10 +1232,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/script_search.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="74" column="43" lean-forward="false" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/script_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="71" column="20" lean-forward="false" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="20" />
+        <state relative-caret-position="311">
+          <caret line="56" column="18" lean-forward="true" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
           <folding>
             <element signature="e#127#143#0" expanded="true" />
           </folding>
