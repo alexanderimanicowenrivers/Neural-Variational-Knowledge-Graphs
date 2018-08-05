@@ -69,11 +69,11 @@ def main(_):
         w1=[10000,100],
         # w1=[10],
         w2=[1e-3,1e-7], #
-        w3=[50,100,200,300],
+        w3=[100,200,300],
         w4 = ['kinship','nations','umls'],
         w5=[False],
         w6=[0.1,0.01,0.001],
-        w7=['DistMult'],
+        w7=['TransE', 'DistMult', 'ComplEx'],
         w8=[True,False],
         w9=['none'],
         w10=[1,6]
