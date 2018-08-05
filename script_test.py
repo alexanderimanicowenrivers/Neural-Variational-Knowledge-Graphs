@@ -40,7 +40,6 @@ def to_cmd(c):
               '--score_func {} ' \
               '--alt_opt {} ' \
               '--alt_test {} ' \
-              '--mean_c {}' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -53,9 +52,7 @@ def to_cmd(c):
                 c['w7'],
                 # ("{}/logs/180718/tb_nvkg.{}".format(path, summary(c))),
                 c['w8'],
-                c['w9'],
-                c['w10']
-                )
+                c['w9'])                )
     return command
 
 
@@ -75,9 +72,7 @@ def main(_):
         w6=[0.1,0.01,0.001],
         w7=['DistMult', 'ComplEx','TransE'],
         w8=[True],
-        w9=['none'],
-        w10=[1,6]
-    )
+        w9=['none'])
 
     configurations = cartesian_product(hyperparameters_space)
 
