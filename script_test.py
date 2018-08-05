@@ -141,7 +141,7 @@ def main(_):
 # $ -e /home/acowenri/array.e.log
 # $ -t 1-{}
 # $ -l tmem=8G
-# $ -l h_rt=8:00:00
+# $ -l h_rt=24:00:00
 # $ -P gpu
 # $ -l gpu=1
 # $ -ac allow=LMNOPQSTU
