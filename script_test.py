@@ -81,7 +81,7 @@ def main(_):
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180802_redo_test'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180805_redo_testGPU'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
