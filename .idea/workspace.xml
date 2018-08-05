@@ -4,7 +4,6 @@
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/__init__.py" afterPath="$PROJECT_DIR$/vkge/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/non_probabilistic.py" afterPath="$PROJECT_DIR$/vkge/non_probabilistic.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -437,13 +436,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00554" summary="updated tests">
-      <created>1532940045358</created>
-      <option name="number" value="00554" />
-      <option name="presentableId" value="LOCAL-00554" />
-      <option name="project" value="LOCAL" />
-      <updated>1532940045358</updated>
-    </task>
     <task id="LOCAL-00555" summary="updated tests with ada optimiser">
       <created>1533042183168</created>
       <option name="number" value="00555" />
@@ -780,7 +772,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533462343692</updated>
     </task>
-    <option name="localTasksCounter" value="603" />
+    <task id="LOCAL-00603" summary="updated test script to no GPU's">
+      <created>1533480068727</created>
+      <option name="number" value="00603" />
+      <option name="presentableId" value="LOCAL-00603" />
+      <option name="project" value="LOCAL" />
+      <updated>1533480068727</updated>
+    </task>
+    <option name="localTasksCounter" value="604" />
     <servers />
   </component>
   <component name="TodoView">
