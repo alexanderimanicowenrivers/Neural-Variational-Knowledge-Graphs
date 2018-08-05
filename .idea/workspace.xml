@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="only using MLE for now without Hinge">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_test.py" afterPath="$PROJECT_DIR$/script_test.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -81,8 +80,8 @@
       <file leaf-file-name="script_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+            <state relative-caret-position="259">
+              <caret line="71" column="20" lean-forward="false" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="20" />
               <folding>
                 <element signature="e#127#143#0" expanded="true" />
               </folding>
@@ -436,13 +435,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00559" summary="updated tests with ada optimiser">
-      <created>1533048061156</created>
-      <option name="number" value="00559" />
-      <option name="presentableId" value="LOCAL-00559" />
-      <option name="project" value="LOCAL" />
-      <updated>1533048061156</updated>
-    </task>
     <task id="LOCAL-00560" summary="baseline with hinge loss + projection">
       <created>1533048226829</created>
       <option name="number" value="00560" />
@@ -779,7 +771,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533481701407</updated>
     </task>
-    <option name="localTasksCounter" value="608" />
+    <task id="LOCAL-00608" summary="remove mean embedding initalisation">
+      <created>1533482178902</created>
+      <option name="number" value="00608" />
+      <option name="presentableId" value="LOCAL-00608" />
+      <option name="project" value="LOCAL" />
+      <updated>1533482178902</updated>
+    </task>
+    <option name="localTasksCounter" value="609" />
     <servers />
   </component>
   <component name="TodoView">
@@ -865,7 +864,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="baseline with hinge loss + projection" />
     <MESSAGE value="added in hinge loss" />
     <MESSAGE value="test scripts" />
     <MESSAGE value="fixed test script shape to len error" />
@@ -890,7 +888,8 @@
     <MESSAGE value="updated test script to no GPU's" />
     <MESSAGE value="gradient clipping to combat nans" />
     <MESSAGE value="only using MLE for now without Hinge" />
-    <option name="LAST_COMMIT_MESSAGE" value="only using MLE for now without Hinge" />
+    <MESSAGE value="remove mean embedding initalisation" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove mean embedding initalisation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1243,8 +1242,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+        <state relative-caret-position="259">
+          <caret line="71" column="20" lean-forward="false" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="20" />
           <folding>
             <element signature="e#127#143#0" expanded="true" />
           </folding>

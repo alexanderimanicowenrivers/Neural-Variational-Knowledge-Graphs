@@ -69,7 +69,7 @@ def main(_):
         w3=[100,200,300],
         w4 = ['kinship','nations','umls'],
         w5=[False],
-        w6=[0.1,0.01,0.001],
+        w6=[0.1,0.01],
         w7=['DistMult', 'ComplEx','TransE'],
         w8=[True],
         w9=['none'])
