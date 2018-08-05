@@ -375,7 +375,18 @@ class VKGE:
 
 
         self.elbo = self.g_objective + self.e_objective
-        self.training_step = optimizer.minimize(self.elbo)
+
+        gradients = optimizer.compute_gradients(loss=self.elbo)
+
+        if True:
+            gradients = [(tf.clip_by_value(grad, -1, 1), var)
+                         for grad, var in gradients if grad is not None]
+
+        self.training_step = optimizer.apply_gradients(gradients)
+
+
+
+        # self.training_step = optimizer.minimize(self.elbo)
 
         # self.train_variables=tf.trainable_variables()
         # self._setup_training(loss=self.elbo,optimizer=optimizer)
@@ -692,7 +703,6 @@ class VKGE:
 
 
                 logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
-
 
 
                 if (epoch % 10) == 0:
