@@ -133,7 +133,7 @@ def main(_):
     # $ -l tmem=8G
     # $ -l h_rt=24:00:00
     # $ -P gpu
-    # $ -l gpu=1
+    # $ -l gpu=1-GPU_PASCAL=1
 
 
     header = """#!/bin/bash
@@ -147,7 +147,8 @@ def main(_):
 # $ -l tmem=8G
 # $ -l h_rt=8:00:00
 # $ -P gpu
-# $ -l gpu=1-GPU_PASCAL=1
+# $ -l gpu=1
+# $ -ac allow=LMNOPQSTU
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
