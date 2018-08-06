@@ -53,7 +53,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                ("{}/logs/180806/model_{}".format(path, summary(c)))
+                ("{}/logs/180806_adamntada/model_{}".format(path, summary(c)))
                 )
     return command
 
@@ -78,7 +78,7 @@ def main(_):
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180806'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180806_adamntada'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
