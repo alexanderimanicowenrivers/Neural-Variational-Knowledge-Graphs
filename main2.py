@@ -16,7 +16,7 @@ flags.DEFINE_float("mog_split", 0.5, "Split between spike and slab [6.0]")
 flags.DEFINE_integer("re_reun", 1, "used for multiple runs of the same parameter settings")
 flags.DEFINE_integer("embedding_size", 200, "The dimension of graph embeddings [50]")
 flags.DEFINE_string("file_name", '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/18_6_25', "file name for tensorboard file ['--']")
-flags.DEFINE_integer("no_batches", 10, "Number of batches [10]")
+flags.DEFINE_integer("no_batches", 100, "Number of batches [10]")
 flags.DEFINE_boolean("alt_updates", True, "Switch between alternating updates in training [True]")
 flags.DEFINE_boolean("alt_cost", True, "Switch for compression cost to be used in training [True]")
 flags.DEFINE_boolean("static_mean", False,
@@ -27,7 +27,7 @@ flags.DEFINE_boolean("projection", False, "Alternate between using a projection 
 flags.DEFINE_boolean("alt_opt", True, "Define the use of hinge loss or MLE True is MLE  [True]")
 flags.DEFINE_string("score_func", 'DistMult', "Defines score function [dismult]")
 flags.DEFINE_string("alt_test", 'none', "Defines the alternative test type, t1,t2,t3 [None]")
-flags.DEFINE_float("lr", 0.1, "Choose optimiser loss, select the margin for hinge loss [1]")
+flags.DEFINE_float("lr", 0.01, "Choose optimiser loss, select the margin for hinge loss [1]")
 flags.DEFINE_integer("negsamples", 0, "Number of negative samples [0]")
 flags.DEFINE_float("samples_perdp", 1, "Number of noise samples used per datapoint [1]")
 FLAGS = flags.FLAGS
