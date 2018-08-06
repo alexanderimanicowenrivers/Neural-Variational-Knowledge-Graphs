@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,8 +42,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="51" column="10" lean-forward="false" selection-start-line="51" selection-start-column="6" selection-end-line="51" selection-end-column="10" />
+            <state relative-caret-position="95">
+              <caret line="692" column="82" lean-forward="false" selection-start-line="692" selection-start-column="82" selection-end-line="692" selection-end-column="82" />
               <folding>
                 <element signature="e#679#799#0" expanded="false" />
                 <element signature="e#842#996#0" expanded="false" />
@@ -52,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base_quick.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base_quick.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base_quick.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="51" column="16" lean-forward="false" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
+            <state relative-caret-position="366">
+              <caret line="599" column="17" lean-forward="true" selection-start-line="599" selection-start-column="17" selection-end-line="599" selection-end-column="17" />
               <folding>
                 <element signature="e#679#799#0" expanded="false" />
                 <element signature="e#842#996#0" expanded="false" />
@@ -66,10 +67,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script_test.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="script_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1247">
+            <state relative-caret-position="134">
               <caret line="52" column="24" lean-forward="true" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
               <folding>
                 <element signature="e#127#143#0" expanded="true" />
@@ -81,8 +82,8 @@
       <file leaf-file-name="script_search.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="74" column="43" lean-forward="false" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="43" />
+            <state relative-caret-position="242">
+              <caret line="135" column="0" lean-forward="true" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -198,7 +199,6 @@
         <option value="$PROJECT_DIR$/vkge/models/base.py" />
         <option value="$PROJECT_DIR$/script_test_variance.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/script_search.py" />
         <option value="$PROJECT_DIR$/script_test_thresh.py" />
         <option value="$PROJECT_DIR$/vkge/not_working.py" />
         <option value="$PROJECT_DIR$/script_baseline.py" />
@@ -209,8 +209,9 @@
         <option value="$PROJECT_DIR$/vkge/base_variance_tests.py" />
         <option value="$PROJECT_DIR$/main2.py" />
         <option value="$PROJECT_DIR$/script_test.py" />
-        <option value="$PROJECT_DIR$/vkge/base.py" />
+        <option value="$PROJECT_DIR$/script_search.py" />
         <option value="$PROJECT_DIR$/vkge/base_quick.py" />
+        <option value="$PROJECT_DIR$/vkge/base.py" />
       </list>
     </option>
   </component>
@@ -424,13 +425,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00575" summary="remove summary">
-      <created>1533138457352</created>
-      <option name="number" value="00575" />
-      <option name="presentableId" value="LOCAL-00575" />
-      <option name="project" value="LOCAL" />
-      <updated>1533138457352</updated>
     </task>
     <task id="LOCAL-00576" summary="remove summary">
       <created>1533216480777</created>
@@ -768,7 +762,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533563053359</updated>
     </task>
-    <option name="localTasksCounter" value="624" />
+    <task id="LOCAL-00624" summary="updated training">
+      <created>1533563912523</created>
+      <option name="number" value="00624" />
+      <option name="presentableId" value="LOCAL-00624" />
+      <option name="project" value="LOCAL" />
+      <updated>1533563912523</updated>
+    </task>
+    <option name="localTasksCounter" value="625" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1168,14 +1169,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script_search.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="74" column="43" lean-forward="false" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -1202,20 +1195,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script_test.py">
+    <entry file="file://$PROJECT_DIR$/script_search.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1247">
-          <caret line="52" column="24" lean-forward="true" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
+        <state relative-caret-position="242">
+          <caret line="135" column="0" lean-forward="true" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base_quick.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="599" column="17" lean-forward="true" selection-start-line="599" selection-start-column="17" selection-end-line="599" selection-end-column="17" />
           <folding>
-            <element signature="e#127#143#0" expanded="true" />
+            <element signature="e#679#799#0" expanded="false" />
+            <element signature="e#842#996#0" expanded="false" />
+            <element signature="e#1025#1360#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="51" column="10" lean-forward="false" selection-start-line="51" selection-start-column="6" selection-end-line="51" selection-end-column="10" />
+        <state relative-caret-position="95">
+          <caret line="692" column="82" lean-forward="false" selection-start-line="692" selection-start-column="82" selection-end-line="692" selection-end-column="82" />
           <folding>
             <element signature="e#679#799#0" expanded="false" />
             <element signature="e#842#996#0" expanded="false" />
@@ -1224,14 +1227,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base_quick.py">
+    <entry file="file://$PROJECT_DIR$/script_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="51" column="16" lean-forward="false" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
+        <state relative-caret-position="134">
+          <caret line="52" column="24" lean-forward="true" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
           <folding>
-            <element signature="e#679#799#0" expanded="false" />
-            <element signature="e#842#996#0" expanded="false" />
-            <element signature="e#1025#1360#0" expanded="false" />
+            <element signature="e#127#143#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -690,7 +690,7 @@ class VKGE:
 
 
                 if (epoch % 10) == 0:
-                    self._saver.save(session, filename+'_epoch_'+str(epoch))
+                    self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
                     eval_name = 'valid'
