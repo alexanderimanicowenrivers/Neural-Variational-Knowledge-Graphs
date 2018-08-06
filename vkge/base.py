@@ -117,9 +117,7 @@ class VKGE:
             predicate_embedding_size = embedding_size*2
             entity_embedding_size = embedding_size*2
 
-        elif self.score_func=='RESCAL':
-            predicate_embedding_size = embedding_size * embedding_size
-            entity_embedding_size = embedding_size
+
         else:
             predicate_embedding_size = embedding_size
             entity_embedding_size = embedding_size
@@ -151,8 +149,8 @@ class VKGE:
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
-        optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
-        # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
+        # optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
+        optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
 
         # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-5)
 
@@ -196,27 +194,27 @@ class VKGE:
         tf.summary.scalar("total loss", self.elbo)
 
 
-        with tf.name_scope('Samples'):
-
-            with tf.name_scope('Entity1'):
-                self.var1_1 = tf.nn.embedding_lookup(self.entity_embedding_mean, self.var1)
-                self.var1_2 = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var1)
-
-                with tf.name_scope('Entity1_Mean'):
-                    self.variable_summaries(self.var1_1)
-
-                with tf.name_scope('Entity1_logStd'):
-                    self.variable_summaries(tf.sqrt(tf.exp(self.var1_2)))
-
-            with tf.name_scope('Predicate1'):
-                self.var2_1 = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.var2)
-                self.var2_2 = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.var2)
-
-                with tf.name_scope('Predicate1_Mean'):
-                    self.variable_summaries(self.var2_1)
-
-                with tf.name_scope('Predicate1_logStd'):
-                    self.variable_summaries(tf.sqrt(tf.exp(self.var2_2)))
+        # with tf.name_scope('Samples'):
+        #
+        #     with tf.name_scope('Entity1'):
+        #         self.var1_1 = tf.nn.embedding_lookup(self.entity_embedding_mean, self.var1)
+        #         self.var1_2 = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var1)
+        #
+        #         with tf.name_scope('Entity1_Mean'):
+        #             self.variable_summaries(self.var1_1)
+        #
+        #         with tf.name_scope('Entity1_logStd'):
+        #             self.variable_summaries(tf.sqrt(tf.exp(self.var1_2)))
+        #
+        #     with tf.name_scope('Predicate1'):
+        #         self.var2_1 = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.var2)
+        #         self.var2_2 = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.var2)
+        #
+        #         with tf.name_scope('Predicate1_Mean'):
+        #             self.variable_summaries(self.var2_1)
+        #
+        #         with tf.name_scope('Predicate1_logStd'):
+        #             self.variable_summaries(tf.sqrt(tf.exp(self.var2_2)))
 
     def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=None):
         global_step = tf.train.get_global_step()
@@ -392,7 +390,7 @@ class VKGE:
 
         # self.train_variables=tf.trainable_variables()
         # self._setup_training(loss=self.elbo,optimizer=optimizer)
-        self._setup_summaries()
+        # self._setup_summaries()
         # self._variables = tf.global_variables()
         self._saver = tf.train.Saver()
 
@@ -692,7 +690,7 @@ class VKGE:
 
 
                 if (epoch % 10) == 0:
-                    self._saver.save(session, filename)
+                    self._saver.save(session, filename+'_epoch_'+str(epoch))
 
 
                     eval_name = 'valid'
