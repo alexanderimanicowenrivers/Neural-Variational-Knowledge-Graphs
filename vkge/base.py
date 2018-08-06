@@ -692,7 +692,7 @@ class VKGE:
 
 
                 if (epoch % 10) == 0:
-                    self._saver.save(session, '/model'+filename )
+                    self._saver.save(session, filename)
 
 
                     eval_name = 'valid'

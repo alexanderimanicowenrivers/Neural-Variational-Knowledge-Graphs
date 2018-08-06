@@ -53,7 +53,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                ("{}/logs/180806/tb_nvkg.{}".format(path, summary(c)))
+                ("{}/logs/180806/model_{}".format(path, summary(c)))
                 )
     return command
 
