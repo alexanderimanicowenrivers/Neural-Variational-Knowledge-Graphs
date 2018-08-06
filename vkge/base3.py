@@ -594,10 +594,10 @@ class VKGE:
 
                     counter += 1
 
-                if (self.projection == True):  # project means
-                    for projection_step in projection_steps:
-                        session.run([projection_step])
-
+                # if (self.projection == True):  # project means
+                #     for projection_step in projection_steps:
+                #         session.run([projection_step])
+                #
 
 
 
@@ -607,7 +607,7 @@ class VKGE:
                 # Early Stopping
                 ##
 
-                if (epoch % 50) == 0:
+                if (epoch % 10) == 0:
 
                     eval_name = 'valid'
                     eval_triples = valid_triples
