@@ -688,7 +688,7 @@ class VKGE:
                     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
 
 
-                    loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
+                    loss_values += [elbo_value / (Xp_batch.shape[0] )]
                     total_loss_value += elbo_value
 
                     counter += 1
