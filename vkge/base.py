@@ -394,7 +394,7 @@ class VKGE:
         # self._setup_training(loss=self.elbo,optimizer=optimizer)
         self._setup_summaries()
         # self._variables = tf.global_variables()
-        # self._saver = tf.train.Saver()
+        self._saver = tf.train.Saver()
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
                       sig_min):
@@ -596,9 +596,7 @@ class VKGE:
 
             for epoch in range(1, nb_epochs + 1):
 
-                if earl_stop == 1:
-                    break
-                    # self._saver.save(session, '/model'+filename )
+
 
                 counter = 0
 
@@ -660,17 +658,7 @@ class VKGE:
 
                     # merge = tf.summary.merge_all()  # for TB
 
-                    if self.alt_updates:
-                        _ = session.run([ self.training_stepg],
-                                                             feed_dict=loss_args)
-                        # summary, _, elbo_value = session.run([merge, self.training_stepe, self.elbo],
-                        #                                      feed_dict=loss_args)
-                        _, elbo_value = session.run([self.training_stepe, self.elbo],
-                                                             feed_dict=loss_args)
-
-
-                    else:
-                        _, elbo_value = session.run([ self.training_step, self.elbo],
+                    _, elbo_value = session.run([ self.training_step, self.elbo],
                                                          feed_dict=loss_args)
 
                         # summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
@@ -704,6 +692,8 @@ class VKGE:
 
 
                 if (epoch % 10) == 0:
+                    self._saver.save(session, '/model'+filename )
+
 
                     eval_name = 'valid'
                     eval_triples = valid_triples

@@ -40,6 +40,7 @@ def to_cmd(c):
               '--score_func {} ' \
               '--alt_opt {} ' \
               '--alt_test {} ' \
+              '--file_name {} ' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -50,9 +51,9 @@ def to_cmd(c):
                 c['w5'],
                 c['w6'],
                 c['w7'],
-                # ("{}/logs/180718/tb_nvkg.{}".format(path, summary(c))),
                 c['w8'],
-                c['w9']
+                c['w9'],
+                ("{}/logs/180806/tb_nvkg.{}".format(path, summary(c)))
                 )
     return command
 
@@ -77,7 +78,7 @@ def main(_):
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180805_redo_testGPU2'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180806'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
