@@ -50,9 +50,9 @@ class IndexGenerator:
         return rand_ints
 
 
-class VKGE:
+class VKGE_tests:
     """
-           model for testing the basic probabilistic aspects of the model
+           model for testing the basic probabilistic aspects of the model, just using SGD optimiser  - !!working!! 91.34%Hits@10
 
             Achievies
         Initializes a Link Prediction Model.

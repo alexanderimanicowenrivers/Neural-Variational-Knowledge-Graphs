@@ -1,5 +1,5 @@
 """
-            used for cluster job submission and parameter search over baseline_main.py for baseline results
+            used for cluster job submission and parameter search over main_tests.py, perform tests on pre-trained variational embeddings
 
                 """
 
@@ -27,25 +27,33 @@ def to_cmd(c):
     path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs'
     #     params = '-m cbilstm -b 32 -d 0.8 -r 300 -o adam --lr 0.001 -c 100 -e 10 ' \
     #              '--restore saved/snli/cbilstm/2/cbilstm -C 5000'
-    #     command = 'PYTHONPATH=. python3-gpu {}/main3.py {} ' \
+    #     command = 'PYTHONPATH=. python3-gpu {}/baseline_main.py {} ' \
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
-    command = 'PYTHONPATH=. anaconda-python3-cpu {}/baseline_main.py  ' \
+    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main_tests.py  ' \
+              '--no_batches {} ' \
+              '--epsilon {} ' \
               '--embedding_size {} ' \
               '--dataset {} ' \
-              '--epsilon {} ' \
+              '--alt_updates {} ' \
               '--lr {} ' \
               '--score_func {} ' \
-              '--no_batches {} ' \
+              '--alt_opt {} ' \
+              '--alt_test {} ' \
+              '--file_name {} ' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
+                c['w1'],
+                c['w2'],
                 c['w3'],
+                c['w4'],
+                c['w5'],
                 c['w6'],
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                c['w10']
+                ("{}/logs/180806_adamntada/model_{}".format(path, summary(c)))
                 )
     return command
 
@@ -57,17 +65,20 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w3=[350,300,250],
-        w6=['fb15k-237', 'kinship', 'nations', 'umls', 'wn18', 'wn18rr'],
-        w7=[1e-3],
-        w8=[0.1,0.01,0.001],
-        w9=['TransE', 'DistMult', 'ComplEx'],
-        w10=[10,100]
-    )
+        w1=[1000],
+        # w1=[10],
+        w2=[1e-7], #
+        w3=[300],
+        w4 = ['kinship','nations','umls'],
+        w5=[False],
+        w6=[0.01,0.001],
+        w7=['DistMult','TransE', 'ComplEx'],
+        w8=[True],
+        w9=['none'])
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/baseline'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180806_adamntada'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
@@ -95,21 +106,45 @@ def main(_):
     sorted_command_lines = sorted(command_lines,reverse=True)
     nb_jobs = len(sorted_command_lines)
 
-
+# use #$ -pe smp 1000 for 1000 cores
  # add this in for GPU's   # $ -P gpu
  #    # $ -l gpu=0
+    #no gpu
+
+    # $ -cwd
+    # $ -S /bin/bash
+    # $ -o /home/acowenri/array.o.log
+    # $ -e /home/acowenri/array.e.log
+    # $ -t 1-{}
+    # $ -l tmem=8G
+    # $ -l h_rt=24:00:00
+    # $ -ac allow=LMNOPQSTU
+
+    #GPU
+
+    # $ -cwd
+    # $ -S /bin/bash
+    # $ -o /dev/null
+    # $ -e /dev/null
+    # $ -t 1-{}
+    # $ -l tmem=8G
+    # $ -l h_rt=24:00:00
+    # $ -P gpu
+    # $ -l gpu=1-GPU_PASCAL=1
+
 
     header = """#!/bin/bash
 
+
 #$ -cwd
 #$ -S /bin/bash
-#$ -o /home/acowenri/array.o.log
-#$ -e /home/acowenri/array.e.log
+#$ -o /dev/null
+#$ -e /dev/null
 #$ -t 1-{}
 #$ -l tmem=8G
 #$ -l h_rt=12:00:00
-
-
+#$ -P gpu
+#$ -l gpu=1
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
@@ -121,8 +156,11 @@ export PYTHONPATH=.
 
     print(header)
 
+    #repeat each job three times
+
     for job_id, command_line in enumerate(sorted_command_lines, 1):
         print('test $SGE_TASK_ID -eq {} && {}'.format(job_id, command_line))
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)

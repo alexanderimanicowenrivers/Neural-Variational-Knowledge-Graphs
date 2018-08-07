@@ -1,5 +1,5 @@
 """
-            used for cluster job submission and parameter search over main2.py, final model analysis
+            used for cluster job submission and parameter search over main.py, train variational knowledge graph embeddings
 
                 """
 
@@ -30,7 +30,7 @@ def to_cmd(c):
     #     command = 'PYTHONPATH=. python3-gpu {}/baseline_main.py {} ' \
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
-    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main2.py  ' \
+    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
               '--no_batches {} ' \
               '--epsilon {} ' \
               '--embedding_size {} ' \
