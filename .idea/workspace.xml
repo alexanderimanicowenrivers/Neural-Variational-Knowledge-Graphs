@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_tests.py" afterPath="$PROJECT_DIR$/vkge/base_tests.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -53,8 +54,8 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="588" column="115" lean-forward="true" selection-start-line="588" selection-start-column="115" selection-end-line="588" selection-end-column="115" />
+            <state relative-caret-position="194">
+              <caret line="687" column="39" lean-forward="false" selection-start-line="687" selection-start-column="0" selection-end-line="688" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -412,13 +413,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00593" summary="updated with tested bernoulli sampling on elbo">
-      <created>1533375822110</created>
-      <option name="number" value="00593" />
-      <option name="presentableId" value="LOCAL-00593" />
-      <option name="project" value="LOCAL" />
-      <updated>1533375822111</updated>
-    </task>
     <task id="LOCAL-00594" summary="evaluation after 10 epochs">
       <created>1533376122136</created>
       <option name="number" value="00594" />
@@ -755,7 +749,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533650844101</updated>
     </task>
-    <option name="localTasksCounter" value="642" />
+    <task id="LOCAL-00642" summary="fixed error with loading model">
+      <created>1533650847537</created>
+      <option name="number" value="00642" />
+      <option name="presentableId" value="LOCAL-00642" />
+      <option name="project" value="LOCAL" />
+      <updated>1533650847538</updated>
+    </task>
+    <option name="localTasksCounter" value="643" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1218,8 +1219,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="588" column="115" lean-forward="true" selection-start-line="588" selection-start-column="115" selection-end-line="588" selection-end-column="115" />
+        <state relative-caret-position="194">
+          <caret line="687" column="39" lean-forward="false" selection-start-line="687" selection-start-column="0" selection-end-line="688" selection-end-column="0" />
           <folding />
         </state>
       </provider>
