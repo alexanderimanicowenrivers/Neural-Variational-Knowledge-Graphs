@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_tests.py" afterPath="$PROJECT_DIR$/vkge/base_tests.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -413,13 +412,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00592" summary="dismult in tst">
-      <created>1533242412322</created>
-      <option name="number" value="00592" />
-      <option name="presentableId" value="LOCAL-00592" />
-      <option name="project" value="LOCAL" />
-      <updated>1533242412322</updated>
-    </task>
     <task id="LOCAL-00593" summary="updated with tested bernoulli sampling on elbo">
       <created>1533375822110</created>
       <option name="number" value="00593" />
@@ -756,7 +748,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533650089666</updated>
     </task>
-    <option name="localTasksCounter" value="641" />
+    <task id="LOCAL-00641" summary="fixed error with loading model">
+      <created>1533650844101</created>
+      <option name="number" value="00641" />
+      <option name="presentableId" value="LOCAL-00641" />
+      <option name="project" value="LOCAL" />
+      <updated>1533650844101</updated>
+    </task>
+    <option name="localTasksCounter" value="642" />
     <servers />
   </component>
   <component name="TodoView">
@@ -842,7 +841,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in re run capabilities to testscript for more reliable results" />
     <MESSAGE value="fixed validation every 50 epochs" />
     <MESSAGE value="updates baselines for variance experiments" />
     <MESSAGE value="completed test for none hits@1" />
@@ -867,7 +865,8 @@
     <MESSAGE value="fixed filename" />
     <MESSAGE value="updated training" />
     <MESSAGE value="updated folder name" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated folder name" />
+    <MESSAGE value="fixed error with loading model" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed error with loading model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
