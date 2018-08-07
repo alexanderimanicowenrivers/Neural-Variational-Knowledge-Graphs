@@ -67,7 +67,7 @@ def main(_):
     hyperparameters_space = dict(
         w1=[1000],
         # w1=[10],
-        w2=[1e-3,1e-7], #
+        w2=[1e-3], #
         w3=[200,300],
         w4 = ['kinship','nations','umls'],
         w5=[False],
