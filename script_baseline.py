@@ -27,10 +27,10 @@ def to_cmd(c):
     path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs'
     #     params = '-m cbilstm -b 32 -d 0.8 -r 300 -o adam --lr 0.001 -c 100 -e 10 ' \
     #              '--restore saved/snli/cbilstm/2/cbilstm -C 5000'
-    #     command = 'PYTHONPATH=. python3-gpu {}/main3.py {} ' \
+    #     command = 'PYTHONPATH=. python3-gpu {}/baseline_main.py {} ' \
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
-    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main3.py  ' \
+    command = 'PYTHONPATH=. anaconda-python3-cpu {}/baseline_main.py  ' \
               '--mean_c {} ' \
               '--embedding_size {} ' \
               '--dataset {} ' \
