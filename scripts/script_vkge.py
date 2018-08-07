@@ -38,7 +38,7 @@ def to_cmd(c):
               '--alt_updates {} ' \
               '--lr {} ' \
               '--score_func {} ' \
-              '--alt_opt {} ' \
+              '--negsamples {} ' \
               '--alt_test {} ' \
               '--file_name {} ' \
         .format(path,
@@ -67,18 +67,18 @@ def main(_):
     hyperparameters_space = dict(
         w1=[1000],
         # w1=[10],
-        w2=[1e-3], #
-        w3=[200],
+        w2=[1e-3,1e-7], #
+        w3=[200,300],
         w4 = ['kinship','nations','umls'],
         w5=[False],
         w6=[0.01,0.001],
         w7=['DistMult','TransE', 'ComplEx'],
-        w8=[True],
+        w8=[5,10,15,20,25],
         w9=['none'])
 
     configurations = cartesian_product(hyperparameters_space)
 
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180806_adamntada'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180807_scaled'
 
     # Check that we are on the UCLCS cluster first
     if os.path.exists('/home/acowenri/'):
