@@ -2,40 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/fb-ntn/dev.tsv" afterPath="$PROJECT_DIR$/data/fb-ntn/dev.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/fb-ntn/test.tsv" afterPath="$PROJECT_DIR$/data/fb-ntn/test.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/fb-ntn/train.tsv" afterPath="$PROJECT_DIR$/data/fb-ntn/train.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/fb15k-237/dev.tsv" afterPath="$PROJECT_DIR$/data/fb15k-237/dev.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/fb15k-237/test.tsv" afterPath="$PROJECT_DIR$/data/fb15k-237/test.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/fb15k-237/train.tsv" afterPath="$PROJECT_DIR$/data/fb15k-237/train.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/kinship/dev.tsv" afterPath="$PROJECT_DIR$/data/kinship/dev.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/kinship/test.tsv" afterPath="$PROJECT_DIR$/data/kinship/test.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/kinship/train.tsv" afterPath="$PROJECT_DIR$/data/kinship/train.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/nations/dev.tsv" afterPath="$PROJECT_DIR$/data/nations/dev.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/nations/test.tsv" afterPath="$PROJECT_DIR$/data/nations/test.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/nations/train.tsv" afterPath="$PROJECT_DIR$/data/nations/train.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/umls/dev.tsv" afterPath="$PROJECT_DIR$/data/umls/dev.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/umls/test.tsv" afterPath="$PROJECT_DIR$/data/umls/test.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/umls/train.tsv" afterPath="$PROJECT_DIR$/data/umls/train.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn-ntn/dev.tsv" afterPath="$PROJECT_DIR$/data/wn-ntn/dev.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn-ntn/test.tiny.tsv" afterPath="$PROJECT_DIR$/data/wn-ntn/test.tiny.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn-ntn/test.tsv" afterPath="$PROJECT_DIR$/data/wn-ntn/test.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn-ntn/train.tsv" afterPath="$PROJECT_DIR$/data/wn-ntn/train.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18/dev.tsv" afterPath="$PROJECT_DIR$/data/wn18/dev.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18/test.tsv" afterPath="$PROJECT_DIR$/data/wn18/test.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18/train.tsv" afterPath="$PROJECT_DIR$/data/wn18/train.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18/wordnet-mlj12-definitions.txt" afterPath="$PROJECT_DIR$/data/wn18/wordnet-mlj12-definitions.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18rr/dev.tsv" afterPath="$PROJECT_DIR$/data/wn18rr/dev.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18rr/test.tsv" afterPath="$PROJECT_DIR$/data/wn18rr/test.tsv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18rr/train.tsv" afterPath="$PROJECT_DIR$/data/wn18rr/train.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main3.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base3.py" afterPath="$PROJECT_DIR$/vkge/base3.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_model_search.py" afterPath="$PROJECT_DIR$/vkge/base_model_search.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_variance_tests.py" afterPath="$PROJECT_DIR$/vkge/base_variance_tests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/basic_prop.py" afterPath="$PROJECT_DIR$/vkge/basic_prop.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/non_probabilistic.py" afterPath="$PROJECT_DIR$/vkge/non_probabilistic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/not_working.py" afterPath="$PROJECT_DIR$/vkge/not_working.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/fb15k-237/dev.tsv" afterPath="$PROJECT_DIR$/data/fb15k-237/dev.tsv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/fb15k-237/test.tsv" afterPath="$PROJECT_DIR$/data/fb15k-237/test.tsv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/fb15k-237/train.tsv" afterPath="$PROJECT_DIR$/data/fb15k-237/train.tsv" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -479,13 +450,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00578" summary="fix merge error">
-      <created>1533218966188</created>
-      <option name="number" value="00578" />
-      <option name="presentableId" value="LOCAL-00578" />
-      <option name="project" value="LOCAL" />
-      <updated>1533218966188</updated>
-    </task>
     <task id="LOCAL-00579" summary="upload experiment 2 of 5 negative samples">
       <created>1533222937714</created>
       <option name="number" value="00579" />
@@ -822,7 +786,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533574314018</updated>
     </task>
-    <option name="localTasksCounter" value="627" />
+    <task id="LOCAL-00627" summary="updated folder name">
+      <created>1533636586534</created>
+      <option name="number" value="00627" />
+      <option name="presentableId" value="LOCAL-00627" />
+      <option name="project" value="LOCAL" />
+      <updated>1533636586534</updated>
+    </task>
+    <option name="localTasksCounter" value="628" />
     <servers />
   </component>
   <component name="TodoView">
@@ -836,12 +807,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23462088" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40409207" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.49713877" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3286445" sideWeight="0.50858366" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3286445" sideWeight="0.4914163" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.49427754" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -908,7 +878,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in test script" />
     <MESSAGE value="added in re run capabilities to testscript for more reliable results" />
     <MESSAGE value="fixed validation every 50 epochs" />
     <MESSAGE value="updates baselines for variance experiments" />
@@ -933,7 +902,8 @@
     <MESSAGE value="fixed test script" />
     <MESSAGE value="fixed filename" />
     <MESSAGE value="updated training" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated training" />
+    <MESSAGE value="updated folder name" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated folder name" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1122,7 +1092,7 @@
         <state relative-caret-position="-165">
           <caret line="190" column="107" lean-forward="false" selection-start-line="190" selection-start-column="28" selection-end-line="190" selection-end-column="107" />
           <folding>
-            <element signature="e#25#36#0" expanded="true" />
+            <element signature="e#25#36#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1134,7 +1104,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/main3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="257">
           <caret line="35" column="26" lean-forward="false" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="26" />
@@ -1153,6 +1123,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="65" column="20" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1167,6 +1138,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
           <caret line="74" column="12" lean-forward="false" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1174,6 +1146,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="589">
           <caret line="80" column="22" lean-forward="false" selection-start-line="80" selection-start-column="22" selection-end-line="80" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
