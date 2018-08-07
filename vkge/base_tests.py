@@ -16,7 +16,8 @@ from random import randint
 
 import logging
 import sys
-import seaborn as sns
+import collections
+
 logger = logging.getLogger(__name__)
 
 
@@ -591,7 +592,9 @@ class VKGE_tests:
 
             # train_writer = tf.summary.FileWriter(filename, session.graph)
 
-            for epoch in range(0,1):
+            experiments=collections.defaultdict(list)
+
+            for epoch in range(0,10):
 
                 #
                 #
@@ -886,8 +889,8 @@ class VKGE_tests:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
-
-
+                            experiments[k].append(hits_at_k)
+                            ogger.warn('[{}] {} Hits@{} List: {}'.format(eval_name, setting_name, k, experiments[k]))
                     # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
                     # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
                     # np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
