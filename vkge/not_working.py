@@ -103,8 +103,8 @@ class VKGE_components:
         # logger.warn('Parsing the facts in the Knowledge Base ..')
         dataset_name = 'wn18'
 
-        train_triples = read_triples("data2/{}/train.tsv".format(dataset_name))  # choose dataset
-        test_triples = read_triples("data2/{}/dev.tsv".format(dataset_name))
+        train_triples = read_triples("data/{}/train.tsv".format(dataset_name))  # choose dataset
+        test_triples = read_triples("data/{}/dev.tsv".format(dataset_name))
         self.nb_examples = len(train_triples)
 
         ##### for test time ######

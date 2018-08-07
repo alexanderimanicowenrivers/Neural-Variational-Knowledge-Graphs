@@ -122,9 +122,9 @@ class VKGE2:
         logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(dataset_name))
 
 
-        train_triples = read_triples("data2/{}/train.tsv".format(dataset_name))  # choose dataset
-        valid_triples = read_triples("data2/{}/dev.tsv".format(dataset_name))
-        test_triples = read_triples("data2/{}/test.tsv".format(dataset_name))
+        train_triples = read_triples("data/{}/train.tsv".format(dataset_name))  # choose dataset
+        valid_triples = read_triples("data/{}/dev.tsv".format(dataset_name))
+        test_triples = read_triples("data/{}/test.tsv".format(dataset_name))
         self.nb_examples = len(train_triples)
 
 

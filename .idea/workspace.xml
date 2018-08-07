@@ -2,10 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/fb-ntn/dev.tsv" afterPath="$PROJECT_DIR$/data/fb-ntn/dev.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/fb-ntn/test.tsv" afterPath="$PROJECT_DIR$/data/fb-ntn/test.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/fb-ntn/train.tsv" afterPath="$PROJECT_DIR$/data/fb-ntn/train.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/fb15k-237/dev.tsv" afterPath="$PROJECT_DIR$/data/fb15k-237/dev.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/fb15k-237/test.tsv" afterPath="$PROJECT_DIR$/data/fb15k-237/test.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/fb15k-237/train.tsv" afterPath="$PROJECT_DIR$/data/fb15k-237/train.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/kinship/dev.tsv" afterPath="$PROJECT_DIR$/data/kinship/dev.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/kinship/test.tsv" afterPath="$PROJECT_DIR$/data/kinship/test.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/kinship/train.tsv" afterPath="$PROJECT_DIR$/data/kinship/train.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/nations/dev.tsv" afterPath="$PROJECT_DIR$/data/nations/dev.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/nations/test.tsv" afterPath="$PROJECT_DIR$/data/nations/test.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/nations/train.tsv" afterPath="$PROJECT_DIR$/data/nations/train.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/umls/dev.tsv" afterPath="$PROJECT_DIR$/data/umls/dev.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/umls/test.tsv" afterPath="$PROJECT_DIR$/data/umls/test.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/umls/train.tsv" afterPath="$PROJECT_DIR$/data/umls/train.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn-ntn/dev.tsv" afterPath="$PROJECT_DIR$/data/wn-ntn/dev.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn-ntn/test.tiny.tsv" afterPath="$PROJECT_DIR$/data/wn-ntn/test.tiny.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn-ntn/test.tsv" afterPath="$PROJECT_DIR$/data/wn-ntn/test.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn-ntn/train.tsv" afterPath="$PROJECT_DIR$/data/wn-ntn/train.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18/dev.tsv" afterPath="$PROJECT_DIR$/data/wn18/dev.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18/test.tsv" afterPath="$PROJECT_DIR$/data/wn18/test.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18/train.tsv" afterPath="$PROJECT_DIR$/data/wn18/train.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18/wordnet-mlj12-definitions.txt" afterPath="$PROJECT_DIR$/data/wn18/wordnet-mlj12-definitions.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18rr/dev.tsv" afterPath="$PROJECT_DIR$/data/wn18rr/dev.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18rr/test.tsv" afterPath="$PROJECT_DIR$/data/wn18rr/test.tsv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data2/wn18rr/train.tsv" afterPath="$PROJECT_DIR$/data/wn18rr/train.tsv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_test.py" afterPath="$PROJECT_DIR$/script_test.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base3.py" afterPath="$PROJECT_DIR$/vkge/base3.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_model_search.py" afterPath="$PROJECT_DIR$/vkge/base_model_search.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_variance_tests.py" afterPath="$PROJECT_DIR$/vkge/base_variance_tests.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/basic_prop.py" afterPath="$PROJECT_DIR$/vkge/basic_prop.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/non_probabilistic.py" afterPath="$PROJECT_DIR$/vkge/non_probabilistic.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/not_working.py" afterPath="$PROJECT_DIR$/vkge/not_working.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,10 +61,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
+            <state relative-caret-position="11197">
               <caret line="873" column="0" lean-forward="true" selection-start-line="873" selection-start-column="0" selection-end-line="873" selection-end-column="0" />
               <folding>
                 <element signature="e#690#810#0" expanded="false" />
@@ -70,8 +100,8 @@
       <file leaf-file-name="base_model_search.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="391" column="35" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="684" selection-end-column="0" />
+            <state relative-caret-position="109">
+              <caret line="377" column="11" lean-forward="true" selection-start-line="377" selection-start-column="11" selection-end-line="377" selection-end-column="11" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -79,11 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script_test.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="script_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="81" column="0" lean-forward="true" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+            <state relative-caret-position="1065">
+              <caret line="71" column="42" lean-forward="true" selection-start-line="71" selection-start-column="42" selection-end-line="71" selection-end-column="42" />
               <folding>
                 <element signature="e#127#143#0" expanded="true" />
               </folding>
@@ -238,7 +268,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="182" />
+    <option name="y" value="53" />
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
@@ -446,13 +478,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00577" summary="remove summary">
-      <created>1533216858391</created>
-      <option name="number" value="00577" />
-      <option name="presentableId" value="LOCAL-00577" />
-      <option name="project" value="LOCAL" />
-      <updated>1533216858391</updated>
     </task>
     <task id="LOCAL-00578" summary="fix merge error">
       <created>1533218966188</created>
@@ -790,7 +815,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533564743339</updated>
     </task>
-    <option name="localTasksCounter" value="626" />
+    <task id="LOCAL-00626" summary="updated training">
+      <created>1533574314018</created>
+      <option name="number" value="00626" />
+      <option name="presentableId" value="LOCAL-00626" />
+      <option name="project" value="LOCAL" />
+      <updated>1533574314018</updated>
+    </task>
+    <option name="localTasksCounter" value="627" />
     <servers />
   </component>
   <component name="TodoView">
@@ -803,17 +835,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23462088" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40409207" sideWeight="0.5171674" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40409207" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.49713877" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.49427754" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40409207" sideWeight="0.4828326" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40409207" sideWeight="0.4828326" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -822,7 +855,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -1048,7 +1080,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/wn18/wordnet-mlj12-definitions.txt" />
-    <entry file="file://$PROJECT_DIR$/data2/wn18/wordnet-mlj12-definitions.txt">
+    <entry file="file://$PROJECT_DIR$/data/wn18/wordnet-mlj12-definitions.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1089,6 +1121,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-165">
           <caret line="190" column="107" lean-forward="false" selection-start-line="190" selection-start-column="28" selection-end-line="190" selection-end-column="107" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1110,6 +1145,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="89">
           <caret line="672" column="16" lean-forward="true" selection-start-line="672" selection-start-column="16" selection-end-line="672" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1197,16 +1233,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="391" column="35" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="684" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main3-quick.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="41">
@@ -1233,24 +1259,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base.py">
+    <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="873" column="0" lean-forward="true" selection-start-line="873" selection-start-column="0" selection-end-line="873" selection-end-column="0" />
+        <state relative-caret-position="109">
+          <caret line="377" column="11" lean-forward="true" selection-start-line="377" selection-start-column="11" selection-end-line="377" selection-end-column="11" />
           <folding>
-            <element signature="e#690#810#0" expanded="false" />
-            <element signature="e#853#1007#0" expanded="false" />
-            <element signature="e#1036#1371#0" expanded="false" />
+            <element signature="e#25#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/script_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="81" column="0" lean-forward="true" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+        <state relative-caret-position="1065">
+          <caret line="71" column="42" lean-forward="true" selection-start-line="71" selection-start-column="42" selection-end-line="71" selection-end-column="42" />
           <folding>
             <element signature="e#127#143#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11197">
+          <caret line="873" column="0" lean-forward="true" selection-start-line="873" selection-start-column="0" selection-end-line="873" selection-end-column="0" />
+          <folding>
+            <element signature="e#690#810#0" expanded="false" />
+            <element signature="e#853#1007#0" expanded="false" />
+            <element signature="e#1036#1371#0" expanded="false" />
           </folding>
         </state>
       </provider>
