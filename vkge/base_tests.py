@@ -586,111 +586,110 @@ class VKGE_tests:
 
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
-            session.run(init_op)
-
+            self._saver.restore(session,'/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/nations_model.ckpt')
 
 
             # train_writer = tf.summary.FileWriter(filename, session.graph)
 
-            for epoch in range(1, nb_epochs + 1):
+            for epoch in range(0,1):
 
-
-
-                counter = 0
-
-                kl_inc_val = 1.0
-
-                order = self.random_state.permutation(nb_samples)
-                Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
-
-                loss_values = []
-                total_loss_value = 0
-
-                for batch_no, (batch_start, batch_end) in enumerate(batches):
-
-                    curr_batch_size = batch_end - batch_start
-
-                    Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
-                    Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
-                    Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
-
-                    Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
-                    Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
-                    Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
-
-                    for q in range((int(self.negsamples/2))): # Xs_batch[1::nb_versions] needs to be corrupted
-                        Xs_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
-                        Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
-                        Xo_batch[q::nb_versions] = Xo_shuf[batch_start:batch_end]
-
-                    for q in range((int(self.negsamples/2))): # Xs_batch[1::nb_versions] needs to be corrupted
-                        Xs_batch[q::nb_versions] = Xs_shuf[batch_start:batch_end]
-                        Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
-                        Xo_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
-
-
-                    vec_neglabels=[int(1)]+([int(0)]*(int(nb_versions-1)))
-
-                    #
-                    # loss_args = {
-                    #     self.KL_discount: pi[counter],
-                    #     self.s_inputs: Xs_batch,
-                    #     self.p_inputs: Xp_batch,
-                    #     self.o_inputs: Xo_batch,
-                    #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
-                    #     self.epoch_d: kl_inc_val
-                    # }
-                    noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
-
-                    loss_args = {
-                        self.no_samples:1, #number of samples for precision test
-                        self.KL_discount: 1.0,
-                        self.s_inputs: Xs_batch,
-                        self.p_inputs: Xp_batch,
-                        self.o_inputs: Xo_batch,
-                        self.y_inputs: np.array(vec_neglabels * curr_batch_size),
-                        self.epoch_d: 1.0
-                        ,self.bernoulli_elbo_sampling: np.arange(int(self.batch_size+10))
-                        # ,self.noise:noise
-                    }
-
-                    # merge = tf.summary.merge_all()  # for TB
-
-                    _, elbo_value = session.run([ self.training_step, self.elbo],
-                                                         feed_dict=loss_args)
-
-                        # summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
-                        #                                      feed_dict=loss_args)
-
-                        # h_s = session.run(self.h_s2,
-                        #                                  feed_dict=loss_args)
-                        # logger.warn('Shape : {0}'.format(h_s.shape))
-
-                    # tensorboard
-
-                    # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
-
-
-                    # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
-
-
-                    loss_values += [elbo_value / (Xp_batch.shape[0] )]
-                    total_loss_value += elbo_value
-
-                    counter += 1
-
-                # if (self.projection == True):  # project means
-                #     for projection_step in projection_steps:
-                #         session.run([projection_step])
-
-
+                #
+                #
+                # counter = 0
+                #
+                # kl_inc_val = 1.0
+                #
+                # order = self.random_state.permutation(nb_samples)
+                # Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
+                #
+                # loss_values = []
+                # total_loss_value = 0
+                #
+                # for batch_no, (batch_start, batch_end) in enumerate(batches):
+                #
+                #     curr_batch_size = batch_end - batch_start
+                #
+                #     Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
+                #     Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
+                #     Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
+                #
+                #     Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
+                #     Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
+                #     Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
+                #
+                #     for q in range((int(self.negsamples/2))): # Xs_batch[1::nb_versions] needs to be corrupted
+                #         Xs_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                #         Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
+                #         Xo_batch[q::nb_versions] = Xo_shuf[batch_start:batch_end]
+                #
+                #     for q in range((int(self.negsamples/2))): # Xs_batch[1::nb_versions] needs to be corrupted
+                #         Xs_batch[q::nb_versions] = Xs_shuf[batch_start:batch_end]
+                #         Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
+                #         Xo_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                #
+                #
+                #     vec_neglabels=[int(1)]+([int(0)]*(int(nb_versions-1)))
+                #
+                #     #
+                #     # loss_args = {
+                #     #     self.KL_discount: pi[counter],
+                #     #     self.s_inputs: Xs_batch,
+                #     #     self.p_inputs: Xp_batch,
+                #     #     self.o_inputs: Xo_batch,
+                #     #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
+                #     #     self.epoch_d: kl_inc_val
+                #     # }
+                #     noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
+                #
+                #     loss_args = {
+                #         self.no_samples:1, #number of samples for precision test
+                #         self.KL_discount: 1.0,
+                #         self.s_inputs: Xs_batch,
+                #         self.p_inputs: Xp_batch,
+                #         self.o_inputs: Xo_batch,
+                #         self.y_inputs: np.array(vec_neglabels * curr_batch_size),
+                #         self.epoch_d: 1.0
+                #         ,self.bernoulli_elbo_sampling: np.arange(int(self.batch_size+10))
+                #         # ,self.noise:noise
+                #     }
+                #
+                #     # merge = tf.summary.merge_all()  # for TB
+                #
+                #     _, elbo_value = session.run([ self.training_step, self.elbo],
+                #                                          feed_dict=loss_args)
+                #
+                #         # summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
+                #         #                                      feed_dict=loss_args)
+                #
+                #         # h_s = session.run(self.h_s2,
+                #         #                                  feed_dict=loss_args)
+                #         # logger.warn('Shape : {0}'.format(h_s.shape))
+                #
+                #     # tensorboard
+                #
+                #     # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
+                #
+                #
+                #     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
+                #
+                #
+                #     loss_values += [elbo_value / (Xp_batch.shape[0] )]
+                #     total_loss_value += elbo_value
+                #
+                #     counter += 1
+                #
+                # # if (self.projection == True):  # project means
+                # #     for projection_step in projection_steps:
+                # #         session.run([projection_step])
+                #
+                #
 
 
                 logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
 
-                if (epoch % 10) == 0:
-                    self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
+                if True:
+                    # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
                     eval_name = 'valid'
