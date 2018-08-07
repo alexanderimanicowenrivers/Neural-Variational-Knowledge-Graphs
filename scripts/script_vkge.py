@@ -134,15 +134,14 @@ def main(_):
 
 
     header = """#!/bin/bash
-
-# $ -cwd
-# $ -S /bin/bash
-# $ -o /home/acowenri/array.o.log
-# $ -e /home/acowenri/array.e.log
-# $ -t 1-{}
-# $ -l tmem=8G
-# $ -l h_rt=12:00:00
-# $ -ac allow=LMNOPQSTU
+    # $ -cwd
+    # $ -S /bin/bash
+    # $ -o /home/acowenri/array.o.log
+    # $ -e /home/acowenri/array.e.log
+    # $ -t 1-{}
+    # $ -l tmem=8G
+    # $ -l h_rt=12:00:00
+    # $ -ac allow=LMNOPQSTU
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
