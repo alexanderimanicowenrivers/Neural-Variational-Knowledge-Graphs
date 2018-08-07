@@ -30,8 +30,7 @@ def to_cmd(c):
     #     command = 'PYTHONPATH=. python3-gpu {}/main3.py {} ' \
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
-    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main3.py  ' \
-              '--mean_c {} ' \
+    command = 'PYTHONPATH=. anaconda-python3-cpu {}/baseline_main.py  ' \
               '--embedding_size {} ' \
               '--dataset {} ' \
               '--epsilon {} ' \
@@ -41,7 +40,6 @@ def to_cmd(c):
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
-                c['w1'],
                 c['w3'],
                 c['w6'],
                 c['w7'],

@@ -6,8 +6,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/fb15k-237/dev.tsv" afterPath="$PROJECT_DIR$/data/fb15k-237/dev.tsv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/fb15k-237/test.tsv" afterPath="$PROJECT_DIR$/data/fb15k-237/test.tsv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/fb15k-237/train.tsv" afterPath="$PROJECT_DIR$/data/fb15k-237/train.tsv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_baseline.py" afterPath="$PROJECT_DIR$/script_baseline.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_search.py" afterPath="$PROJECT_DIR$/script_search.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_test.py" afterPath="$PROJECT_DIR$/script_test.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_test_thresh.py" afterPath="$PROJECT_DIR$/script_test_thresh.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_test_variance.py" afterPath="$PROJECT_DIR$/script_test_variance.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script_vkge.py" afterPath="$PROJECT_DIR$/script_vkge.py" />
@@ -72,7 +72,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base_model_search.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base_model_search.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="109">
@@ -80,6 +80,16 @@
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="script_baseline.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/script_baseline.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -193,7 +203,6 @@
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/script_test_thresh.py" />
         <option value="$PROJECT_DIR$/vkge/not_working.py" />
-        <option value="$PROJECT_DIR$/script_baseline.py" />
         <option value="$PROJECT_DIR$/vkge/baseviz.py" />
         <option value="$PROJECT_DIR$/main-viz.py" />
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
@@ -206,12 +215,13 @@
         <option value="$PROJECT_DIR$/script_test.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/script_search.py" />
+        <option value="$PROJECT_DIR$/script_baseline.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="182" />
-    <option name="y" value="53" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1714" />
+    <option name="y" value="190" />
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
@@ -419,13 +429,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00582" summary="update evaluation">
-      <created>1533240391294</created>
-      <option name="number" value="00582" />
-      <option name="presentableId" value="LOCAL-00582" />
-      <option name="project" value="LOCAL" />
-      <updated>1533240391294</updated>
     </task>
     <task id="LOCAL-00583" summary="update evaluation">
       <created>1533240772143</created>
@@ -763,7 +766,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533636969469</updated>
     </task>
-    <option name="localTasksCounter" value="631" />
+    <task id="LOCAL-00631" summary="updated folder name">
+      <created>1533637072897</created>
+      <option name="number" value="00631" />
+      <option name="presentableId" value="LOCAL-00631" />
+      <option name="project" value="LOCAL" />
+      <updated>1533637072897</updated>
+    </task>
+    <option name="localTasksCounter" value="632" />
     <servers />
   </component>
   <component name="TodoView">
@@ -776,9 +786,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <frame x="1714" y="190" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23462088" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23462088" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3286445" sideWeight="0.5143061" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.48569384" order="1" side_tool="false" content_ui="tabs" />
@@ -1082,14 +1093,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script_baseline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="65" column="20" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1232,6 +1235,14 @@
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script_baseline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
