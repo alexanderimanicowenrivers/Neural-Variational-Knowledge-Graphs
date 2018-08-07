@@ -20,6 +20,24 @@ For:
 
 -------
 
+## Training Models
+
+Sample run baseline:
+
+```
+python baseline_main.py  --embedding_size 250 --dataset fb15k-237 --epsilon 0.001 --lr 0.001 --score_func ComplEx --no_batches 10
+```
+
+
+
+Sample run variational knowledge graph:
+
+```
+python main.py --no_batches 1000 --epsilon 1e-07 --embedding_size 300 --dataset kinship --alt_updates False --lr 0.001 --score_func ComplEx --alt_opt True --alt_test none --file_name /model_example
+```
+
+
+
 ## Dependencies
 
 - tbc
