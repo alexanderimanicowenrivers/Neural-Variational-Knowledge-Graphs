@@ -136,11 +136,12 @@ def main(_):
     header = """#!/bin/bash
     # $ -cwd
     # $ -S /bin/bash
-    # $ -o /dev/null
-    # $ -e /dev/null
+    # $ -o /home/acowenri/array.o.log
+    # $ -e /home/acowenri/array.e.log
     # $ -t 1-{}
     # $ -l tmem=8G
-    # $ -l h_rt=12:00:00
+    # $ -l h_rt=24:00:00
+    # $ -ac allow=LMNOPQSTU
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"

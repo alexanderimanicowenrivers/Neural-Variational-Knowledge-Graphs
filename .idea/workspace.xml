@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_vkge.py" afterPath="$PROJECT_DIR$/scripts/script_vkge.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_tests.py" afterPath="$PROJECT_DIR$/vkge/base_tests.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,8 +43,8 @@
       <file leaf-file-name="script_vkge.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-227">
-              <caret line="121" column="0" lean-forward="true" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+            <state relative-caret-position="194">
+              <caret line="143" column="27" lean-forward="false" selection-start-line="143" selection-start-column="27" selection-end-line="143" selection-end-column="27" />
               <folding>
                 <element signature="e#150#166#0" expanded="true" />
               </folding>
@@ -68,9 +69,11 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7">
-              <caret line="866" column="60" lean-forward="false" selection-start-line="866" selection-start-column="60" selection-end-line="866" selection-end-column="60" />
-              <folding />
+            <state relative-caret-position="228">
+              <caret line="888" column="28" lean-forward="false" selection-start-line="888" selection-start-column="28" selection-end-line="888" selection-end-column="28" />
+              <folding>
+                <element signature="e#25#36#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -405,13 +408,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00599" summary="updated test script to use one GPU">
-      <created>1533458323082</created>
-      <option name="number" value="00599" />
-      <option name="presentableId" value="LOCAL-00599" />
-      <option name="project" value="LOCAL" />
-      <updated>1533458323082</updated>
     </task>
     <task id="LOCAL-00600" summary="updated test script to use one GPU">
       <created>1533458417650</created>
@@ -749,7 +745,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533653909086</updated>
     </task>
-    <option name="localTasksCounter" value="648" />
+    <task id="LOCAL-00648" summary="fixed test case">
+      <created>1533654655203</created>
+      <option name="number" value="00648" />
+      <option name="presentableId" value="LOCAL-00648" />
+      <option name="project" value="LOCAL" />
+      <updated>1533654655203</updated>
+    </task>
+    <option name="localTasksCounter" value="649" />
     <servers />
   </component>
   <component name="TodoView">
@@ -835,7 +838,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updates baselines for variance experiments" />
     <MESSAGE value="completed test for none hits@1" />
     <MESSAGE value="hits@1 for variance tests and hits@1,3,5,10 for none" />
     <MESSAGE value="simplified test script" />
@@ -860,7 +862,8 @@
     <MESSAGE value="updated folder name" />
     <MESSAGE value="fixed error with loading model" />
     <MESSAGE value="uploaded scaled version" />
-    <option name="LAST_COMMIT_MESSAGE" value="uploaded scaled version" />
+    <MESSAGE value="fixed test case" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed test case" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1201,8 +1204,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-227">
-          <caret line="121" column="0" lean-forward="true" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+        <state relative-caret-position="194">
+          <caret line="143" column="27" lean-forward="false" selection-start-line="143" selection-start-column="27" selection-end-line="143" selection-end-column="27" />
           <folding>
             <element signature="e#150#166#0" expanded="true" />
           </folding>
@@ -1211,9 +1214,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7">
-          <caret line="866" column="60" lean-forward="false" selection-start-line="866" selection-start-column="60" selection-end-line="866" selection-end-column="60" />
-          <folding />
+        <state relative-caret-position="228">
+          <caret line="888" column="28" lean-forward="false" selection-start-line="888" selection-start-column="28" selection-end-line="888" selection-end-column="28" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
