@@ -586,7 +586,7 @@ class VKGE_tests:
 
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
-            self._saver.restore(session,'/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/nations_model.ckpt')
+            self._saver.restore(session,'/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/nations_model')
 
 
             # train_writer = tf.summary.FileWriter(filename, session.graph)
