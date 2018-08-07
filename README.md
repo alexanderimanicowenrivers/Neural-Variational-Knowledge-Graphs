@@ -15,9 +15,8 @@
 ## Instructions
 
 For:
-- **Models** see [base](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/base.py) ,[base2](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/base2.py),[base3](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/base3.py)
-- **Report** see [ACR](https://github.com/acr42) 
-
+- **Models** see [base](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/base.py)
+- **Report** see [ACR](https://github.com/acr42)  
 
 -------
 
