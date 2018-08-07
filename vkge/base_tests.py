@@ -778,23 +778,19 @@ class VKGE_tests:
 
                         # scores of (1, p, o), (2, p, o), .., (N, p, o)
 
+
+
                         scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
 
                             # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
                         scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
 
-                        if self.alt_test == 'none':
-                            ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                            ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
-                            hts = [1, 3, 5, 10]
-
-                        else:
-                            hts = [1]
 
                         #########################
                         # Calculate score confidence
                         #########################
+
 
                         if self.alt_test in ['test1']: #CORRECTION of scores for confidence TEST1
 
@@ -803,10 +799,19 @@ class VKGE_tests:
 
                             for samp_no in range((self.no_confidence_samples)):
 
-                                scores_subj+= session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
+                                scores_subj+= session.run(self.scores, feed_dict=feed_dict_corrupt_subj)
 
                                 # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                                scores_obj += session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
+                                scores_obj += session.run(self.scores, feed_dict=feed_dict_corrupt_obj)
+
+                        if self.alt_test in ['none','test1']:
+                            ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                            ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+
+                            hts = [1, 3, 5, 10]
+
+                        else:
+                            hts = [1]
 
 
                         if self.alt_test in ['test2']: #CORRECTION of scores for confidence TEST1
@@ -859,7 +864,7 @@ class VKGE_tests:
                         filtered_scores_obj[rm_idx_o] = - np.inf
 
 
-                        if self.alt_test in ['none']:  # multiply by probability
+                        if self.alt_test in ['none','test1']:  # multiply by probability
 
                             filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                             filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
