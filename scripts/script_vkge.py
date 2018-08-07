@@ -134,15 +134,15 @@ def main(_):
 
 
     header = """#!/bin/bash
-    # $ -cwd
-    # $ -S /bin/bash
-    # $ -o /dev/null
-    # $ -e /dev/null
-    # $ -t 1-{}
-    # $ -l tmem=8G
-    # $ -l h_rt=4:00:00
-    # $ -P gpu
-    # $ -l gpu=1-GPU_PASCAL=1
+# $ -cwd
+# $ -S /bin/bash
+# $ -o /dev/null
+# $ -e /dev/null
+# $ -t 1-{}
+# $ -l tmem=8G
+# $ -l h_rt=4:00:00
+# $ -P gpu
+# $ -l gpu=1-GPU_PASCAL=1
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
