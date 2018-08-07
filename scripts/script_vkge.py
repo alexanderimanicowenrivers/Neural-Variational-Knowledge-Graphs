@@ -53,7 +53,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                ("{}/logs/180806_adamntada/model_{}".format(path, summary(c)))
+                ("{}/logs/180807_scaled/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
 
@@ -135,16 +135,14 @@ def main(_):
 
     header = """#!/bin/bash
 
-
-#$ -cwd
-#$ -S /bin/bash
-#$ -o /dev/null
-#$ -e /dev/null
-#$ -t 1-{}
-#$ -l tmem=8G
-#$ -l h_rt=12:00:00
-#$ -P gpu
-#$ -l gpu=1
+# $ -cwd
+# $ -S /bin/bash
+# $ -o /home/acowenri/array.o.log
+# $ -e /home/acowenri/array.e.log
+# $ -t 1-{}
+# $ -l tmem=8G
+# $ -l h_rt=12:00:00
+# $ -ac allow=LMNOPQSTU
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
