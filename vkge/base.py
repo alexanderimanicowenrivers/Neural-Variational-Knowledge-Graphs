@@ -744,6 +744,9 @@ class VKGE:
                         for k in [1, 3, 5, 10]:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+
+                            # if ((k==1) and (hits_at_k<=10.0)):
+                            #     sys.exit("Stopping Program As Bad Hits @10")
             ##
             # Test
             ##
@@ -869,8 +872,7 @@ class VKGE:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
-                            if ((k==1) and (hits_at_k<=10.0)):
-                                sys.exit("Stopping Program As Bad Hits @10")
+
 
                     # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
                     # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
