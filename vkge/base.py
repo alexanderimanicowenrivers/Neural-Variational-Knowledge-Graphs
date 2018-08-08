@@ -107,22 +107,22 @@ class VKGE:
         self.nosamps=int(nosamps)
         # sigma = tf.log(1 + tf.exp(log_sigma_square))
         self.no_confidence_samples=1000 #change to 1000
-        sig_max = np.log((1.0/embedding_size*1.0))**2
 
-        # sig_max = np.log(np.exp(1.0/embedding_size*1.0)-1)
-        sig_min = sig_max
 
                 # adjust for correct format for model input
 
         if self.score_func=='ComplEx':
             predicate_embedding_size = embedding_size*2
             entity_embedding_size = embedding_size*2
+            sig_max = np.log((1.0/embedding_size*2.0))**2
 
 
         else:
             predicate_embedding_size = embedding_size
             entity_embedding_size = embedding_size
+            sig_max = np.log((1.0/embedding_size*1.0))**2
 
+        sig_min = sig_max
 
         self.random_state = np.random.RandomState(0)
         tf.set_random_seed(0)
