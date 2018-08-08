@@ -594,7 +594,7 @@ class VKGE_tests:
 
             experiments=collections.defaultdict(list)
 
-            for epoch in range(0,20):
+            for epoch in range(0,100):
 
                 #
                 #

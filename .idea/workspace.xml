@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="updated test1 scripts">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_tests.py" afterPath="$PROJECT_DIR$/vkge/base_tests.py" />
     </list>
@@ -69,7 +69,7 @@
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="386">
-              <caret line="596" column="35" lean-forward="false" selection-start-line="596" selection-start-column="35" selection-end-line="596" selection-end-column="35" />
+              <caret line="596" column="36" lean-forward="false" selection-start-line="596" selection-start-column="36" selection-end-line="596" selection-end-column="36" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -420,13 +420,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00617" summary="fixed test script">
-      <created>1533495804867</created>
-      <option name="number" value="00617" />
-      <option name="presentableId" value="LOCAL-00617" />
-      <option name="project" value="LOCAL" />
-      <updated>1533495804867</updated>
-    </task>
     <task id="LOCAL-00618" summary="fixed test script">
       <created>1533550693836</created>
       <option name="number" value="00618" />
@@ -763,7 +756,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533727507360</updated>
     </task>
-    <option name="localTasksCounter" value="666" />
+    <task id="LOCAL-00666" summary="updated test1 scripts">
+      <created>1533727529686</created>
+      <option name="number" value="00666" />
+      <option name="presentableId" value="LOCAL-00666" />
+      <option name="project" value="LOCAL" />
+      <updated>1533727529686</updated>
+    </task>
+    <option name="localTasksCounter" value="667" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1224,7 +1224,7 @@
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="386">
-          <caret line="596" column="35" lean-forward="false" selection-start-line="596" selection-start-column="35" selection-end-line="596" selection-end-column="35" />
+          <caret line="596" column="36" lean-forward="false" selection-start-line="596" selection-start-column="36" selection-end-line="596" selection-end-column="36" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
