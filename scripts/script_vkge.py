@@ -118,9 +118,8 @@ def main(_):
 #$ -e /dev/null
 #$ -t 1-{}
 #$ -l tmem=8G
-#$ -l h_rt=12:00:00
-#$ -P gpu
-#$ -l gpu=1
+#$ -l h_rt=24:00:00
+#$ -ac allow=LMNOPQSTU
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
