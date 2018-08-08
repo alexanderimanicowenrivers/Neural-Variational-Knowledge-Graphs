@@ -42,8 +42,8 @@
       <file leaf-file-name="script_vkge.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="136" column="0" lean-forward="false" selection-start-line="136" selection-start-column="0" selection-end-line="144" selection-end-column="25" />
+            <state relative-caret-position="150">
+              <caret line="143" column="14" lean-forward="false" selection-start-line="143" selection-start-column="14" selection-end-line="143" selection-end-column="14" />
               <folding>
                 <element signature="e#150#166#0" expanded="true" />
               </folding>
@@ -68,7 +68,7 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
+            <state relative-caret-position="3744">
               <caret line="892" column="29" lean-forward="false" selection-start-line="892" selection-start-column="29" selection-end-line="892" selection-end-column="29" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
@@ -200,7 +200,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="width" value="1440" />
+    <option name="x" value="44" />
+    <option name="y" value="3" />
+    <option name="width" value="1941" />
     <option name="height" value="900" />
   </component>
   <component name="ProjectView">
@@ -407,13 +409,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00606" summary="only using MLE for now without Hinge">
-      <created>1533480925705</created>
-      <option name="number" value="00606" />
-      <option name="presentableId" value="LOCAL-00606" />
-      <option name="project" value="LOCAL" />
-      <updated>1533480925705</updated>
     </task>
     <task id="LOCAL-00607" summary="only using MLE for now without Hinge">
       <created>1533481701407</created>
@@ -751,7 +746,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533658132829</updated>
     </task>
-    <option name="localTasksCounter" value="655" />
+    <task id="LOCAL-00655" summary="updated GPU scripts">
+      <created>1533658203276</created>
+      <option name="number" value="00655" />
+      <option name="presentableId" value="LOCAL-00655" />
+      <option name="project" value="LOCAL" />
+      <updated>1533658203276</updated>
+    </task>
+    <option name="localTasksCounter" value="656" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1203,7 +1205,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
+        <state relative-caret-position="3744">
           <caret line="892" column="29" lean-forward="false" selection-start-line="892" selection-start-column="29" selection-end-line="892" selection-end-column="29" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
@@ -1213,8 +1215,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="136" column="0" lean-forward="false" selection-start-line="136" selection-start-column="0" selection-end-line="144" selection-end-column="25" />
+        <state relative-caret-position="150">
+          <caret line="143" column="14" lean-forward="false" selection-start-line="143" selection-start-column="14" selection-end-line="143" selection-end-column="14" />
           <folding>
             <element signature="e#150#166#0" expanded="true" />
           </folding>
