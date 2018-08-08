@@ -81,11 +81,11 @@ def main(_):
         w9=['none'])
 
     configurations = cartesian_product(hyperparameters_space)
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180807_scaled'
 
-    path = '/home/pminervi/workspace/neural-nli/logs/emnlp/uclcs_cbilstm_v1/'
 
     # Check that we are on the UCLCS cluster first
-    if os.path.exists('/home/pminervi/'):
+    if os.path.exists('/home/acowenri/'):
         # If the folder that will contain logs does not exist, create it
         if not os.path.exists(path):
             os.makedirs(path)
