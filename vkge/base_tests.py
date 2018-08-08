@@ -594,7 +594,7 @@ class VKGE_tests:
 
             experiments=collections.defaultdict(list)
 
-            for epoch in range(0,15):
+            for epoch in range(0,1):
 
                 #
                 #
@@ -889,8 +889,32 @@ class VKGE_tests:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
-                            experiments[k].append(hits_at_k)
-                            logger.warn('[{}] {} Hits@{} List: {}'.format(eval_name, setting_name, k, experiments[k]))
+
+                            if setting_name=='Filtered':
+                                experiments[k].append(hits_at_k)
+                                logger.warn('[{}] {} Hits@{} List: {}'.format(eval_name, setting_name, k, experiments[k]))
+
+                    # e1, e2, p1, p2 = session.run(
+                    #     [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
+                    #      self.predicate_embedding_sigma], feed_dict={})
+                    # np.save(
+                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/entity_embeddings.tsv",
+                    #     e1)
+                    # np.save(
+                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/entity_embedding_sigma.tsv",
+                    #     e2)
+                    # np.save(
+                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/predicate_embedding_mean.tsv",
+                    #     p1)
+                    # np.save(
+                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/predicate_embedding_sigma.tsv",
+                    #     p2)
+
+
+
+
+
+
                     # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
                     # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
                     # np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
