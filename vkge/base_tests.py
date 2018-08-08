@@ -903,21 +903,21 @@ class VKGE_tests:
                             #     experiments[k].append(hits_at_k)
                             #     logger.warn('[{}] {} Hits@{} List: {}'.format(eval_name, setting_name, k, experiments[k]))
 
-                    # e1, e2, p1, p2 = session.run(
-                    #     [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
-                    #      self.predicate_embedding_sigma], feed_dict={})
-                    # np.save(
-                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/entity_embeddings",
-                    #     e1)
-                    # np.save(
-                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/entity_embedding_sigma",
-                    #     e2)
-                    # np.save(
-                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/predicate_embedding_mean",
-                    #     p1)
-                    # np.save(
-                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/predicate_embedding_sigma",
-                    #     p2)
+                    e1, e2, p1, p2 = session.run(
+                        [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
+                         self.predicate_embedding_sigma], feed_dict={})
+                    np.save(
+                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/15ng_entity_embeddings",
+                        e1)
+                    np.save(
+                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/15ng_entity_embedding_sigma",
+                        e2)
+                    np.save(
+                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/15ng_predicate_embedding_mean",
+                        p1)
+                    np.save(
+                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/15ng_predicate_embedding_sigma",
+                        p2)
 
 
 
