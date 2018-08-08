@@ -594,7 +594,7 @@ class VKGE_tests:
 
             experiments=collections.defaultdict(list)
 
-            for epoch in range(0,100):
+            for epoch in range(0,1):
 
                 #
                 #
@@ -878,6 +878,13 @@ class VKGE_tests:
                                 filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                             if (confidence_obj[o_idx] > self.p_threshold):
                                 filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
+                        if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] == [1]:
+                            logger.warn(
+                                "\t \t filtered_scores_subj  rank 1 idx is {},{},{} \t \t".format(s_idx, o_idx, p_idx))
+
+                        if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] == [1]:
+                            logger.warn(
+                                "\t \t filtered_scores_obj rank 1 idx is {},{},{} \t \t".format(s_idx, o_idx, p_idx))
 
                     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
                     ranks = ranks_subj + ranks_obj
@@ -890,9 +897,11 @@ class VKGE_tests:
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
 
-                            if setting_name=='Filtered' and self.alt_test=='test1':
-                                experiments[k].append(hits_at_k)
-                                logger.warn('[{}] {} Hits@{} List: {}'.format(eval_name, setting_name, k, experiments[k]))
+
+
+                            # if setting_name=='Filtered' and self.alt_test=='test1':
+                            #     experiments[k].append(hits_at_k)
+                            #     logger.warn('[{}] {} Hits@{} List: {}'.format(eval_name, setting_name, k, experiments[k]))
 
                     # e1, e2, p1, p2 = session.run(
                     #     [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
