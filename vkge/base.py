@@ -689,7 +689,7 @@ class VKGE:
                 logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
 
-                if (epoch % 10) == 0:
+                if (epoch % 50) == 0:
                     self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
@@ -745,8 +745,8 @@ class VKGE:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
-                            # if ((k==1) and (hits_at_k<=10.0)):
-                            #     sys.exit("Stopping Program As Bad Hits @10")
+                            if ((k==1) and (hits_at_k<=10.0)):
+                                sys.exit("Stopping Program As Bad Hits @10")
             ##
             # Test
             ##
