@@ -69,7 +69,7 @@
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="244">
-              <caret line="892" column="56" lean-forward="false" selection-start-line="892" selection-start-column="56" selection-end-line="892" selection-end-column="56" />
+              <caret line="892" column="81" lean-forward="false" selection-start-line="892" selection-start-column="81" selection-end-line="892" selection-end-column="81" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -420,13 +420,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00614" summary="fixed test script">
-      <created>1533482960613</created>
-      <option name="number" value="00614" />
-      <option name="presentableId" value="LOCAL-00614" />
-      <option name="project" value="LOCAL" />
-      <updated>1533482960614</updated>
-    </task>
     <task id="LOCAL-00615" summary="fixed test script">
       <created>1533482968276</created>
       <option name="number" value="00615" />
@@ -763,7 +756,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533726576146</updated>
     </task>
-    <option name="localTasksCounter" value="663" />
+    <task id="LOCAL-00663" summary="updated test1 scripts">
+      <created>1533727211802</created>
+      <option name="number" value="00663" />
+      <option name="presentableId" value="LOCAL-00663" />
+      <option name="project" value="LOCAL" />
+      <updated>1533727211802</updated>
+    </task>
+    <option name="localTasksCounter" value="664" />
     <servers />
   </component>
   <component name="TodoView">
@@ -849,7 +849,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="simplified test script" />
     <MESSAGE value="remove summary" />
     <MESSAGE value="fix merge error" />
     <MESSAGE value="upload experiment 2 of 5 negative samples" />
@@ -874,7 +873,8 @@
     <MESSAGE value="fixed test case" />
     <MESSAGE value="updated test script to do forward sampling for 1000 samples 15 times" />
     <MESSAGE value="updated GPU scripts" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated GPU scripts" />
+    <MESSAGE value="updated test1 scripts" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated test1 scripts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1224,7 +1224,7 @@
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
-          <caret line="892" column="56" lean-forward="false" selection-start-line="892" selection-start-column="56" selection-end-line="892" selection-end-column="56" />
+          <caret line="892" column="81" lean-forward="false" selection-start-line="892" selection-start-column="81" selection-end-line="892" selection-end-column="81" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

@@ -890,7 +890,7 @@ class VKGE_tests:
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
 
-                            if setting_name=='Filtered':
+                            if setting_name=='Filtered' and self.alt_test=='test1':
                                 experiments[k].append(hits_at_k)
                                 logger.warn('[{}] {} Hits@{} List: {}'.format(eval_name, setting_name, k, experiments[k]))
 
