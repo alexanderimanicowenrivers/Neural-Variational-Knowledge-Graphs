@@ -689,7 +689,7 @@ class VKGE:
                 logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
 
-                if (epoch % 50) == 0:
+                if (epoch % 10) == 0:
                     self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
