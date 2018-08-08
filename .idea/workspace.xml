@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_tests.py" afterPath="$PROJECT_DIR$/vkge/base_tests.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,8 +53,8 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="589" column="209" lean-forward="false" selection-start-line="589" selection-start-column="209" selection-end-line="589" selection-end-column="209" />
+            <state relative-caret-position="287">
+              <caret line="588" column="37" lean-forward="true" selection-start-line="588" selection-start-column="37" selection-end-line="588" selection-end-column="37" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -406,13 +405,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00626" summary="updated training">
-      <created>1533574314018</created>
-      <option name="number" value="00626" />
-      <option name="presentableId" value="LOCAL-00626" />
-      <option name="project" value="LOCAL" />
-      <updated>1533574314018</updated>
-    </task>
     <task id="LOCAL-00627" summary="updated folder name">
       <created>1533636586534</created>
       <option name="number" value="00627" />
@@ -749,7 +741,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533752828189</updated>
     </task>
-    <option name="localTasksCounter" value="675" />
+    <task id="LOCAL-00675" summary="updated test script">
+      <created>1533752985739</created>
+      <option name="number" value="00675" />
+      <option name="presentableId" value="LOCAL-00675" />
+      <option name="project" value="LOCAL" />
+      <updated>1533752985739</updated>
+    </task>
+    <option name="localTasksCounter" value="676" />
     <servers />
   </component>
   <component name="TodoView">
@@ -841,7 +840,6 @@
     <MESSAGE value="dismult in tst" />
     <MESSAGE value="updated with tested bernoulli sampling on elbo" />
     <MESSAGE value="evaluation after 10 epochs" />
-    <MESSAGE value="updated test script" />
     <MESSAGE value="updated test script to use one GPU" />
     <MESSAGE value="updated test script to no GPU's" />
     <MESSAGE value="gradient clipping to combat nans" />
@@ -860,7 +858,8 @@
     <MESSAGE value="updated test1 scripts" />
     <MESSAGE value="updated test1 scripts for viz" />
     <MESSAGE value="updated Complex variance init to be half the normal" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated Complex variance init to be half the normal" />
+    <MESSAGE value="updated test script" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated test script" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1209,8 +1208,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="589" column="209" lean-forward="false" selection-start-line="589" selection-start-column="209" selection-end-line="589" selection-end-column="209" />
+        <state relative-caret-position="287">
+          <caret line="588" column="37" lean-forward="true" selection-start-line="588" selection-start-column="37" selection-end-line="588" selection-end-column="37" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
