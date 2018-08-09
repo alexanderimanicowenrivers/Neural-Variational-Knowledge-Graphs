@@ -903,9 +903,9 @@ class VKGE_tests:
                     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                         mean_rank = np.mean(setting_ranks)
                         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
-                        for k in hts:
-                            hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
-                            logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+                        # for k in hts:
+                        #     hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                        #     logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
                             if setting_name=='Filtered':
                                 experiments[k].append(hits_at_k)
