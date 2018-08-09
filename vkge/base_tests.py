@@ -692,9 +692,9 @@ class VKGE_tests:
 
                 # logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
-                pthresh=[]
+                cvrg=[]
                 for p_threshold in np.arange(0,1,0.02):
-                    pthresh.append(p_threshold)
+                    cvrg.append(1-p_threshold)
                     # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
@@ -790,13 +790,16 @@ class VKGE_tests:
                         # scores of (1, p, o), (2, p, o), .., (N, p, o)
 
 
+                        #
+                        # scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
+                        #
+                        #     # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                        # scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
 
-                        scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
+                        scores_subj = session.run(self.p_x_i_test, feed_dict=feed_dict_corrupt_subj)
 
                             # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                        scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
-
-
+                        scores_obj = session.run(self.p_x_i_test, feed_dict=feed_dict_corrupt_obj)
 
                         #########################
                         # Calculate score confidence
@@ -906,7 +909,9 @@ class VKGE_tests:
 
                             if setting_name=='Filtered':
                                 experiments[k].append(hits_at_k)
-                cvrg=1-pthresh
+
+
+
                 for k in hts:
                     table=[np.divide(experiments[k], 100) ,cvrg]
 
