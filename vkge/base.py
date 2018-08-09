@@ -619,6 +619,7 @@ class VKGE:
         ##
         # Train
         ##
+        config = tf.ConfigProto(log_device_placement=True)
 
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
@@ -682,8 +683,8 @@ class VKGE:
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size),
                         self.BernoulliSRescale: (2.0*(self.nb_entities-1))
-                        ,self.idx_pos: np.arange(int(self.batch_size)),
-                        self.idx_neg: np.arange(int(self.batch_size),int(self.batch_size)*(int(self.negsamples)+1))
+                        ,self.idx_pos: np.arange(curr_batch_size),
+                        self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
                         ,self.noise:noise
                     }
 
@@ -749,6 +750,7 @@ class VKGE:
                         feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
                                                  self.o_inputs: np.arange(self.nb_entities)}
 
+
                         # scores of (1, p, o), (2, p, o), .., (N, p, o)
                         scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
 
@@ -796,7 +798,7 @@ class VKGE:
 
                     logger.warn('Beginning test/ save phase')
 
-                    self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
+                    # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
                     eval_name = 'test'
