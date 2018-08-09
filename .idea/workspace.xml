@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_tests.py" afterPath="$PROJECT_DIR$/vkge/base_tests.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +20,8 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="924" column="72" lean-forward="true" selection-start-line="924" selection-start-column="72" selection-end-line="924" selection-end-column="72" />
+            <state relative-caret-position="372">
+              <caret line="702" column="48" lean-forward="true" selection-start-line="702" selection-start-column="48" selection-end-line="702" selection-end-column="48" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -378,13 +379,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00648" summary="fixed test case">
-      <created>1533654655203</created>
-      <option name="number" value="00648" />
-      <option name="presentableId" value="LOCAL-00648" />
-      <option name="project" value="LOCAL" />
-      <updated>1533654655203</updated>
-    </task>
     <task id="LOCAL-00649" summary="fixed test case">
       <created>1533655111688</created>
       <option name="number" value="00649" />
@@ -721,7 +715,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533833074713</updated>
     </task>
-    <option name="localTasksCounter" value="697" />
+    <task id="LOCAL-00697" summary="upload confidence estimation scripts">
+      <created>1533833117910</created>
+      <option name="number" value="00697" />
+      <option name="presentableId" value="LOCAL-00697" />
+      <option name="project" value="LOCAL" />
+      <updated>1533833117910</updated>
+    </task>
+    <option name="localTasksCounter" value="698" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1190,8 +1191,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="924" column="72" lean-forward="true" selection-start-line="924" selection-start-column="72" selection-end-line="924" selection-end-column="72" />
+        <state relative-caret-position="372">
+          <caret line="702" column="48" lean-forward="true" selection-start-line="702" selection-start-column="48" selection-end-line="702" selection-end-column="48" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

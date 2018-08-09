@@ -693,7 +693,7 @@ class VKGE_tests:
                 # logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
                 pthresh=[]
-                for p_threshold in range(0,1,0.02):
+                for p_threshold in np.arange(0,1,0.02):
                     pthresh.append(p_threshold)
                     # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
