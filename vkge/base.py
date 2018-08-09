@@ -601,7 +601,7 @@ class VKGE:
 
         nb_versions = int(self.negsamples + 1)  # neg samples + original
 
-        projection_steps = [constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0)]
+        projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_sigma, norm=1.0)]
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
