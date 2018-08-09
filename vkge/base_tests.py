@@ -925,7 +925,7 @@ class VKGE_tests:
 
                     tips.columns = columns
 
-                    ax = sns.regplot(scatter_kws = {"s": 80}, order = 2, ci = 0.95, truncate = True)
+                    ax = sns.regplot(x='coverage',y='Hits@'+str(k),scatter_kws = {"s": 80}, order = 2, ci = 0.95, truncate = True)
 
                     ax.figure.savefig("ConfEstimation_H@"+str(k)+".png")
 
