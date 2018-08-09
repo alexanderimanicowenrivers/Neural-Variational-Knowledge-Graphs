@@ -71,8 +71,8 @@ def main(_):
     hyperparameters_space = dict(
         w1=[1,10,100,1000],
         # w1=[10],
-        w2=[1e-3,1e-7], #
-        w3=[200,300],
+        w2=[1e-3], #
+        w3=[200],
         w4 = ['fb15k-237', 'kinship', 'nations', 'umls', 'wn18', 'wn18rr'],
         w5=[False],
         w6=[0.1,0.01,0.001],
