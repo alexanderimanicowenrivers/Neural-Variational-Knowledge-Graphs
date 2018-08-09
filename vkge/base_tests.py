@@ -17,6 +17,8 @@ from random import randint
 import logging
 import sys
 import collections
+import pandas as pd
+import seaborn as sns
 
 logger = logging.getLogger(__name__)
 
@@ -690,8 +692,9 @@ class VKGE_tests:
 
                 # logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
-
-                if True:
+                pthresh=[]
+                for p_threshold in range(0,1,0.02):
+                    pthresh.append(p_threshold)
                     # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
@@ -853,9 +856,9 @@ class VKGE_tests:
 
                             scores_obj = scores_obj
 
-                            if (scores_subj[s_idx] > self.p_threshold): #need to index subj and obj here
+                            if (scores_subj[s_idx] > p_threshold): #need to index subj and obj here
                                 ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                            if (scores_obj[o_idx] > self.p_threshold):
+                            if (scores_obj[o_idx] > p_threshold):
                                 ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
 
@@ -879,9 +882,9 @@ class VKGE_tests:
 
                         elif self.alt_test in ['test2','test2_bline']:  # multiply by binary threshold on variance
 
-                            if (scores_subj[s_idx] > self.p_threshold):
+                            if (scores_subj[s_idx] > p_threshold):
                                 filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                            if (scores_obj[o_idx] > self.p_threshold):
+                            if (scores_obj[o_idx] > p_threshold):
                                 filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
                         # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] == [1]:
                         #     logger.warn(
@@ -901,26 +904,42 @@ class VKGE_tests:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
+                            if setting_name=='Filtered':
+                                experiments[k].append(hits_at_k)
+                cvrg=1-pthresh
+                for k in hts:
+                    table=[np.divide(experiments[k], 100) ,cvrg]
 
 
+                    tips = pd.DataFrame(table)
+                    tips = tips.transpose()
+
+                    colnam='Hits@'+str(k)
+
+                    columns = [colnam,'coverage']
+
+                    tips.columns = columns
+
+                    ax = sns.regplot(x='coverage', y=colnam, data=table, scatter_kws = {"s": 80}, order = 2, ci = 0.95, truncate = True)
+
+                    ax.figure.savefig("ConfEstimation_H@"+str(k)+".png")
 
 
-
-                    e1, e2, p1, p2 = session.run(
-                        [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
-                         self.predicate_embedding_sigma], feed_dict={})
-                    np.save(
-                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/15ng_entity_embeddings",
-                        e1)
-                    np.save(
-                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/15ng_entity_embedding_sigma",
-                        e2)
-                    np.save(
-                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/15ng_predicate_embedding_mean",
-                        p1)
-                    np.save(
-                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/15ng_predicate_embedding_sigma",
-                        p2)
+                # e1, e2, p1, p2 = session.run(
+                    #     [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
+                    #      self.predicate_embedding_sigma], feed_dict={})
+                    # np.save(
+                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/15ng_entity_embeddings",
+                    #     e1)
+                    # np.save(
+                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/15ng_entity_embedding_sigma",
+                    #     e2)
+                    # np.save(
+                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/15ng_predicate_embedding_mean",
+                    #     p1)
+                    # np.save(
+                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/15ng_predicate_embedding_sigma",
+                    #     p2)
 
 
 

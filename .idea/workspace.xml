@@ -20,8 +20,8 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="892" column="0" lean-forward="true" selection-start-line="885" selection-start-column="26" selection-end-line="892" selection-end-column="0" />
+            <state relative-caret-position="471">
+              <caret line="924" column="72" lean-forward="true" selection-start-line="924" selection-start-column="72" selection-end-line="924" selection-end-column="72" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -53,8 +53,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>div</find>
-      <find>len_valid</find>
       <find>self.p_threshold</find>
       <find>if (confidence_subj &gt; self.p_threshold):</find>
       <find>self.tra</find>
@@ -83,6 +81,8 @@
       <find>cub</find>
       <find>sphere</find>
       <find>self.scores</find>
+      <find>p_threshold</find>
+      <find>list</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -104,6 +104,7 @@
       <replace>idx_neg</replace>
       <replace>idx_pos</replace>
       <replace>test2</replace>
+      <replace>p_threshold</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -377,13 +378,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00646" summary="uploaded scaled version">
-      <created>1533653858595</created>
-      <option name="number" value="00646" />
-      <option name="presentableId" value="LOCAL-00646" />
-      <option name="project" value="LOCAL" />
-      <updated>1533653858596</updated>
     </task>
     <task id="LOCAL-00647" summary="uploaded scaled version">
       <created>1533653909085</created>
@@ -721,7 +715,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533826152415</updated>
     </task>
-    <option name="localTasksCounter" value="695" />
+    <task id="LOCAL-00695" summary="updated test scripts">
+      <created>1533830535045</created>
+      <option name="number" value="00695" />
+      <option name="presentableId" value="LOCAL-00695" />
+      <option name="project" value="LOCAL" />
+      <updated>1533830535045</updated>
+    </task>
+    <option name="localTasksCounter" value="696" />
     <servers />
   </component>
   <component name="TodoView">
@@ -807,7 +808,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update evaluation" />
     <MESSAGE value="updated baseline with max number of negative samples" />
     <MESSAGE value="dismult in tst" />
     <MESSAGE value="updated with tested bernoulli sampling on elbo" />
@@ -832,7 +832,8 @@
     <MESSAGE value="updated Complex variance init to be half the normal" />
     <MESSAGE value="updated test script" />
     <MESSAGE value="push before implementing bernoulli sampling" />
-    <option name="LAST_COMMIT_MESSAGE" value="push before implementing bernoulli sampling" />
+    <MESSAGE value="updated test scripts" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated test scripts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1190,8 +1191,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="892" column="0" lean-forward="true" selection-start-line="885" selection-start-column="26" selection-end-line="892" selection-end-column="0" />
+        <state relative-caret-position="471">
+          <caret line="924" column="72" lean-forward="true" selection-start-line="924" selection-start-column="72" selection-end-line="924" selection-end-column="72" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
