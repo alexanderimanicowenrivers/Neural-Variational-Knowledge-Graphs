@@ -717,7 +717,7 @@ class VKGE:
                     counter += 1
                 #
                 # if self.projection:
-                if False:
+                if self.projection:
 
                     for projection_step in projection_steps:
                         session.run([projection_step])
@@ -729,7 +729,7 @@ class VKGE:
 
 
                 if (epoch % 10) == 0:
-                    # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
+                    self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
                     eval_name = 'valid'
