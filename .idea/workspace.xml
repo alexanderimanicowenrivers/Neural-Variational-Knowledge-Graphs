@@ -21,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
-              <caret line="927" column="48" lean-forward="false" selection-start-line="927" selection-start-column="48" selection-end-line="927" selection-end-column="48" />
+              <caret line="927" column="46" lean-forward="false" selection-start-line="927" selection-start-column="46" selection-end-line="927" selection-end-column="46" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -379,13 +379,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00654" summary="updated GPU scripts">
-      <created>1533658132829</created>
-      <option name="number" value="00654" />
-      <option name="presentableId" value="LOCAL-00654" />
-      <option name="project" value="LOCAL" />
-      <updated>1533658132829</updated>
-    </task>
     <task id="LOCAL-00655" summary="updated GPU scripts">
       <created>1533658203276</created>
       <option name="number" value="00655" />
@@ -722,7 +715,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533837605548</updated>
     </task>
-    <option name="localTasksCounter" value="703" />
+    <task id="LOCAL-00703" summary="upload confidence estimation scripts">
+      <created>1533837765929</created>
+      <option name="number" value="00703" />
+      <option name="presentableId" value="LOCAL-00703" />
+      <option name="project" value="LOCAL" />
+      <updated>1533837765929</updated>
+    </task>
+    <option name="localTasksCounter" value="704" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1192,7 +1192,7 @@
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="927" column="48" lean-forward="false" selection-start-line="927" selection-start-column="48" selection-end-line="927" selection-end-column="48" />
+          <caret line="927" column="46" lean-forward="false" selection-start-line="927" selection-start-column="46" selection-end-line="927" selection-end-column="46" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
