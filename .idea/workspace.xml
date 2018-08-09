@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="upload confidence estimation scripts">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vkge/base_model2.py" />
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,8 +31,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="694" column="79" lean-forward="false" selection-start-line="694" selection-start-column="79" selection-end-line="694" selection-end-column="79" />
+            <state relative-caret-position="380">
+              <caret line="742" column="99" lean-forward="true" selection-start-line="742" selection-start-column="99" selection-end-line="742" selection-end-column="99" />
               <folding>
                 <element signature="e#853#1007#0" expanded="false" />
                 <element signature="e#1036#1371#0" expanded="false" />
@@ -402,13 +400,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00663" summary="updated test1 scripts">
-      <created>1533727211802</created>
-      <option name="number" value="00663" />
-      <option name="presentableId" value="LOCAL-00663" />
-      <option name="project" value="LOCAL" />
-      <updated>1533727211802</updated>
-    </task>
     <task id="LOCAL-00664" summary="updated test1 scripts">
       <created>1533727243153</created>
       <option name="number" value="00664" />
@@ -745,7 +736,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533840921375</updated>
     </task>
-    <option name="localTasksCounter" value="712" />
+    <task id="LOCAL-00712" summary="upload confidence estimation scripts">
+      <created>1533842495624</created>
+      <option name="number" value="00712" />
+      <option name="presentableId" value="LOCAL-00712" />
+      <option name="project" value="LOCAL" />
+      <updated>1533842495625</updated>
+    </task>
+    <option name="localTasksCounter" value="713" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1214,8 +1212,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="694" column="79" lean-forward="false" selection-start-line="694" selection-start-column="79" selection-end-line="694" selection-end-column="79" />
+        <state relative-caret-position="380">
+          <caret line="742" column="99" lean-forward="true" selection-start-line="742" selection-start-column="99" selection-end-line="742" selection-end-column="99" />
           <folding>
             <element signature="e#853#1007#0" expanded="false" />
             <element signature="e#1036#1371#0" expanded="false" />
