@@ -400,13 +400,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00664" summary="updated test1 scripts">
-      <created>1533727243153</created>
-      <option name="number" value="00664" />
-      <option name="presentableId" value="LOCAL-00664" />
-      <option name="project" value="LOCAL" />
-      <updated>1533727243153</updated>
-    </task>
     <task id="LOCAL-00665" summary="updated test1 scripts">
       <created>1533727507360</created>
       <option name="number" value="00665" />
@@ -743,7 +736,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533842495625</updated>
     </task>
-    <option name="localTasksCounter" value="713" />
+    <task id="LOCAL-00713" summary="upload confidence estimation scripts">
+      <created>1533842939093</created>
+      <option name="number" value="00713" />
+      <option name="presentableId" value="LOCAL-00713" />
+      <option name="project" value="LOCAL" />
+      <updated>1533842939094</updated>
+    </task>
+    <option name="localTasksCounter" value="714" />
     <servers />
   </component>
   <component name="TodoView">
