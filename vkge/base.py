@@ -281,7 +281,8 @@ class VKGE:
                         Constructs Model
         """
         self.noise = tf.placeholder(tf.float32, shape=[None,entity_embedding_size])
-        self.bernoulli_elbo_sampling = tf.placeholder(tf.int32, shape=[None])
+        self.idx_pos = tf.placeholder(tf.int32, shape=[None])
+        self.idx_neg = tf.placeholder(tf.int32, shape=[None])
 
         self.no_samples = tf.placeholder(tf.int32)
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
@@ -289,7 +290,7 @@ class VKGE:
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
         self.y_inputs = tf.placeholder(tf.bool, shape=[None])
         self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
-        self.epoch_d = tf.placeholder(tf.float32)  # starts at 0.5
+        self.BernoulliSRescale = tf.placeholder(tf.float32)  # starts at 0.5
 
         self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
                            pred_sig)
@@ -328,15 +329,20 @@ class VKGE:
         # ####################################  one KL
 
         #
-        idx=self.bernoulli_elbo_sampling
 
-        # self.mu_s_bs=tf.gather(self.mu_s,idx)
-        # self.mu_o_bs=tf.gather(self.mu_o,idx)
-        # self.mu_p_bs=tf.gather(self.mu_p,idx)
+        #positive samples
+
+        self.mu_s_ps=tf.gather(self.mu_s,idx_pos)
+        self.mu_o_ps=tf.gather(self.mu_o,idx_pos)
+        self.mu_p_ps=tf.gather(self.mu_p,idx_pos)
         #
-        # self.log_sigma_sq_s_bs =tf.gather(self.log_sigma_sq_s,idx)
-        # self.log_sigma_sq_o_bs =tf.gather(self.log_sigma_sq_o,idx)
-        # self.log_sigma_sq_p_bs =tf.gather(self.log_sigma_sq_p,idx)
+        self.log_sigma_sq_s_ps =tf.gather(self.log_sigma_sq_s,idx_pos)
+        self.log_sigma_sq_o_ps =tf.gather(self.log_sigma_sq_o,idx_pos)
+        self.log_sigma_sq_p_ps =tf.gather(self.log_sigma_sq_p,idx_pos)
+
+        # negative samples
+
+
         #
         # self.mu_all=tf.concat(axis=0,values=[self.mu_s_bs,self.mu_o_bs,self.mu_p_bs])
         # self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s_bs,self.log_sigma_sq_o_bs,self.log_sigma_sq_p_bs])
@@ -650,7 +656,8 @@ class VKGE:
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size),
                         self.epoch_d: 1.0
-                        ,self.bernoulli_elbo_sampling: np.arange(int(self.batch_size+10))
+                        ,self.idx_pos: np.arange(int(self.batch_size)),
+                        self.idx_neg: np.arange(int(self.batch_size))
                         # ,self.noise:noise
                     }
 
@@ -690,7 +697,7 @@ class VKGE:
 
 
                 if (epoch % 10) == 0:
-                    self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
+                    # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
                     eval_name = 'valid'
@@ -787,54 +794,18 @@ class VKGE:
                             # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
                         scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
 
-                        if self.alt_test == 'none':
-                            ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                            ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+                        ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                        ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
-                            hts = [1, 3, 5, 10]
+                        hts = [1, 3, 5, 10]
 
-                        else:
-                            hts = [1]
+
 
                         #########################
                         # Calculate score confidence
                         #########################
 
-                        if self.alt_test in ['test1']: #CORRECTION of scores for confidence TEST1
 
-                            confidence_subj=np.zeros(self.nb_entities)
-
-                            confidence_obj=np.zeros(self.nb_entities)
-
-                            for samp_no in range((self.no_confidence_samples)):
-
-                                scores_subj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
-
-                                confidence_subj+= np.divide(scores_subj,self.no_confidence_samples)
-
-                                # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                                scores_obj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
-
-                                confidence_obj+=((scores_obj)/self.no_confidence_samples*1.0)
-
-                        elif self.alt_test in ['test1_bline']: #creates random confidence levels between 0 and 1 for baseline test1
-                            confidence_subj=np.random.random_sample(self.nb_entities,)
-                            confidence_obj=np.random.random_sample(self.nb_entities,)
-                        #########################
-                        # Calculate new scores wrs to confidence
-                        #########################
-
-
-                        if self.alt_test in ['test1','test1_bline']: #multiply by binary threshold on variance
-
-                            scores_subj = scores_subj
-
-                            scores_obj = scores_obj
-
-                            if (confidence_subj[s_idx] > self.p_threshold): #need to index subj and obj here
-                                ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                            if (confidence_obj[o_idx] > self.p_threshold):
-                                ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
 
 
@@ -850,17 +821,9 @@ class VKGE:
                         filtered_scores_obj[rm_idx_o] = - np.inf
 
 
-                        if self.alt_test in ['none']:  # multiply by probability
+                        filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                        filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
-                            filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                            filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
-
-                        elif self.alt_test in ['test1','test1_bline']:  # multiply by binary threshold on variance
-
-                            if (confidence_subj[s_idx] > self.p_threshold):
-                                filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                            if (confidence_obj[o_idx] > self.p_threshold):
-                                filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
                     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
                     ranks = ranks_subj + ranks_obj
