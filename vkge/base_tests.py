@@ -746,6 +746,11 @@ class VKGE_tests:
                         for k in [1, 3, 5, 10]:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+
+                            #
+                            # if setting_name=='Filtered' and self.alt_test=='test1':
+                            #     experiments[k].append(hits_at_k)
+                            #     logger.warn('[{}] {} Hits@{} List: {}'.format(eval_name, setting_name, k, experiments[k]))
             ##
             # Test
             ##
@@ -899,9 +904,7 @@ class VKGE_tests:
 
 
 
-                            # if setting_name=='Filtered' and self.alt_test=='test1':
-                            #     experiments[k].append(hits_at_k)
-                            #     logger.warn('[{}] {} Hits@{} List: {}'.format(eval_name, setting_name, k, experiments[k]))
+
 
                     e1, e2, p1, p2 = session.run(
                         [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,

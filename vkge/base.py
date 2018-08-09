@@ -729,7 +729,6 @@ class VKGE:
 
 
                 if (epoch % 10) == 0:
-                    self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
                     eval_name = 'valid'
@@ -784,8 +783,8 @@ class VKGE:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
-            #                 if ((k==1) and (hits_at_k<=10.0)):
-            #                     sys.exit("Stopping Program As Bad Hits @10")
+                            if ((k==1) and (hits_at_k<=1.0) and setting_name=='Filtered'):
+                                sys.exit("Stopping Program As Bad Hits @10")
             # ##
             # Test
             ##
@@ -796,7 +795,9 @@ class VKGE:
             #
             # logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20],samp1_sig[:20]))
 
-                    logger.warn('Beginning test phase')
+                    logger.warn('Beginning test/ save phase')
+
+                    self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
                     eval_name = 'test'
