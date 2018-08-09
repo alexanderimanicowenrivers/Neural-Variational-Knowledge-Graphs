@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_tests.py" afterPath="$PROJECT_DIR$/vkge/base_tests.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,7 +19,7 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
+            <state relative-caret-position="341">
               <caret line="924" column="72" lean-forward="true" selection-start-line="924" selection-start-column="72" selection-end-line="924" selection-end-column="72" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
@@ -379,13 +378,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00647" summary="uploaded scaled version">
-      <created>1533653909085</created>
-      <option name="number" value="00647" />
-      <option name="presentableId" value="LOCAL-00647" />
-      <option name="project" value="LOCAL" />
-      <updated>1533653909086</updated>
-    </task>
     <task id="LOCAL-00648" summary="fixed test case">
       <created>1533654655203</created>
       <option name="number" value="00648" />
@@ -722,7 +714,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533830535045</updated>
     </task>
-    <option name="localTasksCounter" value="696" />
+    <task id="LOCAL-00696" summary="upload confidence estimation scripts">
+      <created>1533833074713</created>
+      <option name="number" value="00696" />
+      <option name="presentableId" value="LOCAL-00696" />
+      <option name="project" value="LOCAL" />
+      <updated>1533833074713</updated>
+    </task>
+    <option name="localTasksCounter" value="697" />
     <servers />
   </component>
   <component name="TodoView">
@@ -808,7 +807,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated baseline with max number of negative samples" />
     <MESSAGE value="dismult in tst" />
     <MESSAGE value="updated with tested bernoulli sampling on elbo" />
     <MESSAGE value="evaluation after 10 epochs" />
@@ -833,7 +831,8 @@
     <MESSAGE value="updated test script" />
     <MESSAGE value="push before implementing bernoulli sampling" />
     <MESSAGE value="updated test scripts" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated test scripts" />
+    <MESSAGE value="upload confidence estimation scripts" />
+    <option name="LAST_COMMIT_MESSAGE" value="upload confidence estimation scripts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1191,7 +1190,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
+        <state relative-caret-position="341">
           <caret line="924" column="72" lean-forward="true" selection-start-line="924" selection-start-column="72" selection-end-line="924" selection-end-column="72" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
