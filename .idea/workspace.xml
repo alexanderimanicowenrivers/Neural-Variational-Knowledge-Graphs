@@ -56,7 +56,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="421">
-              <caret line="71" column="16" lean-forward="false" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
+              <caret line="71" column="13" lean-forward="false" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
               <folding>
                 <element signature="e#199#215#0" expanded="true" />
               </folding>
@@ -422,13 +422,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00640" summary="updated folder name">
-      <created>1533650089666</created>
-      <option name="number" value="00640" />
-      <option name="presentableId" value="LOCAL-00640" />
-      <option name="project" value="LOCAL" />
-      <updated>1533650089666</updated>
-    </task>
     <task id="LOCAL-00641" summary="fixed error with loading model">
       <created>1533650844101</created>
       <option name="number" value="00641" />
@@ -765,7 +758,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533823185100</updated>
     </task>
-    <option name="localTasksCounter" value="689" />
+    <task id="LOCAL-00689" summary="push before implementing bernoulli sampling">
+      <created>1533823459820</created>
+      <option name="number" value="00689" />
+      <option name="presentableId" value="LOCAL-00689" />
+      <option name="project" value="LOCAL" />
+      <updated>1533823459820</updated>
+    </task>
+    <option name="localTasksCounter" value="690" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1235,7 +1235,7 @@
     <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="421">
-          <caret line="71" column="16" lean-forward="false" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
+          <caret line="71" column="13" lean-forward="false" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
           <folding>
             <element signature="e#199#215#0" expanded="true" />
           </folding>
