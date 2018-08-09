@@ -341,10 +341,10 @@ class VKGE:
         # self.hinge_losses_p = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
         # self.g_objective_n = tf.reduce_sum(self.hinge_losses)
 
-        self.g_objective_p = -tf.reduce_sum(
+        self.g_objective_p = -tf.reduce_mean(
             tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
 
-        self.g_objective_n = -tf.reduce_sum(
+        self.g_objective_n = -tf.reduce_mean(
             tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10))
 
         #positive samples
@@ -382,10 +382,10 @@ class VKGE:
         self.e_objective_n = 0.0
 
 
-        self.e_objective_p -= 0.5 * tf.reduce_sum(
+        self.e_objective_p -= 0.5 * tf.reduce_mean(
             1. + self.log_sigma_ps - tf.square(self.mu_all_ps) - tf.exp(self.log_sigma_ps))
 
-        self.e_objective_n -= 0.5 * tf.reduce_sum(
+        self.e_objective_n -= 0.5 * tf.reduce_mean(
             1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))
 
         self.elbo_positive = self.g_objective_p + self.e_objective_p
