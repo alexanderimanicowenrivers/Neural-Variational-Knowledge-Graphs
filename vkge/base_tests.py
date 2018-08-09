@@ -822,7 +822,7 @@ class VKGE_tests:
                             hts = [1]
 
 
-                        if self.alt_test in ['test2']: #CORRECTION of scores for confidence TEST1
+                        if self.alt_test in ['-']: #CORRECTION of scores for confidence TEST1
 
                             confidence_subj=np.zeros(self.nb_entities)
 
@@ -853,9 +853,9 @@ class VKGE_tests:
 
                             scores_obj = scores_obj
 
-                            if (confidence_subj[s_idx] > self.p_threshold): #need to index subj and obj here
+                            if (scores_subj[s_idx] > self.p_threshold): #need to index subj and obj here
                                 ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                            if (confidence_obj[o_idx] > self.p_threshold):
+                            if (scores_obj[o_idx] > self.p_threshold):
                                 ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
 
@@ -879,17 +879,17 @@ class VKGE_tests:
 
                         elif self.alt_test in ['test2','test2_bline']:  # multiply by binary threshold on variance
 
-                            if (confidence_subj[s_idx] > self.p_threshold):
+                            if (scores_subj[s_idx] > self.p_threshold):
                                 filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                            if (confidence_obj[o_idx] > self.p_threshold):
+                            if (scores_obj[o_idx] > self.p_threshold):
                                 filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
-                        if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] == [1]:
-                            logger.warn(
-                                "\t \t filtered_scores_subj  rank 1 idx is {},{},{} \t \t".format(s_idx, o_idx, p_idx))
-
-                        if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] == [1]:
-                            logger.warn(
-                                "\t \t filtered_scores_obj rank 1 idx is {},{},{} \t \t".format(s_idx, o_idx, p_idx))
+                        # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] == [1]:
+                        #     logger.warn(
+                        #         "\t \t filtered_scores_subj  rank 1 idx is {},{},{} \t \t".format(s_idx, o_idx, p_idx))
+                        #
+                        # if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] == [1]:
+                        #     logger.warn(
+                        #         "\t \t filtered_scores_obj rank 1 idx is {},{},{} \t \t".format(s_idx, o_idx, p_idx))
 
                     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
                     ranks = ranks_subj + ranks_obj
