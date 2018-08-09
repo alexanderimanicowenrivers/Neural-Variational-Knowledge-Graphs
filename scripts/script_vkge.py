@@ -43,8 +43,8 @@ def to_cmd(c):
               '--lr {} ' \
               '--score_func {} ' \
               '--negsamples {} ' \
-              '--alt_test {} ' \
               '--projection {} ' \
+              '--file_name {} ' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
