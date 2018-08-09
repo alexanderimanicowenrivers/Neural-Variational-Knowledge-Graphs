@@ -916,7 +916,7 @@ class VKGE_tests:
 
                 for k in hts:
                     table=[np.divide(experiments[k], 100) ,cvrg]
-                    logger.warn(' at k {} and {}'.format(k,np.divide(experiments[k])))
+                    logger.warn(' at k {} and {}'.format(k,np.divide(experiments[k], 100)))
 
                     tips = pd.DataFrame(table)
                     tips = tips.transpose()
