@@ -693,7 +693,7 @@ class VKGE_tests:
                 # logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
                 cvrg=[]
-                for p_threshold in np.arange(0,1,0.02):
+                for p_threshold in np.arange(0,1,.5):
                     cvrg.append(1-p_threshold)
                     # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
@@ -925,7 +925,7 @@ class VKGE_tests:
 
                     tips.columns = columns
 
-                    ax = sns.regplot(x='coverage', y=colnam, data=table, scatter_kws = {"s": 80}, order = 2, ci = 0.95, truncate = True)
+                    ax = sns.regplot(scatter_kws = {"s": 80}, order = 2, ci = 0.95, truncate = True)
 
                     ax.figure.savefig("ConfEstimation_H@"+str(k)+".png")
 
