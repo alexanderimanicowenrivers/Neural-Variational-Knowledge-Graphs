@@ -44,7 +44,7 @@ def to_cmd(c):
               '--score_func {} ' \
               '--negsamples {} ' \
               '--alt_test {} ' \
-              '--file_name {} ' \
+              '--projection {} ' \
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -69,16 +69,16 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[1000],
+        w1=[10],
         # w1=[10],
         w2=[1e-3], #
-        w3=[200,300],
+        w3=[200],
         w4 = ['kinship','nations','umls'],
         w5=[False],
-        w6=[0.01,0.001],
+        w6=[0.1,0.001],
         w7=['DistMult','TransE', 'ComplEx'],
         w8=[5,10,15,20,25],
-        w9=['none'])
+        w9=['True','False'])
 
     configurations = cartesian_product(hyperparameters_space)
     path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/180807_scaled'

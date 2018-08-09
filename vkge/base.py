@@ -597,7 +597,7 @@ class VKGE:
 
         total_negatives = int(2.0*len(all_triples)*(self.nb_entities-1))
 
-        logger.warn("Number of negative samples per positive is {}, \n batch size is {} \n number of positive triples {} , \n  bernoulli rescale {}".format(self.negsamples,self.negsamples*batch_size,len(all_triples),(1.0*total_negatives/self.negsamples)))
+        logger.warn("Number of negative samples per positive is {}, \n batch size is {} \n number of positive triples {} , \n  bernoulli rescale {}".format(self.negsamples,self.negsamples*batch_size,len(all_triples),(2.0*(self.nb_entities-1))))
 
         nb_versions = int(self.negsamples + 1)  # neg samples + original
 
@@ -654,15 +654,11 @@ class VKGE:
                     Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
                     Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                    for q in range((int(self.negsamples/2))): # Xs_batch[1::nb_versions] needs to be corrupted
+                    for q in range(0,int(self.negsamples)): # Xs_batch[1::nb_versions] needs to be corrupted
                         Xs_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
                         Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
                         Xo_batch[q::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                    for q2 in range(q,(int(self.negsamples/2))): # Xs_batch[1::nb_versions] needs to be corrupted
-                        Xs_batch[q2::nb_versions] = Xs_shuf[batch_start:batch_end]
-                        Xp_batch[q2::nb_versions] = Xp_shuf[batch_start:batch_end]
-                        Xo_batch[q2::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
 
 
                     vec_neglabels=[int(1)]+([int(0)]*(int(nb_versions-1)))
@@ -685,16 +681,20 @@ class VKGE:
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size),
-                        self.BernoulliSRescale: ((1.0*total_negatives/self.negsamples)/(self.nb_entities*2.0))
+                        self.BernoulliSRescale: (2.0*(self.nb_entities-1))
                         ,self.idx_pos: np.arange(int(self.batch_size)),
-                        self.idx_neg: np.arange(int(self.batch_size),int(self.batch_size)*int(self.negsamples))
+                        self.idx_neg: np.arange(int(self.batch_size),int(self.batch_size)*(int(self.negsamples)+1))
                         # ,self.noise:noise
                     }
 
                     # merge = tf.summary.merge_all()  # for TB
 
-                    _, elbo_value = session.run([ self.training_step, self.elbo],
-                                                         feed_dict=loss_args)
+
+
+
+                    _, elbo_value,ep,en = session.run([ self.training_step, self.elbo,self.elbo_positive,self.elbo_negative],
+                                                             feed_dict=loss_args)
+                    logger.warn('elbow pos {0}\t ELBO neg: {1}'.format(ep, en))
 
                         # summary, _, elbo_value = session.run([merge, self.training_step, self.elbo],
                         #                                      feed_dict=loss_args)
@@ -711,13 +711,13 @@ class VKGE:
                     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
 
 
-                    loss_values += [elbo_value / (Xp_batch.shape[0] )]
+                    loss_values += [elbo_value / (Xp_batch.shape[0])]
                     total_loss_value += elbo_value
 
                     counter += 1
                 #
                 # if self.projection:
-                if True:
+                if False:
 
                     for projection_step in projection_steps:
                         session.run([projection_step])
