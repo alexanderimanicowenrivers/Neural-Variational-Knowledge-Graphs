@@ -6,12 +6,12 @@ from setuptools import find_packages
 with open('requirements.txt', 'r') as f:
       requirements = f.readlines()
 
-setup(name='vkge',
+setup(name='VKGE',
       version='0.1.0',
       description='Variational Embeddings of Knowledge Graphs',
       author='Pasquale Minervini',
-      author_email='p.minervini@cs.ucl.ac.uk',
-      url='https://github.com/pminervini/vkge',
+      author_email='mc_rivers@icloud.com',
+      url='https://github.com/acr42/vkge',
       test_suite='tests',
       license='MIT',
       install_requires=requirements,

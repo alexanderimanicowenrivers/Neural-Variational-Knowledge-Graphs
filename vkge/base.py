@@ -297,18 +297,16 @@ class VKGE:
         self.build_decoder()
 
         # Kullback Leibler divergence   in one go
-        self.e_objective = 0.0
-        self.e_objective1 = 0.0
-        self.e_objective2 = 0.0
-        self.e_objective3 = 0.0
 
-        if self.alt_opt: #ml
-            self.g_objective = -tf.reduce_sum(
-                tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
-        else: #else hinge margin of 1
-            self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
-            self.g_objective = tf.reduce_sum(self.hinge_losses)
+
+        # if self.alt_opt: #ml
+        #     self.g_objective = -tf.reduce_sum(
+        #         tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
+        #
+        # else: #else hinge margin of 1
+        #     self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
+        #     self.g_objective = tf.reduce_sum(self.hinge_losses)
 
 
 
@@ -330,55 +328,87 @@ class VKGE:
 
         #
 
+
+        self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
+        self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
+
+        self.p_x_i_pos = tf.gather(self.p_x_i, self.idx_pos)
+        self.p_x_i_neg = tf.gather(self.p_x_i, self.idx_neg)
+        #
+        # self.hinge_losses_p = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
+        # self.g_objective_p = tf.reduce_sum(self.hinge_losses)
+        #
+        # self.hinge_losses_p = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
+        # self.g_objective_n = tf.reduce_sum(self.hinge_losses)
+
+        self.g_objective_p = -tf.reduce_sum(
+            tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
+
+        self.g_objective_n = -tf.reduce_sum(
+            tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10))
+
         #positive samples
 
-        self.mu_s_ps=tf.gather(self.mu_s,idx_pos)
-        self.mu_o_ps=tf.gather(self.mu_o,idx_pos)
-        self.mu_p_ps=tf.gather(self.mu_p,idx_pos)
+        self.mu_s_ps=tf.gather(self.mu_s,self.idx_pos)
+        self.mu_o_ps=tf.gather(self.mu_o,self.idx_pos)
+        self.mu_p_ps=tf.gather(self.mu_p,self.idx_pos)
         #
-        self.log_sigma_sq_s_ps =tf.gather(self.log_sigma_sq_s,idx_pos)
-        self.log_sigma_sq_o_ps =tf.gather(self.log_sigma_sq_o,idx_pos)
-        self.log_sigma_sq_p_ps =tf.gather(self.log_sigma_sq_p,idx_pos)
+        self.log_sigma_sq_s_ps =tf.gather(self.log_sigma_sq_s,self.idx_pos)
+        self.log_sigma_sq_o_ps =tf.gather(self.log_sigma_sq_o,self.idx_pos)
+        self.log_sigma_sq_p_ps =tf.gather(self.log_sigma_sq_p,self.idx_pos)
+
+        self.mu_all_ps = tf.concat(axis=0, values=[self.mu_s_ps, self.mu_o_ps, self.mu_p_ps])
+        self.log_sigma_ps = tf.concat(axis=0, values=[self.log_sigma_sq_s_ps, self.log_sigma_sq_o_ps, self.log_sigma_sq_p_ps])
+        #
 
         # negative samples
 
+        self.mu_s_ns=tf.gather(self.mu_s,self.idx_neg)
+        self.mu_o_ns=tf.gather(self.mu_o,self.idx_neg)
+        self.mu_p_ns=tf.gather(self.mu_p,self.idx_neg)
+        #
+        self.log_sigma_sq_s_ns =tf.gather(self.log_sigma_sq_s,self.idx_neg)
+        self.log_sigma_sq_o_ns =tf.gather(self.log_sigma_sq_o,self.idx_neg)
+        self.log_sigma_sq_p_ns =tf.gather(self.log_sigma_sq_p,self.idx_neg)
+
+        self.mu_all_ns = tf.concat(axis=0, values=[self.mu_s_ns, self.mu_o_ns, self.mu_p_ns])
+        self.log_sigma_ns = tf.concat(axis=0, values=[self.log_sigma_sq_s_ns, self.log_sigma_sq_o_ns, self.log_sigma_sq_p_ns])
+        #
+
+        #calc elbows
+
+        # self.e_objective = 0.0
+        self.e_objective_p = 0.0
+        self.e_objective_n = 0.0
+
+
+        self.e_objective_p -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_ps - tf.square(self.mu_all_ps) - tf.exp(self.log_sigma_ps))
+
+        self.e_objective_n -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))
+
+        self.elbo_positive = self.g_objective_p + self.e_objective_p
+        self.elbo_negative = self.g_objective_n + self.e_objective_n
+
+        self.elbo = self.elbo_positive + (self.elbo_negative*self.BernoulliSRescale)
 
         #
         # self.mu_all=tf.concat(axis=0,values=[self.mu_s_bs,self.mu_o_bs,self.mu_p_bs])
         # self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s_bs,self.log_sigma_sq_o_bs,self.log_sigma_sq_p_bs])
         # #
-        self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
-        self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
-        #
+        # self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
+        # self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
+        # #
 
-        self.e_objective-= 0.5 * tf.reduce_sum(
-                         1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
-
-
-
-        # ####################################  separately KL
-        # self.e_objective1 -= 0.5 * tf.reduce_sum(
-        #     1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
-        # self.e_objective2 -= 0.5 * tf.reduce_sum(
-        #     1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
-        # self.e_objective3 -= 0.5 * tf.reduce_sum(
-        #     1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))  # Log likelihood
-        #
-        #
-        # self.e_objective1 = self.e_objective1 * self.KL_discount
-        # self.e_objective2 = self.e_objective1 * self.KL_discount
-        # self.e_objective3 = self.e_objective1 * self.KL_discount
-        #
-        # self.e_objective = (self.e_objective1 + self.e_objective2 + self.e_objective3)
-
-        # ####################################  separately KL
-
-        self.training_stepe = optimizer.minimize(self.e_objective)
-        self.training_stepg = optimizer.minimize(self.g_objective)
+        # self.e_objective-= 0.5 * tf.reduce_sum(
+        #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
 
 
 
-        self.elbo = self.g_objective + self.e_objective
+        # self.elbo = self.g_objective + self.e_objective
+
+
 
         ##clip for robust learning as observed nans during training
         #
@@ -565,13 +595,13 @@ class VKGE:
 
         self.negsamples = int(self.negsamples)
 
-        # self.negsamples = int(2.0*len(all_triples)*(self.nb_entities-1)/(nb_batches*1.0))
+        total_negatives = int(2.0*len(all_triples)*(self.nb_entities-1))
 
-        logger.warn("Number of negative samples per batch is {}, \t batch size is {} \t number of positive triples {}".format(self.negsamples,self.negsamples+batch_size,len(all_triples)))
+        logger.warn("Number of negative samples per positive is {}, \n batch size is {} \n number of positive triples {} , \n  bernoulli rescale {}".format(self.negsamples,self.negsamples*batch_size,len(all_triples),(1.0*total_negatives/self.negsamples)))
 
         nb_versions = int(self.negsamples + 1)  # neg samples + original
 
-        projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
+        projection_steps = [constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0)]
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
@@ -629,10 +659,10 @@ class VKGE:
                         Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
                         Xo_batch[q::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                    for q in range((int(self.negsamples/2))): # Xs_batch[1::nb_versions] needs to be corrupted
-                        Xs_batch[q::nb_versions] = Xs_shuf[batch_start:batch_end]
-                        Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
-                        Xo_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                    for q2 in range(q,(int(self.negsamples/2))): # Xs_batch[1::nb_versions] needs to be corrupted
+                        Xs_batch[q2::nb_versions] = Xs_shuf[batch_start:batch_end]
+                        Xp_batch[q2::nb_versions] = Xp_shuf[batch_start:batch_end]
+                        Xo_batch[q2::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
 
 
                     vec_neglabels=[int(1)]+([int(0)]*(int(nb_versions-1)))
@@ -655,9 +685,9 @@ class VKGE:
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size),
-                        self.epoch_d: 1.0
+                        self.BernoulliSRescale: ((1.0*total_negatives/self.negsamples)/(self.nb_entities*2.0))
                         ,self.idx_pos: np.arange(int(self.batch_size)),
-                        self.idx_neg: np.arange(int(self.batch_size))
+                        self.idx_neg: np.arange(int(self.batch_size),int(self.batch_size)*int(self.negsamples))
                         # ,self.noise:noise
                     }
 
@@ -685,10 +715,12 @@ class VKGE:
                     total_loss_value += elbo_value
 
                     counter += 1
+                #
+                # if self.projection:
+                if True:
 
-                # if (self.projection == True):  # project means
-                #     for projection_step in projection_steps:
-                #         session.run([projection_step])
+                    for projection_step in projection_steps:
+                        session.run([projection_step])
 
 
 
@@ -752,9 +784,9 @@ class VKGE:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
-                            if ((k==1) and (hits_at_k<=10.0)):
-                                sys.exit("Stopping Program As Bad Hits @10")
-            ##
+            #                 if ((k==1) and (hits_at_k<=10.0)):
+            #                     sys.exit("Stopping Program As Bad Hits @10")
+            # ##
             # Test
             ##
 
