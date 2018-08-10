@@ -345,7 +345,7 @@ class VKGE:
             tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
 
         self.g_objective_n = -tf.reduce_mean((
-            tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10))*self.BernoulliSRescale)
+            tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
 
         #positive samples
 
@@ -386,12 +386,15 @@ class VKGE:
             1. + self.log_sigma_ps - tf.square(self.mu_all_ps) - tf.exp(self.log_sigma_ps))
 
         self.e_objective_n -= 0.5 * tf.reduce_mean((
-            1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))*self.BernoulliSRescale) #rescale
+            1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))) #rescale
 
         self.elbo_positive = self.g_objective_p + self.e_objective_p
         self.elbo_negative = self.g_objective_n + self.e_objective_n
 
-        self.elbo = self.elbo_positive + self.elbo_negative
+        self.elbo = tf.divide(self.elbo_positive,self.BernoulliSRescale) + tf.divide(self.elbo_negative*(self.BernoulliSRescale-1),self.BernoulliSRescale) #as reduce mean
+
+
+        self.elbo = self.elbo_positive + self.elbo_negative*self.BernoulliSRescale  #if reduce sum
 
         #
         # self.mu_all=tf.concat(axis=0,values=[self.mu_s_bs,self.mu_o_bs,self.mu_p_bs])
@@ -682,8 +685,8 @@ class VKGE:
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-                        # ,self.BernoulliSRescale: (2.0*(self.nb_entities-self.negsamples))
-                        , self.BernoulliSRescale: 1.0
+                        ,self.BernoulliSRescale: (2.0*(self.nb_entities-self.negsamples))
+                        # , self.BernoulliSRescale: 1.0
                         ,self.idx_pos: np.arange(curr_batch_size),
                         self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
                         ,self.noise:noise
