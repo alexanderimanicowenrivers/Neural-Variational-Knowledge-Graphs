@@ -725,7 +725,7 @@ class VKGE:
                     counter += 1
                 #
                 # if self.projection:
-                if self.projection:
+                if self.projection and epoch<nb_epochs: #so you do not project before evaluation
 
                     for projection_step in projection_steps:
                         session.run([projection_step])
