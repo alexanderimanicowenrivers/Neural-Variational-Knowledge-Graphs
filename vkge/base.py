@@ -344,8 +344,8 @@ class VKGE:
         self.g_objective_p = -tf.reduce_mean(
             tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
 
-        self.g_objective_n = -tf.reduce_mean(
-            tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10))
+        self.g_objective_n = -tf.reduce_mean((
+            tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10))*self.BernoulliSRescale)
 
         #positive samples
 
