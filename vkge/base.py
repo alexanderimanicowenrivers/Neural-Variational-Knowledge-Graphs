@@ -385,13 +385,13 @@ class VKGE:
         self.e_objective_p -= 0.5 * tf.reduce_mean(
             1. + self.log_sigma_ps - tf.square(self.mu_all_ps) - tf.exp(self.log_sigma_ps))
 
-        self.e_objective_n -= 0.5 * tf.reduce_mean(
-            1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))
+        self.e_objective_n -= 0.5 * tf.reduce_mean((
+            1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))*self.BernoulliSRescale) #rescale
 
         self.elbo_positive = self.g_objective_p + self.e_objective_p
         self.elbo_negative = self.g_objective_n + self.e_objective_n
 
-        self.elbo = self.elbo_positive + (self.elbo_negative*self.BernoulliSRescale)
+        self.elbo = self.elbo_positive + self.elbo_negative
 
         #
         # self.mu_all=tf.concat(axis=0,values=[self.mu_s_bs,self.mu_o_bs,self.mu_p_bs])

@@ -52,8 +52,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="800" column="72" lean-forward="false" selection-start-line="800" selection-start-column="0" selection-end-line="801" selection-end-column="0" />
+            <state relative-caret-position="424">
+              <caret line="394" column="0" lean-forward="true" selection-start-line="394" selection-start-column="0" selection-end-line="394" selection-end-column="0" />
               <folding>
                 <element signature="e#853#1007#0" expanded="false" />
                 <element signature="e#1036#1371#0" expanded="false" />
@@ -421,13 +421,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00672" summary="updated test1 scripts for viz">
-      <created>1533729951762</created>
-      <option name="number" value="00672" />
-      <option name="presentableId" value="LOCAL-00672" />
-      <option name="project" value="LOCAL" />
-      <updated>1533729951762</updated>
-    </task>
     <task id="LOCAL-00673" summary="updated Complex variance init to be half the normal">
       <created>1533752357722</created>
       <option name="number" value="00673" />
@@ -764,7 +757,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533851260235</updated>
     </task>
-    <option name="localTasksCounter" value="721" />
+    <task id="LOCAL-00721" summary="upload confidence estimation scripts">
+      <created>1533851850363</created>
+      <option name="number" value="00721" />
+      <option name="presentableId" value="LOCAL-00721" />
+      <option name="project" value="LOCAL" />
+      <updated>1533851850363</updated>
+    </task>
+    <option name="localTasksCounter" value="722" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1232,8 +1232,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="800" column="72" lean-forward="false" selection-start-line="800" selection-start-column="0" selection-end-line="801" selection-end-column="0" />
+        <state relative-caret-position="424">
+          <caret line="394" column="0" lean-forward="true" selection-start-line="394" selection-start-column="0" selection-end-line="394" selection-end-column="0" />
           <folding>
             <element signature="e#853#1007#0" expanded="false" />
             <element signature="e#1036#1371#0" expanded="false" />
