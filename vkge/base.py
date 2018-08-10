@@ -394,7 +394,7 @@ class VKGE:
         self.elbo = tf.divide(self.elbo_positive,self.BernoulliSRescale) + tf.divide(self.elbo_negative*(self.BernoulliSRescale-1),self.BernoulliSRescale) #as reduce mean
 
 
-        self.elbo = self.elbo_positive + self.elbo_negative*self.BernoulliSRescale  #if reduce sum
+        # self.elbo = self.elbo_positive + self.elbo_negative*self.BernoulliSRescale  #if reduce sum
 
         #
         # self.mu_all=tf.concat(axis=0,values=[self.mu_s_bs,self.mu_o_bs,self.mu_p_bs])
