@@ -114,13 +114,13 @@ class VKGE:
         if self.score_func=='ComplEx':
             predicate_embedding_size = embedding_size*2
             entity_embedding_size = embedding_size*2
-            sig_max = np.log((1.0/embedding_size*2.0))**2
+            sig_max = np.log((1.0/embedding_size*2.0)+1e-10)**2
 
 
         else:
             predicate_embedding_size = embedding_size
             entity_embedding_size = embedding_size
-            sig_max = np.log((1.0/embedding_size*1.0))**2
+            sig_max = np.log((1.0/embedding_size*1.0)+1e-10)**2
 
         sig_min = sig_max
 
@@ -387,10 +387,10 @@ class VKGE:
         self.e_objective_n = 0.0
 
 
-        self.e_objective_p -= 0.5 * tf.reduce_sum(
+        self.e_objective_p = -0.5 * tf.reduce_sum(
             1. + self.log_sigma_ps - tf.square(self.mu_all_ps) - tf.exp(self.log_sigma_ps))
 
-        self.e_objective_n -= 0.5 * tf.reduce_sum((
+        self.e_objective_n = -0.5 * tf.reduce_sum((
             1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))) #rescale
 
         self.elbo_positive = self.g_objective_p + self.e_objective_p
@@ -419,17 +419,17 @@ class VKGE:
 
         ##clip for robust learning as observed nans during training
         #
-        # gradients = optimizer.compute_gradients(loss=self.elbo)
-        #
-        # if True:
-        #     gradients = [(tf.clip_by_value(grad, -1, 1), var)
-        #                  for grad, var in gradients if grad is not None]
-        #
-        # self.training_step = optimizer.apply_gradients(gradients)
+        gradients = optimizer.compute_gradients(loss=self.elbo)
+
+
+        gradients = [(tf.clip_by_norm(grad, 1), var)
+                     for grad, var in gradients if grad is not None]
+
+        self.training_step = optimizer.apply_gradients(gradients)
         #
 
 
-        self.training_step = optimizer.minimize(self.elbo)
+        # self.training_step = optimizer.minimize(self.elbo)
 
         # self.train_variables=tf.trainable_variables()
         # self._setup_training(loss=self.elbo,optimizer=optimizer)
