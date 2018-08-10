@@ -16,7 +16,7 @@ from random import randint
 
 import logging
 import sys
-
+import sys
 logger = logging.getLogger(__name__)
 
 
@@ -143,6 +143,11 @@ class VKGE:
 
         ##### for test time ######
         all_triples = train_triples + valid_triples + test_triples
+
+        if len(all_triples)<=no_batches:
+            sys.exit("Stopping Job As Batch Size Exceeds Triples")
+
+
         entity_set = {s for (s, p, o) in all_triples} | {o for (s, p, o) in all_triples}
         predicate_set = {p for (s, p, o) in all_triples}
         self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
