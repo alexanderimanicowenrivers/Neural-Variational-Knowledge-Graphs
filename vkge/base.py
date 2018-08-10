@@ -792,7 +792,7 @@ class VKGE:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
-                            if ((k==1) and (hits_at_k<=1.0) and setting_name=='Filtered'):
+                            if ((k==3) and (hits_at_k<=10.0) and setting_name=='Filtered'):
                                 sys.exit("Stopping Program As Bad Hits @10")
             # ##
             # Test

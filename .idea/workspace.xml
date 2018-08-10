@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="do not project on last epoch before validation">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_vkge.py" afterPath="$PROJECT_DIR$/scripts/script_vkge.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,10 +37,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script_vkge.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="script_vkge.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
+            <state relative-caret-position="353">
               <caret line="71" column="22" lean-forward="false" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
               <folding>
                 <element signature="e#199#215#0" expanded="true" />
@@ -49,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="735" column="35" lean-forward="false" selection-start-line="735" selection-start-column="35" selection-end-line="735" selection-end-column="35" />
+            <state relative-caret-position="219">
+              <caret line="794" column="57" lean-forward="false" selection-start-line="794" selection-start-column="57" selection-end-line="794" selection-end-column="57" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#863#1017#0" expanded="false" />
@@ -204,8 +204,8 @@
         <option value="$PROJECT_DIR$/vkge/base_model2.py" />
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
         <option value="$PROJECT_DIR$/vkge/base_tests.py" />
-        <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/scripts/script_vkge.py" />
+        <option value="$PROJECT_DIR$/vkge/base.py" />
       </list>
     </option>
   </component>
@@ -419,13 +419,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00688" summary="push before implementing bernoulli sampling">
-      <created>1533823185099</created>
-      <option name="number" value="00688" />
-      <option name="presentableId" value="LOCAL-00688" />
-      <option name="project" value="LOCAL" />
-      <updated>1533823185100</updated>
     </task>
     <task id="LOCAL-00689" summary="push before implementing bernoulli sampling">
       <created>1533823459820</created>
@@ -763,7 +756,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533919981122</updated>
     </task>
-    <option name="localTasksCounter" value="737" />
+    <task id="LOCAL-00737" summary="do not project on last epoch before validation">
+      <created>1533920026259</created>
+      <option name="number" value="00737" />
+      <option name="presentableId" value="LOCAL-00737" />
+      <option name="project" value="LOCAL" />
+      <updated>1533920026260</updated>
+    </task>
+    <option name="localTasksCounter" value="738" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1219,24 +1219,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base.py">
+    <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="735" column="35" lean-forward="false" selection-start-line="735" selection-start-column="35" selection-end-line="735" selection-end-column="35" />
+        <state relative-caret-position="353">
+          <caret line="71" column="22" lean-forward="false" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
           <folding>
-            <element signature="e#25#36#0" expanded="true" />
-            <element signature="e#863#1017#0" expanded="false" />
-            <element signature="e#1046#1381#0" expanded="false" />
+            <element signature="e#199#215#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
+    <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="71" column="22" lean-forward="false" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
+        <state relative-caret-position="219">
+          <caret line="794" column="57" lean-forward="false" selection-start-line="794" selection-start-column="57" selection-end-line="794" selection-end-column="57" />
           <folding>
-            <element signature="e#199#215#0" expanded="true" />
+            <element signature="e#25#36#0" expanded="true" />
+            <element signature="e#863#1017#0" expanded="false" />
+            <element signature="e#1046#1381#0" expanded="false" />
           </folding>
         </state>
       </provider>
