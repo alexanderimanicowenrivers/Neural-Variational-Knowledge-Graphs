@@ -626,7 +626,6 @@ class VKGE:
         ##
         # Train
         ##
-        config = tf.ConfigProto(log_device_placement=True)
 
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:

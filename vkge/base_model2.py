@@ -410,19 +410,14 @@ class VKGE_independent:
 
 
 
-        ##clip for robust learning as observed nans during training
-        #
-        # gradients = optimizer.compute_gradients(loss=self.elbo)
-        #
-        # if True:
-        #     gradients = [(tf.clip_by_value(grad, -1, 1), var)
-        #                  for grad, var in gradients if grad is not None]
-        #
-        # self.training_step = optimizer.apply_gradients(gradients)
-        #
+        gradients = optimizer.compute_gradients(loss=self.elbo)
 
+        gradients = [(tf.clip_by_norm(grad, 1), var)
+                     for grad, var in gradients if grad is not None]
 
-        self.training_step = optimizer.minimize(self.elbo)
+        self.training_step = optimizer.apply_gradients(gradients)
+        #
+        # self.training_step = optimizer.minimize(self.elbo)
 
         # self.train_variables=tf.trainable_variables()
         # self._setup_training(loss=self.elbo,optimizer=optimizer)
@@ -490,17 +485,17 @@ class VKGE_independent:
 
             with tf.variable_scope('Decoder'):
 
-                # self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
-                # self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
-                # self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
+                self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
+                self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
+                self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
                 #
                 # else:
 
-                self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
-                self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
-                self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
-
-
+                # self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
+                # self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+                # self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
+                #
+                #
 
 
     def build_decoder(self):
@@ -641,6 +636,9 @@ class VKGE_independent:
 
                 loss_values = []
                 total_loss_value = 0
+                noise = session.run(tf.random_normal((nb_versions * curr_batch_size, entity_embedding_size), 0, 1,
+                                                     dtype=tf.float32)) #sample noise before epoch
+
 
                 for batch_no, (batch_start, batch_end) in enumerate(batches):
 
@@ -672,19 +670,20 @@ class VKGE_independent:
                     #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
                     #     self.epoch_d: kl_inc_val
                     # }
-                    noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
+
 
                     loss_args = {
-                        self.no_samples:1, #number of samples for precision test
+                        self.no_samples: 1,  # number of samples for precision test
                         self.KL_discount: 1.0,
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
-                        self.y_inputs: np.array(vec_neglabels * curr_batch_size),
-                        self.BernoulliSRescale: (2.0*(self.nb_entities-1))
-                        ,self.idx_pos: np.arange(int(self.batch_size)),
-                        self.idx_neg: np.arange(int(self.batch_size),int(self.batch_size)*(int(self.negsamples)+1))
-                        # ,self.noise:noise
+                        self.y_inputs: np.array(vec_neglabels * curr_batch_size)
+                        , self.BernoulliSRescale: (2.0 * (self.nb_entities - self.negsamples))
+                        # , self.BernoulliSRescale: 1.0
+                        , self.idx_pos: np.arange(curr_batch_size),
+                        self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
+                        , self.noise: noise
                     }
 
                     # merge = tf.summary.merge_all()  # for TB
@@ -717,11 +716,10 @@ class VKGE_independent:
                     counter += 1
                 #
                 # if self.projection:
-                if self.projection:
+                if self.projection and epoch<nb_epochs: #so you do not project before evaluation
 
                     for projection_step in projection_steps:
                         session.run([projection_step])
-
 
 
 
@@ -783,7 +781,7 @@ class VKGE_independent:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
-                            if ((k==1) and (hits_at_k<=1.0) and setting_name=='Filtered'):
+                            if ((k==3) and (hits_at_k<=10.0) and setting_name=='Filtered'):
                                 sys.exit("Stopping Program As Bad Hits @10")
             # ##
             # Test
