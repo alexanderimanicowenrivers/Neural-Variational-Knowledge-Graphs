@@ -1,55 +1,3 @@
-Skip
-to
-content
-
-Search or jump
-to…
-
-Pull
-requests
-Issues
-Marketplace
-Explore
-
-
-@acr42
-
-
-Sign
-out
-1
-0
-0
-acr42 / Neural - Variational - Knowledge - Graphs
-Code
-Issues
-0
-Pull
-requests
-0
-Projects
-0
-Wiki
-Insights
-Settings
-Neural - Variational - Knowledge - Graphs / vkge / base.py
-22
-aa651
-on
-1
-Jul
-
-
-@acr42
-
-
-acr42
-added in ComplEX
-
-693
-lines(511
-sloc)  30.6
-KB
 # -*- coding: utf-8 -*-
 
 import math
@@ -140,8 +88,8 @@ class VKGE_working:
         @type projection: bool
             """
 
-    def __init__(self, file_name, dismult_complex=False, static_mean=False, embedding_size=50, batch_s=14145,
-                 mean_c=0.1,
+    def __init__(self, file_name='', dismult_complex=False, static_mean=False, embedding_size=50, batch_s=14145,
+                 mean_c=0.1,lr=0.01,
                  init_sig=6.0,
                  alt_cost=False, alt_updates=True, sigma_alt=True, margin=5, alt_opt=True, projection=True):
         super().__init__()
@@ -185,9 +133,9 @@ class VKGE_working:
 
         logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(dataset_name))
 
-        train_triples = read_triples("data2/{}/train.tsv".format(dataset_name))  # choose dataset
-        valid_triples = read_triples("data2/{}/dev.tsv".format(dataset_name))
-        test_triples = read_triples("data2/{}/test.tsv".format(dataset_name))
+        train_triples = read_triples("data/{}/train.tsv".format(dataset_name))  # choose dataset
+        valid_triples = read_triples("data/{}/dev.tsv".format(dataset_name))
+        test_triples = read_triples("data/{}/test.tsv".format(dataset_name))
         self.nb_examples = len(train_triples)
 
         ##### for test time ######
@@ -201,9 +149,9 @@ class VKGE_working:
         self.margin = margin
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)        # optimizer=tf.train.AdagradOptimizer(learning_rate=0.1)
         if alt_opt:
-            optimizer = tf.train.AdagradOptimizer(learning_rate=0.1)  # original KG
+            optimizer = tf.train.AdagradOptimizer(learning_rate=lr)  # original KG
         else:
-            optimizer = tf.train.AdamOptimizer(learning_rate=0.1, epsilon=1e-05)
+            optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-05)
 
         # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-5)
 
@@ -219,7 +167,7 @@ class VKGE_working:
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, sig_max, sig_min)
-        self.nb_epochs = 1000
+        self.nb_epochs = 100
 
         self.decay_kl = False
 
@@ -317,7 +265,7 @@ class VKGE_working:
         """
         logger.warn('Building Inference Networks q(h_x | x) ..')
 
-        init1 = np.round((6.0 / np.sqrt(entity_embedding_size * 1.0)), decimals=2)
+        init1 = np.round((1 / np.sqrt(entity_embedding_size * 1.0)), decimals=2)
         init2 = sig_min
 
         # experiment 1 parameters, initalises a sigma to 0.031
@@ -525,16 +473,15 @@ class VKGE_working:
                     # if self.alt_cost:  # if compression cost
 
                     loss_args = {
-                        self.KL_discount: pi[counter],
+                        self.KL_discount: 1.0,
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array([1.0, 0.0, 0.0] * curr_batch_size),
-                        self.epoch_d: kl_inc_val
-                    }
+                        self.epoch_d: 1.0}
 
 
-                    summary, _, elbo_value = session.run([self.training_step, self.elbo],
+                    _, elbo_value = session.run([self.training_step, self.elbo],
                                                          feed_dict=loss_args)
 
                     # tensorboard

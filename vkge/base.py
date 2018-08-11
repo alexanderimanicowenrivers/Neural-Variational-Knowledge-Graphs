@@ -114,14 +114,14 @@ class VKGE:
         if self.score_func=='ComplEx':
             predicate_embedding_size = embedding_size*2
             entity_embedding_size = embedding_size*2
-            sig_max = np.log((1.0/embedding_size*2.0)**2+1e-10)
+            sig_max = np.log((1.0/embedding_size*2.0)+1e-10)
             # sig_max = np.exp((1.0 / embedding_size * 2.0) ** 2)
 
 
         else:
             predicate_embedding_size = embedding_size
             entity_embedding_size = embedding_size
-            sig_max = np.log((1.0/embedding_size*1.0)**2+1e-10)
+            sig_max = np.log((1.0/embedding_size*1.0)+1e-10)
             # sig_max = np.exp((1.0 / embedding_size * 1.0) ** 2)
 
         sig_min = sig_max
@@ -415,12 +415,12 @@ class VKGE:
         # self.e_objective=self.e_objective*self.KL_discount *self.epoch_d
         # ####################################  separately
 
-        self.e_objective1 -= 0.5 * tf.reduce_sum(
-            1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
-        self.e_objective2 -= 0.5 * tf.reduce_sum(
-            1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
-        self.e_objective3 -= 0.5 * tf.reduce_sum(
-            1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
+        # self.e_objective1 -= 0.5 * tf.reduce_sum(
+        #     1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
+        # self.e_objective2 -= 0.5 * tf.reduce_sum(
+        #     1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
+        # self.e_objective3 -= 0.5 * tf.reduce_sum(
+        #     1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
 
         # self.e_objective1 -= 0.5 * tf.reduce_sum(
         #     1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
@@ -479,7 +479,6 @@ class VKGE:
         """
         logger.warn('Building Inference Networks q(h_x | x) ..{}'.format(self.score_func))
 
-        init1 = np.round((1 / np.sqrt(entity_embedding_size * 1.0)), decimals=2)
         init2 = np.round(sig_max,decimals=2)
 
         # experiment 1 parameters, initalises a sigma to 0.031
@@ -491,15 +490,15 @@ class VKGE:
             with tf.variable_scope('entity'):
                 with tf.variable_scope('mu'):
 
-                    # self.entity_embedding_mean = tf.get_variable('entities', shape=[nb_entities + 1, entity_embedding_size],
-                    #                                              initializer=tf.contrib.layers.xavier_initializer())
+                    self.entity_embedding_mean = tf.get_variable('entities', shape=[nb_entities + 1, entity_embedding_size],
+                                                                 initializer=tf.contrib.layers.xavier_initializer())
 
-                    self.entity_embedding_mean = tf.get_variable('entities',
-                                                                 shape=[nb_entities + 1, entity_embedding_size],
-                                                                 initializer=tf.random_uniform_initializer(
-                                                                     minval=-init1,
-                                                                     maxval=init1,
-                                                                     dtype=tf.float32))
+                    # self.entity_embedding_mean = tf.get_variable('entities',
+                    #                                              shape=[nb_entities + 1, entity_embedding_size],
+                    #                                              initializer=tf.random_uniform_initializer(
+                    #                                                  minval=-init1,
+                    #                                                  maxval=init1,
+                    #                                                  dtype=tf.float32))
                 with tf.variable_scope('sigma'):
 
                     self.entity_embedding_sigma = tf.get_variable('entities_sigma',
@@ -519,16 +518,16 @@ class VKGE:
 
             with tf.variable_scope('predicate'):
                 with tf.variable_scope('mu'):
-                    # self.predicate_embedding_mean = tf.get_variable('predicates',
-                    #                                             shape=[nb_predicates + 1, predicate_embedding_size],
-                    #                                                 initializer=tf.contrib.layers.xavier_initializer())
-
                     self.predicate_embedding_mean = tf.get_variable('predicates',
-                                                                    shape=[nb_predicates + 1, predicate_embedding_size],
-                                                                    initializer=tf.random_uniform_initializer(
-                                                                        minval=-init1,
-                                                                        maxval=init1,
-                                                                        dtype=tf.float32))
+                                                                shape=[nb_predicates + 1, predicate_embedding_size],
+                                                                    initializer=tf.contrib.layers.xavier_initializer())
+
+                    # self.predicate_embedding_mean = tf.get_variable('predicates',
+                    #                                                 shape=[nb_predicates + 1, predicate_embedding_size],
+                    #                                                 initializer=tf.random_uniform_initializer(
+                    #                                                     minval=-init1,
+                    #                                                     maxval=init1,
+                    #                                                     dtype=tf.float32))
 
                 with tf.variable_scope('sigma'):
 
@@ -768,7 +767,7 @@ class VKGE:
                     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
 
 
-                    loss_values += [elbo_value / (Xp_batch.shape[0])]
+                    loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
                     total_loss_value += elbo_value
 
                     counter += 1
