@@ -440,7 +440,7 @@ class VKGE:
         """
         logger.warn('Building Inference Networks q(h_x | x) ..{}'.format(self.score_func))
 
-        init1 = np.round((self.mean_c / np.sqrt(entity_embedding_size * 1.0)), decimals=2)
+        init1 = np.round((1 / np.sqrt(entity_embedding_size * 1.0)), decimals=2)
         init2 = np.round(sig_max,decimals=2)
 
         # experiment 1 parameters, initalises a sigma to 0.031
@@ -452,10 +452,15 @@ class VKGE:
             with tf.variable_scope('entity'):
                 with tf.variable_scope('mu'):
 
-                    self.entity_embedding_mean = tf.get_variable('entities', shape=[nb_entities + 1, entity_embedding_size],
-                                                                 initializer=tf.contrib.layers.xavier_initializer())
+                    # self.entity_embedding_mean = tf.get_variable('entities', shape=[nb_entities + 1, entity_embedding_size],
+                    #                                              initializer=tf.contrib.layers.xavier_initializer())
 
-
+                    self.entity_embedding_mean = tf.get_variable('entities',
+                                                                 shape=[nb_entities + 1, entity_embedding_size],
+                                                                 initializer=tf.random_uniform_initializer(
+                                                                     minval=-init1,
+                                                                     maxval=init1,
+                                                                     dtype=tf.float32))
                 with tf.variable_scope('sigma'):
 
                     self.entity_embedding_sigma = tf.get_variable('entities_sigma',
@@ -474,6 +479,18 @@ class VKGE:
 
 
             with tf.variable_scope('predicate'):
+                with tf.variable_scope('mu'):
+                    # self.predicate_embedding_mean = tf.get_variable('predicates',
+                    #                                             shape=[nb_predicates + 1, predicate_embedding_size],
+                    #                                                 initializer=tf.contrib.layers.xavier_initializer())
+
+                    self.predicate_embedding_mean = tf.get_variable('predicates',
+                                                                    shape=[nb_predicates + 1, predicate_embedding_size],
+                                                                    initializer=tf.random_uniform_initializer(
+                                                                        minval=-init1,
+                                                                        maxval=init1,
+                                                                        dtype=tf.float32))
+
                 with tf.variable_scope('sigma'):
 
                     self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
@@ -482,11 +499,7 @@ class VKGE:
                                                              initializer=tf.random_uniform_initializer(
                                                                  minval=init2, maxval=init2, dtype=tf.float32),
                                                              dtype=tf.float32)
-                with tf.variable_scope('mu'):
 
-                    self.predicate_embedding_mean = tf.get_variable('predicates',
-                                                                shape=[nb_predicates + 1, predicate_embedding_size],
-                                                                    initializer=tf.contrib.layers.xavier_initializer())
 
                 self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
                 self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
