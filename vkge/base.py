@@ -114,13 +114,13 @@ class VKGE:
         if self.score_func=='ComplEx':
             predicate_embedding_size = embedding_size*2
             entity_embedding_size = embedding_size*2
-            sig_max = np.log((1.0/embedding_size*2.0)+1e-10)**2
+            sig_max = np.log((1.0/embedding_size*2.0)**2+1e-10)
 
 
         else:
             predicate_embedding_size = embedding_size
             entity_embedding_size = embedding_size
-            sig_max = np.log((1.0/embedding_size*1.0)+1e-10)**2
+            sig_max = np.log((1.0/embedding_size*1.0)**2+1e-10)
 
         sig_min = sig_max
 
