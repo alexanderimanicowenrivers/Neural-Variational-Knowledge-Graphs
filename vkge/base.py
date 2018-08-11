@@ -840,10 +840,10 @@ class VKGE:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
-                            if ((k==3)  and (hits_at_k<=0.1) and setting_name=='Filtered'):
-                                # self._saver.save(session, filename + '_epoch_' + str(epoch) + '.ckpt')
-
-                                sys.exit("Stopping Program As Bad Hits @10")
+                            # if ((k==3)  and (hits_at_k<=0.1) and setting_name=='Filtered'):
+                            #     # self._saver.save(session, filename + '_epoch_' + str(epoch) + '.ckpt')
+                            #
+                            #     sys.exit("Stopping Program As Bad Hits @10")
             # ##
             # Test
             ##
