@@ -19,7 +19,7 @@ import sys
 import sys
 logger = logging.getLogger(__name__)
 
-
+import collections
 def read_triples(path):
     triples = []
     with open(path, 'rt') as f:
@@ -143,8 +143,8 @@ class VKGE:
 
         ##### for test time ######
         all_triples = train_triples + valid_triples + test_triples
-
-        if len(all_triples)<=no_batches:
+        n=len(all_triples)*1.0
+        if n<=no_batches:
             sys.exit("Stopping Job As Batch Size Exceeds Triples")
 
 
@@ -153,6 +153,7 @@ class VKGE:
         self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
+        self.klrew = n / self.nb_entities
         ############################
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
         # optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
@@ -408,7 +409,7 @@ class VKGE:
 
 
 
-        self.elbo = self.g_objective + self.e_objective
+        self.elbo = self.g_objective + self.e_objective*self.KL_discount
 
 
 
@@ -679,7 +680,7 @@ class VKGE:
 
                     loss_args = {
                         self.no_samples:1, #number of samples for precision test
-                        self.KL_discount: 1.0,
+                        self.KL_discount: self.klrew,
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,

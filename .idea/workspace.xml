@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -51,12 +52,12 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1994">
-              <caret line="604" column="93" lean-forward="true" selection-start-line="604" selection-start-column="93" selection-end-line="604" selection-end-column="93" />
+            <state relative-caret-position="61">
+              <caret line="675" column="50" lean-forward="true" selection-start-line="675" selection-start-column="50" selection-end-line="675" selection-end-column="50" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
-                <element signature="e#863#1017#0" expanded="false" />
-                <element signature="e#1046#1381#0" expanded="false" />
+                <element signature="e#881#1035#0" expanded="false" />
+                <element signature="e#1064#1399#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -407,13 +408,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00705" summary="upload confidence estimation scripts">
-      <created>1533837935762</created>
-      <option name="number" value="00705" />
-      <option name="presentableId" value="LOCAL-00705" />
-      <option name="project" value="LOCAL" />
-      <updated>1533837935762</updated>
-    </task>
     <task id="LOCAL-00706" summary="upload confidence estimation scripts">
       <created>1533838054285</created>
       <option name="number" value="00706" />
@@ -750,7 +744,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534003152840</updated>
     </task>
-    <option name="localTasksCounter" value="754" />
+    <task id="LOCAL-00754" summary="only predicate is squished">
+      <created>1534003199575</created>
+      <option name="number" value="00754" />
+      <option name="presentableId" value="LOCAL-00754" />
+      <option name="project" value="LOCAL" />
+      <updated>1534003199575</updated>
+    </task>
+    <option name="localTasksCounter" value="755" />
     <servers />
   </component>
   <component name="TodoView">
@@ -836,7 +837,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed filename" />
     <MESSAGE value="updated training" />
     <MESSAGE value="updated folder name" />
     <MESSAGE value="fixed error with loading model" />
@@ -861,7 +861,8 @@
     <MESSAGE value="updated model with 5 negative samples" />
     <MESSAGE value="updated model with 5 negative samples and projection of only predicate sigma" />
     <MESSAGE value="updated model with 5 negative samples and projection of only predicate  and entity sigma" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated model with 5 negative samples and projection of only predicate  and entity sigma" />
+    <MESSAGE value="only predicate is squished" />
+    <option name="LAST_COMMIT_MESSAGE" value="only predicate is squished" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1218,12 +1219,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1994">
-          <caret line="604" column="93" lean-forward="true" selection-start-line="604" selection-start-column="93" selection-end-line="604" selection-end-column="93" />
+        <state relative-caret-position="61">
+          <caret line="675" column="50" lean-forward="true" selection-start-line="675" selection-start-column="50" selection-end-line="675" selection-end-column="50" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <element signature="e#863#1017#0" expanded="false" />
-            <element signature="e#1046#1381#0" expanded="false" />
+            <element signature="e#881#1035#0" expanded="false" />
+            <element signature="e#1064#1399#0" expanded="false" />
           </folding>
         </state>
       </provider>
