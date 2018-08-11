@@ -303,7 +303,10 @@ class VKGE:
 
         # Kullback Leibler divergence   in one go
 
+        self.g_objective = -tf.reduce_sum(
+            tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
+        self.e_objective=0
 
         # if self.alt_opt: #ml
         #     self.g_objective = -tf.reduce_sum(
@@ -332,88 +335,80 @@ class VKGE:
         # ####################################  one KL
 
         #
-
-
-        self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
-        self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
-
-        self.p_x_i_pos = tf.gather(self.p_x_i, self.idx_pos)
-        self.p_x_i_neg = tf.gather(self.p_x_i, self.idx_neg)
         #
-        # self.hinge_losses_p = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
-        # self.g_objective_p = tf.reduce_sum(self.hinge_losses)
         #
-        # self.hinge_losses_p = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
-        # self.g_objective_n = tf.reduce_sum(self.hinge_losses)
-
-        self.g_objective_p = -tf.reduce_sum(
-            tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
-
-        self.g_objective_n = -tf.reduce_sum((
-            tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
-
-        #positive samples
-
-        self.mu_s_ps=tf.gather(self.mu_s,self.idx_pos)
-        self.mu_o_ps=tf.gather(self.mu_o,self.idx_pos)
-        self.mu_p_ps=tf.gather(self.mu_p,self.idx_pos)
+        # self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
+        # self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
         #
-        self.log_sigma_sq_s_ps =tf.gather(self.log_sigma_sq_s,self.idx_pos)
-        self.log_sigma_sq_o_ps =tf.gather(self.log_sigma_sq_o,self.idx_pos)
-        self.log_sigma_sq_p_ps =tf.gather(self.log_sigma_sq_p,self.idx_pos)
-
-        self.mu_all_ps = tf.concat(axis=0, values=[self.mu_s_ps, self.mu_o_ps, self.mu_p_ps])
-        self.log_sigma_ps = tf.concat(axis=0, values=[self.log_sigma_sq_s_ps, self.log_sigma_sq_o_ps, self.log_sigma_sq_p_ps])
+        # self.p_x_i_pos = tf.gather(self.p_x_i, self.idx_pos)
+        # self.p_x_i_neg = tf.gather(self.p_x_i, self.idx_neg)
         #
-
-        # negative samples
-
-        self.mu_s_ns=tf.gather(self.mu_s,self.idx_neg)
-        self.mu_o_ns=tf.gather(self.mu_o,self.idx_neg)
-        self.mu_p_ns=tf.gather(self.mu_p,self.idx_neg)
+        # self.g_objective_p = -tf.reduce_sum(
+        #     tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
         #
-        self.log_sigma_sq_s_ns =tf.gather(self.log_sigma_sq_s,self.idx_neg)
-        self.log_sigma_sq_o_ns =tf.gather(self.log_sigma_sq_o,self.idx_neg)
-        self.log_sigma_sq_p_ns =tf.gather(self.log_sigma_sq_p,self.idx_neg)
+        # self.g_objective_n = -tf.reduce_sum((
+        #     tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
 
-        self.mu_all_ns = tf.concat(axis=0, values=[self.mu_s_ns, self.mu_o_ns, self.mu_p_ns])
-        self.log_sigma_ns = tf.concat(axis=0, values=[self.log_sigma_sq_s_ns, self.log_sigma_sq_o_ns, self.log_sigma_sq_p_ns])
-        #
+#        # positive samples
 
-        #calc elbows
-
-        # self.e_objective = 0.0
-        self.e_objective_p = 0.0
-        self.e_objective_n = 0.0
-
-
-        self.e_objective_p = -0.5 * tf.reduce_sum(
-            1. + self.log_sigma_ps - tf.square(self.mu_all_ps) - tf.exp(self.log_sigma_ps))
-
-        self.e_objective_n = -0.5 * tf.reduce_sum((
-            1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))) #rescale
-
-        self.elbo_positive = self.g_objective_p + self.e_objective_p
-        self.elbo_negative = self.g_objective_n + self.e_objective_n
-
-
-
-        self.elbo = self.elbo_positive + self.elbo_negative*self.BernoulliSRescale  #if reduce sum
-
-        #
-        # self.mu_all=tf.concat(axis=0,values=[self.mu_s_bs,self.mu_o_bs,self.mu_p_bs])
-        # self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s_bs,self.log_sigma_sq_o_bs,self.log_sigma_sq_p_bs])
+        # self.mu_s_ps=tf.gather(self.mu_s,self.idx_pos)
+        # self.mu_o_ps=tf.gather(self.mu_o,self.idx_pos)
+        # self.mu_p_ps=tf.gather(self.mu_p,self.idx_pos)
         # #
-        # self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
-        # self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
+        # self.log_sigma_sq_s_ps =tf.gather(self.log_sigma_sq_s,self.idx_pos)
+        # self.log_sigma_sq_o_ps =tf.gather(self.log_sigma_sq_o,self.idx_pos)
+        # self.log_sigma_sq_p_ps =tf.gather(self.log_sigma_sq_p,self.idx_pos)
+        #
+        # self.mu_all_ps = tf.concat(axis=0, values=[self.mu_s_ps, self.mu_o_ps, self.mu_p_ps])
+        # self.log_sigma_ps = tf.concat(axis=0, values=[self.log_sigma_sq_s_ps, self.log_sigma_sq_o_ps, self.log_sigma_sq_p_ps])
         # #
+        #
+        # # negative samples
+        #
+        # self.mu_s_ns=tf.gather(self.mu_s,self.idx_neg)
+        # self.mu_o_ns=tf.gather(self.mu_o,self.idx_neg)
+        # self.mu_p_ns=tf.gather(self.mu_p,self.idx_neg)
+        # #
+        # self.log_sigma_sq_s_ns =tf.gather(self.log_sigma_sq_s,self.idx_neg)
+        # self.log_sigma_sq_o_ns =tf.gather(self.log_sigma_sq_o,self.idx_neg)
+        # self.log_sigma_sq_p_ns =tf.gather(self.log_sigma_sq_p,self.idx_neg)
+        #
+        # self.mu_all_ns = tf.concat(axis=0, values=[self.mu_s_ns, self.mu_o_ns, self.mu_p_ns])
+        # self.log_sigma_ns = tf.concat(axis=0, values=[self.log_sigma_sq_s_ns, self.log_sigma_sq_o_ns, self.log_sigma_sq_p_ns])
+        # #
+        #
+        # #calc elbows
+        #
+        # # self.e_objective = 0.0
+        # self.e_objective_p = 0.0
+        # self.e_objective_n = 0.0
+        #
+        #
+        # self.e_objective_p = -0.5 * tf.reduce_sum(
+        #     1. + self.log_sigma_ps - tf.square(self.mu_all_ps) - tf.exp(self.log_sigma_ps))
+        #
+        # self.e_objective_n = -0.5 * tf.reduce_sum((
+        #     1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))) #rescale
+        #
+        # self.elbo_positive = self.g_objective_p + self.e_objective_p
+        # self.elbo_negative = self.g_objective_n + self.e_objective_n
 
-        # self.e_objective-= 0.5 * tf.reduce_sum(
-        #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
+
+
+        # self.elbo = self.elbo_positive + self.elbo_negative*self.BernoulliSRescale  #if reduce sum
 
 
 
-        # self.elbo = self.g_objective + self.e_objective
+        self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
+        self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
+        #
+
+        self.e_objective-= 0.5 * tf.reduce_sum(
+                         1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
+
+
+
+        self.elbo = self.g_objective + self.e_objective
 
 
 
@@ -496,16 +491,16 @@ class VKGE:
                 self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
 
             with tf.variable_scope('Decoder'):
-
-                self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
-                self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
-                self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
                 #
+                # self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
+                # self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
+                # self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
+                # #
                 # else:
 
-                # self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
-                # self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
-                # self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
+                self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
+                self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+                self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
 
 
