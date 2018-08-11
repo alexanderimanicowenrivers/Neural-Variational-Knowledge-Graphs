@@ -307,7 +307,6 @@ class VKGE:
         self.g_objective = -tf.reduce_sum(
             tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
-        self.e_objective=0
 
         # if self.alt_opt: #ml
         #     self.g_objective = -tf.reduce_sum(
@@ -398,18 +397,49 @@ class VKGE:
 
         # self.elbo = self.elbo_positive + self.elbo_negative*self.BernoulliSRescale  #if reduce sum
 
+##mock elbo
 
+        self.e_objective = 0.0
+        self.e_objective1 = 0.0
+        self.e_objective2 = 0.0
+        self.e_objective3 = 0.0
 
-        self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
-        self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
+        # self.mu_all=tf.concat(axis=0,values=[self.mu_s,self.mu_p,self.mu_o])
+        # self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s,self.log_sigma_sq_p,self.log_sigma_sq_o])
         #
+        # self.e_objective-= 0.5 * tf.reduce_sum(
+        #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
+        #
+        # self.e_objective=self.e_objective*self.KL_discount *self.epoch_d
 
-        self.e_objective-= 0.5 * tf.reduce_sum(
-                         1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
+        # ####################################  separately
+        self.e_objective1 -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
+        self.e_objective2 -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
+        self.e_objective3 -= 0.5 * tf.reduce_sum(
+            1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))  # Log likelihood
+        # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
+
+
+        self.e_objective1 = self.e_objective1 * self.KL_discount * self.epoch_d
+        self.e_objective2 = self.e_objective1 * self.KL_discount * self.epoch_d
+        self.e_objective3 = self.e_objective1 * self.KL_discount * self.epoch_d
+
+        self.e_objective = (1.0 / 3.0) * (self.e_objective1 + self.e_objective2 + self.e_objective3)
+
+        ###########best ELBO
+
+        # self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
+        # self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
+        # #
+        #
+        # self.e_objective-= 0.5 * tf.reduce_sum(
+        #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
 
 
 
-        self.elbo = self.g_objective + self.e_objective*self.KL_discount
+        self.elbo = self.g_objective + self.e_objective
 
 
 
