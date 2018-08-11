@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_vkge.py" afterPath="$PROJECT_DIR$/scripts/script_vkge.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script_vkge.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="script_vkge.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="77" column="17" lean-forward="false" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
+            <state relative-caret-position="185">
+              <caret line="79" column="13" lean-forward="false" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
               <folding>
                 <element signature="e#199#215#0" expanded="true" />
               </folding>
@@ -48,10 +49,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
+            <state relative-caret-position="-24">
               <caret line="493" column="16" lean-forward="false" selection-start-line="493" selection-start-column="17" selection-end-line="497" selection-end-column="19" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
@@ -83,7 +84,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>alt_opt</find>
       <find>shape</find>
       <find>samples</find>
       <find>merge</find>
@@ -113,6 +113,7 @@
       <find>compression</find>
       <find>tf.log</find>
       <find>np.log</find>
+      <find>_bs</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -193,8 +194,8 @@
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
         <option value="$PROJECT_DIR$/vkge/base_tests.py" />
         <option value="$PROJECT_DIR$/vkge/base_model2.py" />
-        <option value="$PROJECT_DIR$/scripts/script_vkge.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
+        <option value="$PROJECT_DIR$/scripts/script_vkge.py" />
       </list>
     </option>
   </component>
@@ -406,13 +407,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00696" summary="upload confidence estimation scripts">
-      <created>1533833074713</created>
-      <option name="number" value="00696" />
-      <option name="presentableId" value="LOCAL-00696" />
-      <option name="project" value="LOCAL" />
-      <updated>1533833074713</updated>
     </task>
     <task id="LOCAL-00697" summary="upload confidence estimation scripts">
       <created>1533833117910</created>
@@ -750,7 +744,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533997504258</updated>
     </task>
-    <option name="localTasksCounter" value="745" />
+    <task id="LOCAL-00745" summary="updated model with negative sampling">
+      <created>1533997517837</created>
+      <option name="number" value="00745" />
+      <option name="presentableId" value="LOCAL-00745" />
+      <option name="project" value="LOCAL" />
+      <updated>1533997517838</updated>
+    </task>
+    <option name="localTasksCounter" value="746" />
     <servers />
   </component>
   <component name="TodoView">
@@ -836,7 +837,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="only using MLE for now without Hinge" />
     <MESSAGE value="remove mean embedding initalisation" />
     <MESSAGE value="less learning rate search" />
     <MESSAGE value="fixed test script" />
@@ -861,7 +861,8 @@
     <MESSAGE value="do not project on last epoch before validation" />
     <MESSAGE value="updated model2" />
     <MESSAGE value="updated lr for model1 large datasets" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated lr for model1 large datasets" />
+    <MESSAGE value="updated model with negative sampling" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated model with negative sampling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1206,24 +1207,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="77" column="17" lean-forward="false" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
-          <folding>
-            <element signature="e#199#215#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
+        <state relative-caret-position="-24">
           <caret line="493" column="16" lean-forward="false" selection-start-line="493" selection-start-column="17" selection-end-line="497" selection-end-column="19" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#863#1017#0" expanded="false" />
             <element signature="e#1046#1381#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="79" column="13" lean-forward="false" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
+          <folding>
+            <element signature="e#199#215#0" expanded="true" />
           </folding>
         </state>
       </provider>
