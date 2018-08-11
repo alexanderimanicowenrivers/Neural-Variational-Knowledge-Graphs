@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_vkge.py" afterPath="$PROJECT_DIR$/scripts/script_vkge.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,8 +31,8 @@
       <file leaf-file-name="script_vkge.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-590">
-              <caret line="75" column="26" lean-forward="false" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
+            <state relative-caret-position="126">
+              <caret line="65" column="34" lean-forward="false" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
               <folding>
                 <element signature="e#199#215#0" expanded="true" />
               </folding>
@@ -51,8 +53,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="427" column="23" lean-forward="false" selection-start-line="427" selection-start-column="0" selection-end-line="428" selection-end-column="0" />
+            <state relative-caret-position="199">
+              <caret line="683" column="45" lean-forward="false" selection-start-line="683" selection-start-column="45" selection-end-line="683" selection-end-column="45" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#881#1035#0" expanded="false" />
@@ -407,13 +409,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00714" summary="upload confidence estimation scripts">
-      <created>1533842944639</created>
-      <option name="number" value="00714" />
-      <option name="presentableId" value="LOCAL-00714" />
-      <option name="project" value="LOCAL" />
-      <updated>1533842944639</updated>
-    </task>
     <task id="LOCAL-00715" summary="upload confidence estimation scripts">
       <created>1533843556303</created>
       <option name="number" value="00715" />
@@ -750,7 +745,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534006302282</updated>
     </task>
-    <option name="localTasksCounter" value="763" />
+    <task id="LOCAL-00763" summary="take out gradient clipping">
+      <created>1534006333966</created>
+      <option name="number" value="00763" />
+      <option name="presentableId" value="LOCAL-00763" />
+      <option name="project" value="LOCAL" />
+      <updated>1534006333966</updated>
+    </task>
+    <option name="localTasksCounter" value="764" />
     <servers />
   </component>
   <component name="TodoView">
@@ -836,7 +838,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="uploaded scaled version" />
     <MESSAGE value="fixed test case" />
     <MESSAGE value="updated test script to do forward sampling for 1000 samples 15 times" />
     <MESSAGE value="updated GPU scripts" />
@@ -861,7 +862,8 @@
     <MESSAGE value="added KL REW" />
     <MESSAGE value="add save for embedding analysis" />
     <MESSAGE value="take out projection layer" />
-    <option name="LAST_COMMIT_MESSAGE" value="take out projection layer" />
+    <MESSAGE value="take out gradient clipping" />
+    <option name="LAST_COMMIT_MESSAGE" value="take out gradient clipping" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1208,8 +1210,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-590">
-          <caret line="75" column="26" lean-forward="false" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
+        <state relative-caret-position="126">
+          <caret line="65" column="34" lean-forward="false" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
           <folding>
             <element signature="e#199#215#0" expanded="true" />
           </folding>
@@ -1218,8 +1220,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="427" column="23" lean-forward="false" selection-start-line="427" selection-start-column="0" selection-end-line="428" selection-end-column="0" />
+        <state relative-caret-position="199">
+          <caret line="683" column="45" lean-forward="false" selection-start-line="683" selection-start-column="45" selection-end-line="683" selection-end-column="45" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
