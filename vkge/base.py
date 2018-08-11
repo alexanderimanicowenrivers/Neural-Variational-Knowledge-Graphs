@@ -676,7 +676,7 @@ class VKGE:
                     #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
                     #     self.epoch_d: kl_inc_val
                     # }
-                    # noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
+                    noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
 
                     loss_args = {
                         self.no_samples:1, #number of samples for precision test

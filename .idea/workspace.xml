@@ -41,8 +41,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="122" column="60" lean-forward="false" selection-start-line="122" selection-start-column="60" selection-end-line="122" selection-end-column="60" />
+            <state relative-caret-position="15">
+              <caret line="678" column="58" lean-forward="true" selection-start-line="678" selection-start-column="0" selection-end-line="679" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#881#1035#0" expanded="false" />
@@ -83,7 +83,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>samples</find>
       <find>merge</find>
       <find>sig_max</find>
       <find>self.noise</find>
@@ -113,6 +112,7 @@
       <find>np.log</find>
       <find>_bs</find>
       <find>self.KL_discount</find>
+      <find>noise</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -406,13 +406,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00719" summary="upload confidence estimation scripts">
-      <created>1533843773004</created>
-      <option name="number" value="00719" />
-      <option name="presentableId" value="LOCAL-00719" />
-      <option name="project" value="LOCAL" />
-      <updated>1533843773005</updated>
     </task>
     <task id="LOCAL-00720" summary="upload confidence estimation scripts">
       <created>1533851260234</created>
@@ -750,7 +743,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534007459827</updated>
     </task>
-    <option name="localTasksCounter" value="768" />
+    <task id="LOCAL-00768" summary="KL/3">
+      <created>1534007488850</created>
+      <option name="number" value="00768" />
+      <option name="presentableId" value="LOCAL-00768" />
+      <option name="project" value="LOCAL" />
+      <updated>1534007488850</updated>
+    </task>
+    <option name="localTasksCounter" value="769" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1218,8 +1218,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="122" column="60" lean-forward="false" selection-start-line="122" selection-start-column="60" selection-end-line="122" selection-end-column="60" />
+        <state relative-caret-position="15">
+          <caret line="678" column="58" lean-forward="true" selection-start-line="678" selection-start-column="0" selection-end-line="679" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
