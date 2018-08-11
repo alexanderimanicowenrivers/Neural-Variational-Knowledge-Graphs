@@ -422,9 +422,9 @@ class VKGE:
         # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
 
 
-        self.e_objective1 = self.e_objective1 * self.KL_discount * self.epoch_d
-        self.e_objective2 = self.e_objective1 * self.KL_discount * self.epoch_d
-        self.e_objective3 = self.e_objective1 * self.KL_discount * self.epoch_d
+        self.e_objective1 = self.e_objective1
+        self.e_objective2 = self.e_objective2
+        self.e_objective3 = self.e_objective3
 
         self.e_objective = (1.0 / 3.0) * (self.e_objective1 + self.e_objective2 + self.e_objective3)
 
