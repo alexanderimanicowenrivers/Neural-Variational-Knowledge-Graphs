@@ -264,9 +264,9 @@ class VKGE:
 
         embedding_size = mu.get_shape()[1].value
 
-        self.eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
+        eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
 
-        return mu+sigma*self.eps
+        return mu+sigma*eps
 
     def sample_embedding_ptriple(self, mu, log_sigma_square):
         """
@@ -776,7 +776,7 @@ class VKGE:
                 logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
 
-                if (epoch % 10) == 0:
+                if (epoch % 50) == 0:
 
 
                     eval_name = 'valid'
