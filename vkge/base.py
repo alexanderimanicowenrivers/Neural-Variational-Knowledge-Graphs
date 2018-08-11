@@ -676,12 +676,12 @@ class VKGE:
                     #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
                     #     self.epoch_d: kl_inc_val
                     # }
-                    noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
+                    # noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
 
                     loss_args = {
                         self.no_samples:1, #number of samples for precision test
                         # self.KL_discount: self.klrew,
-                        self.KL_discount: 1.0,
+                        self.KL_discount: (1.0/3.0),
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
@@ -724,8 +724,8 @@ class VKGE:
                 # if self.projection:
                 # if self.projection and epoch<nb_epochs: #so you do not project before evaluation
                 #
-                #     for projection_step in projection_steps:
-                #         session.run([projection_step])
+                    # for projection_step in projection_steps:
+                    #     session.run([projection_step])
 
 
 

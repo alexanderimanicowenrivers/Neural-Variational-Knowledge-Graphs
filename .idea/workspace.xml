@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="take out gradient clipping and remove kl reweight">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_vkge.py" afterPath="$PROJECT_DIR$/scripts/script_vkge.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,7 +30,7 @@
       <file leaf-file-name="script_vkge.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
+            <state relative-caret-position="118">
               <caret line="65" column="34" lean-forward="false" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
               <folding>
                 <element signature="e#199#215#0" expanded="true" />
@@ -40,21 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script_baseline.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/script_baseline.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="60" column="73" lean-forward="true" selection-start-line="60" selection-start-column="11" selection-end-line="60" selection-end-column="73" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="683" column="45" lean-forward="false" selection-start-line="683" selection-start-column="45" selection-end-line="683" selection-end-column="45" />
+            <state relative-caret-position="305">
+              <caret line="726" column="6" lean-forward="false" selection-start-line="726" selection-start-column="6" selection-end-line="727" selection-end-column="56" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#881#1035#0" expanded="false" />
@@ -85,7 +74,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>shape</find>
       <find>samples</find>
       <find>merge</find>
       <find>sig_max</find>
@@ -115,6 +103,7 @@
       <find>tf.log</find>
       <find>np.log</find>
       <find>_bs</find>
+      <find>self.KL_discount</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -408,13 +397,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00715" summary="upload confidence estimation scripts">
-      <created>1533843556303</created>
-      <option name="number" value="00715" />
-      <option name="presentableId" value="LOCAL-00715" />
-      <option name="project" value="LOCAL" />
-      <updated>1533843556303</updated>
     </task>
     <task id="LOCAL-00716" summary="upload confidence estimation scripts">
       <created>1533843572490</created>
@@ -752,7 +734,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534006333966</updated>
     </task>
-    <option name="localTasksCounter" value="764" />
+    <task id="LOCAL-00764" summary="take out gradient clipping and remove kl reweight">
+      <created>1534006427479</created>
+      <option name="number" value="00764" />
+      <option name="presentableId" value="LOCAL-00764" />
+      <option name="project" value="LOCAL" />
+      <updated>1534006427479</updated>
+    </task>
+    <option name="localTasksCounter" value="765" />
     <servers />
   </component>
   <component name="TodoView">
@@ -838,7 +827,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed test case" />
     <MESSAGE value="updated test script to do forward sampling for 1000 samples 15 times" />
     <MESSAGE value="updated GPU scripts" />
     <MESSAGE value="updated test1 scripts" />
@@ -863,7 +851,8 @@
     <MESSAGE value="add save for embedding analysis" />
     <MESSAGE value="take out projection layer" />
     <MESSAGE value="take out gradient clipping" />
-    <option name="LAST_COMMIT_MESSAGE" value="take out gradient clipping" />
+    <MESSAGE value="take out gradient clipping and remove kl reweight" />
+    <option name="LAST_COMMIT_MESSAGE" value="take out gradient clipping and remove kl reweight" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1210,7 +1199,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
+        <state relative-caret-position="118">
           <caret line="65" column="34" lean-forward="false" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
           <folding>
             <element signature="e#199#215#0" expanded="true" />
@@ -1220,8 +1209,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="683" column="45" lean-forward="false" selection-start-line="683" selection-start-column="45" selection-end-line="683" selection-end-column="45" />
+        <state relative-caret-position="305">
+          <caret line="726" column="6" lean-forward="false" selection-start-line="726" selection-start-column="6" selection-end-line="727" selection-end-column="56" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
