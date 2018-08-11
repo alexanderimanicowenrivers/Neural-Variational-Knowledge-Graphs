@@ -727,21 +727,22 @@ class VKGE:
                     #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
                     #     self.epoch_d: kl_inc_val
                     # }
-                    noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
+
+                    # noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
 
                     loss_args = {
-                        self.no_samples:1, #number of samples for precision test
+                        # self.no_samples:1, #number of samples for precision test
                         # self.KL_discount: self.klrew,
-                        self.KL_discount: (1.0/3.0),
+                        # self.KL_discount: (1.0/3.0),
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-                        ,self.BernoulliSRescale: (2.0*(self.nb_entities-self.negsamples))
+                        # ,self.BernoulliSRescale: (2.0*(self.nb_entities-self.negsamples))
                         # , self.BernoulliSRescale: 1.0
-                        ,self.idx_pos: np.arange(curr_batch_size),
-                        self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
-                        ,self.noise:noise
+                        # ,self.idx_pos: np.arange(curr_batch_size),
+                        # self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
+                        # ,self.noise:noise
                     }
 
                     # merge = tf.summary.merge_all()  # for TB
@@ -844,15 +845,15 @@ class VKGE:
                             #     # self._saver.save(session, filename + '_epoch_' + str(epoch) + '.ckpt')
                             #
                             #     sys.exit("Stopping Program As Bad Hits @10")
-            # ##
-            # Test
-            ##
+                    # ##
+                    # Test
+                    ##
 
-            # logger.warn('PRINTING TOP 20 ROWS FROM SAMPLE ENTITY MEAN AND VAR ')
-            #
-            # samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
-            #
-            # logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20],samp1_sig[:20]))
+                    # logger.warn('PRINTING TOP 20 ROWS FROM SAMPLE ENTITY MEAN AND VAR ')
+                    #
+                    # samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
+                    #
+                    # logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20],samp1_sig[:20]))
 
                     logger.warn('Beginning test/ save phase')
 
