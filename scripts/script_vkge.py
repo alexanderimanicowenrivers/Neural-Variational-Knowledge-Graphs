@@ -57,13 +57,13 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                ("{}/logs/1808011_NS/uclcs_nvkg_v1.{}".format(path, summary(c)))
+                ("{}/logs/1808011_NS/uclcs_nvkg_v1.ProjPS{}".format(path, summary(c)))
                 )
     return command
 
 
 def to_logfile(c, path):
-    outfile = "%s/uclcs_nvkg_v1.%s.log" % (path, summary(c))
+    outfile = "%s/uclcs_nvkg_v1.ProjPS%s.log" % (path, summary(c))
     return outfile
 
 
