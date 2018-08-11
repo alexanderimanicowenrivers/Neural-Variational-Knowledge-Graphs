@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="test vkge without KL">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_vkge.py" afterPath="$PROJECT_DIR$/scripts/script_vkge.py" />
     </list>
@@ -54,8 +54,8 @@
       <file leaf-file-name="script_vkge.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="77" column="12" lean-forward="false" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
+            <state relative-caret-position="226">
+              <caret line="78" column="22" lean-forward="false" selection-start-line="78" selection-start-column="22" selection-end-line="78" selection-end-column="22" />
               <folding>
                 <element signature="e#199#215#0" expanded="true" />
               </folding>
@@ -413,13 +413,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00741" summary="updated lr for model1 large datasets">
-      <created>1533982990322</created>
-      <option name="number" value="00741" />
-      <option name="presentableId" value="LOCAL-00741" />
-      <option name="project" value="LOCAL" />
-      <updated>1533982990322</updated>
-    </task>
     <task id="LOCAL-00742" summary="updated lr for model1 large datasets">
       <created>1533985260892</created>
       <option name="number" value="00742" />
@@ -756,7 +749,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534027919547</updated>
     </task>
-    <option name="localTasksCounter" value="790" />
+    <task id="LOCAL-00790" summary="test vkge without KL">
+      <created>1534028026101</created>
+      <option name="number" value="00790" />
+      <option name="presentableId" value="LOCAL-00790" />
+      <option name="project" value="LOCAL" />
+      <updated>1534028026101</updated>
+    </task>
+    <option name="localTasksCounter" value="791" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1236,8 +1236,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="77" column="12" lean-forward="false" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
+        <state relative-caret-position="226">
+          <caret line="78" column="22" lean-forward="false" selection-start-line="78" selection-start-column="22" selection-end-line="78" selection-end-column="22" />
           <folding>
             <element signature="e#199#215#0" expanded="true" />
           </folding>
