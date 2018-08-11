@@ -603,7 +603,7 @@ class VKGE:
         logger.warn("Number of negative samples per positive is {}, \n batch size is {} \n number of positive triples {} , \n  bernoulli rescale {}".format(self.negsamples,self.negsamples*batch_size,len(all_triples),(2.0*(self.nb_entities-1))))
 
         nb_versions = int(self.negsamples + 1)  # neg samples + original
-        projection_steps = [constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0)]
+        projection_steps = [constraints.unit_sphere(self.predicate_embedding_sigma, norm=5.0)]
 
         # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_sigma, norm=1.0)]
 
@@ -789,7 +789,7 @@ class VKGE:
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
                             if ((k==3)  and (hits_at_k<=0.1) and setting_name=='Filtered'):
-                                self._saver.save(session, filename + '_epoch_' + str(epoch) + '.ckpt')
+                                # self._saver.save(session, filename + '_epoch_' + str(epoch) + '.ckpt')
 
                                 sys.exit("Stopping Program As Bad Hits @10")
             # ##
@@ -804,7 +804,7 @@ class VKGE:
 
                     logger.warn('Beginning test/ save phase')
 
-                    # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
+                    self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
                     eval_name = 'test'

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_vkge.py" afterPath="$PROJECT_DIR$/scripts/script_vkge.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +31,8 @@
       <file leaf-file-name="script_vkge.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="65" column="34" lean-forward="false" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
+            <state relative-caret-position="258">
+              <caret line="75" column="26" lean-forward="false" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
               <folding>
                 <element signature="e#199#215#0" expanded="true" />
               </folding>
@@ -52,8 +53,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="806" column="50" lean-forward="true" selection-start-line="806" selection-start-column="0" selection-end-line="807" selection-end-column="0" />
+            <state relative-caret-position="112">
+              <caret line="605" column="90" lean-forward="false" selection-start-line="605" selection-start-column="90" selection-end-line="605" selection-end-column="90" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#881#1035#0" expanded="false" />
@@ -408,13 +409,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00708" summary="upload confidence estimation scripts">
-      <created>1533838630117</created>
-      <option name="number" value="00708" />
-      <option name="presentableId" value="LOCAL-00708" />
-      <option name="project" value="LOCAL" />
-      <updated>1533838630118</updated>
-    </task>
     <task id="LOCAL-00709" summary="upload confidence estimation scripts">
       <created>1533838637935</created>
       <option name="number" value="00709" />
@@ -751,7 +745,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534004212580</updated>
     </task>
-    <option name="localTasksCounter" value="757" />
+    <task id="LOCAL-00757" summary="add save for embedding analysis">
+      <created>1534005016446</created>
+      <option name="number" value="00757" />
+      <option name="presentableId" value="LOCAL-00757" />
+      <option name="project" value="LOCAL" />
+      <updated>1534005016446</updated>
+    </task>
+    <option name="localTasksCounter" value="758" />
     <servers />
   </component>
   <component name="TodoView">
@@ -837,7 +838,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated folder name" />
     <MESSAGE value="fixed error with loading model" />
     <MESSAGE value="uploaded scaled version" />
     <MESSAGE value="fixed test case" />
@@ -862,7 +862,8 @@
     <MESSAGE value="updated model with 5 negative samples and projection of only predicate  and entity sigma" />
     <MESSAGE value="only predicate is squished" />
     <MESSAGE value="added KL REW" />
-    <option name="LAST_COMMIT_MESSAGE" value="added KL REW" />
+    <MESSAGE value="add save for embedding analysis" />
+    <option name="LAST_COMMIT_MESSAGE" value="add save for embedding analysis" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1209,8 +1210,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="65" column="34" lean-forward="false" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
+        <state relative-caret-position="258">
+          <caret line="75" column="26" lean-forward="false" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
           <folding>
             <element signature="e#199#215#0" expanded="true" />
           </folding>
@@ -1219,8 +1220,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="806" column="50" lean-forward="true" selection-start-line="806" selection-start-column="0" selection-end-line="807" selection-end-column="0" />
+        <state relative-caret-position="112">
+          <caret line="605" column="90" lean-forward="false" selection-start-line="605" selection-start-column="90" selection-end-line="605" selection-end-column="90" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
