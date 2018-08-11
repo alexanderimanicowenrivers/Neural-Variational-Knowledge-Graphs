@@ -76,7 +76,7 @@ def main(_):
         w4 = ['fb15k-237', 'wn18', 'wn18rr'],
         w5=[False],
         w6=[1e-2,1e-3,1e-4],
-        w7=['DistMult','TransE', 'ComplEx'],
+        w7=['DistMult'],
         w8=[3],
         w9=['True'])
 
