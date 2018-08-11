@@ -115,13 +115,14 @@ class VKGE:
             predicate_embedding_size = embedding_size*2
             entity_embedding_size = embedding_size*2
             # sig_max = np.log((1.0/embedding_size*2.0)**2+1e-10)
-            sig_max= np.log(np.exp((0.05*2.0)) - 1)
+            sig_max = np.exp((1.0 / embedding_size * 2.0) ** 2)
+
 
         else:
             predicate_embedding_size = embedding_size
             entity_embedding_size = embedding_size
             # sig_max = np.log((1.0/embedding_size*1.0)**2+1e-10)
-            sig_max= np.log(np.exp((0.01*1.0)) - 1)
+            sig_max = np.exp((1.0 / embedding_size * 1.0) ** 2)
 
         sig_min = sig_max
 
@@ -130,7 +131,6 @@ class VKGE:
         self.static_mean = static_mean
         self.alt_cost = alt_cost
         self.projection = projection
-        self.mean_c = mean_c
 
         # Dataset
         self.dataset_name = dataset
@@ -144,9 +144,10 @@ class VKGE:
 
         ##### for test time ######
         all_triples = train_triples + valid_triples + test_triples
-        n=len(all_triples)*1.0
-        if n<=no_batches:
-            sys.exit("Stopping Job As Batch Size Exceeds Triples")
+
+        # n=len(all_triples)*1.0 use this for BS
+        # if n<=no_batches:
+        #     sys.exit("Stopping Job As Batch Size Exceeds Triples")
 
 
         entity_set = {s for (s, p, o) in all_triples} | {o for (s, p, o) in all_triples}
@@ -154,7 +155,7 @@ class VKGE:
         self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
-        self.klrew = n / self.nb_entities
+        # self.klrew = n / self.nb_entities
         ############################
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
         # optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
