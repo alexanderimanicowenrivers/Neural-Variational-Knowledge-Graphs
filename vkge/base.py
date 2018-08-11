@@ -721,10 +721,10 @@ class VKGE:
                     counter += 1
                 #
                 # if self.projection:
-                if self.projection and epoch<nb_epochs: #so you do not project before evaluation
-
-                    for projection_step in projection_steps:
-                        session.run([projection_step])
+                # if self.projection and epoch<nb_epochs: #so you do not project before evaluation
+                #
+                #     for projection_step in projection_steps:
+                #         session.run([projection_step])
 
 
 
@@ -789,7 +789,7 @@ class VKGE:
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
                             if ((k==3)  and (hits_at_k<=0.1) and setting_name=='Filtered'):
-                                self._saver.save(session, filename + '_epoch_' + str(epoch) + '.ckpt')
+                                # self._saver.save(session, filename + '_epoch_' + str(epoch) + '.ckpt')
 
                                 sys.exit("Stopping Program As Bad Hits @10")
             # ##
