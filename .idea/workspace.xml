@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="add save for embedding analysis">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
@@ -52,8 +52,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="791" column="61" lean-forward="false" selection-start-line="791" selection-start-column="0" selection-end-line="792" selection-end-column="0" />
+            <state relative-caret-position="237">
+              <caret line="427" column="23" lean-forward="false" selection-start-line="427" selection-start-column="0" selection-end-line="428" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#881#1035#0" expanded="false" />
@@ -408,13 +408,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00712" summary="upload confidence estimation scripts">
-      <created>1533842495624</created>
-      <option name="number" value="00712" />
-      <option name="presentableId" value="LOCAL-00712" />
-      <option name="project" value="LOCAL" />
-      <updated>1533842495625</updated>
-    </task>
     <task id="LOCAL-00713" summary="upload confidence estimation scripts">
       <created>1533842939093</created>
       <option name="number" value="00713" />
@@ -751,7 +744,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534005397448</updated>
     </task>
-    <option name="localTasksCounter" value="761" />
+    <task id="LOCAL-00761" summary="take out projection layer">
+      <created>1534006273684</created>
+      <option name="number" value="00761" />
+      <option name="presentableId" value="LOCAL-00761" />
+      <option name="project" value="LOCAL" />
+      <updated>1534006273684</updated>
+    </task>
+    <option name="localTasksCounter" value="762" />
     <servers />
   </component>
   <component name="TodoView">
@@ -837,7 +837,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed error with loading model" />
     <MESSAGE value="uploaded scaled version" />
     <MESSAGE value="fixed test case" />
     <MESSAGE value="updated test script to do forward sampling for 1000 samples 15 times" />
@@ -862,7 +861,8 @@
     <MESSAGE value="only predicate is squished" />
     <MESSAGE value="added KL REW" />
     <MESSAGE value="add save for embedding analysis" />
-    <option name="LAST_COMMIT_MESSAGE" value="add save for embedding analysis" />
+    <MESSAGE value="take out projection layer" />
+    <option name="LAST_COMMIT_MESSAGE" value="take out projection layer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1219,8 +1219,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="791" column="61" lean-forward="false" selection-start-line="791" selection-start-column="0" selection-end-line="792" selection-end-column="0" />
+        <state relative-caret-position="237">
+          <caret line="427" column="23" lean-forward="false" selection-start-line="427" selection-start-column="0" selection-end-line="428" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
