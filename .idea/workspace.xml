@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="updated mean init">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
@@ -42,12 +42,13 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="426" column="45" lean-forward="false" selection-start-line="426" selection-start-column="45" selection-end-line="426" selection-end-column="45" />
+            <state relative-caret-position="138">
+              <caret line="116" column="63" lean-forward="false" selection-start-line="116" selection-start-column="63" selection-end-line="116" selection-end-column="63" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#881#1035#0" expanded="false" />
                 <element signature="e#1064#1399#0" expanded="false" />
+                <marker date="1534013117147" expanded="true" signature="4039:4209" ph="..." />
               </folding>
             </state>
           </provider>
@@ -408,13 +409,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00726" summary="fixed Bernoulli rescale">
-      <created>1533895205344</created>
-      <option name="number" value="00726" />
-      <option name="presentableId" value="LOCAL-00726" />
-      <option name="project" value="LOCAL" />
-      <updated>1533895205344</updated>
-    </task>
     <task id="LOCAL-00727" summary="fixed Bernoulli rescale">
       <created>1533895918021</created>
       <option name="number" value="00727" />
@@ -751,7 +745,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534012987900</updated>
     </task>
-    <option name="localTasksCounter" value="775" />
+    <task id="LOCAL-00775" summary="updated loss">
+      <created>1534013022571</created>
+      <option name="number" value="00775" />
+      <option name="presentableId" value="LOCAL-00775" />
+      <option name="project" value="LOCAL" />
+      <updated>1534013022572</updated>
+    </task>
+    <option name="localTasksCounter" value="776" />
     <servers />
   </component>
   <component name="TodoView">
@@ -837,7 +838,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated test1 scripts" />
     <MESSAGE value="updated test1 scripts for viz" />
     <MESSAGE value="updated Complex variance init to be half the normal" />
     <MESSAGE value="updated test script" />
@@ -862,7 +862,8 @@
     <MESSAGE value="take out gradient clipping and remove kl reweight" />
     <MESSAGE value="KL/3" />
     <MESSAGE value="updated mean init" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated mean init" />
+    <MESSAGE value="updated loss" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated loss" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1219,12 +1220,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="426" column="45" lean-forward="false" selection-start-line="426" selection-start-column="45" selection-end-line="426" selection-end-column="45" />
+        <state relative-caret-position="138">
+          <caret line="116" column="63" lean-forward="false" selection-start-line="116" selection-start-column="63" selection-end-line="116" selection-end-column="63" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
             <element signature="e#1064#1399#0" expanded="false" />
+            <marker date="1534013117147" expanded="true" signature="4039:4209" ph="..." />
           </folding>
         </state>
       </provider>
