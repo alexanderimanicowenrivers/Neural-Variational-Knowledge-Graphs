@@ -408,13 +408,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00723" summary="fixed Bernoulli rescale">
-      <created>1533894124704</created>
-      <option name="number" value="00723" />
-      <option name="presentableId" value="LOCAL-00723" />
-      <option name="project" value="LOCAL" />
-      <updated>1533894124704</updated>
-    </task>
     <task id="LOCAL-00724" summary="fixed Bernoulli rescale">
       <created>1533894875508</created>
       <option name="number" value="00724" />
@@ -751,7 +744,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534012741334</updated>
     </task>
-    <option name="localTasksCounter" value="772" />
+    <task id="LOCAL-00772" summary="updated mean init">
+      <created>1534012748502</created>
+      <option name="number" value="00772" />
+      <option name="presentableId" value="LOCAL-00772" />
+      <option name="project" value="LOCAL" />
+      <updated>1534012748503</updated>
+    </task>
+    <option name="localTasksCounter" value="773" />
     <servers />
   </component>
   <component name="TodoView">
