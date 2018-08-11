@@ -75,9 +75,9 @@ def main(_):
         w3=[200],
         w4 = ['fb15k-237', 'wn18', 'wn18rr'],
         w5=[False],
-        w6=[1e-6,1e-7,1e-8,1e-5],
+        w6=[0.01,0.001],
         w7=['DistMult','TransE', 'ComplEx'],
-        w8=[1,10],
+        w8=[100,1000],
         w9=['True'])
 
     configurations = cartesian_product(hyperparameters_space)
