@@ -838,8 +838,6 @@ class VKGE:
 
                     logger.warn('Beginning test/ save phase')
 
-                    self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
-
 
                     eval_name = 'test'
                     eval_triples = test_triples
@@ -903,9 +901,10 @@ class VKGE:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
+                    self._saver.save(session, filename + '_epoch_' + str(epoch) + '.ckpt')
 
 
-                    # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
+                            # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
                     # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
                     # np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
                 #
