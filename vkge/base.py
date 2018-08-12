@@ -105,8 +105,6 @@ class VKGE:
         self.negsamples=1
         self.alt_opt=alt_opt
         self.nosamps=int(nosamps)
-        # sigma = tf.log(1 + tf.exp(log_sigma_square))
-        self.no_confidence_samples=1000 #change to 1000
 
 
                 # adjust for correct format for model input

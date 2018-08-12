@@ -58,23 +58,13 @@
           <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/base.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="307">
-                  <caret line="768" column="20" lean-forward="false" selection-start-line="767" selection-start-column="20" selection-end-line="768" selection-end-column="20" />
+                <state relative-caret-position="43">
+                  <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                     <element signature="e#881#1035#0" expanded="false" />
                     <element signature="e#1064#1399#0" expanded="false" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="script_baseline.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/scripts/script_baseline.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="317">
-                  <caret line="60" column="54" lean-forward="true" selection-start-line="60" selection-start-column="25" selection-end-line="60" selection-end-column="54" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -434,13 +424,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00754" summary="only predicate is squished">
-      <created>1534003199575</created>
-      <option name="number" value="00754" />
-      <option name="presentableId" value="LOCAL-00754" />
-      <option name="project" value="LOCAL" />
-      <updated>1534003199575</updated>
-    </task>
     <task id="LOCAL-00755" summary="added KL REW">
       <created>1534004091057</created>
       <option name="number" value="00755" />
@@ -777,7 +760,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534079123257</updated>
     </task>
-    <option name="localTasksCounter" value="803" />
+    <task id="LOCAL-00803" summary=" fixed neg samples and added in projection">
+      <created>1534079342448</created>
+      <option name="number" value="00803" />
+      <option name="presentableId" value="LOCAL-00803" />
+      <option name="project" value="LOCAL" />
+      <updated>1534079342448</updated>
+    </task>
+    <option name="localTasksCounter" value="804" />
     <servers />
   </component>
   <component name="TodoView">
@@ -863,7 +853,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adding 1 or 10 negative samples into script" />
     <MESSAGE value="stabalise gradients by clipping by norm 1 and adding small quantity onto logs" />
     <MESSAGE value="do not project on last epoch before validation" />
     <MESSAGE value="updated model2" />
@@ -888,7 +877,8 @@
     <MESSAGE value="put in hinge" />
     <MESSAGE value="fixed negative samples" />
     <MESSAGE value=" fixed neg samples bug" />
-    <option name="LAST_COMMIT_MESSAGE" value=" fixed neg samples bug" />
+    <MESSAGE value=" fixed neg samples and added in projection" />
+    <option name="LAST_COMMIT_MESSAGE" value=" fixed neg samples and added in projection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1233,6 +1223,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="381" column="53" lean-forward="false" selection-start-line="381" selection-start-column="0" selection-end-line="382" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
@@ -1243,18 +1241,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="381" column="53" lean-forward="false" selection-start-line="381" selection-start-column="0" selection-end-line="382" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="768" column="20" lean-forward="false" selection-start-line="767" selection-start-column="20" selection-end-line="768" selection-end-column="20" />
+        <state relative-caret-position="43">
+          <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
