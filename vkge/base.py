@@ -293,8 +293,8 @@ class VKGE:
 
         # Kullback Leibler divergence   in one go
 
-        self.g_objective = -tf.reduce_sum(
-            tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
+        # self.g_objective = -tf.reduce_sum(
+        #     tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
         # self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
         # self.g_objective = tf.reduce_sum(self.hinge_losses)
@@ -318,18 +318,18 @@ class VKGE:
 
         #
         #
-        #
-        # self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
-        # self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
-        #
-        # self.p_x_i_pos = tf.gather(self.p_x_i, self.idx_pos)
-        # self.p_x_i_neg = tf.gather(self.p_x_i, self.idx_neg)
-        #
-        # self.g_objective_p = -tf.reduce_sum(
-        #     tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
-        #
-        # self.g_objective_n = -tf.reduce_sum((
-        #     tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
+
+        self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
+        self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
+
+        self.p_x_i_pos = tf.gather(self.p_x_i, self.idx_pos)
+        self.p_x_i_neg = tf.gather(self.p_x_i, self.idx_neg)
+
+        self.g_objective_p = -tf.reduce_sum(
+            tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
+
+        self.g_objective_n = -tf.reduce_sum((
+            tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
 
        # positive samples
 
