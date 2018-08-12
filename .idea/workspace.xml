@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="put in hinge">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_vkge.py" afterPath="$PROJECT_DIR$/scripts/script_vkge.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -59,8 +58,8 @@
           <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/base.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="591">
-                  <caret line="461" column="24" lean-forward="true" selection-start-line="461" selection-start-column="0" selection-end-line="462" selection-end-column="0" />
+                <state relative-caret-position="-7253">
+                  <caret line="415" column="0" lean-forward="false" selection-start-line="415" selection-start-column="0" selection-end-line="420" selection-end-column="0" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                     <element signature="e#881#1035#0" expanded="false" />
@@ -87,8 +86,8 @@
           <file leaf-file-name="baseline.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="365">
-                  <caret line="208" column="4" lean-forward="true" selection-start-line="208" selection-start-column="4" selection-end-line="220" selection-end-column="65" />
+                <state relative-caret-position="561">
+                  <caret line="381" column="53" lean-forward="false" selection-start-line="381" selection-start-column="0" selection-end-line="382" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -434,13 +433,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00751" summary="updated model with 5 negative samples and projection of only predicate sigma">
-      <created>1534002092491</created>
-      <option name="number" value="00751" />
-      <option name="presentableId" value="LOCAL-00751" />
-      <option name="project" value="LOCAL" />
-      <updated>1534002092491</updated>
-    </task>
     <task id="LOCAL-00752" summary="updated model with 5 negative samples and projection of only predicate  and entity sigma">
       <created>1534002633952</created>
       <option name="number" value="00752" />
@@ -777,7 +769,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534072149811</updated>
     </task>
-    <option name="localTasksCounter" value="800" />
+    <task id="LOCAL-00800" summary="put in hinge">
+      <created>1534074015484</created>
+      <option name="number" value="00800" />
+      <option name="presentableId" value="LOCAL-00800" />
+      <option name="project" value="LOCAL" />
+      <updated>1534074015484</updated>
+    </task>
+    <option name="localTasksCounter" value="801" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1245,16 +1244,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="208" column="4" lean-forward="true" selection-start-line="208" selection-start-column="4" selection-end-line="220" selection-end-column="65" />
+        <state relative-caret-position="561">
+          <caret line="381" column="53" lean-forward="false" selection-start-line="381" selection-start-column="0" selection-end-line="382" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="591">
-          <caret line="461" column="24" lean-forward="true" selection-start-line="461" selection-start-column="0" selection-end-line="462" selection-end-column="0" />
+        <state relative-caret-position="-7253">
+          <caret line="415" column="0" lean-forward="false" selection-start-line="415" selection-start-column="0" selection-end-line="420" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />

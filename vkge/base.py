@@ -295,25 +295,12 @@ class VKGE:
 
         # Kullback Leibler divergence   in one go
 
-        # self.g_objective = -tf.reduce_sum(
-        #     tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
+        self.g_objective = -tf.reduce_sum(
+            tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
-        self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
-        self.g_objective = tf.reduce_sum(self.hinge_losses)
+        # self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
+        # self.g_objective = tf.reduce_sum(self.hinge_losses)
 
-        gradients = optimizer.compute_gradients(loss=self.g_objective)
-
-        if False:
-            self.g_objective += tf.add_n([tf.nn.l2_loss(v) for v in self.train_variables]) * 0.01
-        if True:
-            # if clip_op == tf.clip_by_value:
-            gradients = [(tf.clip_by_value(grad, -1, 1), var)
-                         for grad, var in gradients if grad is not None]
-            # elif clip_op == tf.clip_by_norm:
-            # gradients = [(tf.clip_by_norm(grad, 1), var)
-            #             for grad, var in gradients if grad is not None]
-
-        self.training_step = optimizer.apply_gradients(gradients)
 
         # ####################################  Weight uncertainity in NN's
 
@@ -645,7 +632,7 @@ class VKGE:
 
         self.negsamples = int(self.negsamples)
 
-        total_negatives = int(2.0*len(all_triples)*(self.nb_entities-1))
+        # total_negatives = int(2.0*len(all_triples)*(self.nb_entities-1))
 
         logger.warn("Number of negative samples per positive is {}, \n batch size is {} \n number of positive triples {} , \n  bernoulli rescale {}".format(self.negsamples,self.negsamples*batch_size,len(all_triples),(2.0*(self.nb_entities-1))))
 
@@ -685,6 +672,7 @@ class VKGE:
 
                 counter = 0
 
+
                 kl_inc_val = 1.0
 
                 order = self.random_state.permutation(nb_samples)
@@ -692,6 +680,8 @@ class VKGE:
 
                 loss_values = []
                 total_loss_value = 0
+
+                neg_subs=math.ceil(int(self.negsamples/2))
 
                 for batch_no, (batch_start, batch_end) in enumerate(batches):
 
@@ -705,12 +695,15 @@ class VKGE:
                     Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
                     Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                    for q in range(0,int(self.negsamples)): # Xs_batch[1::nb_versions] needs to be corrupted
+                    for q in range((neg_subs)): # Xs_batch[1::nb_versions] needs to be corrupted
                         Xs_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
                         Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
                         Xo_batch[q::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-
+                    for q in range(((self.negsamples-neg_subs))): # Xs_batch[1::nb_versions] needs to be corrupted
+                        Xs_batch[q::nb_versions] = Xs_shuf[batch_start:batch_end]
+                        Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
+                        Xo_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
 
                     vec_neglabels=[int(1)]+([int(0)]*(int(nb_versions-1)))
 
