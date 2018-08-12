@@ -58,8 +58,8 @@
           <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/base.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="45">
-                  <caret line="335" column="60" lean-forward="false" selection-start-line="335" selection-start-column="60" selection-end-line="335" selection-end-column="60" />
+                <state relative-caret-position="212">
+                  <caret line="364" column="0" lean-forward="true" selection-start-line="364" selection-start-column="0" selection-end-line="364" selection-end-column="0" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                     <element signature="e#881#1035#0" expanded="false" />
@@ -424,13 +424,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00768" summary="KL/3">
-      <created>1534007488850</created>
-      <option name="number" value="00768" />
-      <option name="presentableId" value="LOCAL-00768" />
-      <option name="project" value="LOCAL" />
-      <updated>1534007488850</updated>
-    </task>
     <task id="LOCAL-00769" summary="KL/3">
       <created>1534008538687</created>
       <option name="number" value="00769" />
@@ -767,7 +760,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534085575157</updated>
     </task>
-    <option name="localTasksCounter" value="817" />
+    <task id="LOCAL-00817" summary="added in KL term">
+      <created>1534085951733</created>
+      <option name="number" value="00817" />
+      <option name="presentableId" value="LOCAL-00817" />
+      <option name="project" value="LOCAL" />
+      <updated>1534085951733</updated>
+    </task>
+    <option name="localTasksCounter" value="818" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1243,8 +1243,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="335" column="60" lean-forward="false" selection-start-line="335" selection-start-column="60" selection-end-line="335" selection-end-column="60" />
+        <state relative-caret-position="212">
+          <caret line="364" column="0" lean-forward="true" selection-start-line="364" selection-start-column="0" selection-end-line="364" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
