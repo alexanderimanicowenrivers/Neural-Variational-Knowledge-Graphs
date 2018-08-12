@@ -416,7 +416,7 @@ class VKGE:
         # self.e_objective = (1.0 / 3.0) * (self.e_objective1 + self.e_objective2 + self.e_objective3)
 
         ###########best ELBO
-
+        self.e_objective=0
         self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
         self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
         #
@@ -442,7 +442,7 @@ class VKGE:
         #
         #
         #
-        # self.training_step = optimizer.minimize(self.elbo)
+        self.training_step = optimizer.minimize(self.elbo)
 
         # self.train_variables=tf.trainable_variables()
         # self._setup_training(loss=self.elbo,optimizer=optimizer)
