@@ -838,7 +838,7 @@ class VKGE:
 
                     logger.warn('Beginning test/ save phase')
 
-                    # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
+                    self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
                     eval_name = 'test'
