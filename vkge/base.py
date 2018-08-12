@@ -658,7 +658,7 @@ class VKGE:
         with tf.Session() as session:
             session.run(init_op)
 
-
+            neg_subs = math.ceil(int(self.negsamples / 2))
 
             # train_writer = tf.summary.FileWriter(filename, session.graph)
 
@@ -677,7 +677,6 @@ class VKGE:
                 loss_values = []
                 total_loss_value = 0
 
-                neg_subs=math.ceil(int(self.negsamples/2))
 
                 for batch_no, (batch_start, batch_end) in enumerate(batches):
 
@@ -696,10 +695,10 @@ class VKGE:
                         Xp_batch[(q+1)::nb_versions] = Xp_shuf[batch_start:batch_end]
                         Xo_batch[(q+1)::nb_versions] = Xo_shuf[batch_start:batch_end]
 
-                    for q2 in range(((self.negsamples-neg_subs))): # Xs_batch[1::nb_versions] needs to be corrupted
-                        Xs_batch[(q2+1)::nb_versions] = Xs_shuf[batch_start:batch_end]
-                        Xp_batch[(q2+1)::nb_versions] = Xp_shuf[batch_start:batch_end]
-                        Xo_batch[(q2+1)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                    for q2 in range(neg_subs,(self.negsamples-neg_subs)): # Xs_batch[1::nb_versions] needs to be corrupted
+                        Xs_batch[(q2)::nb_versions] = Xs_shuf[batch_start:batch_end]
+                        Xp_batch[(q2)::nb_versions] = Xp_shuf[batch_start:batch_end]
+                        Xo_batch[(q2)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
 
                     vec_neglabels=[int(1)]+([int(0)]*(int(self.negsamples)))
 
