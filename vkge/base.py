@@ -317,18 +317,18 @@ class VKGE:
         #
         #
 
-       #  self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
-       #  self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
-       #
-       #  self.p_x_i_pos = tf.gather(self.p_x_i, self.idx_pos)
-       #  self.p_x_i_neg = tf.gather(self.p_x_i, self.idx_neg)
-       #
-       #  self.g_objective_p = -tf.reduce_sum(
-       #      tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
-       #
-       #  self.g_objective_n = -tf.reduce_sum((
-       #      tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
-       #
+        self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
+        self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
+
+        self.p_x_i_pos = tf.gather(self.p_x_i, self.idx_pos)
+        self.p_x_i_neg = tf.gather(self.p_x_i, self.idx_neg)
+
+        self.g_objective_p = -tf.reduce_sum(
+            tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
+
+        self.g_objective_n = -tf.reduce_sum((
+            tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
+
        # # positive samples
        #
        #  self.mu_s_ps=tf.gather(self.mu_s,self.idx_pos)
@@ -427,8 +427,9 @@ class VKGE:
 
         # self.elbo = self.g_objective + self.e_objective
 
-        self.elbo = self.g_objective
+        # self.elbo = self.g_objective
 
+        self.elbo = self.g_objective_p + self.g_objective_n
 
 
         ##clip for robust learning as observed nans during training
@@ -870,16 +871,10 @@ class VKGE:
                         ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
                         ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
-                        hts = [1, 3, 5, 10]
-
-
 
                         #########################
                         # Calculate score confidence
                         #########################
-
-
-
 
 
                         filtered_scores_subj = scores_subj.copy()
@@ -904,7 +899,7 @@ class VKGE:
                     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                         mean_rank = np.mean(setting_ranks)
                         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
-                        for k in hts:
+                        for k in [1, 3, 5, 10]:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
