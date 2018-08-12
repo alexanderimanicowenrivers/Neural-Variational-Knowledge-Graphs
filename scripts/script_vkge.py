@@ -73,10 +73,10 @@ def main(_):
         # w1=[10],
         w2=[1e-3], #
         w3=[200,300],
-        w4 = ['kinship', 'nations', 'umls'],
+        w4 = ['fb15k-237', 'kinship', 'nations', 'umls', 'wn18', 'wn18rr'],
         w5=[False],
-        w6=[1e-2,1e-3],
-        w7=['DistMult'],
+        w6=[1e-2],
+        w7=['TransE', 'DistMult', 'ComplEx'],
         w8=[3],
         w9=['True'])
 
