@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_vkge.py" afterPath="$PROJECT_DIR$/scripts/script_vkge.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -67,8 +65,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="310" column="0" lean-forward="true" selection-start-line="308" selection-start-column="7" selection-end-line="310" selection-end-column="0" />
+            <state relative-caret-position="429">
+              <caret line="318" column="56" lean-forward="true" selection-start-line="318" selection-start-column="56" selection-end-line="318" selection-end-column="56" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#881#1035#0" expanded="false" />
@@ -426,13 +424,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00748" summary="updated model with 5 negative samples">
-      <created>1533997801234</created>
-      <option name="number" value="00748" />
-      <option name="presentableId" value="LOCAL-00748" />
-      <option name="project" value="LOCAL" />
-      <updated>1533997801234</updated>
-    </task>
     <task id="LOCAL-00749" summary="updated model with 5 negative samples">
       <created>1534001973470</created>
       <option name="number" value="00749" />
@@ -769,7 +760,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534069986935</updated>
     </task>
-    <option name="localTasksCounter" value="797" />
+    <task id="LOCAL-00797" summary="put in hinge">
+      <created>1534070475096</created>
+      <option name="number" value="00797" />
+      <option name="presentableId" value="LOCAL-00797" />
+      <option name="project" value="LOCAL" />
+      <updated>1534070475096</updated>
+    </task>
+    <option name="localTasksCounter" value="798" />
     <servers />
   </component>
   <component name="TodoView">
@@ -855,7 +853,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated test scripts" />
     <MESSAGE value="upload confidence estimation scripts" />
     <MESSAGE value="fixed Bernoulli rescale" />
     <MESSAGE value="adding 1 or 10 negative samples into script" />
@@ -880,7 +877,8 @@
     <MESSAGE value="updated sigma init - next try alternative init" />
     <MESSAGE value="test vkge without KL" />
     <MESSAGE value="take out variance" />
-    <option name="LAST_COMMIT_MESSAGE" value="take out variance" />
+    <MESSAGE value="put in hinge" />
+    <option name="LAST_COMMIT_MESSAGE" value="put in hinge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1245,8 +1243,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="310" column="0" lean-forward="true" selection-start-line="308" selection-start-column="7" selection-end-line="310" selection-end-column="0" />
+        <state relative-caret-position="429">
+          <caret line="318" column="56" lean-forward="true" selection-start-line="318" selection-start-column="56" selection-end-line="318" selection-end-column="56" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
