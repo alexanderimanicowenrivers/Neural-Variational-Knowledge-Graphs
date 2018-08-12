@@ -639,7 +639,7 @@ class VKGE:
         nb_versions = int(self.negsamples + 1)  # neg samples + original
         projection_steps = [constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0)]
 
-        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_sigma, norm=1.0)]
+        projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_sigma, norm=1.0)]
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
@@ -765,8 +765,8 @@ class VKGE:
                 # if self.projection:
                 # if self.projection and epoch<nb_epochs: #so you do not project before evaluation
                 #
-                    # for projection_step in projection_steps:
-                    #     session.run([projection_step])
+                    for projection_step in projection_steps:
+                        session.run([projection_step])
 
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="fixed negative samples">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
@@ -58,8 +58,8 @@
           <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/base.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="284">
-                  <caret line="710" column="35" lean-forward="true" selection-start-line="710" selection-start-column="35" selection-end-line="710" selection-end-column="35" />
+                <state relative-caret-position="307">
+                  <caret line="768" column="20" lean-forward="false" selection-start-line="767" selection-start-column="20" selection-end-line="768" selection-end-column="20" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                     <element signature="e#881#1035#0" expanded="false" />
@@ -434,13 +434,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00753" summary="updated model with 5 negative samples and projection of only predicate  and entity sigma">
-      <created>1534003152840</created>
-      <option name="number" value="00753" />
-      <option name="presentableId" value="LOCAL-00753" />
-      <option name="project" value="LOCAL" />
-      <updated>1534003152840</updated>
-    </task>
     <task id="LOCAL-00754" summary="only predicate is squished">
       <created>1534003199575</created>
       <option name="number" value="00754" />
@@ -777,7 +770,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534078181840</updated>
     </task>
-    <option name="localTasksCounter" value="802" />
+    <task id="LOCAL-00802" summary=" fixed neg samples bug">
+      <created>1534079123257</created>
+      <option name="number" value="00802" />
+      <option name="presentableId" value="LOCAL-00802" />
+      <option name="project" value="LOCAL" />
+      <updated>1534079123257</updated>
+    </task>
+    <option name="localTasksCounter" value="803" />
     <servers />
   </component>
   <component name="TodoView">
@@ -863,7 +863,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed Bernoulli rescale" />
     <MESSAGE value="adding 1 or 10 negative samples into script" />
     <MESSAGE value="stabalise gradients by clipping by norm 1 and adding small quantity onto logs" />
     <MESSAGE value="do not project on last epoch before validation" />
@@ -888,7 +887,8 @@
     <MESSAGE value="take out variance" />
     <MESSAGE value="put in hinge" />
     <MESSAGE value="fixed negative samples" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed negative samples" />
+    <MESSAGE value=" fixed neg samples bug" />
+    <option name="LAST_COMMIT_MESSAGE" value=" fixed neg samples bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1253,8 +1253,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="710" column="35" lean-forward="true" selection-start-line="710" selection-start-column="35" selection-end-line="710" selection-end-column="35" />
+        <state relative-caret-position="307">
+          <caret line="768" column="20" lean-forward="false" selection-start-line="767" selection-start-column="20" selection-end-line="768" selection-end-column="20" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
