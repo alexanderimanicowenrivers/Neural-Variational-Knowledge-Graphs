@@ -155,23 +155,12 @@ class VKGE:
         self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
-        # self.klrew = n / self.nb_entities
         ############################
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
-        optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
-        # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
+        # optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
+        optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
 
-        # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-5)
 
-        self.var1_1 = randint(0, self.nb_entities - 1)
-        self.var1_2 = randint(0, self.nb_predicates - 1)
-
-        logger.warn("Entity Sample1 id is {} with name {}..".format(self.var1_1, list(entity_set)[self.var1_1]))
-
-        logger.warn("Predicate Sample1 id is {} with name {}..".format(self.var1_2, list(predicate_set)[self.var1_2]))
-
-        self.var1 = tf.Variable(initial_value=self.var1_1, trainable=False, dtype=tf.int32)
-        self.var2 = tf.Variable(initial_value=self.var1_2, trainable=False, dtype=tf.int32)
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, sig_max, sig_min)
@@ -312,6 +301,19 @@ class VKGE:
         self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
         self.g_objective = tf.reduce_sum(self.hinge_losses)
 
+        gradients = optimizer.compute_gradients(loss=self.g_objective)
+
+        if False:
+            self.g_objective += tf.add_n([tf.nn.l2_loss(v) for v in self.train_variables]) * 0.01
+        if True:
+            # if clip_op == tf.clip_by_value:
+            gradients = [(tf.clip_by_value(grad, -1, 1), var)
+                         for grad, var in gradients if grad is not None]
+            # elif clip_op == tf.clip_by_norm:
+            # gradients = [(tf.clip_by_norm(grad, 1), var)
+            #             for grad, var in gradients if grad is not None]
+
+        self.training_step = optimizer.apply_gradients(gradients)
 
         # ####################################  Weight uncertainity in NN's
 
@@ -457,7 +459,7 @@ class VKGE:
         #
 
 
-        self.training_step = optimizer.minimize(self.elbo)
+        # self.training_step = optimizer.minimize(self.elbo)
 
         # self.train_variables=tf.trainable_variables()
         # self._setup_training(loss=self.elbo,optimizer=optimizer)
