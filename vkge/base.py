@@ -550,12 +550,13 @@ class VKGE:
                 # #
                 # else:
 
-                self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
-                self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
-                self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
+                # self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
+                # self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+                # self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
-
-
+                self.h_s = self.mu_s
+                self.h_p = self.mu_p
+                self.h_o = self.mu_o
 
     def build_decoder(self):
         """
