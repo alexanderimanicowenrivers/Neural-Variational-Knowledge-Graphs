@@ -685,8 +685,8 @@ class VKGE_A:
 
                     loss_args = {
                         # self.no_samples:1, #number of samples for precision test
-                        # self.KL_discount: self.klrew,
-                        self.KL_discount: (1.0/nb_batches),
+                        self.KL_discount: pi[counter],
+                        # self.KL_discount: (1.0/nb_batches),
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
