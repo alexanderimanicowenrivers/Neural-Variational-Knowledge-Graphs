@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment=" fixed neg samples and added in projection">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
@@ -58,8 +58,8 @@
           <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/base.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="289">
-                  <caret line="725" column="65" lean-forward="false" selection-start-line="725" selection-start-column="0" selection-end-line="726" selection-end-column="0" />
+                <state relative-caret-position="331">
+                  <caret line="706" column="35" lean-forward="true" selection-start-line="706" selection-start-column="35" selection-end-line="706" selection-end-column="35" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                     <element signature="e#881#1035#0" expanded="false" />
@@ -76,8 +76,8 @@
           <file leaf-file-name="baseline.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="561">
-                  <caret line="381" column="53" lean-forward="false" selection-start-line="381" selection-start-column="0" selection-end-line="382" selection-end-column="0" />
+                <state relative-caret-position="306">
+                  <caret line="201" column="28" lean-forward="false" selection-start-line="201" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -424,20 +424,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00757" summary="add save for embedding analysis">
-      <created>1534005016446</created>
-      <option name="number" value="00757" />
-      <option name="presentableId" value="LOCAL-00757" />
-      <option name="project" value="LOCAL" />
-      <updated>1534005016446</updated>
-    </task>
-    <task id="LOCAL-00758" summary="add save for embedding analysis">
-      <created>1534005102571</created>
-      <option name="number" value="00758" />
-      <option name="presentableId" value="LOCAL-00758" />
-      <option name="project" value="LOCAL" />
-      <updated>1534005102571</updated>
-    </task>
     <task id="LOCAL-00759" summary="add save for embedding analysis">
       <created>1534005384382</created>
       <option name="number" value="00759" />
@@ -767,7 +753,21 @@
       <option name="project" value="LOCAL" />
       <updated>1534079691838</updated>
     </task>
-    <option name="localTasksCounter" value="806" />
+    <task id="LOCAL-00806" summary=" fixed neg samples and added in projection">
+      <created>1534079804918</created>
+      <option name="number" value="00806" />
+      <option name="presentableId" value="LOCAL-00806" />
+      <option name="project" value="LOCAL" />
+      <updated>1534079804918</updated>
+    </task>
+    <task id="LOCAL-00807" summary="changed to original loss with no grad clipping, no projection and no pos/neg seperation">
+      <created>1534081103617</created>
+      <option name="number" value="00807" />
+      <option name="presentableId" value="LOCAL-00807" />
+      <option name="project" value="LOCAL" />
+      <updated>1534081103617</updated>
+    </task>
+    <option name="localTasksCounter" value="808" />
     <servers />
   </component>
   <component name="TodoView">
@@ -853,7 +853,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="stabalise gradients by clipping by norm 1 and adding small quantity onto logs" />
     <MESSAGE value="do not project on last epoch before validation" />
     <MESSAGE value="updated model2" />
     <MESSAGE value="updated lr for model1 large datasets" />
@@ -878,7 +877,8 @@
     <MESSAGE value="fixed negative samples" />
     <MESSAGE value=" fixed neg samples bug" />
     <MESSAGE value=" fixed neg samples and added in projection" />
-    <option name="LAST_COMMIT_MESSAGE" value=" fixed neg samples and added in projection" />
+    <MESSAGE value="changed to original loss with no grad clipping, no projection and no pos/neg seperation" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed to original loss with no grad clipping, no projection and no pos/neg seperation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1223,14 +1223,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="381" column="53" lean-forward="false" selection-start-line="381" selection-start-column="0" selection-end-line="382" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_vkge.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
@@ -1241,10 +1233,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="201" column="28" lean-forward="false" selection-start-line="201" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="725" column="65" lean-forward="false" selection-start-line="725" selection-start-column="0" selection-end-line="726" selection-end-column="0" />
+        <state relative-caret-position="331">
+          <caret line="706" column="35" lean-forward="true" selection-start-line="706" selection-start-column="35" selection-end-line="706" selection-end-column="35" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
