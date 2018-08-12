@@ -331,13 +331,13 @@ class VKGE:
 
        # positive samples
 
-        self.mu_s_ps=tf.gather(self.mu_s,self.idx_pos,axis=1)
-        self.mu_o_ps=tf.gather(self.mu_o,self.idx_pos,axis=1)
-        self.mu_p_ps=tf.gather(self.mu_p,self.idx_pos,axis=1)
+        self.mu_s_ps=tf.gather(self.mu_s,self.idx_pos,axis=0)
+        self.mu_o_ps=tf.gather(self.mu_o,self.idx_pos,axis=0)
+        self.mu_p_ps=tf.gather(self.mu_p,self.idx_pos,axis=0)
         #
-        self.log_sigma_sq_s_ps =tf.gather(self.log_sigma_sq_s,self.idx_pos,axis=1)
-        self.log_sigma_sq_o_ps =tf.gather(self.log_sigma_sq_o,self.idx_pos,axis=1)
-        self.log_sigma_sq_p_ps =tf.gather(self.log_sigma_sq_p,self.idx_pos,axis=1)
+        self.log_sigma_sq_s_ps =tf.gather(self.log_sigma_sq_s,self.idx_pos,axis=0)
+        self.log_sigma_sq_o_ps =tf.gather(self.log_sigma_sq_o,self.idx_pos,axis=0)
+        self.log_sigma_sq_p_ps =tf.gather(self.log_sigma_sq_p,self.idx_pos,axis=0)
 
         self.mu_all_ps = tf.concat(axis=0, values=[self.mu_s_ps, self.mu_o_ps, self.mu_p_ps])
         self.log_sigma_ps = tf.concat(axis=0, values=[self.log_sigma_sq_s_ps, self.log_sigma_sq_o_ps, self.log_sigma_sq_p_ps])
@@ -345,13 +345,13 @@ class VKGE:
 
         # negative samples
 
-        self.mu_s_ns=tf.gather(self.mu_s,self.idx_neg,axis=1)
-        self.mu_o_ns=tf.gather(self.mu_o,self.idx_neg,axis=1)
-        self.mu_p_ns=tf.gather(self.mu_p,self.idx_neg,axis=1)
+        self.mu_s_ns=tf.gather(self.mu_s,self.idx_neg,axis=0)
+        self.mu_o_ns=tf.gather(self.mu_o,self.idx_neg,axis=0)
+        self.mu_p_ns=tf.gather(self.mu_p,self.idx_neg,axis=0)
         #
-        self.log_sigma_sq_s_ns =tf.gather(self.log_sigma_sq_s,self.idx_neg,axis=1)
-        self.log_sigma_sq_o_ns =tf.gather(self.log_sigma_sq_o,self.idx_neg,axis=1)
-        self.log_sigma_sq_p_ns =tf.gather(self.log_sigma_sq_p,self.idx_neg,axis=1)
+        self.log_sigma_sq_s_ns =tf.gather(self.log_sigma_sq_s,self.idx_neg,axis=0)
+        self.log_sigma_sq_o_ns =tf.gather(self.log_sigma_sq_o,self.idx_neg,axis=0)
+        self.log_sigma_sq_p_ns =tf.gather(self.log_sigma_sq_p,self.idx_neg,axis=0)
 
         self.mu_all_ns = tf.concat(axis=0, values=[self.mu_s_ns, self.mu_o_ns, self.mu_p_ns])
         self.log_sigma_ns = tf.concat(axis=0, values=[self.log_sigma_sq_s_ns, self.log_sigma_sq_o_ns, self.log_sigma_sq_p_ns])
