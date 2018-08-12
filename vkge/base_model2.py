@@ -50,7 +50,7 @@ class IndexGenerator:
         return rand_ints
 
 
-class VKGE:
+class VKGE_A:
     """
            model for testing the basic probabilistic aspects of the model
 
@@ -293,7 +293,7 @@ class VKGE:
 
         # Kullback Leibler divergence   in one go
 
-        self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
+        # self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
         # self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
         # self.g_objective = tf.reduce_sum(self.hinge_losses)
 
@@ -331,58 +331,24 @@ class VKGE:
 
        # positive samples
 
-        self.mu_s_ps=tf.gather(self.mu_s,self.idx_pos,axis=0)
-        self.mu_o_ps=tf.gather(self.mu_o,self.idx_pos,axis=0)
-        self.mu_p_ps=tf.gather(self.mu_p,self.idx_pos,axis=0)
-        #
-        self.log_sigma_sq_s_ps =tf.gather(self.log_sigma_sq_s,self.idx_pos,axis=0)
-        self.log_sigma_sq_o_ps =tf.gather(self.log_sigma_sq_o,self.idx_pos,axis=0)
-        self.log_sigma_sq_p_ps =tf.gather(self.log_sigma_sq_p,self.idx_pos,axis=0)
-
-        self.mu_all_ps = tf.concat(axis=0, values=[self.mu_s_ps, self.mu_o_ps, self.mu_p_ps])
-        self.log_sigma_ps = tf.concat(axis=0, values=[self.log_sigma_sq_s_ps, self.log_sigma_sq_o_ps, self.log_sigma_sq_p_ps])
-        #
-
-        # negative samples
-
-        self.mu_s_ns=tf.gather(self.entity_embedding_mean,self.idx_neg,axis=0)
-        self.mu_o_ns=tf.gather(self.mu_o,self.idx_neg,axis=0)
-        self.mu_p_ns=tf.gather(self.mu_p,self.idx_neg,axis=0)
-        #
-        self.log_sigma_sq_s_ns =tf.gather(self.log_sigma_sq_s,self.idx_neg,axis=0)
-        self.log_sigma_sq_o_ns =tf.gather(self.log_sigma_sq_o,self.idx_neg,axis=0)
-        self.log_sigma_sq_p_ns =tf.gather(self.log_sigma_sq_p,self.idx_neg,axis=0)
-
-        self.mu_all_ns = tf.concat(axis=0, values=[self.mu_s_ns, self.mu_o_ns, self.mu_p_ns])
-        self.log_sigma_ns = tf.concat(axis=0, values=[self.log_sigma_sq_s_ns, self.log_sigma_sq_o_ns, self.log_sigma_sq_p_ns])
-        #
 
        #  #calc elbows
        #
        #  # self.e_objective = 0.0
-        self.e_objective_p = 0.0
-        self.e_objective_n = 0.0
+        self.e_objective = 0.0
+        self.e_objective1 = 0.0
+        self.e_objective2 = 0.0
 
-
-        self.e_objective_p = -0.5 * tf.reduce_sum(
-            1. + self.log_sigma_ps - tf.square(self.mu_all_ps) - tf.exp(self.log_sigma_ps))
-
-        self.e_objective_n = -0.5 * tf.reduce_sum((
-            1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))) #rescale
-
-        self.elbo_positive = self.g_objective_p + self.e_objective_p
-        self.elbo_negative = self.g_objective_n + self.e_objective_n
-
-
-
-        self.elbo = self.elbo_positive + self.elbo_negative*self.BernoulliSRescale  #if reduce sum
-
+        self.g_objective = self.g_objective_p + self.g_objective_n*self.BernoulliSRescale  #if reduce sum
 # ##mock elbo
 #
-#         self.e_objective = 0.0
-#         self.e_objective1 = 0.0
-#         self.e_objective2 = 0.0
-#         self.e_objective3 = 0.0
+        self.e_objective1-= 0.5 * tf.reduce_sum(
+                         1. + self.entity_embedding_sigma - tf.square(self.entity_embedding_mean) - tf.exp(self.entity_embedding_sigma))
+        self.e_objective2 -= 0.5 * tf.reduce_sum(
+            1. + self.predicate_embedding_sigma - tf.square(self.predicate_embedding_mean) - tf.exp(self.predicate_embedding_sigma))
+
+        self.e_objective = self.e_objective1+self.e_objective2
+        self.e_objective = self.e_objective * self.KL_discount
 
         # self.mu_all=tf.concat(axis=0,values=[self.mu_s,self.mu_p,self.mu_o])
         # self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s,self.log_sigma_sq_p,self.log_sigma_sq_o])
@@ -715,12 +681,11 @@ class VKGE:
                     #     self.epoch_d: kl_inc_val
                     # }
 
-                    noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
 
                     loss_args = {
                         # self.no_samples:1, #number of samples for precision test
                         # self.KL_discount: self.klrew,
-                        # self.KL_discount: (1.0/3.0),
+                        self.KL_discount: (1.0/nb_batches),
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
@@ -729,7 +694,6 @@ class VKGE:
                         # , self.BernoulliSRescale: 1.0
                         ,self.idx_pos: np.arange(curr_batch_size),
                         self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
-                        ,self.noise:noise
                     }
 
                     # merge = tf.summary.merge_all()  # for TB
