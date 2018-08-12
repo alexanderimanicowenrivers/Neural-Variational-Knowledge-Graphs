@@ -530,13 +530,13 @@ class VKGE:
                 # #
                 # else:
                 #
-                # self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
-                # self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
-                # self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
+                self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
+                self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
+                self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
-                self.h_s = self.mu_s
-                self.h_p = self.mu_p
-                self.h_o = self.mu_o
+                # self.h_s = self.mu_s
+                # self.h_p = self.mu_p
+                # self.h_o = self.mu_o
 
     def build_decoder(self):
         """
@@ -725,7 +725,7 @@ class VKGE:
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-                        # ,self.BernoulliSRescale: (2.0*(self.nb_entities-self.negsamples))
+                        # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
                         , self.BernoulliSRescale: 1.0
                         ,self.idx_pos: np.arange(curr_batch_size),
                         self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
