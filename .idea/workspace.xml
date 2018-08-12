@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="put in hinge">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="fixed negative samples">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
     </list>
@@ -58,8 +58,8 @@
           <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/base.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-7253">
-                  <caret line="415" column="0" lean-forward="false" selection-start-line="415" selection-start-column="0" selection-end-line="420" selection-end-column="0" />
+                <state relative-caret-position="284">
+                  <caret line="710" column="35" lean-forward="true" selection-start-line="710" selection-start-column="35" selection-end-line="710" selection-end-column="35" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                     <element signature="e#881#1035#0" expanded="false" />
@@ -106,7 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>hts</find>
       <find>batch_size</find>
       <find>saver</find>
       <find>nosamps</find>
@@ -136,6 +135,7 @@
       <find>self.mean_c</find>
       <find>data2</find>
       <find>self.klrew</find>
+      <find>q</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -159,6 +159,7 @@
       <replace>test2</replace>
       <replace>p_threshold</replace>
       <replace>data</replace>
+      <replace>(q+1)</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -432,13 +433,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00752" summary="updated model with 5 negative samples and projection of only predicate  and entity sigma">
-      <created>1534002633952</created>
-      <option name="number" value="00752" />
-      <option name="presentableId" value="LOCAL-00752" />
-      <option name="project" value="LOCAL" />
-      <updated>1534002633952</updated>
     </task>
     <task id="LOCAL-00753" summary="updated model with 5 negative samples and projection of only predicate  and entity sigma">
       <created>1534003152840</created>
@@ -776,7 +770,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534074015484</updated>
     </task>
-    <option name="localTasksCounter" value="801" />
+    <task id="LOCAL-00801" summary="fixed negative samples">
+      <created>1534078181839</created>
+      <option name="number" value="00801" />
+      <option name="presentableId" value="LOCAL-00801" />
+      <option name="project" value="LOCAL" />
+      <updated>1534078181840</updated>
+    </task>
+    <option name="localTasksCounter" value="802" />
     <servers />
   </component>
   <component name="TodoView">
@@ -862,7 +863,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="upload confidence estimation scripts" />
     <MESSAGE value="fixed Bernoulli rescale" />
     <MESSAGE value="adding 1 or 10 negative samples into script" />
     <MESSAGE value="stabalise gradients by clipping by norm 1 and adding small quantity onto logs" />
@@ -887,7 +887,8 @@
     <MESSAGE value="test vkge without KL" />
     <MESSAGE value="take out variance" />
     <MESSAGE value="put in hinge" />
-    <option name="LAST_COMMIT_MESSAGE" value="put in hinge" />
+    <MESSAGE value="fixed negative samples" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed negative samples" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1252,8 +1253,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7253">
-          <caret line="415" column="0" lean-forward="false" selection-start-line="415" selection-start-column="0" selection-end-line="420" selection-end-column="0" />
+        <state relative-caret-position="284">
+          <caret line="710" column="35" lean-forward="true" selection-start-line="710" selection-start-column="35" selection-end-line="710" selection-end-column="35" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />

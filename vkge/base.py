@@ -333,60 +333,60 @@ class VKGE:
         # self.g_objective_n = -tf.reduce_sum((
         #     tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
 
-#        # positive samples
+       # positive samples
 
-        # self.mu_s_ps=tf.gather(self.mu_s,self.idx_pos)
-        # self.mu_o_ps=tf.gather(self.mu_o,self.idx_pos)
-        # self.mu_p_ps=tf.gather(self.mu_p,self.idx_pos)
-        # #
-        # self.log_sigma_sq_s_ps =tf.gather(self.log_sigma_sq_s,self.idx_pos)
-        # self.log_sigma_sq_o_ps =tf.gather(self.log_sigma_sq_o,self.idx_pos)
-        # self.log_sigma_sq_p_ps =tf.gather(self.log_sigma_sq_p,self.idx_pos)
+        self.mu_s_ps=tf.gather(self.mu_s,self.idx_pos)
+        self.mu_o_ps=tf.gather(self.mu_o,self.idx_pos)
+        self.mu_p_ps=tf.gather(self.mu_p,self.idx_pos)
         #
-        # self.mu_all_ps = tf.concat(axis=0, values=[self.mu_s_ps, self.mu_o_ps, self.mu_p_ps])
-        # self.log_sigma_ps = tf.concat(axis=0, values=[self.log_sigma_sq_s_ps, self.log_sigma_sq_o_ps, self.log_sigma_sq_p_ps])
-        # #
+        self.log_sigma_sq_s_ps =tf.gather(self.log_sigma_sq_s,self.idx_pos)
+        self.log_sigma_sq_o_ps =tf.gather(self.log_sigma_sq_o,self.idx_pos)
+        self.log_sigma_sq_p_ps =tf.gather(self.log_sigma_sq_p,self.idx_pos)
+
+        self.mu_all_ps = tf.concat(axis=0, values=[self.mu_s_ps, self.mu_o_ps, self.mu_p_ps])
+        self.log_sigma_ps = tf.concat(axis=0, values=[self.log_sigma_sq_s_ps, self.log_sigma_sq_o_ps, self.log_sigma_sq_p_ps])
         #
-        # # negative samples
+
+        # negative samples
+
+        self.mu_s_ns=tf.gather(self.mu_s,self.idx_neg)
+        self.mu_o_ns=tf.gather(self.mu_o,self.idx_neg)
+        self.mu_p_ns=tf.gather(self.mu_p,self.idx_neg)
         #
-        # self.mu_s_ns=tf.gather(self.mu_s,self.idx_neg)
-        # self.mu_o_ns=tf.gather(self.mu_o,self.idx_neg)
-        # self.mu_p_ns=tf.gather(self.mu_p,self.idx_neg)
-        # #
-        # self.log_sigma_sq_s_ns =tf.gather(self.log_sigma_sq_s,self.idx_neg)
-        # self.log_sigma_sq_o_ns =tf.gather(self.log_sigma_sq_o,self.idx_neg)
-        # self.log_sigma_sq_p_ns =tf.gather(self.log_sigma_sq_p,self.idx_neg)
+        self.log_sigma_sq_s_ns =tf.gather(self.log_sigma_sq_s,self.idx_neg)
+        self.log_sigma_sq_o_ns =tf.gather(self.log_sigma_sq_o,self.idx_neg)
+        self.log_sigma_sq_p_ns =tf.gather(self.log_sigma_sq_p,self.idx_neg)
+
+        self.mu_all_ns = tf.concat(axis=0, values=[self.mu_s_ns, self.mu_o_ns, self.mu_p_ns])
+        self.log_sigma_ns = tf.concat(axis=0, values=[self.log_sigma_sq_s_ns, self.log_sigma_sq_o_ns, self.log_sigma_sq_p_ns])
         #
-        # self.mu_all_ns = tf.concat(axis=0, values=[self.mu_s_ns, self.mu_o_ns, self.mu_p_ns])
-        # self.log_sigma_ns = tf.concat(axis=0, values=[self.log_sigma_sq_s_ns, self.log_sigma_sq_o_ns, self.log_sigma_sq_p_ns])
-        # #
-        #
-        # #calc elbows
-        #
-        # # self.e_objective = 0.0
-        # self.e_objective_p = 0.0
-        # self.e_objective_n = 0.0
-        #
-        #
-        # self.e_objective_p = -0.5 * tf.reduce_sum(
-        #     1. + self.log_sigma_ps - tf.square(self.mu_all_ps) - tf.exp(self.log_sigma_ps))
-        #
-        # self.e_objective_n = -0.5 * tf.reduce_sum((
-        #     1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))) #rescale
-        #
-        # self.elbo_positive = self.g_objective_p + self.e_objective_p
-        # self.elbo_negative = self.g_objective_n + self.e_objective_n
+
+        #calc elbows
+
+        # self.e_objective = 0.0
+        self.e_objective_p = 0.0
+        self.e_objective_n = 0.0
 
 
+        self.e_objective_p = -0.5 * tf.reduce_sum(
+            1. + self.log_sigma_ps - tf.square(self.mu_all_ps) - tf.exp(self.log_sigma_ps))
 
-        # self.elbo = self.elbo_positive + self.elbo_negative*self.BernoulliSRescale  #if reduce sum
+        self.e_objective_n = -0.5 * tf.reduce_sum((
+            1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))) #rescale
 
-##mock elbo
+        self.elbo_positive = self.g_objective_p + self.e_objective_p
+        self.elbo_negative = self.g_objective_n + self.e_objective_n
 
-        self.e_objective = 0.0
-        self.e_objective1 = 0.0
-        self.e_objective2 = 0.0
-        self.e_objective3 = 0.0
+
+
+        self.elbo = self.elbo_positive + self.elbo_negative*self.BernoulliSRescale  #if reduce sum
+
+# ##mock elbo
+#
+#         self.e_objective = 0.0
+#         self.e_objective1 = 0.0
+#         self.e_objective2 = 0.0
+#         self.e_objective3 = 0.0
 
         # self.mu_all=tf.concat(axis=0,values=[self.mu_s,self.mu_p,self.mu_o])
         # self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s,self.log_sigma_sq_p,self.log_sigma_sq_o])
@@ -412,12 +412,12 @@ class VKGE:
         #     1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))  # Log likelihood
         # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
 
-
-        self.e_objective1 = self.e_objective1
-        self.e_objective2 = self.e_objective1
-        self.e_objective3 = self.e_objective1
-
-        self.e_objective = (1.0 / 3.0) * (self.e_objective1 + self.e_objective2 + self.e_objective3)
+        #
+        # self.e_objective1 = self.e_objective1
+        # self.e_objective2 = self.e_objective1
+        # self.e_objective3 = self.e_objective1
+        #
+        # self.e_objective = (1.0 / 3.0) * (self.e_objective1 + self.e_objective2 + self.e_objective3)
 
         ###########best ELBO
 
@@ -430,23 +430,23 @@ class VKGE:
 
 
 
-        self.elbo = self.g_objective + self.e_objective
+        # self.elbo = self.g_objective + self.e_objective
 
 
 
         ##clip for robust learning as observed nans during training
         #
-        # gradients = optimizer.compute_gradients(loss=self.elbo)
-        #
-        #
-        # gradients = [(tf.clip_by_norm(grad, 1), var)
-        #              for grad, var in gradients if grad is not None]
-        #
-        # self.training_step = optimizer.apply_gradients(gradients)
-        #
+        gradients = optimizer.compute_gradients(loss=self.elbo)
 
 
-        # self.training_step = optimizer.minimize(self.elbo)
+        gradients = [(tf.clip_by_norm(grad, 1), var)
+                     for grad, var in gradients if grad is not None]
+
+        self.training_step = optimizer.apply_gradients(gradients)
+
+
+
+        self.training_step = optimizer.minimize(self.elbo)
 
         # self.train_variables=tf.trainable_variables()
         # self._setup_training(loss=self.elbo,optimizer=optimizer)
@@ -525,20 +525,20 @@ class VKGE:
                 self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
 
             with tf.variable_scope('Decoder'):
-                #
-                # self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
-                # self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
-                # self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
-                # #
-                # else:
 
+                self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
+                self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
+                self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
+                #
+                # else:
+                #
                 # self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
                 # self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
                 # self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
-
-                self.h_s = self.mu_s
-                self.h_p = self.mu_p
-                self.h_o = self.mu_o
+                #
+                # self.h_s = self.mu_s
+                # self.h_p = self.mu_p
+                # self.h_o = self.mu_o
 
     def build_decoder(self):
         """
@@ -696,14 +696,14 @@ class VKGE:
                     Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
 
                     for q in range((neg_subs)): # Xs_batch[1::nb_versions] needs to be corrupted
-                        Xs_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
-                        Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
-                        Xo_batch[q::nb_versions] = Xo_shuf[batch_start:batch_end]
+                        Xs_batch[(q+1)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                        Xp_batch[(q+1)::nb_versions] = Xp_shuf[batch_start:batch_end]
+                        Xo_batch[(q+1)::nb_versions] = Xo_shuf[batch_start:batch_end]
 
                     for q in range(((self.negsamples-neg_subs))): # Xs_batch[1::nb_versions] needs to be corrupted
-                        Xs_batch[q::nb_versions] = Xs_shuf[batch_start:batch_end]
-                        Xp_batch[q::nb_versions] = Xp_shuf[batch_start:batch_end]
-                        Xo_batch[q::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                        Xs_batch[(q+1)::nb_versions] = Xs_shuf[batch_start:batch_end]
+                        Xp_batch[(q+1)::nb_versions] = Xp_shuf[batch_start:batch_end]
+                        Xo_batch[(q+1)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
 
                     vec_neglabels=[int(1)]+([int(0)]*(int(nb_versions-1)))
 
@@ -717,7 +717,7 @@ class VKGE:
                     #     self.epoch_d: kl_inc_val
                     # }
 
-                    # noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
+                    noise=session.run(tf.random_normal((nb_versions*curr_batch_size, entity_embedding_size), 0, 1, dtype=tf.float32))
 
                     loss_args = {
                         # self.no_samples:1, #number of samples for precision test
@@ -727,11 +727,11 @@ class VKGE:
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-                        # ,self.BernoulliSRescale: (2.0*(self.nb_entities-self.negsamples))
+                        ,self.BernoulliSRescale: (2.0*(self.nb_entities-self.negsamples))
                         # , self.BernoulliSRescale: 1.0
-                        # ,self.idx_pos: np.arange(curr_batch_size),
-                        # self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
-                        # ,self.noise:noise
+                        ,self.idx_pos: np.arange(curr_batch_size),
+                        self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
+                        ,self.noise:noise
                     }
 
                     # merge = tf.summary.merge_all()  # for TB
