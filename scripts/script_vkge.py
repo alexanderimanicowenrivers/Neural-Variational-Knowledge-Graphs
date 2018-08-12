@@ -39,7 +39,7 @@ def to_cmd(c):
               '--epsilon {} ' \
               '--embedding_size {} ' \
               '--dataset {} ' \
-              '--alt_updates {} ' \
+              '--alt_opt {} ' \
               '--lr {} ' \
               '--score_func {} ' \
               '--negsamples {} ' \
@@ -73,13 +73,13 @@ def main(_):
         # w1=[10],
         w2=[1e-3], #
         w3=[200],
-        w4=['kinship', 'nations', 'umls'],
-        # w4 = ['fb15k-237', 'kinship', 'nations', 'umls', 'wn18', 'wn18rr'],
-        w5=[False],
+        # w4=['kinship', 'nations', 'umls'],
+        w4 = ['fb15k-237', 'kinship', 'nations', 'umls', 'wn18', 'wn18rr'],
+        w5=[True,False],
         w6=[1e-2],
-        w7=['DistMult'],
+        w7=['TransE', 'DistMult', 'ComplEx'],
         w8=[3],
-        w9=['True'])
+        w9=[True,False])
 
     configurations = cartesian_product(hyperparameters_space)
     path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/1808011_NS'

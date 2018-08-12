@@ -431,20 +431,20 @@ class VKGE:
 
         # self.elbo = self.g_objective_p + self.g_objective_n
 
-
+        if self.alt_opt:
         ##clip for robust learning as observed nans during training
         #
-        # gradients = optimizer.compute_gradients(loss=self.elbo)
+            gradients = optimizer.compute_gradients(loss=self.elbo)
+
+
+            gradients = [(tf.clip_by_norm(grad, 1), var)
+                         for grad, var in gradients if grad is not None]
+
+            self.training_step = optimizer.apply_gradients(gradients)
+        else:
         #
         #
-        # gradients = [(tf.clip_by_norm(grad, 1), var)
-        #              for grad, var in gradients if grad is not None]
-        #
-        # self.training_step = optimizer.apply_gradients(gradients)
-        #
-        #
-        #
-        self.training_step = optimizer.minimize(self.elbo)
+            self.training_step = optimizer.minimize(self.elbo)
 
         # self.train_variables=tf.trainable_variables()
         # self._setup_training(loss=self.elbo,optimizer=optimizer)
@@ -635,9 +635,9 @@ class VKGE:
         logger.warn("Number of negative samples per positive is {}, \n batch size is {} \n number of positive triples {} , \n  bernoulli rescale {}".format(self.negsamples,self.negsamples*batch_size,len(all_triples),(2.0*(self.nb_entities-1))))
 
         nb_versions = int(self.negsamples + 1)  # neg samples + original
-        # projection_steps = [constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
+        projection_steps = [constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_sigma, norm=1.0)]
 
-        projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_sigma, norm=1.0)]
+        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_sigma, norm=1.0)]
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
@@ -755,11 +755,11 @@ class VKGE:
                     counter += 1
                 #
                 # if self.projection:
-                # if self.projection and epoch<nb_epochs: #so you do not project before evaluation
-                #
-                    # for projection_step in projection_steps:
-                    #     session.run([projection_step])
-                    #
+                    if self.projection and epoch<nb_epochs: #so you do not project before evaluation
+
+                        for projection_step in projection_steps:
+                            session.run([projection_step])
+
 
 
 
