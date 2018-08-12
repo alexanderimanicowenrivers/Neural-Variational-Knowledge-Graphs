@@ -723,8 +723,8 @@ class VKGE:
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-                        ,self.BernoulliSRescale: (2.0*(self.nb_entities-self.negsamples))
-                        # , self.BernoulliSRescale: 1.0
+                        # ,self.BernoulliSRescale: (2.0*(self.nb_entities-self.negsamples))
+                        , self.BernoulliSRescale: 1.0
                         ,self.idx_pos: np.arange(curr_batch_size),
                         self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
                         ,self.noise:noise
