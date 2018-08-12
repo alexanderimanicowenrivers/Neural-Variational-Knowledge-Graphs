@@ -370,8 +370,8 @@ class VKGE:
         self.e_objective_n = -0.5 * tf.reduce_sum((
             1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))) #rescale
 
-        self.elbo_positive = self.g_objective_p + self.e_objective_p
-        self.elbo_negative = self.g_objective_n + self.e_objective_n
+        self.elbo_positive = self.g_objective_p + self.e_objective_p*0.1
+        self.elbo_negative = self.g_objective_n + self.e_objective_n*0.1
 
 
 
