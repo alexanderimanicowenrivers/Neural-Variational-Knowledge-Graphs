@@ -331,13 +331,13 @@ class VKGE:
 
        # positive samples
 
-        self.mu_s_ps=self.mu_s[self.idx_pos,:]
-        self.mu_o_ps=self.mu_o[self.idx_pos,:]
-        self.mu_p_ps=self.mu_p[self.idx_pos,:]
+        self.mu_s_ps=tf.gather(self.mu_s,self.idx_pos,axis=1)
+        self.mu_o_ps=tf.gather(self.mu_o,self.idx_pos,axis=1)
+        self.mu_p_ps=tf.gather(self.mu_p,self.idx_pos,axis=1)
         #
-        self.log_sigma_sq_s_ps =self.log_sigma_sq_s[self.idx_pos,:]
-        self.log_sigma_sq_o_ps =self.log_sigma_sq_o[self.idx_pos,:]
-        self.log_sigma_sq_p_ps =self.log_sigma_sq_p[self.idx_pos,:]
+        self.log_sigma_sq_s_ps =tf.gather(self.log_sigma_sq_s,self.idx_pos,axis=1)
+        self.log_sigma_sq_o_ps =tf.gather(self.log_sigma_sq_o,self.idx_pos,axis=1)
+        self.log_sigma_sq_p_ps =tf.gather(self.log_sigma_sq_p,self.idx_pos,axis=1)
 
         self.mu_all_ps = tf.concat(axis=0, values=[self.mu_s_ps, self.mu_o_ps, self.mu_p_ps])
         self.log_sigma_ps = tf.concat(axis=0, values=[self.log_sigma_sq_s_ps, self.log_sigma_sq_o_ps, self.log_sigma_sq_p_ps])
@@ -345,13 +345,13 @@ class VKGE:
 
         # negative samples
 
-        self.mu_s_ns=self.mu_s[self.idx_neg,:]
-        self.mu_o_ns=self.mu_o[self.idx_neg,:]
-        self.mu_p_ns=self.mu_p[self.idx_neg,:]
+        self.mu_s_ns=tf.gather(self.mu_s,self.idx_neg,axis=1)
+        self.mu_o_ns=tf.gather(self.mu_o,self.idx_neg,axis=1)
+        self.mu_p_ns=tf.gather(self.mu_p,self.idx_neg,axis=1)
         #
-        self.log_sigma_sq_s_ns =self.log_sigma_sq_s[self.idx_neg,:]
-        self.log_sigma_sq_o_ns =self.log_sigma_sq_o[self.idx_neg,:]
-        self.log_sigma_sq_p_ns =self.log_sigma_sq_p[self.idx_neg,:]
+        self.log_sigma_sq_s_ns =tf.gather(self.log_sigma_sq_s,self.idx_neg,axis=1)
+        self.log_sigma_sq_o_ns =tf.gather(self.log_sigma_sq_o,self.idx_neg,axis=1)
+        self.log_sigma_sq_p_ns =tf.gather(self.log_sigma_sq_p,self.idx_neg,axis=1)
 
         self.mu_all_ns = tf.concat(axis=0, values=[self.mu_s_ns, self.mu_o_ns, self.mu_p_ns])
         self.log_sigma_ns = tf.concat(axis=0, values=[self.log_sigma_sq_s_ns, self.log_sigma_sq_o_ns, self.log_sigma_sq_p_ns])
@@ -360,22 +360,22 @@ class VKGE:
        #  #calc elbows
        #
        #  # self.e_objective = 0.0
-        self.e_objective_p = 0.0
-        self.e_objective_n = 0.0
-
-
-        self.e_objective_p = -0.5 * tf.reduce_sum(
-            1. + self.log_sigma_ps - tf.square(self.mu_all_ps) - tf.exp(self.log_sigma_ps))
-
-        self.e_objective_n = -0.5 * tf.reduce_sum((
-            1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))) #rescale
-
-        self.elbo_positive = self.g_objective_p + self.e_objective_p
-        self.elbo_negative = self.g_objective_n + self.e_objective_n
-
-
-
-        self.elbo = self.elbo_positive + self.elbo_negative*self.BernoulliSRescale  #if reduce sum
+       #  self.e_objective_p = 0.0
+       #  self.e_objective_n = 0.0
+       #
+       #
+       #  self.e_objective_p = -0.5 * tf.reduce_sum(
+       #      1. + self.log_sigma_ps - tf.square(self.mu_all_ps) - tf.exp(self.log_sigma_ps))
+       #
+       #  self.e_objective_n = -0.5 * tf.reduce_sum((
+       #      1. + self.log_sigma_ns - tf.square(self.mu_all_ns) - tf.exp(self.log_sigma_ns))) #rescale
+       #
+       #  self.elbo_positive = self.g_objective_p + self.e_objective_p
+       #  self.elbo_negative = self.g_objective_n + self.e_objective_n
+       #
+       #
+       #
+       #  self.elbo = self.elbo_positive + self.elbo_negative*self.BernoulliSRescale  #if reduce sum
 
 # ##mock elbo
 #

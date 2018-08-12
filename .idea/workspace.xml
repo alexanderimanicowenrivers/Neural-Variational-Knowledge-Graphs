@@ -58,8 +58,8 @@
           <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/base.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1227">
-                  <caret line="359" column="22" lean-forward="true" selection-start-line="359" selection-start-column="22" selection-end-line="359" selection-end-column="22" />
+                <state relative-caret-position="45">
+                  <caret line="335" column="60" lean-forward="false" selection-start-line="335" selection-start-column="60" selection-end-line="335" selection-end-column="60" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                     <element signature="e#881#1035#0" expanded="false" />
@@ -424,13 +424,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00767" summary="KL/3">
-      <created>1534007459827</created>
-      <option name="number" value="00767" />
-      <option name="presentableId" value="LOCAL-00767" />
-      <option name="project" value="LOCAL" />
-      <updated>1534007459827</updated>
-    </task>
     <task id="LOCAL-00768" summary="KL/3">
       <created>1534007488850</created>
       <option name="number" value="00768" />
@@ -767,7 +760,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534085024906</updated>
     </task>
-    <option name="localTasksCounter" value="816" />
+    <task id="LOCAL-00816" summary="added in KL term">
+      <created>1534085575157</created>
+      <option name="number" value="00816" />
+      <option name="presentableId" value="LOCAL-00816" />
+      <option name="project" value="LOCAL" />
+      <updated>1534085575157</updated>
+    </task>
+    <option name="localTasksCounter" value="817" />
     <servers />
   </component>
   <component name="TodoView">
@@ -853,7 +853,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated model with negative sampling" />
     <MESSAGE value="updated model with 5 negative samples" />
     <MESSAGE value="updated model with 5 negative samples and projection of only predicate sigma" />
     <MESSAGE value="updated model with 5 negative samples and projection of only predicate  and entity sigma" />
@@ -878,7 +877,8 @@
     <MESSAGE value="only means are trained" />
     <MESSAGE value="testingBS on g objective" />
     <MESSAGE value="Worked without variance embeddings and BS on likelihood" />
-    <option name="LAST_COMMIT_MESSAGE" value="Worked without variance embeddings and BS on likelihood" />
+    <MESSAGE value="added in KL term" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in KL term" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1243,8 +1243,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1227">
-          <caret line="359" column="22" lean-forward="true" selection-start-line="359" selection-start-column="22" selection-end-line="359" selection-end-column="22" />
+        <state relative-caret-position="45">
+          <caret line="335" column="60" lean-forward="false" selection-start-line="335" selection-start-column="60" selection-end-line="335" selection-end-column="60" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
