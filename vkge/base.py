@@ -416,17 +416,18 @@ class VKGE:
         # self.e_objective = (1.0 / 3.0) * (self.e_objective1 + self.e_objective2 + self.e_objective3)
 
         ###########best ELBO
-        self.e_objective=0
-        self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
-        self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
+        # self.e_objective=0
+        # self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
+        # self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
+        # #
+        #
+        # self.e_objective-= 0.5 * tf.reduce_sum(
+        #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
         #
 
-        self.e_objective-= 0.5 * tf.reduce_sum(
-                         1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
+        # self.elbo = self.g_objective + self.e_objective
 
-
-
-        self.elbo = self.g_objective + self.e_objective
+        self.elbo = self.g_objective
 
 
 
@@ -521,20 +522,20 @@ class VKGE:
                 self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
 
             with tf.variable_scope('Decoder'):
-
-                self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
-                self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
-                self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
                 #
+                # self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
+                # self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
+                # self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
+                # #
                 # else:
                 #
                 # self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
                 # self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
                 # self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
-                #
-                # self.h_s = self.mu_s
-                # self.h_p = self.mu_p
-                # self.h_o = self.mu_o
+
+                self.h_s = self.mu_s
+                self.h_p = self.mu_p
+                self.h_o = self.mu_o
 
     def build_decoder(self):
         """
@@ -660,6 +661,7 @@ class VKGE:
 
             neg_subs = math.ceil(int(self.negsamples / 2))
 
+            logger.warn("\n \n \n neg subs is {} \n \n \n".format(neg_subs))
             # train_writer = tf.summary.FileWriter(filename, session.graph)
 
             for epoch in range(1, nb_epochs + 1):
