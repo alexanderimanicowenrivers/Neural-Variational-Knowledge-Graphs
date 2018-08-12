@@ -57,7 +57,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                ("{}/logs/1808011_BS/uclcs_nvkg_v1.{}".format(path, summary(c)))
+                ("{}/logs/ModelB_BS/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
 
@@ -82,7 +82,7 @@ def main(_):
         w9=[True,False])
 
     configurations = cartesian_product(hyperparameters_space)
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/1808011_BS'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/ModelB_BS'
 
 
     # Check that we are on the UCLCS cluster first
