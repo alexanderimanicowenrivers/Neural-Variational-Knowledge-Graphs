@@ -118,7 +118,7 @@ def main(_):
 #$ -o /dev/null
 #$ -e /dev/null
 #$ -t 1-{}
-#$ -l tmem=8G
+#$ -l tmem=12G
 #$ -l h_rt=24:00:00
 #$ -ac allow=LMNOPQSTU
 
