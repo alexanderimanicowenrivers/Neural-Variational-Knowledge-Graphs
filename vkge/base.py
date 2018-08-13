@@ -162,7 +162,7 @@ class VKGE:
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, sig_max, sig_min)
-        self.nb_epochs = 100
+        self.nb_epochs = 500
 
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
@@ -725,8 +725,8 @@ class VKGE:
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-                        # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
-                        , self.BernoulliSRescale: 1.0
+                        ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
+                        # , self.BernoulliSRescale: 1.0
                         ,self.idx_pos: np.arange(curr_batch_size),
                         self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
                         ,self.noise:noise
@@ -901,8 +901,7 @@ class VKGE:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
-                    self._saver.save(session, filename + '_epoch_' + str(epoch) + '.ckpt')
-
+falt
 
                             # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
                     # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
