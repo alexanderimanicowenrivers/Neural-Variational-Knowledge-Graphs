@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="compression cost">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_vkge.py" afterPath="$PROJECT_DIR$/scripts/script_vkge.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_model2.py" afterPath="$PROJECT_DIR$/vkge/base_model2.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,18 +35,11 @@
             <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="149">
-                  <caret line="687" column="43" lean-forward="false" selection-start-line="687" selection-start-column="43" selection-end-line="687" selection-end-column="43" />
+                  <caret line="687" column="56" lean-forward="false" selection-start-line="687" selection-start-column="56" selection-end-line="687" selection-end-column="56" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                     <element signature="e#881#1035#0" expanded="false" />
                     <element signature="e#1064#1399#0" expanded="false" />
-                    <marker date="1534157372834" expanded="true" signature="1415:46789" ph="..." />
-                    <marker date="1534157372834" expanded="true" signature="24983:36623" ph="..." />
-                    <marker date="1534157372834" expanded="true" signature="27163:32647" ph="..." />
-                    <marker date="1534157372834" expanded="true" signature="27461:32414" ph="..." />
-                    <marker date="1534157372834" expanded="true" signature="27821:30479" ph="..." />
-                    <marker date="1534157372834" expanded="true" signature="29735:29876" ph="..." />
-                    <marker date="1534157372834" expanded="true" signature="31853:32018" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -466,13 +458,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00791" summary="test vkge without KL">
-      <created>1534028038034</created>
-      <option name="number" value="00791" />
-      <option name="presentableId" value="LOCAL-00791" />
-      <option name="project" value="LOCAL" />
-      <updated>1534028038034</updated>
-    </task>
     <task id="LOCAL-00792" summary="test vkge without KL">
       <created>1534028069919</created>
       <option name="number" value="00792" />
@@ -809,7 +794,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534110189594</updated>
     </task>
-    <option name="localTasksCounter" value="840" />
+    <task id="LOCAL-00840" summary="compression cost">
+      <created>1534157376253</created>
+      <option name="number" value="00840" />
+      <option name="presentableId" value="LOCAL-00840" />
+      <option name="project" value="LOCAL" />
+      <updated>1534157376253</updated>
+    </task>
+    <option name="localTasksCounter" value="841" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1287,18 +1279,11 @@
     <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
-          <caret line="687" column="43" lean-forward="false" selection-start-line="687" selection-start-column="43" selection-end-line="687" selection-end-column="43" />
+          <caret line="687" column="56" lean-forward="false" selection-start-line="687" selection-start-column="56" selection-end-line="687" selection-end-column="56" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
             <element signature="e#1064#1399#0" expanded="false" />
-            <marker date="1534157372834" expanded="true" signature="1415:46789" ph="..." />
-            <marker date="1534157372834" expanded="true" signature="24983:36623" ph="..." />
-            <marker date="1534157372834" expanded="true" signature="27163:32647" ph="..." />
-            <marker date="1534157372834" expanded="true" signature="27461:32414" ph="..." />
-            <marker date="1534157372834" expanded="true" signature="27821:30479" ph="..." />
-            <marker date="1534157372834" expanded="true" signature="29735:29876" ph="..." />
-            <marker date="1534157372834" expanded="true" signature="31853:32018" ph="..." />
           </folding>
         </state>
       </provider>
