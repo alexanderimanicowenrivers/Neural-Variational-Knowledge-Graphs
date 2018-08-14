@@ -28,11 +28,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base_model2.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="base_model2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="356" column="49" lean-forward="true" selection-start-line="356" selection-start-column="49" selection-end-line="356" selection-end-column="49" />
+            <state relative-caret-position="476">
+              <caret line="164" column="26" lean-forward="false" selection-start-line="164" selection-start-column="26" selection-end-line="164" selection-end-column="26" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#881#1035#0" expanded="false" />
@@ -54,7 +54,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scriptA_NS2.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="scriptA_NS2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="110">
@@ -233,8 +233,8 @@
         <option value="$PROJECT_DIR$/scripts/script_NS2.py" />
         <option value="$PROJECT_DIR$/scripts/script_BS2.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/vkge/base_model2.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
+        <option value="$PROJECT_DIR$/vkge/base_model2.py" />
       </list>
     </option>
   </component>
@@ -449,13 +449,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00803" summary=" fixed neg samples and added in projection">
-      <created>1534079342448</created>
-      <option name="number" value="00803" />
-      <option name="presentableId" value="LOCAL-00803" />
-      <option name="project" value="LOCAL" />
-      <updated>1534079342448</updated>
     </task>
     <task id="LOCAL-00804" summary=" fixed neg samples and added in projection">
       <created>1534079457681</created>
@@ -793,7 +786,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534266915973</updated>
     </task>
-    <option name="localTasksCounter" value="852" />
+    <task id="LOCAL-00852" summary="modelA_NS">
+      <created>1534266994976</created>
+      <option name="number" value="00852" />
+      <option name="presentableId" value="LOCAL-00852" />
+      <option name="project" value="LOCAL" />
+      <updated>1534266994976</updated>
+    </task>
+    <option name="localTasksCounter" value="853" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1258,18 +1258,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="356" column="49" lean-forward="true" selection-start-line="356" selection-start-column="49" selection-end-line="356" selection-end-column="49" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-            <element signature="e#881#1035#0" expanded="false" />
-            <element signature="e#1064#1399#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/scriptB_BS2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="109">
@@ -1285,6 +1273,18 @@
         <state relative-caret-position="110">
           <caret line="59" column="36" lean-forward="false" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="164" column="26" lean-forward="false" selection-start-line="164" selection-start-column="26" selection-end-line="164" selection-end-column="26" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+            <element signature="e#881#1035#0" expanded="false" />
+            <element signature="e#1064#1399#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
