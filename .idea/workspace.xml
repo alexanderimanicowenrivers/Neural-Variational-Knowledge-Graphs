@@ -46,8 +46,8 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="145" column="102" lean-forward="false" selection-start-line="145" selection-start-column="102" selection-end-line="145" selection-end-column="102" />
+            <state relative-caret-position="177">
+              <caret line="591" column="0" lean-forward="true" selection-start-line="591" selection-start-column="0" selection-end-line="591" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -429,13 +429,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00808" summary="changed to original loss with no grad clipping, no projection and no pos/neg seperation">
-      <created>1534081421780</created>
-      <option name="number" value="00808" />
-      <option name="presentableId" value="LOCAL-00808" />
-      <option name="project" value="LOCAL" />
-      <updated>1534081421780</updated>
-    </task>
     <task id="LOCAL-00809" summary="changed to original loss with no grad clipping, no projection and no pos/neg seperation">
       <created>1534081669984</created>
       <option name="number" value="00809" />
@@ -772,7 +765,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534269710768</updated>
     </task>
-    <option name="localTasksCounter" value="857" />
+    <task id="LOCAL-00857" summary="updated confidence estimation">
+      <created>1534269821839</created>
+      <option name="number" value="00857" />
+      <option name="presentableId" value="LOCAL-00857" />
+      <option name="project" value="LOCAL" />
+      <updated>1534269821839</updated>
+    </task>
+    <option name="localTasksCounter" value="858" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1261,8 +1261,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="145" column="102" lean-forward="false" selection-start-line="145" selection-start-column="102" selection-end-line="145" selection-end-column="102" />
+        <state relative-caret-position="177">
+          <caret line="591" column="0" lean-forward="true" selection-start-line="591" selection-start-column="0" selection-end-line="591" selection-end-column="0" />
           <folding />
         </state>
       </provider>
