@@ -140,9 +140,9 @@ class VKGE_quick:
 
         logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(self.dataset_name))
 
-        train_triples = read_triples("data/{}/train.tsv".format(self.dataset_name))  # choose dataset
-        valid_triples = read_triples("data/{}/dev.tsv".format(self.dataset_name))
-        test_triples = read_triples("data/{}/test.tsv".format(self.dataset_name))
+        train_triples = read_triples("/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/data/{}/train.tsv".format(self.dataset_name))  # choose dataset
+        valid_triples = read_triples("/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/data/{}/dev.tsv".format(self.dataset_name))
+        test_triples = read_triples("/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/data/{}/test.tsv".format(self.dataset_name))
         self.nb_examples = len(train_triples)
 
         ##### for test time ######
