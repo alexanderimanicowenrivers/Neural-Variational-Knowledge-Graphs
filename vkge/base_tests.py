@@ -632,7 +632,7 @@ class VKGE_quick:
         ##
         # Train
         ##
-        tf.reset_default_graph()
+        # tf.reset_default_graph()
 
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
