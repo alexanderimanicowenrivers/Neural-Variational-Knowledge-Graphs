@@ -843,6 +843,7 @@ class VKGE:
                     eval_triples = test_triples
                     ranks_subj, ranks_obj = [], []
                     filtered_ranks_subj, filtered_ranks_obj = [], []
+                    self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
                     for _i, (s, p, o) in enumerate(eval_triples):
 
