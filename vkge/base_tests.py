@@ -838,12 +838,12 @@ class VKGE_tests:
 
                             for samp_no in range((self.no_confidence_samples)):
 
-                                scores_subj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
+                                scores_subj = session.run(self.p_x_i_test, feed_dict=feed_dict_corrupt_subj)
 
                                 confidence_subj+= np.divide(scores_subj,self.no_confidence_samples)
 
                                 # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                                scores_obj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
+                                scores_obj = session.run(self.p_x_i_test, feed_dict=feed_dict_corrupt_obj)
 
                                 confidence_obj+=((scores_obj)/self.no_confidence_samples*1.0)
 
@@ -886,7 +886,7 @@ class VKGE_tests:
                             filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
                         elif self.alt_test in ['test2','test2_bline']:  # multiply by binary threshold on variance
-
+                            logger.warn('scores_subj[s_idx] {}'.format(scores_subj[s_idx]))
                             if (scores_subj[s_idx] > p_threshold):
                                 filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                             if (scores_obj[o_idx] > p_threshold):
