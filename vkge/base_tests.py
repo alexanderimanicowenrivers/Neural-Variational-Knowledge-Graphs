@@ -24,7 +24,7 @@ import pandas as pd
 
 logger = logging.getLogger(__name__)
 
-
+import collections
 def read_triples(path):
     triples = []
     with open(path, 'rt') as f:
@@ -55,9 +55,9 @@ class IndexGenerator:
         return rand_ints
 
 
-class VKGE_tests:
+class VKGE_quick:
     """
-           model for testing the basic probabilistic aspects of the model, just using SGD optimiser  - !!working!! 91.34%Hits@10
+           model for testing the basic probabilistic aspects of the model
 
             Achievies
         Initializes a Link Prediction Model.
@@ -107,47 +107,52 @@ class VKGE_tests:
         self.sigma_alt = sigma_alt
         self.score_func=score_func
         self.alt_updates=alt_updates
-        self.negsamples=negsamples
+        self.negsamples=1
         self.alt_opt=alt_opt
         self.nosamps=int(nosamps)
-        # sigma = tf.log(1 + tf.exp(log_sigma_square))
-        self.no_confidence_samples=1000 #change to 1000
-        sig_max = np.log((1.0/embedding_size*1.0))**2
 
-        # sig_max = np.log(np.exp(1.0/embedding_size*1.0)-1)
-        sig_min = sig_max
 
                 # adjust for correct format for model input
 
         if self.score_func=='ComplEx':
             predicate_embedding_size = embedding_size*2
             entity_embedding_size = embedding_size*2
+            sig_max = np.log((1.0/embedding_size*2.0)+1e-10)
+            # sig_max = np.exp((1.0 / embedding_size * 2.0) ** 2)
 
 
         else:
             predicate_embedding_size = embedding_size
             entity_embedding_size = embedding_size
+            sig_max = np.log((1.0/embedding_size*1.0)+1e-10)
+            # sig_max = np.exp((1.0 / embedding_size * 1.0) ** 2)
 
+        sig_min = sig_max
 
         self.random_state = np.random.RandomState(0)
         tf.set_random_seed(0)
         self.static_mean = static_mean
         self.alt_cost = alt_cost
         self.projection = projection
-        self.mean_c = mean_c
 
         # Dataset
         self.dataset_name = dataset
 
         logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(self.dataset_name))
 
-        train_triples = read_triples("/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/data/{}/train.tsv".format(self.dataset_name))  # choose dataset
-        valid_triples = read_triples("/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/data/{}/dev.tsv".format(self.dataset_name))
-        test_triples = read_triples("/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/data/{}/test.tsv".format(self.dataset_name))
+        train_triples = read_triples("data/{}/train.tsv".format(self.dataset_name))  # choose dataset
+        valid_triples = read_triples("data/{}/dev.tsv".format(self.dataset_name))
+        test_triples = read_triples("data/{}/test.tsv".format(self.dataset_name))
         self.nb_examples = len(train_triples)
 
         ##### for test time ######
         all_triples = train_triples + valid_triples + test_triples
+
+        # n=len(all_triples)*1.0 use this for BS
+        # if n<=no_batches:
+        #     sys.exit("Stopping Job As Batch Size Exceeds Triples")
+
+
         entity_set = {s for (s, p, o) in all_triples} | {o for (s, p, o) in all_triples}
         predicate_set = {p for (s, p, o) in all_triples}
         self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
@@ -158,21 +163,11 @@ class VKGE_tests:
         # optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
 
-        # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=1e-5)
 
-        self.var1_1 = randint(0, self.nb_entities - 1)
-        self.var1_2 = randint(0, self.nb_predicates - 1)
-
-        logger.warn("Entity Sample1 id is {} with name {}..".format(self.var1_1, list(entity_set)[self.var1_1]))
-
-        logger.warn("Predicate Sample1 id is {} with name {}..".format(self.var1_2, list(predicate_set)[self.var1_2]))
-
-        self.var1 = tf.Variable(initial_value=self.var1_1, trainable=False, dtype=tf.int32)
-        self.var2 = tf.Variable(initial_value=self.var1_2, trainable=False, dtype=tf.int32)
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, sig_max, sig_min)
-        self.nb_epochs = 100
+        self.nb_epochs = 500
 
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
@@ -263,9 +258,9 @@ class VKGE_tests:
 
         embedding_size = mu.get_shape()[1].value
 
-        self.eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
+        eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
 
-        return mu+sigma*self.eps
+        return mu+sigma*eps
 
     def sample_embedding_ptriple(self, mu, log_sigma_square):
         """
@@ -286,7 +281,8 @@ class VKGE_tests:
                         Constructs Model
         """
         self.noise = tf.placeholder(tf.float32, shape=[None,entity_embedding_size])
-        self.bernoulli_elbo_sampling = tf.placeholder(tf.int32, shape=[None])
+        self.idx_pos = tf.placeholder(tf.int32, shape=[None])
+        self.idx_neg = tf.placeholder(tf.int32, shape=[None])
 
         self.no_samples = tf.placeholder(tf.int32)
         self.s_inputs = tf.placeholder(tf.int32, shape=[None])
@@ -294,26 +290,17 @@ class VKGE_tests:
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
         self.y_inputs = tf.placeholder(tf.bool, shape=[None])
         self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
-        self.epoch_d = tf.placeholder(tf.float32)  # starts at 0.5
+        self.BernoulliSRescale = tf.placeholder(tf.float32)  # starts at 0.5
 
         self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
                            pred_sig)
         self.build_decoder()
 
         # Kullback Leibler divergence   in one go
-        self.e_objective = 0.0
-        self.e_objective1 = 0.0
-        self.e_objective2 = 0.0
-        self.e_objective3 = 0.0
 
-        if self.alt_opt: #ml
-            self.g_objective = -tf.reduce_sum(
-                tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
-
-        else: #else hinge margin of 1
-            self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs,dtype=tf.float32) - 1))
-            self.g_objective = tf.reduce_sum(self.hinge_losses)
-
+        # self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
+        # self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
+        # self.g_objective = tf.reduce_sum(self.hinge_losses)
 
 
         # ####################################  Weight uncertainity in NN's
@@ -333,65 +320,103 @@ class VKGE_tests:
         # ####################################  one KL
 
         #
-        idx=self.bernoulli_elbo_sampling
-
-        # self.mu_s_bs=tf.gather(self.mu_s,idx)
-        # self.mu_o_bs=tf.gather(self.mu_o,idx)
-        # self.mu_p_bs=tf.gather(self.mu_p,idx)
-        #
-        # self.log_sigma_sq_s_bs =tf.gather(self.log_sigma_sq_s,idx)
-        # self.log_sigma_sq_o_bs =tf.gather(self.log_sigma_sq_o,idx)
-        # self.log_sigma_sq_p_bs =tf.gather(self.log_sigma_sq_p,idx)
-        #
-        # self.mu_all=tf.concat(axis=0,values=[self.mu_s_bs,self.mu_o_bs,self.mu_p_bs])
-        # self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s_bs,self.log_sigma_sq_o_bs,self.log_sigma_sq_p_bs])
-        # #
-        self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
-        self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
         #
 
-        self.e_objective-= 0.5 * tf.reduce_sum(
-                         1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
+        self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
+        self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
+
+        self.p_x_i_pos = tf.gather(self.p_x_i, self.idx_pos)
+        self.p_x_i_neg = tf.gather(self.p_x_i, self.idx_neg)
+
+        self.g_objective_p = -tf.reduce_sum(
+            tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
+
+        self.g_objective_n = -tf.reduce_sum((
+            tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
+
+       # positive samples
 
 
+       #  #calc elbows
+       #
+       #  # self.e_objective = 0.0
+        self.e_objective = 0.0
+        self.e_objective1 = 0.0
+        self.e_objective2 = 0.0
 
-        # ####################################  separately KL
+        self.g_objective = self.g_objective_p + self.g_objective_n*self.BernoulliSRescale  #if reduce sum
+# ##mock elbo
+#
+        self.e_objective1-= 0.5 * tf.reduce_sum(
+                         1. + self.entity_embedding_sigma - tf.square(self.entity_embedding_mean) - tf.exp(self.entity_embedding_sigma))
+        self.e_objective2 -= 0.5 * tf.reduce_sum(
+            1. + self.predicate_embedding_sigma - tf.square(self.predicate_embedding_mean) - tf.exp(self.predicate_embedding_sigma))
+
+        self.e_objective = (self.e_objective1+self.e_objective2)* self.KL_discount
+
+        self.elbo= self.e_objective+self.g_objective
+
+        # self.mu_all=tf.concat(axis=0,values=[self.mu_s,self.mu_p,self.mu_o])
+        # self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s,self.log_sigma_sq_p,self.log_sigma_sq_o])
+        #
+        # self.e_objective-= 0.5 * tf.reduce_sum(
+        #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
+        #
+        # self.e_objective=self.e_objective*self.KL_discount *self.epoch_d
+        # ####################################  separately
+
+        # self.e_objective1 -= 0.5 * tf.reduce_sum(
+        #     1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
+        # self.e_objective2 -= 0.5 * tf.reduce_sum(
+        #     1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
+        # self.e_objective3 -= 0.5 * tf.reduce_sum(
+        #     1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
+
         # self.e_objective1 -= 0.5 * tf.reduce_sum(
         #     1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
         # self.e_objective2 -= 0.5 * tf.reduce_sum(
         #     1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
         # self.e_objective3 -= 0.5 * tf.reduce_sum(
         #     1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))  # Log likelihood
+        # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
+
         #
+        # self.e_objective1 = self.e_objective1
+        # self.e_objective2 = self.e_objective1
+        # self.e_objective3 = self.e_objective1
         #
-        # self.e_objective1 = self.e_objective1 * self.KL_discount
-        # self.e_objective2 = self.e_objective1 * self.KL_discount
-        # self.e_objective3 = self.e_objective1 * self.KL_discount
+        # self.e_objective = (1.0 / 3.0) * (self.e_objective1 + self.e_objective2 + self.e_objective3)
+
+        ###########best ELBO
+        # self.e_objective=0
+        # self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
+        # self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
+        # #
         #
-        # self.e_objective = (self.e_objective1 + self.e_objective2 + self.e_objective3)
+        # self.e_objective-= 0.5 * tf.reduce_sum(
+        #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
+        #
 
-        # ####################################  separately KL
+        # self.elbo = self.g_objective + self.e_objective
 
-        self.training_stepe = optimizer.minimize(self.e_objective)
-        self.training_stepg = optimizer.minimize(self.g_objective)
+        # self.elbo = self.g_objective
 
+        # self.elbo = self.g_objective_p + self.g_objective_n
 
-
-        self.elbo = self.g_objective + self.e_objective
-
+        if self.alt_opt:
         ##clip for robust learning as observed nans during training
+        #
+            gradients = optimizer.compute_gradients(loss=self.elbo)
 
-        gradients = optimizer.compute_gradients(loss=self.elbo)
 
-        if True:
-            gradients = [(tf.clip_by_value(grad, -1, 1), var)
+            gradients = [(tf.clip_by_norm(grad, 1), var)
                          for grad, var in gradients if grad is not None]
 
-        self.training_step = optimizer.apply_gradients(gradients)
-
-
-
-        # self.training_step = optimizer.minimize(self.elbo)
+            self.training_step = optimizer.apply_gradients(gradients)
+        else:
+        #
+        #
+            self.training_step = optimizer.minimize(self.elbo)
 
         # self.train_variables=tf.trainable_variables()
         # self._setup_training(loss=self.elbo,optimizer=optimizer)
@@ -406,7 +431,6 @@ class VKGE_tests:
         """
         logger.warn('Building Inference Networks q(h_x | x) ..{}'.format(self.score_func))
 
-        init1 = np.round((self.mean_c / np.sqrt(entity_embedding_size * 1.0)), decimals=2)
         init2 = np.round(sig_max,decimals=2)
 
         # experiment 1 parameters, initalises a sigma to 0.031
@@ -421,7 +445,12 @@ class VKGE_tests:
                     self.entity_embedding_mean = tf.get_variable('entities', shape=[nb_entities + 1, entity_embedding_size],
                                                                  initializer=tf.contrib.layers.xavier_initializer())
 
-
+                    # self.entity_embedding_mean = tf.get_variable('entities',
+                    #                                              shape=[nb_entities + 1, entity_embedding_size],
+                    #                                              initializer=tf.random_uniform_initializer(
+                    #                                                  minval=-init1,
+                    #                                                  maxval=init1,
+                    #                                                  dtype=tf.float32))
                 with tf.variable_scope('sigma'):
 
                     self.entity_embedding_sigma = tf.get_variable('entities_sigma',
@@ -440,6 +469,18 @@ class VKGE_tests:
 
 
             with tf.variable_scope('predicate'):
+                with tf.variable_scope('mu'):
+                    self.predicate_embedding_mean = tf.get_variable('predicates',
+                                                                shape=[nb_predicates + 1, predicate_embedding_size],
+                                                                    initializer=tf.contrib.layers.xavier_initializer())
+
+                    # self.predicate_embedding_mean = tf.get_variable('predicates',
+                    #                                                 shape=[nb_predicates + 1, predicate_embedding_size],
+                    #                                                 initializer=tf.random_uniform_initializer(
+                    #                                                     minval=-init1,
+                    #                                                     maxval=init1,
+                    #                                                     dtype=tf.float32))
+
                 with tf.variable_scope('sigma'):
 
                     self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
@@ -448,11 +489,7 @@ class VKGE_tests:
                                                              initializer=tf.random_uniform_initializer(
                                                                  minval=init2, maxval=init2, dtype=tf.float32),
                                                              dtype=tf.float32)
-                with tf.variable_scope('mu'):
 
-                    self.predicate_embedding_mean = tf.get_variable('predicates',
-                                                                shape=[nb_predicates + 1, predicate_embedding_size],
-                                                                    initializer=tf.contrib.layers.xavier_initializer())
 
                 self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
                 self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
@@ -462,15 +499,16 @@ class VKGE_tests:
                 # self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
                 # self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
                 # self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
-                #
+                # #
                 # else:
-
+                #
                 self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
                 self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
                 self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
 
-
-
+                # self.h_s = self.mu_s
+                # self.h_p = self.mu_p
+                # self.h_o = self.mu_o
 
     def build_decoder(self):
         """
@@ -562,15 +600,16 @@ class VKGE_tests:
 
         batches = make_batches(self.nb_examples, batch_size)
 
-        # self.negsamples = int(5)
+        self.negsamples = int(self.negsamples)
 
-        self.negsamples = int(2.0*len(all_triples)*(self.nb_entities-1)/(nb_batches*1.0))
+        # total_negatives = int(2.0*len(all_triples)*(self.nb_entities-1))
 
-        logger.warn("Number of negative samples per batch is {}, \t batch size is {} \t number of positive triples {}".format(self.negsamples,self.negsamples+batch_size,len(all_triples)))
+        logger.warn("Number of negative samples per positive is {}, \n batch size is {} \n number of positive triples {} , \n  bernoulli rescale {}".format(self.negsamples,self.negsamples*batch_size,len(all_triples),(2.0*(self.nb_entities-1))))
 
         nb_versions = int(self.negsamples + 1)  # neg samples + original
+        projection_steps = [constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_sigma, norm=1.0)]
 
-        projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
+        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_sigma, norm=1.0)]
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
@@ -584,6 +623,11 @@ class VKGE_tests:
 
         pi = (1 / np.sum(pi_t)) * pi_t  # normalise pi
         #####################
+
+        ##
+        # Train
+        ##
+################
 
         ##
         # Train
