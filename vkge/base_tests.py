@@ -931,7 +931,8 @@ class VKGE_tests:
                             filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
                         elif self.alt_test in ['test2','test2_bline']:  # multiply by binary threshold on variance
-                            logger.warn('scores_subj[s_idx] {}'.format(scores_subj[s_idx]))
+                            # logger.warn('scores_subj[s_idx] {}'.format(scores_subj[s_idx]))
+
                             if (scores_subj[s_idx] > p_threshold):
                                 filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                             if (scores_obj[o_idx] > p_threshold):
