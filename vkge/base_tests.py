@@ -18,9 +18,9 @@ import logging
 import sys
 import collections
 import pandas as pd
-# import seaborn as sns
-# import matplotlib.pyplot as plt
-# plt.switch_backend('agg')
+import seaborn as sns
+import matplotlib.pyplot as plt
+plt.switch_backend('agg')
 
 logger = logging.getLogger(__name__)
 
