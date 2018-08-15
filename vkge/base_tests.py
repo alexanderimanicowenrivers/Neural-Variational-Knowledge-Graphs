@@ -740,7 +740,7 @@ class VKGE_tests:
                 # logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
                 cvrg=[]
-                for p_threshold in np.arange(0,1,0.005):
+                for p_threshold in np.arange(0,1,0.001):
                     cvrg.append(1-p_threshold)
                     # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
@@ -965,8 +965,8 @@ class VKGE_tests:
                     logger.warn(' at k {} and {}'.format(k,np.divide(experiments[k], 100)))
 
                     tips_na = pd.DataFrame(table)
-                    tips_na = tips_na.transpose()
-                    tips = tips_na.fillna(value=0)
+                    tips = tips_na.transpose()
+                    # tips = tips_na.fillna(value=0)
 
                     colnam='Hits@'+str(k)
 
