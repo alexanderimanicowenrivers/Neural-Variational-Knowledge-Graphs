@@ -1003,7 +1003,7 @@ class VKGE_tests:
                 ax = sns.regplot(data=tips,x='coverage',y='Hits@'+str(k),scatter_kws = {"s": 80}, order = 2, ci = 0.95, truncate = True,label='Filtered')
 
                 table2 = [experiments_raw[k], cvrg]
-                logger.warn('Making graph at k {} '.format(k)
+                logger.warn('Making graph at k {} '.format(k))
 
                 tips_na2 = pd.DataFrame(table2)
                 tips2 = tips_na2.transpose()
