@@ -1039,7 +1039,7 @@ class VKGE_tests:
                              truncate=True, label='Filtered')
 
             table2 = [experiments_raw[0], cvrg]
-            logger.warn('Making graph at k {} '.format(k))
+            logger.warn('Making graph for Mean Rank '.format(k))
 
             tips_na2 = pd.DataFrame(table2)
             tips2 = tips_na2.transpose()
