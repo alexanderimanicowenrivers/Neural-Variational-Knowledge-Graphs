@@ -879,7 +879,7 @@ class VKGE_tests:
                         hts = [1, 3, 5, 10]
 
                     else:
-                        hts = [1]
+                        hts = [1, 3, 5, 10]
 
 
                     if self.alt_test in ['test3']: #CORRECTION of scores for confidence TEST1
@@ -890,16 +890,16 @@ class VKGE_tests:
 
                         for samp_no in range((self.no_confidence_samples)):
 
-                            scores_subj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
+                            scores_subj_c = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
 
-                            confidence_subj+= np.divide(scores_subj,self.no_confidence_samples)
+                            confidence_subj+= np.divide(scores_subj_c,self.no_confidence_samples)
 
                             # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                            scores_obj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
+                            scores_obj_c = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
 
-                            confidence_obj+=((scores_obj)/self.no_confidence_samples*1.0)
+                            confidence_obj+= np.divide(scores_obj_c,self.no_confidence_samples)
 
-                    elif self.alt_test in ['test2_bline','test3bline','test3bline']: #creates random confidence levels between 0 and 1 for baseline test2
+                    elif self.alt_test in ['test2_bline','test3bline']: #creates random confidence levels between 0 and 1 for baseline test2
                         confidence_subj=np.random.random_sample(self.nb_entities,)
                         confidence_obj=np.random.random_sample(self.nb_entities,)
                     #########################
@@ -1035,7 +1035,7 @@ class VKGE_tests:
 
             tips.columns = columns
 
-            ax = sns.regplot(data=tips, x='coverage', y='Hits@' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
+            ax = sns.regplot(data=tips, x='coverage', y='Mean_Rank' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
                              truncate=True, label='Filtered')
 
             table2 = [experiments_raw[0], cvrg]
@@ -1048,7 +1048,7 @@ class VKGE_tests:
 
             tips2.columns = columns
 
-            ax = sns.regplot(data=tips2, x='coverage', y='Hits@' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
+            ax = sns.regplot(data=tips2, x='coverage', y='Mean_Rank' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
                              truncate=True, label='Raw')
             plt.legend()
 

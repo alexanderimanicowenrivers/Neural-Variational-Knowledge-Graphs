@@ -56,8 +56,8 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="1025" column="39" lean-forward="false" selection-start-line="1025" selection-start-column="39" selection-end-line="1025" selection-end-column="39" />
+            <state relative-caret-position="342">
+              <caret line="1050" column="67" lean-forward="false" selection-start-line="1050" selection-start-column="67" selection-end-line="1050" selection-end-column="67" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#990#1144#0" expanded="false" />
@@ -455,13 +455,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00841" summary="compression cost">
-      <created>1534157390125</created>
-      <option name="number" value="00841" />
-      <option name="presentableId" value="LOCAL-00841" />
-      <option name="project" value="LOCAL" />
-      <updated>1534157390125</updated>
-    </task>
     <task id="LOCAL-00842" summary="BS2">
       <created>1534189929494</created>
       <option name="number" value="00842" />
@@ -798,7 +791,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534351132457</updated>
     </task>
-    <option name="localTasksCounter" value="890" />
+    <task id="LOCAL-00890" summary="updated tests with mean rank plot">
+      <created>1534351539248</created>
+      <option name="number" value="00890" />
+      <option name="presentableId" value="LOCAL-00890" />
+      <option name="project" value="LOCAL" />
+      <updated>1534351539251</updated>
+    </task>
+    <option name="localTasksCounter" value="891" />
     <servers />
   </component>
   <component name="TodoView">
@@ -884,7 +884,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="take out variance" />
     <MESSAGE value="put in hinge" />
     <MESSAGE value="fixed negative samples" />
     <MESSAGE value=" fixed neg samples bug" />
@@ -909,7 +908,8 @@
     <MESSAGE value="updated confidence estimation test" />
     <MESSAGE value="updated CC2" />
     <MESSAGE value="updated test with RAW info" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated test with RAW info" />
+    <MESSAGE value="updated tests with mean rank plot" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated tests with mean rank plot" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1287,8 +1287,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="1025" column="39" lean-forward="false" selection-start-line="1025" selection-start-column="39" selection-end-line="1025" selection-end-column="39" />
+        <state relative-caret-position="342">
+          <caret line="1050" column="67" lean-forward="false" selection-start-line="1050" selection-start-column="67" selection-end-line="1050" selection-end-column="67" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#990#1144#0" expanded="false" />
