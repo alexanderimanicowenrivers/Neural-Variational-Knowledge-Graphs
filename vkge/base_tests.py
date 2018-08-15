@@ -964,8 +964,9 @@ class VKGE_tests:
                     table=[experiments[k],cvrg]
                     logger.warn(' at k {} and {}'.format(k,np.divide(experiments[k], 100)))
 
-                    tips = pd.DataFrame(table)
-                    tips = tips.transpose()
+                    tips_na = pd.DataFrame(table)
+                    tips_na = tips_na.transpose()
+                    tips = tips_na.fillna(value=0)
 
                     colnam='Hits@'+str(k)
 
