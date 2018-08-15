@@ -1019,7 +1019,7 @@ class VKGE_tests:
                 ax = sns.regplot(data=tips2, x='coverage', y='Hits@' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
                                  truncate=True, label='Raw')
 
-                ax.figure.savefig("ConfEstimationByVariance_H@"+str(k)+".png")
+                ax.figure.savefig("ConfEstimation_H@"+str(k)+".png")
 
                 plt.clf()
 
