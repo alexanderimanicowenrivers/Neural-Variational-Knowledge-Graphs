@@ -111,7 +111,7 @@ class VKGE_tests:
         self.alt_opt=alt_opt
         self.nosamps=int(nosamps)
 
-        self.no_confidence_samples=1000
+        self.no_confidence_samples=2
 
                 # adjust for correct format for model input
 
@@ -747,7 +747,7 @@ class VKGE_tests:
                 # logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
             cvrg=[]
-            for p_threshold in np.arange(0,1,0.001):
+            for p_threshold in np.arange(0,1,0.5):
                 cvrg.append(1-p_threshold)
                 # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
