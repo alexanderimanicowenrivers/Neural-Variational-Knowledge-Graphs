@@ -1016,9 +1016,9 @@ class VKGE_tests:
 
 
                 tips2.columns = columns
-
-                ax = sns.regplot(data=tips2, x='coverage', y='Hits@' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
-                                 truncate=True, label='Raw')
+                #
+                # ax = sns.regplot(data=tips2, x='coverage', y='Hits@' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
+                #                  truncate=True, label='Raw')
                 plt.legend()
 
                 ax.figure.savefig("ConfEstimationVar_H@"+str(k)+".png")
@@ -1048,8 +1048,8 @@ class VKGE_tests:
 
             tips2.columns = columns
 
-            ax = sns.regplot(data=tips2, x='coverage', y='Mean_Rank', scatter_kws={"s": 80}, order=2, ci=0.95,
-                             truncate=True, label='Raw')
+            # ax = sns.regplot(data=tips2, x='coverage', y='Mean_Rank', scatter_kws={"s": 80}, order=2, ci=0.95,
+            #                  truncate=True, label='Raw')
             plt.legend()
 
             ax.figure.savefig("ConfEstimationVar_MeanRank.png")
