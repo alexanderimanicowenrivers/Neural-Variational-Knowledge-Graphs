@@ -952,15 +952,16 @@ class VKGE_tests:
                     elif self.alt_test in ['test2','test2_bline','test3','test3bline']:  # multiply by binary threshold on variance
                         # logger.warn('scores_subj[s_idx] {}'.format(scores_subj[s_idx]))
 
-                        if (scores_subj[s_idx] > p_threshold) and (self.alt_test in ['test2','test2_bline']):
-                            filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                        if (scores_obj[o_idx] > p_threshold) and (self.alt_test in ['test2','test2_bline']):
-                            filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
-
-                        if (confidence_subj[s_idx] > p_threshold) and (self.alt_test in ['test3', 'test3bline']):
-                            filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                        if (confidence_obj[o_idx] > p_threshold) and (self.alt_test in ['test3', 'test3bline']):
-                            filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
+                        if (self.alt_test in ['test2','test2_bline']):
+                            if (scores_subj[s_idx] > p_threshold):
+                                filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                            if (scores_obj[o_idx] > p_threshold):
+                                filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
+                        else:
+                            if (confidence_subj[s_idx] > p_threshold):
+                                filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                            if (confidence_obj[o_idx] > p_threshold):
+                                filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
 
                                 # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] == [1]:
