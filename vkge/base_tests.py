@@ -976,7 +976,9 @@ class VKGE_tests:
                 ranks = ranks_subj + ranks_obj
                 logger.warn("\t \t Number of samples in valid phase {} \t \t".format(len(filtered_ranks_obj)))
                 for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
-                    mean_rank = np.mean(setting_ranks)
+                    mean_rank = len(setting_ranks)
+
+                    # mean_rank = np.mean(setting_ranks)
                     if setting_name == 'Filtered':
                         experiments_filt[0].append(mean_rank)
                     elif setting_name == 'Raw':
@@ -992,50 +994,51 @@ class VKGE_tests:
                             experiments_raw[k].append(hits_at_k)
 
 
-            for k in hts:
-                table=[experiments_filt[k],cvrg]
-
-                tips_na = pd.DataFrame(table)
-                tips = tips_na.transpose()
-                # tips = tips_na.fillna(value=0)
-
-                colnam='Hits@'+str(k)
-
-                columns = [colnam,'coverage']
-
-                tips.columns = columns
-
-                ax = sns.regplot(data=tips,x='coverage',y='Hits@'+str(k),scatter_kws = {"s": 80}, order = 2, ci = 0.95, truncate = True,label='Filtered')
-
-                table2 = [experiments_raw[k], cvrg]
-                logger.warn('Making graph at k {} '.format(k))
-
-                tips_na2 = pd.DataFrame(table2)
-                tips2 = tips_na2.transpose()
-                # tips = tips_na.fillna(value=0)
-
-
-                tips2.columns = columns
-                #
-                # ax = sns.regplot(data=tips2, x='coverage', y='Hits@' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
-                #                  truncate=True, label='Raw')
-                plt.legend()
-
-                ax.figure.savefig("ConfEstimation_H@"+str(k)+".png")
-                plt.clf()
+            # for k in hts:
+            #     table=[experiments_filt[k],cvrg]
+            #
+            #     tips_na = pd.DataFrame(table)
+            #     tips = tips_na.transpose()
+            #     # tips = tips_na.fillna(value=0)
+            #
+            #     colnam='Hits@'+str(k)
+            #
+            #     columns = [colnam,'coverage']
+            #
+            #     tips.columns = columns
+            #
+            #     ax = sns.regplot(data=tips,x='coverage',y='Hits@'+str(k),scatter_kws = {"s": 80}, order = 2, ci = 0.95, truncate = True,label='Filtered')
+            #
+            #     table2 = [experiments_raw[k], cvrg]
+            #     logger.warn('Making graph at k {} '.format(k))
+            #
+            #     tips_na2 = pd.DataFrame(table2)
+            #     tips2 = tips_na2.transpose()
+            #     # tips = tips_na.fillna(value=0)
+            #
+            #
+            #     tips2.columns = columns
+            #     #
+            #     # ax = sns.regplot(data=tips2, x='coverage', y='Hits@' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
+            #     #                  truncate=True, label='Raw')
+            #     plt.legend()
+            #
+            #     ax.figure.savefig("ConfEstimationCount_H@"+str(k)+".png")
+            #     plt.clf()
             table = [experiments_filt[0], cvrg]
 
             tips_na = pd.DataFrame(table)
             tips = tips_na.transpose()
             # tips = tips_na.fillna(value=0)
 
-            colnam = 'Mean_Rank'
+            # colnam = 'Mean_Rank'
+            colnam = 'Number_of_Samples'
 
             columns = [colnam, 'coverage']
 
             tips.columns = columns
 
-            ax = sns.regplot(data=tips, x='coverage', y='Mean_Rank', scatter_kws={"s": 80}, order=2, ci=0.95,
+            ax = sns.regplot(data=tips, x='coverage', y='Number_of_Samples', scatter_kws={"s": 80}, order=2, ci=0.95,
                              truncate=True, label='Filtered')
 
             table2 = [experiments_raw[0], cvrg]
@@ -1052,7 +1055,7 @@ class VKGE_tests:
             #                  truncate=True, label='Raw')
             plt.legend()
 
-            ax.figure.savefig("ConfEstimation_MeanRank.png")
+            ax.figure.savefig("ConfEstimationCount_MeanRank.png")
             plt.clf()
 
 
