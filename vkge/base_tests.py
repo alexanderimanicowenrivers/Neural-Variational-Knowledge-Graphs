@@ -977,6 +977,10 @@ class VKGE_tests:
                 logger.warn("\t \t Number of samples in valid phase {} \t \t".format(len(filtered_ranks_obj)))
                 for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                     mean_rank = np.mean(setting_ranks)
+                    if setting_name == 'Filtered':
+                        experiments_filt[0].append(mean_rank)
+                    elif setting_name == 'Raw':
+                        experiments_raw[0].append(mean_rank)
                     logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
                     for k in hts:
                         hits_at_k = np.mean(np.asarray(setting_ranks) <= k)
@@ -1019,6 +1023,37 @@ class VKGE_tests:
 
                 ax.figure.savefig("ConfEstimation_H@"+str(k)+".png")
                 plt.clf()
+            table = [experiments_filt[0], cvrg]
+
+            tips_na = pd.DataFrame(table)
+            tips = tips_na.transpose()
+            # tips = tips_na.fillna(value=0)
+
+            colnam = 'Hits@' + str(k)
+
+            columns = [colnam, 'coverage']
+
+            tips.columns = columns
+
+            ax = sns.regplot(data=tips, x='coverage', y='Hits@' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
+                             truncate=True, label='Filtered')
+
+            table2 = [experiments_raw[0], cvrg]
+            logger.warn('Making graph at k {} '.format(k))
+
+            tips_na2 = pd.DataFrame(table2)
+            tips2 = tips_na2.transpose()
+            # tips = tips_na.fillna(value=0)
+
+
+            tips2.columns = columns
+
+            ax = sns.regplot(data=tips2, x='coverage', y='Hits@' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
+                             truncate=True, label='Raw')
+            plt.legend()
+
+            ax.figure.savefig("ConfEstimation_MeanRank.png")
+            plt.clf()
 
 
                 # e1, e2, p1, p2 = session.run(
