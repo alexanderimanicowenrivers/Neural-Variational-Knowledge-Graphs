@@ -56,8 +56,8 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-35">
-              <caret line="991" column="76" lean-forward="false" selection-start-line="991" selection-start-column="76" selection-end-line="991" selection-end-column="76" />
+            <state relative-caret-position="122">
+              <caret line="950" column="0" lean-forward="true" selection-start-line="950" selection-start-column="0" selection-end-line="950" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#990#1144#0" expanded="false" />
@@ -455,13 +455,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00828" summary="smaller datasets test">
-      <created>1534090502294</created>
-      <option name="number" value="00828" />
-      <option name="presentableId" value="LOCAL-00828" />
-      <option name="project" value="LOCAL" />
-      <updated>1534090502295</updated>
-    </task>
     <task id="LOCAL-00829" summary="smaller datasets test">
       <created>1534090974686</created>
       <option name="number" value="00829" />
@@ -798,7 +791,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534342682744</updated>
     </task>
-    <option name="localTasksCounter" value="877" />
+    <task id="LOCAL-00877" summary="updated test with RAW info">
+      <created>1534345290530</created>
+      <option name="number" value="00877" />
+      <option name="presentableId" value="LOCAL-00877" />
+      <option name="project" value="LOCAL" />
+      <updated>1534345290531</updated>
+    </task>
+    <option name="localTasksCounter" value="878" />
     <servers />
   </component>
   <component name="TodoView">
@@ -884,7 +884,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test vkge without KL" />
     <MESSAGE value="take out variance" />
     <MESSAGE value="put in hinge" />
     <MESSAGE value="fixed negative samples" />
@@ -909,7 +908,8 @@
     <MESSAGE value="updated confidence estimation" />
     <MESSAGE value="updated confidence estimation test" />
     <MESSAGE value="updated CC2" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated CC2" />
+    <MESSAGE value="updated test with RAW info" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated test with RAW info" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1287,8 +1287,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-35">
-          <caret line="991" column="76" lean-forward="false" selection-start-line="991" selection-start-column="76" selection-end-line="991" selection-end-column="76" />
+        <state relative-caret-position="122">
+          <caret line="950" column="0" lean-forward="true" selection-start-line="950" selection-start-column="0" selection-end-line="950" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#990#1144#0" expanded="false" />

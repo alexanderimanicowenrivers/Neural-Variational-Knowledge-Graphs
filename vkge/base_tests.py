@@ -905,6 +905,9 @@ class VKGE_tests:
                 #########################
                 # Calculate new scores wrs to confidence
                 #########################
+                if self.alt_test in ['test2','test2_bline','test3','test3bline']:
+                    ranks_subj, ranks_obj = [], []
+                    filtered_ranks_subj, filtered_ranks_obj = [], []
 
                 cvrg = []
                 for p_threshold in np.arange(0, 1, 0.001):
