@@ -989,7 +989,6 @@ class VKGE_tests:
 
             for k in hts:
                 table=[experiments_filt[k],cvrg]
-                logger.warn(' at k {} and {}'.format(k,np.divide(experiments_filt[k], 100)))
 
                 tips_na = pd.DataFrame(table)
                 tips = tips_na.transpose()
@@ -1004,7 +1003,7 @@ class VKGE_tests:
                 ax = sns.regplot(data=tips,x='coverage',y='Hits@'+str(k),scatter_kws = {"s": 80}, order = 2, ci = 0.95, truncate = True,label='Filtered')
 
                 table2 = [experiments_raw[k], cvrg]
-                logger.warn(' at k {} and {}'.format(k, np.divide(experiments_raw[k], 100)))
+                logger.warn(' at k {} and {}'.format(k)
 
                 tips_na2 = pd.DataFrame(table2)
                 tips2 = tips_na2.transpose()
