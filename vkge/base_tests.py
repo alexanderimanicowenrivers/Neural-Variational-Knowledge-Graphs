@@ -865,7 +865,7 @@ class VKGE_tests:
                                 # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
                                 scores_obj += session.run(self.scores, feed_dict=feed_dict_corrupt_obj)
 
-                        if self.alt_test in ['none','test1']:
+                        if self.alt_test in ['none','test1','test2']:
                             ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
                             ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
