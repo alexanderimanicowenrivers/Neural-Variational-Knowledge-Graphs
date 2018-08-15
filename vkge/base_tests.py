@@ -977,8 +977,10 @@ class VKGE_tests:
 
                     ax.figure.savefig("ConfEstimation_H@"+str(k)+".png")
 
+                    plt.clf()
 
-                # e1, e2, p1, p2 = session.run(
+
+                    # e1, e2, p1, p2 = session.run(
                     #     [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
                     #      self.predicate_embedding_sigma], feed_dict={})
                     # np.save(
