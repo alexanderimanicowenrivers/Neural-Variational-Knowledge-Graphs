@@ -952,7 +952,7 @@ class VKGE_tests:
                         mean_rank = np.mean(setting_ranks)
                         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
                         for k in hts:
-                        #     hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                            hits_at_k = np.mean(np.asarray(setting_ranks) <= k)
                         #     logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
                             if setting_name=='Filtered':
@@ -961,7 +961,7 @@ class VKGE_tests:
 
 
                 for k in hts:
-                    table=[np.divide(experiments[k], 100) ,cvrg]
+                    table=[experiments[k],cvrg]
                     logger.warn(' at k {} and {}'.format(k,np.divide(experiments[k], 100)))
 
                     tips = pd.DataFrame(table)

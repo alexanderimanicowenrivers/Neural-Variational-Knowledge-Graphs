@@ -46,8 +46,8 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="12" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="103">
+              <caret line="954" column="80" lean-forward="false" selection-start-line="954" selection-start-column="80" selection-end-line="954" selection-end-column="80" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#990#1144#0" expanded="false" />
@@ -231,11 +231,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="1534" />
-    <option name="y" value="109" />
-    <option name="width" value="1826" />
-    <option name="height" value="1080" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -442,13 +440,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00818" summary="added in KL term">
-      <created>1534086365230</created>
-      <option name="number" value="00818" />
-      <option name="presentableId" value="LOCAL-00818" />
-      <option name="project" value="LOCAL" />
-      <updated>1534086365230</updated>
     </task>
     <task id="LOCAL-00819" summary="added in KL term">
       <created>1534086616304</created>
@@ -786,7 +777,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534272021335</updated>
     </task>
-    <option name="localTasksCounter" value="867" />
+    <task id="LOCAL-00867" summary="updated confidence estimation">
+      <created>1534272227461</created>
+      <option name="number" value="00867" />
+      <option name="presentableId" value="LOCAL-00867" />
+      <option name="project" value="LOCAL" />
+      <updated>1534272227461</updated>
+    </task>
+    <option name="localTasksCounter" value="868" />
     <servers />
   </component>
   <component name="TodoView">
@@ -799,12 +797,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1534" y="109" width="1826" height="1080" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.08183856" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10443491" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33471933" sideWeight="0.5239651" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4117647" sideWeight="0.5239651" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26117885" sideWeight="0.47816828" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.49427754" order="10" side_tool="false" content_ui="tabs" />
@@ -1218,7 +1216,7 @@
         <state relative-caret-position="109">
           <caret line="73" column="16" lean-forward="false" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
           <folding>
-            <element signature="e#199#215#0" expanded="true" />
+            <element signature="e#199#215#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1275,8 +1273,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="12" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="103">
+          <caret line="954" column="80" lean-forward="false" selection-start-line="954" selection-start-column="80" selection-end-line="954" selection-end-column="80" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#990#1144#0" expanded="false" />
