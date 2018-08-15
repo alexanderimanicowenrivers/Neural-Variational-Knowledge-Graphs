@@ -1021,7 +1021,7 @@ class VKGE_tests:
                                  truncate=True, label='Raw')
                 plt.legend()
 
-                ax.figure.savefig("ConfEstimationWVAr_H@"+str(k)+".png")
+                ax.figure.savefig("ConfEstimation_H@"+str(k)+".png")
                 plt.clf()
             table = [experiments_filt[0], cvrg]
 
@@ -1029,13 +1029,13 @@ class VKGE_tests:
             tips = tips_na.transpose()
             # tips = tips_na.fillna(value=0)
 
-            colnam = 'Hits@' + str(k)
+            colnam = 'Mean_Rank'
 
             columns = [colnam, 'coverage']
 
             tips.columns = columns
 
-            ax = sns.regplot(data=tips, x='coverage', y='Mean_Rank' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
+            ax = sns.regplot(data=tips, x='coverage', y='Mean_Rank', scatter_kws={"s": 80}, order=2, ci=0.95,
                              truncate=True, label='Filtered')
 
             table2 = [experiments_raw[0], cvrg]
@@ -1048,11 +1048,11 @@ class VKGE_tests:
 
             tips2.columns = columns
 
-            ax = sns.regplot(data=tips2, x='coverage', y='Mean_Rank' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
+            ax = sns.regplot(data=tips2, x='coverage', y='Mean_Rank', scatter_kws={"s": 80}, order=2, ci=0.95,
                              truncate=True, label='Raw')
             plt.legend()
 
-            ax.figure.savefig("ConfEstimationWVAr_MeanRank.png")
+            ax.figure.savefig("ConfEstimation_MeanRank.png")
             plt.clf()
 
 
