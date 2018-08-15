@@ -111,6 +111,7 @@ class VKGE_tests:
         self.alt_opt=alt_opt
         self.nosamps=int(nosamps)
 
+        self.no_confidence_samples=1000
 
                 # adjust for correct format for model input
 
@@ -636,284 +637,300 @@ class VKGE_tests:
 
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
+            # session.run(init_op)
+
             self._saver.restore(session,"/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/modelacc/uclcs_nvkg_v1.w1=10_w2=0.001_w3=300_w4=nations_w5=False_w6=0.001_w7=DistMult_w8=5_w9=False_epoch_50.ckpt")
 
 
             # train_writer = tf.summary.FileWriter(filename, session.graph)
 
-            experiments=collections.defaultdict(list)
-
+            experiments_filt=collections.defaultdict(list)
+            experiments_raw=collections.defaultdict(list)
             neg_subs = math.ceil(int(self.negsamples / 2))
 
             logger.warn("\n \n \n neg subs is {} \n \n \n".format(neg_subs))
             # train_writer = tf.summary.FileWriter(filename, session.graph)
 
-            for epoch in range(1, nb_epochs + 1):
-
-                counter = 0
-
-                kl_inc_val = 1.0
-
-                order = self.random_state.permutation(nb_samples)
-                Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
-
-                loss_values = []
-                total_loss_value = 0
-
-                for batch_no, (batch_start, batch_end) in enumerate(batches):
-
-                    curr_batch_size = batch_end - batch_start
-
-                    Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
-                    Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
-                    Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
-
-                    Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
-                    Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
-                    Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
-
-                    for q in range((neg_subs)):  # Xs_batch[1::nb_versions] needs to be corrupted
-                        Xs_batch[(q + 1)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
-                        Xp_batch[(q + 1)::nb_versions] = Xp_shuf[batch_start:batch_end]
-                        Xo_batch[(q + 1)::nb_versions] = Xo_shuf[batch_start:batch_end]
-
-                    for q2 in range(neg_subs,
-                                    (self.negsamples - neg_subs)):  # Xs_batch[1::nb_versions] needs to be corrupted
-                        Xs_batch[(q2 + 1)::nb_versions] = Xs_shuf[batch_start:batch_end]
-                        Xp_batch[(q2 + 1)::nb_versions] = Xp_shuf[batch_start:batch_end]
-                        Xo_batch[(q2 + 1)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
-
-                    vec_neglabels = [int(1)] + ([int(0)] * (int(self.negsamples)))
-
-                    #
-                    # loss_args = {
-                    #     self.KL_discount: pi[counter],
-                    #     self.s_inputs: Xs_batch,
-                    #     self.p_inputs: Xp_batch,
-                    #     self.o_inputs: Xo_batch,
-                    #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
-                    #     self.epoch_d: kl_inc_val
-                    # }
-
-                    noise = session.run(tf.random_normal((nb_versions * curr_batch_size, entity_embedding_size), 0, 1,
-                                                         dtype=tf.float32))
-
-                    loss_args = {
-                        # self.no_samples:1, #number of samples for precision test
-                        # self.KL_discount: self.klrew,
-                        # self.KL_discount: (1.0/3.0),
-                        self.s_inputs: Xs_batch,
-                        self.p_inputs: Xp_batch,
-                        self.o_inputs: Xo_batch,
-                        self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-                        # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
-                        , self.BernoulliSRescale: 1.0
-                        , self.idx_pos: np.arange(curr_batch_size),
-                        self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
-                        , self.noise: noise
-                    }
-
-                    # merge = tf.summary.merge_all()  # for TB
-
-
-
-
-                    _, elbo_value = session.run([self.training_step, self.elbo],
-                                                feed_dict=loss_args)
-
-                    # tensorboard
-
-                    # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
-
-
-                    # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
-
-
-                    loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
-                    total_loss_value += elbo_value
-
-                    counter += 1
-                    #
-                    # if self.projection:
-                    if self.projection and epoch < nb_epochs:  # so you do not project before evaluation
-
-                        for projection_step in projection_steps:
-                            session.run([projection_step])
+            # for epoch in range(1, nb_epochs + 1):
+            #
+            #     counter = 0
+            #
+            #     kl_inc_val = 1.0
+            #
+            #     order = self.random_state.permutation(nb_samples)
+            #     Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
+            #
+            #     loss_values = []
+            #     total_loss_value = 0
+            #
+            #     for batch_no, (batch_start, batch_end) in enumerate(batches):
+            #
+            #         curr_batch_size = batch_end - batch_start
+            #
+            #         Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
+            #         Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
+            #         Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
+            #
+            #         Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
+            #         Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
+            #         Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
+            #
+            #         for q in range((neg_subs)):  # Xs_batch[1::nb_versions] needs to be corrupted
+            #             Xs_batch[(q + 1)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+            #             Xp_batch[(q + 1)::nb_versions] = Xp_shuf[batch_start:batch_end]
+            #             Xo_batch[(q + 1)::nb_versions] = Xo_shuf[batch_start:batch_end]
+            #
+            #         for q2 in range(neg_subs,
+            #                         (self.negsamples - neg_subs)):  # Xs_batch[1::nb_versions] needs to be corrupted
+            #             Xs_batch[(q2 + 1)::nb_versions] = Xs_shuf[batch_start:batch_end]
+            #             Xp_batch[(q2 + 1)::nb_versions] = Xp_shuf[batch_start:batch_end]
+            #             Xo_batch[(q2 + 1)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+            #
+            #         vec_neglabels = [int(1)] + ([int(0)] * (int(self.negsamples)))
+            #
+            #         #
+            #         # loss_args = {
+            #         #     self.KL_discount: pi[counter],
+            #         #     self.s_inputs: Xs_batch,
+            #         #     self.p_inputs: Xp_batch,
+            #         #     self.o_inputs: Xo_batch,
+            #         #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
+            #         #     self.epoch_d: kl_inc_val
+            #         # }
+            #
+            #         noise = session.run(tf.random_normal((nb_versions * curr_batch_size, entity_embedding_size), 0, 1,
+            #                                              dtype=tf.float32))
+            #
+            #         loss_args = {
+            #             # self.no_samples:1, #number of samples for precision test
+            #             # self.KL_discount: self.klrew,
+            #             # self.KL_discount: (1.0/3.0),
+            #             self.s_inputs: Xs_batch,
+            #             self.p_inputs: Xp_batch,
+            #             self.o_inputs: Xo_batch,
+            #             self.y_inputs: np.array(vec_neglabels * curr_batch_size)
+            #             # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
+            #             , self.BernoulliSRescale: 1.0
+            #             , self.idx_pos: np.arange(curr_batch_size),
+            #             self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
+            #             , self.noise: noise
+            #         }
+            #
+            #         # merge = tf.summary.merge_all()  # for TB
+            #
+            #
+            #
+            #
+            #         _, elbo_value = session.run([self.training_step, self.elbo],
+            #                                     feed_dict=loss_args)
+            #
+            #         # tensorboard
+            #
+            #         # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
+            #
+            #
+            #         # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
+            #
+            #
+            #         loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
+            #         total_loss_value += elbo_value
+            #
+            #         counter += 1
+            #         #
+            #         # if self.projection:
+            #         if self.projection and epoch < nb_epochs:  # so you do not project before evaluation
+            #
+            #             for projection_step in projection_steps:
+            #                 session.run([projection_step])
 
 
                 # logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
-            cvrg=[]
-            for p_threshold in np.arange(0,1,0.001):
-                cvrg.append(1-p_threshold)
+            # cvrg=[]
+            # for p_threshold in np.arange(0,1,0.001):
+            #     cvrg.append(1-p_threshold)
                 # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
-                eval_name = 'valid'
-                eval_triples = valid_triples
-                ranks_subj, ranks_obj = [], []
-                filtered_ranks_subj, filtered_ranks_obj = [], []
+            eval_name = 'valid'
+            eval_triples = valid_triples
+            ranks_subj, ranks_obj = [], []
+            filtered_ranks_subj, filtered_ranks_obj = [], []
 
-                for _i, (s, p, o) in enumerate(eval_triples):
-                    s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], \
-                                          self.entity_to_idx[o]
+            for _i, (s, p, o) in enumerate(eval_triples):
+                s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], \
+                                      self.entity_to_idx[o]
 
-                    Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
-                    Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
-                    Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
+                Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
+                Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
+                Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
 
-                    feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities),
-                                              self.p_inputs: Xp_v,
-                                              self.o_inputs: Xo_v}
-                    feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
-                                             self.o_inputs: np.arange(self.nb_entities)}
+                feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities),
+                                          self.p_inputs: Xp_v,
+                                          self.o_inputs: Xo_v}
+                feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
+                                         self.o_inputs: np.arange(self.nb_entities)}
 
-                    # scores of (1, p, o), (2, p, o), .., (N, p, o)
-                    scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
+                # scores of (1, p, o), (2, p, o), .., (N, p, o)
+                scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
+
+                # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
+
+                ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+
+                filtered_scores_subj = scores_subj.copy()
+                filtered_scores_obj = scores_obj.copy()
+
+                rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
+                            fs != s and fp == p and fo == o]
+                rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
+                            fs == s and fp == p and fo != o]
+
+                filtered_scores_subj[rm_idx_s] = - np.inf
+                filtered_scores_obj[rm_idx_o] = - np.inf
+
+                filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
+
+            filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
+            ranks = ranks_subj + ranks_obj
+
+            for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
+                mean_rank = np.mean(setting_ranks)
+                logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
+                for k in [1, 3, 5, 10]:
+                    hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                    logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+
+                    #
+                    # if setting_name=='Filtered' and self.alt_test=='test1':
+                    #     experiments_filt[k].append(hits_at_k)
+                    #     logger.warn('[{}] {} Hits@{} List: {}'.format(eval_name, setting_name, k, experiments_filt[k]))
+    ##
+    # Test
+    ##
+
+    # logger.warn('PRINTING TOP 20 ROWS FROM SAMPLE ENTITY MEAN AND VAR ')
+    #
+    # samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
+    #
+    # logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20],samp1_sig[:20]))
+
+            logger.warn('Beginning test phase')
+
+
+            eval_name = 'test'
+            eval_triples = test_triples
+            ranks_subj, ranks_obj = [], []
+            filtered_ranks_subj, filtered_ranks_obj = [], []
+
+            for _i, (s, p, o) in enumerate(eval_triples):
+
+                #corrupts both a subject and object
+
+                s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], self.entity_to_idx[o]
+
+                Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
+                Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
+                Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
+
+                feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities), self.p_inputs: Xp_v,
+                                          self.o_inputs: Xo_v}
+                feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
+                                         self.o_inputs: np.arange(self.nb_entities)}
+
+                # scores of (1, p, o), (2, p, o), .., (N, p, o)
+
+
+                #
+                # scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
+                #
+                #     # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                # scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
+
+                scores_subj = session.run(self.p_x_i_test, feed_dict=feed_dict_corrupt_subj)
 
                     # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                    scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
+                scores_obj = session.run(self.p_x_i_test, feed_dict=feed_dict_corrupt_obj)
 
+                #########################
+                # Calculate score confidence
+                #########################
+
+
+                if self.alt_test in ['test1']: #CORRECTION of scores for confidence TEST1
+
+                    scores_subj=0
+                    scores_obj=0
+
+                    for samp_no in range((self.no_confidence_samples)):
+
+                        scores_subj+= session.run(self.scores, feed_dict=feed_dict_corrupt_subj)
+
+                        # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
+                        scores_obj += session.run(self.scores, feed_dict=feed_dict_corrupt_obj)
+
+                if self.alt_test in ['none','test1','test2','test1bline']:
                     ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
                     ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
-                    filtered_scores_subj = scores_subj.copy()
-                    filtered_scores_obj = scores_obj.copy()
+                    hts = [1, 3, 5, 10]
 
-                    rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
-                                fs != s and fp == p and fo == o]
-                    rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
-                                fs == s and fp == p and fo != o]
-
-                    filtered_scores_subj[rm_idx_s] = - np.inf
-                    filtered_scores_obj[rm_idx_o] = - np.inf
-
-                    filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                    filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
-
-                filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
-                ranks = ranks_subj + ranks_obj
-
-                for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
-                    mean_rank = np.mean(setting_ranks)
-                    logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
-                    for k in [1, 3, 5, 10]:
-                        hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
-                        logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
-
-                        #
-                        # if setting_name=='Filtered' and self.alt_test=='test1':
-                        #     experiments[k].append(hits_at_k)
-                        #     logger.warn('[{}] {} Hits@{} List: {}'.format(eval_name, setting_name, k, experiments[k]))
-        ##
-        # Test
-        ##
-
-        # logger.warn('PRINTING TOP 20 ROWS FROM SAMPLE ENTITY MEAN AND VAR ')
-        #
-        # samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
-        #
-        # logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20],samp1_sig[:20]))
-
-                logger.warn('Beginning test phase')
+                else:
+                    hts = [1]
 
 
-                eval_name = 'test'
-                eval_triples = test_triples
-                ranks_subj, ranks_obj = [], []
-                filtered_ranks_subj, filtered_ranks_obj = [], []
+                if self.alt_test in ['test3']: #CORRECTION of scores for confidence TEST1
 
-                for _i, (s, p, o) in enumerate(eval_triples):
+                    confidence_subj=np.zeros(self.nb_entities)
 
-                    #corrupts both a subject and object
+                    confidence_obj=np.zeros(self.nb_entities)
 
-                    s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], self.entity_to_idx[o]
+                    for samp_no in range((self.no_confidence_samples)):
 
-                    Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
-                    Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
-                    Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
+                        scores_subj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
 
-                    feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities), self.p_inputs: Xp_v,
-                                              self.o_inputs: Xo_v}
-                    feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
-                                             self.o_inputs: np.arange(self.nb_entities)}
-
-                    # scores of (1, p, o), (2, p, o), .., (N, p, o)
-
-
-                    #
-                    # scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
-                    #
-                    #     # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                    # scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
-
-                    scores_subj = session.run(self.p_x_i_test, feed_dict=feed_dict_corrupt_subj)
+                        confidence_subj+= np.divide(scores_subj,self.no_confidence_samples)
 
                         # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                    scores_obj = session.run(self.p_x_i_test, feed_dict=feed_dict_corrupt_obj)
+                        scores_obj = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
 
-                    #########################
-                    # Calculate score confidence
-                    #########################
+                        confidence_obj+=((scores_obj)/self.no_confidence_samples*1.0)
 
+                elif self.alt_test in ['test2_bline','test3bline']: #creates random confidence levels between 0 and 1 for baseline test2
+                    confidence_subj=np.random.random_sample(self.nb_entities,)
+                    confidence_obj=np.random.random_sample(self.nb_entities,)
+                #########################
+                # Calculate new scores wrs to confidence
+                #########################
 
-                    if self.alt_test in ['test1']: #CORRECTION of scores for confidence TEST1
-
-                        scores_subj=0
-                        scores_obj=0
-
-                        for samp_no in range((self.no_confidence_samples)):
-
-                            scores_subj+= session.run(self.scores, feed_dict=feed_dict_corrupt_subj)
-
-                            # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                            scores_obj += session.run(self.scores, feed_dict=feed_dict_corrupt_obj)
-
-                    if self.alt_test in ['none','test1','test2']:
-                        ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                        ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
-
-                        hts = [1, 3, 5, 10]
-
-                    else:
-                        hts = [1]
-
-
-                    if self.alt_test in ['-']: #CORRECTION of scores for confidence TEST1
-
-                        confidence_subj=np.zeros(self.nb_entities)
-
-                        confidence_obj=np.zeros(self.nb_entities)
-
-                        for samp_no in range((self.no_confidence_samples)):
-
-                            scores_subj = session.run(self.p_x_i_test, feed_dict=feed_dict_corrupt_subj)
-
-                            confidence_subj+= np.divide(scores_subj,self.no_confidence_samples)
-
-                            # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                            scores_obj = session.run(self.p_x_i_test, feed_dict=feed_dict_corrupt_obj)
-
-                            confidence_obj+=((scores_obj)/self.no_confidence_samples*1.0)
-
-                    elif self.alt_test in ['test2_bline']: #creates random confidence levels between 0 and 1 for baseline test2
-                        confidence_subj=np.random.random_sample(self.nb_entities,)
-                        confidence_obj=np.random.random_sample(self.nb_entities,)
-                    #########################
-                    # Calculate new scores wrs to confidence
-                    #########################
-
-
-                    if self.alt_test in ['test2','test2_bline']: #multiply by binary threshold on variance
+                cvrg = []
+                for p_threshold in np.arange(0, 1, 0.001):
+                    cvrg.append(1 - p_threshold)
+                    if self.alt_test in ['test2','test2_bline','test3']: #multiply by binary threshold on variance
 
                         scores_subj = scores_subj
 
                         scores_obj = scores_obj
+                        
+                        if self.alt_test in ['test3','test3bline']:
 
-                        if (scores_subj[s_idx] > p_threshold): #need to index subj and obj here
-                            ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                        if (scores_obj[o_idx] > p_threshold):
-                            ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+
+                            if (confidence_subj[s_idx] > p_threshold): #need to index subj and obj here
+                                ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                            if (confidence_obj[o_idx] > p_threshold):
+                                ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+
+
+                        else:
+
+
+                            if (scores_subj[s_idx] > p_threshold): #need to index subj and obj here
+                                ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                            if (scores_obj[o_idx] > p_threshold):
+                                ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
 
 
@@ -934,13 +951,18 @@ class VKGE_tests:
                         filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                         filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
-                    elif self.alt_test in ['test2','test2_bline']:  # multiply by binary threshold on variance
+                    elif self.alt_test in ['test2','test2_bline','test3','test3bline']:  # multiply by binary threshold on variance
                         # logger.warn('scores_subj[s_idx] {}'.format(scores_subj[s_idx]))
-
-                        if (scores_subj[s_idx] > p_threshold):
-                            filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                        if (scores_obj[o_idx] > p_threshold):
-                            filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
+                        if self.alt_test in ['test2','test2_bline']:
+                            if (scores_subj[s_idx] > p_threshold):
+                                filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                            if (scores_obj[o_idx] > p_threshold):
+                                filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
+                        else:
+                            if (confidence_subj[s_idx] > p_threshold):
+                                filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                            if (confidence_obj[o_idx] > p_threshold):
+                                filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
                     # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] == [1]:
                     #     logger.warn(
                     #         "\t \t filtered_scores_subj  rank 1 idx is {},{},{} \t \t".format(s_idx, o_idx, p_idx))
@@ -960,13 +982,14 @@ class VKGE_tests:
                     #     logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
                         if setting_name=='Filtered':
-                            experiments[k].append(hits_at_k)
-
+                            experiments_filt[k].append(hits_at_k)
+                        elif setting_name == 'Raw':
+                            experiments_raw[k].append(hits_at_k)
 
 
             for k in hts:
-                table=[experiments[k],cvrg]
-                logger.warn(' at k {} and {}'.format(k,np.divide(experiments[k], 100)))
+                table=[experiments_filt[k],cvrg]
+                logger.warn(' at k {} and {}'.format(k,experiments_filt[k]))
 
                 tips_na = pd.DataFrame(table)
                 tips = tips_na.transpose()
@@ -978,9 +1001,22 @@ class VKGE_tests:
 
                 tips.columns = columns
 
-                ax = sns.regplot(data=tips,x='coverage',y='Hits@'+str(k),scatter_kws = {"s": 80}, order = 2, ci = 0.95, truncate = True)
+                ax = sns.regplot(data=tips,x='coverage',y='Hits@'+str(k),scatter_kws = {"s": 80}, order = 2, ci = 0.95, truncate = True,label='Filtered')
 
-                ax.figure.savefig("ConfEstimation_H@"+str(k)+".png")
+                table2 = [experiments_raw[k], cvrg]
+                logger.warn(' at k {} and {}'.format(k, experiments_raw[k]))
+
+                tips_na2 = pd.DataFrame(table2)
+                tips2 = tips_na2.transpose()
+                # tips = tips_na.fillna(value=0)
+
+
+                tips2.columns = columns
+
+                ax = sns.regplot(data=tips2, x='coverage', y='Hits@' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
+                                 truncate=True, label='Raw')
+
+                ax.figure.savefig("ConfEstimationByVariance_H@"+str(k)+".png")
 
                 plt.clf()
 
