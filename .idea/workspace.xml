@@ -56,8 +56,8 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2956">
-              <caret line="1058" column="48" lean-forward="false" selection-start-line="1058" selection-start-column="48" selection-end-line="1058" selection-end-column="48" />
+            <state relative-caret-position="160">
+              <caret line="980" column="35" lean-forward="false" selection-start-line="980" selection-start-column="0" selection-end-line="981" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#990#1144#0" expanded="false" />
@@ -244,9 +244,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1567" />
+    <option name="x" value="1464" />
     <option name="y" value="109" />
-    <option name="width" value="1793" />
+    <option name="width" value="935" />
     <option name="height" value="1080" />
   </component>
   <component name="ProjectView">
@@ -454,13 +454,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00853" summary="modelA_NS">
-      <created>1534267914883</created>
-      <option name="number" value="00853" />
-      <option name="presentableId" value="LOCAL-00853" />
-      <option name="project" value="LOCAL" />
-      <updated>1534267914883</updated>
     </task>
     <task id="LOCAL-00854" summary="updated test">
       <created>1534269315445</created>
@@ -798,7 +791,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534360437856</updated>
     </task>
-    <option name="localTasksCounter" value="902" />
+    <task id="LOCAL-00902" summary="test3 var">
+      <created>1534360688211</created>
+      <option name="number" value="00902" />
+      <option name="presentableId" value="LOCAL-00902" />
+      <option name="project" value="LOCAL" />
+      <updated>1534360688211</updated>
+    </task>
+    <option name="localTasksCounter" value="903" />
     <servers />
   </component>
   <component name="TodoView">
@@ -811,10 +811,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1567" y="109" width="1793" height="1080" extended-state="0" />
+    <frame x="1464" y="109" width="935" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.08338092" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16349384" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33471933" sideWeight="0.5239651" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26117885" sideWeight="0.47816828" order="1" side_tool="false" content_ui="tabs" />
@@ -1287,8 +1287,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2956">
-          <caret line="1058" column="48" lean-forward="false" selection-start-line="1058" selection-start-column="48" selection-end-line="1058" selection-end-column="48" />
+        <state relative-caret-position="160">
+          <caret line="980" column="35" lean-forward="false" selection-start-line="980" selection-start-column="0" selection-end-line="981" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#990#1144#0" expanded="false" />

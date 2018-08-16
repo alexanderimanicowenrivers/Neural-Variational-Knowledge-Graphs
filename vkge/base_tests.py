@@ -976,9 +976,9 @@ class VKGE_tests:
                 ranks = ranks_subj + ranks_obj
                 logger.warn("\t \t Number of samples in valid phase {} \t \t".format(len(filtered_ranks_obj)))
                 for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
-                    mean_rank = len(setting_ranks)
+                    # mean_rank = len(setting_ranks)
 
-                    # mean_rank = np.mean(setting_ranks)
+                    mean_rank = np.mean(setting_ranks)
                     if setting_name == 'Filtered':
                         experiments_filt[0].append(mean_rank)
                     elif setting_name == 'Raw':
