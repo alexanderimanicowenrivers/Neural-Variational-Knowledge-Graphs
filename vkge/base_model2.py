@@ -685,8 +685,8 @@ class VKGE_A:
 
                     loss_args = {
                         # self.no_samples:1, #number of samples for precision test
-                        self.KL_discount: (pi[counter]),
-                        # self.KL_discount: (1.0/nb_batches),
+                        # self.KL_discount: (pi[counter]),
+                        self.KL_discount: (1.0/nb_batches),
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
@@ -803,7 +803,7 @@ class VKGE_A:
 
                     logger.warn('Beginning test/ save phase')
 
-                    self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
+                    # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
 
                     eval_name = 'test'
