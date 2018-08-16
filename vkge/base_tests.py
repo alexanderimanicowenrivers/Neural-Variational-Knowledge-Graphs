@@ -850,10 +850,10 @@ class VKGE_tests:
                     #     # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
                     # scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
 
-                    scores_subj = session.run(self.p_x_i_test, feed_dict=feed_dict_corrupt_subj)
+                    scores_subj = session.run(self.scores, feed_dict=feed_dict_corrupt_subj)
 
                         # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                    scores_obj = session.run(self.p_x_i_test, feed_dict=feed_dict_corrupt_obj)
+                    scores_obj = session.run(self.scores, feed_dict=feed_dict_corrupt_obj)
 
                     #########################
                     # Calculate score confidence
