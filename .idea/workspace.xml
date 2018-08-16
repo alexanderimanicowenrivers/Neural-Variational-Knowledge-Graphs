@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="test3 var">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_model2.py" afterPath="$PROJECT_DIR$/vkge/base_model2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA_BS2.py" afterPath="$PROJECT_DIR$/scripts/scriptA_BS2.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,7 +29,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base_model2.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base_model2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
@@ -43,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scriptA_BS2.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="scriptA_BS2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/scriptA_BS2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="77" column="17" lean-forward="false" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
+            <state relative-caret-position="400">
+              <caret line="59" column="35" lean-forward="false" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -152,8 +152,8 @@
       <find>alt_opt</find>
       <find>falt</find>
       <find>no_confidence_samples</find>
-      <find>self.KL_discount</find>
       <find>table</find>
+      <find>self.KL_discount</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -178,8 +178,8 @@
       <replace>p_threshold</replace>
       <replace>data</replace>
       <replace>experiments_raw</replace>
-      <replace>(q+1)</replace>
       <replace>table2</replace>
+      <replace>(q+1)</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -238,8 +238,8 @@
         <option value="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/vkge/base_tests.py" />
-        <option value="$PROJECT_DIR$/scripts/scriptA_BS2.py" />
         <option value="$PROJECT_DIR$/vkge/base_model2.py" />
+        <option value="$PROJECT_DIR$/scripts/scriptA_BS2.py" />
       </list>
     </option>
   </component>
@@ -454,13 +454,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00856" summary="updated confidence estimation">
-      <created>1534269710768</created>
-      <option name="number" value="00856" />
-      <option name="presentableId" value="LOCAL-00856" />
-      <option name="project" value="LOCAL" />
-      <updated>1534269710768</updated>
     </task>
     <task id="LOCAL-00857" summary="updated confidence estimation">
       <created>1534269821839</created>
@@ -798,7 +791,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534411661260</updated>
     </task>
-    <option name="localTasksCounter" value="905" />
+    <task id="LOCAL-00905" summary="BS for ModelA">
+      <created>1534411691428</created>
+      <option name="number" value="00905" />
+      <option name="presentableId" value="LOCAL-00905" />
+      <option name="project" value="LOCAL" />
+      <updated>1534411691429</updated>
+    </task>
+    <option name="localTasksCounter" value="906" />
     <servers />
   </component>
   <component name="TodoView">
@@ -884,7 +884,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed negative samples" />
     <MESSAGE value=" fixed neg samples bug" />
     <MESSAGE value=" fixed neg samples and added in projection" />
     <MESSAGE value="changed to original loss with no grad clipping, no projection and no pos/neg seperation" />
@@ -909,7 +908,8 @@
     <MESSAGE value="updated test with RAW info" />
     <MESSAGE value="updated tests with mean rank plot" />
     <MESSAGE value="test3 var" />
-    <option name="LAST_COMMIT_MESSAGE" value="test3 var" />
+    <MESSAGE value="BS for ModelA" />
+    <option name="LAST_COMMIT_MESSAGE" value="BS for ModelA" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1278,14 +1278,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/scriptA_BS2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="77" column="17" lean-forward="false" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1295,6 +1287,14 @@
             <element signature="e#881#1035#0" expanded="false" />
             <element signature="e#1064#1399#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/scriptA_BS2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="59" column="35" lean-forward="false" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
