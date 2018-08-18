@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="updated projection for model A">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/base.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_model2.py" afterPath="$PROJECT_DIR$/vkge/base_model2.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,37 +33,13 @@
       <file leaf-file-name="base_model2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="609" column="43" lean-forward="true" selection-start-line="609" selection-start-column="43" selection-end-line="609" selection-end-column="43" />
+            <state relative-caret-position="-1001">
+              <caret line="617" column="54" lean-forward="false" selection-start-line="617" selection-start-column="54" selection-end-line="617" selection-end-column="54" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#881#1035#0" expanded="false" />
                 <element signature="e#1064#1399#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5641">
-              <caret line="749" column="48" lean-forward="false" selection-start-line="749" selection-start-column="48" selection-end-line="749" selection-end-column="48" />
-              <folding>
-                <element signature="e#25#36#0" expanded="true" />
-                <element signature="e#990#1144#0" expanded="false" />
-                <element signature="e#1173#1508#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main_tests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main_tests.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="43" column="19" lean-forward="false" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="19" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -82,8 +59,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-649">
-              <caret line="669" column="0" lean-forward="true" selection-start-line="669" selection-start-column="0" selection-end-line="669" selection-end-column="0" />
+            <state relative-caret-position="104">
+              <caret line="638" column="0" lean-forward="true" selection-start-line="638" selection-start-column="0" selection-end-line="638" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#881#1035#0" expanded="false" />
@@ -141,9 +118,9 @@
       <find>alt_op</find>
       <find>alt_opt</find>
       <find>falt</find>
-      <find>self.KL_discount</find>
       <find>table</find>
       <find>no_confidence_samples</find>
+      <find>self.KL_discount</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -225,10 +202,10 @@
         <option value="$PROJECT_DIR$/scripts/script_BS2.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
-        <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA_BS2.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA_varyingBS2.py" />
         <option value="$PROJECT_DIR$/vkge/base_tests.py" />
+        <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/vkge/base_model2.py" />
       </list>
     </option>
@@ -443,13 +420,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00860" summary="updated confidence estimation">
-      <created>1534270989254</created>
-      <option name="number" value="00860" />
-      <option name="presentableId" value="LOCAL-00860" />
-      <option name="project" value="LOCAL" />
-      <updated>1534270989255</updated>
     </task>
     <task id="LOCAL-00861" summary="updated confidence estimation">
       <created>1534271034813</created>
@@ -787,7 +757,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534444315677</updated>
     </task>
-    <option name="localTasksCounter" value="909" />
+    <task id="LOCAL-00909" summary="updated projection for model A">
+      <created>1534603502556</created>
+      <option name="number" value="00909" />
+      <option name="presentableId" value="LOCAL-00909" />
+      <option name="project" value="LOCAL" />
+      <updated>1534603502558</updated>
+    </task>
+    <option name="localTasksCounter" value="910" />
     <servers />
   </component>
   <component name="TodoView">
@@ -873,7 +850,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value=" fixed neg samples bug" />
     <MESSAGE value=" fixed neg samples and added in projection" />
     <MESSAGE value="changed to original loss with no grad clipping, no projection and no pos/neg seperation" />
     <MESSAGE value="only means are trained" />
@@ -898,7 +874,8 @@
     <MESSAGE value="updated tests with mean rank plot" />
     <MESSAGE value="test3 var" />
     <MESSAGE value="BS for ModelA" />
-    <option name="LAST_COMMIT_MESSAGE" value="BS for ModelA" />
+    <MESSAGE value="updated projection for model A" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated projection for model A" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1272,8 +1249,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-649">
-          <caret line="669" column="0" lean-forward="true" selection-start-line="669" selection-start-column="0" selection-end-line="669" selection-end-column="0" />
+        <state relative-caret-position="104">
+          <caret line="638" column="0" lean-forward="true" selection-start-line="638" selection-start-column="0" selection-end-line="638" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
@@ -1284,8 +1261,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="609" column="43" lean-forward="true" selection-start-line="609" selection-start-column="43" selection-end-line="609" selection-end-column="43" />
+        <state relative-caret-position="-1001">
+          <caret line="617" column="54" lean-forward="false" selection-start-line="617" selection-start-column="54" selection-end-line="617" selection-end-column="54" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />

@@ -615,6 +615,7 @@ class VKGE_A:
         pi_e = np.log(2.0)
 
         pi_t = np.exp(np.linspace(pi_s, pi_e, M) - M * np.log(2.0))
+        pi_t = pi_t + np.flip(pi_t, axis=0) #modified
 
         pi = (1 / np.sum(pi_t)) * pi_t  # normalise pi
         #####################
@@ -685,8 +686,8 @@ class VKGE_A:
 
                     loss_args = {
                         # self.no_samples:1, #number of samples for precision test
-                        # self.KL_discount: (pi[counter]),
-                        self.KL_discount: (1.0/nb_batches),
+                        self.KL_discount: (pi[counter]),
+                        # self.KL_discount: (1.0/nb_batches),
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
