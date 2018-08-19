@@ -14,12 +14,21 @@ def renorm_update_var(log_var_matrix, norm=1.0, axis=0):
     return tf.assign(log_var_matrix, scaled)
 
 def renorm_update_clip(log_var_matrix, norm=1.0, axis=0):
-    #limits each variance vector having a spherical norm of greater than one -- unit variance.
+    #limits each variance vector having a spherical variance of greater than one .
     #first transform to origingal variance representation
     var_matrix=tf.exp(log_var_matrix)
     #norm sphere
     scaled=tf.clip_by_norm(var_matrix,1.0,axes=1)
     scaled=tf.log(scaled)
+    return tf.assign(log_var_matrix, scaled)
+
+def renorm_unitvariance(log_var_matrix, norm=1.0, axis=0):
+    #limits each variance vector having a spherical norm of greater than one -- unit variance.
+    #first transform to origingal variance representation
+    var_matrix=tf.sqrt(tf.exp(log_var_matrix))
+    #norm sphere
+    scaled=tf.clip_by_norm(var_matrix,1.0,axes=1)
+    scaled=tf.log(scaled**2)
     return tf.assign(log_var_matrix, scaled)
 
 
@@ -38,7 +47,7 @@ def pseudoboolean_sigmoid_update(var_matrix):
     pseudoboolean_sigmoid = tf.nn.sigmoid(var_matrix)
     return tf.assign(var_matrix, pseudoboolean_sigmoid)
 
-unit_sphere_logvar=renorm_update_clip
+unit_sphere_logvar=renorm_unitvariance
 unit_sphere = renorm = renorm_update
 unit_cube = pseudoboolean_linear = pseudoboolean_linear_update
 pseudoboolean_sigmoid = pseudoboolean_sigmoid_update

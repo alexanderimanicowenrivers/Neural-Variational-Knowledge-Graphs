@@ -158,7 +158,18 @@ class VKGE_A:
         # optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
 
-
+        # #delete this later
+        #
+        # ent=collections.defaultdict(float)
+        # pred=collections.defaultdict(float)
+        #
+        # for (s, p, o) in all_triples:
+        #     ent[self.entity_to_idx[s]]+=1
+        #     pred[self.predicate_to_idx[p]] += 1
+        #     ent[self.entity_to_idx[o]]+=1
+        #
+        #
+        # logger.warn('entity {} \n \n preds {}..'.format(ent,pred))
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, sig_max, sig_min)
@@ -181,7 +192,7 @@ class VKGE_A:
 
         with tf.name_scope('entity_sigma'):
 
-            self.variable_summaries(self.entity_embedding_sigma)
+            self.variable_summaries(tf.exp(self.entity_embedding_sigma))
 
         with tf.name_scope('entity_mean'):
 
@@ -190,18 +201,22 @@ class VKGE_A:
 
         with tf.name_scope('pred_sigma'):
 
-            self.variable_summaries(self.predicate_embedding_sigma)
+            self.variable_summaries(tf.exp(self.predicate_embedding_sigma))
 
         with tf.name_scope('pred_mean'):
 
             self.variable_summaries(self.predicate_embedding_mean)
 
-        tf.summary.scalar("total e loss", self.e_objective,collections=['summary_train'])
+        with tf.name_scope('loss'):
+            tf.summary.scalar("g_loss_positive", self.g_objective_p)
 
-        tf.summary.scalar("g loss", self.g_objective,collections=['summary_train'])
+            tf.summary.scalar("g_loss_negative", self.g_objective_n)
 
-        tf.summary.scalar("total loss", self.elbo,collections=['summary_train'])
+            tf.summary.scalar("total_loss", self.elbo)
 
+            tf.summary.scalar("e_loss_pred", self.e_objective2)
+
+            tf.summary.scalar("e_loss_entity", self.e_objective1)
 
         # with tf.name_scope('Samples'):
         #
@@ -629,7 +644,7 @@ class VKGE_A:
         pi_e = np.log(2.0)
 
         pi_t = np.exp(np.linspace(pi_s, pi_e, M) - M * np.log(2.0))
-        pi_t = pi_t + np.flip(pi_t, axis=0) #modified
+        # pi_t = pi_t + np.flip(pi_t, axis=0) #modified
 
         pi = (1 / np.sum(pi_t)) * pi_t  # normalise pi
         #####################
@@ -645,8 +660,8 @@ class VKGE_A:
             neg_subs = math.ceil(int(self.negsamples / 2))
 
             logger.warn("\n \n \n neg subs is {} \n \n \n".format(neg_subs))
-            # train_writer = tf.summary.FileWriter('/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar', session.graph)
-
+            train_writer = tf.summary.FileWriter('/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar', session.graph)
+            allloss=[]
             for epoch in range(1, nb_epochs + 1):
 
 
@@ -698,28 +713,6 @@ class VKGE_A:
                     # }
 
                     #
-                    # loss_args = {
-                    #     # self.no_samples:1, #number of samples for precision test
-                    #     self.KL_discount: (pi[counter]),
-                    #     # self.KL_discount: (1.0/nb_batches),
-                    #     self.s_inputs: Xs_batch,
-                    #     self.p_inputs: Xp_batch,
-                    #     self.o_inputs: Xo_batch,
-                    #     self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-                    #     # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
-                    #     , self.BernoulliSRescale: 1.0
-                    #     ,self.idx_pos: np.arange(curr_batch_size),
-                    #     self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
-                    # }
-
-
-
-                    # merge = tf.summary.merge_all()  # for TB
-
-                    # summary,_, elbo_value = session.run([merge, self.training_step, self.elbo],
-                    #                                          feed_dict=loss_args)
-                    # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
-
                     loss_args = {
                         # self.no_samples:1, #number of samples for precision test
                         self.KL_discount: (pi[counter]),
@@ -730,9 +723,31 @@ class VKGE_A:
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size)
                         # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
                         , self.BernoulliSRescale: 1.0
-                        , self.idx_pos: np.arange(curr_batch_size),
-                        self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
+                        ,self.idx_pos: np.arange(curr_batch_size),
+                        self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
                     }
+
+
+                    #
+                    # merge = tf.summary.merge_all()  # for TB
+                    #
+                    # summary,_, elbo_value = session.run([merge, self.training_step, self.elbo],
+                    #                                          feed_dict=loss_args)
+                    # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
+
+                    # loss_args = {
+                    #     # self.no_samples:1, #number of samples for precision test
+                    #     self.KL_discount: (pi[counter]),
+                    #     # self.KL_discount: (1.0/nb_batches),
+                    #     self.s_inputs: Xs_batch,
+                    #     self.p_inputs: Xp_batch,
+                    #     self.o_inputs: Xo_batch,
+                    #     self.y_inputs: np.array(vec_neglabels * curr_batch_size)
+                    #     # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
+                    #     , self.BernoulliSRescale: 1.0
+                    #     , self.idx_pos: np.arange(curr_batch_size),
+                    #     self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
+                    # }
                     _, elbo_value = session.run([ self.training_step, self.elbo],
                                                              feed_dict=loss_args)
 
@@ -755,13 +770,11 @@ class VKGE_A:
                         for projection_step in projection_steps:
                             session.run([projection_step])
 
-
-
-
+                allloss.append(loss_values)
                 logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
 
-                if (epoch % 10) == 0:
+                if (epoch % 50) == 0:
 
 
                     eval_name = 'valid'
@@ -887,6 +900,13 @@ class VKGE_A:
                         filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                         filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
+                        # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] == [1]:
+                        #     logger.warn(
+                        #         "\t \t filtered_scores_subj  rank 1 idx is {},{},{} \t \t".format(s_idx, o_idx, p_idx))
+                        #
+                        # if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] == [1]:
+                        #     logger.warn(
+                        #         "\t \t filtered_scores_obj rank 1 idx is {},{},{} \t \t".format(s_idx, o_idx, p_idx))
 
                     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
                     ranks = ranks_subj + ranks_obj
@@ -900,7 +920,26 @@ class VKGE_A:
 
 
 
-                    # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
+                    #
+                    #         e1, e2, p1, p2 = session.run(
+                    #     [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
+                    #      self.predicate_embedding_sigma], feed_dict={})
+                    # np.save(
+                    #     "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/_entity_embeddings",
+                    #     e1)
+                    # np.save(
+                    #     "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/_entity_embedding_sigma",
+                    #     e2)
+                    # np.save(
+                    #     "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/_predicate_embedding_mean",
+                    #     p1)
+                    # np.save(
+                    #     "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/_predicate_embedding_sigma",
+                    #     p2)
+                    #
+                    # np.save("/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/lossvals",
+                    #         allloss)
+                        # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
                     # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
                     # np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
                 #
