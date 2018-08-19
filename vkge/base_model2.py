@@ -761,7 +761,7 @@ class VKGE_A:
                 logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
 
-                if (epoch % 10) == 0:
+                if (epoch % 50) == 0:
 
 
                     eval_name = 'valid'
