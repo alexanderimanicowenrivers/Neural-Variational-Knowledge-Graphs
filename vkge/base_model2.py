@@ -179,15 +179,28 @@ class VKGE_A:
 
     def _setup_summaries(self):
 
-        self.variable_summaries(self.entity_embedding_sigma)
+        with tf.name_scope('entity_sigma'):
 
-        self.variable_summaries(self.entity_embedding_mean)
+            self.variable_summaries(self.entity_embedding_sigma)
 
-        tf.summary.scalar("total e loss", self.e_objective)
+        with tf.name_scope('entity_mean'):
 
-        tf.summary.scalar("g loss", self.g_objective)
 
-        tf.summary.scalar("total loss", self.elbo)
+            self.variable_summaries(self.entity_embedding_mean)
+
+        with tf.name_scope('pred_sigma'):
+
+            self.variable_summaries(self.predicate_embedding_sigma)
+
+        with tf.name_scope('pred_mean'):
+
+            self.variable_summaries(self.predicate_embedding_mean)
+
+        tf.summary.scalar("total e loss", self.e_objective,collections=['summary_train'])
+
+        tf.summary.scalar("g loss", self.g_objective,collections=['summary_train'])
+
+        tf.summary.scalar("total loss", self.elbo,collections=['summary_train'])
 
 
         # with tf.name_scope('Samples'):
@@ -212,7 +225,7 @@ class VKGE_A:
         #         with tf.name_scope('Predicate1_logStd'):
         #             self.variable_summaries(tf.sqrt(tf.exp(self.var2_2)))
 
-    def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=None):
+    def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=False):
         global_step = tf.train.get_global_step()
         if global_step is None:
             global_step = tf.train.create_global_step()
@@ -221,24 +234,23 @@ class VKGE_A:
         tf.summary.scalar('gradients_l2', tf.add_n([tf.nn.l2_loss(grad[0]) for grad in gradients]),
                           collections=['summary_train'])
 
-        if l2:
-            loss += tf.add_n([tf.nn.l2_loss(v) for v in self.train_variables]) * l2
-        if clip:
-            if clip_op == tf.clip_by_value:
-                gradients = [(tf.clip_by_value(grad, clip[0], clip[1]), var)
-                             for grad, var in gradients if grad is not None]
-            elif clip_op == tf.clip_by_norm:
-                gradients = [(tf.clip_by_norm(grad, clip), var)
-                             for grad, var in gradients if grad is not None]
+        if self.alt_opt:
+        ##clip for robust learning as observed nans during training
+        #
+
+            gradients = [(tf.clip_by_norm(grad, 1), var)
+                         for grad, var in gradients if grad is not None]
+
 
         train_op = optimizer.apply_gradients(gradients, global_step)
 
-        variable_size = lambda v: reduce(lambda x, y: x * y, v.get_shape().as_list()) if v.get_shape() else 1
-        num_params = sum(variable_size(v) for v in self.train_variables)
-        print("Number of parameters: {}".format(num_params))
+        # variable_size = lambda v: reduce(lambda x, y: x * y, v.get_shape().as_list()) if v.get_shape() else 1
+        # num_params = sum(variable_size(v) for v in self.train_variables)
+        # print("Number of parameters: {}".format(num_params))
 
         self.loss = loss
         self.training_step = train_op
+
         self.global_step = global_step
         return loss, train_op
 
@@ -398,24 +410,24 @@ class VKGE_A:
 
         # self.elbo = self.g_objective_p + self.g_objective_n
 
-        if self.alt_opt:
-        ##clip for robust learning as observed nans during training
-        #
-            gradients = optimizer.compute_gradients(loss=self.elbo)
-
-
-            gradients = [(tf.clip_by_norm(grad, 1), var)
-                         for grad, var in gradients if grad is not None]
-
-            self.training_step = optimizer.apply_gradients(gradients)
-        else:
+        # if self.alt_opt:
+        # ##clip for robust learning as observed nans during training
+        # #
+        #     gradients = optimizer.compute_gradients(loss=self.elbo)
         #
         #
-            self.training_step = optimizer.minimize(self.elbo)
+        #     gradients = [(tf.clip_by_norm(grad, 1), var)
+        #                  for grad, var in gradients if grad is not None]
+        #
+        #     self.training_step = optimizer.apply_gradients(gradients)
+        # else:
+        # #
+        # #
+        #     self.training_step = optimizer.minimize(self.elbo)
 
-        # self.train_variables=tf.trainable_variables()
-        # self._setup_training(loss=self.elbo,optimizer=optimizer)
-        # self._setup_summaries()
+        self.train_variables=tf.trainable_variables()
+        self._setup_training(loss=self.elbo,optimizer=optimizer)
+        self._setup_summaries()
         # self._variables = tf.global_variables()
         self._saver = tf.train.Saver()
 
@@ -633,7 +645,7 @@ class VKGE_A:
             neg_subs = math.ceil(int(self.negsamples / 2))
 
             logger.warn("\n \n \n neg subs is {} \n \n \n".format(neg_subs))
-            # train_writer = tf.summary.FileWriter(filename, session.graph)
+            train_writer = tf.summary.FileWriter('/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar', session.graph)
 
             for epoch in range(1, nb_epochs + 1):
 
@@ -700,18 +712,33 @@ class VKGE_A:
                         self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
                     }
 
-                    # merge = tf.summary.merge_all()  # for TB
 
 
+                    merge = tf.summary.merge_all()  # for TB
 
+                    # summary,_, elbo_value = session.run([merge, self.training_step, self.elbo],
+                    #                                          feed_dict=loss_args)
+                    # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
 
+                    loss_args = {
+                        # self.no_samples:1, #number of samples for precision test
+                        self.KL_discount: (pi[counter]),
+                        # self.KL_discount: (1.0/nb_batches),
+                        self.s_inputs: Xs_batch,
+                        self.p_inputs: Xp_batch,
+                        self.o_inputs: Xo_batch,
+                        self.y_inputs: np.array(vec_neglabels * curr_batch_size)
+                        # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
+                        , self.BernoulliSRescale: 1.0
+                        , self.idx_pos: np.arange(curr_batch_size),
+                        self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
+                    }
                     _, elbo_value = session.run([ self.training_step, self.elbo],
                                                              feed_dict=loss_args)
 
 
                     # tensorboard
 
-                    # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
 
 
                     # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
@@ -734,7 +761,7 @@ class VKGE_A:
                 logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
 
-                if (epoch % 50) == 0:
+                if (epoch % 10) == 0:
 
 
                     eval_name = 'valid'
