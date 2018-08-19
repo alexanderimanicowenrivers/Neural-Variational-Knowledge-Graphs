@@ -18,7 +18,7 @@ def renorm_update_clip(log_var_matrix, norm=1.0, axis=0):
     #first transform to origingal variance representation
     var_matrix=tf.exp(log_var_matrix)
     #norm sphere
-    scaled=tf.clip_by_norm(var_matrix,1.0)
+    scaled=tf.clip_by_norm(var_matrix,1.0,axes=1)
     scaled=tf.log(scaled)
     return tf.assign(log_var_matrix, scaled)
 

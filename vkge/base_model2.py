@@ -697,20 +697,20 @@ class VKGE_A:
                     #     self.epoch_d: kl_inc_val
                     # }
 
-
-                    loss_args = {
-                        # self.no_samples:1, #number of samples for precision test
-                        self.KL_discount: (pi[counter]),
-                        # self.KL_discount: (1.0/nb_batches),
-                        self.s_inputs: Xs_batch,
-                        self.p_inputs: Xp_batch,
-                        self.o_inputs: Xo_batch,
-                        self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-                        # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
-                        , self.BernoulliSRescale: 1.0
-                        ,self.idx_pos: np.arange(curr_batch_size),
-                        self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
-                    }
+                    #
+                    # loss_args = {
+                    #     # self.no_samples:1, #number of samples for precision test
+                    #     self.KL_discount: (pi[counter]),
+                    #     # self.KL_discount: (1.0/nb_batches),
+                    #     self.s_inputs: Xs_batch,
+                    #     self.p_inputs: Xp_batch,
+                    #     self.o_inputs: Xo_batch,
+                    #     self.y_inputs: np.array(vec_neglabels * curr_batch_size)
+                    #     # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
+                    #     , self.BernoulliSRescale: 1.0
+                    #     ,self.idx_pos: np.arange(curr_batch_size),
+                    #     self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
+                    # }
 
 
 
@@ -761,7 +761,7 @@ class VKGE_A:
                 logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
 
-                if (epoch % 50) == 0:
+                if (epoch % 10) == 0:
 
 
                     eval_name = 'valid'
