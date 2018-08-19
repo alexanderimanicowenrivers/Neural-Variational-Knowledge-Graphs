@@ -72,14 +72,14 @@ def main(_):
         w1=[10,100],
         # w1=[10],
         w2=[1e-3,1e-7], #
-        w3=[50,100,200,300],
+        w3=[100,200,300],
         # w4=['kinship', 'nations', 'umls'],
         w4 = ['fb15k-237', 'wn18', 'wn18rr','kinship', 'nations', 'umls'],
-        w5=[True,False],
+        w5=[True],
         w6=[1e-3,1e-2],
         w7=['TransE', 'DistMult', 'ComplEx'],
         w8=[5],
-        w9=[True,False])
+        w9=[True])
 
     configurations = cartesian_product(hyperparameters_space)
     path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/ModelA_CC_ProjClip'
