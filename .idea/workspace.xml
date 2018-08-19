@@ -32,7 +32,7 @@
       <file leaf-file-name="base_model2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
+            <state relative-caret-position="-1213">
               <caret line="605" column="43" lean-forward="false" selection-start-line="605" selection-start-column="0" selection-end-line="606" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
@@ -56,8 +56,8 @@
       <file leaf-file-name="scriptA_NS2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="73" column="12" lean-forward="true" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="12" />
+            <state relative-caret-position="219">
+              <caret line="73" column="36" lean-forward="false" selection-start-line="73" selection-start-column="36" selection-end-line="73" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -441,13 +441,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00876" summary="updated CC2">
-      <created>1534342682744</created>
-      <option name="number" value="00876" />
-      <option name="presentableId" value="LOCAL-00876" />
-      <option name="project" value="LOCAL" />
-      <updated>1534342682744</updated>
-    </task>
     <task id="LOCAL-00877" summary="updated test with RAW info">
       <created>1534345290530</created>
       <option name="number" value="00877" />
@@ -784,7 +777,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534673307250</updated>
     </task>
-    <option name="localTasksCounter" value="925" />
+    <task id="LOCAL-00925" summary="added in new constraint">
+      <created>1534673426688</created>
+      <option name="number" value="00925" />
+      <option name="presentableId" value="LOCAL-00925" />
+      <option name="project" value="LOCAL" />
+      <updated>1534673426688</updated>
+    </task>
+    <option name="localTasksCounter" value="926" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1263,18 +1263,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="605" column="43" lean-forward="false" selection-start-line="605" selection-start-column="0" selection-end-line="606" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-            <element signature="e#881#1035#0" expanded="false" />
-            <element signature="e#1064#1399#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
@@ -1287,10 +1275,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1213">
+          <caret line="605" column="43" lean-forward="false" selection-start-line="605" selection-start-column="0" selection-end-line="606" selection-end-column="0" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+            <element signature="e#881#1035#0" expanded="false" />
+            <element signature="e#1064#1399#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="73" column="12" lean-forward="true" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="12" />
+        <state relative-caret-position="219">
+          <caret line="73" column="36" lean-forward="false" selection-start-line="73" selection-start-column="36" selection-end-line="73" selection-end-column="36" />
           <folding />
         </state>
       </provider>
