@@ -3,7 +3,7 @@
 import sys
 import tensorflow as tf
 def renorm_update_var(var_matrix, norm=1.0, axis=0):
-    #limits each variance vector having a spherical norm of greater than one
+    #limits each variance vector having a spherical norm of greater than one -- unit variance.
     #first transform to origingal variance representation
     var_matrix=tf.exp(var_matrix)
     #norm sphere
