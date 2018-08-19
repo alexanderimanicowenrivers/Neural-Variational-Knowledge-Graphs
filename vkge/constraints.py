@@ -2,6 +2,16 @@
 
 import sys
 import tensorflow as tf
+def renorm_update_var(var_matrix, norm=1.0, axis=0):
+    #limits each variance vector having a spherical norm of greater than one
+    #first transform to origingal variance representation
+    var_matrix=tf.exp(var_matrix)
+    #norm sphere
+    row_norms = tf.sqrt(tf.reduce_sum(tf.square(var_matrix), axis=axis))
+    scaled = var_matrix * tf.expand_dims(norm / row_norms, axis=axis)
+    #transform back
+    scaled=tf.log(scaled)
+    return tf.assign(var_matrix, scaled)
 
 
 def renorm_update(var_matrix, norm=1.0, axis=1):
@@ -20,6 +30,7 @@ def pseudoboolean_sigmoid_update(var_matrix):
     return tf.assign(var_matrix, pseudoboolean_sigmoid)
 
 
+unit_sphere_logvar=renorm_update_var
 unit_sphere = renorm = renorm_update
 unit_cube = pseudoboolean_linear = pseudoboolean_linear_update
 pseudoboolean_sigmoid = pseudoboolean_sigmoid_update

@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA_NS2.py" afterPath="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_model2.py" afterPath="$PROJECT_DIR$/vkge/base_model2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/constraints.py" afterPath="$PROJECT_DIR$/vkge/constraints.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,13 +31,23 @@
       <file leaf-file-name="base_model2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="693" column="28" lean-forward="false" selection-start-line="693" selection-start-column="28" selection-end-line="693" selection-end-column="28" />
+            <state relative-caret-position="309">
+              <caret line="604" column="145" lean-forward="false" selection-start-line="604" selection-start-column="145" selection-end-line="604" selection-end-column="145" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#881#1035#0" expanded="false" />
                 <element signature="e#1064#1399#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="constraints.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vkge/constraints.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="32" column="18" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -53,7 +64,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scriptA_NS2.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="scriptA_NS2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="183">
@@ -78,7 +89,7 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
+            <state relative-caret-position="8163">
               <caret line="638" column="0" lean-forward="true" selection-start-line="638" selection-start-column="0" selection-end-line="638" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
@@ -175,7 +186,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/vkge/inferbeddings/knowledgebase/base.py" />
         <option value="$PROJECT_DIR$/vkge/knowledgebase/__init__.py" />
         <option value="$PROJECT_DIR$/vkge/main.py" />
         <option value="$PROJECT_DIR$/vkge/script.py" />
@@ -224,13 +234,15 @@
         <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/vkge/base_quick.py" />
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
-        <option value="$PROJECT_DIR$/vkge/base_model2.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
+        <option value="$PROJECT_DIR$/vkge/base_model2.py" />
+        <option value="$PROJECT_DIR$/vkge/constraints.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="24" />
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+    <option name="x" value="1822" />
+    <option name="y" value="465" />
     <option name="width" value="935" />
     <option name="height" value="900" />
   </component>
@@ -439,13 +451,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00866" summary="updated confidence estimation">
-      <created>1534272021334</created>
-      <option name="number" value="00866" />
-      <option name="presentableId" value="LOCAL-00866" />
-      <option name="project" value="LOCAL" />
-      <updated>1534272021335</updated>
     </task>
     <task id="LOCAL-00867" summary="updated confidence estimation">
       <created>1534272227461</created>
@@ -783,7 +788,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534608988243</updated>
     </task>
-    <option name="localTasksCounter" value="915" />
+    <task id="LOCAL-00915" summary="modified compression cost KL model A">
+      <created>1534609368020</created>
+      <option name="number" value="00915" />
+      <option name="presentableId" value="LOCAL-00915" />
+      <option name="project" value="LOCAL" />
+      <updated>1534609368021</updated>
+    </task>
+    <option name="localTasksCounter" value="916" />
     <servers />
   </component>
   <component name="TodoView">
@@ -796,18 +808,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="24" y="0" width="935" height="900" extended-state="0" />
+    <frame x="1440" y="109" width="1920" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16349384" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.07774228" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4117647" sideWeight="0.52855545" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32723576" sideWeight="0.5260916" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26117885" sideWeight="0.47816828" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.49427754" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24941176" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4117647" sideWeight="0.47144458" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32723576" sideWeight="0.47390842" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1108,14 +1120,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/constraints.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -1238,18 +1242,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="638" column="0" lean-forward="true" selection-start-line="638" selection-start-column="0" selection-end-line="638" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-            <element signature="e#881#1035#0" expanded="false" />
-            <element signature="e#1064#1399#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -1268,10 +1260,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="74" column="15" lean-forward="false" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="693" column="28" lean-forward="false" selection-start-line="693" selection-start-column="28" selection-end-line="693" selection-end-column="28" />
+        <state relative-caret-position="309">
+          <caret line="604" column="145" lean-forward="false" selection-start-line="604" selection-start-column="145" selection-end-line="604" selection-end-column="145" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
@@ -1280,10 +1280,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
+    <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="74" column="15" lean-forward="false" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="15" />
+        <state relative-caret-position="8163">
+          <caret line="638" column="0" lean-forward="true" selection-start-line="638" selection-start-column="0" selection-end-line="638" selection-end-column="0" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+            <element signature="e#881#1035#0" expanded="false" />
+            <element signature="e#1064#1399#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/constraints.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="32" column="18" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="18" />
           <folding />
         </state>
       </provider>
