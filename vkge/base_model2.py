@@ -645,7 +645,7 @@ class VKGE_A:
             neg_subs = math.ceil(int(self.negsamples / 2))
 
             logger.warn("\n \n \n neg subs is {} \n \n \n".format(neg_subs))
-            train_writer = tf.summary.FileWriter('/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar', session.graph)
+            # train_writer = tf.summary.FileWriter('/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar', session.graph)
 
             for epoch in range(1, nb_epochs + 1):
 
@@ -714,7 +714,7 @@ class VKGE_A:
 
 
 
-                    merge = tf.summary.merge_all()  # for TB
+                    # merge = tf.summary.merge_all()  # for TB
 
                     # summary,_, elbo_value = session.run([merge, self.training_step, self.elbo],
                     #                                          feed_dict=loss_args)
