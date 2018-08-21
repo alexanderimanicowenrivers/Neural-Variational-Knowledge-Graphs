@@ -7,14 +7,14 @@ def renorm_update_var(log_var_matrix, norm=1.0, axis=0):
     #first transform to origingal variance representation
     var_matrix=tf.exp(log_var_matrix)
     #norm sphere
-    row_norms = tf.sqrt(tf.reduce_sum(tf.square(var_matrix), axis=axis))
+    row_norms = tf.reduce_sum(var_matrix, axis=axis)
     scaled = var_matrix * tf.expand_dims(norm / row_norms, axis=axis)
     #transform back
     scaled=tf.log(scaled)
     return tf.assign(log_var_matrix, scaled)
 
 def renorm_update_clip(log_var_matrix, norm=1.0, axis=0):
-    #limits each variance vector having a spherical variance of greater than one .
+    #limits each variance vector having a spherical variance of greater than one, spherical covariance .
     #first transform to origingal variance representation
     var_matrix=tf.exp(log_var_matrix)
     #norm sphere

@@ -78,7 +78,7 @@ def main(_):
         w5=[True,False],
         w6=[1e-3,1e-2],
         w7=['TransE', 'DistMult', 'ComplEx'],
-        w8=[5],
+        w8=[3,5],
         w9=[True])
 
     configurations = cartesian_product(hyperparameters_space)

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="final test with sigma init between 0 and sigmax">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA_NS2.py" afterPath="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_model2.py" afterPath="$PROJECT_DIR$/vkge/base_model2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/training/constraints.py" afterPath="$PROJECT_DIR$/vkge/training/constraints.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,8 +47,18 @@
       <file leaf-file-name="scriptA_NS2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="74" column="16" lean-forward="false" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="16" />
+            <state relative-caret-position="498">
+              <caret line="80" column="14" lean-forward="false" selection-start-line="80" selection-start-column="14" selection-end-line="80" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="constraints.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vkge/training/constraints.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="24" column="23" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -128,8 +138,8 @@
       <find>nosamps</find>
       <find>variable_summaries</find>
       <find>e_objective2</find>
-      <find>falt</find>
       <find>no_samples</find>
+      <find>falt</find>
       <find>train_writer</find>
     </findStrings>
     <replaceStrings>
@@ -214,8 +224,8 @@
         <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/vkge/base_tests.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/vkge/training/constraints.py" />
         <option value="$PROJECT_DIR$/vkge/base_model2.py" />
+        <option value="$PROJECT_DIR$/vkge/training/constraints.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
       </list>
     </option>
@@ -431,13 +441,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00887" summary="updated test with RAW info">
-      <created>1534351055438</created>
-      <option name="number" value="00887" />
-      <option name="presentableId" value="LOCAL-00887" />
-      <option name="project" value="LOCAL" />
-      <updated>1534351055439</updated>
     </task>
     <task id="LOCAL-00888" summary="updated test with RAW info">
       <created>1534351071421</created>
@@ -775,7 +778,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534787742532</updated>
     </task>
-    <option name="localTasksCounter" value="936" />
+    <task id="LOCAL-00936" summary="final test with sigma init between 0 and sigmax">
+      <created>1534845181984</created>
+      <option name="number" value="00936" />
+      <option name="presentableId" value="LOCAL-00936" />
+      <option name="project" value="LOCAL" />
+      <updated>1534845181986</updated>
+    </task>
+    <option name="localTasksCounter" value="937" />
     <servers />
   </component>
   <component name="TodoView">
@@ -861,7 +871,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Worked without variance embeddings and BS on likelihood" />
     <MESSAGE value="added in KL term" />
     <MESSAGE value="added in KL term * 0.1" />
     <MESSAGE value="test on smaller datasets" />
@@ -886,7 +895,8 @@
     <MESSAGE value="added in fixed projection for variance vectors" />
     <MESSAGE value="added in new constraint" />
     <MESSAGE value="final test with broad range" />
-    <option name="LAST_COMMIT_MESSAGE" value="final test with broad range" />
+    <MESSAGE value="final test with sigma init between 0 and sigmax" />
+    <option name="LAST_COMMIT_MESSAGE" value="final test with sigma init between 0 and sigmax" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1214,16 +1224,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/constraints.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="32" column="21" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
@@ -1258,10 +1258,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/constraints.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="21" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <element signature="e#25#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/training/constraints.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="49" column="38" lean-forward="false" selection-start-line="49" selection-start-column="38" selection-end-line="49" selection-end-column="38" />
+        <state relative-caret-position="218">
+          <caret line="24" column="23" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -1280,8 +1290,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="74" column="16" lean-forward="false" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="16" />
+        <state relative-caret-position="498">
+          <caret line="80" column="14" lean-forward="false" selection-start-line="80" selection-start-column="14" selection-end-line="80" selection-end-column="14" />
           <folding />
         </state>
       </provider>
