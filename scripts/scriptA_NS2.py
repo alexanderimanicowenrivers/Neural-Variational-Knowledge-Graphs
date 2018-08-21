@@ -72,13 +72,13 @@ def main(_):
         w1=[100,10],
         # w1=[10],
         w2=[1e-3,1e-7], #
-        w3=[200,250,300],
+        w3=[250,300],
         # w4=['kinship', 'nations', 'umls'],
         w4 = ['fb15k-237', 'wn18', 'wn18rr','kinship', 'nations', 'umls'],
         w5=[True,False],
         w6=[1e-3,1e-2],
         w7=['TransE', 'DistMult', 'ComplEx'],
-        w8=[3,5],
+        w8=[3],
         w9=[True])
 
     configurations = cartesian_product(hyperparameters_space)
