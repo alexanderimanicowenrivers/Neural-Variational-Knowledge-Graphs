@@ -57,7 +57,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                ("{}/logs/ModelA_CC_ProjClip/uclcs_nvkg_v1.{}".format(path, summary(c)))
+                ("{}/logs/ModelA_AltSigma/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
 
@@ -69,20 +69,20 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[100],
+        w1=[100,10],
         # w1=[10],
         w2=[1e-3,1e-7], #
-        w3=[100,200,300],
+        w3=[200,250,300],
         # w4=['kinship', 'nations', 'umls'],
         w4 = ['fb15k-237', 'wn18', 'wn18rr','kinship', 'nations', 'umls'],
-        w5=[False],
-        w6=[1e-4],
+        w5=[True,False],
+        w6=[1e-3,1e-2],
         w7=['TransE', 'DistMult', 'ComplEx'],
         w8=[5],
         w9=[True])
 
     configurations = cartesian_product(hyperparameters_space)
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/ModelA_CC_ProjClip'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/ModelA_AltSigma'
 
 
     # Check that we are on the UCLCS cluster first

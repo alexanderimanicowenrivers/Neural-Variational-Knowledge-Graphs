@@ -478,7 +478,7 @@ class VKGE_A:
                     self.entity_embedding_sigma = tf.get_variable('entities_sigma',
                                                               shape=[nb_entities + 1, entity_embedding_size],
                                                               initializer=tf.random_uniform_initializer(
-                                                                  minval=init2, maxval=init2, dtype=tf.float32),
+                                                                  minval=0, maxval=init2, dtype=tf.float32),
                                                               dtype=tf.float32)
 
 
@@ -509,7 +509,7 @@ class VKGE_A:
                                                              shape=[nb_predicates + 1,
                                                                     predicate_embedding_size],
                                                              initializer=tf.random_uniform_initializer(
-                                                                 minval=init2, maxval=init2, dtype=tf.float32),
+                                                                 minval=0, maxval=init2, dtype=tf.float32),
                                                              dtype=tf.float32)
 
 
