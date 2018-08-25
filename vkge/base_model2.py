@@ -173,7 +173,7 @@ class VKGE_A:
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, sig_max, sig_min)
-        self.nb_epochs = 500
+        self.nb_epochs = 50
 
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
@@ -246,8 +246,9 @@ class VKGE_A:
             global_step = tf.train.create_global_step()
 
         gradients = optimizer.compute_gradients(loss=loss)
-        tf.summary.scalar('gradients_l2', tf.add_n([tf.nn.l2_loss(grad[0]) for grad in gradients]),
-                          collections=['summary_train'])
+
+        with tf.name_scope('gradients'):
+            tf.summary.scalar('gradients_l2', tf.add_n([tf.nn.l2_loss(grad[0]) for grad in gradients]))
 
         if self.alt_opt:
         ##clip for robust learning as observed nans during training
@@ -478,7 +479,7 @@ class VKGE_A:
                     self.entity_embedding_sigma = tf.get_variable('entities_sigma',
                                                               shape=[nb_entities + 1, entity_embedding_size],
                                                               initializer=tf.random_uniform_initializer(
-                                                                  minval=0, maxval=init2, dtype=tf.float32),
+                                                                  minval=init2, maxval=init2, dtype=tf.float32),
                                                               dtype=tf.float32)
 
 
@@ -509,7 +510,7 @@ class VKGE_A:
                                                              shape=[nb_predicates + 1,
                                                                     predicate_embedding_size],
                                                              initializer=tf.random_uniform_initializer(
-                                                                 minval=0, maxval=init2, dtype=tf.float32),
+                                                                 minval=init2, maxval=init2, dtype=tf.float32),
                                                              dtype=tf.float32)
 
 
@@ -631,9 +632,9 @@ class VKGE_A:
 
         nb_versions = int(self.negsamples + 1)  # neg samples + original
         projection_steps = [constraints.unit_sphere_logvar(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere_logvar(self.entity_embedding_sigma, norm=1.0)]
-        # projection_steps = [constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_sigma, norm=1.0)]
+        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_mean, norm=1.0),constraints.unit_sphere_logvar(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere_logvar(self.entity_embedding_sigma, norm=1.0)]
+        # projection_steps = [constraints.unit_cube_logvar(self.predicate_embedding_sigma, val=1.0),constraints.unit_cube_logvar(self.entity_embedding_sigma, norm=1.0)]
 
-        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_sigma, norm=1.0)]
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
@@ -660,7 +661,7 @@ class VKGE_A:
             neg_subs = math.ceil(int(self.negsamples / 2))
 
             logger.warn("\n \n \n neg subs is {} \n \n \n".format(neg_subs))
-            # train_writer = tf.summary.FileWriter('/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar', session.graph)
+            train_writer = tf.summary.FileWriter('/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar', session.graph)
             allloss=[]
             for epoch in range(1, nb_epochs + 1):
 
@@ -711,33 +712,44 @@ class VKGE_A:
                     #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
                     #     self.epoch_d: kl_inc_val
                     # }
-
                     #
+                    # #
+                    if epoch >= 10:
+                        kl_linwarmup = (pi[counter])
+                    else:
+                        kl_linwarmup = 0.0
+
+
+
                     loss_args = {
                         # self.no_samples:1, #number of samples for precision test
-                        self.KL_discount: (pi[counter])/2.0,
+                        self.KL_discount: kl_linwarmup,
+                        # self.KL_discount: (pi[counter]),
+
                         # self.KL_discount: (1.0/nb_batches),
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-                        # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
-                        , self.BernoulliSRescale: 1.0
-                        ,self.idx_pos: np.arange(curr_batch_size),
-                        self.idx_neg: np.arange(curr_batch_size,curr_batch_size * nb_versions)
+                        ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
+                        # , self.BernoulliSRescale: 1.0
+                        , self.idx_pos: np.arange(curr_batch_size),
+                        self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
                     }
 
 
-                    #
                     # merge = tf.summary.merge_all()  # for TB
                     #
                     # summary,_, elbo_value = session.run([merge, self.training_step, self.elbo],
                     #                                          feed_dict=loss_args)
                     # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
+                    #
 
                     # loss_args = {
                     #     # self.no_samples:1, #number of samples for precision test
-                    #     self.KL_discount: (pi[counter]),
+                    #     self.KL_discount: kl_linwarmup,
+                    #     # self.KL_discount: (pi[counter]),
+                    #
                     #     # self.KL_discount: (1.0/nb_batches),
                     #     self.s_inputs: Xs_batch,
                     #     self.p_inputs: Xp_batch,
@@ -920,23 +932,23 @@ class VKGE_A:
 
 
 
-                    #
-                    #         e1, e2, p1, p2 = session.run(
-                    #     [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
-                    #      self.predicate_embedding_sigma], feed_dict={})
-                    # np.save(
-                    #     "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/_entity_embeddings",
-                    #     e1)
-                    # np.save(
-                    #     "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/_entity_embedding_sigma",
-                    #     e2)
-                    # np.save(
-                    #     "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/_predicate_embedding_mean",
-                    #     p1)
-                    # np.save(
-                    #     "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/_predicate_embedding_sigma",
-                    #     p2)
-                    #
+
+                    e1, e2, p1, p2 = session.run(
+                        [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
+                         self.predicate_embedding_sigma], feed_dict={})
+                    np.save(
+                        "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/lw_entity_embeddings",
+                        e1)
+                    np.save(
+                        "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/lw_entity_embedding_sigma",
+                        e2)
+                    np.save(
+                        "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/lw_predicate_embedding_mean",
+                        p1)
+                    np.save(
+                        "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/lw_predicate_embedding_sigma",
+                        p2)
+
                     # np.save("/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/lossvals",
                     #         allloss)
                         # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})

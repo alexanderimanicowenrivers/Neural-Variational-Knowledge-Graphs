@@ -57,7 +57,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                ("{}/logs/ModelA_AltSigma/uclcs_nvkg_v1.{}".format(path, summary(c)))
+                ("{}/logs/ModelA_BS2508/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
 
@@ -76,13 +76,13 @@ def main(_):
         # w4=['kinship', 'nations', 'umls'],
         w4 = ['fb15k-237', 'wn18', 'wn18rr','kinship', 'nations', 'umls'],
         w5=[True,False],
-        w6=[1e-3,1e-2],
+        w6=[1e-3,1e-2,1e-4],
         w7=['TransE', 'DistMult', 'ComplEx'],
-        w8=[3],
+        w8=[5,20],
         w9=[True])
 
     configurations = cartesian_product(hyperparameters_space)
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/ModelA_AltSigma'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/ModelA_BS2508'
 
 
     # Check that we are on the UCLCS cluster first
