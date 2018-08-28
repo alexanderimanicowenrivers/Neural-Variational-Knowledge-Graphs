@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="updated confidence estimation testing">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_tests.py" afterPath="$PROJECT_DIR$/vkge/base_tests.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_tests.py" afterPath="$PROJECT_DIR$/scripts/script_tests.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -66,8 +66,8 @@
       <file leaf-file-name="script_tests.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/script_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-430">
-              <caret line="76" column="22" lean-forward="false" selection-start-line="76" selection-start-column="22" selection-end-line="76" selection-end-column="22" />
+            <state relative-caret-position="144">
+              <caret line="76" column="21" lean-forward="false" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -76,7 +76,7 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
+            <state relative-caret-position="44">
               <caret line="1056" column="49" lean-forward="false" selection-start-line="1056" selection-start-column="49" selection-end-line="1056" selection-end-column="49" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
@@ -235,8 +235,8 @@
         <option value="$PROJECT_DIR$/vkge/training/constraints.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
         <option value="$PROJECT_DIR$/vkge/base_model2.py" />
-        <option value="$PROJECT_DIR$/scripts/script_tests.py" />
         <option value="$PROJECT_DIR$/main_tests.py" />
+        <option value="$PROJECT_DIR$/scripts/script_tests.py" />
         <option value="$PROJECT_DIR$/vkge/base_tests.py" />
       </list>
     </option>
@@ -452,13 +452,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00900" summary="test3 var">
-      <created>1534360416781</created>
-      <option name="number" value="00900" />
-      <option name="presentableId" value="LOCAL-00900" />
-      <option name="project" value="LOCAL" />
-      <updated>1534360416781</updated>
     </task>
     <task id="LOCAL-00901" summary="test3 var">
       <created>1534360437856</created>
@@ -796,7 +789,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535471924154</updated>
     </task>
-    <option name="localTasksCounter" value="949" />
+    <task id="LOCAL-00949" summary="updated confidence estimation testing">
+      <created>1535472006268</created>
+      <option name="number" value="00949" />
+      <option name="presentableId" value="LOCAL-00949" />
+      <option name="project" value="LOCAL" />
+      <updated>1535472006271</updated>
+    </task>
+    <option name="localTasksCounter" value="950" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1179,14 +1179,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/script_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-430">
-          <caret line="76" column="22" lean-forward="false" selection-start-line="76" selection-start-column="22" selection-end-line="76" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
@@ -1207,6 +1199,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/script_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="76" column="21" lean-forward="false" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main_tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="518">
@@ -1217,7 +1217,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
+        <state relative-caret-position="44">
           <caret line="1056" column="49" lean-forward="false" selection-start-line="1056" selection-start-column="49" selection-end-line="1056" selection-end-column="49" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
