@@ -778,7 +778,7 @@ class VKGE_tests:
 
 
             cvrg=[]
-            for p_threshold in np.arange(0,1,0.1):
+            for p_threshold in np.arange(0,1,0.05):
                 cvrg.append(1-p_threshold)
                 # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
 
