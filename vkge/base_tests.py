@@ -16,12 +16,7 @@ from random import randint
 
 import logging
 import sys
-import collections
-# import pandas as pd
-# import seaborn as sns
-# import matplotlib.pyplot as plt
-# plt.switch_backend('agg')
-
+import sys
 logger = logging.getLogger(__name__)
 
 import collections
@@ -110,10 +105,9 @@ class VKGE_tests:
         self.negsamples=1
         self.alt_opt=alt_opt
         self.nosamps=int(nosamps)
+        self.alt_test='test3' #confidence estimation
 
-        self.no_confidence_samples=15
-
-                # adjust for correct format for model input
+        # adjust for correct format for model input
 
         if self.score_func=='ComplEx':
             predicate_embedding_size = embedding_size*2
@@ -141,9 +135,9 @@ class VKGE_tests:
 
         logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(self.dataset_name))
 
-        train_triples = read_triples("/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/data/{}/train.tsv".format(self.dataset_name))  # choose dataset
-        valid_triples = read_triples("/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/data/{}/dev.tsv".format(self.dataset_name))
-        test_triples = read_triples("/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/data/{}/test.tsv".format(self.dataset_name))
+        train_triples = read_triples("data/{}/train.tsv".format(self.dataset_name))  # choose dataset
+        valid_triples = read_triples("data/{}/dev.tsv".format(self.dataset_name))
+        test_triples = read_triples("data/{}/test.tsv".format(self.dataset_name))
         self.nb_examples = len(train_triples)
 
         ##### for test time ######
@@ -163,13 +157,16 @@ class VKGE_tests:
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
         # optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
-
-
+        self.no_confidence_samples=300
+        # #delete this later
+        #
+        # ent=collections.defaultdict(float)
+        # pred=collections.defaultdict(float)
+        #
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, sig_max, sig_min)
-        self.nb_epochs = 500
-
+        self.nb_epochs = 100
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
@@ -185,16 +182,33 @@ class VKGE_tests:
 
     def _setup_summaries(self):
 
-        self.variable_summaries(self.entity_embedding_sigma)
+        with tf.name_scope('entity_sigma'):
 
-        self.variable_summaries(self.entity_embedding_mean)
+            self.variable_summaries(tf.exp(self.entity_embedding_sigma))
 
-        tf.summary.scalar("total e loss", self.e_objective)
+        with tf.name_scope('entity_mean'):
 
-        tf.summary.scalar("g loss", self.g_objective)
 
-        tf.summary.scalar("total loss", self.elbo)
+            self.variable_summaries(self.entity_embedding_mean)
 
+        with tf.name_scope('pred_sigma'):
+
+            self.variable_summaries(tf.exp(self.predicate_embedding_sigma))
+
+        with tf.name_scope('pred_mean'):
+
+            self.variable_summaries(self.predicate_embedding_mean)
+
+        with tf.name_scope('loss'):
+            tf.summary.scalar("g_loss_positive", self.g_objective_p)
+
+            tf.summary.scalar("g_loss_negative", self.g_objective_n)
+
+            tf.summary.scalar("total_loss", self.elbo)
+
+            tf.summary.scalar("e_loss_pred", self.e_objective2)
+
+            tf.summary.scalar("e_loss_entity", self.e_objective1)
 
         # with tf.name_scope('Samples'):
         #
@@ -218,33 +232,33 @@ class VKGE_tests:
         #         with tf.name_scope('Predicate1_logStd'):
         #             self.variable_summaries(tf.sqrt(tf.exp(self.var2_2)))
 
-    def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=None):
+    def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=False):
         global_step = tf.train.get_global_step()
         if global_step is None:
             global_step = tf.train.create_global_step()
 
         gradients = optimizer.compute_gradients(loss=loss)
-        tf.summary.scalar('gradients_l2', tf.add_n([tf.nn.l2_loss(grad[0]) for grad in gradients]),
-                          collections=['summary_train'])
 
-        if l2:
-            loss += tf.add_n([tf.nn.l2_loss(v) for v in self.train_variables]) * l2
-        if clip:
-            if clip_op == tf.clip_by_value:
-                gradients = [(tf.clip_by_value(grad, clip[0], clip[1]), var)
-                             for grad, var in gradients if grad is not None]
-            elif clip_op == tf.clip_by_norm:
-                gradients = [(tf.clip_by_norm(grad, clip), var)
-                             for grad, var in gradients if grad is not None]
+        with tf.name_scope('gradients'):
+            tf.summary.scalar('gradients_l2', tf.add_n([tf.nn.l2_loss(grad[0]) for grad in gradients]))
+
+        if self.alt_opt:
+        ##clip for robust learning as observed nans during training
+        #
+
+            gradients = [(tf.clip_by_norm(grad, 1), var)
+                         for grad, var in gradients if grad is not None]
+
 
         train_op = optimizer.apply_gradients(gradients, global_step)
 
-        variable_size = lambda v: reduce(lambda x, y: x * y, v.get_shape().as_list()) if v.get_shape() else 1
-        num_params = sum(variable_size(v) for v in self.train_variables)
-        print("Number of parameters: {}".format(num_params))
+        # variable_size = lambda v: reduce(lambda x, y: x * y, v.get_shape().as_list()) if v.get_shape() else 1
+        # num_params = sum(variable_size(v) for v in self.train_variables)
+        # print("Number of parameters: {}".format(num_params))
 
         self.loss = loss
         self.training_step = train_op
+
         self.global_step = global_step
         return loss, train_op
 
@@ -404,24 +418,24 @@ class VKGE_tests:
 
         # self.elbo = self.g_objective_p + self.g_objective_n
 
-        if self.alt_opt:
-        ##clip for robust learning as observed nans during training
-        #
-            gradients = optimizer.compute_gradients(loss=self.elbo)
-
-
-            gradients = [(tf.clip_by_norm(grad, 1), var)
-                         for grad, var in gradients if grad is not None]
-
-            self.training_step = optimizer.apply_gradients(gradients)
-        else:
+        # if self.alt_opt:
+        # ##clip for robust learning as observed nans during training
+        # #
+        #     gradients = optimizer.compute_gradients(loss=self.elbo)
         #
         #
-            self.training_step = optimizer.minimize(self.elbo)
+        #     gradients = [(tf.clip_by_norm(grad, 1), var)
+        #                  for grad, var in gradients if grad is not None]
+        #
+        #     self.training_step = optimizer.apply_gradients(gradients)
+        # else:
+        # #
+        # #
+        #     self.training_step = optimizer.minimize(self.elbo)
 
-        # self.train_variables=tf.trainable_variables()
-        # self._setup_training(loss=self.elbo,optimizer=optimizer)
-        # self._setup_summaries()
+        self.train_variables=tf.trainable_variables()
+        self._setup_training(loss=self.elbo,optimizer=optimizer)
+        self._setup_summaries()
         # self._variables = tf.global_variables()
         self._saver = tf.train.Saver()
 
@@ -457,7 +471,7 @@ class VKGE_tests:
                     self.entity_embedding_sigma = tf.get_variable('entities_sigma',
                                                               shape=[nb_entities + 1, entity_embedding_size],
                                                               initializer=tf.random_uniform_initializer(
-                                                                  minval=init2, maxval=init2, dtype=tf.float32),
+                                                                  minval=0, maxval=init2, dtype=tf.float32),
                                                               dtype=tf.float32)
 
 
@@ -488,7 +502,7 @@ class VKGE_tests:
                                                              shape=[nb_predicates + 1,
                                                                     predicate_embedding_size],
                                                              initializer=tf.random_uniform_initializer(
-                                                                 minval=init2, maxval=init2, dtype=tf.float32),
+                                                                 minval=0, maxval=init2, dtype=tf.float32),
                                                              dtype=tf.float32)
 
 
@@ -607,10 +621,12 @@ class VKGE_tests:
 
         logger.warn("Number of negative samples per positive is {}, \n batch size is {} \n number of positive triples {} , \n  bernoulli rescale {}".format(self.negsamples,self.negsamples*batch_size,len(all_triples),(2.0*(self.nb_entities-1))))
 
-        nb_versions = int(self.negsamples + 1)  # neg samples + original
-        projection_steps = [constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_sigma, norm=1.0)]
 
-        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere(self.entity_embedding_sigma, norm=1.0)]
+        nb_versions = int(self.negsamples + 1)  # neg samples + original
+        projection_steps = [constraints.unit_sphere_logvar(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere_logvar(self.entity_embedding_sigma, norm=1.0)]
+        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_mean, norm=1.0),constraints.unit_sphere_logvar(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere_logvar(self.entity_embedding_sigma, norm=1.0)]
+        # projection_steps = [constraints.unit_cube_logvar(self.predicate_embedding_sigma, val=1.0),constraints.unit_cube_logvar(self.entity_embedding_sigma, norm=1.0)]
+
 
         max_hits_at_k = 0
         ####### COMPRESSION COST PARAMETERS
@@ -621,6 +637,7 @@ class VKGE_tests:
         pi_e = np.log(2.0)
 
         pi_t = np.exp(np.linspace(pi_s, pi_e, M) - M * np.log(2.0))
+        # pi_t = pi_t + np.flip(pi_t, axis=0) #modified
 
         pi = (1 / np.sum(pi_t)) * pi_t  # normalise pi
         #####################
@@ -628,123 +645,137 @@ class VKGE_tests:
         ##
         # Train
         ##
-################
-
-        ##
-        # Train
-        ##
-        # tf.reset_default_graph()
-
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
-            # session.run(init_op)
+            session.run(init_op)
 
-            self._saver.restore(session,"/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/embeddings/modelacc/uclcs_nvkg_v1.w1=10_w2=0.001_w3=300_w4=nations_w5=False_w6=0.001_w7=DistMult_w8=5_w9=False_epoch_50.ckpt")
-
-
-            # train_writer = tf.summary.FileWriter(filename, session.graph)
-
-            experiments_filt=collections.defaultdict(list)
-            experiments_raw=collections.defaultdict(list)
             neg_subs = math.ceil(int(self.negsamples / 2))
 
             logger.warn("\n \n \n neg subs is {} \n \n \n".format(neg_subs))
-            # train_writer = tf.summary.FileWriter(filename, session.graph)
-
-            # for epoch in range(1, nb_epochs + 1):
-            #
-            #     counter = 0
-            #
-            #     kl_inc_val = 1.0
-            #
-            #     order = self.random_state.permutation(nb_samples)
-            #     Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
-            #
-            #     loss_values = []
-            #     total_loss_value = 0
-            #
-            #     for batch_no, (batch_start, batch_end) in enumerate(batches):
-            #
-            #         curr_batch_size = batch_end - batch_start
-            #
-            #         Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
-            #         Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
-            #         Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
-            #
-            #         Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
-            #         Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
-            #         Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
-            #
-            #         for q in range((neg_subs)):  # Xs_batch[1::nb_versions] needs to be corrupted
-            #             Xs_batch[(q + 1)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
-            #             Xp_batch[(q + 1)::nb_versions] = Xp_shuf[batch_start:batch_end]
-            #             Xo_batch[(q + 1)::nb_versions] = Xo_shuf[batch_start:batch_end]
-            #
-            #         for q2 in range(neg_subs,
-            #                         (self.negsamples - neg_subs)):  # Xs_batch[1::nb_versions] needs to be corrupted
-            #             Xs_batch[(q2 + 1)::nb_versions] = Xs_shuf[batch_start:batch_end]
-            #             Xp_batch[(q2 + 1)::nb_versions] = Xp_shuf[batch_start:batch_end]
-            #             Xo_batch[(q2 + 1)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
-            #
-            #         vec_neglabels = [int(1)] + ([int(0)] * (int(self.negsamples)))
-            #
-            #         #
-            #         # loss_args = {
-            #         #     self.KL_discount: pi[counter],
-            #         #     self.s_inputs: Xs_batch,
-            #         #     self.p_inputs: Xp_batch,
-            #         #     self.o_inputs: Xo_batch,
-            #         #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
-            #         #     self.epoch_d: kl_inc_val
-            #         # }
-            #
-            #         noise = session.run(tf.random_normal((nb_versions * curr_batch_size, entity_embedding_size), 0, 1,
-            #                                              dtype=tf.float32))
-            #
-            #         loss_args = {
-            #             # self.no_samples:1, #number of samples for precision test
-            #             # self.KL_discount: self.klrew,
-            #             # self.KL_discount: (1.0/3.0),
-            #             self.s_inputs: Xs_batch,
-            #             self.p_inputs: Xp_batch,
-            #             self.o_inputs: Xo_batch,
-            #             self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-            #             # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
-            #             , self.BernoulliSRescale: 1.0
-            #             , self.idx_pos: np.arange(curr_batch_size),
-            #             self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
-            #             , self.noise: noise
-            #         }
-            #
-            #         # merge = tf.summary.merge_all()  # for TB
-            #
-            #
-            #
-            #
-            #         _, elbo_value = session.run([self.training_step, self.elbo],
-            #                                     feed_dict=loss_args)
-            #
-            #         # tensorboard
-            #
-            #         # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
-            #
-            #
-            #         # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
-            #
-            #
-            #         loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
-            #         total_loss_value += elbo_value
-            #
-            #         counter += 1
-            #         #
-            #         # if self.projection:
-            #         if self.projection and epoch < nb_epochs:  # so you do not project before evaluation
-            #
-            #             for projection_step in projection_steps:
-            #                 session.run([projection_step])
+            # train_writer = tf.summary.FileWriter('/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar', session.graph)
+            allloss=[]
+            for epoch in range(1, nb_epochs + 1):
 
 
-                # logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
+
+                counter = 0
+
+
+                kl_inc_val = 1.0
+
+                order = self.random_state.permutation(nb_samples)
+                Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
+
+                loss_values = []
+                total_loss_value = 0
+
+
+                for batch_no, (batch_start, batch_end) in enumerate(batches):
+
+                    curr_batch_size = batch_end - batch_start
+
+                    Xs_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xs_shuf.dtype)
+                    Xp_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xp_shuf.dtype)
+                    Xo_batch = np.zeros((curr_batch_size * nb_versions), dtype=Xo_shuf.dtype)
+
+                    Xs_batch[0::nb_versions] = Xs_shuf[batch_start:batch_end]
+                    Xp_batch[0::nb_versions] = Xp_shuf[batch_start:batch_end]
+                    Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
+
+                    for q in range((neg_subs)): # Xs_batch[1::nb_versions] needs to be corrupted
+                        Xs_batch[(q+1)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                        Xp_batch[(q+1)::nb_versions] = Xp_shuf[batch_start:batch_end]
+                        Xo_batch[(q+1)::nb_versions] = Xo_shuf[batch_start:batch_end]
+
+                    for q2 in range(neg_subs,(self.negsamples-neg_subs)): # Xs_batch[1::nb_versions] needs to be corrupted
+                        Xs_batch[(q2+1)::nb_versions] = Xs_shuf[batch_start:batch_end]
+                        Xp_batch[(q2+1)::nb_versions] = Xp_shuf[batch_start:batch_end]
+                        Xo_batch[(q2+1)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+
+                    vec_neglabels=[int(1)]+([int(0)]*(int(self.negsamples)))
+
+                    #
+                    # loss_args = {
+                    #     self.KL_discount: pi[counter],
+                    #     self.s_inputs: Xs_batch,
+                    #     self.p_inputs: Xp_batch,
+                    #     self.o_inputs: Xo_batch,
+                    #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
+                    #     self.epoch_d: kl_inc_val
+                    # }
+                    #
+                    # #
+                    if epoch >= 10:
+                        kl_linwarmup = (pi[counter])
+                    else:
+                        kl_linwarmup = 0.0
+
+
+
+                    loss_args = {
+                        # self.no_samples:1, #number of samples for precision test
+                        self.KL_discount: kl_linwarmup,
+                        # self.KL_discount: (pi[counter]),
+
+                        # self.KL_discount: (1.0/nb_batches),
+                        self.s_inputs: Xs_batch,
+                        self.p_inputs: Xp_batch,
+                        self.o_inputs: Xo_batch,
+                        self.y_inputs: np.array(vec_neglabels * curr_batch_size)
+                        ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
+                        # , self.BernoulliSRescale: 1.0
+                        , self.idx_pos: np.arange(curr_batch_size),
+                        self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
+                    }
+
+
+                    # merge = tf.summary.merge_all()  # for TB
+                    #
+                    # summary,_, elbo_value = session.run([merge, self.training_step, self.elbo],
+                    #                                          feed_dict=loss_args)
+                    # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
+                    #
+
+                    # loss_args = {
+                    #     # self.no_samples:1, #number of samples for precision test
+                    #     self.KL_discount: kl_linwarmup,
+                    #     # self.KL_discount: (pi[counter]),
+                    #
+                    #     # self.KL_discount: (1.0/nb_batches),
+                    #     self.s_inputs: Xs_batch,
+                    #     self.p_inputs: Xp_batch,
+                    #     self.o_inputs: Xo_batch,
+                    #     self.y_inputs: np.array(vec_neglabels * curr_batch_size)
+                    #     # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
+                    #     , self.BernoulliSRescale: 1.0
+                    #     , self.idx_pos: np.arange(curr_batch_size),
+                    #     self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
+                    # }
+                    _, elbo_value = session.run([ self.training_step, self.elbo],
+                                                             feed_dict=loss_args)
+
+
+                    # tensorboard
+
+
+
+                    # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
+
+
+                    loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
+                    total_loss_value += elbo_value
+
+                    counter += 1
+                #
+                # if self.projection:
+                    if self.projection and epoch<=nb_epochs: #so you do not project before evaluation
+
+                        for projection_step in projection_steps:
+                            session.run([projection_step])
+
+                allloss.append(loss_values)
+                logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
+
 
             cvrg=[]
             for p_threshold in np.arange(0,1,0.1):

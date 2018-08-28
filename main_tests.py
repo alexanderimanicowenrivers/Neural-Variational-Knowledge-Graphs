@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 
 import tensorflow as tf
@@ -36,11 +37,8 @@ FLAGS = flags.FLAGS
 def main(_):
     logger.warn("creating model with flags \t {}".format(flags.FLAGS.__flags))
 
-    # vkge.VKGE(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,init_sig=FLAGS.init_sig, alt_cost=FLAGS.alt_cost, no_batches=FLAGS.no_batches,
-    #           static_mean=FLAGS.static_mean, dataset=FLAGS.dataset, sigma_alt=FLAGS.Sigma_alt,
-    #           lr=FLAGS.lr, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt
-    #           , projection=FLAGS.projection,  score_func=FLAGS.score_func)
-
+    # vkge.VKGE_working(embedding_size=10,  sigma_alt=False,lr=0.01, alt_opt=False, projection=False)
+    #
     vkge.VKGE_tests(embedding_size=FLAGS.embedding_size, mean_c=FLAGS.mean_c,epsilon=FLAGS.epsilon, alt_cost=FLAGS.alt_cost, no_batches=FLAGS.no_batches,
               static_mean=FLAGS.static_mean, dataset=FLAGS.dataset, sigma_alt=FLAGS.Sigma_alt,negsamples=FLAGS.negsamples,
               lr=FLAGS.lr, file_name=FLAGS.file_name, alt_opt=FLAGS.alt_opt, projection=FLAGS.projection,alt_test=FLAGS.alt_test,  score_func=FLAGS.score_func,alt_updates=FLAGS.alt_updates,nosamps=FLAGS.samples_perdp)
