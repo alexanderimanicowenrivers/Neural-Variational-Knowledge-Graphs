@@ -1054,7 +1054,7 @@ class VKGE_tests:
                 #                  truncate=True, label='Raw')
                 plt.legend()
 
-                ax.figure.savefig("ConfEstimationVar_H@"+str(k)+".png")
+                ax.figure.savefig("ConfEstimation_H@"+str(k)+".png")
                 plt.clf()
             table = [experiments_filt[0], cvrg]
 
@@ -1087,7 +1087,7 @@ class VKGE_tests:
             plt.legend()
             # ax.figure.savefig("ConfEstimation_Count.png")
 
-            ax.figure.savefig("ConfEstimationVar_MeanRank.png")
+            ax.figure.savefig("ConfEstimation_MeanRank.png")
             plt.clf()
 
 
