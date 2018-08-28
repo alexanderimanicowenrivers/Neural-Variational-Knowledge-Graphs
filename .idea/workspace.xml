@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="updated confidence estimation testing">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_tests.py" afterPath="$PROJECT_DIR$/scripts/script_tests.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_tests.py" afterPath="$PROJECT_DIR$/vkge/base_tests.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -76,12 +76,12 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="1056" column="49" lean-forward="false" selection-start-line="1056" selection-start-column="49" selection-end-line="1056" selection-end-column="49" />
+            <state relative-caret-position="345">
+              <caret line="23" column="25" lean-forward="true" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
-                <element signature="e#881#1035#0" expanded="false" />
-                <element signature="e#1064#1399#0" expanded="false" />
+                <element signature="e#980#1134#0" expanded="false" />
+                <element signature="e#1163#1498#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -453,13 +453,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00901" summary="test3 var">
-      <created>1534360437856</created>
-      <option name="number" value="00901" />
-      <option name="presentableId" value="LOCAL-00901" />
-      <option name="project" value="LOCAL" />
-      <updated>1534360437856</updated>
-    </task>
     <task id="LOCAL-00902" summary="test3 var">
       <created>1534360688211</created>
       <option name="number" value="00902" />
@@ -796,7 +789,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535472006271</updated>
     </task>
-    <option name="localTasksCounter" value="950" />
+    <task id="LOCAL-00950" summary="redo conf est">
+      <created>1535472519087</created>
+      <option name="number" value="00950" />
+      <option name="presentableId" value="LOCAL-00950" />
+      <option name="project" value="LOCAL" />
+      <updated>1535472519087</updated>
+    </task>
+    <option name="localTasksCounter" value="951" />
     <servers />
   </component>
   <component name="TodoView">
@@ -882,7 +882,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="smaller datasets test" />
     <MESSAGE value="model A testing" />
     <MESSAGE value="model A NS" />
     <MESSAGE value="compression cost" />
@@ -907,7 +906,8 @@
     <MESSAGE value="rm trainwriter bug" />
     <MESSAGE value="Fixed analysis section" />
     <MESSAGE value="updated confidence estimation testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated confidence estimation testing" />
+    <MESSAGE value="redo conf est" />
+    <option name="LAST_COMMIT_MESSAGE" value="redo conf est" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1217,12 +1217,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="1056" column="49" lean-forward="false" selection-start-line="1056" selection-start-column="49" selection-end-line="1056" selection-end-column="49" />
+        <state relative-caret-position="345">
+          <caret line="23" column="25" lean-forward="true" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <element signature="e#881#1035#0" expanded="false" />
-            <element signature="e#1064#1399#0" expanded="false" />
+            <element signature="e#980#1134#0" expanded="false" />
+            <element signature="e#1163#1498#0" expanded="false" />
           </folding>
         </state>
       </provider>

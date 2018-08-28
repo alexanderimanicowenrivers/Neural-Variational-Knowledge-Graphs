@@ -18,7 +18,10 @@ import logging
 import sys
 import sys
 logger = logging.getLogger(__name__)
-
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+plt.switch_backend('agg')
 import collections
 def read_triples(path):
     triples = []
