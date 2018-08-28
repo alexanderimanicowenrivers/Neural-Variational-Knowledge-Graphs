@@ -651,7 +651,8 @@ class VKGE_tests:
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
             session.run(init_op)
-
+            experiments_filt = collections.defaultdict(list)
+            experiments_raw = collections.defaultdict(list)
             neg_subs = math.ceil(int(self.negsamples / 2))
 
             logger.warn("\n \n \n neg subs is {} \n \n \n".format(neg_subs))
@@ -926,12 +927,12 @@ class VKGE_tests:
 
                             scores_subj_c = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
 
-                            confidence_subj+= np.divide(scores_subj_c,self.no_confidence_samples)
+                            confidence_subj+= np.divide(np.random.binomial(1, p=scores_subj_c),self.no_confidence_samples) #take bernoulli samples
 
                             # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
                             scores_obj_c = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
 
-                            confidence_obj+= np.divide(scores_obj_c,self.no_confidence_samples)
+                            confidence_obj+= np.divide(np.random.binomial(1, p=scores_obj_c),self.no_confidence_samples)
 
                     elif self.alt_test in ['test2_bline','test3bline']: #creates random confidence levels between 0 and 1 for baseline test2
                         confidence_subj=np.random.random_sample(self.nb_entities,)
@@ -1057,7 +1058,7 @@ class VKGE_tests:
                 #                  truncate=True, label='Raw')
                 plt.legend()
 
-                ax.figure.savefig("ConfEstimation_H@"+str(k)+".png")
+                ax.figure.savefig("ConfEstimationVar_H@"+str(k)+".png")
                 plt.clf()
             table = [experiments_filt[0], cvrg]
 
@@ -1090,7 +1091,7 @@ class VKGE_tests:
             plt.legend()
             # ax.figure.savefig("ConfEstimation_Count.png")
 
-            ax.figure.savefig("ConfEstimation_MeanRank.png")
+            ax.figure.savefig("ConfEstimationVar_MeanRank.png")
             plt.clf()
 
 
