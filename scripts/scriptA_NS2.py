@@ -57,7 +57,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                ("{}/logs/ModelA_BS2508/uclcs_nvkg_v1.{}".format(path, summary(c)))
+                ("{}/logs/modela_analysis/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
 
@@ -69,20 +69,20 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[100,10],
+        w1=[100],
         # w1=[10],
-        w2=[1e-3,1e-7], #
-        w3=[250,300],
+        w2=[1e-7], #
+        w3=[300],
         # w4=['kinship', 'nations', 'umls'],
-        w4 = ['fb15k-237', 'wn18', 'wn18rr','kinship', 'nations', 'umls'],
-        w5=[True,False],
-        w6=[1e-3,1e-4],
-        w7=['DistMult', 'ComplEx'],
-        w8=[5,20],
+        w4 = ['wn18rr'],
+        w5=[True],
+        w6=[1e-3],
+        w7=['DistMult'],
+        w8=[5],
         w9=[True])
 
     configurations = cartesian_product(hyperparameters_space)
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/ModelA_BS2508'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/modela_analysis'
 
 
     # Check that we are on the UCLCS cluster first

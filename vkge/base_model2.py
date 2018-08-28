@@ -163,19 +163,28 @@ class VKGE_A:
         # ent=collections.defaultdict(float)
         # pred=collections.defaultdict(float)
         #
-        # for (s, p, o) in all_triples:
-        #     ent[self.entity_to_idx[s]]+=1
-        #     pred[self.predicate_to_idx[p]] += 1
-        #     ent[self.entity_to_idx[o]]+=1
-        #
-        #
+
+
         # logger.warn('entity {} \n \n preds {}..'.format(ent,pred))
+
+        self.totalp=collections.defaultdict(float) #predicate counts total
+        self.count1s=collections.defaultdict(float) #predicate hits @1 counts correct
+        self.count3s=collections.defaultdict(float) #predicate hits @3 counts correct
+        self.count5s=collections.defaultdict(float) #predicate hits @5 counts correct
+        self.count10s=collections.defaultdict(float) #predicate hits @10 counts correct
+
+        self.count1o=collections.defaultdict(float) #predicate hits @1 counts correct
+        self.count3o=collections.defaultdict(float) #predicate hits @3 counts correct
+        self.count5o=collections.defaultdict(float) #predicate hits @5 counts correct
+        self.count10o=collections.defaultdict(float) #predicate hits @10 counts correct
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, sig_max, sig_min)
-        self.nb_epochs = 500
+        self.nb_epochs = 100
 
-
+        for (s, p, o) in test_triples:
+            self.totalp[self.predicate_to_idx[p]] += 1
+        print('predicates are \n \n \n',self.predicate_to_idx)
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
 
@@ -479,7 +488,7 @@ class VKGE_A:
                     self.entity_embedding_sigma = tf.get_variable('entities_sigma',
                                                               shape=[nb_entities + 1, entity_embedding_size],
                                                               initializer=tf.random_uniform_initializer(
-                                                                  minval=init2, maxval=init2, dtype=tf.float32),
+                                                                  minval=0, maxval=init2, dtype=tf.float32),
                                                               dtype=tf.float32)
 
 
@@ -510,7 +519,7 @@ class VKGE_A:
                                                              shape=[nb_predicates + 1,
                                                                     predicate_embedding_size],
                                                              initializer=tf.random_uniform_initializer(
-                                                                 minval=init2, maxval=init2, dtype=tf.float32),
+                                                                 minval=0, maxval=init2, dtype=tf.float32),
                                                              dtype=tf.float32)
 
 
@@ -653,7 +662,6 @@ class VKGE_A:
         ##
         # Train
         ##
-
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
             session.run(init_op)
@@ -786,7 +794,7 @@ class VKGE_A:
                 logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
 
-                if (epoch % 50) == 0:
+                if (epoch % 100) == 0:
 
 
                     eval_name = 'valid'
@@ -912,13 +920,45 @@ class VKGE_A:
                         filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                         filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
-                        # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] == [1]:
-                        #     logger.warn(
-                        #         "\t \t filtered_scores_subj  rank 1 idx is {},{},{} \t \t".format(s_idx, o_idx, p_idx))
-                        #
-                        # if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] == [1]:
-                        #     logger.warn(
-                        #         "\t \t filtered_scores_obj rank 1 idx is {},{},{} \t \t".format(s_idx, o_idx, p_idx))
+                        if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] == [1]:
+
+                            self.count1s[p_idx]+=1
+
+
+                        elif [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [3]:
+
+                            self.count3s[p_idx]+=1
+
+
+                        elif [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [5]:
+
+                            self.count5s[p_idx]+=1
+
+
+                        elif [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [10]:
+
+                            self.count10s[p_idx]+=1
+
+                        if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] == [1]:
+
+                            self.count1o[p_idx]+=1
+
+                        elif [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [3]:
+
+                            self.count3o[p_idx]+=1
+
+                        elif [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [5]:
+
+                            self.count5o[p_idx]+=1
+
+                        elif [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [10]:
+
+                            self.count10o[p_idx]+=1
+
+
+
+                            # logger.warn(
+                            #     "\t \t filtered_scores_obj rank 1 idx is {},{},{} \t \t".format(s_idx, o_idx, p_idx))
 
                     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
                     ranks = ranks_subj + ranks_obj
@@ -930,9 +970,19 @@ class VKGE_A:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
+                    print('totalp \n \n',self.totalp,'\n \n')
 
+                    print('count1o \n \n',self.count1o,'\n \n')
+                    print('count3o \n \n',self.count3o,'\n \n')
+                    print('count5o \n \n',self.count5o,'\n \n')
+                    print('count10o \n \n',self.count10o,'\n \n')
 
-                    #
+                    print('count1s \n \n', self.count1s, '\n \n')
+                    print('count3s \n \n', self.count3s, '\n \n')
+                    print('count5s \n \n', self.count5s, '\n \n')
+                    print('count10s \n \n', self.count10s, '\n \n')
+
+                #
                     # e1, e2, p1, p2 = session.run(
                     #     [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
                     #      self.predicate_embedding_sigma], feed_dict={})
