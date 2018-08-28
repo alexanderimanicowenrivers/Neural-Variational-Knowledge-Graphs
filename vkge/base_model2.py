@@ -925,17 +925,17 @@ class VKGE_A:
                             self.count1s[p_idx]+=1
 
 
-                        elif [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [3]:
+                        if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [3]:
 
                             self.count3s[p_idx]+=1
 
 
-                        elif [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [5]:
+                        if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [5]:
 
                             self.count5s[p_idx]+=1
 
 
-                        elif [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [10]:
+                        if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [10]:
 
                             self.count10s[p_idx]+=1
 
@@ -943,15 +943,15 @@ class VKGE_A:
 
                             self.count1o[p_idx]+=1
 
-                        elif [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [3]:
+                        if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [3]:
 
                             self.count3o[p_idx]+=1
 
-                        elif [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [5]:
+                        if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [5]:
 
                             self.count5o[p_idx]+=1
 
-                        elif [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [10]:
+                        if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [10]:
 
                             self.count10o[p_idx]+=1
 

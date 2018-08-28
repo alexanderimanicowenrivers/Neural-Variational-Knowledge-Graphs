@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="rm trainwriter bug">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA_NS2.py" afterPath="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_model2.py" afterPath="$PROJECT_DIR$/vkge/base_model2.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,11 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base_model2.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="base_model2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="796" column="30" lean-forward="false" selection-start-line="796" selection-start-column="30" selection-end-line="796" selection-end-column="30" />
+            <state relative-caret-position="106">
+              <caret line="933" column="0" lean-forward="true" selection-start-line="933" selection-start-column="0" selection-end-line="933" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#881#1035#0" expanded="false" />
@@ -54,11 +53,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scriptA_NS2.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="scriptA_NS2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
+            <state relative-caret-position="-57">
               <caret line="59" column="41" lean-forward="false" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="script_tests.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/script_tests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-874">
+              <caret line="74" column="16" lean-forward="true" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -223,8 +232,8 @@
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/vkge/training/constraints.py" />
-        <option value="$PROJECT_DIR$/vkge/base_model2.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
+        <option value="$PROJECT_DIR$/vkge/base_model2.py" />
       </list>
     </option>
   </component>
@@ -439,13 +448,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00896" summary="test3 var">
-      <created>1534356620866</created>
-      <option name="number" value="00896" />
-      <option name="presentableId" value="LOCAL-00896" />
-      <option name="project" value="LOCAL" />
-      <updated>1534356620866</updated>
     </task>
     <task id="LOCAL-00897" summary="test3 var">
       <created>1534356859589</created>
@@ -783,7 +785,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535205975233</updated>
     </task>
-    <option name="localTasksCounter" value="945" />
+    <task id="LOCAL-00945" summary="rm trainwriter bug">
+      <created>1535454330691</created>
+      <option name="number" value="00945" />
+      <option name="presentableId" value="LOCAL-00945" />
+      <option name="project" value="LOCAL" />
+      <updated>1535454330695</updated>
+    </task>
+    <option name="localTasksCounter" value="946" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1018,13 +1027,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/script_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="74" column="16" lean-forward="true" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Python/2.7/site-packages/tensorflow/python/ops/random_ops.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -1187,23 +1189,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-57">
+          <caret line="59" column="41" lean-forward="false" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/script_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-874">
+          <caret line="74" column="16" lean-forward="true" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="796" column="30" lean-forward="false" selection-start-line="796" selection-start-column="30" selection-end-line="796" selection-end-column="30" />
+        <state relative-caret-position="106">
+          <caret line="933" column="0" lean-forward="true" selection-start-line="933" selection-start-column="0" selection-end-line="933" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#881#1035#0" expanded="false" />
             <element signature="e#1064#1399#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="59" column="41" lean-forward="false" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
