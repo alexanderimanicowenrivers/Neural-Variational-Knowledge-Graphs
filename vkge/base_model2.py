@@ -102,9 +102,11 @@ class VKGE_A:
         self.sigma_alt = sigma_alt
         self.score_func=score_func
         self.alt_updates=alt_updates
-        self.negsamples=1
+        self.negsamples=1 #for ablation
+        # self.negsamples=negsamples
+
         self.alt_opt=alt_opt
-        self.nosamps=int(nosamps)
+        self.abltaion_num=negsamples
 
 
                 # adjust for correct format for model input
@@ -128,7 +130,11 @@ class VKGE_A:
         tf.set_random_seed(0)
         self.static_mean = static_mean
         self.alt_cost = alt_cost
-        self.projection = projection
+
+        if self.abltaion_num == 6:
+            self.projection = False
+        else:
+            self.projection = projection
 
         # Dataset
         self.dataset_name = dataset
@@ -180,7 +186,7 @@ class VKGE_A:
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, sig_max, sig_min)
-        self.nb_epochs = 100
+        self.nb_epochs = 500
 
         for (s, p, o) in test_triples:
             self.totalp[self.predicate_to_idx[p]] += 1
@@ -474,22 +480,39 @@ class VKGE_A:
             with tf.variable_scope('entity'):
                 with tf.variable_scope('mu'):
 
-                    self.entity_embedding_mean = tf.get_variable('entities', shape=[nb_entities + 1, entity_embedding_size],
+                    if self.abltaion_num==5:
+
+                        self.entity_embedding_mean = tf.get_variable('entities',
+                                                                     shape=[nb_entities + 1, entity_embedding_size],
+                                                                     initializer=tf.random_uniform_initializer(
+                                                                         minval=-0.001,
+                                                                         maxval=0.001,
+                                                                         dtype=tf.float32))
+
+                    else:
+
+                        self.entity_embedding_mean = tf.get_variable('entities', shape=[nb_entities + 1, entity_embedding_size],
                                                                  initializer=tf.contrib.layers.xavier_initializer())
 
-                    # self.entity_embedding_mean = tf.get_variable('entities',
-                    #                                              shape=[nb_entities + 1, entity_embedding_size],
-                    #                                              initializer=tf.random_uniform_initializer(
-                    #                                                  minval=-init1,
-                    #                                                  maxval=init1,
-                    #                                                  dtype=tf.float32))
+
                 with tf.variable_scope('sigma'):
 
-                    self.entity_embedding_sigma = tf.get_variable('entities_sigma',
-                                                              shape=[nb_entities + 1, entity_embedding_size],
-                                                              initializer=tf.random_uniform_initializer(
-                                                                  minval=0, maxval=init2, dtype=tf.float32),
-                                                              dtype=tf.float32)
+                    if self.abltaion_num==4:
+
+                        self.entity_embedding_sigma = tf.get_variable('entities_sigma',
+                                                                      shape=[nb_entities + 1, entity_embedding_size],
+                                                                      initializer=tf.random_uniform_initializer(
+                                                                          minval=0, maxval=init2, dtype=tf.float32),
+                                                                      dtype=tf.float32)
+
+
+                    else:
+
+                        self.entity_embedding_sigma = tf.get_variable('entities_sigma',
+                                                                  shape=[nb_entities + 1, entity_embedding_size],
+                                                                  initializer=tf.random_uniform_initializer(
+                                                                      minval=init2, maxval=init2, dtype=tf.float32),
+                                                                  dtype=tf.float32)
 
 
                 self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
@@ -502,25 +525,44 @@ class VKGE_A:
 
             with tf.variable_scope('predicate'):
                 with tf.variable_scope('mu'):
-                    self.predicate_embedding_mean = tf.get_variable('predicates',
+                    if self.abltaion_num == 5:
+
+                        self.predicate_embedding_mean = tf.get_variable('predicates',
+                                                                        shape=[nb_predicates + 1, predicate_embedding_size],
+                                                                        initializer=tf.random_uniform_initializer(
+                                                                            minval=-0.001,
+                                                                            maxval=0.001,
+                                                                            dtype=tf.float32))
+
+
+                    else:
+
+                         self.predicate_embedding_mean = tf.get_variable('predicates',
                                                                 shape=[nb_predicates + 1, predicate_embedding_size],
                                                                     initializer=tf.contrib.layers.xavier_initializer())
 
-                    # self.predicate_embedding_mean = tf.get_variable('predicates',
-                    #                                                 shape=[nb_predicates + 1, predicate_embedding_size],
-                    #                                                 initializer=tf.random_uniform_initializer(
-                    #                                                     minval=-init1,
-                    #                                                     maxval=init1,
-                    #                                                     dtype=tf.float32))
 
                 with tf.variable_scope('sigma'):
 
-                    self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
+                    if self.abltaion_num==4:
+
+
+                        self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
                                                              shape=[nb_predicates + 1,
                                                                     predicate_embedding_size],
                                                              initializer=tf.random_uniform_initializer(
                                                                  minval=0, maxval=init2, dtype=tf.float32),
                                                              dtype=tf.float32)
+
+                    else:
+
+                        self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
+                                                                         shape=[nb_predicates + 1,
+                                                                                predicate_embedding_size],
+                                                                         initializer=tf.random_uniform_initializer(
+                                                                             minval=init2, maxval=init2,
+                                                                             dtype=tf.float32),
+                                                                         dtype=tf.float32)
 
 
                 self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
@@ -662,6 +704,11 @@ class VKGE_A:
         ##
         # Train
         ##
+        ablationhits1=[]
+        ablationhits3=[]
+        ablationhits10=[]
+        ablationmeanrank=[]
+
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
             session.run(init_op)
@@ -722,11 +769,21 @@ class VKGE_A:
                     # }
                     #
                     # #
-                    if epoch >= 10:
+
+                    BS=(2.0*(self.nb_entities-1)/self.negsamples)
+
+                    if (epoch >= (nb_epochs/10)) or (self.abltaion_num == 2 ):
                         kl_linwarmup = (pi[counter])
+                        # kl_linwarmup= (1.0/nb_batches)
+
                     else:
                         kl_linwarmup = 0.0
 
+
+                    if self.abltaion_num==1:
+                        kl_linwarmup=(1.0/nb_batches)
+                    elif self.abltaion_num==3:
+                        BS=1.0
 
 
                     loss_args = {
@@ -739,7 +796,7 @@ class VKGE_A:
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-                        ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
+                        ,self.BernoulliSRescale: BS
                         # , self.BernoulliSRescale: 1.0
                         , self.idx_pos: np.arange(curr_batch_size),
                         self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
@@ -794,7 +851,7 @@ class VKGE_A:
                 logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
 
-                if (epoch % 100) == 0:
+                if (epoch % 5) == 0:
 
 
                     eval_name = 'valid'
@@ -846,9 +903,27 @@ class VKGE_A:
                     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                         mean_rank = np.mean(setting_ranks)
                         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
+
+
+                        if setting_name == 'Filtered':
+                            ablationmeanrank.append(mean_rank)
+
                         for k in [1, 3, 5, 10]:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+
+                            if setting_name == 'Filtered':
+
+                                if k == 1:
+                                    ablationhits1.append(hits_at_k)
+                                elif k == 3:
+                                    ablationhits3.append(hits_at_k)
+                                elif k == 10:
+                                    ablationhits10.append(hits_at_k)
+                            print('\n \n \n \n ablationhits1 =', ablationhits1)
+                            print('ablationhits3 =', ablationhits3)
+                            print('ablationhits10 =', ablationhits10)
+                            print('ablationmeanrank =', ablationmeanrank)
 
                             # if ((k==3)  and (hits_at_k<=0.1) and setting_name=='Filtered'):
                             #     # self._saver.save(session, filename + '_epoch_' + str(epoch) + '.ckpt')
@@ -919,42 +994,42 @@ class VKGE_A:
 
                         filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
                         filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
-
-                        if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] == [1]:
-
-                            self.count1s[p_idx]+=1
-
-
-                        if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [3]:
-
-                            self.count3s[p_idx]+=1
-
-
-                        if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [5]:
-
-                            self.count5s[p_idx]+=1
-
-
-                        if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [10]:
-
-                            self.count10s[p_idx]+=1
-
-                        if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] == [1]:
-
-                            self.count1o[p_idx]+=1
-
-                        if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [3]:
-
-                            self.count3o[p_idx]+=1
-
-                        if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [5]:
-
-                            self.count5o[p_idx]+=1
-
-                        if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [10]:
-
-                            self.count10o[p_idx]+=1
-
+                        #
+                        # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] == [1]:
+                        #
+                        #     self.count1s[p_idx]+=1
+                        #
+                        #
+                        # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [3]:
+                        #
+                        #     self.count3s[p_idx]+=1
+                        #
+                        #
+                        # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [5]:
+                        #
+                        #     self.count5s[p_idx]+=1
+                        #
+                        #
+                        # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [10]:
+                        #
+                        #     self.count10s[p_idx]+=1
+                        #
+                        # if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] == [1]:
+                        #
+                        #     self.count1o[p_idx]+=1
+                        #
+                        # if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [3]:
+                        #
+                        #     self.count3o[p_idx]+=1
+                        #
+                        # if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [5]:
+                        #
+                        #     self.count5o[p_idx]+=1
+                        #
+                        # if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [10]:
+                        #
+                        #     self.count10o[p_idx]+=1
+                        #
 
 
                             # logger.warn(
@@ -966,21 +1041,40 @@ class VKGE_A:
                     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                         mean_rank = np.mean(setting_ranks)
                         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
+
+                        # if setting_name=='Filtered':
+                        #     ablationmeanrank.append(mean_rank)
+
                         for k in [1, 3, 5, 10]:
                             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
 
-                    print('totalp \n \n',self.totalp,'\n \n')
 
-                    print('count1o \n \n',self.count1o,'\n \n')
-                    print('count3o \n \n',self.count3o,'\n \n')
-                    print('count5o \n \n',self.count5o,'\n \n')
-                    print('count10o \n \n',self.count10o,'\n \n')
+                            # if setting_name=='Filtered':
+                            #
+                            #     if k==1:
+                            #         ablationhits1.append(hits_at_k)
+                            #     elif k==3:
+                            #         ablationhits3.append(hits_at_k)
+                            #     elif k==10:
+                            #         ablationhits10.append(hits_at_k)
+                            # print('\n \n \n \n ablationhits1 =',ablationhits1)
+                            # print('ablationhits3 =',ablationhits3)
+                            # print('ablationhits10 =',ablationhits10)
+                            # print('ablationmeanrank =',ablationmeanrank)
 
-                    print('count1s \n \n', self.count1s, '\n \n')
-                    print('count3s \n \n', self.count3s, '\n \n')
-                    print('count5s \n \n', self.count5s, '\n \n')
-                    print('count10s \n \n', self.count10s, '\n \n')
+                    #
+                    # print('totalp \n \n',self.totalp,'\n \n')
+                    #
+                    # print('count1o \n \n',self.count1o,'\n \n')
+                    # print('count3o \n \n',self.count3o,'\n \n')
+                    # print('count5o \n \n',self.count5o,'\n \n')
+                    # print('count10o \n \n',self.count10o,'\n \n')
+                    #
+                    # print('count1s \n \n', self.count1s, '\n \n')
+                    # print('count3s \n \n', self.count3s, '\n \n')
+                    # print('count5s \n \n', self.count5s, '\n \n')
+                    # print('count10s \n \n', self.count10s, '\n \n')
 
                 #
                     # e1, e2, p1, p2 = session.run(
