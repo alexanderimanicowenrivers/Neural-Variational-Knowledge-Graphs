@@ -920,10 +920,10 @@ class VKGE_A:
                                     ablationhits3.append(hits_at_k)
                                 elif k == 10:
                                     ablationhits10.append(hits_at_k)
-                            print('\n \n \n \n ablationhits1 =', ablationhits1)
-                            print('ablationhits3 =', ablationhits3)
-                            print('ablationhits10 =', ablationhits10)
-                            print('ablationmeanrank =', ablationmeanrank)
+                    logger.warn('\n \n \n \n ablationhits1 =', ablationhits1)
+                    logger.warn('ablationhits3 =', ablationhits3)
+                    logger.warn('ablationhits10 =', ablationhits10)
+                    logger.warn('ablationmeanrank =', ablationmeanrank)
 
                             # if ((k==3)  and (hits_at_k<=0.1) and setting_name=='Filtered'):
                             #     # self._saver.save(session, filename + '_epoch_' + str(epoch) + '.ckpt')
