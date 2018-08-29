@@ -927,14 +927,14 @@ class VKGE_tests:
 
                             scores_subj_c = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_subj)
 
-                            # confidence_subj+= np.divide(scores_subj_c,self.no_confidence_samples) #take bernoulli samples
-                            confidence_subj+= np.divide(np.random.binomial(1, p=scores_subj_c),self.no_confidence_samples) #take bernoulli samples
+                            confidence_subj+= np.divide(scores_subj_c,self.no_confidence_samples) #take bernoulli samples
+                            # confidence_subj+= np.divide(np.random.binomial(1, p=scores_subj_c),self.no_confidence_samples) #take bernoulli samples
 
                             # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
                             scores_obj_c = session.run(self.p_x_i, feed_dict=feed_dict_corrupt_obj)
 
-                            # confidence_obj+= np.divide(scores_obj_c,self.no_confidence_samples)
-                            confidence_obj+= np.divide(np.random.binomial(1, p=scores_obj_c),self.no_confidence_samples)
+                            confidence_obj+= np.divide(scores_obj_c,self.no_confidence_samples)
+                            # confidence_obj+= np.divide(np.random.binomial(1, p=scores_obj_c),self.no_confidence_samples)
 
                     elif self.alt_test in ['test2_bline','test3bline']: #creates random confidence levels between 0 and 1 for baseline test2
                         confidence_subj=np.random.random_sample(self.nb_entities,)
@@ -1032,69 +1032,71 @@ class VKGE_tests:
 
 
             for k in hts:
-                table=[experiments_filt[k],cvrg]
 
-                tips_na = pd.DataFrame(table)
-                tips = tips_na.transpose()
-                # tips = tips_na.fillna(value=0)
-
-                colnam='Hits@'+str(k)
-
-                columns = [colnam,'coverage']
-
-                tips.columns = columns
-
-                ax = sns.regplot(data=tips,x='coverage',y='Hits@'+str(k),scatter_kws = {"s": 80}, order = 2, ci = 0.95, truncate = True,label='Filtered')
-
-                table2 = [experiments_raw[k], cvrg]
-                logger.warn('Making graph at k {} '.format(k))
-
-                tips_na2 = pd.DataFrame(table2)
-                tips2 = tips_na2.transpose()
-                # tips = tips_na.fillna(value=0)
-
-
-                tips2.columns = columns
-                #
-                # ax = sns.regplot(data=tips2, x='coverage', y='Hits@' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
-                #                  truncate=True, label='Raw')
-                plt.legend()
-
-                ax.figure.savefig("ConfEstimationVar_H@"+str(k)+".png")
-                plt.clf()
-            table = [experiments_filt[0], cvrg]
-
-            tips_na = pd.DataFrame(table)
-            tips = tips_na.transpose()
-            # tips = tips_na.fillna(value=0)
-
-            colnam = 'Mean_Rank'
-            # colnam = 'Number_of_Samples'
-
-            columns = [colnam, 'coverage']
-
-            tips.columns = columns
-
-            ax = sns.regplot(data=tips, x='coverage', y='Mean_Rank', scatter_kws={"s": 80}, order=2, ci=0.95,
-                             truncate=True, label='Filtered')
-
-            table2 = [experiments_raw[0], cvrg]
-            logger.warn('Making graph for Mean Rank '.format(k))
-
-            tips_na2 = pd.DataFrame(table2)
-            tips2 = tips_na2.transpose()
-            # tips = tips_na.fillna(value=0)
-
-
-            tips2.columns = columns
-
-            # ax = sns.regplot(data=tips2, x='coverage', y='Mean_Rank', scatter_kws={"s": 80}, order=2, ci=0.95,
-            #                  truncate=True, label='Raw')
-            plt.legend()
-            # ax.figure.savefig("ConfEstimation_Count.png")
-
-            ax.figure.savefig("ConfEstimationVar_MeanRank.png")
-            plt.clf()
+                print('k is,',k,'results \n\n\n',experiments_filt[k])
+            #     table=[experiments_filt[k],cvrg]
+            #
+            #     tips_na = pd.DataFrame(table)
+            #     tips = tips_na.transpose()
+            #     # tips = tips_na.fillna(value=0)
+            #
+            #     colnam='Hits@'+str(k)
+            #
+            #     columns = [colnam,'coverage']
+            #
+            #     tips.columns = columns
+            #
+            #     ax = sns.regplot(data=tips,x='coverage',y='Hits@'+str(k),scatter_kws = {"s": 80}, order = 2, ci = 0.95, truncate = True,label='Filtered')
+            #
+            #     table2 = [experiments_raw[k], cvrg]
+            #     logger.warn('Making graph at k {} '.format(k))
+            #
+            #     tips_na2 = pd.DataFrame(table2)
+            #     tips2 = tips_na2.transpose()
+            #     # tips = tips_na.fillna(value=0)
+            #
+            #
+            #     tips2.columns = columns
+            #     #
+            #     # ax = sns.regplot(data=tips2, x='coverage', y='Hits@' + str(k), scatter_kws={"s": 80}, order=2, ci=0.95,
+            #     #                  truncate=True, label='Raw')
+            #     plt.legend()
+            #
+            #     ax.figure.savefig("ConfEstimationVar_H@"+str(k)+".png")
+            #     plt.clf()
+            # table = [experiments_filt[0], cvrg]
+            #
+            # tips_na = pd.DataFrame(table)
+            # tips = tips_na.transpose()
+            # # tips = tips_na.fillna(value=0)
+            #
+            # colnam = 'Mean_Rank'
+            # # colnam = 'Number_of_Samples'
+            #
+            # columns = [colnam, 'coverage']
+            #
+            # tips.columns = columns
+            #
+            # ax = sns.regplot(data=tips, x='coverage', y='Mean_Rank', scatter_kws={"s": 80}, order=2, ci=0.95,
+            #                  truncate=True, label='Filtered')
+            #
+            # table2 = [experiments_raw[0], cvrg]
+            # logger.warn('Making graph for Mean Rank '.format(k))
+            #
+            # tips_na2 = pd.DataFrame(table2)
+            # tips2 = tips_na2.transpose()
+            # # tips = tips_na.fillna(value=0)
+            #
+            #
+            # tips2.columns = columns
+            #
+            # # ax = sns.regplot(data=tips2, x='coverage', y='Mean_Rank', scatter_kws={"s": 80}, order=2, ci=0.95,
+            # #                  truncate=True, label='Raw')
+            # plt.legend()
+            # # ax.figure.savefig("ConfEstimation_Count.png")
+            #
+            # ax.figure.savefig("ConfEstimationVar_MeanRank.png")
+            # plt.clf()
 
 
                 # e1, e2, p1, p2 = session.run(

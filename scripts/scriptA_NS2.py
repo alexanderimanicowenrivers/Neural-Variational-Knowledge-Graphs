@@ -57,7 +57,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                ("{}/logs/modela_ablation/uclcs_nvkg_v1.{}".format(path, summary(c)))
+                ("{}/logs/modela_ablation2/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
 
@@ -82,7 +82,7 @@ def main(_):
         w9=[True])
 
     configurations = cartesian_product(hyperparameters_space)
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/modela_ablation'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/modela_ablation2'
 
 
     # Check that we are on the UCLCS cluster first
@@ -119,7 +119,7 @@ def main(_):
 #$ -e /dev/null
 #$ -t 1-{}
 #$ -l tmem=12G
-#$ -l h_rt=24:00:00
+#$ -l h_rt=48:00:00
 #$ -ac allow=LMNOPQSTU
 
 export LANG="en_US.utf8"

@@ -4,7 +4,6 @@
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA_NS2.py" afterPath="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_model2.py" afterPath="$PROJECT_DIR$/vkge/base_model2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/base_tests.py" afterPath="$PROJECT_DIR$/vkge/base_tests.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,7 +30,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base_model2.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base_model2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base_model2.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="44">
@@ -65,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scriptA_NS2.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="scriptA_NS2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="77" column="17" lean-forward="false" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
+            <state relative-caret-position="43">
+              <caret line="59" column="42" lean-forward="false" selection-start-line="59" selection-start-column="42" selection-end-line="59" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -78,8 +77,8 @@
       <file leaf-file-name="base_tests.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="238">
+              <caret line="1036" column="50" lean-forward="true" selection-start-line="1036" selection-start-column="18" selection-end-line="1036" selection-end-column="50" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#986#1140#0" expanded="false" />
@@ -92,7 +91,7 @@
       <file leaf-file-name="main_tests.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
+            <state relative-caret-position="401">
               <caret line="41" column="19" lean-forward="false" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="19" />
               <folding />
             </state>
@@ -149,11 +148,11 @@
       <find>lin</find>
       <find>negative_l1_distance</find>
       <find>train_writer</find>
-      <find>self.alt_test</find>
       <find>neg</find>
       <find>negsamples</find>
       <find>self.negsamples</find>
       <find>projection</find>
+      <find>self.alt_test</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -237,9 +236,9 @@
         <option value="$PROJECT_DIR$/vkge/training/constraints.py" />
         <option value="$PROJECT_DIR$/main_tests.py" />
         <option value="$PROJECT_DIR$/scripts/script_tests.py" />
+        <option value="$PROJECT_DIR$/vkge/base_model2.py" />
         <option value="$PROJECT_DIR$/vkge/base_tests.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
-        <option value="$PROJECT_DIR$/vkge/base_model2.py" />
       </list>
     </option>
   </component>
@@ -454,20 +453,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00907" summary="BS for ModelA">
-      <created>1534435717006</created>
-      <option name="number" value="00907" />
-      <option name="presentableId" value="LOCAL-00907" />
-      <option name="project" value="LOCAL" />
-      <updated>1534435717008</updated>
-    </task>
-    <task id="LOCAL-00908" summary="BS for ModelA">
-      <created>1534444315677</created>
-      <option name="number" value="00908" />
-      <option name="presentableId" value="LOCAL-00908" />
-      <option name="project" value="LOCAL" />
-      <updated>1534444315677</updated>
     </task>
     <task id="LOCAL-00909" summary="updated projection for model A">
       <created>1534603502556</created>
@@ -798,7 +783,21 @@
       <option name="project" value="LOCAL" />
       <updated>1535475056391</updated>
     </task>
-    <option name="localTasksCounter" value="956" />
+    <task id="LOCAL-00956" summary="ablation">
+      <created>1535549163000</created>
+      <option name="number" value="00956" />
+      <option name="presentableId" value="LOCAL-00956" />
+      <option name="project" value="LOCAL" />
+      <updated>1535549163000</updated>
+    </task>
+    <task id="LOCAL-00957" summary="ablation">
+      <created>1535549350187</created>
+      <option name="number" value="00957" />
+      <option name="presentableId" value="LOCAL-00957" />
+      <option name="project" value="LOCAL" />
+      <updated>1535549350187</updated>
+    </task>
+    <option name="localTasksCounter" value="958" />
     <servers />
   </component>
   <component name="TodoView">
@@ -884,7 +883,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="model A testing" />
     <MESSAGE value="model A NS" />
     <MESSAGE value="compression cost" />
     <MESSAGE value="BS2" />
@@ -909,7 +907,8 @@
     <MESSAGE value="Fixed analysis section" />
     <MESSAGE value="updated confidence estimation testing" />
     <MESSAGE value="redo conf est" />
-    <option name="LAST_COMMIT_MESSAGE" value="redo conf est" />
+    <MESSAGE value="ablation" />
+    <option name="LAST_COMMIT_MESSAGE" value="ablation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1173,31 +1172,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="41" column="19" lean-forward="false" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
           <caret line="59" column="50" lean-forward="false" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-            <element signature="e#986#1140#0" expanded="false" />
-            <element signature="e#1169#1504#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1209,11 +1188,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
+    <entry file="file://$PROJECT_DIR$/main_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="77" column="17" lean-forward="false" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
+        <state relative-caret-position="401">
+          <caret line="41" column="19" lean-forward="false" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/base_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="1036" column="50" lean-forward="true" selection-start-line="1036" selection-start-column="18" selection-end-line="1036" selection-end-column="50" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+            <element signature="e#986#1140#0" expanded="false" />
+            <element signature="e#1169#1504#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1226,6 +1217,14 @@
             <element signature="e#881#1035#0" expanded="false" />
             <element signature="e#1064#1399#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="43">
+          <caret line="59" column="42" lean-forward="false" selection-start-line="59" selection-start-column="42" selection-end-line="59" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
