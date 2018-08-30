@@ -78,8 +78,8 @@ def main(_):
         w5=[False],
         w6=[1e-3],
         w7=['DistMult'],
-        w8=[0,1,2,3,4,5,6],
-        w9=[True])
+        w8=[0],
+        w9=[False])
 
     configurations = cartesian_product(hyperparameters_space)
     path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/modela_ablation2'
