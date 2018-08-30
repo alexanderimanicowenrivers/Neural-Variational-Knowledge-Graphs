@@ -77,7 +77,7 @@ def main(_):
         w4 = ['fb15k-237', 'wn18', 'wn18rr'],
         w5=[False],
         w6=[1e-3],
-        w7=['Complex'],
+        w7=['ComplEx'],
         w8=[0,1,2,3,4,5,6],
         w9=[False])
 
