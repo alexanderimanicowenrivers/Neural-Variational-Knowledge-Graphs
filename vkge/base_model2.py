@@ -920,10 +920,10 @@ class VKGE_A:
                                     ablationhits3.append(hits_at_k)
                                 elif k == 10:
                                     ablationhits10.append(hits_at_k)
-                    logger.warn('\n \n \n \n ablationhits1 = {}'.format(ablationhits1))
-                    logger.warn('ablationhits3 = {}'.format( ablationhits3))
-                    logger.warn('ablationhits10 = {}'.format( ablationhits10))
-                    logger.warn('ablationmeanrank = {}'.format( ablationmeanrank))
+                    # logger.warn('\n \n \n \n ablationhits1 = {}'.format(ablationhits1))
+                    # logger.warn('ablationhits3 = {}'.format( ablationhits3))
+                    # logger.warn('ablationhits10 = {}'.format( ablationhits10))
+                    # logger.warn('ablationmeanrank = {}'.format( ablationmeanrank))
 
                             # if ((k==3)  and (hits_at_k<=0.1) and setting_name=='Filtered'):
                             #     # self._saver.save(session, filename + '_epoch_' + str(epoch) + '.ckpt')
@@ -1077,21 +1077,21 @@ class VKGE_A:
                     # print('count10s \n \n', self.count10s, '\n \n')
 
                 #
-                    # e1, e2, p1, p2 = session.run(
-                    #     [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
-                    #      self.predicate_embedding_sigma], feed_dict={})
-                    # np.save(
-                    #     "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/lw_entity_embeddings",
-                    #     e1)
-                    # np.save(
-                    #     "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/lw_entity_embedding_sigma",
-                    #     e2)
-                    # np.save(
-                    #     "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/lw_predicate_embedding_mean",
-                    #     p1)
-                    # np.save(
-                    #     "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/lw_predicate_embedding_sigma",
-                    #     p2)
+                    e1, e2, p1, p2 = session.run(
+                        [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
+                         self.predicate_embedding_sigma], feed_dict={})
+                    np.save(
+                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge/lw_entity_embeddings",
+                        e1)
+                    np.save(
+                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge/lw_entity_embedding_sigma",
+                        e2)
+                    np.save(
+                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge/lw_predicate_embedding_mean",
+                        p1)
+                    np.save(
+                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge/lw_predicate_embedding_sigma",
+                        p2)
 
                     # np.save("/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/lossvals",
                     #         allloss)
