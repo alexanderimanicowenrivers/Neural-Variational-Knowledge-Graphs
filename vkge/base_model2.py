@@ -1076,22 +1076,22 @@ class VKGE_A:
                     # print('count5s \n \n', self.count5s, '\n \n')
                     # print('count10s \n \n', self.count10s, '\n \n')
 
-                #
-                    e1, e2, p1, p2 = session.run(
-                        [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
-                         self.predicate_embedding_sigma], feed_dict={})
-                    np.save(
-                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge/lw_entity_embeddings",
-                        e1)
-                    np.save(
-                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge/lw_entity_embedding_sigma",
-                        e2)
-                    np.save(
-                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge/lw_predicate_embedding_mean",
-                        p1)
-                    np.save(
-                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge/lw_predicate_embedding_sigma",
-                        p2)
+                # #
+                #     e1, e2, p1, p2 = session.run(
+                #         [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
+                #          self.predicate_embedding_sigma], feed_dict={})
+                #     np.save(
+                #         "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge/lw_entity_embeddings",
+                #         e1)
+                #     np.save(
+                #         "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge/lw_entity_embedding_sigma",
+                #         e2)
+                #     np.save(
+                #         "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge/lw_predicate_embedding_mean",
+                #         p1)
+                #     np.save(
+                #         "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge/lw_predicate_embedding_sigma",
+                #         p2)
 
                     # np.save("/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/lossvals",
                     #         allloss)
