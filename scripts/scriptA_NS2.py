@@ -75,11 +75,11 @@ def main(_):
         w3=[300],
         # w4=['kinship', 'nations', 'umls'],
         w4 = ['fb15k-237', 'wn18', 'wn18rr'],
-        w5=[False,True],
+        w5=[False],
         w6=[1e-3],
         w7=['ComplEx'],
         w8=[0,1,2,3,4,5,6],
-        w9=[False,True])
+        w9=[False])
 
     configurations = cartesian_product(hyperparameters_space)
     path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/modela_noprojecion'
