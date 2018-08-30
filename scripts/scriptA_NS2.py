@@ -57,7 +57,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                ("{}/logs/modela_ablation2/uclcs_nvkg_v1.{}".format(path, summary(c)))
+                ("{}/logs/modela_noprojecion/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
 
@@ -82,7 +82,7 @@ def main(_):
         w9=[False])
 
     configurations = cartesian_product(hyperparameters_space)
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/modela_ablation2'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/modela_noprojecion'
 
 
     # Check that we are on the UCLCS cluster first
