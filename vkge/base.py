@@ -3,23 +3,15 @@
 import math
 import numpy as np
 import tensorflow as tf
-import os
-from vkge.knowledgebase import Fact, KnowledgeBaseParser
-from functools import reduce
-
 import vkge.models as models
 from vkge.training import constraints, corrupt, index
 from vkge.training.util import make_batches
-import vkge.io as io
-from random import randint
-# new
-
 import logging
-import sys
-import sys
 logger = logging.getLogger(__name__)
+tfd = tf.contrib.distributions
 
-import collections
+
+
 def read_triples(path):
     triples = []
     with open(path, 'rt') as f:
@@ -98,31 +90,23 @@ class model:
         # super().__init__()
 
         self.alt_test=alt_test
-        self.model='ptriple' #decides if we sample per triple or per entity/ predicate/ object
         self.sigma_alt = sigma_alt
         self.score_func=score_func
         self.alt_updates=alt_updates
-        self.negsamples=1 #for ablation
-        # self.negsamples=negsamples
+        self.negsamples=1
 
         self.alt_opt=alt_opt
         self.abltaion_num=negsamples
-
-
-                # adjust for correct format for model input
 
         if self.score_func=='ComplEx':
             predicate_embedding_size = embedding_size*2
             entity_embedding_size = embedding_size*2
             sig_max = np.log((1.0/embedding_size*2.0)+1e-10)
-            # sig_max = np.exp((1.0 / embedding_size * 2.0) ** 2)
-
 
         else:
             predicate_embedding_size = embedding_size
             entity_embedding_size = embedding_size
             sig_max = np.log((1.0/embedding_size*1.0)+1e-10)
-            # sig_max = np.exp((1.0 / embedding_size * 1.0) ** 2)
 
         sig_min = sig_max
 
@@ -136,7 +120,6 @@ class model:
         else:
             self.projection = projection
 
-        # Dataset
         self.dataset_name = dataset
 
         logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(self.dataset_name))
@@ -149,10 +132,6 @@ class model:
         ##### for test time ######
         all_triples = train_triples + valid_triples + test_triples
 
-        # n=len(all_triples)*1.0 use this for BS
-        # if n<=no_batches:
-        #     sys.exit("Stopping Job As Batch Size Exceeds Triples")
-
 
         entity_set = {s for (s, p, o) in all_triples} | {o for (s, p, o) in all_triples}
         predicate_set = {p for (s, p, o) in all_triples}
@@ -160,320 +139,29 @@ class model:
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
-        # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
-        # optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
-
-        # #delete this later
-        #
-        # ent=collections.defaultdict(float)
-        # pred=collections.defaultdict(float)
-
-
-
-        # logger.warn('entity {} \n \n preds {}..'.format(ent,pred))
-
-        self.totalp=collections.defaultdict(float) #predicate counts total
-        self.totale=collections.defaultdict(float) #predicate counts total
-
-        self.count1s=collections.defaultdict(float) #predicate hits @1 counts correct
-        self.count3s=collections.defaultdict(float) #predicate hits @3 counts correct
-        self.count5s=collections.defaultdict(float) #predicate hits @5 counts correct
-        self.count10s=collections.defaultdict(float) #predicate hits @10 counts correct
-
-        self.count1o=collections.defaultdict(float) #predicate hits @1 counts correct
-        self.count3o=collections.defaultdict(float) #predicate hits @3 counts correct
-        self.count5o=collections.defaultdict(float) #predicate hits @5 counts correct
-        self.count10o=collections.defaultdict(float) #predicate hits @10 counts correct
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, sig_max, sig_min)
         self.nb_epochs = 500
 
-        for (s, p, o) in all_triples:
-            self.totalp[self.predicate_to_idx[p]] += 1
-            self.totale[self.entity_to_idx[s]] += 1
-            self.totale[self.entity_to_idx[o]] += 1
-
-        # print('predicates are \n \n \n',self.predicate_to_idx)
-        # print('pred count is \n \n \n ',self.totalp)
-        #
-        # print('preds=',self.entity_to_idx)
-        # print('predc=',self.totale)
-        #
-        # np.save("/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/entity_to_idx",list(self.entity_to_idx))
-        # np.save("/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/totale",list(self.totale.values()))
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
 
-    @staticmethod
-    def input_parameters(inputs, parameters_layer):
+    def scale_embedding(self, log_sigma_square):
         """
-                    Separates distribution parameters from embeddings
-        """
-        parameters = tf.nn.embedding_lookup(parameters_layer, inputs)
-        mu, log_sigma_square = tf.split(value=parameters, num_or_size_splits=2, axis=1)
-        return mu, log_sigma_square
-
-    def _setup_summaries(self):
-
-        with tf.name_scope('entity_sigma'):
-
-            self.variable_summaries(tf.exp(self.entity_embedding_sigma))
-
-        with tf.name_scope('entity_mean'):
-
-
-            self.variable_summaries(self.entity_embedding_mean)
-
-        with tf.name_scope('pred_sigma'):
-
-            self.variable_summaries(tf.exp(self.predicate_embedding_sigma))
-
-        with tf.name_scope('pred_mean'):
-
-            self.variable_summaries(self.predicate_embedding_mean)
-
-        with tf.name_scope('loss'):
-            tf.summary.scalar("g_loss_positive", self.g_objective_p)
-
-            tf.summary.scalar("g_loss_negative", self.g_objective_n)
-
-            tf.summary.scalar("total_loss", self.elbo)
-
-            tf.summary.scalar("e_loss_pred", self.e_objective2)
-
-            tf.summary.scalar("e_loss_entity", self.e_objective1)
-
-        # with tf.name_scope('Samples'):
-        #
-        #     with tf.name_scope('Entity1'):
-        #         self.var1_1 = tf.nn.embedding_lookup(self.entity_embedding_mean, self.var1)
-        #         self.var1_2 = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.var1)
-        #
-        #         with tf.name_scope('Entity1_Mean'):
-        #             self.variable_summaries(self.var1_1)
-        #
-        #         with tf.name_scope('Entity1_logStd'):
-        #             self.variable_summaries(tf.sqrt(tf.exp(self.var1_2)))
-        #
-        #     with tf.name_scope('Predicate1'):
-        #         self.var2_1 = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.var2)
-        #         self.var2_2 = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.var2)
-        #
-        #         with tf.name_scope('Predicate1_Mean'):
-        #             self.variable_summaries(self.var2_1)
-        #
-        #         with tf.name_scope('Predicate1_logStd'):
-        #             self.variable_summaries(tf.sqrt(tf.exp(self.var2_2)))
-
-    def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=False):
-        global_step = tf.train.get_global_step()
-        if global_step is None:
-            global_step = tf.train.create_global_step()
-
-        gradients = optimizer.compute_gradients(loss=loss)
-
-        with tf.name_scope('gradients'):
-            tf.summary.scalar('gradients_l2', tf.add_n([tf.nn.l2_loss(grad[0]) for grad in gradients]))
-
-        if self.alt_opt:
-        ##clip for robust learning as observed nans during training
-        #
-
-            gradients = [(tf.clip_by_norm(grad, 1), var)
-                         for grad, var in gradients if grad is not None]
-
-
-        train_op = optimizer.apply_gradients(gradients, global_step)
-
-        # variable_size = lambda v: reduce(lambda x, y: x * y, v.get_shape().as_list()) if v.get_shape() else 1
-        # num_params = sum(variable_size(v) for v in self.train_variables)
-        # print("Number of parameters: {}".format(num_params))
-
-        self.loss = loss
-        self.training_step = train_op
-
-        self.global_step = global_step
-        return loss, train_op
-
-    def sample_embedding(self, mu, log_sigma_square):
-        """
-                        Samples from embeddings
+                        Returns the scale (std dev) from embeddings for tensorflow distributions MultivariateNormalDiag function
                 """
-        # if self.sigma_alt:
-        #     sigma = tf.log(1 + tf.exp(log_sigma_square))
-        # else:
+
         sigma = tf.sqrt(tf.exp(log_sigma_square))
 
-        embedding_size = mu.get_shape()[1].value
+        return sigma
 
-        eps = tf.random_normal((1, embedding_size), 0, 1, dtype=tf.float32)
-
-        return mu+sigma*eps
-
-    def sample_embedding_ptriple(self, mu, log_sigma_square):
-        """
-                        Samples from embeddings
-                """
-        # if self.sigma_alt:
-        #     sigma = tf.log(1 + tf.exp(log_sigma_square))
-        # else:
-        sigma = tf.sqrt(tf.exp(log_sigma_square))
-
-
-
-        return mu+sigma*self.noise
-
-    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
-                    sig_max, pred_sig):
-        """
-                        Constructs Model
-        """
-        self.noise = tf.placeholder(tf.float32, shape=[None,entity_embedding_size])
-        self.idx_pos = tf.placeholder(tf.int32, shape=[None])
-        self.idx_neg = tf.placeholder(tf.int32, shape=[None])
-
-        self.no_samples = tf.placeholder(tf.int32)
-        self.s_inputs = tf.placeholder(tf.int32, shape=[None])
-        self.p_inputs = tf.placeholder(tf.int32, shape=[None])
-        self.o_inputs = tf.placeholder(tf.int32, shape=[None])
-        self.y_inputs = tf.placeholder(tf.bool, shape=[None])
-        self.KL_discount = tf.placeholder(tf.float32)  # starts at 0.5
-        self.BernoulliSRescale = tf.placeholder(tf.float32)  # starts at 0.5
-
-        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
-                           pred_sig)
-        self.build_decoder()
-
-        # Kullback Leibler divergence   in one go
-
-        # self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
-        # self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
-        # self.g_objective = tf.reduce_sum(self.hinge_losses)
-
-
-        # ####################################  Weight uncertainity in NN's
-
-
-        # self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
-        # self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
-        # self.samples_all= tf.concat(axis=0, values=[self.h_s, self.h_p, self.h_o])
-        # #
-        # self.sigma_all= tf.log(1 + tf.exp(self.log_sigma_all ))
-        # # self.dist = tf.contrib.distributions.Normal(self.mu_all, self.sigma_all)
-        # # self.e_objective = self.dist.pdf(self.samples_all)
-        # self.e_objective=tf.sqrt(1 / (2 * 3.14 * (self.sigma_all ** 2)))*tf.exp(-(self.samples_all - self.mu_all)**2 / (2 * (self.samples_all ** 2)))
-        #
-        # self.e_objective = tf.reduce_sum(tf.log(self.e_objective)) * self.KL_discount
-
-        # ####################################  one KL
-
-        #
-        #
-
-        self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
-        self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
-
-        self.p_x_i_pos = tf.gather(self.p_x_i, self.idx_pos)
-        self.p_x_i_neg = tf.gather(self.p_x_i, self.idx_neg)
-
-        self.g_objective_p = -tf.reduce_sum(
-            tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
-
-        self.g_objective_n = -tf.reduce_sum((
-            tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
-
-       # positive samples
-
-
-       #  #calc elbows
-       #
-       #  # self.e_objective = 0.0
-        self.e_objective = 0.0
-        self.e_objective1 = 0.0
-        self.e_objective2 = 0.0
-
-        self.g_objective = self.g_objective_p + self.g_objective_n*self.BernoulliSRescale  #if reduce sum
-# ##mock elbo
-#
-        self.e_objective1-= 0.5 * tf.reduce_sum(
-                         1. + self.entity_embedding_sigma - tf.square(self.entity_embedding_mean) - tf.exp(self.entity_embedding_sigma))
-        self.e_objective2 -= 0.5 * tf.reduce_sum(
-            1. + self.predicate_embedding_sigma - tf.square(self.predicate_embedding_mean) - tf.exp(self.predicate_embedding_sigma))
-
-        self.e_objective = (self.e_objective1+self.e_objective2)* self.KL_discount
-
-        self.elbo= self.e_objective+self.g_objective
-
-        # self.mu_all=tf.concat(axis=0,values=[self.mu_s,self.mu_p,self.mu_o])
-        # self.log_sigma_all=tf.concat(axis=0,values=[self.log_sigma_sq_s,self.log_sigma_sq_p,self.log_sigma_sq_o])
-        #
-        # self.e_objective-= 0.5 * tf.reduce_sum(
-        #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
-        #
-        # self.e_objective=self.e_objective*self.KL_discount *self.epoch_d
-        # ####################################  separately
-
-        # self.e_objective1 -= 0.5 * tf.reduce_sum(
-        #     1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
-        # self.e_objective2 -= 0.5 * tf.reduce_sum(
-        #     1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
-        # self.e_objective3 -= 0.5 * tf.reduce_sum(
-        #     1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))
-
-        # self.e_objective1 -= 0.5 * tf.reduce_sum(
-        #     1. + self.log_sigma_sq_s - tf.square(self.mu_s) - tf.exp(self.log_sigma_sq_s))
-        # self.e_objective2 -= 0.5 * tf.reduce_sum(
-        #     1. + self.log_sigma_sq_p - tf.square(self.mu_p) - tf.exp(self.log_sigma_sq_p))
-        # self.e_objective3 -= 0.5 * tf.reduce_sum(
-        #     1. + self.log_sigma_sq_o - tf.square(self.mu_o) - tf.exp(self.log_sigma_sq_o))  # Log likelihood
-        # self.g_objective = -tf.reduce_sum(tf.log(tf.gather(self.p_x_i, self.y_inputs) + 1e-10))
-
-        #
-        # self.e_objective1 = self.e_objective1
-        # self.e_objective2 = self.e_objective1
-        # self.e_objective3 = self.e_objective1
-        #
-        # self.e_objective = (1.0 / 3.0) * (self.e_objective1 + self.e_objective2 + self.e_objective3)
-
-        ###########best ELBO
-        # self.e_objective=0
-        # self.mu_all = tf.concat(axis=0, values=[self.mu_s, self.mu_p, self.mu_o])
-        # self.log_sigma_all = tf.concat(axis=0, values=[self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o])
-        # #
-        #
-        # self.e_objective-= 0.5 * tf.reduce_sum(
-        #                  1. + self.log_sigma_all - tf.square(self.mu_all) - tf.exp(self.log_sigma_all))
-        #
-
-        # self.elbo = self.g_objective + self.e_objective
-
-        # self.elbo = self.g_objective
-
-        # self.elbo = self.g_objective_p + self.g_objective_n
-
-        # if self.alt_opt:
-        # ##clip for robust learning as observed nans during training
-        # #
-        #     gradients = optimizer.compute_gradients(loss=self.elbo)
-        #
-        #
-        #     gradients = [(tf.clip_by_norm(grad, 1), var)
-        #                  for grad, var in gradients if grad is not None]
-        #
-        #     self.training_step = optimizer.apply_gradients(gradients)
-        # else:
-        # #
-        # #
-        #     self.training_step = optimizer.minimize(self.elbo)
-
-        self.train_variables=tf.trainable_variables()
-        self._setup_training(loss=self.elbo,optimizer=optimizer)
-        self._setup_summaries()
-        # self._variables = tf.global_variables()
-        self._saver = tf.train.Saver()
+    def make_prior(self,code_size):
+        loc = tf.zeros(code_size)
+        scale = tf.ones(code_size)
+        return tfd.MultivariateNormalDiag(loc, scale)
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
                       sig_min):
@@ -483,10 +171,6 @@ class model:
         logger.warn('Building Inference Networks q(h_x | x) ..{}'.format(self.score_func))
 
         init2 = np.round(sig_max,decimals=2)
-
-        # experiment 1 parameters, initalises a sigma to 0.031
-        # init2 = (np.log(0.05 ** 2))
-        # init3 = (np.log(0.05 ** 2))
 
         with tf.variable_scope('Encoder'):
 
@@ -581,30 +265,19 @@ class model:
                 self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
                 self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
 
-            with tf.variable_scope('Decoder'):
 
-                # self.h_s = self.sample_embedding_ptriple(self.mu_s, self.log_sigma_sq_s)
-                # self.h_p = self.sample_embedding_ptriple(self.mu_p, self.log_sigma_sq_p)
-                # self.h_o = self.sample_embedding_ptriple(self.mu_o, self.log_sigma_sq_o)
-                # #
-                # else:
-                #
-                self.h_s = self.sample_embedding(self.mu_s, self.log_sigma_sq_s)
-                self.h_p = self.sample_embedding(self.mu_p, self.log_sigma_sq_p)
-                self.h_o = self.sample_embedding(self.mu_o, self.log_sigma_sq_o)
-
-                # self.h_s = self.mu_s
-                # self.h_p = self.mu_p
-                # self.h_o = self.mu_o
 
     def build_decoder(self):
         """
                                 Constructs Decoder
         """
         logger.warn('Building Inference Network p(y|h) for {} score function.'.format(self.score_func))
-        # w9=['TransE','DistMult','RESCAL','ComplEx']
 
         with tf.variable_scope('Inference'):
+
+            self.h_s = tfd.MultivariateNormalDiag(self.mu_s, self.scale_embedding(self.log_sigma_sq_s)).sample()
+            self.h_p = tfd.MultivariateNormalDiag(self.mu_p, self.scale_embedding(self.log_sigma_sq_p)).sample()
+            self.h_o = tfd.MultivariateNormalDiag(self.mu_o, self.scale_embedding(self.log_sigma_sq_o)).sample()
 
             if self.score_func=='DistMult':
 
@@ -632,22 +305,83 @@ class model:
             self.p_x_i = tf.sigmoid(self.scores)
             self.p_x_i_test = tf.sigmoid(self.scores_test)
 
+    def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=False):
+        global_step = tf.train.get_global_step()
+        if global_step is None:
+            global_step = tf.train.create_global_step()
+
+        gradients = optimizer.compute_gradients(loss=loss)
+
+        with tf.name_scope('gradients'):
+            tf.summary.scalar('gradients_l2', tf.add_n([tf.nn.l2_loss(grad[0]) for grad in gradients]))
+
+        if self.alt_opt:
+        ##clip for robust learning as observed nans during training
+        #
+
+            gradients = [(tf.clip_by_norm(grad, 1), var)
+                         for grad, var in gradients if grad is not None]
 
 
+        train_op = optimizer.apply_gradients(gradients, global_step)
 
-    def variable_summaries(self, var):
-        """Summaries of a Tensor"""
-        with tf.name_scope('summaries'):
-            mean = tf.reduce_mean(var)
-            tf.summary.scalar('mean', mean)
-            with tf.name_scope('stddev'):
-                stddev = tf.sqrt(tf.reduce_mean(tf.square(var - mean)))
-            tf.summary.scalar('stddev', stddev)
-            tf.summary.scalar('max', tf.reduce_max(var))
-            tf.summary.scalar('min', tf.reduce_min(var))
-            tf.summary.histogram('histogram', var)
+        self.loss = loss
+        self.training_step = train_op
+
+        self.global_step = global_step
+        return loss, train_op
+
+    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
+                    sig_max, pred_sig):
+        """
+                        Constructs Model
+        """
+        self.noise = tf.placeholder(tf.float32, shape=[None,entity_embedding_size])
+        self.idx_pos = tf.placeholder(tf.int32, shape=[None])
+        self.idx_neg = tf.placeholder(tf.int32, shape=[None])
+
+        self.no_samples = tf.placeholder(tf.int32)
+        self.s_inputs = tf.placeholder(tf.int32, shape=[None])
+        self.p_inputs = tf.placeholder(tf.int32, shape=[None])
+        self.o_inputs = tf.placeholder(tf.int32, shape=[None])
+        self.y_inputs = tf.placeholder(tf.bool, shape=[None])
+        self.KL_discount = tf.placeholder(tf.float32)
+        self.BernoulliSRescale = tf.placeholder(tf.float32)  #
+
+        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
+                           pred_sig)
+        self.build_decoder()
+
+        self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
+        self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
+
+        self.p_x_i_pos = tf.gather(self.p_x_i, self.idx_pos)
+        self.p_x_i_neg = tf.gather(self.p_x_i, self.idx_neg)
+
+        # Negative log likelihood
+
+        self.g_objective_p = -tf.reduce_sum(
+            tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
+        self.g_objective_n = -tf.reduce_sum((
+            tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
+        self.ng_objective = self.g_objective_p + self.g_objective_n*self.BernoulliSRescale  #if reduce sum
 
 
+        #KL
+
+        prior = self.make_prior(code_size=entity_embedding_size)
+        entity_posterior=tfd.MultivariateNormalDiag(self.entity_embedding_mean, self.scale_embedding(self.entity_embedding_sigma))
+        predicate_posterior=tfd.MultivariateNormalDiag(self.predicate_embedding_mean, self.scale_embedding(self.predicate_embedding_sigma))
+
+        self.e_objective1=tfd.kl_divergence(entity_posterior, prior)
+        self.e_objective2=tfd.kl_divergence(predicate_posterior, prior)
+        self.ne_objective = (self.e_objective1+self.e_objective2)* self.KL_discount
+
+        # Negative ELBO
+
+        self.nelbo= self.ne_objective+self.ng_objective
+
+        self._setup_training(loss=self.nelbo,optimizer=optimizer)
 
     def stats(self, values):
         """
@@ -663,13 +397,7 @@ class model:
 
         """
 
-
-        earl_stop = 0
-
         all_triples = train_triples + valid_triples + test_triples
-
-        len_valid=len(valid_triples)
-        len_test=len(test_triples)
 
         index_gen = index.GlorotIndexGenerator()
 
@@ -689,19 +417,8 @@ class model:
 
         self.negsamples = int(self.negsamples)
 
-        # total_negatives = int(2.0*len(all_triples)*(self.nb_entities-1))
-
-        logger.warn("Number of negative samples per positive is {}, \n batch size is {} \n number of positive triples {} , \n  bernoulli rescale {}".format(self.negsamples,self.negsamples*batch_size,len(all_triples),(2.0*(self.nb_entities-1))))
-
-
         nb_versions = int(self.negsamples + 1)  # neg samples + original
         projection_steps = [constraints.unit_sphere_logvar(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere_logvar(self.entity_embedding_sigma, norm=1.0)]
-        # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0),constraints.unit_sphere(self.predicate_embedding_mean, norm=1.0),constraints.unit_sphere_logvar(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere_logvar(self.entity_embedding_sigma, norm=1.0)]
-        # projection_steps = [constraints.unit_cube_logvar(self.predicate_embedding_sigma, val=1.0),constraints.unit_cube_logvar(self.entity_embedding_sigma, norm=1.0)]
-
-
-        max_hits_at_k = 0
-        ####### COMPRESSION COST PARAMETERS
 
         M = int(nb_batches)
 
@@ -709,7 +426,6 @@ class model:
         pi_e = np.log(2.0)
 
         pi_t = np.exp(np.linspace(pi_s, pi_e, M) - M * np.log(2.0))
-        # pi_t = pi_t + np.flip(pi_t, axis=0) #modified
 
         pi = (1 / np.sum(pi_t)) * pi_t  # normalise pi
         #####################
@@ -717,10 +433,7 @@ class model:
         ##
         # Train
         ##
-        ablationhits1=[]
-        ablationhits3=[]
-        ablationhits10=[]
-        ablationmeanrank=[]
+
 
         init_op = tf.global_variables_initializer()
         with tf.Session() as session:
@@ -728,24 +441,14 @@ class model:
 
             neg_subs = math.ceil(int(self.negsamples / 2))
 
-            logger.warn("\n \n \n neg subs is {} \n \n \n".format(neg_subs))
-            # train_writer = tf.summary.FileWriter('/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar', session.graph)
-            allloss=[]
             for epoch in range(1, nb_epochs + 1):
 
-
-
                 counter = 0
-
-
-                kl_inc_val = 1.0
-
                 order = self.random_state.permutation(nb_samples)
                 Xs_shuf, Xp_shuf, Xo_shuf = Xs[order], Xp[order], Xo[order]
 
                 loss_values = []
                 total_loss_value = 0
-
 
                 for batch_no, (batch_start, batch_end) in enumerate(batches):
 
@@ -771,23 +474,10 @@ class model:
 
                     vec_neglabels=[int(1)]+([int(0)]*(int(self.negsamples)))
 
-                    #
-                    # loss_args = {
-                    #     self.KL_discount: pi[counter],
-                    #     self.s_inputs: Xs_batch,
-                    #     self.p_inputs: Xp_batch,
-                    #     self.o_inputs: Xo_batch,
-                    #     self.y_inputs: np.array(vec_neglabels * curr_batch_size),
-                    #     self.epoch_d: kl_inc_val
-                    # }
-                    #
-                    # #
-
                     BS=(2.0*(self.nb_entities-1)/self.negsamples)
 
                     if (epoch >= (nb_epochs/10)) or (self.abltaion_num == 2 ):
                         kl_linwarmup = (pi[counter])
-                        # kl_linwarmup= (1.0/nb_batches)
 
                         if self.abltaion_num == 1:
                             kl_linwarmup = (1.0 / nb_batches)
@@ -802,435 +492,87 @@ class model:
 
 
                     loss_args = {
-                        # self.no_samples:1, #number of samples for precision test
                         self.KL_discount: kl_linwarmup,
-                        # self.KL_discount: (pi[counter]),
-
-                        # self.KL_discount: (1.0/nb_batches),
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size)
                         ,self.BernoulliSRescale: BS
-                        # , self.BernoulliSRescale: 1.0
                         , self.idx_pos: np.arange(curr_batch_size),
                         self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
                     }
 
-
-                    # merge = tf.summary.merge_all()  # for TB
-                    #
-                    # summary,_, elbo_value = session.run([merge, self.training_step, self.elbo],
-                    #                                          feed_dict=loss_args)
-                    # train_writer.add_summary(summary, tf.train.global_step(session, self.global_step))
-                    #
-
-                    # loss_args = {
-                    #     # self.no_samples:1, #number of samples for precision test
-                    #     self.KL_discount: kl_linwarmup,
-                    #     # self.KL_discount: (pi[counter]),
-                    #
-                    #     # self.KL_discount: (1.0/nb_batches),
-                    #     self.s_inputs: Xs_batch,
-                    #     self.p_inputs: Xp_batch,
-                    #     self.o_inputs: Xo_batch,
-                    #     self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-                    #     # ,self.BernoulliSRescale: (2.0*(self.nb_entities-1)/self.negsamples)
-                    #     , self.BernoulliSRescale: 1.0
-                    #     , self.idx_pos: np.arange(curr_batch_size),
-                    #     self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
-                    # }
-                    _, elbo_value = session.run([ self.training_step, self.elbo],
+                    _, elbo_value = session.run([ self.training_step, self.nelbo],
                                                              feed_dict=loss_args)
-
-
-                    # tensorboard
-
-
-
-                    # logger.warn('mu s: {0}\t \t log sig s: {1} \t \t h s {2}'.format(a1,a2,a3 ))
-
 
                     loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
                     total_loss_value += elbo_value
 
                     counter += 1
-                #
-                # if self.projection:
+
                     if ((self.projection) and (epoch<=nb_epochs)): #so you do not project before evaluation
 
                         for projection_step in projection_steps:
                             session.run([projection_step])
 
-                allloss.append(loss_values)
                 logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
 
+                ##
+                # Test
+                ##
 
                 if (epoch % 50) == 0:
 
+                    for eval_name,eval_triples in [('valid',valid_triples),('test',test_triples)]:
 
-                    eval_name = 'valid'
-                    eval_triples = valid_triples
-                    ranks_subj, ranks_obj = [], []
-                    filtered_ranks_subj, filtered_ranks_obj = [], []
+                        ranks_subj, ranks_obj = [], []
+                        filtered_ranks_subj, filtered_ranks_obj = [], []
 
-                    for _i, (s, p, o) in enumerate(eval_triples):
-                        s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], \
-                                              self.entity_to_idx[o]
+                        for _i, (s, p, o) in enumerate(eval_triples):
+                            s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], \
+                                                  self.entity_to_idx[o]
 
-                        Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
-                        Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
-                        Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
+                            Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
+                            Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
+                            Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
 
-                        feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities),
-                                                  self.p_inputs: Xp_v,
-                                                  self.o_inputs: Xo_v}
-                        feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
-                                                 self.o_inputs: np.arange(self.nb_entities)}
-
-
-                        # scores of (1, p, o), (2, p, o), .., (N, p, o)
-                        scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
-
-                        # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                        scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
-
-                        ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                        ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
-
-                        filtered_scores_subj = scores_subj.copy()
-                        filtered_scores_obj = scores_obj.copy()
-
-                        rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
-                                    fs != s and fp == p and fo == o]
-                        rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
-                                    fs == s and fp == p and fo != o]
-
-                        filtered_scores_subj[rm_idx_s] = - np.inf
-                        filtered_scores_obj[rm_idx_o] = - np.inf
-
-                        filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                        filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
-
-                    filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
-                    ranks = ranks_subj + ranks_obj
-
-                    for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
-                        mean_rank = np.mean(setting_ranks)
-                        logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
+                            feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities),
+                                                      self.p_inputs: Xp_v,
+                                                      self.o_inputs: Xo_v}
+                            feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
+                                                     self.o_inputs: np.arange(self.nb_entities)}
 
 
-                        if setting_name == 'Filtered':
-                            ablationmeanrank.append(mean_rank)
-
-                        for k in [1, 3, 5, 10]:
-                            hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
-                            logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
-
-                            if setting_name == 'Filtered':
-
-                                if k == 1:
-                                    ablationhits1.append(hits_at_k)
-                                elif k == 3:
-                                    ablationhits3.append(hits_at_k)
-                                elif k == 10:
-                                    ablationhits10.append(hits_at_k)
-                    # logger.warn('\n \n \n \n ablationhits1 = {}'.format(ablationhits1))
-                    # logger.warn('ablationhits3 = {}'.format( ablationhits3))
-                    # logger.warn('ablationhits10 = {}'.format( ablationhits10))
-                    # logger.warn('ablationmeanrank = {}'.format( ablationmeanrank))
-
-                            # if ((k==3)  and (hits_at_k<=0.1) and setting_name=='Filtered'):
-                            #     # self._saver.save(session, filename + '_epoch_' + str(epoch) + '.ckpt')
-                            #
-                            #     sys.exit("Stopping Program As Bad Hits @10")
-                    # ##
-                    # Test
-                    ##
-
-                    # logger.warn('PRINTING TOP 20 ROWS FROM SAMPLE ENTITY MEAN AND VAR ')
-                    #
-                    # samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
-                    #
-                    # logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20],samp1_sig[:20]))
-
-                    logger.warn('Beginning test/ save phase')
-
-                    # self._saver.save(session, filename+'_epoch_'+str(epoch)+'.ckpt')
-
-
-                    eval_name = 'test'
-                    eval_triples = test_triples
-                    ranks_subj, ranks_obj = [], []
-                    filtered_ranks_subj, filtered_ranks_obj = [], []
-
-                    for _i, (s, p, o) in enumerate(eval_triples):
-
-                        #corrupts both a subject and object
-
-                        s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], self.entity_to_idx[o]
-
-                        Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
-                        Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
-                        Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
-
-                        feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities), self.p_inputs: Xp_v,
-                                                  self.o_inputs: Xo_v}
-                        feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
-                                                 self.o_inputs: np.arange(self.nb_entities)}
-
-                        # scores of (1, p, o), (2, p, o), .., (N, p, o)
-
-                        scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
+                            # scores of (1, p, o), (2, p, o), .., (N, p, o)
+                            scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
 
                             # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                        scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
+                            scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
 
-                        ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                        ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
+                            ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
+                            ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
 
+                            filtered_scores_subj = scores_subj.copy()
+                            filtered_scores_obj = scores_obj.copy()
 
-                        #########################
-                        # Calculate score confidence
-                        #########################
+                            rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
+                                        fs != s and fp == p and fo == o]
+                            rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
+                                        fs == s and fp == p and fo != o]
 
+                            filtered_scores_subj[rm_idx_s] = - np.inf
+                            filtered_scores_obj[rm_idx_o] = - np.inf
 
-                        filtered_scores_subj = scores_subj.copy()
-                        filtered_scores_obj = scores_obj.copy()
+                            filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
+                            filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
 
-                        rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
-                                    fs != s and fp == p and fo == o]
-                        rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
-                                    fs == s and fp == p and fo != o]
+                        filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
+                        ranks = ranks_subj + ranks_obj
 
-                        filtered_scores_subj[rm_idx_s] = - np.inf
-                        filtered_scores_obj[rm_idx_o] = - np.inf
+                        for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
+                            mean_rank = np.mean(setting_ranks)
+                            logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
 
-
-                        filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                        filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
-                        #
-                        # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] == [1]:
-                        #
-                        #     self.count1s[p_idx]+=1
-                        #
-                        #
-                        # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [3]:
-                        #
-                        #     self.count3s[p_idx]+=1
-                        #
-                        #
-                        # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [5]:
-                        #
-                        #     self.count5s[p_idx]+=1
-                        #
-                        #
-                        # if [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])] <= [10]:
-                        #
-                        #     self.count10s[p_idx]+=1
-                        #
-                        # if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] == [1]:
-                        #
-                        #     self.count1o[p_idx]+=1
-                        #
-                        # if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [3]:
-                        #
-                        #     self.count3o[p_idx]+=1
-                        #
-                        # if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [5]:
-                        #
-                        #     self.count5o[p_idx]+=1
-                        #
-                        # if [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])] <= [10]:
-                        #
-                        #     self.count10o[p_idx]+=1
-                        #
-
-
-                            # logger.warn(
-                            #     "\t \t filtered_scores_obj rank 1 idx is {},{},{} \t \t".format(s_idx, o_idx, p_idx))
-
-                    filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
-                    ranks = ranks_subj + ranks_obj
-                    logger.warn("\t \t Number of samples in valid phase {} \t \t".format(len(filtered_ranks_obj)))
-                    for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
-                        mean_rank = np.mean(setting_ranks)
-                        logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
-
-                        # if setting_name=='Filtered':
-                        #     ablationmeanrank.append(mean_rank)
-
-                        for k in [1, 3, 5, 10]:
-                            hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
-                            logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
-
-
-                            # if setting_name=='Filtered':
-                            #
-                            #     if k==1:
-                            #         ablationhits1.append(hits_at_k)
-                            #     elif k==3:
-                            #         ablationhits3.append(hits_at_k)
-                            #     elif k==10:
-                            #         ablationhits10.append(hits_at_k)
-                            # print('\n \n \n \n ablationhits1 =',ablationhits1)
-                            # print('ablationhits3 =',ablationhits3)
-                            # print('ablationhits10 =',ablationhits10)
-                            # print('ablationmeanrank =',ablationmeanrank)
-
-                    #
-                    # print('totalp \n \n',self.totalp,'\n \n')
-                    #
-                    # print('count1o \n \n',self.count1o,'\n \n')
-                    # print('count3o \n \n',self.count3o,'\n \n')
-                    # print('count5o \n \n',self.count5o,'\n \n')
-                    # print('count10o \n \n',self.count10o,'\n \n')
-                    #
-                    # print('count1s \n \n', self.count1s, '\n \n')
-                    # print('count3s \n \n', self.count3s, '\n \n')
-                    # print('count5s \n \n', self.count5s, '\n \n')
-                    # print('count10s \n \n', self.count10s, '\n \n')
-
-                # #
-                #     e1, e2, p1, p2 = session.run(
-                #         [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
-                #          self.predicate_embedding_sigma], feed_dict={})
-                #     np.save(
-                #         "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/lw_entity_embeddings",
-                #         e1)
-                #     np.save(
-                #         "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/lw_entity_embedding_sigma",
-                #         e2)
-                #     np.save(
-                #         "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/lw_predicate_embedding_mean",
-                #         p1)
-                #     np.save(
-                #         "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/lw_predicate_embedding_sigma",
-                #         p2)
-
-#            /Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs
-                    #="/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vkge/lw_predicate_embedding_sigma",
-
-        # np.save("/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/projvar/lossvals",
-                    #         allloss)
-                        # entity_embeddings,entity_embedding_sigma=session.run([self.entity_embedding_mean,self.entity_embedding_sigma],feed_dict={})
-                    # np.savetxt(filename+"/entity_embeddings.tsv", entity_embeddings, delimiter="\t")
-                    # np.savetxt(filename+"/entity_embedding_sigma.tsv", entity_embedding_sigma, delimiter="\t")
-                #
-                # if (epoch % 50) == 0:
-                #
-                #     eval_name = 'valid'
-                #     eval_triples = valid_triples
-                #     ranks_subj, ranks_obj = [], []
-                #     filtered_ranks_subj, filtered_ranks_obj = [], []
-                #
-                #     for _i, (s, p, o) in enumerate(eval_triples):
-                #         s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], \
-                #                               self.entity_to_idx[o]
-                #
-                #         Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
-                #         Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
-                #         Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
-                #
-                #         feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities),
-                #                                   self.p_inputs: Xp_v,
-                #                                   self.o_inputs: Xo_v}
-                #         feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
-                #                                  self.o_inputs: np.arange(self.nb_entities)}
-                #
-                #         # scores of (1, p, o), (2, p, o), .., (N, p, o)
-                #         scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
-                #
-                #         # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                #         scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
-                #
-                #         ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                #         ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
-                #
-                #         filtered_scores_subj = scores_subj.copy()
-                #         filtered_scores_obj = scores_obj.copy()
-                #
-                #         rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
-                #                     fs != s and fp == p and fo == o]
-                #         rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
-                #                     fs == s and fp == p and fo != o]
-                #
-                #         filtered_scores_subj[rm_idx_s] = - np.inf
-                #         filtered_scores_obj[rm_idx_o] = - np.inf
-                #
-                #         filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                #         filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
-                #
-                #     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
-                #     ranks = ranks_subj + ranks_obj
-                #
-                #     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
-                #         mean_rank = np.mean(setting_ranks)
-                #         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
-                #         for k in [1, 3, 5, 10]:
-                #             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
-                #             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
-                #
-                #     ##
-                #     # Test
-                #     ##
-                #
-                #     # logger.warn('PRINTING TOP 20 ROWS FROM SAMPLE ENTITY MEAN AND VAR ')
-                #     #
-                #     # samp1_mu, samp1_sig = session.run([self.var1_1, self.var1_2],feed_dict={})
-                #     #
-                #     # logger.warn('Sample Mean \t {} \t Sample Var \t {}'.format(samp1_mu[:20],samp1_sig[:20]))
-                #
-                #     logger.warn('Beginning test phase')
-                #
-                #     eval_name = 'test'
-                #     eval_triples = test_triples
-                #     ranks_subj, ranks_obj = [], []
-                #     filtered_ranks_subj, filtered_ranks_obj = [], []
-                #
-                #     for _i, (s, p, o) in enumerate(eval_triples):
-                #         s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], \
-                #                               self.entity_to_idx[o]
-                #
-                #         Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
-                #         Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
-                #         Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
-                #
-                #         feed_dict_corrupt_subj = {self.s_inputs: np.arange(self.nb_entities),
-                #                                   self.p_inputs: Xp_v,
-                #                                   self.o_inputs: Xo_v}
-                #         feed_dict_corrupt_obj = {self.s_inputs: Xs_v, self.p_inputs: Xp_v,
-                #                                  self.o_inputs: np.arange(self.nb_entities)}
-                #
-                #         # scores of (1, p, o), (2, p, o), .., (N, p, o)
-                #         scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
-                #
-                #         # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                #         scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
-                #
-                #         ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
-                #         ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
-                #
-                #         filtered_scores_subj = scores_subj.copy()
-                #         filtered_scores_obj = scores_obj.copy()
-                #
-                #         rm_idx_s = [self.entity_to_idx[fs] for (fs, fp, fo) in all_triples if
-                #                     fs != s and fp == p and fo == o]
-                #         rm_idx_o = [self.entity_to_idx[fo] for (fs, fp, fo) in all_triples if
-                #                     fs == s and fp == p and fo != o]
-                #
-                #         filtered_scores_subj[rm_idx_s] = - np.inf
-                #         filtered_scores_obj[rm_idx_o] = - np.inf
-                #
-                #         filtered_ranks_subj += [1 + np.sum(filtered_scores_subj > filtered_scores_subj[s_idx])]
-                #         filtered_ranks_obj += [1 + np.sum(filtered_scores_obj > filtered_scores_obj[o_idx])]
-                #
-                #     filtered_ranks = filtered_ranks_subj + filtered_ranks_obj
-                #     ranks = ranks_subj + ranks_obj
-                #
-                #     for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
-                #         mean_rank = np.mean(setting_ranks)
-                #         logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
-                #         for k in [1, 3, 5, 10]:
-                #             hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
-                #             logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+                            for k in [1, 3, 5, 10]:
+                                hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
+                                logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
