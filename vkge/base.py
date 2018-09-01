@@ -10,8 +10,6 @@ import logging
 logger = logging.getLogger(__name__)
 tfd = tf.contrib.distributions
 
-
-
 def read_triples(path):
     triples = []
     with open(path, 'rt') as f:
@@ -87,7 +85,13 @@ class model:
     def __init__(self, file_name, score_func='dismult', static_mean=False, embedding_size=50, no_batches=10, mean_c=0.1,
                  epsilon=1e-3,negsamples=0,
                  alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True, projection=True,alt_updates=False,nosamps=1,alt_test='none'):
-        # super().__init__()
+
+        seed=np.random.randint()
+
+        self.random_state = np.random.RandomState(seed)
+        tf.set_random_seed(seed)
+
+        logger.warn("\n \n Using Random Seed {} \n \n".format(seed))
 
         self.alt_test=alt_test
         self.sigma_alt = sigma_alt
@@ -101,17 +105,16 @@ class model:
         if self.score_func=='ComplEx':
             predicate_embedding_size = embedding_size*2
             entity_embedding_size = embedding_size*2
-            sig_max = np.log((1.0/embedding_size*2.0)+1e-10)
+            var_max = np.log((1.0/embedding_size*2.0)+1e-10)
 
         else:
             predicate_embedding_size = embedding_size
             entity_embedding_size = embedding_size
-            sig_max = np.log((1.0/embedding_size*1.0)+1e-10)
+            var_max = np.log((1.0/embedding_size*1.0)+1e-10)
 
-        sig_min = sig_max
+        var_min = var_max
 
-        self.random_state = np.random.RandomState(0)
-        tf.set_random_seed(0)
+
         self.static_mean = static_mean
         self.alt_cost = alt_cost
 
@@ -142,7 +145,7 @@ class model:
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
-                         optimizer, sig_max, sig_min)
+                         optimizer, var_max, var_min)
         self.nb_epochs = 500
 
 
@@ -163,14 +166,14 @@ class model:
         scale = tf.ones(code_size)
         return tfd.MultivariateNormalDiag(loc, scale)
 
-    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
-                      sig_min):
+    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, var_max,
+                      var_min):
         """
                                 Constructs Encoder
         """
         logger.warn('Building Inference Networks q(h_x | x) ..{}'.format(self.score_func))
 
-        init2 = np.round(sig_max,decimals=2)
+        init2 = np.round(var_max,decimals=2)
 
         with tf.variable_scope('Encoder'):
 
@@ -332,7 +335,7 @@ class model:
         return loss, train_op
 
     def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
-                    sig_max, pred_sig):
+                    var_max, pred_sig):
         """
                         Constructs Model
         """
@@ -348,7 +351,7 @@ class model:
         self.KL_discount = tf.placeholder(tf.float32)
         self.BernoulliSRescale = tf.placeholder(tf.float32)  #
 
-        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, sig_max,
+        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, var_max,
                            pred_sig)
         self.build_decoder()
 

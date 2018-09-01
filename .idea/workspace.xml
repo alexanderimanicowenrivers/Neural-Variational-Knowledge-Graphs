@@ -46,8 +46,8 @@
       <file leaf-file-name="base.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="118">
+              <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -435,13 +435,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00921" summary="added in new constraint">
-      <created>1534673051160</created>
-      <option name="number" value="00921" />
-      <option name="presentableId" value="LOCAL-00921" />
-      <option name="project" value="LOCAL" />
-      <updated>1534673051160</updated>
-    </task>
     <task id="LOCAL-00922" summary="added in new constraint">
       <created>1534673160130</created>
       <option name="number" value="00922" />
@@ -778,7 +771,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535808843230</updated>
     </task>
-    <option name="localTasksCounter" value="970" />
+    <task id="LOCAL-00970" summary="neaten up code for main model">
+      <created>1535812596647</created>
+      <option name="number" value="00970" />
+      <option name="presentableId" value="LOCAL-00970" />
+      <option name="project" value="LOCAL" />
+      <updated>1535812596647</updated>
+    </task>
+    <option name="localTasksCounter" value="971" />
     <servers />
   </component>
   <component name="TodoView">
@@ -864,7 +864,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="BS2" />
     <MESSAGE value="NS" />
     <MESSAGE value="modelA_NS" />
     <MESSAGE value="updated test" />
@@ -889,7 +888,8 @@
     <MESSAGE value="ablation" />
     <MESSAGE value="rerun-complex" />
     <MESSAGE value="neaten up code" />
-    <option name="LAST_COMMIT_MESSAGE" value="neaten up code" />
+    <MESSAGE value="neaten up code for main model" />
+    <option name="LAST_COMMIT_MESSAGE" value="neaten up code for main model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1204,8 +1204,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="118">
+          <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
