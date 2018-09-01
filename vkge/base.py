@@ -152,7 +152,7 @@ class model:
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
 
-    def scale_embedding(self, log_sigma_square):
+    def distribution_scale(self, log_sigma_square):
         """
                         Returns the scale (std dev) from embeddings for tensorflow distributions MultivariateNormalDiag function
                 """
@@ -162,6 +162,13 @@ class model:
         return scale
 
     def make_prior(self,code_size):
+
+        """
+                        Returns the prior on embeddings for tensorflow distributions MultivariateNormalDiag function
+
+                        (1) Alt: N(0,1/code_size)
+                        (2) N(0,1)
+                """
 
         if self.alt_opt: #alternative prior 0,1/embeddings variance
             loc = tf.zeros(code_size)
@@ -176,7 +183,7 @@ class model:
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, var_max,
                       var_min):
         """
-                                Constructs Encoder
+                                Constructs encoder
         """
         logger.warn('Building Inference Networks q(h_x | x) ..{}'.format(self.score_func))
 
@@ -285,9 +292,9 @@ class model:
 
         with tf.variable_scope('Inference'):
 
-            self.h_s = tfd.MultivariateNormalDiag(self.mu_s, self.scale_embedding(self.log_sigma_sq_s)).sample()
-            self.h_p = tfd.MultivariateNormalDiag(self.mu_p, self.scale_embedding(self.log_sigma_sq_p)).sample()
-            self.h_o = tfd.MultivariateNormalDiag(self.mu_o, self.scale_embedding(self.log_sigma_sq_o)).sample()
+            self.h_s = tfd.MultivariateNormalDiag(self.mu_s, self.distribution_scale(self.log_sigma_sq_s)).sample()
+            self.h_p = tfd.MultivariateNormalDiag(self.mu_p, self.distribution_scale(self.log_sigma_sq_p)).sample()
+            self.h_o = tfd.MultivariateNormalDiag(self.mu_o, self.distribution_scale(self.log_sigma_sq_o)).sample()
 
             if self.score_func=='DistMult':
 
@@ -331,7 +338,7 @@ class model:
     def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
                     var_max, pred_sig):
         """
-                        Constructs Model
+                        Construct full computation graph
         """
         self.noise = tf.placeholder(tf.float32, shape=[None,entity_embedding_size])
         self.idx_pos = tf.placeholder(tf.int32, shape=[None])
@@ -367,8 +374,8 @@ class model:
         #KL
 
         prior = self.make_prior(code_size=entity_embedding_size)
-        entity_posterior=tfd.MultivariateNormalDiag(self.entity_embedding_mean, self.scale_embedding(self.entity_embedding_sigma))
-        predicate_posterior=tfd.MultivariateNormalDiag(self.predicate_embedding_mean, self.scale_embedding(self.predicate_embedding_sigma))
+        entity_posterior=tfd.MultivariateNormalDiag(self.entity_embedding_mean, self.distribution_scale(self.entity_embedding_sigma))
+        predicate_posterior=tfd.MultivariateNormalDiag(self.predicate_embedding_mean, self.distribution_scale(self.predicate_embedding_sigma))
 
         self.e_objective1=tfd.kl_divergence(entity_posterior, prior)
         self.e_objective2=tfd.kl_divergence(predicate_posterior, prior)
@@ -390,7 +397,7 @@ class model:
               filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
 
-                                Train Model
+                                Train and test model
 
         """
 
