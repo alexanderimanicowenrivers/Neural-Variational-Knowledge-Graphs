@@ -157,9 +157,9 @@ class model:
                         Returns the scale (std dev) from embeddings for tensorflow distributions MultivariateNormalDiag function
                 """
 
-        sigma = tf.sqrt(tf.exp(log_sigma_square))
+        scale = tf.sqrt(tf.exp(log_sigma_square))
 
-        return sigma
+        return scale
 
     def make_prior(self,code_size):
 
