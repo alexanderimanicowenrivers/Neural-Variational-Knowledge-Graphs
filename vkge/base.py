@@ -82,7 +82,7 @@ class model:
 
             """
 
-    def __init__(self, file_name, score_func='dismult', static_mean=False, embedding_size=50, no_batches=10, mean_c=0.1,
+    def __init__(self, file_name, score_func='DistMult', static_mean=False, embedding_size=50, no_batches=10, mean_c=0.1,
                  epsilon=1e-3,negsamples=0,
                  alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True, projection=True,alt_updates=False,nosamps=1,alt_test='none'):
 
@@ -146,7 +146,7 @@ class model:
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, var_max, var_min)
-        self.nb_epochs = 500
+        self.nb_epochs = 1000
 
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
@@ -162,8 +162,15 @@ class model:
         return sigma
 
     def make_prior(self,code_size):
-        loc = tf.zeros(code_size)
-        scale = tf.ones(code_size)
+
+        if self.alt_opt: #alternative prior 0,1/embeddings variance
+            loc = tf.zeros(code_size)
+            scale = tf.sqrt(tf.divide(tf.ones(code_size),code_size))
+
+        else:
+            loc = tf.zeros(code_size)
+            scale = tf.ones(code_size)
+
         return tfd.MultivariateNormalDiag(loc, scale)
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, var_max,
@@ -314,24 +321,11 @@ class model:
             global_step = tf.train.create_global_step()
 
         gradients = optimizer.compute_gradients(loss=loss)
-
-        with tf.name_scope('gradients'):
-            tf.summary.scalar('gradients_l2', tf.add_n([tf.nn.l2_loss(grad[0]) for grad in gradients]))
-
-        if self.alt_opt:
-        ##clip for robust learning as observed nans during training
-        #
-
-            gradients = [(tf.clip_by_norm(grad, 1), var)
-                         for grad, var in gradients if grad is not None]
-
-
         train_op = optimizer.apply_gradients(gradients, global_step)
 
         self.loss = loss
         self.training_step = train_op
 
-        self.global_step = global_step
         return loss, train_op
 
     def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,

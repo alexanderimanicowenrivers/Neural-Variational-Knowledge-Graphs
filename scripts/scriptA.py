@@ -75,7 +75,7 @@ def main(_):
         w3=[100,200,300,400,500],
         # w4=['kinship', 'nations', 'umls'],
         w4 = ['wn18rr'],
-        w5=[False],
+        w5=[True],
         w6=[1e-3],
         w7=['ComplEx'],
         w8=[0,1,2,3,4,5,6],
