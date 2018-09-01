@@ -86,7 +86,7 @@ class model:
                  epsilon=1e-3,negsamples=0,
                  alt_cost=False, dataset='wn18', sigma_alt=True, lr=0.1, alt_opt=True, projection=True,alt_updates=False,nosamps=1,alt_test='none'):
 
-        seed=np.random.randint()
+        seed=np.random.randint(100,size=1)[0]
 
         self.random_state = np.random.RandomState(seed)
         tf.set_random_seed(seed)
@@ -377,8 +377,8 @@ class model:
         entity_posterior=tfd.MultivariateNormalDiag(self.entity_embedding_mean, self.distribution_scale(self.entity_embedding_sigma))
         predicate_posterior=tfd.MultivariateNormalDiag(self.predicate_embedding_mean, self.distribution_scale(self.predicate_embedding_sigma))
 
-        self.e_objective1=tfd.kl_divergence(entity_posterior, prior)
-        self.e_objective2=tfd.kl_divergence(predicate_posterior, prior)
+        self.e_objective1=tf.reduce_sum(tfd.kl_divergence(entity_posterior, prior))
+        self.e_objective2=tf.reduce_sum(tfd.kl_divergence(predicate_posterior, prior))
         self.ne_objective = (self.e_objective1+self.e_objective2)* self.KL_discount
 
         # Negative ELBO

@@ -57,7 +57,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                ("{}/logs/modela_noprojecion/uclcs_nvkg_v1.{}".format(path, summary(c)))
+                ("{}/logs/ModelA_Prior/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
 
@@ -75,14 +75,14 @@ def main(_):
         w3=[100,200,300,400,500],
         # w4=['kinship', 'nations', 'umls'],
         w4 = ['wn18rr'],
-        w5=[True],
+        w5=[True,False],
         w6=[1e-3],
         w7=['ComplEx'],
         w8=[0,1,2,3,4,5,6],
         w9=[False])
 
     configurations = cartesian_product(hyperparameters_space)
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/modela_noprojecion'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/ModelA_Prior'
 
 
     # Check that we are on the UCLCS cluster first
