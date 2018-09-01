@@ -50,7 +50,7 @@ class IndexGenerator:
         return rand_ints
 
 
-class model:
+class VKGE_A:
     """
            model for testing the basic probabilistic aspects of the model
 
