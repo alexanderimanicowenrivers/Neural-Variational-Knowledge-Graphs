@@ -146,7 +146,7 @@ class modelB:
 
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, var_max, var_min)
-        self.nb_epochs = 1000
+        self.nb_epochs = 500
 
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,

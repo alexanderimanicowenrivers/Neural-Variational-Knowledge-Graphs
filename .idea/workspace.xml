@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="fixed random seed bug">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mainB.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/scriptB.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vkge/baseB.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/vkge/base.py" afterPath="$PROJECT_DIR$/vkge/baseA.py" />
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA.py" afterPath="$PROJECT_DIR$/scripts/scriptA.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/__init__.py" afterPath="$PROJECT_DIR$/vkge/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseB.py" afterPath="$PROJECT_DIR$/vkge/baseB.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -116,8 +111,8 @@
       <file leaf-file-name="baseB.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/baseB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="409" column="22" lean-forward="false" selection-start-line="409" selection-start-column="22" selection-end-line="409" selection-end-column="22" />
+            <state relative-caret-position="256">
+              <caret line="148" column="28" lean-forward="false" selection-start-line="148" selection-start-column="28" selection-end-line="148" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -464,13 +459,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00927" summary="final test with broad range">
-      <created>1534687162467</created>
-      <option name="number" value="00927" />
-      <option name="presentableId" value="LOCAL-00927" />
-      <option name="project" value="LOCAL" />
-      <updated>1534687162468</updated>
-    </task>
     <task id="LOCAL-00928" summary="final test with broad range">
       <created>1534687174882</created>
       <option name="number" value="00928" />
@@ -807,7 +795,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535813755533</updated>
     </task>
-    <option name="localTasksCounter" value="976" />
+    <task id="LOCAL-00976" summary="fixed random seed bug">
+      <created>1535902379268</created>
+      <option name="number" value="00976" />
+      <option name="presentableId" value="LOCAL-00976" />
+      <option name="project" value="LOCAL" />
+      <updated>1535902379268</updated>
+    </task>
+    <option name="localTasksCounter" value="977" />
     <servers />
   </component>
   <component name="TodoView">
@@ -893,7 +888,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="NS" />
     <MESSAGE value="modelA_NS" />
     <MESSAGE value="updated test" />
     <MESSAGE value="updated confidence estimation" />
@@ -918,7 +912,8 @@
     <MESSAGE value="rerun-complex" />
     <MESSAGE value="neaten up code" />
     <MESSAGE value="neaten up code for main model" />
-    <option name="LAST_COMMIT_MESSAGE" value="neaten up code for main model" />
+    <MESSAGE value="fixed random seed bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed random seed bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1246,8 +1241,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseB.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="409" column="22" lean-forward="false" selection-start-line="409" selection-start-column="22" selection-end-line="409" selection-end-column="22" />
+        <state relative-caret-position="256">
+          <caret line="148" column="28" lean-forward="false" selection-start-line="148" selection-start-column="28" selection-end-line="148" selection-end-column="28" />
           <folding />
         </state>
       </provider>
