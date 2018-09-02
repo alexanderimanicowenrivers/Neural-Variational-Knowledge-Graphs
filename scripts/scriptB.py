@@ -34,7 +34,7 @@ def to_cmd(c):
     #     command = 'PYTHONPATH=. python3-gpu {}/baseline_main.py {} ' \
     #     '--file_name {} ' \ this is for command if I want tensorboard
 
-    command = 'PYTHONPATH=. anaconda-python3-cpu {}/main.py  ' \
+    command = 'PYTHONPATH=. anaconda-python3-cpu {}/mainB.py  ' \
               '--no_batches {} ' \
               '--epsilon {} ' \
               '--embedding_size {} ' \
@@ -57,7 +57,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                ("{}/logs/modela_noprojecion/uclcs_nvkg_v1.{}".format(path, summary(c)))
+                ("{}/logs/ModelB_BS/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
 
@@ -69,20 +69,19 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[100],
+        w1=[100,10],
         # w1=[10],
-        w2=[1e-3,1e-7], #
-        w3=[100,200,300,400,500],
-        # w4=['kinship', 'nations', 'umls'],
-        w4 = ['wn18rr'],
-        w5=[False],
+        w2=[1e-7], #
+        w3=[300],
+        w4 = ['fb15k-237', 'kinship', 'nations', 'umls', 'wn18', 'wn18rr'],
+        w5=[True,False],
         w6=[1e-3],
-        w7=['ComplEx'],
-        w8=[0,1,2,3,4,5,6],
-        w9=[False])
+        w7=['ComplEx','DistMult'],
+        w8=[0],
+        w9=[True,False])
 
     configurations = cartesian_product(hyperparameters_space)
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/modela_noprojecion'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/ModelB_BS'
 
 
     # Check that we are on the UCLCS cluster first
