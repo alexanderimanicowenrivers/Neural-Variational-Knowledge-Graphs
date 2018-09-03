@@ -73,11 +73,11 @@ def main(_):
         # w1=[10],
         w2=[1e-7], #
         w3=[300],
-        w4 = ['wn18rr'],
+        w4 = ['wn18'],
         w5=[True,False],
         w6=[1e-3],
-        w7=['ComplEx','DistMult'],
-        w8=[0,1,2,3,4,5,6],
+        w7=['ComplEx'],
+        w8=[0],
         w9=[True,False])
 
     configurations = cartesian_product(hyperparameters_space)
