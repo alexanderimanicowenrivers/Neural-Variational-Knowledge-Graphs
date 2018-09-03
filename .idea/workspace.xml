@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseB.py" afterPath="$PROJECT_DIR$/vkge/baseB.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptB.py" afterPath="$PROJECT_DIR$/scripts/scriptB.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -53,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scriptB.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="scriptB.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/scriptB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="61">
-              <caret line="73" column="16" lean-forward="false" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
+            <state relative-caret-position="317">
+              <caret line="79" column="13" lean-forward="false" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -108,10 +108,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="baseB.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="baseB.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/baseB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
+            <state relative-caret-position="-5519">
               <caret line="148" column="28" lean-forward="false" selection-start-line="148" selection-start-column="28" selection-end-line="148" selection-end-column="28" />
               <folding />
             </state>
@@ -244,8 +244,8 @@
         <option value="$PROJECT_DIR$/scripts/scriptA.py" />
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
         <option value="$PROJECT_DIR$/mainB.py" />
-        <option value="$PROJECT_DIR$/scripts/scriptB.py" />
         <option value="$PROJECT_DIR$/vkge/baseB.py" />
+        <option value="$PROJECT_DIR$/scripts/scriptB.py" />
       </list>
     </option>
   </component>
@@ -458,13 +458,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00928" summary="final test with broad range">
-      <created>1534687174882</created>
-      <option name="number" value="00928" />
-      <option name="presentableId" value="LOCAL-00928" />
-      <option name="project" value="LOCAL" />
-      <updated>1534687174883</updated>
     </task>
     <task id="LOCAL-00929" summary="final test with broad range">
       <created>1534687441463</created>
@@ -802,7 +795,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535902379268</updated>
     </task>
-    <option name="localTasksCounter" value="977" />
+    <task id="LOCAL-00977" summary="model B BS">
+      <created>1535902750066</created>
+      <option name="number" value="00977" />
+      <option name="presentableId" value="LOCAL-00977" />
+      <option name="project" value="LOCAL" />
+      <updated>1535902750066</updated>
+    </task>
+    <option name="localTasksCounter" value="978" />
     <servers />
   </component>
   <component name="TodoView">
@@ -888,7 +888,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modelA_NS" />
     <MESSAGE value="updated test" />
     <MESSAGE value="updated confidence estimation" />
     <MESSAGE value="updated confidence estimation test" />
@@ -913,7 +912,8 @@
     <MESSAGE value="neaten up code" />
     <MESSAGE value="neaten up code for main model" />
     <MESSAGE value="fixed random seed bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed random seed bug" />
+    <MESSAGE value="model B BS" />
+    <option name="LAST_COMMIT_MESSAGE" value="model B BS" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1220,14 +1220,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/scriptB.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="73" column="16" lean-forward="false" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/base_modelb.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1241,8 +1233,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseB.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
+        <state relative-caret-position="-5519">
           <caret line="148" column="28" lean-forward="false" selection-start-line="148" selection-start-column="28" selection-end-line="148" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/scriptB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="79" column="13" lean-forward="false" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
           <folding />
         </state>
       </provider>
