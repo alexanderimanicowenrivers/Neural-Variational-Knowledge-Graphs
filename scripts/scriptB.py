@@ -69,7 +69,7 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[100,10],
+        w1=[10],
         # w1=[10],
         w2=[1e-7], #
         w3=[300],
@@ -77,7 +77,7 @@ def main(_):
         w5=[True,False],
         w6=[1e-3],
         w7=['ComplEx','DistMult'],
-        w8=[3],
+        w8=[0,1,2,3,4,5,6],
         w9=[True,False])
 
     configurations = cartesian_product(hyperparameters_space)
