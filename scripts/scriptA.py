@@ -69,17 +69,16 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[100],
+        w1=[10],
         # w1=[10],
-        w2=[1e-3,1e-7], #
-        w3=[100,200,300,400,500],
-        # w4=['kinship', 'nations', 'umls'],
-        w4 = ['wn18rr'],
-        w5=[False],
+        w2=[1e-7], #
+        w3=[300],
+        w4 = ['fb15k-237', 'kinship', 'nations', 'umls', 'wn18', 'wn18rr'],
+        w5=[True,False],
         w6=[1e-3],
-        w7=['ComplEx'],
+        w7=['ComplEx','DistMult'],
         w8=[0,1,2,3,4,5,6],
-        w9=[False])
+        w9=[True,False])
 
     configurations = cartesian_product(hyperparameters_space)
     path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/modela_noprojecion'
