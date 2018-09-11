@@ -81,7 +81,7 @@ def main(_):
         w6=[1e-3],
         w7=['DistMult'],
         w8=[1],
-        w9=[True,False],
+        w9=[False],
         w10=['normal','vmf'],
         w11=[0])
 
