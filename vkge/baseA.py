@@ -113,7 +113,12 @@ class modelA:
             entity_embedding_size = embedding_size
             var_max = np.log((1.0/embedding_size*1.0)+1e-10)
 
+        if self.distribution == 'vmf':
+
+            var_max = np.log(1e-8)
+
         var_min = var_max
+
 
 
 
@@ -156,15 +161,9 @@ class modelA:
                         Returns the scale (std dev) from embeddings for tensorflow distributions MultivariateNormalDiag function
                 """
 
-        if self.distribution == 'normal':
-            scale = tf.sqrt(tf.exp(log_sigma_square))
+        scale = tf.sqrt(tf.exp(log_sigma_square))
 
-        elif self.distribution == 'vmf':
 
-            scale=tf.nn.softplus(log_sigma_square)
-
-        else:
-            raise NotImplemented
         return scale
 
     def make_prior(self,code_size):
@@ -244,7 +243,7 @@ class modelA:
                 self.entity_embedding_sigma = tf.get_variable('entities_sigma',
                                                           shape=[nb_entities + 1, 1],
                                                           initializer=tf.random_uniform_initializer(
-                                                              minval=0, maxval=0, dtype=tf.float32),
+                                                              minval=init2, maxval=init2, dtype=tf.float32),
                                                           dtype=tf.float32)
 
             else:
@@ -304,7 +303,7 @@ class modelA:
                                                                  shape=[nb_predicates + 1,
                                                                         1],
                                                                  initializer=tf.random_uniform_initializer(
-                                                                     minval=0, maxval=0,
+                                                                     minval=init2, maxval=init2,
                                                                      dtype=tf.float32),
                                                                  dtype=tf.float32)
 
@@ -470,9 +469,13 @@ class modelA:
         elif self.distribution == 'vmf':
 
             # KL divergence between vMF approximate posterior and uniform hyper-spherical prior
+            #
+            # entity_posterior = VonMisesFisher(tf.nn.l2_normalize(self.entity_embedding_mean, axis=-1), self.distribution_scale(self.entity_embedding_sigma) + 1)
+            # predicate_posterior = VonMisesFisher(tf.nn.l2_normalize(self.predicate_embedding_mean, axis=-1), self.distribution_scale(self.predicate_embedding_sigma) + 1)
 
-            entity_posterior = VonMisesFisher(tf.nn.l2_normalize(self.entity_embedding_mean, axis=-1), self.distribution_scale(self.entity_embedding_sigma) + 1)
-            predicate_posterior = VonMisesFisher(tf.nn.l2_normalize(self.predicate_embedding_mean, axis=-1), self.distribution_scale(self.predicate_embedding_sigma) + 1)
+            entity_posterior = VonMisesFisher(self.entity_embedding_mean, self.distribution_scale(self.entity_embedding_sigma) + 1)
+            predicate_posterior = VonMisesFisher(self.predicate_embedding_mean, self.distribution_scale(self.predicate_embedding_sigma) + 1)
+
 
             kl1 = entity_posterior.kl_divergence(prior)
             kl2 = predicate_posterior.kl_divergence(prior)

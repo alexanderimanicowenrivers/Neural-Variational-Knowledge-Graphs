@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="trying distmult on mean embeddings">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseA.py" afterPath="$PROJECT_DIR$/vkge/baseA.py" />
     </list>
@@ -34,15 +34,9 @@
           <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="268">
-                  <caret line="345" column="47" lean-forward="false" selection-start-line="345" selection-start-column="47" selection-end-line="345" selection-end-column="47" />
-                  <folding>
-                    <element signature="e#25#36#0" expanded="true" />
-                    <marker date="1536693766175" expanded="true" signature="8418:8926" ph="..." />
-                    <marker date="1536693766175" expanded="true" signature="14319:15218" ph="..." />
-                    <marker date="1536693766175" expanded="true" signature="15320:16218" ph="..." />
-                    <marker date="1536693766175" expanded="true" signature="15829:16218" ph="..." />
-                  </folding>
+                <state relative-caret-position="129">
+                  <caret line="9" column="59" lean-forward="false" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="59" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -96,7 +90,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>q</find>
       <find>alt_op</find>
       <find>table</find>
       <find>no_confidence_samples</find>
@@ -126,6 +119,7 @@
       <find>z_var</find>
       <find>mean_c</find>
       <find>self.print</find>
+      <find>VonMisesFisher</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -437,13 +431,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00956" summary="ablation">
-      <created>1535549163000</created>
-      <option name="number" value="00956" />
-      <option name="presentableId" value="LOCAL-00956" />
-      <option name="project" value="LOCAL" />
-      <updated>1535549163000</updated>
     </task>
     <task id="LOCAL-00957" summary="ablation">
       <created>1535549350187</created>
@@ -781,7 +768,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536693755907</updated>
     </task>
-    <option name="localTasksCounter" value="1005" />
+    <task id="LOCAL-01005" summary="trying distmult on mean embeddings">
+      <created>1536693769512</created>
+      <option name="number" value="01005" />
+      <option name="presentableId" value="LOCAL-01005" />
+      <option name="project" value="LOCAL" />
+      <updated>1536693769513</updated>
+    </task>
+    <option name="localTasksCounter" value="1006" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1217,15 +1211,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="345" column="47" lean-forward="false" selection-start-line="345" selection-start-column="47" selection-end-line="345" selection-end-column="47" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-            <marker date="1536693766175" expanded="true" signature="8418:8926" ph="..." />
-            <marker date="1536693766175" expanded="true" signature="14319:15218" ph="..." />
-            <marker date="1536693766175" expanded="true" signature="15320:16218" ph="..." />
-            <marker date="1536693766175" expanded="true" signature="15829:16218" ph="..." />
-          </folding>
+        <state relative-caret-position="129">
+          <caret line="9" column="59" lean-forward="false" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="59" />
+          <folding />
         </state>
       </provider>
     </entry>
