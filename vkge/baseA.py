@@ -169,15 +169,22 @@ class modelA:
                         (2) N(0,1)
                 """
 
-        if self.alt_opt: #alternative prior 0,1/embeddings variance
-            loc = tf.zeros(code_size)
-            scale = tf.sqrt(tf.divide(tf.ones(code_size),code_size))
+        if self.distribution == 'normal':
+            if self.alt_opt: #alternative prior 0,1/embeddings variance
+                loc = tf.zeros(code_size)
+                scale = tf.sqrt(tf.divide(tf.ones(code_size),code_size))
 
-        else:
-            loc = tf.zeros(code_size)
-            scale = tf.ones(code_size)
+            else:
+                loc = tf.zeros(code_size)
+                scale = tf.ones(code_size)
 
-        return tfd.MultivariateNormalDiag(loc, scale)
+            dist=tfd.MultivariateNormalDiag(loc, scale)
+
+        elif self.distribution == 'vmf':
+
+            dist=HypersphericalUniform(code_size - 1, dtype=tf.float32)
+
+        return dist
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, var_max,
                       var_min):
@@ -411,12 +418,12 @@ class modelA:
 
 
         #KL
+        prior = self.make_prior(code_size=entity_embedding_size)
 
         if self.distribution == 'normal':
 
             # KL divergence between normal approximate posterior and prior
 
-            prior = self.make_prior(code_size=entity_embedding_size)
             entity_posterior = tfd.MultivariateNormalDiag(self.entity_embedding_mean,
                                                           self.distribution_scale(self.entity_embedding_sigma))
             predicate_posterior = tfd.MultivariateNormalDiag(self.predicate_embedding_mean,
@@ -428,7 +435,6 @@ class modelA:
         elif self.distribution == 'vmf':
 
             # KL divergence between vMF approximate posterior and uniform hyper-spherical prior
-            prior = HypersphericalUniform(entity_embedding_size - 1, dtype=model.x.dtype)
 
             entity_posterior = VonMisesFisher(tf.nn.l2_normalize(self.entity_embedding_mean, axis=-1), self.distribution_scale(self.entity_embedding_sigma) + 1)
             predicate_posterior = VonMisesFisher(tf.nn.l2_normalize(self.predicate_embedding_mean, axis=-1), self.distribution_scale(self.predicate_embedding_sigma) + 1)

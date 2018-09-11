@@ -77,7 +77,7 @@ def main(_):
         w2=[1e-7], #ls
         w3=[5],
         w4 = ['nations'],
-        w5=[True,False],
+        w5=[False],
         w6=[1e-3],
         w7=['DistMult'],
         w8=[1],
