@@ -45,6 +45,7 @@ def to_cmd(c):
               '--negsamples {} ' \
               '--projection {} ' \
               '--file_name {} ' \
+              '--distribution {}'\
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -57,6 +58,7 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
+                c['w10'],
                 ("{}/logs/ModelA_BS/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
@@ -72,13 +74,14 @@ def main(_):
         w1=[10],
         # w1=[10],
         w2=[1e-7], #ls
-        w3=[300],
-        w4 = ['wn18'],
+        w3=[5],
+        w4 = ['nations'],
         w5=[True,False],
         w6=[1e-3],
-        w7=['ComplEx'],
+        w7=['DistMult'],
         w8=[0],
-        w9=[True,False])
+        w9=[True,False],
+        w10=['normal','vmf'])
 
     configurations = cartesian_product(hyperparameters_space)
     path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/ModelA_BS'
