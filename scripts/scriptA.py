@@ -44,8 +44,8 @@ def to_cmd(c):
               '--score_func {} ' \
               '--negsamples {} ' \
               '--projection {} ' \
+              '--distribution {}' \
               '--file_name {} ' \
-              '--distribution {}'\
         .format(path,
                 #                 params,
                 #                 set_to_path[c['instances']],
@@ -58,8 +58,8 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                ("{}/logs/ModelA_VMD/uclcs_nvkg_v1.{}".format(path, summary(c))),
-                c['w10']
+                c['w10'],
+                ("{}/logs/ModelA_VMD/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
 
