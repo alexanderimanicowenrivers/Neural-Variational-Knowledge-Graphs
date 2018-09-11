@@ -184,6 +184,9 @@ class modelA:
 
             dist=HypersphericalUniform(code_size - 1, dtype=tf.float32)
 
+        else:
+            raise NotImplemented
+
         return dist
 
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, var_max,

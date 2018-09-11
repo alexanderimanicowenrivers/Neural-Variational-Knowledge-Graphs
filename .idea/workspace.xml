@@ -34,11 +34,11 @@
           <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="227">
-                  <caret line="296" column="87" lean-forward="false" selection-start-line="296" selection-start-column="87" selection-end-line="296" selection-end-column="87" />
+                <state relative-caret-position="235">
+                  <caret line="188" column="0" lean-forward="true" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
-                    <marker date="1536692131747" expanded="true" signature="8183:8691" ph="..." />
+                    <marker date="1536692215229" expanded="true" signature="8231:8739" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -435,13 +435,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00949" summary="updated confidence estimation testing">
-      <created>1535472006268</created>
-      <option name="number" value="00949" />
-      <option name="presentableId" value="LOCAL-00949" />
-      <option name="project" value="LOCAL" />
-      <updated>1535472006271</updated>
-    </task>
     <task id="LOCAL-00950" summary="redo conf est">
       <created>1535472519087</created>
       <option name="number" value="00950" />
@@ -778,7 +771,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536692079323</updated>
     </task>
-    <option name="localTasksCounter" value="998" />
+    <task id="LOCAL-00998" summary="updated HyperSpherical variance initalisation">
+      <created>1536692146164</created>
+      <option name="number" value="00998" />
+      <option name="presentableId" value="LOCAL-00998" />
+      <option name="project" value="LOCAL" />
+      <updated>1536692146164</updated>
+    </task>
+    <option name="localTasksCounter" value="999" />
     <servers />
   </component>
   <component name="TodoView">
@@ -844,7 +844,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated CC2" />
     <MESSAGE value="updated test with RAW info" />
     <MESSAGE value="updated tests with mean rank plot" />
     <MESSAGE value="test3 var" />
@@ -869,7 +868,8 @@
     <MESSAGE value="model B NS" />
     <MESSAGE value="Add in Hyperspherical VAE code" />
     <MESSAGE value="updated HyperSpherical ModelA" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated HyperSpherical ModelA" />
+    <MESSAGE value="updated HyperSpherical variance initalisation" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated HyperSpherical variance initalisation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1214,11 +1214,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="296" column="87" lean-forward="false" selection-start-line="296" selection-start-column="87" selection-end-line="296" selection-end-column="87" />
+        <state relative-caret-position="235">
+          <caret line="188" column="0" lean-forward="true" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1536692131747" expanded="true" signature="8183:8691" ph="..." />
+            <marker date="1536692215229" expanded="true" signature="8231:8739" ph="..." />
           </folding>
         </state>
       </provider>
