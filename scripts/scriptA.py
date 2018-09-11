@@ -117,14 +117,15 @@ def main(_):
 
     header = """#!/bin/bash
 
-#$ -cwd
-#$ -S /bin/bash
-#$ -o /dev/null
-#$ -e /dev/null
-#$ -t 1-{}
-#$ -l tmem=12G
-#$ -l h_rt=48:00:00
-#$ -ac allow=LMNOPQSTU
+    # $ -cwd
+    # $ -S /bin/bash
+    # $ -o /dev/null
+    # $ -e /dev/null
+    # $ -t 1-{}
+    # $ -l tmem=12G
+    # $ -l h_rt=24:00:00
+    # $ -P gpu
+    # $ -l gpu=1-GPU_PASCAL=1
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
@@ -258,14 +259,14 @@ if __name__ == '__main__':
 #  #    # $ -l gpu=0
 #     #no gpu
 #
-#     # $ -cwd
-#     # $ -S /bin/bash
-#     # $ -o /home/acowenri/array.o.log
-#     # $ -e /home/acowenri/array.e.log
-#     # $ -t 1-{}
-#     # $ -l tmem=8G
-#     # $ -l h_rt=24:00:00
-#     # $ -ac allow=LMNOPQSTU
+# $ -cwd
+# $ -S /bin/bash
+# $ -o /dev/null
+# $ -e /dev/null
+# $ -t 1-{}
+# $ -l tmem=12G
+# $ -l h_rt=48:00:00
+# $ -ac allow=LMNOPQSTU
 #
 #     #GPU
 #
