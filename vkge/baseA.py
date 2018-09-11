@@ -360,11 +360,14 @@ class modelA:
                                                            object_embeddings=self.mu_o)
 
                 elif self.distribution == 'vmf':
+                    #
+                    # model_test = models.BilinearDiagonalModel(subject_embeddings=tf.nn.l2_normalize(self.mu_s,axis=-1),
+                    #                                           predicate_embeddings=tf.nn.l2_normalize(self.mu_p,axis=-1),
+                    #                                           object_embeddings=tf.nn.l2_normalize(self.mu_o,axis=-1))
+                    model_test = models.BilinearDiagonalModel(subject_embeddings=self.mu_s,
+                                                              predicate_embeddings=self.mu_p,
+                                                              object_embeddings=self.mu_o)
 
-                    model_test = models.BilinearDiagonalModel(subject_embeddings=tf.nn.l2_normalize(self.mu_s,axis=-1),
-                                                              predicate_embeddings=tf.nn.l2_normalize(self.mu_p,axis=-1),
-                                                              object_embeddings=tf.nn.l2_normalize(self.mu_o,axis=-1))
-                    
             elif self.score_func=='ComplEx':
                 model = models.ComplexModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
                                                      object_embeddings=self.h_o)

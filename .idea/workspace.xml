@@ -34,11 +34,13 @@
           <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="111">
-                  <caret line="163" column="50" lean-forward="false" selection-start-line="163" selection-start-column="50" selection-end-line="163" selection-end-column="50" />
+                <state relative-caret-position="29">
+                  <caret line="368" column="90" lean-forward="false" selection-start-line="368" selection-start-column="90" selection-end-line="368" selection-end-column="90" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
-                    <marker date="1536693259294" expanded="true" signature="8418:8926" ph="..." />
+                    <marker date="1536693629804" expanded="true" signature="8418:8926" ph="..." />
+                    <marker date="1536693629804" expanded="true" signature="14979:15877" ph="..." />
+                    <marker date="1536693629804" expanded="true" signature="15488:15877" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -71,8 +73,8 @@
           <file leaf-file-name="mnist.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/examples/mnist.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="274">
-                  <caret line="60" column="74" lean-forward="true" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="74" />
+                <state relative-caret-position="-568">
+                  <caret line="118" column="16" lean-forward="false" selection-start-line="118" selection-start-column="16" selection-end-line="118" selection-end-column="16" />
                   <folding>
                     <element signature="e#1#19#0" expanded="true" />
                   </folding>
@@ -118,11 +120,11 @@
       <find>alt_cost</find>
       <find>alt_opt</find>
       <find>alt_test</find>
-      <find>self.print</find>
       <find>make_prior</find>
       <find>dty</find>
       <find>z_var</find>
       <find>mean_c</find>
+      <find>self.print</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -434,13 +436,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00953" summary="redo conf est">
-      <created>1535473609608</created>
-      <option name="number" value="00953" />
-      <option name="presentableId" value="LOCAL-00953" />
-      <option name="project" value="LOCAL" />
-      <updated>1535473609616</updated>
     </task>
     <task id="LOCAL-00954" summary="redo conf est">
       <created>1535474991335</created>
@@ -778,7 +773,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536693013304</updated>
     </task>
-    <option name="localTasksCounter" value="1002" />
+    <task id="LOCAL-01002" summary="fixed scale function for von mises">
+      <created>1536693275936</created>
+      <option name="number" value="01002" />
+      <option name="presentableId" value="LOCAL-01002" />
+      <option name="project" value="LOCAL" />
+      <updated>1536693275936</updated>
+    </task>
+    <option name="localTasksCounter" value="1003" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1204,8 +1206,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/mnist.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="60" column="74" lean-forward="true" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="74" />
+        <state relative-caret-position="-568">
+          <caret line="118" column="16" lean-forward="false" selection-start-line="118" selection-start-column="16" selection-end-line="118" selection-end-column="16" />
           <folding>
             <element signature="e#1#19#0" expanded="true" />
           </folding>
@@ -1214,11 +1216,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="163" column="50" lean-forward="false" selection-start-line="163" selection-start-column="50" selection-end-line="163" selection-end-column="50" />
+        <state relative-caret-position="29">
+          <caret line="368" column="90" lean-forward="false" selection-start-line="368" selection-start-column="90" selection-end-line="368" selection-end-column="90" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1536693259294" expanded="true" signature="8418:8926" ph="..." />
+            <marker date="1536693629804" expanded="true" signature="8418:8926" ph="..." />
+            <marker date="1536693629804" expanded="true" signature="14979:15877" ph="..." />
+            <marker date="1536693629804" expanded="true" signature="15488:15877" ph="..." />
           </folding>
         </state>
       </provider>
