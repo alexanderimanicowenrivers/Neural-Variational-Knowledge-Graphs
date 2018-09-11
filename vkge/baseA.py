@@ -341,9 +341,9 @@ class modelA:
                 # '+1' used to prevent collapsing behaviors
 
 
-                self.h_s = VonMisesFisher(mu_s, self.distribution_scale(self.log_sigma_sq_s)+ 1).sample()
-                self.h_p = VonMisesFisher(mu_p, self.distribution_scale(self.log_sigma_sq_p)+ 1).sample()
-                self.h_o = VonMisesFisher(mu_o, self.distribution_scale(self.log_sigma_sq_o)+ 1).sample()
+                self.h_s = VonMisesFisher(self.mu_s, self.distribution_scale(self.log_sigma_sq_s)+ 1).sample()
+                self.h_p = VonMisesFisher(self.mu_p, self.distribution_scale(self.log_sigma_sq_p)+ 1).sample()
+                self.h_o = VonMisesFisher(self.mu_o, self.distribution_scale(self.log_sigma_sq_o)+ 1).sample()
 
 
                 # self.h_s = VonMisesFisher(tf.nn.l2_normalize(self.mu_s,axis=-1), self.distribution_scale(self.log_sigma_sq_s)+ 1).sample()

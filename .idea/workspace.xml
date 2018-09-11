@@ -34,14 +34,14 @@
           <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="258">
-                  <caret line="345" column="46" lean-forward="false" selection-start-line="345" selection-start-column="46" selection-end-line="345" selection-end-column="46" />
+                <state relative-caret-position="268">
+                  <caret line="345" column="47" lean-forward="false" selection-start-line="345" selection-start-column="47" selection-end-line="345" selection-end-column="47" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
-                    <marker date="1536693753009" expanded="true" signature="8418:8926" ph="..." />
-                    <marker date="1536693753009" expanded="true" signature="14319:15203" ph="..." />
-                    <marker date="1536693753009" expanded="true" signature="15305:16203" ph="..." />
-                    <marker date="1536693753009" expanded="true" signature="15814:16203" ph="..." />
+                    <marker date="1536693766175" expanded="true" signature="8418:8926" ph="..." />
+                    <marker date="1536693766175" expanded="true" signature="14319:15218" ph="..." />
+                    <marker date="1536693766175" expanded="true" signature="15320:16218" ph="..." />
+                    <marker date="1536693766175" expanded="true" signature="15829:16218" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -438,13 +438,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00955" summary="redo conf est">
-      <created>1535475056388</created>
-      <option name="number" value="00955" />
-      <option name="presentableId" value="LOCAL-00955" />
-      <option name="project" value="LOCAL" />
-      <updated>1535475056391</updated>
-    </task>
     <task id="LOCAL-00956" summary="ablation">
       <created>1535549163000</created>
       <option name="number" value="00956" />
@@ -781,7 +774,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536693641967</updated>
     </task>
-    <option name="localTasksCounter" value="1004" />
+    <task id="LOCAL-01004" summary="trying distmult on mean embeddings">
+      <created>1536693755907</created>
+      <option name="number" value="01004" />
+      <option name="presentableId" value="LOCAL-01004" />
+      <option name="project" value="LOCAL" />
+      <updated>1536693755907</updated>
+    </task>
+    <option name="localTasksCounter" value="1005" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1217,14 +1217,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="345" column="46" lean-forward="false" selection-start-line="345" selection-start-column="46" selection-end-line="345" selection-end-column="46" />
+        <state relative-caret-position="268">
+          <caret line="345" column="47" lean-forward="false" selection-start-line="345" selection-start-column="47" selection-end-line="345" selection-end-column="47" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1536693753009" expanded="true" signature="8418:8926" ph="..." />
-            <marker date="1536693753009" expanded="true" signature="14319:15203" ph="..." />
-            <marker date="1536693753009" expanded="true" signature="15305:16203" ph="..." />
-            <marker date="1536693753009" expanded="true" signature="15814:16203" ph="..." />
+            <marker date="1536693766175" expanded="true" signature="8418:8926" ph="..." />
+            <marker date="1536693766175" expanded="true" signature="14319:15218" ph="..." />
+            <marker date="1536693766175" expanded="true" signature="15320:16218" ph="..." />
+            <marker date="1536693766175" expanded="true" signature="15829:16218" ph="..." />
           </folding>
         </state>
       </provider>
