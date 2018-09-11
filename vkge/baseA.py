@@ -161,7 +161,7 @@ class modelA:
 
         elif self.distribution == 'vmf':
 
-            scale=log_sigma_square
+            scale=tf.nn.softplus(log_sigma_square)
 
         else:
             raise NotImplemented

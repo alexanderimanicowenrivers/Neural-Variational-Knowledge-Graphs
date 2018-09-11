@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="removed projection">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseA.py" afterPath="$PROJECT_DIR$/vkge/baseA.py" />
     </list>
@@ -34,11 +34,11 @@
           <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="126">
-                  <caret line="164" column="12" lean-forward="false" selection-start-line="164" selection-start-column="12" selection-end-line="164" selection-end-column="12" />
+                <state relative-caret-position="111">
+                  <caret line="163" column="50" lean-forward="false" selection-start-line="163" selection-start-column="50" selection-end-line="163" selection-end-column="50" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
-                    <marker date="1536692998381" expanded="true" signature="8414:8922" ph="..." />
+                    <marker date="1536693259294" expanded="true" signature="8418:8926" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -71,8 +71,8 @@
           <file leaf-file-name="mnist.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/examples/mnist.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-362">
-                  <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+                <state relative-caret-position="274">
+                  <caret line="60" column="74" lean-forward="true" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="74" />
                   <folding>
                     <element signature="e#1#19#0" expanded="true" />
                   </folding>
@@ -435,13 +435,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00952" summary="redo conf est">
-      <created>1535473522976</created>
-      <option name="number" value="00952" />
-      <option name="presentableId" value="LOCAL-00952" />
-      <option name="project" value="LOCAL" />
-      <updated>1535473522976</updated>
-    </task>
     <task id="LOCAL-00953" summary="redo conf est">
       <created>1535473609608</created>
       <option name="number" value="00953" />
@@ -778,7 +771,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536692492567</updated>
     </task>
-    <option name="localTasksCounter" value="1001" />
+    <task id="LOCAL-01001" summary="fixed scale function for von mises">
+      <created>1536693013304</created>
+      <option name="number" value="01001" />
+      <option name="presentableId" value="LOCAL-01001" />
+      <option name="project" value="LOCAL" />
+      <updated>1536693013304</updated>
+    </task>
+    <option name="localTasksCounter" value="1002" />
     <servers />
   </component>
   <component name="TodoView">
@@ -844,7 +844,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated tests with mean rank plot" />
     <MESSAGE value="test3 var" />
     <MESSAGE value="BS for ModelA" />
     <MESSAGE value="updated projection for model A" />
@@ -869,7 +868,8 @@
     <MESSAGE value="updated HyperSpherical ModelA" />
     <MESSAGE value="updated HyperSpherical variance initalisation" />
     <MESSAGE value="removed projection" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed projection" />
+    <MESSAGE value="fixed scale function for von mises" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed scale function for von mises" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1194,16 +1194,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/mnist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-362">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="e#1#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-866">
@@ -1212,13 +1202,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/examples/mnist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="60" column="74" lean-forward="true" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="74" />
+          <folding>
+            <element signature="e#1#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="164" column="12" lean-forward="false" selection-start-line="164" selection-start-column="12" selection-end-line="164" selection-end-column="12" />
+        <state relative-caret-position="111">
+          <caret line="163" column="50" lean-forward="false" selection-start-line="163" selection-start-column="50" selection-end-line="163" selection-end-column="50" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1536692998381" expanded="true" signature="8414:8922" ph="..." />
+            <marker date="1536693259294" expanded="true" signature="8418:8926" ph="..." />
           </folding>
         </state>
       </provider>
