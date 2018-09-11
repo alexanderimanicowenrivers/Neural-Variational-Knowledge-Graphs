@@ -34,13 +34,14 @@
           <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="29">
-                  <caret line="368" column="90" lean-forward="false" selection-start-line="368" selection-start-column="90" selection-end-line="368" selection-end-column="90" />
+                <state relative-caret-position="258">
+                  <caret line="345" column="46" lean-forward="false" selection-start-line="345" selection-start-column="46" selection-end-line="345" selection-end-column="46" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
-                    <marker date="1536693629804" expanded="true" signature="8418:8926" ph="..." />
-                    <marker date="1536693629804" expanded="true" signature="14979:15877" ph="..." />
-                    <marker date="1536693629804" expanded="true" signature="15488:15877" ph="..." />
+                    <marker date="1536693753009" expanded="true" signature="8418:8926" ph="..." />
+                    <marker date="1536693753009" expanded="true" signature="14319:15203" ph="..." />
+                    <marker date="1536693753009" expanded="true" signature="15305:16203" ph="..." />
+                    <marker date="1536693753009" expanded="true" signature="15814:16203" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -437,13 +438,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00954" summary="redo conf est">
-      <created>1535474991335</created>
-      <option name="number" value="00954" />
-      <option name="presentableId" value="LOCAL-00954" />
-      <option name="project" value="LOCAL" />
-      <updated>1535474991336</updated>
-    </task>
     <task id="LOCAL-00955" summary="redo conf est">
       <created>1535475056388</created>
       <option name="number" value="00955" />
@@ -780,7 +774,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536693275936</updated>
     </task>
-    <option name="localTasksCounter" value="1003" />
+    <task id="LOCAL-01003" summary="trying distmult on mean embeddings">
+      <created>1536693641967</created>
+      <option name="number" value="01003" />
+      <option name="presentableId" value="LOCAL-01003" />
+      <option name="project" value="LOCAL" />
+      <updated>1536693641967</updated>
+    </task>
+    <option name="localTasksCounter" value="1004" />
     <servers />
   </component>
   <component name="TodoView">
@@ -846,7 +847,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test3 var" />
     <MESSAGE value="BS for ModelA" />
     <MESSAGE value="updated projection for model A" />
     <MESSAGE value="modified compression cost KL model A" />
@@ -871,7 +871,8 @@
     <MESSAGE value="updated HyperSpherical variance initalisation" />
     <MESSAGE value="removed projection" />
     <MESSAGE value="fixed scale function for von mises" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed scale function for von mises" />
+    <MESSAGE value="trying distmult on mean embeddings" />
+    <option name="LAST_COMMIT_MESSAGE" value="trying distmult on mean embeddings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1216,13 +1217,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="368" column="90" lean-forward="false" selection-start-line="368" selection-start-column="90" selection-end-line="368" selection-end-column="90" />
+        <state relative-caret-position="258">
+          <caret line="345" column="46" lean-forward="false" selection-start-line="345" selection-start-column="46" selection-end-line="345" selection-end-column="46" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1536693629804" expanded="true" signature="8418:8926" ph="..." />
-            <marker date="1536693629804" expanded="true" signature="14979:15877" ph="..." />
-            <marker date="1536693629804" expanded="true" signature="15488:15877" ph="..." />
+            <marker date="1536693753009" expanded="true" signature="8418:8926" ph="..." />
+            <marker date="1536693753009" expanded="true" signature="14319:15203" ph="..." />
+            <marker date="1536693753009" expanded="true" signature="15305:16203" ph="..." />
+            <marker date="1536693753009" expanded="true" signature="15814:16203" ph="..." />
           </folding>
         </state>
       </provider>
