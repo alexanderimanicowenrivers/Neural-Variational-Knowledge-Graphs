@@ -101,13 +101,14 @@ def main(_):
 
     header = """#!/bin/bash
 
-#$ -cwd
-#$ -S /bin/bash
-#$ -o /home/acowenri/array.o.log
-#$ -e /home/acowenri/array.e.log
-#$ -t 1-{}
-#$ -l tmem=8G
-#$ -l h_rt=12:00:00
+    #$ -cwd
+    #$ -S /bin/bash
+    #$ -o /home/acowenri/array.o.log
+    #$ -e /home/acowenri/array.e.log
+    #$ -t 1-{}
+    #$ -l tmem=12G
+    #$ -l h_rt=24:00:00
+    # $ -ac allow=LMNOPQSTU
 
 
 
