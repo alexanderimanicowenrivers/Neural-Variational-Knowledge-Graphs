@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseA.py" afterPath="$PROJECT_DIR$/vkge/baseA.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,11 +31,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="baseA.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="253">
-                  <caret line="96" column="0" lean-forward="true" selection-start-line="89" selection-start-column="7" selection-end-line="96" selection-end-column="0" />
+                <state relative-caret-position="233">
+                  <caret line="152" column="28" lean-forward="false" selection-start-line="152" selection-start-column="28" selection-end-line="152" selection-end-column="28" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                   </folding>
@@ -62,7 +63,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="baseline.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="baseline.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="117">
@@ -215,10 +216,10 @@
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
         <option value="$PROJECT_DIR$/mainA.py" />
-        <option value="$PROJECT_DIR$/vkge/baseA.py" />
         <option value="$PROJECT_DIR$/scripts/script_baseline.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA.py" />
         <option value="$PROJECT_DIR$/vkge/baseline.py" />
+        <option value="$PROJECT_DIR$/vkge/baseA.py" />
       </list>
     </option>
   </component>
@@ -453,13 +454,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00962" summary="ablation">
-      <created>1535666556228</created>
-      <option name="number" value="00962" />
-      <option name="presentableId" value="LOCAL-00962" />
-      <option name="project" value="LOCAL" />
-      <updated>1535666556228</updated>
     </task>
     <task id="LOCAL-00963" summary="ablation">
       <created>1535667329449</created>
@@ -797,7 +791,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536695628362</updated>
     </task>
-    <option name="localTasksCounter" value="1011" />
+    <task id="LOCAL-01011" summary="5 samples 100 epochs">
+      <created>1536695641061</created>
+      <option name="number" value="01011" />
+      <option name="presentableId" value="LOCAL-01011" />
+      <option name="project" value="LOCAL" />
+      <updated>1536695641061</updated>
+    </task>
+    <option name="localTasksCounter" value="1012" />
     <servers />
   </component>
   <component name="TodoView">
@@ -863,7 +864,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated projection for model A" />
     <MESSAGE value="modified compression cost KL model A" />
     <MESSAGE value="added in fixed projection for variance vectors" />
     <MESSAGE value="added in new constraint" />
@@ -888,7 +888,8 @@
     <MESSAGE value="fixed scale function for von mises" />
     <MESSAGE value="trying distmult on mean embeddings" />
     <MESSAGE value="taken out mean l2 reg" />
-    <option name="LAST_COMMIT_MESSAGE" value="taken out mean l2 reg" />
+    <MESSAGE value="5 samples 100 epochs" />
+    <option name="LAST_COMMIT_MESSAGE" value="5 samples 100 epochs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1209,16 +1210,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="96" column="0" lean-forward="true" selection-start-line="89" selection-start-column="7" selection-end-line="96" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_baseline.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="885">
@@ -1240,6 +1231,16 @@
         <state relative-caret-position="117">
           <caret line="318" column="31" lean-forward="false" selection-start-line="318" selection-start-column="31" selection-end-line="318" selection-end-column="31" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="152" column="28" lean-forward="false" selection-start-line="152" selection-start-column="28" selection-end-line="152" selection-end-column="28" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
