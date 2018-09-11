@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseline.py" afterPath="$PROJECT_DIR$/vkge/baseline.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA.py" afterPath="$PROJECT_DIR$/scripts/scriptA.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_baseline.py" afterPath="$PROJECT_DIR$/scripts/script_baseline.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,11 +44,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="scriptA.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="scriptA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="282">
-                  <caret line="81" column="23" lean-forward="false" selection-start-line="81" selection-start-column="23" selection-end-line="81" selection-end-column="23" />
+                <state relative-caret-position="240">
+                  <caret line="88" column="93" lean-forward="false" selection-start-line="88" selection-start-column="93" selection-end-line="88" selection-end-column="93" />
                   <folding />
                 </state>
               </provider>
@@ -56,18 +57,18 @@
           <file leaf-file-name="script_baseline.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/scripts/script_baseline.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="66">
-                  <caret line="63" column="33" lean-forward="true" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="33" />
+                <state relative-caret-position="80">
+                  <caret line="69" column="78" lean-forward="true" selection-start-line="69" selection-start-column="78" selection-end-line="69" selection-end-column="87" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="baseline.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="baseline.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="131">
-                  <caret line="154" column="28" lean-forward="true" selection-start-line="154" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+                <state relative-caret-position="585">
+                  <caret line="154" column="28" lean-forward="false" selection-start-line="154" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -129,9 +130,9 @@
       <find>dty</find>
       <find>z_var</find>
       <find>self.print</find>
+      <find>VonMisesFisher</find>
       <find>mean_c</find>
       <find>negsamples</find>
-      <find>VonMisesFisher</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -216,10 +217,10 @@
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
         <option value="$PROJECT_DIR$/mainA.py" />
-        <option value="$PROJECT_DIR$/scripts/script_baseline.py" />
-        <option value="$PROJECT_DIR$/scripts/scriptA.py" />
         <option value="$PROJECT_DIR$/vkge/baseA.py" />
         <option value="$PROJECT_DIR$/vkge/baseline.py" />
+        <option value="$PROJECT_DIR$/scripts/script_baseline.py" />
+        <option value="$PROJECT_DIR$/scripts/scriptA.py" />
       </list>
     </option>
   </component>
@@ -454,13 +455,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00964" summary="rerun-complex">
-      <created>1535669761586</created>
-      <option name="number" value="00964" />
-      <option name="presentableId" value="LOCAL-00964" />
-      <option name="project" value="LOCAL" />
-      <updated>1535669761586</updated>
     </task>
     <task id="LOCAL-00965" summary="rerun-complex">
       <created>1535669863619</created>
@@ -798,7 +792,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536695655645</updated>
     </task>
-    <option name="localTasksCounter" value="1013" />
+    <task id="LOCAL-01013" summary="5 samples 100 epochs with adam and MLE">
+      <created>1536695701756</created>
+      <option name="number" value="01013" />
+      <option name="presentableId" value="LOCAL-01013" />
+      <option name="project" value="LOCAL" />
+      <updated>1536695701756</updated>
+    </task>
+    <option name="localTasksCounter" value="1014" />
     <servers />
   </component>
   <component name="TodoView">
@@ -864,7 +865,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modified compression cost KL model A" />
     <MESSAGE value="added in fixed projection for variance vectors" />
     <MESSAGE value="added in new constraint" />
     <MESSAGE value="final test with broad range" />
@@ -889,7 +889,8 @@
     <MESSAGE value="trying distmult on mean embeddings" />
     <MESSAGE value="taken out mean l2 reg" />
     <MESSAGE value="5 samples 100 epochs" />
-    <option name="LAST_COMMIT_MESSAGE" value="5 samples 100 epochs" />
+    <MESSAGE value="5 samples 100 epochs with adam and MLE" />
+    <option name="LAST_COMMIT_MESSAGE" value="5 samples 100 epochs with adam and MLE" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1210,14 +1211,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="81" column="23" lean-forward="false" selection-start-line="81" selection-start-column="23" selection-end-line="81" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
@@ -1228,18 +1221,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/script_baseline.py">
+    <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="63" column="33" lean-forward="true" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="33" />
+        <state relative-caret-position="585">
+          <caret line="154" column="28" lean-forward="false" selection-start-line="154" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
+    <entry file="file://$PROJECT_DIR$/scripts/script_baseline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="154" column="28" lean-forward="true" selection-start-line="154" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+        <state relative-caret-position="80">
+          <caret line="69" column="78" lean-forward="true" selection-start-line="69" selection-start-column="78" selection-end-line="69" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="88" column="93" lean-forward="false" selection-start-line="88" selection-start-column="93" selection-end-line="88" selection-end-column="93" />
           <folding />
         </state>
       </provider>
