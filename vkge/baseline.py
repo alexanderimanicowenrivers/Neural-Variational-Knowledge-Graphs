@@ -118,9 +118,13 @@ class VKGE_simple:
             predicate_embedding_size = embedding_size
             entity_embedding_size = embedding_size
 
+        seed = np.random.randint(100, size=1)[0]
 
-        self.random_state = np.random.RandomState(0)
-        tf.set_random_seed(0)
+        self.random_state = np.random.RandomState(seed)
+        tf.set_random_seed(seed)
+
+        logger.warn("\n \n Using Random Seed {} \n \n".format(seed))
+
         self.static_mean = static_mean
         self.alt_cost = alt_cost
         self.mean_c = mean_c
@@ -196,10 +200,10 @@ class VKGE_simple:
                            pred_sig)
         self.build_decoder()
 
-        self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
-        self.g_objective = tf.reduce_sum(self.hinge_losses)
+        self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
+        # self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
+        # self.g_objective = tf.reduce_sum(self.hinge_losses)
 
-        # self.g_objective = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
 
         self.elbo = self.g_objective
 
@@ -208,9 +212,9 @@ class VKGE_simple:
 
         gradients = optimizer.compute_gradients(loss=self.g_objective)
 
-        if False:
-            self.g_objective += tf.add_n([tf.nn.l2_loss(v) for v in self.train_variables]) * 0.01
         if True:
+            self.g_objective += tf.add_n([tf.nn.l2_loss(v) for v in self.train_variables]) * 0.01
+        if False:
             # if clip_op == tf.clip_by_value:
             gradients = [(tf.clip_by_value(grad, -1, 1), var)
                         for grad, var in gradients if grad is not None]
