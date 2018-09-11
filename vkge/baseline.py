@@ -151,8 +151,8 @@ class VKGE_simple:
 
         ############################
         # optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
-        optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
-        # optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
+        # optimizer=tf.train.AdagradOptimizer(learning_rate=lr)
+        optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
 
 
 
