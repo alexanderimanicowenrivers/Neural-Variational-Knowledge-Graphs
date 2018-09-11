@@ -71,7 +71,7 @@ def main(_):
     hyperparameters_space = dict(
         w1=[10],
         # w1=[10],
-        w2=[1e-7], #
+        w2=[1e-7], #ls
         w3=[300],
         w4 = ['wn18'],
         w5=[True,False],
