@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="trying distmult on mean embeddings">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseA.py" afterPath="$PROJECT_DIR$/vkge/baseA.py" />
     </list>
@@ -34,9 +34,11 @@
           <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="129">
-                  <caret line="9" column="59" lean-forward="false" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="59" />
-                  <folding />
+                <state relative-caret-position="154">
+                  <caret line="553" column="9" lean-forward="false" selection-start-line="553" selection-start-column="9" selection-end-line="553" selection-end-column="9" />
+                  <folding>
+                    <element signature="e#25#36#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -432,13 +434,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00957" summary="ablation">
-      <created>1535549350187</created>
-      <option name="number" value="00957" />
-      <option name="presentableId" value="LOCAL-00957" />
-      <option name="project" value="LOCAL" />
-      <updated>1535549350187</updated>
-    </task>
     <task id="LOCAL-00958" summary="ablation">
       <created>1535557676688</created>
       <option name="number" value="00958" />
@@ -775,7 +770,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536693769513</updated>
     </task>
-    <option name="localTasksCounter" value="1006" />
+    <task id="LOCAL-01006" summary="taken out mean l2 reg">
+      <created>1536694323085</created>
+      <option name="number" value="01006" />
+      <option name="presentableId" value="LOCAL-01006" />
+      <option name="project" value="LOCAL" />
+      <updated>1536694323085</updated>
+    </task>
+    <option name="localTasksCounter" value="1007" />
     <servers />
   </component>
   <component name="TodoView">
@@ -841,7 +843,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="BS for ModelA" />
     <MESSAGE value="updated projection for model A" />
     <MESSAGE value="modified compression cost KL model A" />
     <MESSAGE value="added in fixed projection for variance vectors" />
@@ -866,7 +867,8 @@
     <MESSAGE value="removed projection" />
     <MESSAGE value="fixed scale function for von mises" />
     <MESSAGE value="trying distmult on mean embeddings" />
-    <option name="LAST_COMMIT_MESSAGE" value="trying distmult on mean embeddings" />
+    <MESSAGE value="taken out mean l2 reg" />
+    <option name="LAST_COMMIT_MESSAGE" value="taken out mean l2 reg" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1211,9 +1213,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="9" column="59" lean-forward="false" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="59" />
-          <folding />
+        <state relative-caret-position="154">
+          <caret line="553" column="9" lean-forward="false" selection-start-line="553" selection-start-column="9" selection-end-line="553" selection-end-column="9" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

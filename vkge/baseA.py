@@ -549,9 +549,13 @@ class modelA:
         # Train
         ##
 
+        config = tf.ConfigProto(
+            device_count={'GPU': 0}
+        )
 
         init_op = tf.global_variables_initializer()
-        with tf.Session() as session:
+        # with tf.Session() as session:
+        with tf.Session(config=config) as session:
             session.run(init_op)
 
             neg_subs = math.ceil(int(self.negsamples / 2))
