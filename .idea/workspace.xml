@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="updated HyperSpherical ModelA">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA.py" afterPath="$PROJECT_DIR$/scripts/scriptA.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseA.py" afterPath="$PROJECT_DIR$/vkge/baseA.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,11 +34,11 @@
           <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-13">
-                  <caret line="171" column="8" lean-forward="false" selection-start-line="171" selection-start-column="8" selection-end-line="171" selection-end-column="8" />
+                <state relative-caret-position="267">
+                  <caret line="241" column="12" lean-forward="false" selection-start-line="241" selection-start-column="12" selection-end-line="241" selection-end-column="12" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
-                    <marker date="1536691569454" expanded="true" signature="6156:6915" ph="..." />
+                    <marker date="1536692075629" expanded="true" signature="8183:8691" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -49,7 +48,7 @@
             <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="512">
-                  <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+                  <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -72,7 +71,7 @@
           <file leaf-file-name="mnist.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/examples/mnist.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
+                <state relative-caret-position="-348">
                   <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
                   <folding>
                     <element signature="e#1#19#0" expanded="true" />
@@ -436,13 +435,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00947" summary="updated confidence estimation testing">
-      <created>1535471876013</created>
-      <option name="number" value="00947" />
-      <option name="presentableId" value="LOCAL-00947" />
-      <option name="project" value="LOCAL" />
-      <updated>1535471876013</updated>
-    </task>
     <task id="LOCAL-00948" summary="updated confidence estimation testing">
       <created>1535471924153</created>
       <option name="number" value="00948" />
@@ -779,7 +771,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536690906111</updated>
     </task>
-    <option name="localTasksCounter" value="996" />
+    <task id="LOCAL-00996" summary="updated HyperSpherical ModelA">
+      <created>1536691572567</created>
+      <option name="number" value="00996" />
+      <option name="presentableId" value="LOCAL-00996" />
+      <option name="project" value="LOCAL" />
+      <updated>1536691572568</updated>
+    </task>
+    <option name="localTasksCounter" value="997" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1198,14 +1197,14 @@
     <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="512">
-          <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/mnist.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="-348">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
             <element signature="e#1#19#0" expanded="true" />
@@ -1215,11 +1214,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13">
-          <caret line="171" column="8" lean-forward="false" selection-start-line="171" selection-start-column="8" selection-end-line="171" selection-end-column="8" />
+        <state relative-caret-position="267">
+          <caret line="241" column="12" lean-forward="false" selection-start-line="241" selection-start-column="12" selection-end-line="241" selection-end-column="12" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1536691569454" expanded="true" signature="6156:6915" ph="..." />
+            <marker date="1536692075629" expanded="true" signature="8183:8691" ph="..." />
           </folding>
         </state>
       </provider>
