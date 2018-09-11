@@ -44,7 +44,7 @@ def to_cmd(c):
               '--score_func {} ' \
               '--negsamples {} ' \
               '--projection {} ' \
-              '--distribution {}' \
+              '--distribution {} ' \
               '--file_name {} ' \
         .format(path,
                 #                 params,

@@ -34,10 +34,10 @@
           <file leaf-file-name="scriptA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="119">
-                  <caret line="47" column="33" lean-forward="false" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
+                <state relative-caret-position="104">
+                  <caret line="46" column="33" lean-forward="false" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
                   <folding>
-                    <marker date="1536690334145" expanded="true" signature="1041:1427" ph="'...'" />
+                    <marker date="1536690407378" expanded="true" signature="1041:1428" ph="'...'" />
                   </folding>
                 </state>
               </provider>
@@ -428,13 +428,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00942" summary="BS with sigma init between 0 and sigmax">
-      <created>1535204653295</created>
-      <option name="number" value="00942" />
-      <option name="presentableId" value="LOCAL-00942" />
-      <option name="project" value="LOCAL" />
-      <updated>1535204653295</updated>
-    </task>
     <task id="LOCAL-00943" summary="rm trainwriter bug">
       <created>1535205171425</created>
       <option name="number" value="00943" />
@@ -771,7 +764,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536690274925</updated>
     </task>
-    <option name="localTasksCounter" value="991" />
+    <task id="LOCAL-00991" summary="Add in Hyperspherical VAE code">
+      <created>1536690337411</created>
+      <option name="number" value="00991" />
+      <option name="presentableId" value="LOCAL-00991" />
+      <option name="project" value="LOCAL" />
+      <updated>1536690337411</updated>
+    </task>
+    <option name="localTasksCounter" value="992" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1208,10 +1208,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="47" column="33" lean-forward="false" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
+        <state relative-caret-position="104">
+          <caret line="46" column="33" lean-forward="false" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
           <folding>
-            <marker date="1536690334145" expanded="true" signature="1041:1427" ph="'...'" />
+            <marker date="1536690407378" expanded="true" signature="1041:1428" ph="'...'" />
           </folding>
         </state>
       </provider>
