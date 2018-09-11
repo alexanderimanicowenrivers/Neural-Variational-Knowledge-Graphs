@@ -316,9 +316,9 @@ class VKGE_simple:
 
         # projection_steps = [constraints.unit_sphere(self.entity_embedding_mean, norm=1.0)]
 
-        # self.negsamples = int(3)
+        self.negsamples = int(5)
 
-        self.negsamples = int(2.0*len(all_triples)*(self.nb_entities-1)/(nb_batches*1.0))
+        # self.negsamples = int(2.0*len(all_triples)*(self.nb_entities-1)/(nb_batches*1.0))
 
         logger.warn("Number of negative samples per batch is {}, \t batch size is {} \t number of positive triples {}".format(self.negsamples,self.negsamples+batch_size,len(all_triples)))
 
