@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA.py" afterPath="$PROJECT_DIR$/scripts/scriptA.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_baseline.py" afterPath="$PROJECT_DIR$/scripts/script_baseline.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,21 +44,31 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="scriptA.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="scriptA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="189">
-                  <caret line="76" column="16" lean-forward="false" selection-start-line="76" selection-start-column="16" selection-end-line="76" selection-end-column="16" />
+                <state relative-caret-position="131">
+                  <caret line="126" column="22" lean-forward="false" selection-start-line="126" selection-start-column="22" selection-end-line="126" selection-end-column="22" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="script_baseline.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="script_baseline.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/scripts/script_baseline.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="243">
-                  <caret line="61" column="16" lean-forward="false" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+                <state relative-caret-position="298">
+                  <caret line="110" column="22" lean-forward="false" selection-start-line="110" selection-start-column="22" selection-end-line="110" selection-end-column="22" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="scriptA_BS2.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/scripts/scriptA_BS2.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="62">
+                  <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -218,8 +229,8 @@
         <option value="$PROJECT_DIR$/mainA.py" />
         <option value="$PROJECT_DIR$/vkge/baseA.py" />
         <option value="$PROJECT_DIR$/vkge/baseline.py" />
-        <option value="$PROJECT_DIR$/scripts/scriptA.py" />
         <option value="$PROJECT_DIR$/scripts/script_baseline.py" />
+        <option value="$PROJECT_DIR$/scripts/scriptA.py" />
       </list>
     </option>
   </component>
@@ -454,13 +465,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00969" summary="neaten up code">
-      <created>1535808843229</created>
-      <option name="number" value="00969" />
-      <option name="presentableId" value="LOCAL-00969" />
-      <option name="project" value="LOCAL" />
-      <updated>1535808843230</updated>
     </task>
     <task id="LOCAL-00970" summary="neaten up code for main model">
       <created>1535812596647</created>
@@ -798,7 +802,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536696597525</updated>
     </task>
-    <option name="localTasksCounter" value="1018" />
+    <task id="LOCAL-01018" summary="5 samples 100 epochs with adam and MLE">
+      <created>1536696609165</created>
+      <option name="number" value="01018" />
+      <option name="presentableId" value="LOCAL-01018" />
+      <option name="project" value="LOCAL" />
+      <updated>1536696609165</updated>
+    </task>
+    <option name="localTasksCounter" value="1019" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1055,13 +1066,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/scriptA_BS2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="79" column="32" lean-forward="false" selection-start-line="79" selection-start-column="22" selection-end-line="79" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/scriptA_NS2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
@@ -1228,18 +1232,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
+    <entry file="file://$PROJECT_DIR$/scripts/scriptA_BS2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="76" column="16" lean-forward="false" selection-start-line="76" selection-start-column="16" selection-end-line="76" selection-end-column="16" />
+        <state relative-caret-position="62">
+          <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_baseline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="61" column="16" lean-forward="false" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+        <state relative-caret-position="298">
+          <caret line="110" column="22" lean-forward="false" selection-start-line="110" selection-start-column="22" selection-end-line="110" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="126" column="22" lean-forward="false" selection-start-line="126" selection-start-column="22" selection-end-line="126" selection-end-column="22" />
           <folding />
         </state>
       </provider>
