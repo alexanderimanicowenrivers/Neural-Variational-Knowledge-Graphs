@@ -58,8 +58,8 @@ def to_cmd(c):
                 c['w7'],
                 c['w8'],
                 c['w9'],
-                c['w10'],
-                ("{}/logs/ModelA_VMD/uclcs_nvkg_v1.{}".format(path, summary(c)))
+                ("{}/logs/ModelA_VMD/uclcs_nvkg_v1.{}".format(path, summary(c))),
+                c['w10']
                 )
     return command
 
