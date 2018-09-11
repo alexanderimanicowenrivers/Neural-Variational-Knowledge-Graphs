@@ -234,7 +234,7 @@ class modelA:
                 self.entity_embedding_sigma = tf.get_variable('entities_sigma',
                                                           shape=[nb_entities + 1, 1],
                                                           initializer=tf.random_uniform_initializer(
-                                                              minval=init2, maxval=init2, dtype=tf.float32),
+                                                              minval=0, maxval=0, dtype=tf.float32),
                                                           dtype=tf.float32)
 
             else:
@@ -294,7 +294,7 @@ class modelA:
                                                                  shape=[nb_predicates + 1,
                                                                         1],
                                                                  initializer=tf.random_uniform_initializer(
-                                                                     minval=init2, maxval=init2,
+                                                                     minval=0, maxval=0,
                                                                      dtype=tf.float32),
                                                                  dtype=tf.float32)
 

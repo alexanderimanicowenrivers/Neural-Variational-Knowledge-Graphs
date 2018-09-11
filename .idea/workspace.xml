@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="updated HyperSpherical ModelA">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseA.py" afterPath="$PROJECT_DIR$/vkge/baseA.py" />
     </list>
@@ -34,11 +34,11 @@
           <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="267">
-                  <caret line="241" column="12" lean-forward="false" selection-start-line="241" selection-start-column="12" selection-end-line="241" selection-end-column="12" />
+                <state relative-caret-position="227">
+                  <caret line="296" column="87" lean-forward="false" selection-start-line="296" selection-start-column="87" selection-end-line="296" selection-end-column="87" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
-                    <marker date="1536692075629" expanded="true" signature="8183:8691" ph="..." />
+                    <marker date="1536692131747" expanded="true" signature="8183:8691" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -435,13 +435,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00948" summary="updated confidence estimation testing">
-      <created>1535471924153</created>
-      <option name="number" value="00948" />
-      <option name="presentableId" value="LOCAL-00948" />
-      <option name="project" value="LOCAL" />
-      <updated>1535471924154</updated>
-    </task>
     <task id="LOCAL-00949" summary="updated confidence estimation testing">
       <created>1535472006268</created>
       <option name="number" value="00949" />
@@ -778,7 +771,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536691572568</updated>
     </task>
-    <option name="localTasksCounter" value="997" />
+    <task id="LOCAL-00997" summary="updated HyperSpherical ModelA">
+      <created>1536692079323</created>
+      <option name="number" value="00997" />
+      <option name="presentableId" value="LOCAL-00997" />
+      <option name="project" value="LOCAL" />
+      <updated>1536692079323</updated>
+    </task>
+    <option name="localTasksCounter" value="998" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1214,11 +1214,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="241" column="12" lean-forward="false" selection-start-line="241" selection-start-column="12" selection-end-line="241" selection-end-column="12" />
+        <state relative-caret-position="227">
+          <caret line="296" column="87" lean-forward="false" selection-start-line="296" selection-start-column="87" selection-end-line="296" selection-end-column="87" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
-            <marker date="1536692075629" expanded="true" signature="8183:8691" ph="..." />
+            <marker date="1536692131747" expanded="true" signature="8183:8691" ph="..." />
           </folding>
         </state>
       </provider>
