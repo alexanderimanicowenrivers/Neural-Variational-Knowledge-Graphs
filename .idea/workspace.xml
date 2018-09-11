@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA.py" afterPath="$PROJECT_DIR$/scripts/scriptA.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/__init__.py" afterPath="$PROJECT_DIR$/vkge/__init__.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,6 +19,18 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/vkge/__init__.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="165">
+                  <caret line="11" column="70" lean-forward="false" selection-start-line="11" selection-start-column="70" selection-end-line="11" selection-end-column="70" />
+                  <folding>
+                    <element signature="e#25#58#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="baseA.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
@@ -31,14 +43,12 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="scriptA.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="scriptA.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="104">
                   <caret line="46" column="33" lean-forward="false" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
-                  <folding>
-                    <marker date="1536690407378" expanded="true" signature="1041:1428" ph="'...'" />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -191,7 +201,6 @@
         <option value="$PROJECT_DIR$/vkge/base_model2.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
-        <option value="$PROJECT_DIR$/vkge/__init__.py" />
         <option value="$PROJECT_DIR$/mainB.py" />
         <option value="$PROJECT_DIR$/vkge/baseB.py" />
         <option value="$PROJECT_DIR$/scripts/scriptB.py" />
@@ -199,6 +208,7 @@
         <option value="$PROJECT_DIR$/mainA.py" />
         <option value="$PROJECT_DIR$/vkge/baseA.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA.py" />
+        <option value="$PROJECT_DIR$/vkge/__init__.py" />
       </list>
     </option>
   </component>
@@ -244,11 +254,6 @@
               <item name="Neural-Variational-Knowledge-Graphs" type="462c0819:PsiDirectoryNode" />
               <item name="hyperspherical_vae" type="462c0819:PsiDirectoryNode" />
               <item name="distributions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Neural-Variational-Knowledge-Graphs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Neural-Variational-Knowledge-Graphs" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Neural-Variational-Knowledge-Graphs" type="b2602c69:ProjectViewProjectNode" />
@@ -427,13 +432,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00943" summary="rm trainwriter bug">
-      <created>1535205171425</created>
-      <option name="number" value="00943" />
-      <option name="presentableId" value="LOCAL-00943" />
-      <option name="project" value="LOCAL" />
-      <updated>1535205171425</updated>
     </task>
     <task id="LOCAL-00944" summary="rm trainwriter bug">
       <created>1535205975233</created>
@@ -771,7 +769,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536690337411</updated>
     </task>
-    <option name="localTasksCounter" value="992" />
+    <task id="LOCAL-00992" summary="Add in Hyperspherical VAE code">
+      <created>1536690410649</created>
+      <option name="number" value="00992" />
+      <option name="presentableId" value="LOCAL-00992" />
+      <option name="project" value="LOCAL" />
+      <updated>1536690410649</updated>
+    </task>
+    <option name="localTasksCounter" value="993" />
     <servers />
   </component>
   <component name="TodoView">
@@ -893,13 +898,6 @@
     <entry file="file://$PROJECT_DIR$/vkge/base3.py" />
     <entry file="file://$PROJECT_DIR$/script_search.py" />
     <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py" />
-    <entry file="file://$PROJECT_DIR$/scripts/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/baseline_main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="335">
@@ -1039,16 +1037,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="84" column="87" lean-forward="false" selection-start-line="84" selection-start-column="87" selection-end-line="84" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="8" column="44" lean-forward="false" selection-start-line="8" selection-start-column="44" selection-end-line="10" selection-end-column="62" />
-          <folding>
-            <element signature="e#25#58#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1206,12 +1194,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
           <caret line="46" column="33" lean-forward="false" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="70" lean-forward="false" selection-start-line="11" selection-start-column="70" selection-end-line="11" selection-end-column="70" />
           <folding>
-            <marker date="1536690407378" expanded="true" signature="1041:1428" ph="'...'" />
+            <element signature="e#25#58#0" expanded="true" />
           </folding>
         </state>
       </provider>
