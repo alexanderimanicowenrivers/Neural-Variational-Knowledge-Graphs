@@ -116,16 +116,15 @@ def main(_):
     nb_jobs = len(sorted_command_lines)
 
     header = """#!/bin/bash
-
+    
     # $ -cwd
     # $ -S /bin/bash
     # $ -o /dev/null
     # $ -e /dev/null
     # $ -t 1-{}
     # $ -l tmem=12G
-    # $ -l h_rt=24:00:00
-    # $ -P gpu
-    # $ -l gpu=1-GPU_PASCAL=1
+    # $ -l h_rt=48:00:00
+    # $ -ac allow=LMNOPQSTU
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
