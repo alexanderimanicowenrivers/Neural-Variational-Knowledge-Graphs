@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mainA.py" afterPath="$PROJECT_DIR$/mainA.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA.py" afterPath="$PROJECT_DIR$/scripts/scriptA.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,7 +35,7 @@
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="205">
-                  <caret line="31" column="14" lean-forward="true" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+                  <caret line="31" column="14" lean-forward="false" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                   </folding>
@@ -47,8 +46,8 @@
           <file leaf-file-name="scriptA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="20">
-                  <caret line="36" column="57" lean-forward="false" selection-start-line="36" selection-start-column="57" selection-end-line="36" selection-end-column="57" />
+                <state relative-caret-position="-326">
+                  <caret line="47" column="25" lean-forward="false" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
                   <folding />
                 </state>
               </provider>
@@ -57,8 +56,8 @@
           <file leaf-file-name="mainA.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/mainA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="61">
-                  <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+                <state relative-caret-position="239">
+                  <caret line="33" column="142" lean-forward="false" selection-start-line="33" selection-start-column="134" selection-end-line="33" selection-end-column="142" />
                   <folding />
                 </state>
               </provider>
@@ -434,13 +433,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00945" summary="rm trainwriter bug">
-      <created>1535454330691</created>
-      <option name="number" value="00945" />
-      <option name="presentableId" value="LOCAL-00945" />
-      <option name="project" value="LOCAL" />
-      <updated>1535454330695</updated>
-    </task>
     <task id="LOCAL-00946" summary="Fixed analysis section">
       <created>1535468457129</created>
       <option name="number" value="00946" />
@@ -777,7 +769,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536690580292</updated>
     </task>
-    <option name="localTasksCounter" value="994" />
+    <task id="LOCAL-00994" summary="Add in Hyperspherical VAE code">
+      <created>1536690719089</created>
+      <option name="number" value="00994" />
+      <option name="presentableId" value="LOCAL-00994" />
+      <option name="project" value="LOCAL" />
+      <updated>1536690719090</updated>
+    </task>
+    <option name="localTasksCounter" value="995" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1195,28 +1194,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mainA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="33" column="142" lean-forward="false" selection-start-line="33" selection-start-column="134" selection-end-line="33" selection-end-column="142" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
-          <caret line="31" column="14" lean-forward="true" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+          <caret line="31" column="14" lean-forward="false" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mainA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="36" column="57" lean-forward="false" selection-start-line="36" selection-start-column="57" selection-end-line="36" selection-end-column="57" />
+        <state relative-caret-position="-326">
+          <caret line="47" column="25" lean-forward="false" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
           <folding />
         </state>
       </provider>

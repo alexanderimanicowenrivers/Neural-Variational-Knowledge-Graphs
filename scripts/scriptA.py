@@ -45,6 +45,7 @@ def to_cmd(c):
               '--negsamples {} ' \
               '--projection {} ' \
               '--distribution {} ' \
+              '--ablation {} ' \
               '--file_name {} ' \
         .format(path,
                 #                 params,
@@ -59,6 +60,7 @@ def to_cmd(c):
                 c['w8'],
                 c['w9'],
                 c['w10'],
+                c['w11'],
                 ("{}/logs/ModelA_VMD/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
@@ -72,16 +74,16 @@ def to_logfile(c, path):
 def main(_):
     hyperparameters_space = dict(
         w1=[10],
-        # w1=[10],
         w2=[1e-7], #ls
         w3=[5],
         w4 = ['nations'],
         w5=[True,False],
         w6=[1e-3],
         w7=['DistMult'],
-        w8=[0],
+        w8=[1],
         w9=[True,False],
-        w10=['normal','vmf'])
+        w10=['normal','vmf'],
+        w11=[0])
 
     configurations = cartesian_product(hyperparameters_space)
     path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/ModelA_VMD'
