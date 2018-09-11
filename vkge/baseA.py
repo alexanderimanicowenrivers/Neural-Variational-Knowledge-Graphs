@@ -156,8 +156,15 @@ class modelA:
                         Returns the scale (std dev) from embeddings for tensorflow distributions MultivariateNormalDiag function
                 """
 
-        scale = tf.sqrt(tf.exp(log_sigma_square))
+        if self.distribution == 'normal':
+            scale = tf.sqrt(tf.exp(log_sigma_square))
 
+        elif self.distribution == 'vmf':
+
+            scale=log_sigma_square
+
+        else:
+            raise NotImplemented
         return scale
 
     def make_prior(self,code_size):

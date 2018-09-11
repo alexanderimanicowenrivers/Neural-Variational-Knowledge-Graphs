@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="removed projection">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA.py" afterPath="$PROJECT_DIR$/scripts/scriptA.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseA.py" afterPath="$PROJECT_DIR$/vkge/baseA.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,23 +31,23 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="baseA.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-4007">
-                  <caret line="188" column="0" lean-forward="false" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
+                <state relative-caret-position="126">
+                  <caret line="164" column="12" lean-forward="false" selection-start-line="164" selection-start-column="12" selection-end-line="164" selection-end-column="12" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
-                    <marker date="1536692215229" expanded="true" signature="8231:8739" ph="..." />
+                    <marker date="1536692998381" expanded="true" signature="8414:8922" ph="..." />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="scriptA.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="scriptA.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="313">
+                <state relative-caret-position="-866">
                   <caret line="83" column="12" lean-forward="false" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="12" />
                   <folding />
                 </state>
@@ -71,7 +71,7 @@
           <file leaf-file-name="mnist.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/examples/mnist.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-348">
+                <state relative-caret-position="-362">
                   <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
                   <folding>
                     <element signature="e#1#19#0" expanded="true" />
@@ -121,8 +121,8 @@
       <find>self.print</find>
       <find>make_prior</find>
       <find>dty</find>
-      <find>mean_c</find>
       <find>z_var</find>
+      <find>mean_c</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -209,8 +209,8 @@
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
         <option value="$PROJECT_DIR$/mainA.py" />
-        <option value="$PROJECT_DIR$/vkge/baseA.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA.py" />
+        <option value="$PROJECT_DIR$/vkge/baseA.py" />
       </list>
     </option>
   </component>
@@ -434,13 +434,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00951" summary="redo conf est">
-      <created>1535472663007</created>
-      <option name="number" value="00951" />
-      <option name="presentableId" value="LOCAL-00951" />
-      <option name="project" value="LOCAL" />
-      <updated>1535472663008</updated>
     </task>
     <task id="LOCAL-00952" summary="redo conf est">
       <created>1535473522976</created>
@@ -778,7 +771,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536692218457</updated>
     </task>
-    <option name="localTasksCounter" value="1000" />
+    <task id="LOCAL-01000" summary="removed projection">
+      <created>1536692492566</created>
+      <option name="number" value="01000" />
+      <option name="presentableId" value="LOCAL-01000" />
+      <option name="project" value="LOCAL" />
+      <updated>1536692492567</updated>
+    </task>
+    <option name="localTasksCounter" value="1001" />
     <servers />
   </component>
   <component name="TodoView">
@@ -844,7 +844,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated test with RAW info" />
     <MESSAGE value="updated tests with mean rank plot" />
     <MESSAGE value="test3 var" />
     <MESSAGE value="BS for ModelA" />
@@ -869,7 +868,8 @@
     <MESSAGE value="Add in Hyperspherical VAE code" />
     <MESSAGE value="updated HyperSpherical ModelA" />
     <MESSAGE value="updated HyperSpherical variance initalisation" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated HyperSpherical variance initalisation" />
+    <MESSAGE value="removed projection" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed projection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1196,7 +1196,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/mnist.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-348">
+        <state relative-caret-position="-362">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
             <element signature="e#1#19#0" expanded="true" />
@@ -1204,22 +1204,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
+    <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4007">
-          <caret line="188" column="0" lean-forward="false" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-            <marker date="1536692215229" expanded="true" signature="8231:8739" ph="..." />
-          </folding>
+        <state relative-caret-position="-866">
+          <caret line="83" column="12" lean-forward="false" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
+    <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="83" column="12" lean-forward="false" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="12" />
-          <folding />
+        <state relative-caret-position="126">
+          <caret line="164" column="12" lean-forward="false" selection-start-line="164" selection-start-column="12" selection-end-line="164" selection-end-column="12" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+            <marker date="1536692998381" expanded="true" signature="8414:8922" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
