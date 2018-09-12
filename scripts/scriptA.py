@@ -12,6 +12,7 @@ import os
 
 import sys
 import logging
+import numpy as np
 
 
 def cartesian_product(dicts):
