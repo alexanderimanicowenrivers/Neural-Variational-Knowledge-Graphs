@@ -61,7 +61,7 @@ def main(_):
         w6=['nations' ],
         w7=[1e-7],
         w8=[0.001],
-        w9=['DistMult', 'ComplEx'],
+        w9=['DistMult'],
         w10=[10]
     )
 
