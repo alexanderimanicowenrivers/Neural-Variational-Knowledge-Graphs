@@ -57,7 +57,7 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w3=[2,5,10,20,30,40,50],
+        w3=[20],
         w6=['fb15k-237', 'kinship', 'nations', 'umls', 'wn18', 'wn18rr'],
         w7=[1e-7],
         w8=[0.001,0.0001],
