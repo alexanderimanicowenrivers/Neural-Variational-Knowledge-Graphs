@@ -346,6 +346,7 @@ class VKGE_simple:
         with tf.Session() as session:
             session.run(init_op)
 
+            neg_subs = math.ceil(int(self.negsamples / 2))
 
 
             # train_writer = tf.summary.FileWriter(filename, session.graph)

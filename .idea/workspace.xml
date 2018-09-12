@@ -22,7 +22,7 @@
           <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/vkge/__init__.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="165">
+                <state relative-caret-position="90">
                   <caret line="11" column="70" lean-forward="false" selection-start-line="11" selection-start-column="70" selection-end-line="11" selection-end-column="70" />
                   <folding>
                     <element signature="e#25#58#0" expanded="true" />
@@ -34,7 +34,7 @@
           <file leaf-file-name="scriptA.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="192">
+                <state relative-caret-position="1110">
                   <caret line="79" column="19" lean-forward="false" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="19" />
                   <folding>
                     <element signature="e#199#215#0" expanded="true" />
@@ -46,7 +46,7 @@
           <file leaf-file-name="script_baseline.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/scripts/script_baseline.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="498">
+                <state relative-caret-position="840">
                   <caret line="60" column="19" lean-forward="false" selection-start-line="60" selection-start-column="19" selection-end-line="60" selection-end-column="19" />
                   <folding>
                     <element signature="e#134#150#0" expanded="true" />
@@ -58,8 +58,8 @@
           <file leaf-file-name="baseA.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="162">
-                  <caret line="583" column="0" lean-forward="false" selection-start-line="583" selection-start-column="0" selection-end-line="594" selection-end-column="0" />
+                <state relative-caret-position="129">
+                  <caret line="560" column="42" lean-forward="true" selection-start-line="560" selection-start-column="0" selection-end-line="561" selection-end-column="0" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                   </folding>
@@ -70,8 +70,8 @@
           <file leaf-file-name="baseline.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="252">
-                  <caret line="387" column="73" lean-forward="false" selection-start-line="387" selection-start-column="63" selection-end-line="387" selection-end-column="73" />
+                <state relative-caret-position="275">
+                  <caret line="349" column="0" lean-forward="true" selection-start-line="349" selection-start-column="0" selection-end-line="349" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -106,7 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>alt_op</find>
       <find>table</find>
       <find>no_confidence_samples</find>
       <find>self.KL_discount</find>
@@ -136,6 +135,7 @@
       <find>VonMisesFisher</find>
       <find>mean_c</find>
       <find>negsamples</find>
+      <find>neg_subs</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -246,6 +246,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -290,7 +291,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -458,13 +458,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00977" summary="model B BS">
-      <created>1535902750066</created>
-      <option name="number" value="00977" />
-      <option name="presentableId" value="LOCAL-00977" />
-      <option name="project" value="LOCAL" />
-      <updated>1535902750066</updated>
     </task>
     <task id="LOCAL-00978" summary="model B NS">
       <created>1535989851646</created>
@@ -802,7 +795,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536776446003</updated>
     </task>
-    <option name="localTasksCounter" value="1026" />
+    <task id="LOCAL-01026" summary="fixed baseline">
+      <created>1536782514142</created>
+      <option name="number" value="01026" />
+      <option name="presentableId" value="LOCAL-01026" />
+      <option name="project" value="LOCAL" />
+      <updated>1536782514142</updated>
+    </task>
+    <option name="localTasksCounter" value="1027" />
     <servers />
   </component>
   <component name="TodoView">
@@ -818,16 +818,16 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16523606" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16738197" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33471933" sideWeight="0.251634" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26819128" sideWeight="0.49427754" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32848233" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24941176" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40792838" sideWeight="0.748366" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -868,7 +868,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in fixed projection for variance vectors" />
     <MESSAGE value="added in new constraint" />
     <MESSAGE value="final test with broad range" />
     <MESSAGE value="final test with sigma init between 0 and sigmax" />
@@ -893,7 +892,8 @@
     <MESSAGE value="taken out mean l2 reg" />
     <MESSAGE value="5 samples 100 epochs" />
     <MESSAGE value="5 samples 100 epochs with adam and MLE" />
-    <option name="LAST_COMMIT_MESSAGE" value="5 samples 100 epochs with adam and MLE" />
+    <MESSAGE value="fixed baseline" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed baseline" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1090,11 +1090,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5565">
           <caret line="381" column="43" lean-forward="false" selection-start-line="381" selection-start-column="33" selection-end-line="381" selection-end-column="43" />
-          <folding>
-            <element signature="e#25#36#0" expanded="false" />
-            <element signature="e#881#1035#0" expanded="false" />
-            <element signature="e#1064#1399#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1109,10 +1104,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
           <caret line="52" column="10" lean-forward="false" selection-start-line="52" selection-start-column="10" selection-end-line="52" selection-end-column="10" />
-          <folding>
-            <element signature="e#881#1035#0" expanded="false" />
-            <element signature="e#1064#1399#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1127,9 +1118,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#48#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1151,7 +1139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1195,7 +1182,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="90">
           <caret line="11" column="70" lean-forward="false" selection-start-line="11" selection-start-column="70" selection-end-line="11" selection-end-column="70" />
           <folding>
             <element signature="e#25#58#0" expanded="true" />
@@ -1205,7 +1192,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
+        <state relative-caret-position="1110">
           <caret line="79" column="19" lean-forward="false" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="19" />
           <folding>
             <element signature="e#199#215#0" expanded="true" />
@@ -1215,7 +1202,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_baseline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
+        <state relative-caret-position="840">
           <caret line="60" column="19" lean-forward="false" selection-start-line="60" selection-start-column="19" selection-end-line="60" selection-end-column="19" />
           <folding>
             <element signature="e#134#150#0" expanded="true" />
@@ -1225,8 +1212,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="583" column="0" lean-forward="false" selection-start-line="583" selection-start-column="0" selection-end-line="594" selection-end-column="0" />
+        <state relative-caret-position="129">
+          <caret line="560" column="42" lean-forward="true" selection-start-line="560" selection-start-column="0" selection-end-line="561" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
@@ -1235,8 +1222,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="387" column="73" lean-forward="false" selection-start-line="387" selection-start-column="63" selection-end-line="387" selection-end-column="73" />
+        <state relative-caret-position="275">
+          <caret line="349" column="0" lean-forward="true" selection-start-line="349" selection-start-column="0" selection-end-line="349" selection-end-column="0" />
           <folding />
         </state>
       </provider>
