@@ -640,7 +640,7 @@ class modelA:
                 # Test
                 ##
 
-                if (epoch % 50) == 0:
+                if (epoch % 100) == 0:
 
                     for eval_name,eval_triples in [('valid',valid_triples),('test',test_triples)]:
 

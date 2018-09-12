@@ -5,7 +5,7 @@
 
 import itertools
 import os
-
+import numpy as np
 import sys
 import logging
 
@@ -57,10 +57,10 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w3=[20],
-        w6=['nations'],
+        w3=list(np.arange(49)+1),
+        w6=['nations' ],
         w7=[1e-7],
-        w8=[0.001,0.0001],
+        w8=[0.001],
         w9=['DistMult', 'ComplEx'],
         w10=[10]
     )
