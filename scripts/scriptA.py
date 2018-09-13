@@ -62,7 +62,7 @@ def to_cmd(c):
                 c['w9'],
                 c['w10'],
                 c['w11'],
-                ("{}/logs/low_rank_ModelA/uclcs_nvkg_v1.{}".format(path, summary(c)))
+                ("{}/logs/low_rank_VMF/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
 
@@ -74,20 +74,20 @@ def to_logfile(c, path):
 
 def main(_):
     hyperparameters_space = dict(
-        w1=[100],
+        w1=[10],
         w2=[1e-7], #ls
-        w3=list(np.arange(49)+1),
-        w4=['wn18rr'],
+        w3=[20],
+        w4=['nations'],
         w5=[False],
         w6=[0.001],
         w7=['DistMult'],
         w8=[5],
         w9=[False],
-        w10=['normal','vmf'],
+        w10=['vmf'],
         w11=[0])
 
     configurations = cartesian_product(hyperparameters_space)
-    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/low_rank_ModelA'
+    path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/low_rank_VMF'
 
 
     # Check that we are on the UCLCS cluster first
