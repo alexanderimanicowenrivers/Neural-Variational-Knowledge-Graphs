@@ -700,14 +700,14 @@ class modelA:
                         [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
                          self.predicate_embedding_sigma], feed_dict={})
                     np.save(
-                        "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/vmf_entity_embeddings",
+                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vmf_entity_embeddings",
                         e1)
                     np.save(
-                        "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/vmf_entity_embedding_sigma",
+                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vmf_entity_embedding_sigma",
                         e2)
                     np.save(
-                        "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/vmf_predicate_embedding_mean",
+                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vmf_predicate_embedding_mean",
                         p1)
                     np.save(
-                        "/Users/BaBa/Desktop/Neural-Variational-Knowledge-Graphs/vmf_predicate_embedding_sigma",
+                        "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vmf_predicate_embedding_sigma",
                         p2)
