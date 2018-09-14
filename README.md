@@ -53,7 +53,7 @@ python mainA.py  --no_batches 10 --epsilon 1e-07 --embedding_size 50 --dataset n
 ## Usage
 
 1. Clone or download this repository.
-2. Prepare your data, or use the included WN18 dataset.
+2. Prepare your data, or use any of the six included KG datasets.
 
 ## FAQs
 
