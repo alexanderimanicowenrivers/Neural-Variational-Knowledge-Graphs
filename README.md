@@ -5,6 +5,8 @@
 * **python>=3.6**
 * **tensorflow>=1.7.0**: https://tensorflow.org
 * **scipy**: https://scipy.org
+* **tensorflow_probability**: https://www.tensorflow.org/probability/
+* **tflearn**: https://github.com/tflearn/tflearn.git
 
 ## Installation
 
