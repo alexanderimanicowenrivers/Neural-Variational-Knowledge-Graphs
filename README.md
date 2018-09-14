@@ -59,19 +59,10 @@ python mainA.py  --no_batches 10 --epsilon 1e-07 --embedding_size 50 --dataset n
 
 ## Usage
 
-Please cite [[1](#citation)] in your work when using this library in your experiments.
-
-## Sampling von Mises-Fisher
-To sample the von Mises-Fisher distribution we follow the rejection sampling procedure as outlined by [Ulrich, 1984](http://www.jstor.org/stable/2347441?seq=1#page_scan_tab_contents). This simulation pipeline is visualized below:
-
-<p align="center">
-  <img src="https://i.imgur.com/aK1ze0z.png" alt="blog toy1"/>
-</p>
-
-_Note that as ![](http://latex.codecogs.com/svg.latex?%5Comega) is a scalar, this approach does not suffer from the curse of dimensionality. For the final transformation, ![](http://latex.codecogs.com/svg.latex?U%28%5Cmathbf%7Bz%7D%27%3B%5Cmu%29), a [Householder reflection](https://en.wikipedia.org/wiki/Householder_transformation) is utilized._
+Please cite [[1](#citation)] and [[2](#citation)] in your work when using this library in your experiments.
 
 ## Feedback
-For questions and comments, feel free to contact [Nicola De Cao](mailto:nicola.decao@gmail.com).
+For questions and comments, feel free to contact [ACR](https://github.com/acr42)(mailto:mc_rivers@icloud.com).
 
 ## License
 MIT
