@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mainA.py" afterPath="$PROJECT_DIR$/mainA.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA.py" afterPath="$PROJECT_DIR$/scripts/scriptA.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseA.py" afterPath="$PROJECT_DIR$/vkge/baseA.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/training/util.py" afterPath="$PROJECT_DIR$/vkge/training/util.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -70,7 +67,7 @@
         <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="273">
-              <caret line="250" column="48" lean-forward="false" selection-start-line="250" selection-start-column="48" selection-end-line="250" selection-end-column="48" />
+              <caret line="249" column="90" lean-forward="true" selection-start-line="249" selection-start-column="90" selection-end-line="249" selection-end-column="90" />
               <folding>
                 <element signature="e#25#43#0" expanded="true" />
               </folding>
@@ -425,13 +422,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00997" summary="updated HyperSpherical ModelA">
-      <created>1536692079323</created>
-      <option name="number" value="00997" />
-      <option name="presentableId" value="LOCAL-00997" />
-      <option name="project" value="LOCAL" />
-      <updated>1536692079323</updated>
-    </task>
     <task id="LOCAL-00998" summary="updated HyperSpherical variance initalisation">
       <created>1536692146164</created>
       <option name="number" value="00998" />
@@ -768,7 +758,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536938971020</updated>
     </task>
-    <option name="localTasksCounter" value="1046" />
+    <task id="LOCAL-01046" summary="added stats to utils">
+      <created>1536942520445</created>
+      <option name="number" value="01046" />
+      <option name="presentableId" value="LOCAL-01046" />
+      <option name="project" value="LOCAL" />
+      <updated>1536942520445</updated>
+    </task>
+    <option name="localTasksCounter" value="1047" />
     <servers />
   </component>
   <component name="TodoView">
@@ -834,7 +831,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed random seed bug" />
     <MESSAGE value="model B BS" />
     <MESSAGE value="model B NS" />
     <MESSAGE value="Add in Hyperspherical VAE code" />
@@ -859,7 +855,8 @@
     <MESSAGE value="testing make latent variables" />
     <MESSAGE value="testing get latent distributions" />
     <MESSAGE value="test get scoring function" />
-    <option name="LAST_COMMIT_MESSAGE" value="test get scoring function" />
+    <MESSAGE value="added stats to utils" />
+    <option name="LAST_COMMIT_MESSAGE" value="added stats to utils" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1212,7 +1209,7 @@
     <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
-          <caret line="250" column="48" lean-forward="false" selection-start-line="250" selection-start-column="48" selection-end-line="250" selection-end-column="48" />
+          <caret line="249" column="90" lean-forward="true" selection-start-line="249" selection-start-column="90" selection-end-line="249" selection-end-column="90" />
           <folding>
             <element signature="e#25#43#0" expanded="true" />
           </folding>

@@ -226,11 +226,10 @@ def get_scoring_func(score_func,distribution,h_s,h_p,h_o,mu_s,mu_p,mu_o):
 
 
 def make_compression_cost(nb_batches):
-
     """
                     Returns compression cost coefficient vector
-
     """
+
     M = int(nb_batches)
 
     pi_s = np.log(2.0) * (M - 1)
