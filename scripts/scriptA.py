@@ -40,13 +40,12 @@ def to_cmd(c):
               '--epsilon {} ' \
               '--embedding_size {} ' \
               '--dataset {} ' \
-              '--alt_opt {} ' \
+              '--alt_prior {} ' \
               '--lr {} ' \
               '--score_func {} ' \
               '--negsamples {} ' \
               '--projection {} ' \
               '--distribution {} ' \
-              '--ablation {} ' \
               '--file_name {} ' \
         .format(path,
                 #                 params,
@@ -61,7 +60,6 @@ def to_cmd(c):
                 c['w8'],
                 c['w9'],
                 c['w10'],
-                c['w11'],
                 ("{}/logs/low_rank_ModelA/uclcs_nvkg_v1.{}".format(path, summary(c)))
                 )
     return command
@@ -83,8 +81,7 @@ def main(_):
         w7=['DistMult'],
         w8=[5],
         w9=[False],
-        w10=['normal','vmf'],
-        w11=[0])
+        w10=['normal','vmf'])
 
     configurations = cartesian_product(hyperparameters_space)
     path = '/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/low_rank_ModelA'

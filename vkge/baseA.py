@@ -13,63 +13,51 @@ logger = logging.getLogger(__name__)
 
 class modelA:
     """
-           model for testing the basic probabilistic aspects of the model
+           Model A (latents generated independently) 
 
-            Achievies
-        Initializes a Link Prediction Model.
+            
+        Initializes and trains Link Prediction Model.
+
         @param file_name: The TensorBoard file_name.
-        @param opt_type: Determines the optimiser used
         @param embedding_size: The embedding_size for entities and predicates
-        @param batch_s: The batch size
+        @param no_batches: The number of batches per epoch 
         @param lr: The learning rate
-        @param b1: The beta 1 value for ADAM optimiser
-        @param b2: The beta 2 value for ADAM optimiser
         @param eps: The epsilon value for ADAM optimiser
-        @param GPUMode: Used for reduced print statements during architecture search.
-        @param alt_cost: Determines the use of a compression cost KL or classical KL term
-        @param train_mean: Determines whether the mean embeddings are trainable or fixed
-        @param alt_updates: Determines if updates are done simultaneously or
-                            separately for each e and g objective.
-        @param sigma_alt: Determines between two standard deviation representation used
-        @param tensorboard: Determines if Tensorboard events are logged
-        @param projection: Determines if mean embeddings are projected
-                                     network.
+        @param distribution: The prior distribution we assume generates the data 
+        @param dataset: The dataset which the model is trained on
+        @param projection: Determines if variance embeddings constrained to sum to unit variance. 
+        @param alt_prior: Determines whether a normal or specific Gaussian prior is used. 
 
         @type file_name: str: '/home/workspace/acowenri/tboard'
-        @type opt_type: str
         @type embedding_size: int
-        @type batch_s: int
+        @type no_batches: int
         @type lr: float
-        @type b1: float
-        @type b2: float
         @type eps: float
-        @type GPUMode: bool
-        @type alt_cost: bool
-        @type train_mean: bool
-        @type alt_updates: bool
-        @type sigma_alt: bool
-        @type tensorboard: bool
+        @type distribution: str
+        @type dataset: str
         @type projection: bool
+        @type alt_prior: bool
 
             """
 
-    def __init__(self, file_name, score_func='DistMult', embedding_size=50, no_batches=10, distribution='normal',
-                 epsilon=1e-3,negsamples=0, dataset='wn18', lr=0.1, alt_opt=True, projection=False,ablation=0):
+    def __init__(self, file_name, score_func='DistMult', embedding_size=200, no_batches=10, distribution='normal',
+                 epsilon=1e-3,negsamples=5, dataset='wn18', lr=0.001, alt_prior=False, projection=False):
+
+
+        
+        self.nb_epochs = 500
 
         seed=np.random.randint(100,size=1)[0]
-
         self.random_state = np.random.RandomState(seed)
         tf.set_random_seed(seed)
-
-
         logger.warn("\n \n Using Random Seed {} \n \n".format(seed))
 
         self.score_func=score_func
         self.negsamples=int(negsamples)
         self.distribution=distribution
-        self.alt_opt=alt_opt
-        self.abltaion_num=ablation
+        self.alt_prior=alt_prior
         self.projection=projection
+        optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
 
         ##### dataset  ######
         self.dataset_name = dataset
@@ -86,11 +74,23 @@ class modelA:
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
         
-        optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
         self.build_model(self.nb_entities, self.nb_predicates, embedding_size,optimizer)
-        self.nb_epochs = 100
+
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,embedding_size=embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
+        
+    def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=False):
+        global_step = tf.train.get_global_step()
+        if global_step is None:
+            global_step = tf.train.create_global_step()
+
+        gradients = optimizer.compute_gradients(loss=loss)
+        train_op = optimizer.apply_gradients(gradients, global_step)
+
+        self.loss = loss
+        self.training_step = train_op
+
+        return loss, train_op
 
     def build_encoder(self, nb_entities, nb_predicates, embedding_size):
         """
@@ -98,25 +98,17 @@ class modelA:
         """
         logger.warn('Building Inference Networks q(h_x | x) ..{}'.format(self.score_func))
 
-
-
         with tf.variable_scope('Encoder'):
 
             self.entity_embedding_mean,self.entity_embedding_sigma=util.make_latent_variables(meaninit='xavier', siginit='constant', nb_variables=nb_entities, embedding_size=embedding_size, distribution=self.distribution,vtype='entities')
             self.predicate_embedding_mean,self.predicate_embedding_sigma=util.make_latent_variables(meaninit='xavier', siginit='constant', nb_variables=nb_predicates, embedding_size=embedding_size, distribution=self.distribution,vtype='predicates')
 
-
             self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
             self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
-
             self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
             self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
-
-
             self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
             self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
-
-
 
     def build_decoder(self):
         """
@@ -138,19 +130,6 @@ class modelA:
             self.scores_test = model_test()
             self.p_x_i = tf.sigmoid(self.scores)
             self.p_x_i_test = tf.sigmoid(self.scores_test)
-
-    def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=False):
-        global_step = tf.train.get_global_step()
-        if global_step is None:
-            global_step = tf.train.create_global_step()
-
-        gradients = optimizer.compute_gradients(loss=loss)
-        train_op = optimizer.apply_gradients(gradients, global_step)
-
-        self.loss = loss
-        self.training_step = train_op
-
-        return loss, train_op
 
     def build_model(self, nb_entities, nb_predicates, embedding_size, optimizer):
         """
@@ -191,7 +170,7 @@ class modelA:
         self.nreconstruction_loss = self.reconstruction_loss_p + self.reconstruction_loss_n*self.ELBOBS  #if reduce sum
 
 
-        prior = util.make_prior(code_size=embedding_size,distribution=self.distribution,alt_prior=self.alt_opt)
+        prior = util.make_prior(code_size=embedding_size,distribution=self.distribution,alt_prior=self.alt_prior)
 
         if self.distribution == 'normal':
 
@@ -232,14 +211,8 @@ class modelA:
 
         self._setup_training(loss=self.nelbo,optimizer=optimizer)
 
-    def stats(self, values):
-        """
-                                Return mean and variance statistics
-        """
-        return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
-
-    def train(self, test_triples, valid_triples, train_triples, embedding_size,no_batches, session=0, nb_epochs=500, unit_cube=True,
-              filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
+    def train(self, test_triples, valid_triples, train_triples, embedding_size,no_batches, nb_epochs=500,
+              filename='/home/'):
         """
 
                                 Train and test model
@@ -269,7 +242,6 @@ class modelA:
         projection_steps = [constraints.unit_sphere_logvar(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere_logvar(self.entity_embedding_sigma, norm=1.0)]
 
         with tf.Session() as session:
-        # with tf.Session(config=config) as session:
             session.run(init_op)
 
 
@@ -346,7 +318,7 @@ class modelA:
                         for projection_step in projection_steps:
                             session.run([projection_step])
 
-                logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, self.stats(loss_values)))
+                logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, util.stats(loss_values)))
 
                 ##
                 # Test

@@ -241,3 +241,11 @@ def make_compression_cost(nb_batches):
     pi = (1 / np.sum(pi_t)) * pi_t  # normalise pi
 
     return pi
+
+
+ def stats(values):
+    """
+                                Return mean and variance statistics
+    """
+
+    return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
