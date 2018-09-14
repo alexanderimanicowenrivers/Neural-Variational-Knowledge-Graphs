@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+import tensorflow as tf
 
 def read_triples(path):
     triples = []
@@ -25,3 +26,11 @@ class IndexGenerator:
         rand_ints = shuffled_indices[np.arange(n_samples) % len(shuffled_indices)]
         return rand_ints
 
+def distribution_scale(log_sigma_square):
+        """
+                        Returns the scale (std dev) from embeddings for tensorflow distributions MultivariateNormalDiag function
+                """
+
+        scale = tf.sqrt(tf.exp(log_sigma_square))
+
+        return scale

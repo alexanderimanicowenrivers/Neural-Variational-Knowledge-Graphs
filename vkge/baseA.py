@@ -73,68 +73,39 @@ class modelA:
         self.alt_opt=alt_opt
         self.abltaion_num=ablation
 
-        if self.score_func=='ComplEx':
-            predicate_embedding_size = embedding_size*2
-            entity_embedding_size = embedding_size*2
-            var_max = np.log((1.0/embedding_size*2.0)+1e-10)
-
-        else:
-            predicate_embedding_size = embedding_size
-            entity_embedding_size = embedding_size
-            var_max = np.log((1.0/embedding_size*1.0)+1e-10)
+        predicate_embedding_size = embedding_size
+        entity_embedding_size = embedding_size
 
         if self.distribution == 'vmf':
-
             var_max = np.log(1e-8)
+            
+        else:
+            var_max = np.log((1.0 / embedding_size * 1.0) + 1e-10)
 
         var_min = var_max
-
-
-
-
-        if self.abltaion_num == 6:
-            self.projection = False
-        else:
-            self.projection = projection
-
+        
+        ##### dataset  ######
         self.dataset_name = dataset
-
         logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(self.dataset_name))
-
         train_triples = util.read_triples("data/{}/train.tsv".format(self.dataset_name))  # choose dataset
         valid_triples = util.read_triples("data/{}/dev.tsv".format(self.dataset_name))
         test_triples = util.read_triples("data/{}/test.tsv".format(self.dataset_name))
         self.nb_examples = len(train_triples)
-
-        ##### for test time ######
         all_triples = train_triples + valid_triples + test_triples
-
-
         entity_set = {s for (s, p, o) in all_triples} | {o for (s, p, o) in all_triples}
         predicate_set = {p for (s, p, o) in all_triples}
         self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
+        
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
-
         self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
                          optimizer, var_max, var_min)
         self.nb_epochs = 100
-
-
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
 
-    def distribution_scale(self, log_sigma_square):
-        """
-                        Returns the scale (std dev) from embeddings for tensorflow distributions MultivariateNormalDiag function
-                """
-
-        scale = tf.sqrt(tf.exp(log_sigma_square))
-
-
-        return scale
 
     def make_prior(self,code_size):
 
@@ -298,9 +269,9 @@ class modelA:
 
                 # sample from mean and std of the normal distribution
 
-                self.q_s = tfd.MultivariateNormalDiag(self.mu_s, self.distribution_scale(self.log_sigma_sq_s))
-                self.q_p = tfd.MultivariateNormalDiag(self.mu_p, self.distribution_scale(self.log_sigma_sq_p))
-                self.q_o = tfd.MultivariateNormalDiag(self.mu_o, self.distribution_scale(self.log_sigma_sq_o))
+                self.q_s = tfd.MultivariateNormalDiag(self.mu_s, util.distribution_scale(self.log_sigma_sq_s))
+                self.q_p = tfd.MultivariateNormalDiag(self.mu_p, util.distribution_scale(self.log_sigma_sq_p))
+                self.q_o = tfd.MultivariateNormalDiag(self.mu_o, util.distribution_scale(self.log_sigma_sq_o))
 
                 self.h_s = self.q_s.sample()
                 self.h_p = self.q_p.sample()
@@ -313,9 +284,9 @@ class modelA:
 
                 # '+1' used to prevent collapsing behaviors
 
-                self.q_s = VonMisesFisher(self.mu_s, self.distribution_scale(self.log_sigma_sq_s)+ 1)
-                self.q_p = VonMisesFisher(self.mu_p, self.distribution_scale(self.log_sigma_sq_p)+ 1)
-                self.q_o = VonMisesFisher(self.mu_o, self.distribution_scale(self.log_sigma_sq_o)+ 1)
+                self.q_s = VonMisesFisher(self.mu_s, util.distribution_scale(self.log_sigma_sq_s)+ 1)
+                self.q_p = VonMisesFisher(self.mu_p, util.distribution_scale(self.log_sigma_sq_p)+ 1)
+                self.q_o = VonMisesFisher(self.mu_o, util.distribution_scale(self.log_sigma_sq_o)+ 1)
 
                 self.h_s = self.q_s.sample()
                 self.h_p = self.q_p.sample()
@@ -436,9 +407,9 @@ class modelA:
             # KL divergence between normal approximate posterior and prior
 
             entity_posterior = tfd.MultivariateNormalDiag(self.entity_embedding_mean,
-                                                          self.distribution_scale(self.entity_embedding_sigma))
+                                                          util.distribution_scale(self.entity_embedding_sigma))
             predicate_posterior = tfd.MultivariateNormalDiag(self.predicate_embedding_mean,
-                                                             self.distribution_scale(self.predicate_embedding_sigma))
+                                                             util.distribution_scale(self.predicate_embedding_sigma))
 
             self.kl1 = tf.reduce_sum(tfd.kl_divergence(entity_posterior, prior))
             self.kl2 = tf.reduce_sum(tfd.kl_divergence(predicate_posterior, prior))
@@ -448,8 +419,8 @@ class modelA:
             # KL divergence between vMF approximate posterior and uniform hyper-spherical prior
             #
 
-            entity_posterior = VonMisesFisher(self.entity_embedding_mean, self.distribution_scale(self.entity_embedding_sigma) + 1)
-            predicate_posterior = VonMisesFisher(self.predicate_embedding_mean, self.distribution_scale(self.predicate_embedding_sigma) + 1)
+            entity_posterior = VonMisesFisher(self.entity_embedding_mean, util.distribution_scale(self.entity_embedding_sigma) + 1)
+            predicate_posterior = VonMisesFisher(self.predicate_embedding_mean, util.distribution_scale(self.predicate_embedding_sigma) + 1)
 
 
             kl1 = entity_posterior.kl_divergence(prior)
