@@ -90,7 +90,7 @@ class modelA:
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
         self.build_model(self.nb_entities, self.nb_predicates, embedding_size,optimizer)
         self.nb_epochs = 100
-        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
+        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,embedding_size=embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
 
     def build_encoder(self, nb_entities, nb_predicates, embedding_size):
@@ -229,7 +229,7 @@ class modelA:
         """
                         Construct full computation graph
         """
-        self.noise = tf.placeholder(tf.float32, shape=[None,entity_embedding_size])
+        self.noise = tf.placeholder(tf.float32, shape=[None,embedding_size])
         self.idx_pos = tf.placeholder(tf.int32, shape=[None])
         self.idx_neg = tf.placeholder(tf.int32, shape=[None])
 
@@ -259,7 +259,7 @@ class modelA:
         self.nreconstruction_loss = self.reconstruction_loss_p + self.reconstruction_loss_n*self.BernoulliSRescale  #if reduce sum
 
 
-        prior = util.make_prior(code_size=entity_embedding_size,distribution=self.distribution,alt_prior=self.alt_opt)
+        prior = util.make_prior(code_size=embedding_size,distribution=self.distribution,alt_prior=self.alt_opt)
 
         if self.distribution == 'normal':
 
@@ -309,7 +309,7 @@ class modelA:
         """
         return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
 
-    def train(self, test_triples, valid_triples, train_triples, entity_embedding_size,no_batches, session=0, nb_epochs=500, unit_cube=True,
+    def train(self, test_triples, valid_triples, train_triples, embedding_size,no_batches, session=0, nb_epochs=500, unit_cube=True,
               filename='/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/logs/'):
         """
 

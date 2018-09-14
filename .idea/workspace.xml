@@ -4,7 +4,6 @@
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseA.py" afterPath="$PROJECT_DIR$/vkge/baseA.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/training/util.py" afterPath="$PROJECT_DIR$/vkge/training/util.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -57,8 +56,8 @@
       <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="111" column="0" lean-forward="true" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+            <state relative-caret-position="1321">
+              <caret line="311" column="85" lean-forward="false" selection-start-line="311" selection-start-column="85" selection-end-line="311" selection-end-column="85" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -208,8 +207,8 @@
         <option value="$PROJECT_DIR$/scripts/scriptA.py" />
         <option value="$PROJECT_DIR$/vkge/util.py" />
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
-        <option value="$PROJECT_DIR$/vkge/baseA.py" />
         <option value="$PROJECT_DIR$/vkge/training/util.py" />
+        <option value="$PROJECT_DIR$/vkge/baseA.py" />
       </list>
     </option>
   </component>
@@ -423,13 +422,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00992" summary="Add in Hyperspherical VAE code">
-      <created>1536690410649</created>
-      <option name="number" value="00992" />
-      <option name="presentableId" value="LOCAL-00992" />
-      <option name="project" value="LOCAL" />
-      <updated>1536690410649</updated>
     </task>
     <task id="LOCAL-00993" summary="Add in Hyperspherical VAE code">
       <created>1536690580292</created>
@@ -767,7 +759,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536936521327</updated>
     </task>
-    <option name="localTasksCounter" value="1041" />
+    <task id="LOCAL-01041" summary="testing make latent variables">
+      <created>1536936937958</created>
+      <option name="number" value="01041" />
+      <option name="presentableId" value="LOCAL-01041" />
+      <option name="project" value="LOCAL" />
+      <updated>1536936937959</updated>
+    </task>
+    <option name="localTasksCounter" value="1042" />
     <servers />
   </component>
   <component name="TodoView">
@@ -833,7 +832,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="rerun-complex" />
     <MESSAGE value="neaten up code" />
     <MESSAGE value="neaten up code for main model" />
     <MESSAGE value="fixed random seed bug" />
@@ -858,7 +856,8 @@
     <MESSAGE value="fixed util function, dist scale" />
     <MESSAGE value="testing make prior" />
     <MESSAGE value="testing make entity matrices" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing make entity matrices" />
+    <MESSAGE value="testing make latent variables" />
+    <option name="LAST_COMMIT_MESSAGE" value="testing make latent variables" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1209,8 +1208,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="111" column="0" lean-forward="true" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+        <state relative-caret-position="1321">
+          <caret line="311" column="85" lean-forward="false" selection-start-line="311" selection-start-column="85" selection-end-line="311" selection-end-column="85" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
