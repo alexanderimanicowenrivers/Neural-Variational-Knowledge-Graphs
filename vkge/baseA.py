@@ -150,11 +150,15 @@ class modelA:
         self.KL_discount = tf.placeholder(tf.float32)
         self.ELBOBS = tf.placeholder(tf.float32)
 
-        ############## end of placeholders
+        ##############
 
         self.build_encoder(nb_entities, nb_predicates, embedding_size)
         self.build_decoder()
 
+        ############## ##############
+        ##############  #Loss
+        ############## ##############
+        
         self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
         self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
 
@@ -173,29 +177,22 @@ class modelA:
         prior = util.make_prior(code_size=embedding_size,distribution=self.distribution,alt_prior=self.alt_prior)
 
         if self.distribution == 'normal':
-
             # KL divergence between normal approximate posterior and prior
 
             entity_posterior = tfd.MultivariateNormalDiag(self.entity_embedding_mean,
                                                           util.distribution_scale(self.entity_embedding_sigma))
             predicate_posterior = tfd.MultivariateNormalDiag(self.predicate_embedding_mean,
                                                              util.distribution_scale(self.predicate_embedding_sigma))
-
             self.kl1 = tf.reduce_sum(tfd.kl_divergence(entity_posterior, prior))
             self.kl2 = tf.reduce_sum(tfd.kl_divergence(predicate_posterior, prior))
 
         elif self.distribution == 'vmf':
-
             # KL divergence between vMF approximate posterior and uniform hyper-spherical prior
-            #
 
             entity_posterior = VonMisesFisher(self.entity_embedding_mean, util.distribution_scale(self.entity_embedding_sigma) + 1)
             predicate_posterior = VonMisesFisher(self.predicate_embedding_mean, util.distribution_scale(self.predicate_embedding_sigma) + 1)
-
-
             kl1 = entity_posterior.kl_divergence(prior)
             kl2 = predicate_posterior.kl_divergence(prior)
-
             self.kl1 = tf.reduce_sum(kl1)
             self.kl2 = tf.reduce_sum(kl2)
 

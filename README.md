@@ -1,8 +1,4 @@
-# Hyperspherical Variational Auto-Encoders
-### Tensorflow implementation of Hyperspherical Variational Auto-Encoders
-
-## Overview
-This library contains a Tensorflow implementation of the hyperspherical variational auto-encoder, or S-VAE, as presented in [[1]](#citation)(http://arxiv.org/abs/1804.00891). Check also our blogpost (https://nicola-decao.github.io/s-vae).
+# Neural-Variational-Knowledge-Graphs
 
 ## Dependencies
 
@@ -19,12 +15,55 @@ $ python setup.py install
 ```
 
 ## Structure
-* [distributions](https://github.com/nicola-decao/s-vae-tf/tree/master/hyperspherical_vae/distributions): Tensorflow implementation of the von Mises-Fisher and hyperspherical Uniform distributions. Both inherit from `tf.distributions.Distribution`.
-* [ops](https://github.com/nicola-decao/s-vae-tf/tree/master/hyperspherical_vae/ops): Low-level operations used for computing the exponentially scaled modified Bessel function of the first kind and its derivative.
-* [examples](https://github.com/nicola-decao/s-vae-tf/tree/master/examples): Example code for using the library within a Tensorflow project.
+
+# Neural-Variational-Knowledge-Graphs !!(Work in progress)!!
+-------
+## CONTRIBUTERS:
+
+- Alexander Cowen-Rivers ([GitHub](https://github.com/acr42))
+
+## Supervisors:
+
+- Pasquale Minervini ([GitHub](https://github.com/pminervini))
+- Sebastian Riedel ([GitHub](https://github.com/riedelcastro))
+
+-------
+
+## Instructions
+
+For:
+- **Models** see [base](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/base.py)
+- **Report** see [ACR](https://github.com/acr42)
+
+-------
+
+## Training Models
+
+Train baseline:
+
+```
+python baseline_main.py  --embedding_size 250 --dataset fb15k-237 --epsilon 0.001 --lr 0.001 --score_func ComplEx --no_batches 10
+```
+
+
+
+Train variational knowledge graph:
+
+```
+python main.py --no_batches 1000 --epsilon 1e-07 --embedding_size 300 --dataset kinship --alt_updates False --lr 0.001 --score_func ComplEx --alt_opt True --alt_test none --file_name /model_example
+```
+
+
+-------
 
 ## Usage
-Please have a look into the [examples folder](https://github.com/nicola-decao/s-vae-tf/tree/master/examples). We adapted our implementation to follow the structure of the recently proposed [Tensorflow Distribution library](https://www.tensorflow.org/api_docs/python/tf/distributions/Distribution), ([Dillon et al, 2017](https://arxiv.org/abs/1711.10604)).
+
+1. Clone or download this repository.
+2. Prepare your data, or use the included WN18 dataset.
+
+## FAQs
+
+## Usage
 
 Please cite [[1](#citation)] in your work when using this library in your experiments.
 
@@ -45,13 +84,15 @@ MIT
 
 ## Citation
 ```
-[1] Davidson, T. R., Falorsi, L., De Cao, N., Kipf, T.,
+[1]
+[2] Davidson, T. R., Falorsi, L., De Cao, N., Kipf, T.,
 and Tomczak, J. M. (2018). Hyperspherical Variational
 Auto-Encoders. arXiv preprint arXiv:1804.00891.
 ```
 
 BibTeX format:
 ```
+@article{OUR-paper}
 @article{s-vae18,
   title={Hyperspherical Variational Auto-Encoders},
   author={Davidson, Tim R. and

@@ -1,3 +1,5 @@
 pytest
 numpy
-tensorflow>=1.0
+tensorflow>=1.7
+tensorflow_probability
+git+https://github.com/tflearn/tflearn.git
