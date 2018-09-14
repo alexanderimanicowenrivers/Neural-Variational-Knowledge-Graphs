@@ -55,7 +55,7 @@ class modelA:
             """
 
     def __init__(self, file_name, score_func='DistMult', embedding_size=50, no_batches=10, distribution='normal',
-                 epsilon=1e-3,negsamples=0, dataset='wn18', lr=0.1, alt_opt=True, projection=True,ablation=0):
+                 epsilon=1e-3,negsamples=0, dataset='wn18', lr=0.1, alt_opt=True, projection=False,ablation=0):
 
         seed=np.random.randint(100,size=1)[0]
 
@@ -72,6 +72,7 @@ class modelA:
 
         self.alt_opt=alt_opt
         self.abltaion_num=ablation
+        self.projection=projection
 
         predicate_embedding_size = embedding_size
         entity_embedding_size = embedding_size
