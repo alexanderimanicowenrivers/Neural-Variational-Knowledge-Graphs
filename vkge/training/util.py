@@ -241,8 +241,7 @@ def make_compression_cost(nb_batches):
 
     return pi
 
-
- def stats(values):
+def stats(values):
     """
                                 Return mean and variance statistics
     """
