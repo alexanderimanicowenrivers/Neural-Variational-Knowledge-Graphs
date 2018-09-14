@@ -38,8 +38,7 @@ def distribution_scale(log_sigma_square):
 
         return scale
 
-    def make_prior(code_size,distribution,alt_prior):
-
+def make_prior(code_size,distribution,alt_prior):
         """
                         Returns the prior on embeddings for tensorflow distributions
 
@@ -51,7 +50,7 @@ def distribution_scale(log_sigma_square):
 
                         (1) Alt: N(0,1/code_size)
                         (2) N(0,1)
-                """
+        """
 
         if distribution == 'normal':
             if alt_prior: #alternative prior 0,1/embeddings variance
