@@ -50,7 +50,7 @@ class modelA:
         seed=np.random.randint(100,size=1)[0]
         self.random_state = np.random.RandomState(seed)
         tf.set_random_seed(seed)
-        logger.warn("\n \n Using Random Seed {} \n \n".format(seed))
+        logger.warning("\n \n Using Random Seed {} \n \n".format(seed))
 
         self.score_func=score_func
         self.negsamples=int(negsamples)
@@ -61,7 +61,7 @@ class modelA:
 
         ##### dataset  ######
         self.dataset_name = dataset
-        logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(self.dataset_name))
+        logger.warning('Parsing the facts in the Knowledge Base for Dataset {}..'.format(self.dataset_name))
         train_triples = util.read_triples("data/{}/train.tsv".format(self.dataset_name))  # choose dataset
         valid_triples = util.read_triples("data/{}/dev.tsv".format(self.dataset_name))
         test_triples = util.read_triples("data/{}/test.tsv".format(self.dataset_name))
@@ -96,7 +96,7 @@ class modelA:
         """
                                 Constructs encoder
         """
-        logger.warn('Building Inference Networks q(h_x | x) ..{}'.format(self.score_func))
+        logger.warning('Building Inference Networks q(h_x | x) ..{}'.format(self.score_func))
 
         with tf.variable_scope('Encoder'):
 
@@ -114,7 +114,7 @@ class modelA:
         """
                                 Constructs Decoder
         """
-        logger.warn('Building Inference Network p(y|h) for {} score function.'.format(self.score_func))
+        logger.warning('Building Inference Network p(y|h) for {} score function.'.format(self.score_func))
 
         with tf.variable_scope('Inference'):
 
@@ -318,7 +318,7 @@ class modelA:
                         for projection_step in projection_steps:
                             session.run([projection_step])
 
-                logger.warn('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, util.stats(loss_values)))
+                logger.warning('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, util.stats(loss_values)))
 
                 ##
                 # Test
@@ -376,8 +376,8 @@ class modelA:
 
                         for setting_name, setting_ranks in [('Raw', ranks), ('Filtered', filtered_ranks)]:
                             mean_rank = np.mean(setting_ranks)
-                            logger.warn('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
+                            logger.warning('[{}] {} Mean Rank: {}'.format(eval_name, setting_name, mean_rank))
 
                             for k in [1, 3, 5, 10]:
                                 hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
-                                logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+                                logger.warning('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))

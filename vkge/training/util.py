@@ -247,4 +247,4 @@ def stats(values):
                                 Return mean and variance statistics
     """
 
-    return '{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4))
+    return ('{0:.4f} ± {1:.4f}'.format(round(np.mean(values), 4), round(np.std(values), 4)))

@@ -45,9 +45,11 @@
       <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="258">
+              <caret line="382" column="46" lean-forward="false" selection-start-line="382" selection-start-column="46" selection-end-line="382" selection-end-column="46" />
+              <folding>
+                <element signature="e#25#36#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -55,7 +57,7 @@
       <file leaf-file-name="mainA.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mainA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
+            <state relative-caret-position="-196">
               <caret line="2" column="22" lean-forward="true" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
               <folding />
             </state>
@@ -65,9 +67,11 @@
       <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="24" />
-              <folding />
+            <state relative-caret-position="273">
+              <caret line="249" column="92" lean-forward="false" selection-start-line="249" selection-start-column="92" selection-end-line="249" selection-end-column="92" />
+              <folding>
+                <element signature="e#25#43#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -419,13 +423,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-01001" summary="fixed scale function for von mises">
-      <created>1536693013304</created>
-      <option name="number" value="01001" />
-      <option name="presentableId" value="LOCAL-01001" />
-      <option name="project" value="LOCAL" />
-      <updated>1536693013304</updated>
-    </task>
     <task id="LOCAL-01002" summary="fixed scale function for von mises">
       <created>1536693275936</created>
       <option name="number" value="01002" />
@@ -762,7 +759,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536942749336</updated>
     </task>
-    <option name="localTasksCounter" value="1050" />
+    <task id="LOCAL-01050" summary="added stats to utils">
+      <created>1536943092183</created>
+      <option name="number" value="01050" />
+      <option name="presentableId" value="LOCAL-01050" />
+      <option name="project" value="LOCAL" />
+      <updated>1536943092184</updated>
+    </task>
+    <option name="localTasksCounter" value="1051" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1192,15 +1196,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="24" />
-          <folding />
+        <state relative-caret-position="273">
+          <caret line="249" column="92" lean-forward="false" selection-start-line="249" selection-start-column="92" selection-end-line="249" selection-end-column="92" />
+          <folding>
+            <element signature="e#25#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mainA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
+        <state relative-caret-position="-196">
           <caret line="2" column="22" lean-forward="true" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
           <folding />
         </state>
@@ -1208,9 +1214,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="258">
+          <caret line="382" column="46" lean-forward="false" selection-start-line="382" selection-start-column="46" selection-end-line="382" selection-end-column="46" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
