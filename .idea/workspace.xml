@@ -57,8 +57,8 @@
       <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="131" column="40" lean-forward="true" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
+            <state relative-caret-position="168">
+              <caret line="320" column="36" lean-forward="false" selection-start-line="320" selection-start-column="36" selection-end-line="320" selection-end-column="36" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -69,8 +69,8 @@
       <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="222" column="27" lean-forward="true" selection-start-line="222" selection-start-column="11" selection-end-line="222" selection-end-column="27" />
+            <state relative-caret-position="102">
+              <caret line="227" column="36" lean-forward="false" selection-start-line="227" selection-start-column="26" selection-end-line="227" selection-end-column="36" />
               <folding>
                 <element signature="e#25#43#0" expanded="true" />
               </folding>
@@ -89,7 +89,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>train_writer</find>
       <find>neg</find>
       <find>self.negsamples</find>
       <find>self.alt_test</find>
@@ -107,7 +106,6 @@
       <find>VonMisesFisher</find>
       <find>mean_c</find>
       <find>negsamples</find>
-      <find>neg_subs</find>
       <find>make_bat</find>
       <find>alt_opt</find>
       <find>make_pr</find>
@@ -119,9 +117,10 @@
       <find>distribution</find>
       <find>self.score_func</find>
       <find>models</find>
+      <find>neg_subs</find>
+      <find>BS</find>
     </findStrings>
     <replaceStrings>
-      <replace>print</replace>
       <replace>logger.info</replace>
       <replace>summary.scalar</replace>
       <replace>warn</replace>
@@ -151,6 +150,7 @@
       <replace>scale_max</replace>
       <replace>score_func</replace>
       <replace>distribution</replace>
+      <replace>BS_prop</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -424,13 +424,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00995" summary="updated HyperSpherical ModelA">
-      <created>1536690906111</created>
-      <option name="number" value="00995" />
-      <option name="presentableId" value="LOCAL-00995" />
-      <option name="project" value="LOCAL" />
-      <updated>1536690906111</updated>
     </task>
     <task id="LOCAL-00996" summary="updated HyperSpherical ModelA">
       <created>1536691572567</created>
@@ -768,7 +761,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536937615783</updated>
     </task>
-    <option name="localTasksCounter" value="1044" />
+    <task id="LOCAL-01044" summary="test get scoring function">
+      <created>1536937981165</created>
+      <option name="number" value="01044" />
+      <option name="presentableId" value="LOCAL-01044" />
+      <option name="project" value="LOCAL" />
+      <updated>1536937981165</updated>
+    </task>
+    <option name="localTasksCounter" value="1045" />
     <servers />
   </component>
   <component name="TodoView">
@@ -834,7 +834,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="neaten up code for main model" />
     <MESSAGE value="fixed random seed bug" />
     <MESSAGE value="model B BS" />
     <MESSAGE value="model B NS" />
@@ -859,7 +858,8 @@
     <MESSAGE value="testing make entity matrices" />
     <MESSAGE value="testing make latent variables" />
     <MESSAGE value="testing get latent distributions" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing get latent distributions" />
+    <MESSAGE value="test get scoring function" />
+    <option name="LAST_COMMIT_MESSAGE" value="test get scoring function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1200,8 +1200,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="222" column="27" lean-forward="true" selection-start-line="222" selection-start-column="11" selection-end-line="222" selection-end-column="27" />
+        <state relative-caret-position="102">
+          <caret line="227" column="36" lean-forward="false" selection-start-line="227" selection-start-column="26" selection-end-line="227" selection-end-column="36" />
           <folding>
             <element signature="e#25#43#0" expanded="true" />
           </folding>
@@ -1210,8 +1210,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="131" column="40" lean-forward="true" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
+        <state relative-caret-position="168">
+          <caret line="320" column="36" lean-forward="false" selection-start-line="320" selection-start-column="36" selection-end-line="320" selection-end-column="36" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

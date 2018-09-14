@@ -221,3 +221,23 @@ def get_scoring_func(score_func,distribution,h_s,h_p,h_o,mu_s,mu_p,mu_o):
         raise NotImplemented
 
     return model,model_test
+
+
+
+
+def make_compression_cost(nb_batches):
+
+    """
+                    Returns compression cost coefficient vector
+
+    """
+    M = int(nb_batches)
+
+    pi_s = np.log(2.0) * (M - 1)
+    pi_e = np.log(2.0)
+
+    pi_t = np.exp(np.linspace(pi_s, pi_e, M) - M * np.log(2.0))
+
+    pi = (1 / np.sum(pi_t)) * pi_t  # normalise pi
+
+    return pi

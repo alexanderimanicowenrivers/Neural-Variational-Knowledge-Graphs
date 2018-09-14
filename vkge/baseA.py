@@ -65,7 +65,7 @@ class modelA:
         logger.warn("\n \n Using Random Seed {} \n \n".format(seed))
 
         self.score_func=score_func
-        self.negsamples=negsamples
+        self.negsamples=int(negsamples)
         self.distribution=distribution
         self.alt_opt=alt_opt
         self.abltaion_num=ablation
@@ -139,10 +139,6 @@ class modelA:
             self.p_x_i = tf.sigmoid(self.scores)
             self.p_x_i_test = tf.sigmoid(self.scores_test)
 
-            self.s_pdf=self.q_s.prob(self.mu_s)
-            self.o_pdf=self.q_o.prob(self.mu_o)
-            self.r_pdf=self.q_p.prob(self.mu_p)
-
     def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=False):
         global_step = tf.train.get_global_step()
         if global_step is None:
@@ -160,6 +156,9 @@ class modelA:
         """
                         Construct full computation graph
         """
+        
+        ############## placeholders
+        
         self.noise = tf.placeholder(tf.float32, shape=[None,embedding_size])
         self.idx_pos = tf.placeholder(tf.int32, shape=[None])
         self.idx_neg = tf.placeholder(tf.int32, shape=[None])
@@ -170,7 +169,9 @@ class modelA:
         self.o_inputs = tf.placeholder(tf.int32, shape=[None])
         self.y_inputs = tf.placeholder(tf.bool, shape=[None])
         self.KL_discount = tf.placeholder(tf.float32)
-        self.BernoulliSRescale = tf.placeholder(tf.float32)  #
+        self.ELBOBS = tf.placeholder(tf.float32)
+
+        ############## end of placeholders
 
         self.build_encoder(nb_entities, nb_predicates, embedding_size)
         self.build_decoder()
@@ -181,13 +182,13 @@ class modelA:
         self.p_x_i_pos = tf.gather(self.p_x_i, self.idx_pos)
         self.p_x_i_neg = tf.gather(self.p_x_i, self.idx_neg)
 
-        # Negative log likelihood
+        # Negative reconstruction loss
 
         self.reconstruction_loss_p = -tf.reduce_sum(
             tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
         self.reconstruction_loss_n = -tf.reduce_sum((
             tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
-        self.nreconstruction_loss = self.reconstruction_loss_p + self.reconstruction_loss_n*self.BernoulliSRescale  #if reduce sum
+        self.nreconstruction_loss = self.reconstruction_loss_p + self.reconstruction_loss_n*self.ELBOBS  #if reduce sum
 
 
         prior = util.make_prior(code_size=embedding_size,distribution=self.distribution,alt_prior=self.alt_opt)
@@ -231,9 +232,6 @@ class modelA:
 
         self._setup_training(loss=self.nelbo,optimizer=optimizer)
 
-        self.print={'recon loss': -self.nreconstruction_loss, 'ELBO': -self.nelbo, 'KL': -self.nkl}
-
-
     def stats(self, values):
         """
                                 Return mean and variance statistics
@@ -248,8 +246,8 @@ class modelA:
 
         """
 
-        all_triples = train_triples + valid_triples + test_triples
 
+        all_triples = train_triples + valid_triples + test_triples
         util.index_gen = index.GlorotIndexGenerator()
 
         Xs = np.array([self.entity_to_idx[s] for (s, p, o) in train_triples], dtype=np.int32)
@@ -261,40 +259,19 @@ class modelA:
         nb_samples = Xs.shape[0]
         nb_batches = no_batches
         batch_size = math.ceil(nb_samples / nb_batches)
-
         self.batch_size=batch_size
-
         batches = util.make_batches(self.nb_examples, batch_size)
-
-        self.negsamples = int(self.negsamples)
-
         nb_versions = int(self.negsamples + 1)  # neg samples + original
-        projection_steps = [constraints.unit_sphere_logvar(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere_logvar(self.entity_embedding_sigma, norm=1.0)]
-
-        M = int(nb_batches)
-
-        pi_s = np.log(2.0) * (M - 1)
-        pi_e = np.log(2.0)
-
-        pi_t = np.exp(np.linspace(pi_s, pi_e, M) - M * np.log(2.0))
-
-        pi = (1 / np.sum(pi_t)) * pi_t  # normalise pi
-        #####################
-
-        ##
-        # Train
-        ##
-
-        # config = tf.ConfigProto(
-        #     device_count={'GPU': 0}
-        # )
+        neg_subs = math.ceil(int(self.negsamples / 2))
+        pi=util.make_compression_cost(nb_batches)
 
         init_op = tf.global_variables_initializer()
+        projection_steps = [constraints.unit_sphere_logvar(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere_logvar(self.entity_embedding_sigma, norm=1.0)]
+
         with tf.Session() as session:
         # with tf.Session(config=config) as session:
             session.run(init_op)
 
-            neg_subs = math.ceil(int(self.negsamples / 2))
 
             for epoch in range(1, nb_epochs + 1):
 
@@ -331,18 +308,17 @@ class modelA:
 
                     BS=(2.0*(self.nb_entities-1)/self.negsamples)
 
-                    if (epoch >= (nb_epochs/10)) or (self.abltaion_num == 2 ):
-                        kl_linwarmup = (pi[counter])
+                    if (epoch >= (nb_epochs/10)): #linear warmup
 
-                        if self.abltaion_num == 1:
-                            kl_linwarmup = (1.0 / nb_batches)
+                        kl_linwarmup = (pi[counter])
+                        #kl_linwarmup = (1.0 / nb_batches)
 
                     else:
                         kl_linwarmup = 0.0
 
 
 
-                    if self.abltaion_num==3:
+                    if False: #turn Bernoulli Sample Off
                         BS=1.0
 
 
@@ -352,7 +328,7 @@ class modelA:
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size)
-                        ,self.BernoulliSRescale: BS
+                        ,self.ELBOBS: BS
                         , self.idx_pos: np.arange(curr_batch_size),
                         self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
                     }
@@ -365,7 +341,7 @@ class modelA:
 
                     counter += 1
 
-                    if ((self.projection) and (epoch<=nb_epochs)): #so you do not project before evaluation
+                    if (self.projection):
 
                         for projection_step in projection_steps:
                             session.run([projection_step])
@@ -433,21 +409,3 @@ class modelA:
                             for k in [1, 3, 5, 10]:
                                 hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                                 logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
-
-
-                    #
-                    # e1, e2, p1, p2 = session.run(
-                    #     [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
-                    #      self.predicate_embedding_sigma], feed_dict={})
-                    # np.save(
-                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vmf_entity_embeddings",
-                    #     e1)
-                    # np.save(
-                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vmf_entity_embedding_sigma",
-                    #     e2)
-                    # np.save(
-                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vmf_predicate_embedding_mean",
-                    #     p1)
-                    # np.save(
-                    #     "/home/acowenri/workspace/Neural-Variational-Knowledge-Graphs/vmf_predicate_embedding_sigma",
-                    #     p2)
