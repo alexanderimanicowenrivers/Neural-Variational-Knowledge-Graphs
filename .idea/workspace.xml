@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/scriptA.py" afterPath="$PROJECT_DIR$/scripts/scriptA.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/script_baseline.py" afterPath="$PROJECT_DIR$/scripts/script_baseline.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseA.py" afterPath="$PROJECT_DIR$/vkge/baseA.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,11 +31,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="scriptA.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="scriptA.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="221">
-                  <caret line="78" column="28" lean-forward="false" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="28" />
+                <state relative-caret-position="579">
+                  <caret line="109" column="0" lean-forward="true" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
                   <folding>
                     <element signature="e#199#215#0" expanded="true" />
                   </folding>
@@ -57,11 +55,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="baseA.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="236">
-                  <caret line="706" column="22" lean-forward="false" selection-start-line="706" selection-start-column="22" selection-end-line="706" selection-end-column="22" />
+                <state relative-caret-position="137">
+                  <caret line="669" column="55" lean-forward="false" selection-start-line="669" selection-start-column="55" selection-end-line="669" selection-end-column="55" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                   </folding>
@@ -233,9 +231,9 @@
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
         <option value="$PROJECT_DIR$/mainA.py" />
         <option value="$PROJECT_DIR$/vkge/baseline.py" />
-        <option value="$PROJECT_DIR$/vkge/baseA.py" />
         <option value="$PROJECT_DIR$/scripts/script_baseline.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA.py" />
+        <option value="$PROJECT_DIR$/vkge/baseA.py" />
       </list>
     </option>
   </component>
@@ -470,13 +468,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00981" summary="model B NS">
-      <created>1535991336291</created>
-      <option name="number" value="00981" />
-      <option name="presentableId" value="LOCAL-00981" />
-      <option name="project" value="LOCAL" />
-      <updated>1535991336291</updated>
     </task>
     <task id="LOCAL-00982" summary="model B NS">
       <created>1535991842043</created>
@@ -814,7 +805,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536839121380</updated>
     </task>
-    <option name="localTasksCounter" value="1030" />
+    <task id="LOCAL-01030" summary="redo tests on WN18">
+      <created>1536839255840</created>
+      <option name="number" value="01030" />
+      <option name="presentableId" value="LOCAL-01030" />
+      <option name="project" value="LOCAL" />
+      <updated>1536839255841</updated>
+    </task>
+    <option name="localTasksCounter" value="1031" />
     <servers />
   </component>
   <component name="TodoView">
@@ -880,7 +878,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added in new constraint" />
     <MESSAGE value="final test with broad range" />
     <MESSAGE value="final test with sigma init between 0 and sigmax" />
     <MESSAGE value="BS with sigma init between 0 and sigmax" />
@@ -905,7 +902,8 @@
     <MESSAGE value="5 samples 100 epochs" />
     <MESSAGE value="5 samples 100 epochs with adam and MLE" />
     <MESSAGE value="fixed baseline" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed baseline" />
+    <MESSAGE value="redo tests on WN18" />
+    <option name="LAST_COMMIT_MESSAGE" value="redo tests on WN18" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1223,22 +1221,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
+    <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="706" column="22" lean-forward="false" selection-start-line="706" selection-start-column="22" selection-end-line="706" selection-end-column="22" />
+        <state relative-caret-position="579">
+          <caret line="109" column="0" lean-forward="true" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
           <folding>
-            <element signature="e#25#36#0" expanded="true" />
+            <element signature="e#199#215#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/scriptA.py">
+    <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="78" column="28" lean-forward="false" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="28" />
+        <state relative-caret-position="137">
+          <caret line="669" column="55" lean-forward="false" selection-start-line="669" selection-start-column="55" selection-end-line="669" selection-end-column="55" />
           <folding>
-            <element signature="e#199#215#0" expanded="true" />
+            <element signature="e#25#36#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -328,9 +328,13 @@ class modelA:
 
                 # sample from mean and std of the normal distribution
 
-                self.h_s = tfd.MultivariateNormalDiag(self.mu_s, self.distribution_scale(self.log_sigma_sq_s)).sample()
-                self.h_p = tfd.MultivariateNormalDiag(self.mu_p, self.distribution_scale(self.log_sigma_sq_p)).sample()
-                self.h_o = tfd.MultivariateNormalDiag(self.mu_o, self.distribution_scale(self.log_sigma_sq_o)).sample()
+                self.q_s = tfd.MultivariateNormalDiag(self.mu_s, self.distribution_scale(self.log_sigma_sq_s))
+                self.q_p = tfd.MultivariateNormalDiag(self.mu_p, self.distribution_scale(self.log_sigma_sq_p))
+                self.q_o = tfd.MultivariateNormalDiag(self.mu_o, self.distribution_scale(self.log_sigma_sq_o))
+
+                self.h_s = self.q_s.sample()
+                self.h_p = self.q_p.sample()
+                self.h_o = self.q_o.sample()
 
 
             elif self.distribution == 'vmf':
@@ -339,15 +343,14 @@ class modelA:
 
                 # '+1' used to prevent collapsing behaviors
 
+                self.q_s = VonMisesFisher(self.mu_s, self.distribution_scale(self.log_sigma_sq_s)+ 1)
+                self.q_p = VonMisesFisher(self.mu_p, self.distribution_scale(self.log_sigma_sq_p)+ 1)
+                self.q_o = VonMisesFisher(self.mu_o, self.distribution_scale(self.log_sigma_sq_o)+ 1)
 
-                self.h_s = VonMisesFisher(self.mu_s, self.distribution_scale(self.log_sigma_sq_s)+ 1).sample()
-                self.h_p = VonMisesFisher(self.mu_p, self.distribution_scale(self.log_sigma_sq_p)+ 1).sample()
-                self.h_o = VonMisesFisher(self.mu_o, self.distribution_scale(self.log_sigma_sq_o)+ 1).sample()
+                self.h_s = self.q_s.sample()
+                self.h_p = self.q_p.sample()
+                self.h_o = self.q_o.sample()
 
-
-                # self.h_s = VonMisesFisher(tf.nn.l2_normalize(self.mu_s,axis=-1), self.distribution_scale(self.log_sigma_sq_s)+ 1).sample()
-                # self.h_p = VonMisesFisher(tf.nn.l2_normalize(self.mu_p,axis=-1), self.distribution_scale(self.log_sigma_sq_p)+ 1).sample()
-                # self.h_o = VonMisesFisher(tf.nn.l2_normalize(self.mu_o,axis=-1), self.distribution_scale(self.log_sigma_sq_o)+ 1).sample()
 
             else:
                 raise NotImplemented
@@ -401,6 +404,10 @@ class modelA:
             self.scores_test = model_test()
             self.p_x_i = tf.sigmoid(self.scores)
             self.p_x_i_test = tf.sigmoid(self.scores_test)
+
+            self.s_pdf=self.q_s.prob(self.mu_s)
+            self.o_pdf=self.q_o.prob(self.mu_o)
+            self.r_pdf=self.q_r.prob(self.mu_r)
 
     def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=False):
         global_step = tf.train.get_global_step()
@@ -470,8 +477,6 @@ class modelA:
 
             # KL divergence between vMF approximate posterior and uniform hyper-spherical prior
             #
-            # entity_posterior = VonMisesFisher(tf.nn.l2_normalize(self.entity_embedding_mean, axis=-1), self.distribution_scale(self.entity_embedding_sigma) + 1)
-            # predicate_posterior = VonMisesFisher(tf.nn.l2_normalize(self.predicate_embedding_mean, axis=-1), self.distribution_scale(self.predicate_embedding_sigma) + 1)
 
             entity_posterior = VonMisesFisher(self.entity_embedding_mean, self.distribution_scale(self.entity_embedding_sigma) + 1)
             predicate_posterior = VonMisesFisher(self.predicate_embedding_mean, self.distribution_scale(self.predicate_embedding_sigma) + 1)
@@ -651,6 +656,21 @@ class modelA:
                             s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], \
                                                   self.entity_to_idx[o]
 
+                            # predictive uncertainty
+                            Xs = np.full(shape=(1,), fill_value=s_idx, dtype=np.int32)
+                            Xp = np.full(shape=(1,), fill_value=p_idx, dtype=np.int32)
+                            Xo = np.full(shape=(1,), fill_value=o_idx, dtype=np.int32)
+
+                            feed_dict = {self.s_inputs: Xs,
+                                                      self.p_inputs: Xp,
+                                                      self.o_inputs: Xo}
+
+                            pdfs,pdfo,pdfr = session.run(self.s_pdf, self.o_pdf, self.r_pdf,feed_dict=feed_dict)
+
+                            logger.warn('Predictive uncertainity for fact {} \n Sub {} \n Obj {} \n Pred {} \n'.format((s_idx, p_idx, o_idx), pdfs,pdfo,pdfr ))
+
+                            #####
+
                             Xs_v = np.full(shape=(self.nb_entities,), fill_value=s_idx, dtype=np.int32)
                             Xp_v = np.full(shape=(self.nb_entities,), fill_value=p_idx, dtype=np.int32)
                             Xo_v = np.full(shape=(self.nb_entities,), fill_value=o_idx, dtype=np.int32)
@@ -695,6 +715,8 @@ class modelA:
                             for k in [1, 3, 5, 10]:
                                 hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                                 logger.warn('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+
+
                     #
                     # e1, e2, p1, p2 = session.run(
                     #     [self.entity_embedding_mean, self.entity_embedding_sigma, self.predicate_embedding_mean,
