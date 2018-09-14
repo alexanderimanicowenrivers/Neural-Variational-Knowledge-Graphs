@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/baseA.py" afterPath="$PROJECT_DIR$/vkge/baseA.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/training/util.py" afterPath="$PROJECT_DIR$/vkge/training/util.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mainA.py" afterPath="$PROJECT_DIR$/mainA.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="baseA.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="382" column="46" lean-forward="false" selection-start-line="382" selection-start-column="46" selection-end-line="382" selection-end-column="46" />
+            <state relative-caret-position="228">
+              <caret line="380" column="51" lean-forward="true" selection-start-line="380" selection-start-column="51" selection-end-line="380" selection-end-column="51" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -54,12 +53,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mainA.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mainA.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mainA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-196">
-              <caret line="2" column="22" lean-forward="true" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-              <folding />
+            <state relative-caret-position="358">
+              <caret line="27" column="48" lean-forward="false" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+              <folding>
+                <element signature="e#25#48#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -206,9 +207,9 @@
         <option value="$PROJECT_DIR$/vkge/util.py" />
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA.py" />
-        <option value="$PROJECT_DIR$/mainA.py" />
         <option value="$PROJECT_DIR$/vkge/training/util.py" />
         <option value="$PROJECT_DIR$/vkge/baseA.py" />
+        <option value="$PROJECT_DIR$/mainA.py" />
       </list>
     </option>
   </component>
@@ -422,13 +423,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-01002" summary="fixed scale function for von mises">
-      <created>1536693275936</created>
-      <option name="number" value="01002" />
-      <option name="presentableId" value="LOCAL-01002" />
-      <option name="project" value="LOCAL" />
-      <updated>1536693275936</updated>
     </task>
     <task id="LOCAL-01003" summary="trying distmult on mean embeddings">
       <created>1536693641967</created>
@@ -766,7 +760,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536943092184</updated>
     </task>
-    <option name="localTasksCounter" value="1051" />
+    <task id="LOCAL-01051" summary="updated to use tensorflow probability">
+      <created>1536943582267</created>
+      <option name="number" value="01051" />
+      <option name="presentableId" value="LOCAL-01051" />
+      <option name="project" value="LOCAL" />
+      <updated>1536943582269</updated>
+    </task>
+    <option name="localTasksCounter" value="1052" />
     <servers />
   </component>
   <component name="TodoView">
@@ -832,7 +833,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="model B BS" />
     <MESSAGE value="model B NS" />
     <MESSAGE value="Add in Hyperspherical VAE code" />
     <MESSAGE value="updated HyperSpherical ModelA" />
@@ -857,7 +857,8 @@
     <MESSAGE value="testing get latent distributions" />
     <MESSAGE value="test get scoring function" />
     <MESSAGE value="added stats to utils" />
-    <option name="LAST_COMMIT_MESSAGE" value="added stats to utils" />
+    <MESSAGE value="updated to use tensorflow probability" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated to use tensorflow probability" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1204,20 +1205,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mainA.py">
+    <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-196">
-          <caret line="2" column="22" lean-forward="true" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-          <folding />
+        <state relative-caret-position="228">
+          <caret line="380" column="51" lean-forward="true" selection-start-line="380" selection-start-column="51" selection-end-line="380" selection-end-column="51" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
+    <entry file="file://$PROJECT_DIR$/mainA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="382" column="46" lean-forward="false" selection-start-line="382" selection-start-column="46" selection-end-line="382" selection-end-column="46" />
+        <state relative-caret-position="358">
+          <caret line="27" column="48" lean-forward="false" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
           <folding>
-            <element signature="e#25#36#0" expanded="true" />
+            <element signature="e#25#48#0" expanded="true" />
           </folding>
         </state>
       </provider>

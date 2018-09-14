@@ -25,7 +25,7 @@ FLAGS = flags.FLAGS
 
 
 def main(_):
-    logger.warn("creating model with flags \t {}".format(flags.FLAGS.__flags))
+    logger.warn('creating model with flags \t {0}'.format(flags.FLAGS.__flags))
 
 
     vkge.modelA(embedding_size=FLAGS.embedding_size,distribution=FLAGS.distribution, epsilon=FLAGS.epsilon, no_batches=FLAGS.no_batches,dataset=FLAGS.dataset, negsamples=FLAGS.negsamples,
