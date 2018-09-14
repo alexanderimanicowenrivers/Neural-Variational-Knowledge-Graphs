@@ -665,7 +665,7 @@ class modelA:
                                                       self.p_inputs: Xp,
                                                       self.o_inputs: Xo}
 
-                            pdfs,pdfo,pdfr = session.run(self.s_pdf, self.o_pdf, self.r_pdf,feed_dict=feed_dict)
+                            pdfs,pdfo,pdfr = session.run([self.s_pdf, self.o_pdf, self.r_pdf],feed_dict=feed_dict)
 
                             logger.warn('Predictive uncertainity for fact {} \n Sub {} \n Obj {} \n Pred {} \n'.format((s_idx, p_idx, o_idx), pdfs,pdfo,pdfr ))
 
