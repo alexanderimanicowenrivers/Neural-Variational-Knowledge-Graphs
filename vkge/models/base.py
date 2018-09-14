@@ -111,26 +111,6 @@ class ComplexModel(BaseModel):
         score = dot3(es_re, ew_re, eo_re) + dot3(es_re, ew_im, eo_im) + dot3(es_im, ew_re, eo_im) - dot3(es_im, ew_im, eo_re)
         return score
 
-###############################
-#New Models
-###############################
-
-class PredicateInc(BaseModel):
-    def __init__(self, *args, **kwargs):
-        """
-        Implementation of the  model [1]
-
-        :param similarity_function: Similarity function.
-        """
-        super().__init__(*args, **kwargs)
-
-    def __call__(self):
-        """
-        :return: (batch_size) Tensor containing the scores associated by the models to the walks.
-        """
-        scaled_subject_embedding = self.subject_embeddings * self.predicate_embeddings
-        return tf.reduce_sum(scaled_subject_embedding * self.object_embeddings, axis=1)
-
 # Aliases
 TransE = TranslatingEmbeddings = TranslatingModel
 DistMult = BilinearDiagonal = BilinearDiagonalModel
