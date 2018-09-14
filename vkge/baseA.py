@@ -103,7 +103,9 @@ class modelA:
 
         with tf.variable_scope('Encoder'):
 
-            self.entity_embedding_mean,self.entity_embedding_sigma=util.make_entity_matrices(meaninit='xavier', siginit='constant', nb_entities=nb_entities, embedding_size=embedding_size, distribution=self.distribution)
+            self.entity_embedding_mean,self.entity_embedding_sigma=util.make_latent_variables(meaninit='xavier', siginit='constant', nb_variables=nb_entities, embedding_size=embedding_size, distribution=self.distribution,vtype='entities')
+            self.predicate_embedding_mean,self.predicate_embedding_sigma=util.make_latent_variables(meaninit='xavier', siginit='constant', nb_variables=nb_predicates, embedding_size=embedding_size, distribution=self.distribution,vtype='predicates')
+
 
             self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
             self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
@@ -111,61 +113,6 @@ class modelA:
             self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
             self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
 
-
-            if self.abltaion_num == 5:
-
-                self.predicate_embedding_mean = tf.get_variable('predicates',
-                                                                shape=[nb_predicates + 1, embedding_size],
-                                                                initializer=tf.random_uniform_initializer(
-                                                                    minval=-0.001,
-                                                                    maxval=0.001,
-                                                                    dtype=tf.float32))
-
-
-            else:
-
-                 self.predicate_embedding_mean = tf.get_variable('predicates',
-                                                        shape=[nb_predicates + 1, embedding_size],
-                                                            initializer=tf.contrib.layers.xavier_initializer())
-
-
-
-            # if self.abltaion_num==4:
-
-
-
-            #     self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
-            #                                          shape=[nb_predicates + 1,
-            #                                                 embedding_size],
-            #                                          initializer=tf.random_uniform_initializer(
-            #                                              minval=0, maxval=init_var, dtype=tf.float32),
-            #                                          dtype=tf.float32)
-            #
-            # else:
-
-            if self.distribution == 'normal':
-
-
-                self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
-                                                                 shape=[nb_predicates + 1,
-                                                                        embedding_size],
-                                                                 initializer=tf.random_uniform_initializer(
-                                                                     minval=init_var, maxval=init_var,
-                                                                     dtype=tf.float32),
-                                                                 dtype=tf.float32)
-            elif self.distribution == 'vmf':
-
-                self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
-                                                                 shape=[nb_predicates + 1,
-                                                                        1],
-                                                                 initializer=tf.random_uniform_initializer(
-                                                                     minval=init_var, maxval=init_var,
-                                                                     dtype=tf.float32),
-                                                                 dtype=tf.float32)
-
-
-            else:
-                raise NotImplemented
 
             self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
             self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)

@@ -73,23 +73,27 @@ def make_prior(code_size,distribution,alt_prior):
         return dist
 
 
-def make_entity_matrices(meaninit,siginit,nb_entities,embedding_size,distribution):
+def make_latent_variables(meaninit,siginit,nb_variables,embedding_size,distribution,vtype):
     """
                     Returns the entity embedding mean matrix
     """
+    
+    emd_mean_name=vtype+'_mean'
+    emd_sig_name=vtype+'_sigma'
 
     if distribution == 'vmf':
-        var_max = np.log(1e-8)
+        #almost initialise scale to 0
+        scale_max = np.log(1e-8) 
 
     else:
-        var_max = np.log((1.0 / embedding_size * 1.0) + 1e-10)
+        scale_max = np.log((1.0 / embedding_size * 1.0) + 1e-10)
 
-    sigmax = np.round(var_max, decimals=2)
+    sigmax = np.round(scale_max, decimals=2)
 
     if meaninit=='ru':
 
-        entity_embedding_mean = tf.get_variable('entities',
-                                                     shape=[nb_entities + 1, embedding_size],
+        embedding_mean = tf.get_variable(emd_mean_name,
+                                                     shape=[nb_variables + 1, embedding_size],
                                                      initializer=tf.random_uniform_initializer(
                                                          minval=-0.001,
                                                          maxval=0.001,
@@ -97,30 +101,30 @@ def make_entity_matrices(meaninit,siginit,nb_entities,embedding_size,distributio
 
     else:
 
-        entity_embedding_mean = tf.get_variable('entities', shape=[nb_entities + 1, embedding_size],
+        embedding_mean = tf.get_variable(emd_mean_name, shape=[nb_variables + 1, embedding_size],
                                                      initializer=tf.contrib.layers.xavier_initializer())
 
     if siginit=='ru' and distribution == 'normal':
 
 
-        entity_embedding_sigma = tf.get_variable('entities_sigma',
-                                                     shape=[nb_entities + 1, embedding_size],
+        embedding_sigma = tf.get_variable(emd_sig_name,
+                                                     shape=[nb_variables + 1, embedding_size],
                                                      initializer=tf.random_uniform_initializer(
                                                          minval=0, maxval=sigmax, dtype=tf.float32),
                                                      dtype=tf.float32)
 
     if (siginit != 'ru') and distribution == 'normal':
 
-        entity_embedding_sigma = tf.get_variable('entities_sigma',
-                                                      shape=[nb_entities + 1, embedding_size],
+        embedding_sigma = tf.get_variable(emd_sig_name,
+                                                      shape=[nb_variables + 1, embedding_size],
                                                       initializer=tf.random_uniform_initializer(
                                                           minval=sigmax, maxval=sigmax, dtype=tf.float32),
                                                       dtype=tf.float32)
 
     if distribution == 'vmf':
 
-        entity_embedding_sigma = tf.get_variable('entities_sigma',
-                                                      shape=[nb_entities + 1, 1],
+        embedding_sigma = tf.get_variable(emd_sig_name,
+                                                      shape=[nb_variables + 1, 1],
                                                       initializer=tf.random_uniform_initializer(
                                                           minval=sigmax, maxval=sigmax, dtype=tf.float32),
                                                       dtype=tf.float32)
@@ -128,4 +132,4 @@ def make_entity_matrices(meaninit,siginit,nb_entities,embedding_size,distributio
     if distribution not in ['vmf','normal']:
         raise NotImplemented
 
-    return entity_embedding_mean,entity_embedding_sigma
+    return embedding_mean,embedding_sigma
