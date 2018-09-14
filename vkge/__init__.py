@@ -6,7 +6,5 @@ from vkge.base_tests import VKGE_tests
 from vkge.base_modela import VKGE_A
 from vkge.baseA import modelA
 from vkge.baseB import modelB
-# from vkge.copy_working import VKGE_working
-# from vkge.base_quick import VKGE_quick
-# __all__ = ['VKGE','VKGE_simple','VKGE_working','VKGE_quick']
-__all__ = ['VKGE','VKGE_simple','VKGE_tests','VKGE_A','modelB','modelA']
+from vkge.util import  make_batches,read_triples,IndexGenerator
+__all__ = ['VKGE','VKGE_simple','VKGE_tests','VKGE_A','modelB','modelA',"IndexGenerator"]

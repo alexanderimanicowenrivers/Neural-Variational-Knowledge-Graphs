@@ -4,43 +4,13 @@ import math
 import numpy as np
 import tensorflow as tf
 import vkge.models as models
-from vkge.training import constraints, corrupt, index
-from vkge.training.util import make_batches
+from vkge.training import constraints, index
+from vkge.training import util as util 
 import logging
 from hyperspherical_vae.distributions import VonMisesFisher
 from hyperspherical_vae.distributions import HypersphericalUniform
-logger = logging.getLogger(__name__)
 tfd = tf.contrib.distributions
-
-def read_triples(path):
-    triples = []
-    with open(path, 'rt') as f:
-        for line in f.readlines():
-            s, p, o = line.split()
-            triples += [(s.strip(), p.strip(), o.strip())]
-    return triples
-
-
-def unit_cube_projection(var_matrix):
-    unit_cube_projection = tf.minimum(1., tf.maximum(var_matrix, 0.))
-    return tf.assign(var_matrix, unit_cube_projection)
-
-
-def make_batches(size, batch_size):
-    nb_batch = int(np.ceil(size / float(batch_size)))
-    res = [(i * batch_size, min(size, (i + 1) * batch_size)) for i in range(0, nb_batch)]
-    return res
-
-
-class IndexGenerator:
-    def __init__(self):
-        self.random_state = np.random.RandomState(0)
-
-    def __call__(self, n_samples, candidate_indices):
-        shuffled_indices = candidate_indices[self.random_state.permutation(len(candidate_indices))]
-        rand_ints = shuffled_indices[np.arange(n_samples) % len(shuffled_indices)]
-        return rand_ints
-
+logger = logging.getLogger(__name__)
 
 class modelA:
     """
@@ -131,9 +101,9 @@ class modelA:
 
         logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(self.dataset_name))
 
-        train_triples = read_triples("data/{}/train.tsv".format(self.dataset_name))  # choose dataset
-        valid_triples = read_triples("data/{}/dev.tsv".format(self.dataset_name))
-        test_triples = read_triples("data/{}/test.tsv".format(self.dataset_name))
+        train_triples = util.read_triples("data/{}/train.tsv".format(self.dataset_name))  # choose dataset
+        valid_triples = util.read_triples("data/{}/dev.tsv".format(self.dataset_name))
+        test_triples = util.read_triples("data/{}/test.tsv".format(self.dataset_name))
         self.nb_examples = len(train_triples)
 
         ##### for test time ######
@@ -519,7 +489,7 @@ class modelA:
 
         all_triples = train_triples + valid_triples + test_triples
 
-        index_gen = index.GlorotIndexGenerator()
+        util.index_gen = index.GlorotIndexGenerator()
 
         Xs = np.array([self.entity_to_idx[s] for (s, p, o) in train_triples], dtype=np.int32)
         Xp = np.array([self.predicate_to_idx[p] for (s, p, o) in train_triples], dtype=np.int32)
@@ -533,7 +503,7 @@ class modelA:
 
         self.batch_size=batch_size
 
-        batches = make_batches(self.nb_examples, batch_size)
+        batches = util.make_batches(self.nb_examples, batch_size)
 
         self.negsamples = int(self.negsamples)
 
@@ -587,14 +557,14 @@ class modelA:
                     Xo_batch[0::nb_versions] = Xo_shuf[batch_start:batch_end]
 
                     for q in range((neg_subs)): # Xs_batch[1::nb_versions] needs to be corrupted
-                        Xs_batch[(q+1)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                        Xs_batch[(q+1)::nb_versions] = util.index_gen(curr_batch_size, np.arange(self.nb_entities))
                         Xp_batch[(q+1)::nb_versions] = Xp_shuf[batch_start:batch_end]
                         Xo_batch[(q+1)::nb_versions] = Xo_shuf[batch_start:batch_end]
 
                     for q2 in range(neg_subs,(self.negsamples-neg_subs)): # Xs_batch[1::nb_versions] needs to be corrupted
                         Xs_batch[(q2+1)::nb_versions] = Xs_shuf[batch_start:batch_end]
                         Xp_batch[(q2+1)::nb_versions] = Xp_shuf[batch_start:batch_end]
-                        Xo_batch[(q2+1)::nb_versions] = index_gen(curr_batch_size, np.arange(self.nb_entities))
+                        Xo_batch[(q2+1)::nb_versions] = util.index_gen(curr_batch_size, np.arange(self.nb_entities))
 
                     vec_neglabels=[int(1)]+([int(0)]*(int(self.negsamples)))
 
@@ -655,19 +625,6 @@ class modelA:
                         for _i, (s, p, o) in enumerate(eval_triples):
                             s_idx, p_idx, o_idx = self.entity_to_idx[s], self.predicate_to_idx[p], \
                                                   self.entity_to_idx[o]
-
-                            # predictive uncertainty
-                            Xs = np.full(shape=(1,), fill_value=s_idx, dtype=np.int32)
-                            Xp = np.full(shape=(1,), fill_value=p_idx, dtype=np.int32)
-                            Xo = np.full(shape=(1,), fill_value=o_idx, dtype=np.int32)
-
-                            feed_dict = {self.s_inputs: Xs,
-                                                      self.p_inputs: Xp,
-                                                      self.o_inputs: Xo}
-
-                            pdfs,pdfo,pdfr = session.run([self.s_pdf, self.o_pdf, self.r_pdf],feed_dict=feed_dict)
-
-                            logger.warn('Predictive uncertainity for fact {} \n Sub {} \n Obj {} \n Pred {} \n'.format((s_idx, p_idx, o_idx), pdfs,pdfo,pdfr ))
 
                             #####
 
