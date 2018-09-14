@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/training/util.py" afterPath="$PROJECT_DIR$/vkge/training/util.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mainA.py" afterPath="$PROJECT_DIR$/mainA.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -53,21 +53,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mainA.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mainA.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mainA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="31" column="77" lean-forward="false" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="77" />
+            <state relative-caret-position="239">
+              <caret line="31" column="79" lean-forward="false" selection-start-line="31" selection-start-column="79" selection-end-line="31" selection-end-column="79" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="util.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="243" column="0" lean-forward="false" selection-start-line="243" selection-start-column="0" selection-end-line="243" selection-end-column="0" />
+            <state relative-caret-position="273">
+              <caret line="248" column="82" lean-forward="true" selection-start-line="248" selection-start-column="82" selection-end-line="248" selection-end-column="82" />
               <folding>
                 <element signature="e#25#43#0" expanded="true" />
               </folding>
@@ -205,9 +205,9 @@
         <option value="$PROJECT_DIR$/vkge/util.py" />
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA.py" />
-        <option value="$PROJECT_DIR$/mainA.py" />
         <option value="$PROJECT_DIR$/vkge/baseA.py" />
         <option value="$PROJECT_DIR$/vkge/training/util.py" />
+        <option value="$PROJECT_DIR$/mainA.py" />
       </list>
     </option>
   </component>
@@ -421,13 +421,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00999" summary="updated HyperSpherical variance initalisation">
-      <created>1536692218457</created>
-      <option name="number" value="00999" />
-      <option name="presentableId" value="LOCAL-00999" />
-      <option name="project" value="LOCAL" />
-      <updated>1536692218457</updated>
     </task>
     <task id="LOCAL-01000" summary="removed projection">
       <created>1536692492566</created>
@@ -765,7 +758,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536942606374</updated>
     </task>
-    <option name="localTasksCounter" value="1048" />
+    <task id="LOCAL-01048" summary="added stats to utils">
+      <created>1536942697208</created>
+      <option name="number" value="01048" />
+      <option name="presentableId" value="LOCAL-01048" />
+      <option name="project" value="LOCAL" />
+      <updated>1536942697209</updated>
+    </task>
+    <option name="localTasksCounter" value="1049" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1188,14 +1188,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mainA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="31" column="77" lean-forward="false" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -1208,11 +1200,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="243" column="0" lean-forward="false" selection-start-line="243" selection-start-column="0" selection-end-line="243" selection-end-column="0" />
+        <state relative-caret-position="273">
+          <caret line="248" column="82" lean-forward="true" selection-start-line="248" selection-start-column="82" selection-end-line="248" selection-end-column="82" />
           <folding>
             <element signature="e#25#43#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mainA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="31" column="79" lean-forward="false" selection-start-line="31" selection-start-column="79" selection-end-line="31" selection-end-column="79" />
+          <folding />
         </state>
       </provider>
     </entry>

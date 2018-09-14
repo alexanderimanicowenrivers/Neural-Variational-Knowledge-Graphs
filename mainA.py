@@ -29,7 +29,7 @@ def main(_):
 
 
     vkge.modelA(embedding_size=FLAGS.embedding_size,distribution=FLAGS.distribution, epsilon=FLAGS.epsilon, no_batches=FLAGS.no_batches,dataset=FLAGS.dataset, negsamples=FLAGS.negsamples,
-              lr=FLAGS.lr, file_name=FLAGS.file_name, alt_prior=FLAGS.alt_opt, projection=FLAGS.projection, score_func=FLAGS.score_func)
+              lr=FLAGS.lr, file_name=FLAGS.file_name, alt_prior=FLAGS.alt_prior, projection=FLAGS.projection, score_func=FLAGS.score_func)
 
 
 if __name__ == '__main__':
