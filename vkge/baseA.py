@@ -7,8 +7,8 @@ from vkge.training import constraints, index
 from vkge.training import util as util 
 import logging
 from hyperspherical_vae.distributions import VonMisesFisher
-from hyperspherical_vae.distributions import HypersphericalUniform
-tfd = tf.contrib.distributions
+import tensorflow_probability as tfp
+tfd =  tfp.distributions
 logger = logging.getLogger(__name__)
 
 class modelA:

@@ -5,7 +5,8 @@ import tensorflow as tf
 from hyperspherical_vae.distributions import VonMisesFisher
 from hyperspherical_vae.distributions import HypersphericalUniform
 import vkge.models as models
-tfd = tf.contrib.distributions
+import tensorflow_probability as tfp
+tfd =  tfp.distributions
 
 def read_triples(path):
     triples = []
