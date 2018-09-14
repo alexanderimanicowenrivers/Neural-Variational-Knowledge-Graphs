@@ -18,7 +18,6 @@ $ python setup.py install
 
 ## Structure
 
-# Neural-Variational-Knowledge-Graphs !!(Work in progress)!!
 -------
 ## CONTRIBUTERS:
 
