@@ -67,24 +67,11 @@ class modelA:
 
         self.score_func=score_func
         self.negsamples=negsamples
-
         self.distribution=distribution
-
         self.alt_opt=alt_opt
         self.abltaion_num=ablation
         self.projection=projection
 
-        predicate_embedding_size = embedding_size
-        entity_embedding_size = embedding_size
-
-        if self.distribution == 'vmf':
-            var_max = np.log(1e-8)
-            
-        else:
-            var_max = np.log((1.0 / embedding_size * 1.0) + 1e-10)
-
-        var_min = var_max
-        
         ##### dataset  ######
         self.dataset_name = dataset
         logger.warn('Parsing the facts in the Knowledge Base for Dataset {}..'.format(self.dataset_name))
@@ -101,65 +88,22 @@ class modelA:
         ############################
         
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
-        self.build_model(self.nb_entities, entity_embedding_size, self.nb_predicates, predicate_embedding_size,
-                         optimizer, var_max, var_min)
+        self.build_model(self.nb_entities, self.nb_predicates, embedding_size,optimizer)
         self.nb_epochs = 100
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
 
-    def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, var_max,
-                      var_min):
+    def build_encoder(self, nb_entities, nb_predicates, embedding_size):
         """
                                 Constructs encoder
         """
         logger.warn('Building Inference Networks q(h_x | x) ..{}'.format(self.score_func))
 
-        init2 = np.round(var_max,decimals=2)
+
 
         with tf.variable_scope('Encoder'):
 
-
-            if self.abltaion_num==5:
-
-                self.entity_embedding_mean = tf.get_variable('entities',
-                                                             shape=[nb_entities + 1, entity_embedding_size],
-                                                             initializer=tf.random_uniform_initializer(
-                                                                 minval=-0.001,
-                                                                 maxval=0.001,
-                                                                 dtype=tf.float32))
-
-            else:
-
-                self.entity_embedding_mean = tf.get_variable('entities', shape=[nb_entities + 1, entity_embedding_size],
-                                                         initializer=tf.contrib.layers.xavier_initializer())
-
-
-
-            # if self.abltaion_num==4:
-            #
-            #     self.entity_embedding_sigma = tf.get_variable('entities_sigma',
-            #                                                   shape=[nb_entities + 1, entity_embedding_size],
-            #                                                   initializer=tf.random_uniform_initializer(
-            #                                                       minval=0, maxval=init2, dtype=tf.float32),
-            #                                                   dtype=tf.float32)
-            if self.distribution == 'normal':
-
-                self.entity_embedding_sigma = tf.get_variable('entities_sigma',
-                                                              shape=[nb_entities + 1, entity_embedding_size],
-                                                              initializer=tf.random_uniform_initializer(
-                                                                  minval=init2, maxval=init2, dtype=tf.float32),
-                                                              dtype=tf.float32)
-
-            elif self.distribution == 'vmf':
-
-                self.entity_embedding_sigma = tf.get_variable('entities_sigma',
-                                                          shape=[nb_entities + 1, 1],
-                                                          initializer=tf.random_uniform_initializer(
-                                                              minval=init2, maxval=init2, dtype=tf.float32),
-                                                          dtype=tf.float32)
-
-            else:
-                raise NotImplemented
+            self.entity_embedding_mean,self.entity_embedding_sigma=util.make_entity_matrices(meaninit='xavier', siginit='constant', nb_entities=nb_entities, embedding_size=embedding_size, distribution=self.distribution)
 
             self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
             self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
@@ -171,7 +115,7 @@ class modelA:
             if self.abltaion_num == 5:
 
                 self.predicate_embedding_mean = tf.get_variable('predicates',
-                                                                shape=[nb_predicates + 1, predicate_embedding_size],
+                                                                shape=[nb_predicates + 1, embedding_size],
                                                                 initializer=tf.random_uniform_initializer(
                                                                     minval=-0.001,
                                                                     maxval=0.001,
@@ -181,7 +125,7 @@ class modelA:
             else:
 
                  self.predicate_embedding_mean = tf.get_variable('predicates',
-                                                        shape=[nb_predicates + 1, predicate_embedding_size],
+                                                        shape=[nb_predicates + 1, embedding_size],
                                                             initializer=tf.contrib.layers.xavier_initializer())
 
 
@@ -192,9 +136,9 @@ class modelA:
 
             #     self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
             #                                          shape=[nb_predicates + 1,
-            #                                                 predicate_embedding_size],
+            #                                                 embedding_size],
             #                                          initializer=tf.random_uniform_initializer(
-            #                                              minval=0, maxval=init2, dtype=tf.float32),
+            #                                              minval=0, maxval=init_var, dtype=tf.float32),
             #                                          dtype=tf.float32)
             #
             # else:
@@ -204,9 +148,9 @@ class modelA:
 
                 self.predicate_embedding_sigma = tf.get_variable('predicate_sigma',
                                                                  shape=[nb_predicates + 1,
-                                                                        predicate_embedding_size],
+                                                                        embedding_size],
                                                                  initializer=tf.random_uniform_initializer(
-                                                                     minval=init2, maxval=init2,
+                                                                     minval=init_var, maxval=init_var,
                                                                      dtype=tf.float32),
                                                                  dtype=tf.float32)
             elif self.distribution == 'vmf':
@@ -215,7 +159,7 @@ class modelA:
                                                                  shape=[nb_predicates + 1,
                                                                         1],
                                                                  initializer=tf.random_uniform_initializer(
-                                                                     minval=init2, maxval=init2,
+                                                                     minval=init_var, maxval=init_var,
                                                                      dtype=tf.float32),
                                                                  dtype=tf.float32)
 
@@ -334,8 +278,7 @@ class modelA:
 
         return loss, train_op
 
-    def build_model(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, optimizer,
-                    var_max, pred_sig):
+    def build_model(self, nb_entities, nb_predicates, embedding_size, optimizer):
         """
                         Construct full computation graph
         """
@@ -351,8 +294,7 @@ class modelA:
         self.KL_discount = tf.placeholder(tf.float32)
         self.BernoulliSRescale = tf.placeholder(tf.float32)  #
 
-        self.build_encoder(nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, var_max,
-                           pred_sig)
+        self.build_encoder(nb_entities, nb_predicates, embedding_size)
         self.build_decoder()
 
         self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
