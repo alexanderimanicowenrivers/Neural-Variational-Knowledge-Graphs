@@ -57,8 +57,8 @@
       <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="135" column="0" lean-forward="true" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+            <state relative-caret-position="111">
+              <caret line="131" column="40" lean-forward="true" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -70,7 +70,7 @@
         <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="258">
-              <caret line="167" column="22" lean-forward="true" selection-start-line="167" selection-start-column="11" selection-end-line="167" selection-end-column="22" />
+              <caret line="222" column="27" lean-forward="true" selection-start-line="222" selection-start-column="11" selection-end-line="222" selection-end-column="27" />
               <folding>
                 <element signature="e#25#43#0" expanded="true" />
               </folding>
@@ -89,8 +89,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>lin</find>
-      <find>negative_l1_distance</find>
       <find>train_writer</find>
       <find>neg</find>
       <find>self.negsamples</find>
@@ -119,9 +117,10 @@
       <find>predicate_embedding_size</find>
       <find>var_max</find>
       <find>distribution</find>
+      <find>self.score_func</find>
+      <find>models</find>
     </findStrings>
     <replaceStrings>
-      <replace />
       <replace>print</replace>
       <replace>logger.info</replace>
       <replace>summary.scalar</replace>
@@ -150,6 +149,7 @@
       <replace>alt_prior</replace>
       <replace>embedding_size</replace>
       <replace>scale_max</replace>
+      <replace>score_func</replace>
       <replace>distribution</replace>
     </replaceStrings>
   </component>
@@ -424,13 +424,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-00994" summary="Add in Hyperspherical VAE code">
-      <created>1536690719089</created>
-      <option name="number" value="00994" />
-      <option name="presentableId" value="LOCAL-00994" />
-      <option name="project" value="LOCAL" />
-      <updated>1536690719090</updated>
     </task>
     <task id="LOCAL-00995" summary="updated HyperSpherical ModelA">
       <created>1536690906111</created>
@@ -768,7 +761,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536937006035</updated>
     </task>
-    <option name="localTasksCounter" value="1043" />
+    <task id="LOCAL-01043" summary="testing get latent distributions">
+      <created>1536937615783</created>
+      <option name="number" value="01043" />
+      <option name="presentableId" value="LOCAL-01043" />
+      <option name="project" value="LOCAL" />
+      <updated>1536937615783</updated>
+    </task>
+    <option name="localTasksCounter" value="1044" />
     <servers />
   </component>
   <component name="TodoView">
@@ -834,7 +834,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="neaten up code" />
     <MESSAGE value="neaten up code for main model" />
     <MESSAGE value="fixed random seed bug" />
     <MESSAGE value="model B BS" />
@@ -859,7 +858,8 @@
     <MESSAGE value="testing make prior" />
     <MESSAGE value="testing make entity matrices" />
     <MESSAGE value="testing make latent variables" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing make latent variables" />
+    <MESSAGE value="testing get latent distributions" />
+    <option name="LAST_COMMIT_MESSAGE" value="testing get latent distributions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1201,7 +1201,7 @@
     <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
-          <caret line="167" column="22" lean-forward="true" selection-start-line="167" selection-start-column="11" selection-end-line="167" selection-end-column="22" />
+          <caret line="222" column="27" lean-forward="true" selection-start-line="222" selection-start-column="11" selection-end-line="222" selection-end-column="27" />
           <folding>
             <element signature="e#25#43#0" expanded="true" />
           </folding>
@@ -1210,8 +1210,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="135" column="0" lean-forward="true" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+        <state relative-caret-position="111">
+          <caret line="131" column="40" lean-forward="true" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

@@ -4,6 +4,7 @@ import numpy as np
 import tensorflow as tf
 from hyperspherical_vae.distributions import VonMisesFisher
 from hyperspherical_vae.distributions import HypersphericalUniform
+import vkge.models as models
 tfd = tf.contrib.distributions
 
 def read_triples(path):
@@ -166,3 +167,57 @@ def get_latent_distributions(distribution,mu_s,mu_p,mu_o,log_sigma_sq_s,log_sigm
         raise NotImplemented
 
     return q_s,q_p,q_o
+
+
+
+def get_scoring_func(score_func,distribution,h_s,h_p,h_o,mu_s,mu_p,mu_o):
+    """
+                    Returns scoring function for training and testing  
+    """
+
+    if score_func == 'DistMult':
+
+        model = models.BilinearDiagonalModel(subject_embeddings=h_s, predicate_embeddings=h_p,
+                                             object_embeddings=h_o)
+
+        if distribution == 'normal':
+
+            model_test = models.BilinearDiagonalModel(subject_embeddings=mu_s, predicate_embeddings=mu_p,
+                                                      object_embeddings=mu_o)
+
+        elif distribution == 'vmf':
+
+            model_test = models.BilinearDiagonalModel(subject_embeddings=mu_s,
+                                                      predicate_embeddings=mu_p,
+                                                      object_embeddings=mu_o)
+
+    elif score_func == 'ComplEx':
+        model = models.ComplexModel(subject_embeddings=h_s, predicate_embeddings=h_p,
+                                    object_embeddings=h_o)
+
+        if distribution == 'normal':
+
+            model_test = models.ComplexModel(subject_embeddings=mu_s, predicate_embeddings=mu_p,
+                                             object_embeddings=mu_o)
+
+        elif distribution == 'vmf':
+
+            model_test = models.ComplexModel(subject_embeddings=tf.nn.l2_normalize(mu_s, axis=-1),
+                                             predicate_embeddings=tf.nn.l2_normalize(mu_p, axis=-1),
+                                             object_embeddings=tf.nn.l2_normalize(mu_o, axis=-1))
+
+    elif score_func == 'TransE':
+        model = models.TranslatingModel(subject_embeddings=h_s, predicate_embeddings=h_p,
+                                        object_embeddings=h_o)
+        if distribution == 'normal':
+            model_test = models.TranslatingModel(subject_embeddings=mu_s, predicate_embeddings=mu_p,
+                                                 object_embeddings=mu_o)
+
+        elif distribution == 'vmf':
+            model_test = models.TranslatingModel(subject_embeddings=tf.nn.l2_normalize(mu_s, axis=-1),
+                                                 predicate_embeddings=tf.nn.l2_normalize(mu_p, axis=-1),
+                                                 object_embeddings=tf.nn.l2_normalize(mu_o, axis=-1))
+    else:
+        raise NotImplemented
+
+    return model,model_test

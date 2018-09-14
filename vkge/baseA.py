@@ -3,7 +3,6 @@
 import math
 import numpy as np
 import tensorflow as tf
-import vkge.models as models
 from vkge.training import constraints, index
 from vkge.training import util as util 
 import logging
@@ -133,50 +132,7 @@ class modelA:
             self.h_p = self.q_p.sample()
             self.h_o = self.q_o.sample()
 
-
-            if self.score_func=='DistMult':
-
-                model = models.BilinearDiagonalModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
-                                                     object_embeddings=self.h_o)
-
-                if self.distribution == 'normal':
-
-                    model_test = models.BilinearDiagonalModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
-                                                           object_embeddings=self.mu_o)
-
-                elif self.distribution == 'vmf':
-                    #
-                    # model_test = models.BilinearDiagonalModel(subject_embeddings=tf.nn.l2_normalize(self.mu_s,axis=-1),
-                    #                                           predicate_embeddings=tf.nn.l2_normalize(self.mu_p,axis=-1),
-                    #                                           object_embeddings=tf.nn.l2_normalize(self.mu_o,axis=-1))
-                    model_test = models.BilinearDiagonalModel(subject_embeddings=self.mu_s,
-                                                              predicate_embeddings=self.mu_p,
-                                                              object_embeddings=self.mu_o)
-
-            elif self.score_func=='ComplEx':
-                model = models.ComplexModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
-                                                     object_embeddings=self.h_o)
-
-                if self.distribution == 'normal':
-
-                    model_test = models.ComplexModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
-                                                          object_embeddings=self.mu_o)
-
-                elif self.distribution == 'vmf':
-
-                    model_test = models.ComplexModel(subject_embeddings=tf.nn.l2_normalize(self.mu_s,axis=-1), predicate_embeddings=tf.nn.l2_normalize(self.mu_p,axis=-1),
-                                                     object_embeddings=tf.nn.l2_normalize(self.mu_o,axis=-1))
-
-            elif self.score_func=='TransE':
-                model = models.TranslatingModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
-                                                     object_embeddings=self.h_o)
-                if self.distribution == 'normal':
-                    model_test = models.TranslatingModel(subject_embeddings=self.mu_s, predicate_embeddings=self.mu_p,
-                                                          object_embeddings=self.mu_o)
-
-                elif self.distribution == 'vmf':
-                    model_test = models.TranslatingModel(subject_embeddings=tf.nn.l2_normalize(self.mu_s,axis=-1), predicate_embeddings=tf.nn.l2_normalize(self.mu_p,axis=-1),
-                                                         object_embeddings=tf.nn.l2_normalize(self.mu_o,axis=-1) )
+            model, model_test=util.get_scoring_func(self.score_func, self.distribution, self.h_s, self.h_p, self.h_o, self.mu_s, self.mu_p, self.mu_o)
 
             self.scores = model()
             self.scores_test = model_test()
