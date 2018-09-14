@@ -2,6 +2,9 @@
 
 import numpy as np
 import tensorflow as tf
+from hyperspherical_vae.distributions import VonMisesFisher
+from hyperspherical_vae.distributions import HypersphericalUniform
+tfd = tf.contrib.distributions
 
 def read_triples(path):
     triples = []
@@ -34,3 +37,38 @@ def distribution_scale(log_sigma_square):
         scale = tf.sqrt(tf.exp(log_sigma_square))
 
         return scale
+
+    def make_prior(code_size,distribution,alt_prior):
+
+        """
+                        Returns the prior on embeddings for tensorflow distributions
+
+                        (i) MultivariateNormalDiag function
+
+                        (ii) HypersphericalUniform
+
+                        with alternative prior on gaussian
+
+                        (1) Alt: N(0,1/code_size)
+                        (2) N(0,1)
+                """
+
+        if distribution == 'normal':
+            if alt_prior: #alternative prior 0,1/embeddings variance
+                loc = tf.zeros(code_size)
+                scale = tf.sqrt(tf.divide(tf.ones(code_size),code_size))
+
+            else:
+                loc = tf.zeros(code_size)
+                scale = tf.ones(code_size)
+
+            dist=tfd.MultivariateNormalDiag(loc, scale)
+
+        elif distribution == 'vmf':
+
+            dist=HypersphericalUniform(code_size - 1, dtype=tf.float32)
+
+        else:
+            raise NotImplemented
+
+        return dist

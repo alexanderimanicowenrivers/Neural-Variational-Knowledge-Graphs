@@ -107,36 +107,6 @@ class modelA:
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,entity_embedding_size=entity_embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
 
-
-    def make_prior(self,code_size):
-
-        """
-                        Returns the prior on embeddings for tensorflow distributions MultivariateNormalDiag function
-
-                        (1) Alt: N(0,1/code_size)
-                        (2) N(0,1)
-                """
-
-        if self.distribution == 'normal':
-            if self.alt_opt: #alternative prior 0,1/embeddings variance
-                loc = tf.zeros(code_size)
-                scale = tf.sqrt(tf.divide(tf.ones(code_size),code_size))
-
-            else:
-                loc = tf.zeros(code_size)
-                scale = tf.ones(code_size)
-
-            dist=tfd.MultivariateNormalDiag(loc, scale)
-
-        elif self.distribution == 'vmf':
-
-            dist=HypersphericalUniform(code_size - 1, dtype=tf.float32)
-
-        else:
-            raise NotImplemented
-
-        return dist
-
     def build_encoder(self, nb_entities, entity_embedding_size, nb_predicates, predicate_embedding_size, var_max,
                       var_min):
         """
@@ -400,8 +370,7 @@ class modelA:
         self.nreconstruction_loss = self.reconstruction_loss_p + self.reconstruction_loss_n*self.BernoulliSRescale  #if reduce sum
 
 
-        #KL
-        prior = self.make_prior(code_size=entity_embedding_size)
+        prior = util.make_prior(code_size=entity_embedding_size,distribution=self.distribution,alt_prior=self.alt_opt)
 
         if self.distribution == 'normal':
 
