@@ -58,8 +58,8 @@
           <file leaf-file-name="baseA.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="137">
-                  <caret line="669" column="55" lean-forward="false" selection-start-line="669" selection-start-column="55" selection-end-line="669" selection-end-column="55" />
+                <state relative-caret-position="352">
+                  <caret line="409" column="46" lean-forward="false" selection-start-line="409" selection-start-column="46" selection-end-line="409" selection-end-column="46" />
                   <folding>
                     <element signature="e#25#36#0" expanded="true" />
                   </folding>
@@ -469,13 +469,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-00982" summary="model B NS">
-      <created>1535991842043</created>
-      <option name="number" value="00982" />
-      <option name="presentableId" value="LOCAL-00982" />
-      <option name="project" value="LOCAL" />
-      <updated>1535991842044</updated>
-    </task>
     <task id="LOCAL-00983" summary="model B NS">
       <created>1535992344731</created>
       <option name="number" value="00983" />
@@ -812,7 +805,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536839255841</updated>
     </task>
-    <option name="localTasksCounter" value="1031" />
+    <task id="LOCAL-01031" summary="added in predictive uncertainity estimates">
+      <created>1536931023216</created>
+      <option name="number" value="01031" />
+      <option name="presentableId" value="LOCAL-01031" />
+      <option name="project" value="LOCAL" />
+      <updated>1536931023216</updated>
+    </task>
+    <option name="localTasksCounter" value="1032" />
     <servers />
   </component>
   <component name="TodoView">
@@ -878,7 +878,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="final test with broad range" />
     <MESSAGE value="final test with sigma init between 0 and sigmax" />
     <MESSAGE value="BS with sigma init between 0 and sigmax" />
     <MESSAGE value="rm trainwriter bug" />
@@ -903,7 +902,8 @@
     <MESSAGE value="5 samples 100 epochs with adam and MLE" />
     <MESSAGE value="fixed baseline" />
     <MESSAGE value="redo tests on WN18" />
-    <option name="LAST_COMMIT_MESSAGE" value="redo tests on WN18" />
+    <MESSAGE value="added in predictive uncertainity estimates" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in predictive uncertainity estimates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1233,8 +1233,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/baseA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="669" column="55" lean-forward="false" selection-start-line="669" selection-start-column="55" selection-end-line="669" selection-end-column="55" />
+        <state relative-caret-position="352">
+          <caret line="409" column="46" lean-forward="false" selection-start-line="409" selection-start-column="46" selection-end-line="409" selection-end-column="46" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>

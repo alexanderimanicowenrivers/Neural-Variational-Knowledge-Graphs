@@ -407,7 +407,7 @@ class modelA:
 
             self.s_pdf=self.q_s.prob(self.mu_s)
             self.o_pdf=self.q_o.prob(self.mu_o)
-            self.r_pdf=self.q_r.prob(self.mu_r)
+            self.r_pdf=self.q_p.prob(self.mu_p)
 
     def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=False):
         global_step = tf.train.get_global_step()
