@@ -75,7 +75,7 @@ def make_prior(code_size,distribution,alt_prior):
 
 def make_latent_variables(meaninit,siginit,nb_variables,embedding_size,distribution,vtype):
     """
-                    Returns the entity embedding mean matrix
+                    Returns the mean and scale embedding matrix
     """
     
     emd_mean_name=vtype+'_mean'
@@ -133,3 +133,36 @@ def make_latent_variables(meaninit,siginit,nb_variables,embedding_size,distribut
         raise NotImplemented
 
     return embedding_mean,embedding_sigma
+
+
+def get_latent_distributions(distribution,mu_s,mu_p,mu_o,log_sigma_sq_s,log_sigma_sq_p,log_sigma_sq_o):
+    """
+                    Returns tf distributions for the generative network 
+    """
+
+    if distribution == 'normal':
+
+        # sample from mean and std of the normal distribution
+
+        q_s = tfd.MultivariateNormalDiag(mu_s, distribution_scale(log_sigma_sq_s))
+        q_p = tfd.MultivariateNormalDiag(mu_p, distribution_scale(log_sigma_sq_p))
+        q_o = tfd.MultivariateNormalDiag(mu_o, distribution_scale(log_sigma_sq_o))
+
+
+
+    elif distribution == 'vmf':
+
+        # sample from mean and concentration of the von Mises-Fisher
+
+        # '+1' used to prevent collapsing behaviors
+
+        q_s = VonMisesFisher(mu_s, distribution_scale(log_sigma_sq_s) + 1)
+        q_p = VonMisesFisher(mu_p, distribution_scale(log_sigma_sq_p) + 1)
+        q_o = VonMisesFisher(mu_o, distribution_scale(log_sigma_sq_o) + 1)
+
+
+
+    else:
+        raise NotImplemented
+
+    return q_s,q_p,q_o

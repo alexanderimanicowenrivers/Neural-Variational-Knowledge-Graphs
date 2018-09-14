@@ -127,36 +127,11 @@ class modelA:
 
         with tf.variable_scope('Inference'):
 
-            if self.distribution == 'normal':
+            self.q_s, self.q_p, self.q_o=util.get_latent_distributions(self.distribution, self.mu_s, self.mu_p,self.mu_o, self.log_sigma_sq_s, self.log_sigma_sq_p, self.log_sigma_sq_o)
 
-                # sample from mean and std of the normal distribution
-
-                self.q_s = tfd.MultivariateNormalDiag(self.mu_s, util.distribution_scale(self.log_sigma_sq_s))
-                self.q_p = tfd.MultivariateNormalDiag(self.mu_p, util.distribution_scale(self.log_sigma_sq_p))
-                self.q_o = tfd.MultivariateNormalDiag(self.mu_o, util.distribution_scale(self.log_sigma_sq_o))
-
-                self.h_s = self.q_s.sample()
-                self.h_p = self.q_p.sample()
-                self.h_o = self.q_o.sample()
-
-
-            elif self.distribution == 'vmf':
-
-                # sample from mean and concentration of the von Mises-Fisher
-
-                # '+1' used to prevent collapsing behaviors
-
-                self.q_s = VonMisesFisher(self.mu_s, util.distribution_scale(self.log_sigma_sq_s)+ 1)
-                self.q_p = VonMisesFisher(self.mu_p, util.distribution_scale(self.log_sigma_sq_p)+ 1)
-                self.q_o = VonMisesFisher(self.mu_o, util.distribution_scale(self.log_sigma_sq_o)+ 1)
-
-                self.h_s = self.q_s.sample()
-                self.h_p = self.q_p.sample()
-                self.h_o = self.q_o.sample()
-
-
-            else:
-                raise NotImplemented
+            self.h_s = self.q_s.sample()
+            self.h_p = self.q_p.sample()
+            self.h_o = self.q_o.sample()
 
 
             if self.score_func=='DistMult':
