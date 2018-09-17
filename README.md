@@ -33,8 +33,8 @@ $ python setup.py install
 ## Instructions
 
 For:
-- **Models** see [base](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/base.py)
-- **Report** see [ACR](https://github.com/acr42)
+- **Models** see [LFM](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/LFM.py) and [LCM](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/LCM.py)
+- **Paper** see [ACR](https://github.com/acr42/)
 
 -------
 
