@@ -43,7 +43,7 @@ For:
 Train variational knowledge graph model, on nations dataset with normal prior using DistMult scoring function :
 
 ```
-python mainA.py  --no_batches 10 --epsilon 1e-07 --embedding_size 50 --dataset nations --alt_prior False --lr 0.001 --score_func DistMult --negsamples 5 --projection False --distribution normal --file_name /User
+python main_LCM.py  --no_batches 10 --epsilon 1e-07 --embedding_size 50 --dataset nations --alt_prior False --lr 0.001 --score_func DistMult --negsamples 5 --projection False --distribution normal --file_name /User
 ```
 
 

@@ -11,7 +11,7 @@ import tensorflow_probability as tfp
 tfd =  tfp.distributions
 logger = logging.getLogger(__name__)
 
-class modelA:
+class LCM:
     """
            Model A (latents generated independently) 
 
@@ -74,7 +74,7 @@ class modelA:
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
         
-        self.build_modelA(self.nb_entities, self.nb_predicates, embedding_size,optimizer)
+        self.build_LCM(self.nb_entities, self.nb_predicates, embedding_size,optimizer)
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,embedding_size=embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
@@ -131,7 +131,7 @@ class modelA:
             self.p_x_i = tf.sigmoid(self.scores)
             self.p_x_i_test = tf.sigmoid(self.scores_test)
 
-    def build_modelA(self, nb_entities, nb_predicates, embedding_size, optimizer):
+    def build_LCM(self, nb_entities, nb_predicates, embedding_size, optimizer):
         """
                         Construct full computation graph for Model A
         """

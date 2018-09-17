@@ -13,7 +13,7 @@ tfd = tfp.distributions
 logger = logging.getLogger(__name__)
 
 
-class modelB:
+class LFM:
     """
            Model A (latents generated independently)
 
@@ -74,7 +74,7 @@ class modelB:
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
 
-        self.build_modelB(self.nb_entities, self.nb_predicates, embedding_size, optimizer)
+        self.build_LFM(self.nb_entities, self.nb_predicates, embedding_size, optimizer)
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,
                    embedding_size=embedding_size,
@@ -140,7 +140,7 @@ class modelB:
             self.p_x_i = tf.sigmoid(self.scores)
             self.p_x_i_test = tf.sigmoid(self.scores_test)
 
-    def build_modelB(self, nb_entities, nb_predicates, embedding_size, optimizer):
+    def build_LFM(self, nb_entities, nb_predicates, embedding_size, optimizer):
         """
                         Construct full computation graph for Model B
         """
