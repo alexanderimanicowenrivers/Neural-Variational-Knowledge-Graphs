@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="updated main file for model B">
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/ed-cli.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/vkge-cli.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/references/1511.06038.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/references/Mnih_nvil_sheffield.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/references/variational-inference-i.pdf" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mainA.py" afterPath="$PROJECT_DIR$/mainA.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mainB.py" afterPath="$PROJECT_DIR$/mainB.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -67,8 +70,8 @@
       <file leaf-file-name="mainB.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mainB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state relative-caret-position="272">
+              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -235,11 +238,6 @@
             <path>
               <item name="Neural-Variational-Knowledge-Graphs" type="b2602c69:ProjectViewProjectNode" />
               <item name="Neural-Variational-Knowledge-Graphs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Neural-Variational-Knowledge-Graphs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Neural-Variational-Knowledge-Graphs" type="462c0819:PsiDirectoryNode" />
-              <item name="vkge" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -414,13 +412,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-01009" summary="taken out mean l2 reg">
-      <created>1536695322360</created>
-      <option name="number" value="01009" />
-      <option name="presentableId" value="LOCAL-01009" />
-      <option name="project" value="LOCAL" />
-      <updated>1536695322360</updated>
     </task>
     <task id="LOCAL-01010" summary="taken out mean l2 reg">
       <created>1536695628362</created>
@@ -758,7 +749,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537190836574</updated>
     </task>
-    <option name="localTasksCounter" value="1058" />
+    <task id="LOCAL-01058" summary="updated comments on main files flags">
+      <created>1537191177389</created>
+      <option name="number" value="01058" />
+      <option name="presentableId" value="LOCAL-01058" />
+      <option name="project" value="LOCAL" />
+      <updated>1537191177389</updated>
+    </task>
+    <option name="localTasksCounter" value="1059" />
     <servers />
   </component>
   <component name="TodoView">
@@ -824,7 +822,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed projection" />
     <MESSAGE value="fixed scale function for von mises" />
     <MESSAGE value="trying distmult on mean embeddings" />
     <MESSAGE value="taken out mean l2 reg" />
@@ -849,7 +846,8 @@
     <MESSAGE value="updated code for models" />
     <MESSAGE value="updated comments for model A and B" />
     <MESSAGE value="updated main file for model B" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated main file for model B" />
+    <MESSAGE value="updated comments on main files flags" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated comments on main files flags" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1108,8 +1106,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mainB.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        <state relative-caret-position="272">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
         </state>
       </provider>
