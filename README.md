@@ -2,7 +2,7 @@
 
 ## Overview
 
-This library contains a Tensorflow implementation of the Laten Fact Model and Latent Information model for Gaussian and Von-Mises Fisher latent priors, using the re-parametrisation trick to learn the distributional parameters. The VMF re-parametrisation trick is as presented in [[1]](#citation)(http://arxiv.org/abs/1804.00891). Check out the authors of VMF blogpost (https://nicola-decao.github.io/s-vae). Whereas the Gaussian re-parametrisation trick is a Tensorflow probability function.
+This library contains a Tensorflow implementation of the Laten Fact Model and Latent Information model for Gaussian and Von-Mises Fisher latent priors, using the re-parametrisation trick to learn the distributional parameters. The VMF re-parametrisation trick is as presented in [[1]](#citation)(http://arxiv.org/abs/1804.00891). Check out the authors of VMF blogpost (https://nicola-decao.github.io/s-vae). The Gaussian re-parametrisation trick is a Tensorflow probability function.
 
 -------
 
