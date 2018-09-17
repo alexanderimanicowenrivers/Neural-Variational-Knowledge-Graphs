@@ -74,12 +74,12 @@ class modelA:
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
         
-        self.build_model(self.nb_entities, self.nb_predicates, embedding_size,optimizer)
+        self.build_modelA(self.nb_entities, self.nb_predicates, embedding_size,optimizer)
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,embedding_size=embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
         
-    def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer, l2=0.0, clip_op=None, clip=False):
+    def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer):
         global_step = tf.train.get_global_step()
         if global_step is None:
             global_step = tf.train.create_global_step()
@@ -131,14 +131,14 @@ class modelA:
             self.p_x_i = tf.sigmoid(self.scores)
             self.p_x_i_test = tf.sigmoid(self.scores_test)
 
-    def build_model(self, nb_entities, nb_predicates, embedding_size, optimizer):
+    def build_modelA(self, nb_entities, nb_predicates, embedding_size, optimizer):
         """
                         Construct full computation graph
         """
-        
+
         ############## placeholders
-        
-        self.noise = tf.placeholder(tf.float32, shape=[None,embedding_size])
+
+        self.noise = tf.placeholder(tf.float32, shape=[None, embedding_size])
         self.idx_pos = tf.placeholder(tf.int32, shape=[None])
         self.idx_neg = tf.placeholder(tf.int32, shape=[None])
 
@@ -158,7 +158,7 @@ class modelA:
         ############## ##############
         ##############  #Loss
         ############## ##############
-        
+
         self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
         self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
 
@@ -171,10 +171,9 @@ class modelA:
             tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
         self.reconstruction_loss_n = -tf.reduce_sum((
             tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
-        self.nreconstruction_loss = self.reconstruction_loss_p + self.reconstruction_loss_n*self.ELBOBS  #if reduce sum
+        self.nreconstruction_loss = self.reconstruction_loss_p + self.reconstruction_loss_n * self.ELBOBS  # if reduce sum
 
-
-        prior = util.make_prior(code_size=embedding_size,distribution=self.distribution,alt_prior=self.alt_prior)
+        prior = util.make_prior(code_size=embedding_size, distribution=self.distribution, alt_prior=self.alt_prior)
 
         if self.distribution == 'normal':
             # KL divergence between normal approximate posterior and prior
@@ -189,8 +188,10 @@ class modelA:
         elif self.distribution == 'vmf':
             # KL divergence between vMF approximate posterior and uniform hyper-spherical prior
 
-            entity_posterior = VonMisesFisher(self.entity_embedding_mean, util.distribution_scale(self.entity_embedding_sigma) + 1)
-            predicate_posterior = VonMisesFisher(self.predicate_embedding_mean, util.distribution_scale(self.predicate_embedding_sigma) + 1)
+            entity_posterior = VonMisesFisher(self.entity_embedding_mean,
+                                              util.distribution_scale(self.entity_embedding_sigma) + 1)
+            predicate_posterior = VonMisesFisher(self.predicate_embedding_mean,
+                                                 util.distribution_scale(self.predicate_embedding_sigma) + 1)
             kl1 = entity_posterior.kl_divergence(prior)
             kl2 = predicate_posterior.kl_divergence(prior)
             self.kl1 = tf.reduce_sum(kl1)
@@ -199,14 +200,13 @@ class modelA:
         else:
             raise NotImplemented
 
-
-        self.nkl = (self.kl1+self.kl2)* self.KL_discount
+        self.nkl = (self.kl1 + self.kl2) * self.KL_discount
 
         # Negative ELBO
 
-        self.nelbo= self.nkl+self.nreconstruction_loss
+        self.nelbo = self.nkl + self.nreconstruction_loss
 
-        self._setup_training(loss=self.nelbo,optimizer=optimizer)
+        self._setup_training(loss=self.nelbo, optimizer=optimizer)
 
     def train(self, test_triples, valid_triples, train_triples, embedding_size,no_batches, nb_epochs=500,
               filename='/home/'):
