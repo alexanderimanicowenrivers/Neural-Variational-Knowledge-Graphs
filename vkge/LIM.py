@@ -374,3 +374,147 @@ class LIM:
                             for k in [1, 3, 5, 10]:
                                 hits_at_k = np.mean(np.asarray(setting_ranks) <= k) * 100
                                 logger.warning('[{}] {} Hits@{}: {}'.format(eval_name, setting_name, k, hits_at_k))
+
+
+class LFM(LIM):
+    """
+           Latent Fact Model
+
+        Initializes and trains Link Prediction Model.
+
+        @param file_name: The TensorBoard file_name.
+        @param embedding_size: The embedding_size for entities and predicates
+        @param no_batches: The number of batches per epoch
+        @param lr: The learning rate
+        @param eps: The epsilon value for ADAM optimiser
+        @param distribution: The prior distribution we assume generates the data
+        @param dataset: The dataset which the model is trained on
+        @param projection: Determines if variance embeddings constrained to sum to unit variance.
+        @param alt_prior: Determines whether a normal or specific Gaussian prior is used.
+
+        @type file_name: str: '/home/workspace/acowenri/tboard'
+        @type embedding_size: int
+        @type no_batches: int
+        @type lr: float
+        @type eps: float
+        @type distribution: str
+        @type dataset: str
+        @type projection: bool
+        @type alt_prior: bool
+
+            """
+
+    def __init__(self, file_name, score_func='DistMult', embedding_size=200, no_batches=10, distribution='normal',
+                 epsilon=1e-3, negsamples=5, dataset='wn18', lr=0.001, alt_prior=False, projection=False):
+
+        LIM.__init__(self, file_name, score_func, embedding_size, no_batches, distribution,
+                     epsilon, negsamples, dataset, lr, alt_prior, projection)
+
+        optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
+
+        ##### dataset  ######
+        self.dataset_name = dataset
+        logger.warning('Parsing the facts in the Knowledge Base for Dataset {}..'.format(self.dataset_name))
+        train_triples = util.read_triples("data/{}/train.tsv".format(self.dataset_name))  # choose dataset
+        valid_triples = util.read_triples("data/{}/dev.tsv".format(self.dataset_name))
+        test_triples = util.read_triples("data/{}/test.tsv".format(self.dataset_name))
+
+
+        ##############
+        self.build_LFM(self.nb_entities, self.nb_predicates, embedding_size, optimizer)
+
+        self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,
+                   embedding_size=embedding_size,
+                   train_triples=train_triples, no_batches=int(no_batches), filename=str(file_name))
+
+
+    def build_LFM(self, nb_entities, nb_predicates, embedding_size, optimizer):
+        """
+                        Construct full computation graph for Latent Fact Model
+        """
+
+        self.build_encoder(nb_entities, nb_predicates, embedding_size)
+        self.build_decoder()
+
+        ############## ##############
+        ##############  #Loss
+        ############## ##############
+
+        self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
+        self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
+
+        self.p_x_i_pos = tf.gather(self.p_x_i, self.idx_pos)
+        self.p_x_i_neg = tf.gather(self.p_x_i, self.idx_neg)
+
+        # Negative reconstruction loss
+
+        self.reconstruction_loss_p = -tf.reduce_sum(
+            tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
+        self.reconstruction_loss_n = -tf.reduce_sum((
+            tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
+
+        ################
+
+        # KL
+
+        self.mu_s_ps = tf.gather(self.mu_s, self.idx_pos, axis=0)
+        self.mu_o_ps = tf.gather(self.mu_o, self.idx_pos, axis=0)
+        self.mu_p_ps = tf.gather(self.mu_p, self.idx_pos, axis=0)
+        #
+        self.log_sigma_sq_s_ps = tf.gather(self.log_sigma_sq_s, self.idx_pos, axis=0)
+        self.log_sigma_sq_o_ps = tf.gather(self.log_sigma_sq_o, self.idx_pos, axis=0)
+        self.log_sigma_sq_p_ps = tf.gather(self.log_sigma_sq_p, self.idx_pos, axis=0)
+
+        self.mu_all_ps = tf.concat(axis=0, values=[self.mu_s_ps, self.mu_o_ps, self.mu_p_ps])
+        self.log_sigma_ps = tf.concat(axis=0,
+                                      values=[self.log_sigma_sq_s_ps, self.log_sigma_sq_o_ps, self.log_sigma_sq_p_ps])
+        #
+
+        # negative samples
+
+        self.mu_s_ns = tf.gather(self.mu_s, self.idx_neg, axis=0)
+        self.mu_o_ns = tf.gather(self.mu_o, self.idx_neg, axis=0)
+        self.mu_p_ns = tf.gather(self.mu_p, self.idx_neg, axis=0)
+        #
+        self.log_sigma_sq_s_ns = tf.gather(self.log_sigma_sq_s, self.idx_neg, axis=0)
+        self.log_sigma_sq_o_ns = tf.gather(self.log_sigma_sq_o, self.idx_neg, axis=0)
+        self.log_sigma_sq_p_ns = tf.gather(self.log_sigma_sq_p, self.idx_neg, axis=0)
+
+        self.mu_all_ns = tf.concat(axis=0, values=[self.mu_s_ns, self.mu_o_ns, self.mu_p_ns])
+        self.log_sigma_ns = tf.concat(axis=0,
+                                      values=[self.log_sigma_sq_s_ns, self.log_sigma_sq_o_ns, self.log_sigma_sq_p_ns])
+        #
+
+
+
+        prior = util.make_prior(code_size=embedding_size, distribution=self.distribution, alt_prior=self.alt_prior)
+
+        if self.distribution == 'normal':
+            # KL divergence between normal approximate posterior and prior
+
+            pos_posterior = tfd.MultivariateNormalDiag(self.mu_all_ps, util.distribution_scale(self.log_sigma_ps))
+            neg_posterior = tfd.MultivariateNormalDiag(self.mu_all_ns, util.distribution_scale(self.log_sigma_ns))
+
+            self.kl1 = tf.reduce_sum(tfd.kl_divergence(pos_posterior, prior))
+            self.kl2 = tf.reduce_sum(tfd.kl_divergence(neg_posterior, prior))
+
+        elif self.distribution == 'vmf':
+            # KL divergence between vMF approximate posterior and uniform hyper-spherical prior
+
+            pos_posterior = VonMisesFisher(self.mu_all_ps, util.distribution_scale(self.log_sigma_ps) + 1)
+            neg_posterior = VonMisesFisher(self.mu_all_ns, util.distribution_scale(self.log_sigma_ns) + 1)
+            kl1 = pos_posterior.kl_divergence(prior)
+            kl2 = neg_posterior.kl_divergence(prior)
+            self.kl1 = tf.reduce_sum(kl1)
+            self.kl2 = tf.reduce_sum(kl2)
+
+        else:
+            raise NotImplemented
+
+        self.nkl = (self.kl1 + self.kl2) * self.KL_discount
+
+        # Negative ELBO
+
+        self.nelbo = (self.reconstruction_loss_p + self.kl1 * self.KL_discount) + (
+                                                                                      self.reconstruction_loss_n + self.kl2 * self.KL_discount) * self.ELBOBS
+        self._setup_training(loss=self.nelbo, optimizer=optimizer)
