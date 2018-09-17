@@ -142,7 +142,7 @@ class modelB:
 
     def build_modelB(self, nb_entities, nb_predicates, embedding_size, optimizer):
         """
-                        Construct full computation graph
+                        Construct full computation graph for Model B
         """
 
         ############## placeholders
