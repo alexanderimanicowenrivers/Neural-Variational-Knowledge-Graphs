@@ -33,7 +33,7 @@ $ python setup.py install
 ## Instructions
 
 For:
-- **Models** see [Latent Fact Model](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/LFM.py) and [Latent Information Model](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/LCM.py)
+- **Models** see [Latent Fact Model](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/LFM.py) and [Latent Information Model](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/LIM.py)
 - **Paper** see [ACR](https://github.com/acr42/)
 
 -------

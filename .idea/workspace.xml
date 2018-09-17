@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/main_LCM.py" afterPath="$PROJECT_DIR$/main_LIM.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/vkge/LCM.py" afterPath="$PROJECT_DIR$/vkge/LIM.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/__init__.py" afterPath="$PROJECT_DIR$/vkge/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,7 +17,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LIM.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LIM.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/LIM.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1500">
@@ -67,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="35" column="107" lean-forward="false" selection-start-line="35" selection-start-column="107" selection-end-line="35" selection-end-column="107" />
+            <state relative-caret-position="525">
+              <caret line="35" column="234" lean-forward="false" selection-start-line="35" selection-start-column="234" selection-end-line="35" selection-end-column="234" />
               <folding />
             </state>
           </provider>
@@ -126,8 +124,8 @@
       <find>entity_posterior</find>
       <find>predicate_posterior</find>
       <find>LCM</find>
-      <find>Component</find>
       <find>modelA</find>
+      <find>Component</find>
     </findStrings>
     <replaceStrings>
       <replace>logger.warn</replace>
@@ -158,8 +156,8 @@
       <replace>pos_posterior</replace>
       <replace>neg_posterior</replace>
       <replace>LIM</replace>
-      <replace>Information</replace>
       <replace>LCM</replace>
+      <replace>Information</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -215,11 +213,11 @@
         <option value="$PROJECT_DIR$/mainA.py" />
         <option value="$PROJECT_DIR$/mainB.py" />
         <option value="$PROJECT_DIR$/vkge/baseB.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/vkge/LFM.py" />
         <option value="$PROJECT_DIR$/main_LCM.py" />
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
         <option value="$PROJECT_DIR$/vkge/LCM.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -472,20 +470,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-01016" summary="5 samples 100 epochs with adam and MLE">
-      <created>1536696525285</created>
-      <option name="number" value="01016" />
-      <option name="presentableId" value="LOCAL-01016" />
-      <option name="project" value="LOCAL" />
-      <updated>1536696525285</updated>
-    </task>
-    <task id="LOCAL-01017" summary="5 samples 100 epochs with adam and MLE">
-      <created>1536696597525</created>
-      <option name="number" value="01017" />
-      <option name="presentableId" value="LOCAL-01017" />
-      <option name="project" value="LOCAL" />
-      <updated>1536696597525</updated>
     </task>
     <task id="LOCAL-01018" summary="5 samples 100 epochs with adam and MLE">
       <created>1536696609165</created>
@@ -816,7 +800,21 @@
       <option name="project" value="LOCAL" />
       <updated>1537193200439</updated>
     </task>
-    <option name="localTasksCounter" value="1065" />
+    <task id="LOCAL-01065" summary="updated model name from Latent Component Model to Latent Information Model">
+      <created>1537202042861</created>
+      <option name="number" value="01065" />
+      <option name="presentableId" value="LOCAL-01065" />
+      <option name="project" value="LOCAL" />
+      <updated>1537202042862</updated>
+    </task>
+    <task id="LOCAL-01066" summary="updated model name from Latent Component Model to Latent Information Model">
+      <created>1537202101804</created>
+      <option name="number" value="01066" />
+      <option name="presentableId" value="LOCAL-01066" />
+      <option name="project" value="LOCAL" />
+      <updated>1537202101807</updated>
+    </task>
+    <option name="localTasksCounter" value="1067" />
     <servers />
   </component>
   <component name="TodoView">
@@ -852,6 +850,9 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.md" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -882,7 +883,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed baseline" />
     <MESSAGE value="redo tests on WN18" />
     <MESSAGE value="added in predictive uncertainity estimates" />
     <MESSAGE value="fixed bug in predictive unct estimates" />
@@ -907,7 +907,8 @@
     <MESSAGE value="renamed models" />
     <MESSAGE value="updated readme file" />
     <MESSAGE value="updated comments in python files to match new names" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated comments in python files to match new names" />
+    <MESSAGE value="updated model name from Latent Component Model to Latent Information Model" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated model name from Latent Component Model to Latent Information Model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1139,14 +1140,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="35" column="107" lean-forward="false" selection-start-line="35" selection-start-column="107" selection-end-line="35" selection-end-column="107" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main_LIM.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -1172,6 +1165,14 @@
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="234" lean-forward="false" selection-start-line="35" selection-start-column="234" selection-end-line="35" selection-end-column="234" />
+          <folding />
         </state>
       </provider>
     </entry>
