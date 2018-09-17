@@ -71,8 +71,21 @@ class LIM:
         self.entity_to_idx = {entity: idx for idx, entity in enumerate(sorted(entity_set))}
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
-        ############################
 
+        ############## placeholders
+
+        self.idx_pos = tf.placeholder(tf.int32, shape=[None])
+        self.idx_neg = tf.placeholder(tf.int32, shape=[None])
+
+        self.no_samples = tf.placeholder(tf.int32)
+        self.s_inputs = tf.placeholder(tf.int32, shape=[None])
+        self.p_inputs = tf.placeholder(tf.int32, shape=[None])
+        self.o_inputs = tf.placeholder(tf.int32, shape=[None])
+        self.y_inputs = tf.placeholder(tf.bool, shape=[None])
+        self.KL_discount = tf.placeholder(tf.float32)
+        self.ELBOBS = tf.placeholder(tf.float32)
+
+        ##############
         self.build_LIM(self.nb_entities, self.nb_predicates, embedding_size,optimizer)
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,embedding_size=embedding_size,
@@ -134,22 +147,6 @@ class LIM:
         """
                         Construct full computation graph for Latent Information Model
         """
-
-        ############## placeholders
-
-        self.noise = tf.placeholder(tf.float32, shape=[None, embedding_size])
-        self.idx_pos = tf.placeholder(tf.int32, shape=[None])
-        self.idx_neg = tf.placeholder(tf.int32, shape=[None])
-
-        self.no_samples = tf.placeholder(tf.int32)
-        self.s_inputs = tf.placeholder(tf.int32, shape=[None])
-        self.p_inputs = tf.placeholder(tf.int32, shape=[None])
-        self.o_inputs = tf.placeholder(tf.int32, shape=[None])
-        self.y_inputs = tf.placeholder(tf.bool, shape=[None])
-        self.KL_discount = tf.placeholder(tf.float32)
-        self.ELBOBS = tf.placeholder(tf.float32)
-
-        ##############
 
         self.build_encoder(nb_entities, nb_predicates, embedding_size)
         self.build_decoder()

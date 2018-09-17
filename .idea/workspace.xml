@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/LFM.py" afterPath="$PROJECT_DIR$/vkge/LFM.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vkge/LIM.py" afterPath="$PROJECT_DIR$/vkge/LIM.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +21,8 @@
       <file leaf-file-name="LIM.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vkge/LIM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1500">
-              <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+            <state relative-caret-position="472">
+              <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -29,48 +30,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LFM.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LFM.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vkge/LFM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="143" column="78" lean-forward="false" selection-start-line="143" selection-start-column="78" selection-end-line="143" selection-end-column="78" />
+            <state relative-caret-position="455">
+              <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="249" column="11" lean-forward="false" selection-start-line="249" selection-start-column="11" selection-end-line="249" selection-end-column="11" />
-              <folding>
-                <element signature="e#25#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vkge/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding>
-                <element signature="e#24#48#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="35" column="234" lean-forward="false" selection-start-line="35" selection-start-column="234" selection-end-line="35" selection-end-column="234" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -96,7 +63,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>alt_cost</find>
       <find>alt_test</find>
       <find>make_prior</find>
       <find>dty</find>
@@ -125,6 +91,7 @@
       <find>predicate_posterior</find>
       <find>LCM</find>
       <find>modelA</find>
+      <find>noise</find>
       <find>Component</find>
     </findStrings>
     <replaceStrings>
@@ -167,7 +134,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/script_test_variance.py" />
         <option value="$PROJECT_DIR$/script_test_thresh.py" />
         <option value="$PROJECT_DIR$/vkge/not_working.py" />
         <option value="$PROJECT_DIR$/vkge/baseviz.py" />
@@ -213,11 +179,12 @@
         <option value="$PROJECT_DIR$/mainA.py" />
         <option value="$PROJECT_DIR$/mainB.py" />
         <option value="$PROJECT_DIR$/vkge/baseB.py" />
-        <option value="$PROJECT_DIR$/vkge/LFM.py" />
         <option value="$PROJECT_DIR$/main_LCM.py" />
         <option value="$PROJECT_DIR$/vkge/__init__.py" />
         <option value="$PROJECT_DIR$/vkge/LCM.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/vkge/LFM.py" />
+        <option value="$PROJECT_DIR$/vkge/LIM.py" />
       </list>
     </option>
   </component>
@@ -470,13 +437,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
-    </task>
-    <task id="LOCAL-01018" summary="5 samples 100 epochs with adam and MLE">
-      <created>1536696609165</created>
-      <option name="number" value="01018" />
-      <option name="presentableId" value="LOCAL-01018" />
-      <option name="project" value="LOCAL" />
-      <updated>1536696609165</updated>
     </task>
     <task id="LOCAL-01019" summary="5 samples 100 epochs with adam and MLE">
       <created>1536696681970</created>
@@ -814,7 +774,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537202101807</updated>
     </task>
-    <option name="localTasksCounter" value="1067" />
+    <task id="LOCAL-01067" summary="fixed readme macros">
+      <created>1537202140853</created>
+      <option name="number" value="01067" />
+      <option name="presentableId" value="LOCAL-01067" />
+      <option name="project" value="LOCAL" />
+      <updated>1537202140853</updated>
+    </task>
+    <option name="localTasksCounter" value="1068" />
     <servers />
   </component>
   <component name="TodoView">
@@ -883,7 +850,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="redo tests on WN18" />
     <MESSAGE value="added in predictive uncertainity estimates" />
     <MESSAGE value="fixed bug in predictive unct estimates" />
     <MESSAGE value="fixed feeddict in uncertainty estms" />
@@ -908,7 +874,8 @@
     <MESSAGE value="updated readme file" />
     <MESSAGE value="updated comments in python files to match new names" />
     <MESSAGE value="updated model name from Latent Component Model to Latent Information Model" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated model name from Latent Component Model to Latent Information Model" />
+    <MESSAGE value="fixed readme macros" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed readme macros" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1112,16 +1079,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="249" column="11" lean-forward="false" selection-start-line="249" selection-start-column="11" selection-end-line="249" selection-end-column="11" />
-          <folding>
-            <element signature="e#25#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -1130,20 +1087,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/LFM.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="143" column="78" lean-forward="false" selection-start-line="143" selection-start-column="78" selection-end-line="143" selection-end-column="78" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main_LIM.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="28" column="12" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="234" lean-forward="false" selection-start-line="35" selection-start-column="234" selection-end-line="35" selection-end-column="234" />
           <folding />
         </state>
       </provider>
@@ -1158,21 +1113,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="249" column="11" lean-forward="false" selection-start-line="249" selection-start-column="11" selection-end-line="249" selection-end-column="11" />
+          <folding>
+            <element signature="e#25#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vkge/LIM.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1500">
-          <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+        <state relative-caret-position="472">
+          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/vkge/LFM.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="234" lean-forward="false" selection-start-line="35" selection-start-column="234" selection-end-line="35" selection-end-column="234" />
-          <folding />
+        <state relative-caret-position="455">
+          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
