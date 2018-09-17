@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/ed-cli.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/vkge-cli.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/references/1511.06038.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/references/Mnih_nvil_sheffield.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/references/variational-inference-i.pdf" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/scriptA.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/scriptB.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/script_baseline.py" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -70,8 +68,8 @@
       <file leaf-file-name="mainB.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mainB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="197">
+              <caret line="20" column="30" lean-forward="false" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -413,13 +411,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491597755739</updated>
     </task>
-    <task id="LOCAL-01010" summary="taken out mean l2 reg">
-      <created>1536695628362</created>
-      <option name="number" value="01010" />
-      <option name="presentableId" value="LOCAL-01010" />
-      <option name="project" value="LOCAL" />
-      <updated>1536695628362</updated>
-    </task>
     <task id="LOCAL-01011" summary="5 samples 100 epochs">
       <created>1536695641061</created>
       <option name="number" value="01011" />
@@ -756,7 +747,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537191177389</updated>
     </task>
-    <option name="localTasksCounter" value="1059" />
+    <task id="LOCAL-01059" summary="updated folder organisation">
+      <created>1537191430401</created>
+      <option name="number" value="01059" />
+      <option name="presentableId" value="LOCAL-01059" />
+      <option name="project" value="LOCAL" />
+      <updated>1537191430401</updated>
+    </task>
+    <option name="localTasksCounter" value="1060" />
     <servers />
   </component>
   <component name="TodoView">
@@ -822,7 +820,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed scale function for von mises" />
     <MESSAGE value="trying distmult on mean embeddings" />
     <MESSAGE value="taken out mean l2 reg" />
     <MESSAGE value="5 samples 100 epochs" />
@@ -847,7 +844,8 @@
     <MESSAGE value="updated comments for model A and B" />
     <MESSAGE value="updated main file for model B" />
     <MESSAGE value="updated comments on main files flags" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated comments on main files flags" />
+    <MESSAGE value="updated folder organisation" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated folder organisation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1106,8 +1104,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mainB.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="197">
+          <caret line="20" column="30" lean-forward="false" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
           <folding />
         </state>
       </provider>
