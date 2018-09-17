@@ -11,21 +11,21 @@ import tensorflow_probability as tfp
 tfd =  tfp.distributions
 logger = logging.getLogger(__name__)
 
-class LCM:
+class LIM:
     """
-           Latent Component Model
-            
+           Latent Information Model
+
         Initializes and trains Link Prediction Model.
 
         @param file_name: The TensorBoard file_name.
         @param embedding_size: The embedding_size for entities and predicates
-        @param no_batches: The number of batches per epoch 
+        @param no_batches: The number of batches per epoch
         @param lr: The learning rate
         @param eps: The epsilon value for ADAM optimiser
-        @param distribution: The prior distribution we assume generates the data 
+        @param distribution: The prior distribution we assume generates the data
         @param dataset: The dataset which the model is trained on
-        @param projection: Determines if variance embeddings constrained to sum to unit variance. 
-        @param alt_prior: Determines whether a normal or specific Gaussian prior is used. 
+        @param projection: Determines if variance embeddings constrained to sum to unit variance.
+        @param alt_prior: Determines whether a normal or specific Gaussian prior is used.
 
         @type file_name: str: '/home/workspace/acowenri/tboard'
         @type embedding_size: int
@@ -43,7 +43,7 @@ class LCM:
                  epsilon=1e-3,negsamples=5, dataset='wn18', lr=0.001, alt_prior=False, projection=False):
 
 
-        
+
         self.nb_epochs = 500
 
         seed=np.random.randint(100,size=1)[0]
@@ -72,12 +72,12 @@ class LCM:
         self.predicate_to_idx = {predicate: idx for idx, predicate in enumerate(sorted(predicate_set))}
         self.nb_entities, self.nb_predicates = len(entity_set), len(predicate_set)
         ############################
-        
-        self.build_LCM(self.nb_entities, self.nb_predicates, embedding_size,optimizer)
+
+        self.build_LIM(self.nb_entities, self.nb_predicates, embedding_size,optimizer)
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,embedding_size=embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches)  , filename=str(file_name))
-        
+
     def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer):
         global_step = tf.train.get_global_step()
         if global_step is None:
@@ -130,9 +130,9 @@ class LCM:
             self.p_x_i = tf.sigmoid(self.scores)
             self.p_x_i_test = tf.sigmoid(self.scores_test)
 
-    def build_LCM(self, nb_entities, nb_predicates, embedding_size, optimizer):
+    def build_LIM(self, nb_entities, nb_predicates, embedding_size, optimizer):
         """
-                        Construct full computation graph for Latent Component Model
+                        Construct full computation graph for Latent Information Model
         """
 
         ############## placeholders
