@@ -15,8 +15,7 @@ logger = logging.getLogger(__name__)
 
 class LFM:
     """
-           Model A (latents generated independently)
-
+           Latent Fact Model
 
         Initializes and trains Link Prediction Model.
 
@@ -142,7 +141,7 @@ class LFM:
 
     def build_LFM(self, nb_entities, nb_predicates, embedding_size, optimizer):
         """
-                        Construct full computation graph for Model B
+                        Construct full computation graph for Latent Fact Model
         """
 
         ############## placeholders

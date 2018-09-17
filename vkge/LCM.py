@@ -13,8 +13,7 @@ logger = logging.getLogger(__name__)
 
 class LCM:
     """
-           Model A (latents generated independently) 
-
+           Latent Component Model
             
         Initializes and trains Link Prediction Model.
 
@@ -133,7 +132,7 @@ class LCM:
 
     def build_LCM(self, nb_entities, nb_predicates, embedding_size, optimizer):
         """
-                        Construct full computation graph for Model A
+                        Construct full computation graph for Latent Component Model
         """
 
         ############## placeholders
