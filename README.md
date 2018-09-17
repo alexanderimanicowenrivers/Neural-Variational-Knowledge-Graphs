@@ -1,7 +1,5 @@
 # Neural-Variational-Knowledge-Graphs
 
-This library contains a Tensorflow implementation of Neural Variational Knoweldge Grapphs: able to learn embeddings with a hyperspherical prior through the von-Mises distribution as well as a Gaussian prior. 
-
 ## Dependencies
 
 * **python>=3.6**
@@ -20,12 +18,6 @@ $ python setup.py install
 
 ## Structure
 
-- ([Data](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/tree/master/data)): Contains six datasets fb15k-237, kinship, nations, umls, wn18 and wn18rr.
-
-- ([vkge](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/tree/master/vkge)): Contains the files needed to create the Latent Fact Model and Latent Component Model with a Gaussian prior.  
-
-- ([hyperspherical_vae](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/tree/master/hyperspherical_vae)): Contains the files needed to sample from the von-mises distribution so as to allow gradients to propogate through the parameters for the Latent Fact Model and Latent Component Model. This work was presented in [[1]](#citation)(http://arxiv.org/abs/1804.00891). Check out the authors blogpost (https://nicola-decao.github.io/s-vae).
-
 -------
 ## CONTRIBUTERS:
 
@@ -41,7 +33,7 @@ $ python setup.py install
 ## Instructions
 
 For:
-- **Models** see [LFM](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/LFM.py) and [LCM](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/LCM.py)
+- **Models** see [Latent Fact Model](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/LFM.py) and [Latent Information Model](https://github.com/acr42/Neural-Variational-Knowledge-Graphs/blob/master/vkge/LCM.py)
 - **Paper** see [ACR](https://github.com/acr42/)
 
 -------
@@ -51,7 +43,7 @@ For:
 Train variational knowledge graph model, on nations dataset with normal prior using DistMult scoring function :
 
 ```
-python main_LCM.py  --no_batches 10 --epsilon 1e-07 --embedding_size 50 --dataset nations --alt_prior False --lr 0.001 --score_func DistMult --negsamples 5 --projection False --distribution normal --file_name /User
+python main_LIM.py  --no_batches 10 --epsilon 1e-07 --embedding_size 50 --dataset nations --alt_prior False --lr 0.001 --score_func DistMult --negsamples 5 --projection False --distribution normal --file_name /User
 ```
 
 
@@ -61,6 +53,8 @@ python main_LCM.py  --no_batches 10 --epsilon 1e-07 --embedding_size 50 --datase
 
 1. Clone or download this repository.
 2. Prepare your data, or use any of the six included KG datasets.
+
+## Usage
 
 Please cite [[1](#citation)] and [[2](#citation)] in your work when using this library in your experiments.
 
