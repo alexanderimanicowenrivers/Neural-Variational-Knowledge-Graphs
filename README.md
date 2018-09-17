@@ -1,5 +1,13 @@
 # Neural-Variational-Knowledge-Graphs
 
+## Overview
+
+This library contains a Tensorflow implementation of the Laten Fact Model and Latent Information model for Gaussian and Von-Mises Fisher latent priors, using the re-parametrisation trick to learn the distributional parameters. The VMF re-parametrisation trick is as presented in [[1]](#citation)(http://arxiv.org/abs/1804.00891). Check out the authors of VMF blogpost (https://nicola-decao.github.io/s-vae). The Gaussian re-parametrisation trick is a Tensorflow probability function.
+
+-------
+
+![From paper](https://imgur.com/Q5lDKmC.png)
+
 ## Dependencies
 
 * **python>=3.6**
@@ -45,8 +53,6 @@ Train variational knowledge graph model, on nations dataset with normal prior us
 ```
 python main_LIM.py  --no_batches 10 --epsilon 1e-07 --embedding_size 50 --dataset nations --alt_prior False --lr 0.001 --score_func DistMult --negsamples 5 --projection False --distribution normal --file_name /User
 ```
-
-
 -------
 
 ## Usage
