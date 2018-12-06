@@ -6,7 +6,6 @@ import tensorflow as tf
 from vkge.training import constraints, index
 from vkge.training import util as util
 import logging
-from hyperspherical_vae.distributions import VonMisesFisher
 import tensorflow_probability as tfp
 
 tfd = tfp.distributions
@@ -222,15 +221,15 @@ class LFM:
             self.kl1 = tf.reduce_sum(tfd.kl_divergence(pos_posterior, prior))
             self.kl2 = tf.reduce_sum(tfd.kl_divergence(neg_posterior, prior))
 
-        elif self.distribution == 'vmf':
-            # KL divergence between vMF approximate posterior and uniform hyper-spherical prior
-
-            pos_posterior = VonMisesFisher(self.mu_all_ps, util.distribution_scale(self.log_sigma_ps) + 1)
-            neg_posterior = VonMisesFisher(self.mu_all_ns, util.distribution_scale(self.log_sigma_ns) + 1)
-            kl1 = pos_posterior.kl_divergence(prior)
-            kl2 = neg_posterior.kl_divergence(prior)
-            self.kl1 = tf.reduce_sum(kl1)
-            self.kl2 = tf.reduce_sum(kl2)
+        # elif self.distribution == 'vmf':
+        #     # KL divergence between vMF approximate posterior and uniform hyper-spherical prior
+        #
+        #     pos_posterior = VonMisesFisher(self.mu_all_ps, util.distribution_scale(self.log_sigma_ps) + 1)
+        #     neg_posterior = VonMisesFisher(self.mu_all_ns, util.distribution_scale(self.log_sigma_ns) + 1)
+        #     kl1 = pos_posterior.kl_divergence(prior)
+        #     kl2 = neg_posterior.kl_divergence(prior)
+        #     self.kl1 = tf.reduce_sum(kl1)
+        #     self.kl2 = tf.reduce_sum(kl2)
 
         else:
             raise NotImplemented

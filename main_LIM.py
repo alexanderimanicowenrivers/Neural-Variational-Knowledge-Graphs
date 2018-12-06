@@ -2,9 +2,7 @@
 
 import tensorflow as tf
 import vkge
-from hyperspherical_vae.distributions import VonMisesFisher
-from hyperspherical_vae.distributions import HypersphericalUniform
-#
+
 import logging
 
 logger = logging.getLogger(__name__)
