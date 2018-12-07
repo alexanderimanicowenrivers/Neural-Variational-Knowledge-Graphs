@@ -2,20 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="fixed import of LIM">
-      <change afterPath="$PROJECT_DIR$/.idea/Neural-Variational-Knowledge-Graphs.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyperspherical_vae/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyperspherical_vae/distributions/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyperspherical_vae/distributions/hyperspherical_uniform.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyperspherical_vae/distributions/von_mises_fisher.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyperspherical_vae/ops/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyperspherical_vae/ops/ive.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_LFM.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_LFM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_LIM.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_LIM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vkge/LFM.py" beforeDir="false" afterPath="$PROJECT_DIR$/vkge/LFM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vkge/LIM.py" beforeDir="false" afterPath="$PROJECT_DIR$/vkge/LIM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_LFM.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_LIM.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_baseline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vkge/LFM.py" beforeDir="false" afterPath="$PROJECT_DIR$/vkge/baseline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vkge/LIM.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vkge/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/vkge/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vkge/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/vkge/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vkge/models/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/vkge/models/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vkge/training/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/vkge/training/util.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,6 +49,34 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="1641120516">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="1553" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="1553" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="21" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="21" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FavoritesManager">
     <favorites_list name="variational-knowledge-embeddings" />
@@ -61,55 +84,62 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vkge/LIM.py">
+        <entry file="file://$PROJECT_DIR$/vkge/quaternator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7500">
-              <caret line="500" column="11" selection-start-line="500" selection-start-column="11" selection-end-line="500" selection-end-column="11" />
+            <state relative-caret-position="155">
+              <caret line="45" column="68" selection-start-line="45" selection-start-column="64" selection-end-line="45" selection-end-column="68" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vkge/models/base.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="116" column="8" lean-forward="true" selection-start-line="116" selection-start-column="8" selection-end-line="116" selection-end-column="8" />
+              <folding>
+                <element signature="e#25#35#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main_LFM.py">
+        <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vkge/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="4">
+              <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
               <folding>
-                <element signature="e#24#48#0" expanded="true" />
+                <element signature="e#25#48#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vkge/LFM.py">
+        <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="227" column="33" selection-start-line="227" selection-start-column="30" selection-end-line="227" selection-end-column="33" />
+            <state relative-caret-position="212">
+              <caret line="43" column="53" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
+                <marker date="1544189093012" expanded="true" signature="6184:6193" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main_LIM.py">
+        <entry file="file://$PROJECT_DIR$/main_baseline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="212">
+              <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+              <folding>
+                <element signature="e#25#48#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -135,28 +165,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>make_prior</find>
-      <find>dty</find>
-      <find>z_var</find>
-      <find>self.print</find>
-      <find>VonMisesFisher</find>
-      <find>mean_c</find>
-      <find>negsamples</find>
-      <find>make_bat</find>
-      <find>make_pr</find>
-      <find>nb_entities</find>
-      <find>entity_embedding_size</find>
-      <find>nb_variables</find>
-      <find>predicate_embedding_size</find>
-      <find>var_max</find>
-      <find>distribution</find>
-      <find>self.score_func</find>
-      <find>models</find>
-      <find>neg_subs</find>
-      <find>BS</find>
-      <find>ablation</find>
-      <find>alt_opt</find>
-      <find>alt_</find>
       <find>build_model</find>
       <find>entity_posterior</find>
       <find>predicate_posterior</find>
@@ -165,13 +173,30 @@
       <find>Component</find>
       <find>noise</find>
       <find>Von</find>
+      <find>scores_test</find>
+      <find>alt_prior</find>
+      <find>g_objective</find>
+      <find>projection_step</find>
+      <find>pi</find>
+      <find>optimizer</find>
+      <find>axis=2</find>
+      <find>2</find>
+      <find>2</find>
+      <find>scaled_subject_embedding</find>
+      <find>not</find>
+      <find>tf.assign(log_var_matrix, scaled)</find>
+      <find>normaliser_r</find>
+      <find>not imp</find>
+      <find>normaliser_e</find>
+      <find>self.scores</find>
+      <find>p_x_i</find>
+      <find>train</find>
+      <find>implemented</find>
+      <find>self.</find>
+      <find>rel_r, rel_x, rel_y, rel_z = tf.split(emb_rel, 4, axis=1)</find>
+      <find>print</find>
     </findStrings>
     <replaceStrings>
-      <replace>logger.warn</replace>
-      <replace>nb_versions</replace>
-      <replace>self.eps</replace>
-      <replace>_saver</replace>
-      <replace>self.test_type</replace>
       <replace>if (confidence_subj[s_idx] &gt; self.p_threshold):</replace>
       <replace>$PROJECT_DIR$</replace>
       <replace>idx_positive</replace>
@@ -186,7 +211,6 @@
       <replace>var_min</replace>
       <replace>make_prior</replace>
       <replace>alt_prior</replace>
-      <replace>embedding_size</replace>
       <replace>scale_max</replace>
       <replace>score_func</replace>
       <replace>distribution</replace>
@@ -197,6 +221,12 @@
       <replace>LIM</replace>
       <replace>LCM</replace>
       <replace>Information</replace>
+      <replace>scores</replace>
+      <replace>tf.math</replace>
+      <replace>tf.</replace>
+      <replace>embedding_size</replace>
+      <replace>axis=1</replace>
+      <replace>_r</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -206,10 +236,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/vkge/baseviz.py" />
-        <option value="$PROJECT_DIR$/main-viz.py" />
-        <option value="$PROJECT_DIR$/vkge/base_variance_tests.py" />
-        <option value="$PROJECT_DIR$/main2.py" />
         <option value="$PROJECT_DIR$/vkge/non_probabilistic.py" />
         <option value="$PROJECT_DIR$/vkge/base3.py" />
         <option value="$PROJECT_DIR$/main3-quick.py" />
@@ -235,16 +261,12 @@
         <option value="$PROJECT_DIR$/scripts/scriptA_NS2.py" />
         <option value="$PROJECT_DIR$/vkge/base.py" />
         <option value="$PROJECT_DIR$/scripts/scriptB.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/vkge/baseline.py" />
         <option value="$PROJECT_DIR$/scripts/script_baseline.py" />
         <option value="$PROJECT_DIR$/vkge/util.py" />
         <option value="$PROJECT_DIR$/scripts/scriptA.py" />
-        <option value="$PROJECT_DIR$/vkge/training/util.py" />
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/README.md 3" />
         <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/vkge/models/base.py" />
         <option value="$PROJECT_DIR$/vkge/baseA.py" />
         <option value="$PROJECT_DIR$/mainA.py" />
         <option value="$PROJECT_DIR$/mainB.py" />
@@ -252,19 +274,27 @@
         <option value="$PROJECT_DIR$/main_LCM.py" />
         <option value="$PROJECT_DIR$/vkge/LCM.py" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/vkge/__init__.py" />
-        <option value="$PROJECT_DIR$/vkge/LFM.py" />
         <option value="$PROJECT_DIR$/main_LIM.py" />
         <option value="$PROJECT_DIR$/vkge/LIM.py" />
         <option value="$PROJECT_DIR$/main_LFM.py" />
+        <option value="$PROJECT_DIR$/vkge/LFM.py" />
+        <option value="$PROJECT_DIR$/vkge/training/util.py" />
+        <option value="$PROJECT_DIR$/vkge/__init__.py" />
+        <option value="$PROJECT_DIR$/vkge/models/__init__.py" />
+        <option value="$PROJECT_DIR$/vkge/models/sda.py" />
+        <option value="$PROJECT_DIR$/vkge/models/base.py" />
+        <option value="$PROJECT_DIR$/vkge/baseline.py" />
+        <option value="$PROJECT_DIR$/main_baseline.py" />
+        <option value="$PROJECT_DIR$/vkge/quaternator.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="862" />
-    <option name="y" value="-1417" />
+    <option name="x" value="160" />
+    <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="1417" />
+    <option name="height" value="827" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -276,18 +306,31 @@
         <subPane>
           <expand>
             <path>
-              <item name="Neural-Variational-Knowledge-Graphs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Neural-Variational-Knowledge-Graphs" type="462c0819:PsiDirectoryNode" />
+              <item name="Quaternions KG" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Quaternions KG" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Neural-Variational-Knowledge-Graphs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Neural-Variational-Knowledge-Graphs" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="Quaternions KG" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Quaternions KG" type="462c0819:PsiDirectoryNode" />
+              <item name="vkge" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Neural-Variational-Knowledge-Graphs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Neural-Variational-Knowledge-Graphs" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="Quaternions KG" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Quaternions KG" type="462c0819:PsiDirectoryNode" />
+              <item name="vkge" type="462c0819:PsiDirectoryNode" />
+              <item name="knowledgebase" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Quaternions KG" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Quaternions KG" type="462c0819:PsiDirectoryNode" />
+              <item name="vkge" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Quaternions KG" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Quaternions KG" type="462c0819:PsiDirectoryNode" />
+              <item name="vkge" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -302,15 +345,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/vkge" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/scripts" />
-      <recent name="$PROJECT_DIR$/data2/wn18" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/scripts" />
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/vkge" />
+      <recent name="$PROJECT_DIR$/scripts" />
+      <recent name="$PROJECT_DIR$/data2/wn18" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -386,20 +429,18 @@
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
+      <module name="vkge" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="variational-knowledge-embeddings" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;.&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="variational-knowledge-embeddings" />
@@ -470,7 +511,7 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
-      <module name="vkge" />
+      <module name="variational-knowledge-embeddings" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -478,8 +519,9 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;.&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
@@ -866,10 +908,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="862" y="-1417" width="1280" height="1417" extended-state="0" />
-    <editor active="true" />
+    <frame x="160" y="23" width="1280" height="827" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1985703" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1985703" />
       <window_info id="Structure" order="1" weight="0.24892704" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -880,9 +921,9 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.251634" side_tool="true" weight="0.33471933" />
-      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32848233" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.748366" weight="0.40792838" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49427754" weight="0.26819128" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32789117" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.748366" visible="true" weight="1.0" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49427754" weight="0.26802722" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -958,7 +999,7 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main_LFM.py</url>
+          <url>file://$PROJECT_DIR$/main.py</url>
           <line>2</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
@@ -966,11 +1007,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vkge/base3.py" />
-    <entry file="file://$PROJECT_DIR$/script_search.py" />
-    <entry file="file://$PROJECT_DIR$/vkge/base_model_search.py" />
-    <entry file="file://$PROJECT_DIR$/baseline_main.py" />
-    <entry file="file:///Library/Python/2.7/site-packages/tensorflow/python/ops/random_ops.py" />
     <entry file="file://$PROJECT_DIR$/vkge/copy_working.py" />
     <entry file="file://$PROJECT_DIR$/main3-quick.py" />
     <entry file="file://$PROJECT_DIR$/scripts/scriptB_NS2.py" />
@@ -979,13 +1015,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/vkge/constraints.py" />
-    <entry file="file://$PROJECT_DIR$/vkge/training/constraints.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="44" column="43" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/script_tests.py" />
     <entry file="file://$PROJECT_DIR$/main_tests.py" />
     <entry file="file://$PROJECT_DIR$/vkge/base_tests.py" />
@@ -1003,20 +1032,12 @@
     <entry file="file://$PROJECT_DIR$/vkge/baseline.py" />
     <entry file="file://$PROJECT_DIR$/vkge/baseAS.py" />
     <entry file="file://$PROJECT_DIR$/vkge/baseBS.py" />
-    <entry file="file://$PROJECT_DIR$/hyperspherical_vae/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/hyperspherical_vae/__init__.py" />
     <entry file="file://$PROJECT_DIR$/vkge/base_modela.py" />
-    <entry file="file://$PROJECT_DIR$/hyperspherical_vae/distributions/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/hyperspherical_vae/distributions/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/script_baseline.py" />
     <entry file="file://$PROJECT_DIR$/vkge/util.py" />
-    <entry file="file://$PROJECT_DIR$/hyperspherical_vae/distributions/von_mises_fisher.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-75" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/hyperspherical_vae/distributions/von_mises_fisher.py" />
     <entry file="file://$PROJECT_DIR$/scripts/scriptA.py" />
     <entry file="file://$PROJECT_DIR$/setup3.py" />
     <entry file="file://$PROJECT_DIR$/setup.py">
@@ -1026,20 +1047,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/models/similarities.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup.cfg">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/models/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="112" selection-start-line="112" selection-end-line="112" />
         </state>
       </provider>
     </entry>
@@ -1051,14 +1062,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
+    <entry file="file://$PROJECT_DIR$/README.md 3" />
+    <entry file="file://$PROJECT_DIR$/main_LIM.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="249" column="11" selection-start-line="249" selection-start-column="11" selection-end-line="249" selection-end-column="11" />
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md 3" />
+    <entry file="file://$PROJECT_DIR$/vkge/LIM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4820">
+          <caret line="500" column="11" selection-start-line="500" selection-start-column="11" selection-end-line="500" selection-end-column="11" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/training/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="516">
+          <caret line="90" column="41" selection-start-line="90" selection-start-column="41" selection-end-line="90" selection-end-column="41" />
+          <folding>
+            <element signature="e#25#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#24#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1072,47 +1113,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/LFM.py">
+    <entry file="file://$PROJECT_DIR$/vkge/training/constraints.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="227" column="33" selection-start-line="227" selection-start-column="30" selection-end-line="227" selection-end-column="33" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="990">
+          <caret line="67" column="24" lean-forward="true" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_LIM.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/vkge/models/similarities.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/__init__.py">
+    <entry file="file://$PROJECT_DIR$/vkge/models/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <caret line="5" column="40" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/tensorflow/python/ops/gen_array_ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="7912" selection-start-line="7912" selection-end-line="7912" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/models/sda.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="43" lean-forward="true" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/models/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="116" column="8" lean-forward="true" selection-start-line="116" selection-start-column="8" selection-end-line="116" selection-end-column="8" />
           <folding>
-            <element signature="e#24#48#0" expanded="true" />
+            <element signature="e#25#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vkge/LIM.py">
+    <entry file="file://$PROJECT_DIR$/vkge/baseline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7500">
-          <caret line="500" column="11" selection-start-line="500" selection-start-column="11" selection-end-line="500" selection-end-column="11" />
+        <state relative-caret-position="212">
+          <caret line="43" column="53" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+            <marker date="1544189093012" expanded="true" signature="6184:6193" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_baseline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding>
+            <element signature="e#25#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vkge/quaternator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="45" column="68" selection-start-line="45" selection-start-column="64" selection-end-line="45" selection-end-column="68" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_LFM.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+        <state relative-caret-position="4">
+          <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+          <folding>
+            <element signature="e#25#48#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import abc
-
 import tensorflow as tf
 from vkge.models.similarities import negative_l1_distance
-
 import sys
 
 
@@ -111,12 +109,84 @@ class ComplexModel(BaseModel):
         score = dot3(es_re, ew_re, eo_re) + dot3(es_re, ew_im, eo_im) + dot3(es_im, ew_re, eo_im) - dot3(es_im, ew_im, eo_re)
         return score
 
+def Quaternator(predicate_embeddings,subject_embeddings,object_embeddings):
+    """
+    Implementation of the Quaternator
+    :param embedding size: Embedding size.
+    :return: (batch_size) Tensor containing the scores associated by the models to the walks.
+     """
+    emb_rel, emb_arg1, emb_arg2=predicate_embeddings,subject_embeddings,object_embeddings
+    rel_r, rel_x, rel_y, rel_z = tf.split(emb_rel, 4, axis=1)
+    arg1_r, arg1_x, arg1_y, arg1_z = tf.split(emb_arg1, 4, axis=1)
+    arg2_r, arg2_x, arg2_y, arg2_z = tf.split(emb_arg2, 4, axis=1)
+
+    score1 = tf.einsum("ij,ij->i", arg1_r * arg2_r, rel_x)
+    score2 = tf.einsum("ij,ij->i", arg1_r * arg2_x, rel_r)
+    score3 = tf.einsum("ij,ij->i", arg1_r * arg2_y, rel_z)
+    score4 = tf.einsum("ij,ij->i", arg1_r * arg2_z, rel_y)
+    score5 = tf.einsum("ij,ij->i", arg1_x * arg2_r, rel_r)
+    score6 = tf.einsum("ij,ij->i", arg1_x * arg2_x, rel_x)
+    score7 = tf.einsum("ij,ij->i", arg1_x * arg2_y, rel_y)
+    score8 = tf.einsum("ij,ij->i", arg1_x * arg2_z, rel_z)
+    score9 = tf.einsum("ij,ij->i", arg1_y * arg2_r, rel_z)
+    score10 = tf.einsum("ij,ij->i", arg1_y * arg2_x, rel_y)
+    score11 = tf.einsum("ij,ij->i", arg1_y * arg2_y, rel_x)
+    score12 = tf.einsum("ij,ij->i", arg1_y * arg2_z, rel_r)
+    score13 = tf.einsum("ij,ij->i", arg1_z * arg2_r, rel_y)
+    score14 = tf.einsum("ij,ij->i", arg1_z * arg2_x, rel_z)
+    score15 = tf.einsum("ij,ij->i", arg1_z * arg2_y, rel_r)
+    score16 = tf.einsum("ij,ij->i", arg1_z * arg2_z, rel_x)
+
+    return (score1 - score2 + score3 - score4 +
+            score5 + score6 - score7 - score8 -
+            score9 + score10 + score11 - score12 +
+            score13 + score14 + score15 + score16)
+
+# class Quaternator(BaseModel):
+#     def __init__(self, *args, **kwargs):
+#         """
+#         Implementation of the Quaternator
+#         :param embedding size: Embedding size.
+#         """
+#         super().__init__(*args, **kwargs)
+#
+#     def __call__(self):
+#         """
+#         :return: (batch_size) Tensor containing the scores associated by the models to the walks.
+#          """
+#         emb_rel, emb_arg1, emb_arg2=self.predicate_embeddings,self.subject_embeddings,self.object_embeddings
+#         rel_r, rel_x, rel_y, rel_z = tf.split(emb_rel, 4, axis=1)
+#         arg1_r, arg1_x, arg1_y, arg1_z = tf.split(emb_arg1, 4, axis=1)
+#         arg2_r, arg2_x, arg2_y, arg2_z = tf.split(emb_arg2, 4, axis=1)
+#
+#         score1 = tf.einsum("ij,ij->i", arg1_r * arg2_r, rel_x)
+#         score2 = tf.einsum("ij,ij->i", arg1_r * arg2_x, rel_r)
+#         score3 = tf.einsum("ij,ij->i", arg1_r * arg2_y, rel_z)
+#         score4 = tf.einsum("ij,ij->i", arg1_r * arg2_z, rel_y)
+#         score5 = tf.einsum("ij,ij->i", arg1_x * arg2_r, rel_r)
+#         score6 = tf.einsum("ij,ij->i", arg1_x * arg2_x, rel_x)
+#         score7 = tf.einsum("ij,ij->i", arg1_x * arg2_y, rel_y)
+#         score8 = tf.einsum("ij,ij->i", arg1_x * arg2_z, rel_z)
+#         score9 = tf.einsum("ij,ij->i", arg1_y * arg2_r, rel_z)
+#         score10 = tf.einsum("ij,ij->i", arg1_y * arg2_x, rel_y)
+#         score11 = tf.einsum("ij,ij->i", arg1_y * arg2_y, rel_x)
+#         score12 = tf.einsum("ij,ij->i", arg1_y * arg2_z, rel_r)
+#         score13 = tf.einsum("ij,ij->i", arg1_z * arg2_r, rel_y)
+#         score14 = tf.einsum("ij,ij->i", arg1_z * arg2_x, rel_z)
+#         score15 = tf.einsum("ij,ij->i", arg1_z * arg2_y, rel_r)
+#         score16 = tf.einsum("ij,ij->i", arg1_z * arg2_z, rel_x)
+#
+#         return (score1 - score2 + score3 - score4 +
+#                 score5 + score6 - score7 - score8 -
+#                 score9 + score10 + score11 - score12 +
+#                 score13 + score14 + score15 + score16)
+
 # Aliases
 TransE = TranslatingEmbeddings = TranslatingModel
 DistMult = BilinearDiagonal = BilinearDiagonalModel
 RESCAL = Bilinear = BilinearModel
 ComplEx = ComplexE = ComplexModel
-
+Qt=Quaternator
 
 def get_function(function_name):
     this_module = sys.modules[__name__]
