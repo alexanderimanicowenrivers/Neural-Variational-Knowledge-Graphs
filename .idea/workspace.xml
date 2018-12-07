@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="fixed import of LIM">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_LFM.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_LIM.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_baseline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vkge/LFM.py" beforeDir="false" afterPath="$PROJECT_DIR$/vkge/baseline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vkge/LIM.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vkge/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/vkge/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vkge/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/vkge/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vkge/models/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/vkge/models/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vkge/training/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/vkge/training/util.py" afterDir="false" />
-    </list>
+    <list default="true" id="b6ca035e-bc3f-441c-9b24-881ef2db81ff" name="Default" comment="fixed import of LIM" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,8 +100,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4">
-              <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+            <state relative-caret-position="315">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
               <folding>
                 <element signature="e#25#48#0" expanded="true" />
               </folding>
@@ -922,7 +912,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.251634" side_tool="true" weight="0.33471933" />
       <window_info anchor="bottom" id="Python Console" order="8" weight="0.32789117" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.748366" visible="true" weight="1.0" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.748366" type="SLIDING" visible="true" weight="0.44217688" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49427754" weight="0.26802722" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -1187,8 +1177,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4">
-          <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+        <state relative-caret-position="315">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
           <folding>
             <element signature="e#25#48#0" expanded="true" />
           </folding>
