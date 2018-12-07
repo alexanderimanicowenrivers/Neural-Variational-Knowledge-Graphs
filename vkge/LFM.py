@@ -5,7 +5,6 @@ import numpy as np
 import tensorflow as tf
 from vkge.training import constraints, index
 from vkge.training import util as util
-import vkge.models as models
 import logging
 import tensorflow_probability as tfp
 
@@ -13,7 +12,7 @@ tfd = tfp.distributions
 logger = logging.getLogger(__name__)
 
 
-class baseline:
+class LFM:
     """
            Latent Fact Model
 
@@ -41,8 +40,8 @@ class baseline:
 
             """
 
-    def __init__(self, file_name, score_func='ComplEx', embedding_size=200, no_batches=10, distribution='normal',
-                 epsilon=1e-3, negsamples=5, dataset='wn18', lr=0.001, projection=False):
+    def __init__(self, file_name, score_func='DistMult', embedding_size=200, no_batches=10, distribution='normal',
+                 epsilon=1e-3, negsamples=5, dataset='wn18', lr=0.001, alt_prior=False, projection=False):
 
         self.nb_epochs = 500
 
@@ -54,6 +53,7 @@ class baseline:
         self.score_func = score_func
         self.negsamples = int(negsamples)
         self.distribution = distribution
+        self.alt_prior = alt_prior
         self.projection = projection
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
 
@@ -73,28 +73,30 @@ class baseline:
 
         ############## placeholders
 
+        self.idx_pos = tf.placeholder(tf.int32, shape=[None])
+        self.idx_neg = tf.placeholder(tf.int32, shape=[None])
 
+        self.no_samples = tf.placeholder(tf.int32)
+        self.s_inputs = tf.placeholder(tf.int32, shape=[None])
+        self.p_inputs = tf.placeholder(tf.int32, shape=[None])
+        self.o_inputs = tf.placeholder(tf.int32, shape=[None])
+        self.y_inputs = tf.placeholder(tf.bool, shape=[None])
+        self.KL_discount = tf.placeholder(tf.float32)
+        self.ELBOBS = tf.placeholder(tf.float32)
 
         ##############
-        self.build_model(self.nb_entities, self.nb_predicates, embedding_size, optimizer)
+        self.build_LFM(self.nb_entities, self.nb_predicates, embedding_size, optimizer)
 
         self.train(nb_epochs=self.nb_epochs, test_triples=test_triples, valid_triples=valid_triples,
                    embedding_size=embedding_size,
                    train_triples=train_triples, no_batches=int(no_batches), filename=str(file_name))
 
-    def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer,clip_op=False,reg=True):
+    def _setup_training(self, loss, optimizer=tf.train.AdamOptimizer):
         global_step = tf.train.get_global_step()
         if global_step is None:
             global_step = tf.train.create_global_step()
 
-        if reg:
-            self.loss += tf.add_n([tf.nn.l2_loss(v) for v in self.train_variables]) * 0.01
-
         gradients = optimizer.compute_gradients(loss=loss)
-
-        if clip_op:
-            gradients = [(tf.clip_by_value(grad, -1, 1), var)
-                         for grad, var in gradients if grad is not None]
         train_op = optimizer.apply_gradients(gradients, global_step)
 
         self.loss = loss
@@ -108,59 +110,137 @@ class baseline:
         """
         logger.warning('Building Inference Networks q(h_x | x) ..{}'.format(self.score_func))
 
-        with tf.variable_scope('encoder'):
-            self.entity_embedding= tf.get_variable('entities',
-                                                         shape=[nb_entities + 1, embedding_size],
-                                                         initializer=tf.contrib.layers.xavier_initializer())
-            self.predicate_embedding = tf.get_variable('predicates',
-                                                              shape=[nb_predicates + 1, embedding_size],
-                                                              initializer=tf.contrib.layers.xavier_initializer())
+        with tf.variable_scope('Encoder'):
+            self.entity_embedding_mean, self.entity_embedding_sigma = util.make_latent_variables(meaninit='xavier',
+                                                                                                 siginit='constant',
+                                                                                                 nb_variables=nb_entities,
+                                                                                                 embedding_size=embedding_size,
+                                                                                                 distribution=self.distribution,
+                                                                                                 vtype='entities')
+            self.predicate_embedding_mean, self.predicate_embedding_sigma = util.make_latent_variables(
+                meaninit='xavier', siginit='constant', nb_variables=nb_predicates, embedding_size=embedding_size,
+                distribution=self.distribution, vtype='predicates')
 
-            self.h_s = tf.nn.embedding_lookup(self.entity_embedding, self.s_inputs)
-            self.h_p = tf.nn.embedding_lookup(self.predicate_embedding, self.p_inputs)
-            self.h_o = tf.nn.embedding_lookup(self.entity_embedding, self.o_inputs)
+            self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
+            self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
+            self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
+            self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
+            self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
+            self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
 
     def build_decoder(self):
         """
                                 Constructs Decoder
         """
+        logger.warning('Building Inference Network p(y|h) for {} score function.'.format(self.score_func))
 
         with tf.variable_scope('Inference'):
-            if self.score_func == 'DistMult':
-                logger.warning('Building Inference Network p(y|h) for DistMult score function.')
-                model = models.Quaternator(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
-                                           object_embeddings=self.h_o)
+            self.q_s, self.q_p, self.q_o = util.get_latent_distributions(self.distribution, self.mu_s, self.mu_p,
+                                                                         self.mu_o, self.log_sigma_sq_s,
+                                                                         self.log_sigma_sq_p, self.log_sigma_sq_o)
 
-            else:
-                logger.warning('Building Inference Network p(y|h) for ComplEx score function.')
-                model = models.ComplexModel(subject_embeddings=self.h_s, predicate_embeddings=self.h_p,
-                                            object_embeddings=self.h_o)
+            self.h_s = self.q_s.sample()
+            self.h_p = self.q_p.sample()
+            self.h_o = self.q_o.sample()
 
+            model, model_test = util.get_scoring_func(self.score_func, self.distribution, self.h_s, self.h_p, self.h_o,
+                                                      self.mu_s, self.mu_p, self.mu_o)
 
             self.scores = model()
+            self.scores_test = model_test()
             self.p_x_i = tf.sigmoid(self.scores)
+            self.p_x_i_test = tf.sigmoid(self.scores_test)
 
-
-
-    def build_model(self, nb_entities, nb_predicates, embedding_size, optimizer):
+    def build_LFM(self, nb_entities, nb_predicates, embedding_size, optimizer):
         """
                         Construct full computation graph for Latent Fact Model
         """
-        self.s_inputs = tf.placeholder(tf.int32, shape=[None])
-        self.p_inputs = tf.placeholder(tf.int32, shape=[None])
-        self.o_inputs = tf.placeholder(tf.int32, shape=[None])
-        self.y_inputs = tf.placeholder(tf.bool, shape=[None])
 
         self.build_encoder(nb_entities, nb_predicates, embedding_size)
         self.build_decoder()
 
-        # self.hinge_losses = tf.nn.relu(1 - self.scores * (2 * tf.cast(self.y_inputs, dtype=tf.float32) - 1))
-        # self.loss = tf.reduce_sum(self.hinge_losses)
+        ############## ##############
+        ##############  #Loss
+        ############## ##############
 
-        self.loss = -tf.reduce_sum(tf.log(tf.where(condition=self.y_inputs, x=self.p_x_i, y=1 - self.p_x_i) + 1e-10))
-        self.train_variables = tf.trainable_variables()
+        self.y_pos = tf.gather(self.y_inputs, self.idx_pos)
+        self.y_neg = tf.gather(self.y_inputs, self.idx_neg)
 
-        self._setup_training(loss=self.loss, optimizer=optimizer)
+        self.p_x_i_pos = tf.gather(self.p_x_i, self.idx_pos)
+        self.p_x_i_neg = tf.gather(self.p_x_i, self.idx_neg)
+
+        # Negative reconstruction loss
+
+        self.reconstruction_loss_p = -tf.reduce_sum(
+            tf.log(tf.where(condition=self.y_pos, x=self.p_x_i_pos, y=1 - self.p_x_i_pos) + 1e-10))
+        self.reconstruction_loss_n = -tf.reduce_sum((
+            tf.log(tf.where(condition=self.y_neg, x=self.p_x_i_neg, y=1 - self.p_x_i_neg) + 1e-10)))
+
+        ################
+
+        # KL
+
+        self.mu_s_ps = tf.gather(self.mu_s, self.idx_pos, axis=0)
+        self.mu_o_ps = tf.gather(self.mu_o, self.idx_pos, axis=0)
+        self.mu_p_ps = tf.gather(self.mu_p, self.idx_pos, axis=0)
+        #
+        self.log_sigma_sq_s_ps = tf.gather(self.log_sigma_sq_s, self.idx_pos, axis=0)
+        self.log_sigma_sq_o_ps = tf.gather(self.log_sigma_sq_o, self.idx_pos, axis=0)
+        self.log_sigma_sq_p_ps = tf.gather(self.log_sigma_sq_p, self.idx_pos, axis=0)
+
+        self.mu_all_ps = tf.concat(axis=0, values=[self.mu_s_ps, self.mu_o_ps, self.mu_p_ps])
+        self.log_sigma_ps = tf.concat(axis=0,
+                                      values=[self.log_sigma_sq_s_ps, self.log_sigma_sq_o_ps, self.log_sigma_sq_p_ps])
+        #
+
+        # negative samples
+
+        self.mu_s_ns = tf.gather(self.mu_s, self.idx_neg, axis=0)
+        self.mu_o_ns = tf.gather(self.mu_o, self.idx_neg, axis=0)
+        self.mu_p_ns = tf.gather(self.mu_p, self.idx_neg, axis=0)
+        #
+        self.log_sigma_sq_s_ns = tf.gather(self.log_sigma_sq_s, self.idx_neg, axis=0)
+        self.log_sigma_sq_o_ns = tf.gather(self.log_sigma_sq_o, self.idx_neg, axis=0)
+        self.log_sigma_sq_p_ns = tf.gather(self.log_sigma_sq_p, self.idx_neg, axis=0)
+
+        self.mu_all_ns = tf.concat(axis=0, values=[self.mu_s_ns, self.mu_o_ns, self.mu_p_ns])
+        self.log_sigma_ns = tf.concat(axis=0,
+                                      values=[self.log_sigma_sq_s_ns, self.log_sigma_sq_o_ns, self.log_sigma_sq_p_ns])
+        #
+
+
+
+        prior = util.make_prior(code_size=embedding_size, distribution=self.distribution, alt_prior=self.alt_prior)
+
+        if self.distribution == 'normal':
+            # KL divergence between normal approximate posterior and prior
+
+            pos_posterior = tfd.MultivariateNormalDiag(self.mu_all_ps, util.distribution_scale(self.log_sigma_ps))
+            neg_posterior = tfd.MultivariateNormalDiag(self.mu_all_ns, util.distribution_scale(self.log_sigma_ns))
+
+            self.kl1 = tf.reduce_sum(tfd.kl_divergence(pos_posterior, prior))
+            self.kl2 = tf.reduce_sum(tfd.kl_divergence(neg_posterior, prior))
+
+        # elif self.distribution == 'vmf':
+        #     # KL divergence between vMF approximate posterior and uniform hyper-spherical prior
+        #
+        #     pos_posterior = VonMisesFisher(self.mu_all_ps, util.distribution_scale(self.log_sigma_ps) + 1)
+        #     neg_posterior = VonMisesFisher(self.mu_all_ns, util.distribution_scale(self.log_sigma_ns) + 1)
+        #     kl1 = pos_posterior.kl_divergence(prior)
+        #     kl2 = neg_posterior.kl_divergence(prior)
+        #     self.kl1 = tf.reduce_sum(kl1)
+        #     self.kl2 = tf.reduce_sum(kl2)
+
+        else:
+            raise NotImplemented
+
+        self.nkl = (self.kl1 + self.kl2) * self.KL_discount
+
+        # Negative ELBO
+
+        self.nelbo = (self.reconstruction_loss_p + self.kl1 * self.KL_discount) + (
+                                                                                  self.reconstruction_loss_n + self.kl2 * self.KL_discount) * self.ELBOBS
+        self._setup_training(loss=self.nelbo, optimizer=optimizer)
 
     def train(self, test_triples, valid_triples, train_triples, embedding_size, no_batches, nb_epochs=500,
               filename='/home/'):
@@ -169,8 +249,6 @@ class baseline:
                                 Train and test model
 
         """
-
-
 
         all_triples = train_triples + valid_triples + test_triples
         util.index_gen = index.GlorotIndexGenerator()
@@ -188,10 +266,11 @@ class baseline:
         batches = util.make_batches(self.nb_examples, batch_size)
         nb_versions = int(self.negsamples + 1)  # neg samples + original
         neg_subs = math.ceil(int(self.negsamples / 2))
+        pi = util.make_compression_cost(nb_batches)
 
-        projection_steps = [constraints.unit_sphere_logvar(self.predicate_embedding, norm=1.0),
-                            constraints.unit_sphere_logvar(self.entity_embedding, norm=1.0)]
         init_op = tf.global_variables_initializer()
+        projection_steps = [constraints.unit_sphere_logvar(self.predicate_embedding_sigma, norm=1.0),
+                            constraints.unit_sphere_logvar(self.entity_embedding_sigma, norm=1.0)]
 
         with tf.Session() as session:
             session.run(init_op)
@@ -229,35 +308,51 @@ class baseline:
                         Xo_batch[(q2 + 1)::nb_versions] = util.index_gen(curr_batch_size, np.arange(self.nb_entities))
 
                     vec_neglabels = [int(1)] + ([int(0)] * (int(self.negsamples)))
-                
+
+                    BS = (2.0 * (self.nb_entities - 1) / self.negsamples)
+
+                    if (epoch >= (nb_epochs / 10)):  # linear warmup
+
+                        kl_linwarmup = (pi[counter])
+                        # kl_linwarmup = (1.0 / nb_batches)
+
+                    else:
+                        kl_linwarmup = 0.0
+
+                    if False:  # turn Bernoulli Sample Off
+                        BS = 1.0
 
                     loss_args = {
+                        self.KL_discount: kl_linwarmup,
                         self.s_inputs: Xs_batch,
                         self.p_inputs: Xp_batch,
                         self.o_inputs: Xo_batch,
                         self.y_inputs: np.array(vec_neglabels * curr_batch_size)
+                        , self.ELBOBS: BS
+                        , self.idx_pos: np.arange(curr_batch_size),
+                        self.idx_neg: np.arange(curr_batch_size, curr_batch_size * nb_versions)
                     }
 
-                    _, loss = session.run([self.training_step, self.loss],
+                    _, elbo_value = session.run([self.training_step, self.nelbo],
                                                 feed_dict=loss_args)
 
-                    loss_values += [loss / (Xp_batch.shape[0] / nb_versions)]
-                    total_loss_value += loss
+                    loss_values += [elbo_value / (Xp_batch.shape[0] / nb_versions)]
+                    total_loss_value += elbo_value
 
                     counter += 1
 
-                    if self.projection:
+                    if (self.projection):
 
                         for projection_step in projection_steps:
                             session.run([projection_step])
 
-                logger.warning('Epoch: {0}\t Loss: {1}'.format(epoch, util.stats(loss_values)))
+                logger.warning('Epoch: {0}\t Negative ELBO: {1}'.format(epoch, util.stats(loss_values)))
 
                 ##
                 # Test
                 ##
 
-                if (epoch % 50) == 0:
+                if (epoch % 100) == 0:
 
                     for eval_name, eval_triples in [('valid', valid_triples), ('test', test_triples)]:
 
@@ -281,10 +376,10 @@ class baseline:
                                                      self.o_inputs: np.arange(self.nb_entities)}
 
                             # scores of (1, p, o), (2, p, o), .., (N, p, o)
-                            scores_subj = session.run(self.scores, feed_dict=feed_dict_corrupt_subj)
+                            scores_subj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_subj)
 
                             # scores of (s, p, 1), (s, p, 2), .., (s, p, N)
-                            scores_obj = session.run(self.scores, feed_dict=feed_dict_corrupt_obj)
+                            scores_obj = session.run(self.scores_test, feed_dict=feed_dict_corrupt_obj)
 
                             ranks_subj += [1 + np.sum(scores_subj > scores_subj[s_idx])]
                             ranks_obj += [1 + np.sum(scores_obj > scores_obj[o_idx])]
