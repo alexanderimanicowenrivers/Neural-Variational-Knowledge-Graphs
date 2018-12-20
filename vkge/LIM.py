@@ -39,10 +39,10 @@ class LIM:
             """
 
     def __init__(self, file_name, score_func='DistMult', embedding_size=200, no_batches=10, distribution='normal',
-                 epsilon=1e-3,negsamples=5, dataset='wn18', lr=0.001, alt_prior=False, projection=False):
+                 epsilon=1e-3,negsamples=5, dataset='wn18', lr=0.001, alt_prior=False, projection=False,s_o=True):
 
 
-
+        self.s_o=s_o
         self.nb_epochs = 500
 
         seed=np.random.randint(100,size=1)[0]
@@ -111,15 +111,49 @@ class LIM:
 
         with tf.variable_scope('Encoder'):
 
-            self.entity_embedding_mean,self.entity_embedding_sigma=util.make_latent_variables(meaninit='xavier', siginit='constant', nb_variables=nb_entities, embedding_size=embedding_size, distribution=self.distribution,vtype='entities')
-            self.predicate_embedding_mean,self.predicate_embedding_sigma=util.make_latent_variables(meaninit='xavier', siginit='constant', nb_variables=nb_predicates, embedding_size=embedding_size, distribution=self.distribution,vtype='predicates')
+            with tf.variable_scope('Encoder'):
 
-            self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
-            self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
-            self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
-            self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
-            self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
-            self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
+                if self.s_o:  # subject and object different embeddings
+                    self.s_embedding_mean, self.s_embedding_sigma = util.make_latent_variables(meaninit='xavier',
+                                                                                               siginit='constant',
+                                                                                               nb_variables=nb_entities,
+                                                                                               embedding_size=embedding_size,
+                                                                                               distribution=self.distribution,
+                                                                                               vtype='subject')
+
+                    self.o_embedding_mean, self.o_embedding_sigma = util.make_latent_variables(meaninit='xavier',
+                                                                                               siginit='constant',
+                                                                                               nb_variables=nb_entities,
+                                                                                               embedding_size=embedding_size,
+                                                                                               distribution=self.distribution,
+                                                                                               vtype='object')
+
+                else:
+                    self.entity_embedding_mean, self.entity_embedding_sigma = util.make_latent_variables(
+                        meaninit='xavier',
+                        siginit='constant',
+                        nb_variables=nb_entities,
+                        embedding_size=embedding_size,
+                        distribution=self.distribution,
+                        vtype='entities')
+
+                self.predicate_embedding_mean, self.predicate_embedding_sigma = util.make_latent_variables(
+                    meaninit='xavier', siginit='constant', nb_variables=nb_predicates, embedding_size=embedding_size,
+                    distribution=self.distribution, vtype='predicates')
+
+                if self.s_o:
+                    self.mu_s = tf.nn.embedding_lookup(self.s_embedding_mean, self.s_inputs)
+                    self.log_sigma_sq_s = tf.nn.embedding_lookup(self.s_embedding_sigma, self.s_inputs)
+                    self.mu_o = tf.nn.embedding_lookup(self.o_embedding_mean, self.o_inputs)
+                    self.log_sigma_sq_o = tf.nn.embedding_lookup(self.o_embedding_sigma, self.o_inputs)
+                else:
+                    self.mu_s = tf.nn.embedding_lookup(self.entity_embedding_mean, self.s_inputs)
+                    self.log_sigma_sq_s = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.s_inputs)
+                    self.mu_o = tf.nn.embedding_lookup(self.entity_embedding_mean, self.o_inputs)
+                    self.log_sigma_sq_o = tf.nn.embedding_lookup(self.entity_embedding_sigma, self.o_inputs)
+
+                self.mu_p = tf.nn.embedding_lookup(self.predicate_embedding_mean, self.p_inputs)
+                self.log_sigma_sq_p = tf.nn.embedding_lookup(self.predicate_embedding_sigma, self.p_inputs)
 
     def build_decoder(self):
         """
@@ -173,29 +207,34 @@ class LIM:
         if self.distribution == 'normal':
             # KL divergence between normal approximate posterior and prior
 
-            entity_posterior = tfd.MultivariateNormalDiag(self.entity_embedding_mean,
-                                                          util.distribution_scale(self.entity_embedding_sigma))
+            if self.s_o:
+                s_posterior = tfd.MultivariateNormalDiag(self.s_embedding_mean,
+                                                              util.distribution_scale(self.s_embedding_sigma))
+
+                o_posterior = tfd.MultivariateNormalDiag(self.o_embedding_mean,
+                                                         util.distribution_scale(self.o_embedding_sigma))
+
+                self.kl0 = tf.reduce_sum(tfd.kl_divergence(s_posterior, prior))
+
+                self.kl1 = tf.reduce_sum(tfd.kl_divergence(o_posterior, prior))
+
+            else:
+
+                entity_posterior = tfd.MultivariateNormalDiag(self.entity_embedding_mean,
+                                                              util.distribution_scale(self.entity_embedding_sigma))
+                self.kl0= 0
+                self.kl1 = tf.reduce_sum(tfd.kl_divergence(entity_posterior, prior))
+
             predicate_posterior = tfd.MultivariateNormalDiag(self.predicate_embedding_mean,
-                                                             util.distribution_scale(self.predicate_embedding_sigma))
-            self.kl1 = tf.reduce_sum(tfd.kl_divergence(entity_posterior, prior))
+                                                         util.distribution_scale(self.predicate_embedding_sigma))
             self.kl2 = tf.reduce_sum(tfd.kl_divergence(predicate_posterior, prior))
 
-        # elif self.distribution == 'vmf':
-        #     # KL divergence between vMF approximate posterior and uniform hyper-spherical prior
-        #
-        #     entity_posterior = VonMisesFisher(self.entity_embedding_mean,
-        #                                       util.distribution_scale(self.entity_embedding_sigma) + 1)
-        #     predicate_posterior = VonMisesFisher(self.predicate_embedding_mean,
-        #                                          util.distribution_scale(self.predicate_embedding_sigma) + 1)
-        #     kl1 = entity_posterior.kl_divergence(prior)
-        #     kl2 = predicate_posterior.kl_divergence(prior)
-        #     self.kl1 = tf.reduce_sum(kl1)
-        #     self.kl2 = tf.reduce_sum(kl2)
+
 
         else:
             raise NotImplemented
 
-        self.nkl = (self.kl1 + self.kl2) * self.KL_discount
+        self.nkl = (self.kl0+self.kl1 + self.kl2) * self.KL_discount
 
         # Negative ELBO
 
@@ -231,7 +270,11 @@ class LIM:
         pi=util.make_compression_cost(nb_batches)
 
         init_op = tf.global_variables_initializer()
-        projection_steps = [constraints.unit_sphere_logvar(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere_logvar(self.entity_embedding_sigma, norm=1.0)]
+
+        if self.s_o:
+            projection_steps = [constraints.unit_sphere_logvar(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere_logvar(self.s_embedding_sigma, norm=1.0),constraints.unit_sphere_logvar(self.o_embedding_sigma, norm=1.0)]
+        else:
+            projection_steps = [constraints.unit_sphere_logvar(self.predicate_embedding_sigma, norm=1.0),constraints.unit_sphere_logvar(self.entity_embedding_sigma, norm=1.0)]
 
         with tf.Session() as session:
             session.run(init_op)
@@ -404,10 +447,10 @@ class LFM(LIM):
             """
 
     def __init__(self, file_name, score_func='DistMult', embedding_size=200, no_batches=10, distribution='normal',
-                 epsilon=1e-3, negsamples=5, dataset='wn18', lr=0.001, alt_prior=False, projection=False):
+                 epsilon=1e-3, negsamples=5, dataset='wn18', lr=0.001, alt_prior=False, projection=False,s_o=True):
 
         LIM.__init__(self, file_name, score_func, embedding_size, no_batches, distribution,
-                     epsilon, negsamples, dataset, lr, alt_prior, projection)
+                     epsilon, negsamples, dataset, lr, alt_prior, projection,s_o=s_o)
 
         optimizer = tf.train.AdamOptimizer(learning_rate=lr, epsilon=epsilon)
 

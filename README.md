@@ -11,10 +11,9 @@ This library contains a Tensorflow implementation of the Laten Fact Model and La
 ## Dependencies
 
 * **python>=3.6**
-* **tensorflow>=1.7.0**: https://tensorflow.org
+* **tf-nightly*: https://tensorflow.org
+* **tfp-nightly*: https://www.tensorflow.org/probability/
 * **scipy**: https://scipy.org
-* **tensorflow_probability**: https://www.tensorflow.org/probability/
-* **tflearn**: https://github.com/tflearn/tflearn.git
 
 ## Installation
 
@@ -51,7 +50,7 @@ For:
 Train variational knowledge graph model, on nations dataset with normal prior using DistMult scoring function :
 
 ```
-python main_LIM.py  --no_batches 10 --epsilon 1e-07 --embedding_size 50 --dataset nations --alt_prior False --lr 0.001 --score_func DistMult --negsamples 5 --projection False --distribution normal --file_name /User
+python main_LIM.py  --no_batches 10 --epsilon 1e-07 --embedding_size 50 --dataset nations --alt_prior False --lr 0.001 --score_func DistMult --negsamples 5 --projection False --distribution normal --file_name /User --s_o False
 ```
 -------
 

@@ -18,6 +18,7 @@ flags.DEFINE_boolean("alt_prior", False, "Define the use of unit prior or altern
 flags.DEFINE_string("score_func", 'DistMult', "Defines score function: DistMult, ComplEx or TransE [DistMult]")
 flags.DEFINE_string("distribution", 'normal', "Defines the distribution, either 'normal' or 'vmf', which is von-Mises Fisher distribution")
 flags.DEFINE_float("lr", 0.001, "Learning rate for optimiser [0.001]")
+flags.DEFINE_boolean("s_o", True, "If subject and object have different embeddings [True]")
 flags.DEFINE_integer("negsamples", 1, "Number of negative samples [1]")
 FLAGS = flags.FLAGS
 
@@ -25,7 +26,7 @@ FLAGS = flags.FLAGS
 def main(_):
 
     vkge.LIM(embedding_size=FLAGS.embedding_size,distribution=FLAGS.distribution, epsilon=FLAGS.epsilon, no_batches=FLAGS.no_batches,dataset=FLAGS.dataset, negsamples=FLAGS.negsamples,
-              lr=FLAGS.lr, file_name=FLAGS.file_name, alt_prior=FLAGS.alt_prior, projection=FLAGS.projection, score_func=FLAGS.score_func)
+              lr=FLAGS.lr, file_name=FLAGS.file_name, alt_prior=FLAGS.alt_prior, projection=FLAGS.projection, score_func=FLAGS.score_func,s_o=FLAGS.s_o)
 
 
 if __name__ == '__main__':
