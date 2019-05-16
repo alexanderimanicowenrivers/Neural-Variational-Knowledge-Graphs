@@ -6,7 +6,7 @@ This library contains a Tensorflow implementation of the Laten Fact Model and La
 
 -------
 
-![From paper](https://imgur.com/Q5lDKmC.png)
+![From paper](https://imgur.com/a/cDKyYK2.png)
 
 ## Dependencies
 
@@ -71,15 +71,13 @@ MIT
 
 ## Citation
 ```
-[1]
-[2] Davidson, T. R., Falorsi, L., De Cao, N., Kipf, T.,
+[1] Davidson, T. R., Falorsi, L., De Cao, N., Kipf, T.,
 and Tomczak, J. M. (2018). Hyperspherical Variational
 Auto-Encoders. arXiv preprint arXiv:1804.00891.
 ```
 
 BibTeX format:
 ```
-@article{OUR-paper}
 @article{s-vae18,
   title={Hyperspherical Variational Auto-Encoders},
   author={Davidson, Tim R. and
