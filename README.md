@@ -6,7 +6,7 @@ This library contains a Tensorflow implementation of the Laten Fact Model and La
 
 -------
 
-![From paper](https://imgur.com/a/cDKyYK2.png)
+![From paper](https://imgur.com/a/cDKyYK2)
 
 ## Dependencies
 
